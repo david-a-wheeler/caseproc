@@ -33,7 +33,7 @@ The program is implemented in a single file to simplify deployment.
 It's written in Python3 because many can easily run and edit that.
 Only use dependencies built in to Python (but *do* use those as appropriate).
 
-It should be written in good and common style (e.g., implmement
+It should be written in good and common style (e.g., implement
 PEP 8 as appropriate). It should be
 importable as a library (though we primarily intend for it to be used
 as a command line script).
@@ -95,7 +95,7 @@ is marked as being `ltac` format, its contents will be read as an LTAC
 argument (package). In addition, if there is an HTML comment
 on a line of its own saying
 `<!-- ltac -->`
-then the lines afterwards until are an LTAC argument (package) until
+then the subsequent lines are treated as an LTAC argument (package) until
 a corresponding line
 `<!-- end ltac -->`.
 
@@ -139,7 +139,7 @@ INFO has a TYPE, optionally followed by a space and element identifier
 
 The mermaid output, and output markdown, will generally include hyperlinks.
 The mermaid output will use the config value `base_url` as its base.
-The output for markdown and referencs
+The output for markdown and references
 will use `markdown_base_url` (default empty string) as its base.
 URL fragments should use the GitHub conventions.
 
@@ -178,7 +178,7 @@ Below are some thoughts on how to organize it.
 
 ```python
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Dict, List, Optional, Set, Tuple
 
 @dataclass
 class Node:
@@ -250,18 +250,15 @@ def parse_options(raw: str) -> set:
 
 ### Line format (BNF sketch)
 
-This isn't quite correct, it's based on an old version of the spec.
-
 ```
-line     ::= INDENT '-' WS nodetype WS? cited_id? id_text? options?
-nodetype ::= 'Claim' | 'Strategy' | 'Justification' | 'Evidence'
-           | 'Context' | 'Assumption' | 'Link' | 'Relation' | 'Connector'
-cited_id ::= '^' ('[' pkgname ']' WS)? identifier
-id_text  ::= identifier ':' WS text
-           | ':' WS text          (text with no identifier)
-           | identifier           (identifier with no text)
-options  ::= WS '{' ... '}'       (at end of line, before optional ref)
-ref      ::= WS '(' reftext ')'   (external reference, at very end)
+line       ::= INDENT bullet WS nodetype [WS identifier] ':' WS text [WS ref] [WS options] NEWLINE
+             | INDENT bullet WS 'Link' WS identifier [WS options] NEWLINE
+bullet     ::= '-' | '*'
+nodetype   ::= 'Claim' | 'Strategy' | 'Justification' | 'Evidence'
+             | 'Context' | 'Assumption' | 'Relation'
+identifier ::= ['^' ('[' pkgname ']')?] localid
+ref        ::= '(' reftext ')'
+options    ::= '{' option (',' option)* '}'
 ```
 
 - `INDENT` is a multiple of 2 spaces; `depth = len(INDENT) / 2`.
@@ -275,16 +272,17 @@ ref      ::= WS '(' reftext ')'   (external reference, at very end)
 
 ```python
 class LTACParser:
-    def parse(self, lines: list[str]) -> list[Node]:
+    def parse(self, lines: List[str]) -> List[Node]:
         """Parse LTAC lines into a forest (list of root Nodes).
 
         Returns the list of root nodes (depth == 0).
-        Also populates self.registry: dict[str, Node] mapping
+        Also populates self.registry: Dict[str, Node] mapping
         each identifier to its Node (for Link resolution).
         """
 ```
 
-This needs to be updated for the current extended LTAC spec.
+`parse_ltac_lines` is a module-level convenience wrapper: it creates an
+`LTACParser`, calls `parse()`, and returns `(roots, parser.registry)` as a tuple.
 
 Steps:
 1. Maintain a **depth stack** of `(depth, node)` pairs; initially empty.
@@ -625,17 +623,18 @@ make_mermaid_id(identifier: str, counter: list) -> str
 escape_html(text: str) -> str
 parse_options(raw: str) -> set
 
-# Parser
-parse_ltac_lines(lines: list[str]) -> tuple[list[Node], dict[str, Node]]
+# Parser (module-level wrapper around LTACParser.parse)
+parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node]]
     # Returns (roots, registry)
 
-# Renderers
-render_sacm(roots: list[Node]) -> str      # -> mermaid string (with fences)
-render_gsn(roots: list[Node]) -> str       # -> mermaid string (with fences)
+# Renderers (base_url from config; empty string if not set)
+render_sacm(roots: List[Node], base_url: str = '') -> str      # -> mermaid string (with fences)
+render_gsn(roots: List[Node], base_url: str = '') -> str       # -> mermaid string (with fences)
+render_markdown(roots: List[Node], base_url: str = '') -> str  # -> indented bullet list with hyperlinks
 
 # Inline processor
 process_inline_text(text: str, render_fn) -> str
-    # render_fn: list[Node] -> str
+    # render_fn: List[Node] -> str
 
 # Top-level orchestration
 process_stream(stream, render_fn) -> str
