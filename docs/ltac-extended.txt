@@ -16,11 +16,11 @@ https://www.argevide.com/documents/ltac.txt
   - Assumption A1
   - Relation R1
   - Link C4
-6. If an element is to be used more than once, it should be defined once only and other occurences should be defined as links. A Link entry is a citation of previously defined element (often evidence or context) without repeating it.
+6. If an element is to be used more than once, it should be defined once only and other occurrences should be defined as links. A Link entry is a citation of previously defined element (often evidence or context) without repeating it.
 7. Identifiers are optional, but when specified, they should be unique within the assurance case argument except links. Links are citations of existing elements and they use existing identifiers within the package.
   - Identifiers G1, G2 can be used for claims, or Cxt1, Cxt2 can be used for context elements. Any letters, digits and other characters except ':' can be used in identifiers. Identifiers’ prefixes other than presented in point 1 and "^" are acceptable.
   - An identifier beginning with "^" is an external reference that refers to an element in another argument package. After the "^" is an optional package name surrounded by square brackets, followed by an element name. If the package name is not given, the package name is "Package" + space + ID. Implementations may use this information to generate hyperlinks. External references should only be Claims or Justifications.
-8. After the identifier, a colon (':') separates it from the descriptive text, the element name. The text cannot contain new line characters. The text can contain colons (':') . An example of a correct element definition:
+8. After the identifier, a colon (':') separates it from the descriptive text, the element name. The text cannot contain new line characters. The text can contain colons (':'). An example of a correct element definition:
 ```
   - Claim C1: System is sufficiently safe
 ```
@@ -29,7 +29,7 @@ https://www.argevide.com/documents/ltac.txt
   b) Child nodes (sub-claims, evidence, strategies, etc.) are indented under their parents.
   c) Each indentation level, two spaces, represents one step deeper in the argument hierarchy.
   d) Hyphens '-' or asterisks '*' are used at the start of each line to mark list items.
-  e) Evidence references may cite external artifacts, written inside parentheses at the end of element name
+  e) Evidence references may cite external artifacts, written inside parentheses at the end of element name.
   f) Justifications may need to be supported by evidence or an argument: subclaims or a strategy.
   g) The following relationships are permitted within the argument structure, which is presented in the format 'element -> sub-element'. Any relationships not listed below are not permitted.
     - Claim -> Claim, Strategy, Assumption, Justification, Evidence
@@ -53,7 +53,7 @@ https://www.argevide.com/documents/ltac.txt
       - Evidence Ev1: Hazard analysis (HARA report.pdf)
     - Claim G3: All hazards have been mitigated {defeated}
       - Link Ev1
-    - Claim ^[Package Verification] Verification: Hazard mitigation verified
+    - Claim ^[Package IV&V] Verification: Hazard mitigation verified
 ```
 
 # LTAC mapping to GSN (Goal Structuring Notation)
@@ -147,7 +147,7 @@ Element         = Indent Bullet WS NodeType [WS Identifier] ":" WS Text [WS Refe
 
 Bullet = "-" | "*" ;
 
-NodeType        = "Claim" | "Strategy" | "Evidence" | "Justification" | "Context" | "Assumption" | "Relation";
+NodeType        = "Claim" | "Strategy" | "Evidence" | "Justification" | "Context" | "Assumption" | "Relation" ;
 
 Identifier      = LocalIdentifier | ExternalIdentifier ;
 
