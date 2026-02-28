@@ -42,53 +42,62 @@ The code should be organized into clear reusable parts.
 For example, there should be a simple routine for turning a
 normal string into a GitHub id fragment.
 
-## Usage
+## CLI Usage
 
 ```
-ltacproc [--sacm|-s] [--gsn|-g] [--mermaid|-m] [--markdown-output|-o]
-         [--config JSON] [--help] [--validate]
-         [--markdown-input|-I] [--inline|-i] [files]
+ltacproc [--help] [--validate] [--config JSON]
+         [--ltac|-l FILENAME] [--select|-s SELECTOR] [--inline|-i] [files]
 ```
 
 Meaning:
 
-* `[--sacm|-s]`: Generate
-   [Structured Assurance Case Metamodel (SACM)](https://www.omg.org/spec/SACM)
-   graphics notation (default)
-* `[--gsn|-g]`: Generate Goal Structuring Notation (GSN) (FUTURE capability)
-* `[--mermaid|-m]`: Generate graphics in mermaid format (default)
-  (we hope to support other formats in the future)
-* `[--markdown-output|-o]`: Generate markdown output instead of graphics.
-  This looks much like LTAC format, but the bullet items have
-  markdown URL links. This isn't used often, but is helpful for debugging.
+* `[--select|-s SELECTOR]`: Print *just* the selected information identified
+  by SELECTOR to stdout.
+  SELECTOR must begin with a known display type,
+  optionally followed by a space and an element
+  identifier. The "display types" include `sacm/mermaid`
+  ([Structured Assurance Case Metamodel (SACM)](https://www.omg.org/spec/SACM)
+  notation in mermaid graphics format) and
+  `ltac/markdown` (markdown representation of LTAC with hyperlinks).
+  If no element identifier is given in SELECTOR,
+  the last LTAC argument (package) read is used.
+  If files are given, they are read, and marked regions are used as input
+  wherever appropriate. However, the content of the files are *not* output.
+  This option is incompatible with `--inline`.
+  See the "SELECTOR" section below.
 * `[--config JSON]`: Configure the tool per JSON.
 * `[--help]`: Print usage information.
 * `[--validate]`: Report errors on stderr (as usual), but otherwise
   don't output or change files. This would report if, for example, a
   node was subordinate to the "wrong" type.
-* `[--markdown-input|-I]`: Input is in markdown format.
-  Read and print to standard output the markdown, but handle marked regions
-  specially (see below).
-* `[--inline|-i] [files]`: Input is in markdown format in the listed files.
+* `[--ltac|-l] FILENAME`: The given FILENAME with this argument
+   is read as a sequence of 1+ LTAC cases (packages),
+   separated by at least 1 blank line and/or comment line beginning with `#`.
+* `[--inline|-i]`: Input is in markdown format in the listed files.
   Each file is processed like `--markdown-input`, handling marked
   regions specially, but each of the
   markdown files are replaced with their updated forms.
+  We do our best to never lose data in these files, so we only update
+  each file after we know it was correctly processed.
 
-By default, without `--markdown-input` or `--inline`, we'll read
-LTAC format. If no files are listed (or a file is `-`) we read from stdin.
-By default its results go to standard output.
-By default, this is a filter.
+By default, this is a filter that reads files (or stdin if none given),
+which are presumably markdown and/or HTML.
+It will loading data and perform replacements in marked regions
+(see the section below on marked regions), and print to standard out
+the result of those replacements.
+Note that `--inline` does something similar, but instead of printing to
+standard out, it reads each file in turn and updates regions as appropriate.
 Error reports go to stderr.
 
-By default, its input is a set of LTAC commands.
-By default, its output is mermaid displaying SACM notation with our
-conventions per `docs/sacm-mermaid.md`.
+The `--config` configuration is loaded early.
+Then the `--ltac` file is processed, if present.
+Finally, the listed files are present.
 
 It will need to read the whole set of LTAC commands
 before being able to generate a
 result, since it may need to reorganize some nodes.
 
-## Marked Regions of markdown
+## Marked Regions
 
 In markdown being read in, if a code block (using ` or ~)
 is marked as being `ltac` format, its contents will be read as an LTAC
@@ -116,17 +125,29 @@ If the header begins with "Package" or an Element type (e.g., "Claim"),
 it's remembered as the default "current element".
 
 Any line of the form
-`<!-- ltac INFO -->`
+`<!-- ltac SELECTOR -->`
 is copied back out, but the following lines are replaced with updated data
 until the corresponding line
 `<!-- end ltac -->`.
-Exactly what is replaced depends on INFO.
-INFO has a TYPE, optionally followed by a space and element identifier
+Exactly what is replaced depends on SELECTOR.
+
+## SELECTOR
+
+Often you want specific information in a specific information;
+SELECTOR lets you specify what you want to see.
+
+SELECTOR begins with a display type,
+optionally followed by a space and element identifier
 (if no element identifier is given the default "current element" is used).
 
-* `sacm/mermaid` - SACM notation in mermaid format
+Valid display types are:
+
+* `sacm/mermaid` - SACM notation in mermaid format.
+  See our conventions in `docs/sacm-mermaid.md`.
 * `gsn/mermaid` - GSN notation in mermaid format
-* `markdown` - Markdown representation of LTAC (with hyperlinks)
+* `ltac/markdown` - Markdown representation of LTAC (indented bullets
+  with hyperlinks)
+* `ltac/html` - HTML representation of LTAC (indented bullets with hyperlinks)
 * `statement` - Markdown representation showing `Statement:` followed by the
   statement of the element identifier
 * `references` - Markdown representation showing `References:` followed by the
