@@ -4,7 +4,7 @@ Argevide
 https://www.argevide.com/documents/ltac.txt
 
 1. LTAC is a text format for representing assurance case arguments regardless of the notation originally used. LTAC can be mapped to GSN, CAE, TRUST-IT, and SACM notations. An LTAC argument contains a set of elements, each presented in a separate line.
-2. LTAC defines its own argument element types that can be mapped to GSN, CAE, TRUST-IT, and SACM. LTAC defines its own syntaxt descibed below which is different from the rules of GSN, CAE, TRUST-IT, or SACM. Only the rules desribed below apply to LTAC.
+2. LTAC defines its own argument element types that can be mapped to GSN, CAE, TRUST-IT, and SACM. LTAC defines its own syntax described below which is different from the rules of GSN, CAE, TRUST-IT, or SACM. Only the rules desribed below apply to LTAC.
 3. The allowed element types are Claim, Strategy, Justification, Evidence, Context and Assumption. Each argument package in LTAC should start (at the top) with a claim.
 4. A keyword 'Link' is used to cite an already specified argument element within the same package.
 5. Each argument element is defined in one line in LTAC that begins with dash and a type keyword (or 'Link' keyword) followed optionally by an identifier, e.g.
@@ -28,7 +28,7 @@ https://www.argevide.com/documents/ltac.txt
   a) The assurance case argument is structured using indentation. Two spaces are added for each level of the argument structure.
   b) Child nodes (sub-claims, evidence, strategies, etc.) are indented under their parents.
   c) Each indentation level, two spaces, represents one step deeper in the argument hierarchy.
-  d) Hyphens '-' are used at the start of each line to mark list items.
+  d) Hyphens '-' or asterisks '*' are used at the start of each line to mark list items.
   e) Evidence references may cite external artifacts, written inside parentheses at the end of element name
   f) Justifications may need to be supported by evidence or an argument: subclaims or a strategy.
   g) The following relationships are permitted within the argument structure, which is presented in the format 'element -> sub-element'. Any relationships not listed below are not permitted.
@@ -98,7 +98,7 @@ Certain options are defined to enable better SACM support:
 - needsSupport: assertionDeclaration=needsSupport
 - assumed: assertionDeclaration=assumed
 - axiomatic: assertionDeclaration=axiomatic
-- defeated: assertionDeclaration=defected
+- defeated: assertionDeclaration=defeated
 - asCited: assertionDeclaration=asCited
 - isCounter: isCounter=true (counters declared purpose).
   Counter-evidence doesn't always lead to the defeat of a claim, but it might.
@@ -152,7 +152,7 @@ Text            = { Character - Newline } ;       (* descriptive label text *)
 
 Reference       = "(" , { Character - ")" - Newline } , ")" ; (* e.g. (Doc-HAZ-2025) *)
 
-Options         = "{" Option [ "," WS? Option ] "}" ;
+Options         = "{" Option { "," WS? Option } "}" ;
 
 Option          = { Character - "," - "}" } ;
 
