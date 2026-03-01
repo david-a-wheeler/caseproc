@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 from collections import deque
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set, Tuple
@@ -1107,7 +1108,40 @@ def main() -> None:
     elif args.validate:
         _process_files(args.files, io.StringIO(), registry, all_roots, config, set())
     elif args.inline:
-        pass  # implemented in step 10
+        seen_headers: set = set()
+        for path in args.files:
+            error_before = _had_error
+            try:
+                with open(path) as f:
+                    original = f.read()
+            except OSError as e:
+                error(f"cannot open {path!r}: {e}")
+                continue
+            buf = io.StringIO()
+            with io.StringIO(original) as src:
+                process_document_stream(src, buf, registry, all_roots, config, seen_headers)
+            if _had_error and not error_before:
+                # Errors occurred while processing this file; leave it untouched.
+                continue
+            new_content = buf.getvalue()
+            if new_content == original:
+                continue  # No change; skip the write.
+            dir_ = os.path.dirname(os.path.abspath(path))
+            try:
+                fd, tmp = tempfile.mkstemp(dir=dir_)
+                try:
+                    with os.fdopen(fd, 'w') as tf:
+                        tf.write(new_content)
+                    os.replace(tmp, path)
+                except Exception:
+                    try:
+                        os.unlink(tmp)
+                    except OSError:
+                        pass
+                    raise
+            except OSError as e:
+                error(f"cannot write {path!r}: {e}")
+        _check_header_coverage(registry, seen_headers)
     else:
         seen_headers: set = set()
         _process_files(args.files, sys.stdout, registry, all_roots, config, seen_headers)
