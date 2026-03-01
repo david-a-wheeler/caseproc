@@ -16,12 +16,10 @@ _had_error = False # If true, we saw an error during processing
 _strict = False # If true, turn warnings into errors
 
 
-def warn(msg: str) -> None:
-    """Print a warning to stderr. Does not set the error flag."""
-    if _strict:
-        error(msg)
-    else:
-        print(f"ltacproc: warning: {msg}", file=sys.stderr)
+def panic(msg: str) -> None:
+    """Print a fatal error to stderr and exit immediately."""
+    print(f"ltacproc: fatal: {msg}", file=sys.stderr)
+    sys.exit(1)
 
 
 def error(msg: str) -> None:
@@ -31,10 +29,12 @@ def error(msg: str) -> None:
     _had_error = True
 
 
-def panic(msg: str) -> None:
-    """Print a fatal error to stderr and exit immediately."""
-    print(f"ltacproc: fatal: {msg}", file=sys.stderr)
-    sys.exit(1)
+def warn(msg: str) -> None:
+    """Print a warning to stderr; if --error is active, escalate to error()."""
+    if _strict:
+        error(msg)
+    else:
+        print(f"ltacproc: warning: {msg}", file=sys.stderr)
 
 
 def notify(msg: str) -> None:
@@ -198,83 +198,7 @@ class LTACParser:
         self._links: List[Tuple[Node, int]] = []
 
         for lineno, line in enumerate(lines, 1):
-            stripped = line.strip()
-            if not stripped or stripped.startswith('//'):
-                if self._stack or self._current_pkg:
-                    self._finalize_package()
-                continue
-
-            m = _LTAC_LINE_RE.match(line)
-            if not m:
-                error(f"line {lineno}: unrecognized syntax: {line.rstrip()!r}")
-                continue
-
-            depth = len(m.group('indent')) // 2
-            nodetype = m.group('nodetype')
-            identifier = (m.group('identifier') or '').strip()
-            text = (m.group('text') or '').strip()
-            ref = (m.group('ref') or '').strip()
-            options = parse_options(m.group('options') or '')
-
-            is_cited = False
-            cited_pkg = ''
-            if identifier.startswith('^'):
-                is_cited = True
-                rest = identifier[1:]
-                if rest.startswith('['):
-                    bracket_end = rest.find(']')
-                    if bracket_end >= 0:
-                        cited_pkg = rest[1:bracket_end]
-                        identifier = rest[bracket_end + 1:].strip()
-                    else:
-                        identifier = rest
-                else:
-                    identifier = rest
-
-            diagram_id = make_diagram_id(identifier, self._id_counter)
-
-            node = Node(
-                node_type=nodetype,
-                identifier=identifier,
-                text=text,
-                ext_ref=ref,
-                options=options,
-                children=[],
-                is_cited=is_cited,
-                cited_pkg=cited_pkg,
-                depth=depth,
-                parent=None,
-                link_target=None,
-                diagram_id=diagram_id,
-            )
-            self.node_count += 1
-
-            if nodetype == 'Link':
-                self._links.append((node, lineno))
-            elif identifier:
-                if identifier in self.registry:
-                    warn(f"line {lineno}: duplicate identifier {identifier!r}")
-                else:
-                    self.registry[identifier] = node
-
-            # Pop stack until top's depth < current depth
-            while self._stack and self._stack[-1][0] >= depth:
-                self._stack.pop()
-
-            if self._stack:
-                parent_node = self._stack[-1][1]
-                node.parent = parent_node
-                parent_node.children.append(node)
-            else:
-                if self._current_pkg:
-                    panic(
-                        f"package starting at line {self._pkg_root_lineno} "
-                        f"already has a top-level element; only one allowed"
-                    )
-                self._current_pkg.append(node)
-                self._pkg_root_lineno = lineno
-
-            self._stack.append((depth, node))
+            self._parse_line(lineno, line)
 
         # Finalize last open package
         if self._stack or self._current_pkg:
@@ -282,15 +206,108 @@ class LTACParser:
 
         # Resolve Link targets (done after full parse so forward refs work)
         for node, lineno in self._links:
-            target_id = node.identifier
-            if target_id in self.registry:
-                node.link_target = self.registry[target_id]
-            else:
-                warn(f"line {lineno}: Link target {target_id!r} not found")
+            self._resolve_link(node, lineno)
 
         return self.results
 
+    def _parse_line(self, lineno: int, line: str) -> None:
+        """Process a single LTAC source line, updating parser state."""
+        stripped = line.strip()
+        if not stripped or stripped.startswith('//'):
+            if self._stack or self._current_pkg:
+                self._finalize_package()
+            return
+
+        m = _LTAC_LINE_RE.match(line)
+        if not m:
+            error(f"line {lineno}: unrecognized syntax: {line.rstrip()!r}")
+            return
+
+        node = self._build_node(m, lineno)
+        self._attach_node(node, lineno)
+
+    def _build_node(self, m, lineno: int) -> Node:
+        """Construct a Node from a successful regex match."""
+        depth = len(m.group('indent')) // 2
+        nodetype = m.group('nodetype')
+        identifier = (m.group('identifier') or '').strip()
+        text = (m.group('text') or '').strip()
+        ref = (m.group('ref') or '').strip()
+        options = parse_options(m.group('options') or '')
+
+        is_cited = False
+        cited_pkg = ''
+        if identifier.startswith('^'):
+            is_cited = True
+            rest = identifier[1:]
+            if rest.startswith('['):
+                bracket_end = rest.find(']')
+                if bracket_end >= 0:
+                    cited_pkg = rest[1:bracket_end]
+                    identifier = rest[bracket_end + 1:].strip()
+                else:
+                    identifier = rest
+            else:
+                identifier = rest
+
+        diagram_id = make_diagram_id(identifier, self._id_counter)
+
+        node = Node(
+            node_type=nodetype,
+            identifier=identifier,
+            text=text,
+            ext_ref=ref,
+            options=options,
+            children=[],
+            is_cited=is_cited,
+            cited_pkg=cited_pkg,
+            depth=depth,
+            parent=None,
+            link_target=None,
+            diagram_id=diagram_id,
+        )
+        self.node_count += 1
+        return node
+
+    def _attach_node(self, node: Node, lineno: int) -> None:
+        """Register the node's identifier, attach it to the tree, and push it onto the stack."""
+        if node.node_type == 'Link':
+            self._links.append((node, lineno))
+        elif node.identifier:
+            if node.identifier in self.registry:
+                warn(f"line {lineno}: duplicate identifier {node.identifier!r}")
+            else:
+                self.registry[node.identifier] = node
+
+        # Pop stack until top's depth < current depth
+        while self._stack and self._stack[-1][0] >= node.depth:
+            self._stack.pop()
+
+        if self._stack:
+            parent_node = self._stack[-1][1]
+            node.parent = parent_node
+            parent_node.children.append(node)
+        else:
+            if self._current_pkg:
+                panic(
+                    f"package starting at line {self._pkg_root_lineno} "
+                    f"already has a top-level element; only one allowed"
+                )
+            self._current_pkg.append(node)
+            self._pkg_root_lineno = lineno
+
+        self._stack.append((node.depth, node))
+
+    def _resolve_link(self, node: Node, lineno: int) -> None:
+        """Set link_target on a Link node, warning if the target is unknown."""
+        target_id = node.identifier
+        if target_id in self.registry:
+            node.link_target = self.registry[target_id]
+        else:
+            warn(f"line {lineno}: Link target {target_id!r} not found")
+
     def _finalize_package(self) -> None:
+        """Flush the current package's root into results and reset package state."""
         self.results.extend(self._current_pkg)
         self._current_pkg = []
         self._pkg_root_lineno = None
@@ -335,9 +352,12 @@ def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node]) 
             registry[ident] = node
 
 
-def main() -> None:
-    global _strict
+# ---------------------------------------------------------------------------
+# CLI helpers
+# ---------------------------------------------------------------------------
 
+def parse_args() -> argparse.Namespace:
+    """Build the argument parser, define all flags, and parse the command line."""
     parser = argparse.ArgumentParser(
         prog='ltacproc',
         description='Process LTAC assurance-case files and inject rendered'
@@ -375,7 +395,38 @@ def main() -> None:
         help='rewrite each file in place with updated marked regions',
     )
 
-    args = parser.parse_args()
+    return parser.parse_args()
+
+
+def find_ltac_file(ltac_arg: Optional[str]) -> str:
+    """Determine the path of the LTAC file to load.
+
+    If --ltac was given, use that path directly.
+    Otherwise try case.ltac in the current directory, then docs/case.ltac.
+    Calls panic() (and exits) if no file can be found.
+    """
+    if ltac_arg:
+        return ltac_arg
+    if os.path.exists('case.ltac'):
+        return 'case.ltac'
+    if os.path.exists('docs/case.ltac'):
+        return 'docs/case.ltac'
+    panic("no LTAC file found; use --ltac or create case.ltac")
+
+
+def check_cited_packages(all_roots: List[Node], registry: Dict[str, Node]) -> None:
+    """Warn about any external ^[PkgName] citations that could not be resolved."""
+    pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
+    for node in registry.values():
+        if node.is_cited and node.cited_pkg and node.cited_pkg not in pkg_names:
+            warn(f"cited package {node.cited_pkg!r} not found in loaded LTAC")
+
+
+def main() -> None:
+    """Entry point: parse arguments, load configuration and LTAC data, then dispatch."""
+    global _strict
+
+    args = parse_args()
 
     if args.error:
         _strict = True
@@ -386,23 +437,11 @@ def main() -> None:
     all_roots: List[Node] = []
     registry: Dict[str, Node] = {}
 
-    if args.ltac:
-        ltac_path = args.ltac
-    elif os.path.exists('case.ltac'):
-        ltac_path = 'case.ltac'
-    elif os.path.exists('docs/case.ltac'):
-        ltac_path = 'docs/case.ltac'
-    else:
-        panic("no LTAC file found; use --ltac or create case.ltac")
-
+    ltac_path = find_ltac_file(args.ltac)
     load_ltac_file(ltac_path, all_roots, registry)
     notify(f"Loaded {len(all_roots)} package(s), {_count_all_nodes(all_roots)} node(s)")
 
-    # Warn about cited packages that were not found
-    pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
-    for node in registry.values():
-        if node.is_cited and node.cited_pkg and node.cited_pkg not in pkg_names:
-            warn(f"cited package {node.cited_pkg!r} not found in loaded LTAC")
+    check_cited_packages(all_roots, registry)
 
     if _had_error:
         sys.exit(1)
