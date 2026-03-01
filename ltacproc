@@ -342,6 +342,142 @@ def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node]) 
 
 
 # ---------------------------------------------------------------------------
+# Renderers
+# ---------------------------------------------------------------------------
+
+def _node_url(node: Node, base_url: str) -> str:
+    """Return the hyperlink URL for a node, or '' if none can be determined.
+
+    Uses ext_ref directly if set; otherwise constructs a URL from base_url
+    and a GitHub-style fragment derived from the expected heading for this node:
+    'Package ID' for root nodes, 'Type ID: text' for all others.
+    """
+    if node.ext_ref:
+        return node.ext_ref
+    if not (base_url and node.identifier):
+        return ''
+    if node.depth == 0:
+        heading = f"Package {node.identifier}"
+    else:
+        heading = f"{node.node_type} {node.identifier}"
+        if node.text:
+            heading += f": {node.text}"
+    return base_url + '#' + to_github_fragment(heading)
+
+
+def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list) -> None:
+    """Append a markdown bullet for node and recurse into its children.
+
+    Link nodes are silently skipped (they are citations, not new bullets).
+    """
+    if node.node_type == 'Link':
+        return
+    url = _node_url(node, base_url)
+    if url and node.identifier:
+        id_part = f'[{node.identifier}]({url})'
+    elif node.identifier:
+        id_part = node.identifier
+    else:
+        id_part = ''
+    parts = ['  ' * indent + f'- {node.node_type}']
+    if id_part:
+        parts.append(f' {id_part}')
+    if node.text:
+        parts.append(f': {node.text}')
+    lines.append(''.join(parts))
+    for child in node.children:
+        _render_markdown_node(child, indent + 1, base_url, lines)
+
+
+def render_markdown(roots: List[Node], base_url: str = '') -> str:
+    """Render a list of nodes as an indented markdown bullet list with hyperlinks.
+
+    Each item is '- NodeType ID: text' where ID is a hyperlink when a URL
+    is available (from ext_ref, or constructed from base_url + anchor).
+    Link nodes are skipped.
+    """
+    lines = []
+    for root in roots:
+        _render_markdown_node(root, 0, base_url, lines)
+    return '\n'.join(lines)
+
+
+def resolve_element(
+    element_id: Optional[str],
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    current_element: Optional[Node],
+) -> List[Node]:
+    """Return the list of nodes to render for the given element_id.
+
+    If element_id is given: look up in registry; call error() and return []
+    if not found.  If element_id is None: use current_element if set, else
+    return all_roots.  ('*' is handled at dispatch time before calling here.)
+    """
+    if element_id is not None:
+        node = registry.get(element_id)
+        if node is None:
+            error(f"element {element_id!r} not found in registry")
+            return []
+        return [node]
+    if current_element is not None:
+        return [current_element]
+    return list(all_roots)
+
+
+def render_all_packages(all_roots: List[Node], render_fn, base_url: str) -> str:
+    """Render every package preceded by a '## Package ID' header.
+
+    Package blocks are separated by a blank line.
+    """
+    blocks = []
+    for root in all_roots:
+        header = f"## Package {root.identifier}" if root.identifier else "## Package"
+        blocks.append(f"{header}\n\n{render_fn([root], base_url)}")
+    return '\n\n'.join(blocks)
+
+
+_VALID_DISPLAY_TYPES = {'ltac/markdown'}
+
+
+def parse_selector(selector: str) -> Tuple[str, Optional[str]]:
+    """Parse a SELECTOR string into (display_type, element_id_or_None).
+
+    Format: 'display_type [element_id]'
+    An element_id of '*' is kept as the literal string '*'.
+    Calls error() on unknown display_type.
+    """
+    parts = selector.split(None, 1)
+    display_type = parts[0] if parts else ''
+    element_id: Optional[str] = parts[1].strip() if len(parts) > 1 else None
+    if display_type not in _VALID_DISPLAY_TYPES:
+        error(f"unknown selector type {display_type!r}")
+    return display_type, element_id
+
+
+def render_selector(
+    selector: str,
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    config: dict,
+    current_element: Optional[Node] = None,
+) -> str:
+    """Parse SELECTOR and return the rendered string.
+
+    Dispatches to the appropriate renderer based on display_type.
+    Returns '' if the display_type is unknown (error already reported).
+    """
+    display_type, element_id = parse_selector(selector)
+    base_url = config.get('markdown_base_url', '')
+    if display_type == 'ltac/markdown':
+        if element_id == '*':
+            return render_all_packages(all_roots, render_markdown, base_url)
+        nodes = resolve_element(element_id, registry, all_roots, current_element)
+        return render_markdown(nodes, base_url)
+    return ''
+
+
+# ---------------------------------------------------------------------------
 # CLI helpers
 # ---------------------------------------------------------------------------
 
@@ -421,16 +557,19 @@ def main() -> None:
         _strict = True
 
     config = load_config(args.config)
-    notify(f"config: {config}")
 
     all_roots: List[Node] = []
     registry: Dict[str, Node] = {}
 
     ltac_path = find_ltac_file(args.ltac)
     load_ltac_file(ltac_path, all_roots, registry)
-    notify(f"Loaded {len(all_roots)} package(s), {_count_all_nodes(all_roots)} node(s)")
 
     check_cited_packages(all_roots, registry)
+
+    if args.select:
+        result = render_selector(args.select, registry, all_roots, config)
+        if result:
+            print(result)
 
     if _had_error:
         sys.exit(1)
