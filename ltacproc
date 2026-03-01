@@ -487,6 +487,76 @@ def render_html(roots: List[Node], base_url: str = '') -> str:
     return '\n'.join(lines)
 
 
+# ---------------------------------------------------------------------------
+# SACM/mermaid renderer (step 9)
+# ---------------------------------------------------------------------------
+
+# Hair space (U+200A) — required inside sacmDot and Connector nodes.
+_HAIR_SPACE = '\u200a'
+
+
+def _sacm_node_decl(node: 'Node') -> str:
+    """Return the mermaid node-declaration line for a single LTAC node.
+
+    Returns '' for Relation and Link nodes (they produce no mermaid declaration).
+    diagram_id must already be set on the node.
+    """
+    if node.node_type in ('Relation', 'Link'):
+        return ''
+
+    if node.node_type == 'Connector':
+        return f'    {node.diagram_id}(("{_HAIR_SPACE}")):::connector'
+
+    did = node.diagram_id
+    eid = escape_html(node.identifier) if node.identifier else ''
+    etxt = escape_html(node.text) if node.text else ''
+    opts = node.options
+
+    # Assertion-state suffix: priority defeated > axiomatic > assumed > needsSupport.
+    # Assumption node type is treated as "assumed" regardless of options.
+    if 'defeated' in opts:
+        suffix = '<br>✗'
+    elif 'axiomatic' in opts:
+        suffix = '<br>━━━'
+    elif node.node_type == 'Assumption' or 'assumed' in opts:
+        suffix = '<br>ASSUMED'
+    elif 'needssupport' in opts:
+        suffix = '<br>...'
+    else:
+        suffix = ''
+
+    # Evidence and Context use the cylinder shape with a &nbsp;↗ after the ID.
+    if node.node_type in ('Evidence', 'Context'):
+        if eid and etxt:
+            inner = f'<b>{eid}</b>&nbsp;↗<br>{etxt}{suffix}'
+        elif eid:
+            inner = f'<b>{eid}</b>&nbsp;↗{suffix}'
+        else:
+            inner = f'&nbsp;↗<br>{etxt}{suffix}' if etxt else f'&nbsp;↗{suffix}'
+        shape = f'[("{inner}")]'
+    else:
+        # Claim, Strategy, Assumption, Justification
+        if eid and etxt:
+            inner = f'<b>{eid}</b><br>{etxt}{suffix}'
+        elif eid:
+            inner = f'<b>{eid}</b>{suffix}'
+        elif etxt:
+            inner = f'{etxt}{suffix}'
+        else:
+            inner = suffix.removeprefix('<br>') if suffix else ''
+
+        if node.node_type == 'Strategy':
+            shape = f'[/"{inner}"/]'
+        elif node.is_cited:
+            shape = f'[["{inner}"]]'
+        else:
+            # Claim, Assumption, Justification all use plain rectangle
+            shape = f'["{inner}"]'
+
+    abstract_cls = ':::abstractClaim' if 'abstract' in opts else ''
+    return f'    {did}{shape}{abstract_cls}'
+
+
 def resolve_element(
     element_id: Optional[str],
     registry: Dict[str, Node],
