@@ -1,0 +1,44 @@
+```mermaid
+---
+config:
+  theme: neutral
+  flowchart:
+    curve: linear
+    htmlLabels: true
+    rankSpacing: 60
+    nodeSpacing: 45
+    padding: 15
+---
+flowchart BT
+    classDef invisible opacity:0
+    classDef sacmDot fill:#000,stroke:#000
+    classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
+    classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
+    TC["<b>TC</b><br>Top claim: System is adequately secure against moderate threats"]
+    PO[/"<b>PO</b><br>Process organization: Organized by lifecycle processes, not a strict waterfall"/]
+    Tech["<b>Tech</b><br>Technical: Technical lifecycle processes implement security"]
+    NonTech[["<b>NonTech</b><br>Non-Technical Processes: Non-Technical lifecycle processes implement security"]]
+    CC[["<b>CC</b><br>Security Certifications &amp; Controls: Certifications &amp; Controls provide confidence in operating results"]]
+    Req[["<b>Req</b><br>Security in Requirements: Security requirements identified and met by functionality"]]
+    Des[["<b>Des</b><br>Security in Design: Design has security built in"]]
+    Impl[["<b>Impl</b><br>Security in Implementation: Implementation process maintains security"]]
+    IV[["<b>IV</b><br>Security in Integration &amp; Verification: Integration &amp; verification confirm security"]]
+    Dep[["<b>Dep</b><br>Security in Transition &amp; Operation: Deployment maintains security"]]
+    Maint[["<b>Maint</b><br>Security in Maintenance: Maintenance process maintains security"]]
+    Dot1((" ")):::sacmDot
+    Dot2((" ")):::sacmDot
+
+    BottomPadding[ ]:::invisible ~~~ TC
+    Req --- Dot1
+    Des --- Dot1
+    Impl --- Dot1
+    IV --- Dot1
+    Dep --- Dot1
+    Maint --- Dot1
+    Dot1 --> Tech
+    Tech --- Dot2
+    NonTech --- Dot2
+    CC --- Dot2
+    PO --- Dot2
+    Dot2 --> TC
+```

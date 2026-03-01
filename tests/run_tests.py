@@ -133,6 +133,13 @@ class TestSelectSacm(unittest.TestCase):
         self.assertEqual(normalise(result.stdout), read_fixture('simple.sacm.mermaid.expected'))
         self.assertEqual(result.stderr, '')
 
+    def test_badgeapp_top_sacm_mermaid(self):
+        """sacm/mermaid renders the badgeapp top-level assurance case correctly."""
+        result = run('--ltac', fixture('badgeapp-top.ltac'), '--select', 'sacm/mermaid')
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(normalise(result.stdout), read_fixture('badgeapp-top.sacm.mermaid.expected'))
+        self.assertEqual(result.stderr, '')
+
     def test_filter_mode_with_sacm_region(self):
         """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
         result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))

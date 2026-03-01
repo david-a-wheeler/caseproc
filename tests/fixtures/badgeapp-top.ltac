@@ -1,0 +1,11 @@
+- Claim TC: Top claim: System is adequately secure against moderate threats
+  - Strategy PO: Process organization: Organized by lifecycle processes, not a strict waterfall
+    - Claim Tech: Technical: Technical lifecycle processes implement security
+      - Claim ^Req: Security in Requirements: Security requirements identified and met by functionality
+      - Claim ^Des: Security in Design: Design has security built in
+      - Claim ^Impl: Security in Implementation: Implementation process maintains security
+      - Claim ^IV: Security in Integration & Verification: Integration & verification confirm security
+      - Claim ^Dep: Security in Transition & Operation: Deployment maintains security
+      - Claim ^Maint: Security in Maintenance: Maintenance process maintains security
+    - Claim ^NonTech: Non-Technical Processes: Non-Technical lifecycle processes implement security
+    - Claim ^CC: Security Certifications & Controls: Certifications & Controls provide confidence in operating results
