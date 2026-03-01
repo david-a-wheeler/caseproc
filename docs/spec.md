@@ -45,12 +45,21 @@ normal string into a GitHub id fragment.
 ## CLI Usage
 
 ```
-ltacproc [--help] [--validate] [--config JSON]
-         [--ltac|-l FILENAME] [--select|-s SELECTOR] [--inline|-i] [files]
+ltacproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
+ [--validate | (--select|-s) SELECTOR | (--inline|-i) ] [files]
 ```
 
 Meaning:
 
+* `[--help]`: Print usage information.
+* `[--config JSON]`: Configure the tool per JSON.
+* `[--error]`: Warnings (e.g., sub-element has wrong type) is considered
+  an error and returns an error code as well as a warning on stderr.
+  Without this flag only serious errors
+  (such as regions with a start but no end) are considered errors.
+* `[--ltac|-l] FILENAME`: The given FILENAME with this argument
+   is read as a sequence of 1+ LTAC cases (packages),
+   separated by at least 1 blank line and/or comment line beginning with `#`.
 * `[--select|-s SELECTOR]`: Print *just* the selected information identified
   by SELECTOR to stdout.
   SELECTOR must begin with a known display type,
@@ -60,38 +69,43 @@ Meaning:
   notation in mermaid graphics format) and
   `ltac/markdown` (markdown representation of LTAC with hyperlinks).
   If no element identifier is given in SELECTOR,
-  the last LTAC argument (package) read is used.
+  the most recent Markdown header
+   that would match an element (Package..., Claim...,
+  etc.) is used, and if there wasn't one, the most recently read LTAC package.
   If files are given, they are read, and marked regions are used as input
   wherever appropriate. However, the content of the files are *not* output.
   This option is incompatible with `--inline`.
   See the "SELECTOR" section below.
-* `[--config JSON]`: Configure the tool per JSON.
-* `[--help]`: Print usage information.
-* `[--validate]`: Report errors on stderr (as usual), but otherwise
-  don't output or change files. This would report if, for example, a
-  node was subordinate to the "wrong" type.
-* `[--ltac|-l] FILENAME`: The given FILENAME with this argument
-   is read as a sequence of 1+ LTAC cases (packages),
-   separated by at least 1 blank line and/or comment line beginning with `#`.
-* `[--inline|-i]`: Input is in markdown format in the listed files.
-  Each file is processed like `--markdown-input`, handling marked
-  regions specially, but each of the
-  markdown files are replaced with their updated forms.
+* `[--validate]`: Report warnings and errors on stderr (as usual),
+  but otherwise
+  don't output or change files. For example, this would print a warning
+  if a node was subordinate to the "wrong" type to standard error.
+* `[--inline|-i]`:
+  Each file is read, handling marked
+  regions specially. However, each of the
+  files is replaced with its updated form once it's processed.
+  Typically the file would be markdown or HTML.
   We do our best to never lose data in these files, so we only update
   each file after we know it was correctly processed.
 
 By default, this is a filter that reads files (or stdin if none given),
 which are presumably markdown and/or HTML.
-It will loading data and perform replacements in marked regions
+It will load data, perform replacements in marked regions
 (see the section below on marked regions), and print to standard out
-the result of those replacements.
-Note that `--inline` does something similar, but instead of printing to
-standard out, it reads each file in turn and updates regions as appropriate.
+the result of those replacements without changing any source inputs.
+
+The `--select` option lets you specify something specific to print to
+standard out, and also does not does change any files.
+The `--inline` option, instead of printing to
+standard out, reads each file in turn, updates regions as appropriate, and
+replaces the file with the updated information (or does no update if there
+was a serious failure).
+
 Error reports go to stderr.
 
 The `--config` configuration is loaded early.
 Then the `--ltac` file is processed, if present.
-Finally, the listed files are present.
+Finally, the listed files are processed in order.
 
 It will need to read the whole set of LTAC commands
 before being able to generate a
@@ -145,9 +159,12 @@ Valid display types are:
 * `sacm/mermaid` - SACM notation in mermaid format.
   See our conventions in `docs/sacm-mermaid.md`.
 * `gsn/mermaid` - GSN notation in mermaid format
-* `ltac/markdown` - Markdown representation of LTAC (indented bullets
-  with hyperlinks)
-* `ltac/html` - HTML representation of LTAC (indented bullets with hyperlinks)
+  NOTE: This won't be implemented at the beginning, it's a planned improvement.
+* `ltac/markdown` - Markdown representation of LTAC (indented bullets, but
+  with markdown hyperlinks added to each item).
+* `ltac/html` - HTML representation of LTAC (indented bullets with hyperlinks).
+  This is very similar to `ltac/markdown` but exclusively uses HTML
+  (such as `<ul>`, `<li>`, and `<a>`).
 * `statement` - Markdown representation showing `Statement:` followed by the
   statement of the element identifier
 * `references` - Markdown representation showing `References:` followed by the
@@ -189,7 +206,8 @@ Below are some thoughts on how to organize it.
 3. **Utility functions** – pure functions with no side effects
 4. **LTAC parser** – text → tree of Node objects
 5. **SACM renderer** – Node tree → mermaid string (default)
-6. **GSN renderer** – Node tree → mermaid string (--gsn)
+6. **GSN renderer** – Node tree → mermaid string for GSN processing
+   when we get around to implementing it.
 7. **Inline processor** – markdown text → updated markdown text
 8. **main()** – CLI entry point
 
