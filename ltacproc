@@ -1167,11 +1167,20 @@ def check_assertion_status(registry: Dict[str, Node]) -> None:
 
 
 def check_cited_packages(all_roots: List[Node], registry: Dict[str, Node]) -> None:
-    """Warn about any external ^[PkgName] citations that could not be resolved."""
+    """Warn about external citations that are missing or unresolvable.
+
+    A bare ^ with no package name is an incomplete citation.
+    A ^[PkgName] whose package is not loaded is an unresolved citation.
+    """
     pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
     for node in registry.values():
-        if node.is_cited and node.cited_pkg and node.cited_pkg not in pkg_names:
-            warn(f"cited package {node.cited_pkg!r} not found in loaded LTAC")
+        if not node.is_cited:
+            continue
+        label = node.identifier or f'(unnamed {node.node_type})'
+        if not node.cited_pkg:
+            warn(f"{label}: cited (^) with no package name")
+        elif node.cited_pkg not in pkg_names:
+            warn(f"{label}: cited package {node.cited_pkg!r} not found in loaded LTAC")
 
 
 def _process_files(

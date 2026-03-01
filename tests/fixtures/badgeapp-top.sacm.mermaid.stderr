@@ -1,0 +1,8 @@
+ltacproc: warning: Req: cited (^) with no package name
+ltacproc: warning: Des: cited (^) with no package name
+ltacproc: warning: Impl: cited (^) with no package name
+ltacproc: warning: IV: cited (^) with no package name
+ltacproc: warning: Dep: cited (^) with no package name
+ltacproc: warning: Maint: cited (^) with no package name
+ltacproc: warning: NonTech: cited (^) with no package name
+ltacproc: warning: CC: cited (^) with no package name

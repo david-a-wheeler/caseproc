@@ -138,7 +138,7 @@ class TestSelectSacm(unittest.TestCase):
         result = run('--ltac', fixture('badgeapp-top.ltac'), '--select', 'sacm/mermaid')
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('badgeapp-top.sacm.mermaid.expected'))
-        self.assertEqual(result.stderr, '')
+        self.assertEqual(normalise(result.stderr), read_fixture('badgeapp-top.sacm.mermaid.stderr'))
 
     def test_filter_mode_with_sacm_region(self):
         """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
