@@ -231,7 +231,7 @@ class Node:
     depth: int              # 0-based indentation level (0 = root)
     parent: Optional['Node'] # back-reference; None for roots
     link_target: Optional['Node'] # for Link nodes: the referenced node (None otherwise)
-    mermaid_id: str         # computed valid mermaid node id (set after parse)
+    diagram_id: str         # computed valid diagram node id for any renderer (set after parse)
 ```
 
 ---
@@ -253,10 +253,11 @@ def to_github_fragment(text: str) -> str:
     Example: "Package C1: Main Claim" -> "package-c1-main-claim"
     """
 
-def make_mermaid_id(identifier: str, counter: list) -> str:
-    """Return a valid mermaid node id for the given LTAC identifier.
+def make_diagram_id(identifier: str, counter: list) -> str:
+    """Return a valid diagram node id for the given LTAC identifier.
 
-    Mermaid ids must match [A-Za-z0-9_]+.
+    Used by all diagram renderers (SACM/mermaid, GSN/mermaid, etc.).
+    Ids must match [A-Za-z0-9_]+.
     - Hyphens and dots become underscores.
     - Other non-alphanumeric characters are removed.
     - If identifier is empty, generate '_auto{N}' using counter[0]++.
@@ -303,6 +304,26 @@ options    ::= '{' option (',' option)* '}'
 - Per the EBNF, `(ref)` comes before `{OPTIONS}`: `Text [Reference] [Options]`.
   Strip `{OPTIONS}` from the end of the line first, then strip `(ref)`.
 
+### Pre-compiled regex constant
+
+The following constant is compiled once at module import time (never inside a function):
+
+```python
+_LTAC_LINE_RE = re.compile(
+    r'^(?P<indent>(?:  )*)'
+    r'[-*] '
+    r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
+    r'|Context|Assumption|Relation|Link)'
+    r'(?:\s+(?P<identifier>[^:{\n(]+))?'
+    r'(?::\s*(?P<text>[^({]*))?'
+    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
+    r'(?:\s*\{(?P<options>[^}\n]*)\})?'
+    r'\s*$'
+)
+```
+
+`identifier` and `text` groups should have `.strip()` applied after extraction.
+
 ### Parser algorithm (class LTACParser)
 
 ```python
@@ -319,24 +340,29 @@ class LTACParser:
 `parse_ltac_lines` is a module-level convenience wrapper: it creates an
 `LTACParser`, calls `parse()`, and returns `(roots, parser.registry)` as a tuple.
 
-Steps:
-1. Maintain a **depth stack** of `(depth, node)` pairs; initially empty.
-2. For each non-blank, non-comment line:
-   a. Count leading spaces; compute `depth = spaces // 2`.
-   b. Strip leading spaces and the `- ` or `* ` bullet prefix.
-   c. Strip trailing `{OPTIONS}` → parse_options() → node.options.
-   d. Strip trailing `(ref)` → node.ext_ref.
-   e. Match the nodetype keyword.
-   f. Check for `^` prefix on identifier → set `is_cited`, `cited_pkg`.
-   g. Split on first `:` to get identifier and text.
-   h. Create Node; compute `mermaid_id`; register in `self.registry`.
-   i. Pop stack until stack top depth < current depth.
-   j. If stack is non-empty, the top is the parent; add node to parent.children.
-   k. If stack is empty, node is a root; append to roots list.
-   l. Push `(depth, node)` onto stack.
-3. For `Link` nodes: look up `self.registry[identifier]`; if found, set
-   `node.link_target = referenced_node`; if not found, warn to stderr.
-4. Return roots list.
+The parser loops over lines one at a time with a depth stack:
+
+1. **Blank/comment line**: a line is blank if empty after stripping, or if the
+   stripped line starts with `//`. Blank lines are package separators: finalize
+   any in-progress package (save roots, clear stack). Ignore leading/trailing
+   blanks and blanks between packages.
+2. **Non-blank line**: match against `_LTAC_LINE_RE`. If no match, print an
+   error to stderr with the line number and text, and return an error.
+   Extract groups (all `.strip()`ped):
+   - `depth = len(m.group('indent')) // 2`
+   - `nodetype`, `identifier` (or `''`), `text` (or `''`), `ref` (or `''`)
+   - `options`: `parse_options(m.group('options') or '')`
+   - If `identifier` starts with `^`: set `is_cited = True`; parse `cited_pkg`
+     and local ID from `^[PkgName]LocalId`.
+3. Build Node; compute `diagram_id`; add to `self.registry` if identifier
+   non-empty. Auto-identifier `_auto{N}` if no identifier.
+4. Pop depth stack until top's depth < current depth.
+5. If stack non-empty: add node as child of stack top.
+   If stack empty: add to current package roots.
+6. Push `(depth, node)` onto stack.
+7. After all lines, finalize any open package.
+8. For `Link` nodes: look up `self.registry[identifier]`; if found set
+   `link_target`; if not found warn to stderr.
 
 ---
 
@@ -460,7 +486,7 @@ flowchart BT
     [node declarations]
     [dot/connector declarations]
     [edge declarations]
-    BottomPadding[ ]:::invisible ~~~ [first_root_mermaid_id]
+    BottomPadding[ ]:::invisible ~~~ [first_root_id]
 ```
 ````
 
@@ -637,7 +663,7 @@ Not shown: We also need to generate `click` lines.
 
 ```python
 to_github_fragment(text: str) -> str
-make_mermaid_id(identifier: str, counter: list) -> str
+make_diagram_id(identifier: str, counter: list) -> str
 escape_html(text: str) -> str
 parse_options(raw: str) -> set
 

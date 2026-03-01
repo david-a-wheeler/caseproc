@@ -134,8 +134,19 @@ This specification extends LTAC as follows:
 - Adds a "Relation" so SACM relationships can be defined
 - Allows {Options} for richer mapping
 - Allows "-" or "*" as bullets, not just "-"
+- Adds "//" line comments: a line whose content (after stripping leading
+  whitespace) begins with "//" is a comment and is treated as a blank line
+  (i.e., a package separator). Comments are ignored for parsing purposes.
 
 # EBNF grammar for LTAC argument:
+
+LTACfile        = { BlankLine | Comment | Package } ;
+
+Package         = Element { Element } ;
+
+BlankLine       = Newline ;
+
+Comment         = "//" { Character } Newline ;   (* treated as a blank line *)
 
 LTACargument    = ElementList ;
 

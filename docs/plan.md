@@ -128,7 +128,7 @@ Add (in order) to `ltacproc`:
 
 ```python
 def to_github_fragment(text: str) -> str: ...
-def make_mermaid_id(identifier: str, counter: list) -> str: ...
+def make_diagram_id(identifier: str, counter: list) -> str: ...
 def escape_html(text: str) -> str: ...
 def parse_options(raw: str) -> set: ...
 ```
@@ -143,6 +143,22 @@ Add the `Node` dataclass exactly as specified in `docs/design-spec.md`
 
 ### 5c: LTAC parser
 
+Add `import re` at the top. Define a **module-level compiled constant** (evaluated once on import):
+
+```python
+_LTAC_LINE_RE = re.compile(
+    r'^(?P<indent>(?:  )*)'
+    r'[-*] '
+    r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
+    r'|Context|Assumption|Relation|Link)'
+    r'(?:\s+(?P<identifier>[^:{\n(]+))?'
+    r'(?::\s*(?P<text>[^({]*))?'
+    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
+    r'(?:\s*\{(?P<options>[^}\n]*)\})?'
+    r'\s*$'
+)
+```
+
 Implement `LTACParser` and the module-level wrapper:
 
 ```python
@@ -152,21 +168,38 @@ class LTACParser:
 def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node]]: ...
 ```
 
-Follow the algorithm in `docs/design-spec.md` §LTAC Parser. Key points:
-- Depth stack for tree building.
-- Strip `{OPTIONS}` before `(ref)`.
-- `^` prefix sets `is_cited` and `cited_pkg`.
-- First `:` splits identifier from text.
-- Link nodes get `link_target` resolved from registry (warn if missing).
-- Auto-identifiers `_auto{N}` for nodes with no identifier.
+The parser loops over `lines` **one at a time**:
+
+- **Blank/comment line**: a line is blank if it is empty after stripping, or if
+  the stripped line starts with `//`. Blank lines are package separators: if a
+  package is in progress (depth stack non-empty), finalize it (append roots to
+  results; clear stack). Blank lines at the start, end, or between packages are
+  silently ignored.
+- **Non-blank line**: try `_LTAC_LINE_RE.match(line)`. If no match, print an
+  error to stderr including the line number and the offending text, and return
+  an error. Otherwise extract groups (all stripped of surrounding whitespace):
+  - `depth = len(m.group('indent')) // 2`
+  - `nodetype`, `identifier` (or `''`), `text` (or `''`), `ref` (or `''`)
+  - `options`: `parse_options(m.group('options') or '')`
+  - If `identifier` starts with `^`: set `is_cited = True`; parse `cited_pkg`
+    and local ID from the `^[PkgName]LocalId` format.
+- Build Node; compute `diagram_id`; add to `self.registry` if identifier is
+  non-empty. Auto-identifier `_auto{N}` if no identifier.
+- Pop depth stack until top's depth < current depth.
+- If stack non-empty: add node as child of stack top.
+  If stack empty: add node to current package roots list.
+- Push `(depth, node)` onto stack.
+- After all lines, finalize any open package.
+- For `Link` nodes: look up `self.registry[identifier]`; if found set
+  `link_target`; if not found warn to stderr.
+
+`parse_ltac_lines` is a module-level wrapper: create an `LTACParser`, call
+`parse()`, return `(roots, parser.registry)`.
 
 ### 5d: LTAC file loading
 
 Write `load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node]) -> None`:
-- Read the file at `path` and split content into chunks on blank lines.
-  Strip leading/trailing whitespace from each chunk.
-- Skip empty chunks and chunks where every line starts with `#`.
-- Parse each non-empty chunk with `parse_ltac_lines()`.
+- Open the file and pass its lines to `parse_ltac_lines()`.
 - Merge the returned roots and registry entries into the provided
   `all_roots` and `registry` (the function mutates them in place).
 
