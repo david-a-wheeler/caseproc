@@ -21,6 +21,41 @@ Create `ltacproc` as an executable Python 3 script.
 - Standard `if __name__ == '__main__': main()` guard at the bottom.
 - Run `chmod +x ltacproc` to make it executable.
 
+### 1b: Error reporting functions
+
+Add a module-level error flag and three reporting functions (all that is needed
+is `sys`, already imported):
+
+```python
+_had_error = False
+
+def warn(msg: str) -> None:
+    """Print a warning to stderr. Does not set the error flag."""
+    print(f"ltacproc: warning: {msg}", file=sys.stderr)
+
+def error(msg: str) -> None:
+    """Print an error to stderr and set the error flag."""
+    global _had_error
+    print(f"ltacproc: error: {msg}", file=sys.stderr)
+    _had_error = True
+
+def panic(msg: str) -> None:
+    """Print a fatal error to stderr and exit immediately."""
+    print(f"ltacproc: fatal: {msg}", file=sys.stderr)
+    sys.exit(1)
+```
+
+In `main()`, at the very end (after all processing), add:
+```python
+if _had_error:
+    sys.exit(1)
+```
+
+The `--error` flag (added in Step 2) makes `warn()` behave like `error()`:
+after parsing args, if `args.error` is set, replace the body of `warn()` with
+a call to `error()` (or use a module-level `_strict` flag checked inside
+`warn()`).
+
 **Verify:**
 ```
 ./ltacproc
@@ -98,7 +133,8 @@ Load and validate the JSON configuration passed on the command line.
   ```
 - Write `load_config(json_str: str) -> dict`:
   - If `json_str` is `None`, return a copy of `DEFAULT_CONFIG`.
-  - Parse JSON; warn to stderr for any key not in `DEFAULT_CONFIG`.
+  - Parse JSON; call `panic()` if the string is not valid JSON.
+  - Call `warn()` for any key not in `DEFAULT_CONFIG`.
   - Merge parsed values over defaults and return.
 - Call `load_config(args.config)` in `main()`; store result as `config`.
 - Replace the stub print with `print("config:", config)`.
@@ -175,23 +211,27 @@ The parser loops over `lines` **one at a time**:
   package is in progress (depth stack non-empty), finalize it (append roots to
   results; clear stack). Blank lines at the start, end, or between packages are
   silently ignored.
-- **Non-blank line**: try `_LTAC_LINE_RE.match(line)`. If no match, print an
-  error to stderr including the line number and the offending text, and return
-  an error. Otherwise extract groups (all stripped of surrounding whitespace):
+- **Non-blank line**: try `_LTAC_LINE_RE.match(line)`. If no match, call
+  `error()` with the line number and offending text; skip the line and continue.
+  Otherwise extract groups (all stripped of surrounding whitespace):
   - `depth = len(m.group('indent')) // 2`
   - `nodetype`, `identifier` (or `''`), `text` (or `''`), `ref` (or `''`)
   - `options`: `parse_options(m.group('options') or '')`
   - If `identifier` starts with `^`: set `is_cited = True`; parse `cited_pkg`
     and local ID from the `^[PkgName]LocalId` format.
-- Build Node; compute `diagram_id`; add to `self.registry` if identifier is
-  non-empty. Auto-identifier `_auto{N}` if no identifier.
+- Build Node; compute `diagram_id`; if identifier is non-empty, add to
+  `self.registry` — call `warn()` if the identifier is already present
+  (duplicate). Auto-identifier `_auto{N}` if no identifier.
 - Pop depth stack until top's depth < current depth.
 - If stack non-empty: add node as child of stack top.
-  If stack empty: add node to current package roots list.
+  If stack empty:
+  - If current package already has a root, call `panic()`:
+    `"package starting at line N already has a top-level element; only one allowed"`.
+  - Otherwise add node as the package root.
 - Push `(depth, node)` onto stack.
 - After all lines, finalize any open package.
 - For `Link` nodes: look up `self.registry[identifier]`; if found set
-  `link_target`; if not found warn to stderr.
+  `link_target`; if not found call `warn()`.
 
 `parse_ltac_lines` is a module-level wrapper: create an `LTACParser`, call
 `parse()`, return `(roots, parser.registry)`.
@@ -206,10 +246,16 @@ Write `load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node
 In `main()`, after loading config, determine the LTAC source:
 - If `args.ltac` is set, use that path.
 - Otherwise try `case.ltac`, then `docs/case.ltac`.
-- If no file is found, exit with a helpful message:
-  `"ltacproc: no LTAC file found; use --ltac or create case.ltac"`.
+- If no file is found, call `panic()`:
+  `"no LTAC file found; use --ltac or create case.ltac"`.
 - Call `load_ltac_file(path, all_roots, registry)`.
 - Print a debug summary: number of packages and nodes parsed.
+
+After loading, scan every node in the registry for external references:
+for any node where `is_cited` is `True` and `cited_pkg` is non-empty,
+check whether a package with that name exists in the loaded registry
+(package names are formed as `"Package " + root.identifier` for each root).
+Call `warn()` for any cited package name that was not found.
 
 ### 5e: Test fixture
 
@@ -246,7 +292,7 @@ Write `parse_selector(selector: str) -> tuple`:
 - `element_id` of `*` is kept as the literal string `'*'` (handled at
   dispatch time — see 6c).
 - Return `(display_type, element_id_or_None)`.
-- Raise (or print error + exit) on unknown `display_type`.
+- Call `error()` on unknown `display_type`; the selector region is left empty.
 
 Valid display types at this stage: `ltac/markdown`. (Others added later.)
 
@@ -265,8 +311,8 @@ Implement `render_markdown(roots: List[Node], base_url: str = '') -> str`:
 
 Write `resolve_element(element_id: Optional[str], registry, all_roots,
 current_element) -> List[Node]`:
-- If `element_id` given (and not `'*'`): look up in registry; return
-  `[node]` or error.
+- If `element_id` given (and not `'*'`): look up in registry; if not found
+  call `error()` and return `[]`.
 - If no `element_id`: use `current_element` if set, else return `all_roots`.
 
 Write `render_all_packages(all_roots: List[Node], render_fn, base_url: str) -> str`:
@@ -371,10 +417,12 @@ immediately. For each line:
 - **`<!-- ltac SELECTOR -->`** (SELECTOR non-empty):
   Write the marker to `out`.
   Read and discard lines in a simple loop until the line (stripped) equals
-  `<!-- end ltac -->`.
+  `<!-- end ltac -->`. If EOF is reached first, call `error()` reporting the
+  unclosed region and the file/line where the marker appeared.
   Render SELECTOR using the loaded `registry`; write rendered output to `out`.
   Write `<!-- end ltac -->` to `out`.
-- **Markdown header** (`^#+ `): update current-element context; write to `out`.
+- **Markdown header** (`^#+ `): update current-element context; record the
+  matched element identifier in a `seen_headers` set; write to `out`.
 
 ### 8b: Default mode in `main()`
 
@@ -406,7 +454,21 @@ Implement `render_html(roots: List[Node], base_url: str = '') -> str`:
 
 Wire into SELECTOR dispatch.
 
-### 8e: Test fixtures for default mode
+### 8e: Post-processing header coverage check
+
+After all document files have been processed in `main()` (in default or
+`--inline` mode), call `warn()` for every identifier in `registry` that
+does not appear in the `seen_headers` set accumulated during processing.
+Message format: `"element C2 has no corresponding header in any processed file"`.
+
+This catches elements that exist in the LTAC file but are never documented in
+any of the processed Markdown/HTML files, helping authors keep their
+documentation in sync with their assurance case.
+
+Skip this check when running `--select` (no documents are being processed).
+
+### 8f: Test fixtures for default mode
+
 
 Create `tests/fixtures/doc-simple.md` (no `sacm/mermaid` regions yet).
 This file references elements from `tests/fixtures/simple.ltac`:
@@ -427,7 +489,7 @@ References: None
 
 Generate and commit `tests/fixtures/doc-simple.md.expected`.
 
-### 8f: Tests for default mode
+### 8g: Tests for default mode
 
 Add to the test suite:
 - **Test 5**: `./ltacproc --ltac tests/fixtures/simple.ltac tests/fixtures/doc-simple.md`
@@ -436,6 +498,9 @@ Add to the test suite:
   exits 0 and produces no stdout.
 - **Test 7**: A fixture with a deliberate structural warning (e.g., Evidence
   as parent of a Claim); `./ltacproc --ltac ... --error` on it exits non-zero.
+- **Test 8**: Process `doc-simple.md` with a `simple.ltac` that contains an
+  extra element not referenced by any header; confirm a warning appears on
+  stderr (and exit is non-zero when run with `--error`).
 
 **Verify:**
 ```
@@ -522,8 +587,8 @@ emit a `click ID href "URL"` line after all node declarations.
   generate updated `doc-simple.md.expected`.
 - Add expected output file `tests/fixtures/simple.sacm.mermaid.expected`
   generated from `--select sacm/mermaid` on `simple.ltac`.
-- **Test 8**: `--select sacm/mermaid` on `simple.ltac` matches expected.
-- **Test 9**: default mode on updated `doc-simple.md` matches expected.
+- **Test 9**: `--select sacm/mermaid` on `simple.ltac` matches expected.
+- **Test 10**: default mode on updated `doc-simple.md` matches expected.
 
 **Verify:**
 ```
@@ -567,11 +632,11 @@ diff /tmp/ltacproc-test-inline.md tests/fixtures/inline-expected.md
 ```
 
 Add to the test suite:
-- **Test 10**: `--inline` on a fresh copy of `inline-input.md` produces
+- **Test 11**: `--inline` on a fresh copy of `inline-input.md` produces
   content matching `inline-expected.md`.
-- **Test 11**: Running `--inline` twice on the same copy is idempotent
+- **Test 12**: Running `--inline` twice on the same copy is idempotent
   (second run makes no changes to the file).
-- **Test 12**: `--inline` on a file with a serious parse error leaves the
+- **Test 13**: `--inline` on a file with a serious parse error leaves the
   file unchanged.
 
 **Verify:**
