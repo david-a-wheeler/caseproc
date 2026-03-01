@@ -167,12 +167,12 @@ def parse_options(raw: str) -> set:
 
     >>> sorted(parse_options("counter, abstract"))
     ['abstract', 'counter']
-    >>> sorted(parse_options("DEFEATED"))
-    ['defeated']
-    >>> sorted(parse_options(""))
-    []
-    >>> sorted(parse_options("  "))
-    []
+    >>> parse_options("DEFEATED")
+    {'defeated'}
+    >>> parse_options("")
+    set()
+    >>> parse_options("  ")
+    set()
     """
     if not raw.strip():
         return set()
