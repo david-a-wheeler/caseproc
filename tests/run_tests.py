@@ -20,7 +20,9 @@ FIXTURES = os.path.join(os.path.dirname(__file__), 'fixtures')
 
 def run(*args):
     """Run ltacproc with the given arguments and return the CompletedProcess."""
-    return subprocess.run(LTACPROC + list(args), capture_output=True, text=True)
+    return subprocess.run(
+        LTACPROC + list(args), capture_output=True, text=True, encoding='utf-8'
+    )
 
 
 def fixture(name):
@@ -29,8 +31,18 @@ def fixture(name):
 
 
 def read_fixture(name):
-    """Read and return the contents of a fixture file, normalising line endings."""
-    with open(fixture(name)) as f:
+    """Read and return the contents of a fixture file, normalising line endings.
+
+    Opens with newline='' so Python's own CRLF translation is disabled;
+    normalise() is the single place that converts any line ending to LF.
+    """
+    with open(fixture(name), encoding='utf-8', newline='') as f:
+        return normalise(f.read())
+
+
+def read_file(path):
+    """Read an arbitrary file and return its contents with normalised line endings."""
+    with open(path, encoding='utf-8', newline='') as f:
         return normalise(f.read())
 
 
@@ -130,8 +142,7 @@ class TestInlineMode(unittest.TestCase):
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
             self.assertEqual(normalise(result.stderr), read_fixture('inline-expected.stderr'))
-            with open(tmp) as f:
-                self.assertEqual(normalise(f.read()), read_fixture('inline-expected.md'))
+            self.assertEqual(read_file(tmp), read_fixture('inline-expected.md'))
         finally:
             os.unlink(tmp)
 
@@ -146,8 +157,7 @@ class TestInlineMode(unittest.TestCase):
             self.assertEqual(result.stdout, '')
             self.assertEqual(normalise(result.stderr), read_fixture('inline-expected.stderr'))
             self.assertEqual(os.path.getmtime(tmp), mtime_after_first)
-            with open(tmp) as f:
-                self.assertEqual(normalise(f.read()), read_fixture('inline-expected.md'))
+            self.assertEqual(read_file(tmp), read_fixture('inline-expected.md'))
         finally:
             os.unlink(tmp)
 
@@ -160,8 +170,7 @@ class TestInlineMode(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
             self.assertIn('unclosed', result.stderr)
-            with open(tmp) as f:
-                self.assertEqual(normalise(f.read()), original)
+            self.assertEqual(read_file(tmp), original)
         finally:
             os.unlink(tmp)
 
