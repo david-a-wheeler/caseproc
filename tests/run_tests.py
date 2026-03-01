@@ -58,6 +58,13 @@ class TestHelp(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stderr, '')
 
+    def test_selftests_pass(self):
+        """All built-in doctests pass."""
+        result = run('--selftest')
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stdout, '')
+        self.assertEqual(result.stderr, '')
+
 
 class TestSelectMarkdown(unittest.TestCase):
     def test_full_tree(self):

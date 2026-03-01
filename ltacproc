@@ -87,7 +87,14 @@ def to_github_fragment(text: str) -> str:
     4. Collapse runs of multiple hyphens into a single hyphen.
     5. Strip leading and trailing hyphens.
 
-    Example: "Package C1: Main Claim" -> "package-c1-main-claim"
+    >>> to_github_fragment("Package C1")
+    'package-c1'
+    >>> to_github_fragment("Claim C1: The software is acceptably safe")
+    'claim-c1-the-software-is-acceptably-safe'
+    >>> to_github_fragment("hello  world")
+    'hello-world'
+    >>> to_github_fragment("well-formed")
+    'well-formed'
     """
     text = text.lower()
     text = re.sub(r'[^\w\s-]', '', text)
@@ -105,6 +112,17 @@ def make_diagram_id(identifier: str, counter: list) -> str:
     - Other non-alphanumeric characters are removed.
     - If identifier is empty, generate '_auto{N}' using counter[0]++.
     - Prefix with underscore if the first character is a digit.
+
+    >>> make_diagram_id("C1", [0])
+    'C1'
+    >>> make_diagram_id("AR-1.0", [0])
+    'AR_1_0'
+    >>> make_diagram_id("1st", [0])
+    '_1st'
+    >>> make_diagram_id("", [0])
+    '_auto0'
+    >>> make_diagram_id("", [3])
+    '_auto3'
     """
     if not identifier:
         idx = counter[0]
@@ -125,6 +143,13 @@ def escape_html(text: str) -> str:
     """Escape text for safe embedding in mermaid HTML labels.
 
     Replaces & -> &amp;  < -> &lt;  > -> &gt;  " -> &quot;
+
+    >>> escape_html("safe text")
+    'safe text'
+    >>> escape_html('<b>Hello & "World"</b>')
+    '&lt;b&gt;Hello &amp; &quot;World&quot;&lt;/b&gt;'
+    >>> escape_html("a & b & c")
+    'a &amp; b &amp; c'
     """
     text = text.replace('&', '&amp;')
     text = text.replace('<', '&lt;')
@@ -139,6 +164,15 @@ def parse_options(raw: str) -> set:
     raw is the content between { and } (already stripped of braces).
     Splits on commas, strips whitespace, lowercases each token.
     Returns a set of lowercase strings.
+
+    >>> sorted(parse_options("counter, abstract"))
+    ['abstract', 'counter']
+    >>> sorted(parse_options("DEFEATED"))
+    ['defeated']
+    >>> sorted(parse_options(""))
+    []
+    >>> sorted(parse_options("  "))
+    []
     """
     if not raw.strip():
         return set()
@@ -610,6 +644,17 @@ def _sacm_edge_line(src_id: str, tgt_id: str, is_context: bool,
     is_context → circle head (--o); otherwise arrow head (-->).
     counter    → adds |⊖| label on the edge.
     abstract   → uses dashed line style (-.- prefix).
+
+    >>> _sacm_edge_line("A", "B", False)
+    '    A --> B'
+    >>> _sacm_edge_line("A", "B", True)
+    '    A --o B'
+    >>> _sacm_edge_line("A", "B", False, counter=True)
+    '    A -->|⊖| B'
+    >>> _sacm_edge_line("A", "B", True, abstract=True)
+    '    A -.-o B'
+    >>> _sacm_edge_line("A", "B", False, counter=True, abstract=True)
+    '    A -.->|⊖| B'
     """
     base = ('-.-o' if abstract else '--o') if is_context else ('-.->' if abstract else '-->')
     arrow = f'{base}|⊖|' if counter else base
@@ -620,6 +665,11 @@ def _sacm_source_edge(src_id: str, dot_id: str, abstract: bool = False) -> str:
     """Return an undirected source edge (--- or -.-) from a node to a sacmDot.
 
     abstract → dashed (-.-).  Counter is reflected on the Dot→target edge.
+
+    >>> _sacm_source_edge("A", "Dot1")
+    '    A --- Dot1'
+    >>> _sacm_source_edge("A", "Dot1", abstract=True)
+    '    A -.- Dot1'
     """
     return f'    {src_id} {"-.-" if abstract else "---"} {dot_id}'
 
@@ -1027,6 +1077,10 @@ def parse_args() -> argparse.Namespace:
         '--inline', '-i', action='store_true',
         help='rewrite each file in place with updated marked regions',
     )
+    mode.add_argument(
+        '--selftest', action='store_true',
+        help='run the built-in doctest suite and exit (0 = all pass, 1 = any fail)',
+    )
 
     return parser.parse_args()
 
@@ -1082,11 +1136,26 @@ def _check_header_coverage(registry: Dict[str, Node], seen_headers: set) -> None
             warn(f"element {ident} has no corresponding header in any processed file")
 
 
+def run_selftests() -> None:
+    """Run all doctests embedded in this module and exit.
+
+    Exits with code 0 if every test passes, 1 if any fail.
+    Failed tests are shown with ndiff output so differences are easy to spot.
+    """
+    import doctest
+    failures, _ = doctest.testmod(optionflags=doctest.REPORT_NDIFF)
+    sys.exit(0 if failures == 0 else 1)
+
+
 def main() -> None:
     """Entry point: parse arguments, load configuration and LTAC data, then dispatch."""
     global _strict
 
     args = parse_args()
+
+    if args.selftest:
+        run_selftests()
+        return  # run_selftests() calls sys.exit(); this is a safety net
 
     if args.error:
         _strict = True
