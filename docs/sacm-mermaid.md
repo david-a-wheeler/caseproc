@@ -133,7 +133,7 @@ Followed by the (re)generated Mermaid diagram.
 [Lightweight Text Assurance Case (LTAC)](https://www.argevide.com/lightweight-text-assurance-case-ltac/)
 defines six element types: **Claim**, **Strategy**, **Justification**,
 **Evidence**, **Context**, and **Assumption**.
-Every LTAC argument must begin with a Claim.
+Every LTAC package must begin with a Claim.
 Child elements nest beneath their parents using two-space indentation;
 a child *supports* (provides evidence for, or contextualizes) its parent.
 The per-line syntax is:
