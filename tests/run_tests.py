@@ -42,6 +42,7 @@ class TestHelp(unittest.TestCase):
         """--help should print usage and exit with code 0."""
         result = run('--help')
         self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr, '')
 
 
 class TestSelectMarkdown(unittest.TestCase):
@@ -50,18 +51,21 @@ class TestSelectMarkdown(unittest.TestCase):
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown')
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('simple.ltac.md.expected'))
+        self.assertEqual(result.stderr, '')
 
     def test_subtree_c2(self):
         """ltac/markdown C2 renders only the subtree rooted at C2."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown C2')
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('simple-c2.md.expected'))
+        self.assertEqual(result.stderr, '')
 
     def test_all_packages(self):
         """ltac/markdown * renders all packages with ## Package headers."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown *')
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('simple-star.md.expected'))
+        self.assertEqual(result.stderr, '')
 
 
 class TestDefaultMode(unittest.TestCase):
@@ -70,12 +74,14 @@ class TestDefaultMode(unittest.TestCase):
         result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('doc-simple.md.expected'))
+        self.assertEqual(normalise(result.stderr), read_fixture('doc-simple.md.stderr'))
 
     def test_validate_exits_zero_no_stdout(self):
         """--validate produces no stdout and exits 0 for a well-formed document."""
         result = run('--ltac', fixture('simple.ltac'), '--validate', fixture('doc-simple.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, '')
+        self.assertEqual(result.stderr, '')
 
     def test_structural_warning_with_error_flag(self):
         """A structurally invalid LTAC file (Claim under Evidence) exits non-zero with --error."""
@@ -96,12 +102,14 @@ class TestSelectSacm(unittest.TestCase):
         result = run('--ltac', fixture('simple.ltac'), '--select', 'sacm/mermaid')
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('simple.sacm.mermaid.expected'))
+        self.assertEqual(result.stderr, '')
 
     def test_filter_mode_with_sacm_region(self):
         """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
         result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(normalise(result.stdout), read_fixture('doc-simple.md.expected'))
+        self.assertEqual(normalise(result.stderr), read_fixture('doc-simple.md.stderr'))
 
 
 if __name__ == '__main__':
