@@ -167,6 +167,8 @@ class Node:
 # LTAC parser
 # ---------------------------------------------------------------------------
 
+# This parses an LTAC line with a regex, and pulls out relevant pieces.
+# Compiled regexes perform well in Python.
 _LTAC_LINE_RE = re.compile(
     r'^(?P<indent>(?:  )*)'
     r'[-*] '
