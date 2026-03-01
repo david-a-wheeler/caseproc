@@ -781,7 +781,9 @@ def render_sacm(roots: List['Node'], base_url: str = '') -> str:
     lines = [_SACM_HEADER]
     lines.extend(node_decl_lines)
     lines.extend(dot_decls)
-    lines.extend(edge_lines)
+    if edge_lines:
+        lines.append('')  # blank line between declarations and edges
+        lines.extend(edge_lines)
     lines.append('```')
     return '\n'.join(lines)
 
