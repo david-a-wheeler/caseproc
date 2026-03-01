@@ -32,26 +32,57 @@ def panic(msg: str) -> None:
     sys.exit(1)
 
 
+def notify(msg: str) -> None:
+    """Print an informational notification to stderr."""
+    print(f"ltacproc: {msg}", file=sys.stderr)
+
+
 def main() -> None:
     global _strict
 
-    parser = argparse.ArgumentParser(prog='ltacproc')
-    parser.add_argument('--config', type=str, metavar='JSON')
-    parser.add_argument('--error', action='store_true')
-    parser.add_argument('--ltac', '-l', type=str, metavar='FILENAME')
-    parser.add_argument('files', nargs='*')
+    parser = argparse.ArgumentParser(
+        prog='ltacproc',
+        description='Process LTAC assurance-case files and inject rendered'
+                    ' views into Markdown/HTML documents.',
+        epilog='For full details see docs/design-spec.md.',
+    )
+    parser.add_argument(
+        '--config', type=str, metavar='JSON',
+        help='configure the tool with a JSON object',
+    )
+    parser.add_argument(
+        '--error', action='store_true',
+        help='treat warnings as errors (non-zero exit on any warning)',
+    )
+    parser.add_argument(
+        '--ltac', '-l', type=str, metavar='FILENAME',
+        help='LTAC file to load (default: case.ltac or docs/case.ltac)',
+    )
+    parser.add_argument(
+        'files', nargs='*',
+        help='Markdown/HTML files to process (default: stdin)',
+    )
 
     mode = parser.add_mutually_exclusive_group()
-    mode.add_argument('--validate', action='store_true')
-    mode.add_argument('--select', '-s', type=str, metavar='SELECTOR')
-    mode.add_argument('--inline', '-i', action='store_true')
+    mode.add_argument(
+        '--validate', action='store_true',
+        help='validate and report warnings/errors; do not produce output',
+    )
+    mode.add_argument(
+        '--select', '-s', type=str, metavar='SELECTOR',
+        help='print the selected SELECTOR output to stdout and exit',
+    )
+    mode.add_argument(
+        '--inline', '-i', action='store_true',
+        help='rewrite each file in place with updated marked regions',
+    )
 
     args = parser.parse_args()
 
     if args.error:
         _strict = True
 
-    print(repr(args))
+    notify("options parsed OK")
 
     if _had_error:
         sys.exit(1)
