@@ -551,7 +551,8 @@ _HAIR_SPACE = '\u200a'
 def _sacm_assertion_suffix(node_type: str, options: Set[str]) -> str:
     """Return the mermaid assertion-state suffix for the given node type and options.
 
-    Priority: defeated > axiomatic > assumed > needsSupport.
+    Valid nodes carry at most one assertion status (enforced by
+    check_assertion_status).  The order below is a rendering fallback only.
     Assumption node type is treated as "assumed" regardless of options.
 
     >>> _sacm_assertion_suffix('Claim', {'defeated'})
@@ -1135,6 +1136,36 @@ def find_ltac_file(ltac_arg: Optional[str]) -> str:
     panic("no LTAC file found; use --ltac or create case.ltac")
 
 
+# SACM spec section 11 defines AssertionStatus as a mutually exclusive
+# enumeration: Asserted (default), NeedsSupport, Assumed, Axiomatic, Defeated,
+# AsCited.  An Assumption node implicitly carries Assumed; a cross-citation
+# (^[PkgName]) implicitly carries AsCited.
+def check_assertion_status(registry: Dict[str, Node]) -> None:
+    """Error if any node carries more than one SACM assertion status.
+
+    SACM spec section 11 defines AssertionStatus as a mutually exclusive
+    enumeration with six values: Asserted (default, no option needed),
+    NeedsSupport, Assumed, Axiomatic, Defeated, AsCited.
+    """
+    for node in registry.values():
+        active = []
+        if node.node_type == 'Assumption' or 'assumed' in node.options:
+            active.append('Assumed')
+        if 'needssupport' in node.options:
+            active.append('NeedsSupport')
+        if 'axiomatic' in node.options:
+            active.append('Axiomatic')
+        if 'defeated' in node.options:
+            active.append('Defeated')
+        if node.is_cited:
+            active.append('AsCited')
+        if len(active) >= 2:
+            label = node.identifier or f'(unnamed {node.node_type})'
+            error(f"{label}: conflicting assertion status: {', '.join(active)}"
+                  f" (SACM spec section 11: Asserted/NeedsSupport/Assumed/"
+                  f"Axiomatic/Defeated/AsCited are mutually exclusive)")
+
+
 def check_cited_packages(all_roots: List[Node], registry: Dict[str, Node]) -> None:
     """Warn about any external ^[PkgName] citations that could not be resolved."""
     pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
@@ -1248,6 +1279,7 @@ def main() -> None:
     ltac_path = find_ltac_file(args.ltac)
     load_ltac_file(ltac_path, all_roots, registry)
 
+    check_assertion_status(registry)
     check_cited_packages(all_roots, registry)
 
     if args.select:

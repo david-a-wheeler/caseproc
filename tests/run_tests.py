@@ -116,6 +116,14 @@ class TestDefaultMode(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('no corresponding header', result.stderr)
 
+    def test_conflicting_assertion_status_is_error(self):
+        """A node with two SACM assertion statuses is always an error (no --error flag needed)."""
+        result = run('--ltac', fixture('conflict.ltac'), '--select', 'ltac/markdown')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('conflicting assertion status', result.stderr)
+        self.assertIn('C1', result.stderr)
+        self.assertNotIn('C2', result.stderr)
+
 
 class TestSelectSacm(unittest.TestCase):
     def test_select_sacm_mermaid(self):
