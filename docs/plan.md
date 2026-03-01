@@ -537,7 +537,8 @@ python tests/run_tests.py
 ## Step 9: `sacm/mermaid` renderer
 
 Implement `render_sacm()` in substeps, verifying the diagram visually at each
-stage. The full spec is in `docs/design-spec.md` §SACM Renderer.
+stage. The full spec is in `docs/design-spec.md` §SACM Renderer,
+with more information in `docs/sacm-mermaid.md`.
 
 ### 9a: Node declaration strings
 
