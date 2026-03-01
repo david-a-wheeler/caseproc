@@ -6,7 +6,11 @@ See docs/design-spec.md for the full specification.
 
 import argparse
 import json
+import os
+import re
 import sys
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set, Tuple
 
 _had_error = False # If true, we saw an error during processing
 _strict = False # If true, turn warnings into errors
@@ -64,6 +68,273 @@ def load_config(json_str: str) -> dict:
     return config
 
 
+# ---------------------------------------------------------------------------
+# Utility functions
+# ---------------------------------------------------------------------------
+
+def to_github_fragment(text: str) -> str:
+    """Convert heading text to a GitHub anchor fragment id.
+
+    Algorithm (matches GitHub's algorithm):
+    1. Lowercase the entire string.
+    2. Remove every character that is not a Unicode letter, digit,
+       hyphen, or space.
+    3. Replace spaces with hyphens.
+    4. Collapse runs of multiple hyphens into a single hyphen.
+    5. Strip leading and trailing hyphens.
+
+    Example: "Package C1: Main Claim" -> "package-c1-main-claim"
+    """
+    text = text.lower()
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'\s+', '-', text)
+    text = re.sub(r'-+', '-', text)
+    return text.strip('-')
+
+
+def make_diagram_id(identifier: str, counter: list) -> str:
+    """Return a valid diagram node id for the given LTAC identifier.
+
+    Used by all diagram renderers (SACM/mermaid, GSN/mermaid, etc.).
+    Ids must match [A-Za-z0-9_]+.
+    - Hyphens and dots become underscores.
+    - Other non-alphanumeric characters are removed.
+    - If identifier is empty, generate '_auto{N}' using counter[0]++.
+    - Prefix with underscore if the first character is a digit.
+    """
+    if not identifier:
+        idx = counter[0]
+        counter[0] += 1
+        return f'_auto{idx}'
+    result = re.sub(r'[-.]', '_', identifier)
+    result = re.sub(r'[^A-Za-z0-9_]', '', result)
+    if not result:
+        idx = counter[0]
+        counter[0] += 1
+        return f'_auto{idx}'
+    if result[0].isdigit():
+        result = '_' + result
+    return result
+
+
+def escape_html(text: str) -> str:
+    """Escape text for safe embedding in mermaid HTML labels.
+
+    Replaces & -> &amp;  < -> &lt;  > -> &gt;  " -> &quot;
+    """
+    text = text.replace('&', '&amp;')
+    text = text.replace('<', '&lt;')
+    text = text.replace('>', '&gt;')
+    text = text.replace('"', '&quot;')
+    return text
+
+
+def parse_options(raw: str) -> set:
+    """Parse a {OPTIONS} suffix string into a set of option names.
+
+    raw is the content between { and } (already stripped of braces).
+    Splits on commas, strips whitespace, lowercases each token.
+    Returns a set of lowercase strings.
+    """
+    if not raw.strip():
+        return set()
+    return {token.strip().lower() for token in raw.split(',') if token.strip()}
+
+
+# ---------------------------------------------------------------------------
+# Data model
+# ---------------------------------------------------------------------------
+
+@dataclass
+class Node:
+    node_type: str           # Claim|Strategy|Justification|Evidence|
+                             # Context|Assumption|Link|Relation|Connector
+    identifier: str          # e.g. "C1"; empty string if absent
+    text: str                # descriptive text (statement / reasoning)
+    ext_ref: str             # text from trailing (...), empty if absent
+    options: Set[str]        # e.g.: needsSupport axiomatic defeated
+                             #        counter abstract assumed
+    children: List['Node']   # child nodes
+    is_cited: bool           # True when identifier had a ^ prefix
+    cited_pkg: str           # package name from ^[PkgName] prefix; '' = default
+    depth: int               # 0-based indentation level (0 = root)
+    parent: Optional['Node'] # back-reference; None for roots
+    link_target: Optional['Node']  # for Link nodes: referenced node
+    diagram_id: str          # computed valid diagram node id for any renderer
+
+
+# ---------------------------------------------------------------------------
+# LTAC parser
+# ---------------------------------------------------------------------------
+
+_LTAC_LINE_RE = re.compile(
+    r'^(?P<indent>(?:  )*)'
+    r'[-*] '
+    r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
+    r'|Context|Assumption|Relation|Link)'
+    r'(?:\s+(?P<identifier>[^:{\n(]+))?'
+    r'(?::\s*(?P<text>[^({]*))?'
+    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
+    r'(?:\s*\{(?P<options>[^}\n]*)\})?'
+    r'\s*$'
+)
+
+
+class LTACParser:
+    def parse(self, lines: List[str]) -> List[Node]:
+        """Parse LTAC lines into a forest (list of root Nodes).
+
+        Returns one root Node per package.
+        Also populates self.registry: Dict[str, Node] mapping each
+        identifier to its Node (for Link resolution).
+        """
+        self.registry: Dict[str, Node] = {}
+        self.results: List[Node] = []
+        self.node_count: int = 0
+        self._stack: List[Tuple[int, Node]] = []
+        self._current_pkg: List[Node] = []
+        self._pkg_root_lineno: Optional[int] = None
+        self._id_counter: List[int] = [0]
+        self._links: List[Tuple[Node, int]] = []
+
+        for lineno, line in enumerate(lines, 1):
+            stripped = line.strip()
+            if not stripped or stripped.startswith('//'):
+                if self._stack or self._current_pkg:
+                    self._finalize_package()
+                continue
+
+            m = _LTAC_LINE_RE.match(line)
+            if not m:
+                error(f"line {lineno}: unrecognized syntax: {line.rstrip()!r}")
+                continue
+
+            depth = len(m.group('indent')) // 2
+            nodetype = m.group('nodetype')
+            identifier = (m.group('identifier') or '').strip()
+            text = (m.group('text') or '').strip()
+            ref = (m.group('ref') or '').strip()
+            options = parse_options(m.group('options') or '')
+
+            is_cited = False
+            cited_pkg = ''
+            if identifier.startswith('^'):
+                is_cited = True
+                rest = identifier[1:]
+                if rest.startswith('['):
+                    bracket_end = rest.find(']')
+                    if bracket_end >= 0:
+                        cited_pkg = rest[1:bracket_end]
+                        identifier = rest[bracket_end + 1:].strip()
+                    else:
+                        identifier = rest
+                else:
+                    identifier = rest
+
+            diagram_id = make_diagram_id(identifier, self._id_counter)
+
+            node = Node(
+                node_type=nodetype,
+                identifier=identifier,
+                text=text,
+                ext_ref=ref,
+                options=options,
+                children=[],
+                is_cited=is_cited,
+                cited_pkg=cited_pkg,
+                depth=depth,
+                parent=None,
+                link_target=None,
+                diagram_id=diagram_id,
+            )
+            self.node_count += 1
+
+            if nodetype == 'Link':
+                self._links.append((node, lineno))
+            elif identifier:
+                if identifier in self.registry:
+                    warn(f"line {lineno}: duplicate identifier {identifier!r}")
+                else:
+                    self.registry[identifier] = node
+
+            # Pop stack until top's depth < current depth
+            while self._stack and self._stack[-1][0] >= depth:
+                self._stack.pop()
+
+            if self._stack:
+                parent_node = self._stack[-1][1]
+                node.parent = parent_node
+                parent_node.children.append(node)
+            else:
+                if self._current_pkg:
+                    panic(
+                        f"package starting at line {self._pkg_root_lineno} "
+                        f"already has a top-level element; only one allowed"
+                    )
+                self._current_pkg.append(node)
+                self._pkg_root_lineno = lineno
+
+            self._stack.append((depth, node))
+
+        # Finalize last open package
+        if self._stack or self._current_pkg:
+            self._finalize_package()
+
+        # Resolve Link targets (done after full parse so forward refs work)
+        for node, lineno in self._links:
+            target_id = node.identifier
+            if target_id in self.registry:
+                node.link_target = self.registry[target_id]
+            else:
+                warn(f"line {lineno}: Link target {target_id!r} not found")
+
+        return self.results
+
+    def _finalize_package(self) -> None:
+        self.results.extend(self._current_pkg)
+        self._current_pkg = []
+        self._pkg_root_lineno = None
+        self._stack = []
+
+
+def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node]]:
+    """Parse LTAC lines and return (roots, registry)."""
+    parser = LTACParser()
+    roots = parser.parse(lines)
+    return roots, parser.registry
+
+
+def _count_all_nodes(roots: List[Node]) -> int:
+    """Count all nodes in the forest by tree traversal."""
+    total = 0
+    stack = list(roots)
+    while stack:
+        node = stack.pop()
+        total += 1
+        stack.extend(node.children)
+    return total
+
+
+# ---------------------------------------------------------------------------
+# LTAC file loader
+# ---------------------------------------------------------------------------
+
+def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node]) -> None:
+    """Parse an LTAC file and merge its roots and registry into the given collections."""
+    try:
+        with open(path) as f:
+            lines = f.readlines()
+    except OSError as e:
+        panic(f"cannot open {path!r}: {e}")
+    roots, new_registry = parse_ltac_lines(lines)
+    all_roots.extend(roots)
+    for ident, node in new_registry.items():
+        if ident in registry:
+            warn(f"{path}: duplicate identifier {ident!r} (already seen in a previous file)")
+        else:
+            registry[ident] = node
+
+
 def main() -> None:
     global _strict
 
@@ -111,6 +382,27 @@ def main() -> None:
 
     config = load_config(args.config)
     notify(f"config: {config}")
+
+    all_roots: List[Node] = []
+    registry: Dict[str, Node] = {}
+
+    if args.ltac:
+        ltac_path = args.ltac
+    elif os.path.exists('case.ltac'):
+        ltac_path = 'case.ltac'
+    elif os.path.exists('docs/case.ltac'):
+        ltac_path = 'docs/case.ltac'
+    else:
+        panic("no LTAC file found; use --ltac or create case.ltac")
+
+    load_ltac_file(ltac_path, all_roots, registry)
+    notify(f"Loaded {len(all_roots)} package(s), {_count_all_nodes(all_roots)} node(s)")
+
+    # Warn about cited packages that were not found
+    pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
+    for node in registry.values():
+        if node.is_cited and node.cited_pkg and node.cited_pkg not in pkg_names:
+            warn(f"cited package {node.cited_pkg!r} not found in loaded LTAC")
 
     if _had_error:
         sys.exit(1)
