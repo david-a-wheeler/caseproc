@@ -353,30 +353,54 @@ Establish a repeatable test suite before the codebase grows further.
 
 ### 7a: Test runner
 
-Create `tests/run_tests.sh`:
-- Simple shell script; each test is a function.
-- Helper `check` function: runs a command, compares stdout to an expected file,
-  prints PASS/FAIL with a label.
-- Exit with non-zero if any test failed.
-- At this stage, register the tests from 7b and 7c.
+Create `tests/run_tests.py` using Python `unittest`. Python is already
+required to run `ltacproc`, making this fully portable across Linux, macOS,
+and Windows without needing a shell, Git Bash, or WSL.
 
-Alternatively, `tests/test_ltacproc.py` using Python `unittest` is also
-acceptable. Choose whichever is simpler; the key requirement is that
-`tests/run_tests.sh` (or `python tests/test_ltacproc.py`) can be run
-repeatedly and is self-contained.
+Key design points:
+
+- Locate `ltacproc` relative to the test file using `os.path`:
+  ```python
+  import os, sys, subprocess, unittest
+  LTACPROC = [sys.executable,
+              os.path.join(os.path.dirname(__file__), '..', 'ltacproc')]
+  ```
+  Using `sys.executable` ensures the same Python interpreter is used
+  everywhere and avoids any reliance on shebangs or `PATH`.
+
+- Run commands with `subprocess.run(LTACPROC + args, capture_output=True,
+  text=True)`. The `text=True` flag opens stdout/stderr in text mode,
+  normalising line endings on Windows.
+
+- Provide a helper that compares output to an expected file, normalising
+  line endings before comparison so CRLF vs LF differences don't cause
+  spurious failures:
+  ```python
+  def normalise(s):
+      return s.replace('\r\n', '\n')
+  ```
+
+- Each test is a `unittest.TestCase` method. Run with:
+  ```
+  python tests/run_tests.py
+  ```
+  or `python -m unittest tests.run_tests`, or any standard test runner.
+
+- Exit with non-zero if any test failed (standard `unittest` behaviour).
 
 ### 7b: Expected output fixtures
 
-Run:
+Run (use `python ltacproc` on all platforms; on Unix `./ltacproc` also works):
 ```
-./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown" \
+python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown" \
   > tests/fixtures/simple.ltac.md.expected
-./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2" \
+python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2" \
   > tests/fixtures/simple-c2.md.expected
-./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *" \
+python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *" \
   > tests/fixtures/simple-star.md.expected
 ```
 Inspect and adjust each file if anything looks wrong, then commit them.
+Ensure the committed files use LF line endings so comparisons are consistent.
 `simple-star.md.expected` should contain `## Package C1` followed by a blank
 line, then the same content as `simple.ltac.md.expected`.
 
@@ -392,8 +416,8 @@ line, then the same content as `simple.ltac.md.expected`.
 
 **Verify:**
 ```
-./tests/run_tests.sh   # (or python tests/test_ltacproc.py)
-# All tests PASS
+python tests/run_tests.py
+# All tests PASS (or similar unittest summary)
 ```
 
 ---
@@ -504,7 +528,7 @@ Add to the test suite:
 
 **Verify:**
 ```
-./tests/run_tests.sh
+python tests/run_tests.py
 # All tests PASS
 ```
 
@@ -592,7 +616,7 @@ emit a `click ID href "URL"` line after all node declarations.
 
 **Verify:**
 ```
-./tests/run_tests.sh
+python tests/run_tests.py
 # All tests PASS
 ```
 Also render the mermaid output in a viewer and confirm the diagram looks
@@ -641,7 +665,7 @@ Add to the test suite:
 
 **Verify:**
 ```
-./tests/run_tests.sh
+python tests/run_tests.py
 # All tests PASS
 ```
 
@@ -652,7 +676,7 @@ Add to the test suite:
 | Artifact | Description |
 |---|---|
 | `ltacproc` | Single executable Python 3 script |
-| `tests/run_tests.sh` | Test runner (all tests pass) |
+| `tests/run_tests.py` | Test runner (all tests pass) |
 | `tests/fixtures/simple.ltac` | Raw LTAC fixture |
 | `tests/fixtures/simple.ltac.md.expected` | Expected `ltac/markdown` output |
 | `tests/fixtures/simple-c2.md.expected` | Expected subtree output |

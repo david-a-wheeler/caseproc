@@ -37,6 +37,13 @@ PEP 8 as appropriate). It should be
 importable as a library (though we primarily intend for it to be used
 as a command line script).
 
+All file reading must handle both LF (`\n`) and CRLF (`\r\n`) line endings,
+since users may work on Windows, macOS, or Linux. Open every input file in
+Python's default text mode (`open(path)` without `newline=`), which
+transparently normalises both `\r\n` and bare `\r` to `\n` on all platforms.
+The compiled regex already uses `\s*$` so any stray `\r` that slips through
+is harmless, but relying on text-mode normalisation is cleaner.
+
 The code should be organized into clear reusable parts.
 For example, there should be a simple routine for turning a
 normal string into a GitHub id fragment.
