@@ -9,3 +9,9 @@ Statement: The software is acceptably safe
 <!-- ltac references C1 -->
 References: None
 <!-- end ltac -->
+
+<!-- ltac sacm/mermaid C1 -->
+```mermaid
+stale content
+```
+<!-- end ltac -->

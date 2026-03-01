@@ -90,5 +90,19 @@ class TestDefaultMode(unittest.TestCase):
         self.assertIn('no corresponding header', result.stderr)
 
 
+class TestSelectSacm(unittest.TestCase):
+    def test_select_sacm_mermaid(self):
+        """sacm/mermaid renders the full SACM mermaid diagram for simple.ltac."""
+        result = run('--ltac', fixture('simple.ltac'), '--select', 'sacm/mermaid')
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(normalise(result.stdout), read_fixture('simple.sacm.mermaid.expected'))
+
+    def test_filter_mode_with_sacm_region(self):
+        """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
+        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(normalise(result.stdout), read_fixture('doc-simple.md.expected'))
+
+
 if __name__ == '__main__':
     unittest.main()
