@@ -172,7 +172,7 @@ _LTAC_LINE_RE = re.compile(
     r'[-*] '
     r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
     r'|Context|Assumption|Relation|Link)'
-    r'(?:\s+(?P<identifier>[^:{\n(]+))?'
+    r'(?:\s+(?P<cited>\^)?(?:\[(?P<cited_pkg>[^\]]*)\])?(?P<identifier>[^:{\n(]*))?'
     r'(?::\s*(?P<text>[^({]*))?'
     r'(?:\s*\((?P<ref>[^)\n]*)\))?'
     r'(?:\s*\{(?P<options>[^}\n]*)\})?'
@@ -230,25 +230,12 @@ class LTACParser:
         """Construct a Node from a successful regex match."""
         depth = len(m.group('indent')) // 2
         nodetype = m.group('nodetype')
+        is_cited = bool(m.group('cited'))
+        cited_pkg = (m.group('cited_pkg') or '').strip()
         identifier = (m.group('identifier') or '').strip()
         text = (m.group('text') or '').strip()
         ref = (m.group('ref') or '').strip()
         options = parse_options(m.group('options') or '')
-
-        is_cited = False
-        cited_pkg = ''
-        if identifier.startswith('^'):
-            is_cited = True
-            rest = identifier[1:]
-            if rest.startswith('['):
-                bracket_end = rest.find(']')
-                if bracket_end >= 0:
-                    cited_pkg = rest[1:bracket_end]
-                    identifier = rest[bracket_end + 1:].strip()
-                else:
-                    identifier = rest
-            else:
-                identifier = rest
 
         diagram_id = make_diagram_id(identifier, self._id_counter)
 
