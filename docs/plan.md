@@ -243,6 +243,8 @@ real output.
 
 Write `parse_selector(selector: str) -> tuple`:
 - Split on the first space to get `display_type` and optional `element_id`.
+- `element_id` of `*` is kept as the literal string `'*'` (handled at
+  dispatch time — see 6c).
 - Return `(display_type, element_id_or_None)`.
 - Raise (or print error + exit) on unknown `display_type`.
 
@@ -259,12 +261,23 @@ Implement `render_markdown(roots: List[Node], base_url: str = '') -> str`:
 - Omit hyperlink if no URL is available.
 - Skip Link nodes (they are citations, not new bullets).
 
-### 6c: Element resolution
+### 6c: Element resolution and `*` dispatch
 
 Write `resolve_element(element_id: Optional[str], registry, all_roots,
 current_element) -> List[Node]`:
-- If `element_id` given: look up in registry; return `[node]` or error.
+- If `element_id` given (and not `'*'`): look up in registry; return
+  `[node]` or error.
 - If no `element_id`: use `current_element` if set, else return `all_roots`.
+
+Write `render_all_packages(all_roots: List[Node], render_fn, base_url: str) -> str`:
+- For each root in `all_roots` (in order):
+  - Emit `## Package {root.identifier}` (or `## Package` if no identifier).
+  - Emit a blank line.
+  - Emit `render_fn([root], base_url)`.
+- Join package blocks with a blank line between them.
+
+In the SELECTOR dispatch (6d and later), if `element_id == '*'`, call
+`render_all_packages` instead of `resolve_element` + renderer directly.
 
 ### 6d: Wire up `--select` in `main()`
 
@@ -306,14 +319,20 @@ acceptable. Choose whichever is simpler; the key requirement is that
 `tests/run_tests.sh` (or `python tests/test_ltacproc.py`) can be run
 repeatedly and is self-contained.
 
-### 7b: Expected output fixture
+### 7b: Expected output fixtures
 
 Run:
 ```
 ./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown" \
   > tests/fixtures/simple.ltac.md.expected
+./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2" \
+  > tests/fixtures/simple-c2.md.expected
+./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *" \
+  > tests/fixtures/simple-star.md.expected
 ```
-Inspect and adjust the file if anything looks wrong, then commit it.
+Inspect and adjust each file if anything looks wrong, then commit them.
+`simple-star.md.expected` should contain `## Package C1` followed by a blank
+line, then the same content as `simple.ltac.md.expected`.
 
 ### 7c: First tests
 
@@ -321,7 +340,9 @@ Inspect and adjust the file if anything looks wrong, then commit it.
 - **Test 2**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown"`
   matches `tests/fixtures/simple.ltac.md.expected`.
 - **Test 3**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2"`
-  matches a `simple-c2.md.expected` file (just the C2 subtree).
+  matches `tests/fixtures/simple-c2.md.expected` (just the C2 subtree).
+- **Test 4**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *"`
+  matches `tests/fixtures/simple-star.md.expected` (all packages with headers).
 
 **Verify:**
 ```
@@ -409,11 +430,11 @@ Generate and commit `tests/fixtures/doc-simple.md.expected`.
 ### 8f: Tests for default mode
 
 Add to the test suite:
-- **Test 4**: `./ltacproc --ltac tests/fixtures/simple.ltac tests/fixtures/doc-simple.md`
+- **Test 5**: `./ltacproc --ltac tests/fixtures/simple.ltac tests/fixtures/doc-simple.md`
   matches `doc-simple.md.expected`.
-- **Test 5**: `./ltacproc --ltac tests/fixtures/simple.ltac --validate tests/fixtures/doc-simple.md`
+- **Test 6**: `./ltacproc --ltac tests/fixtures/simple.ltac --validate tests/fixtures/doc-simple.md`
   exits 0 and produces no stdout.
-- **Test 6**: A fixture with a deliberate structural warning (e.g., Evidence
+- **Test 7**: A fixture with a deliberate structural warning (e.g., Evidence
   as parent of a Claim); `./ltacproc --ltac ... --error` on it exits non-zero.
 
 **Verify:**
@@ -501,8 +522,8 @@ emit a `click ID href "URL"` line after all node declarations.
   generate updated `doc-simple.md.expected`.
 - Add expected output file `tests/fixtures/simple.sacm.mermaid.expected`
   generated from `--select sacm/mermaid` on `simple.ltac`.
-- **Test 7**: `--select sacm/mermaid` on `simple.ltac` matches expected.
-- **Test 8**: default mode on updated `doc-simple.md` matches expected.
+- **Test 8**: `--select sacm/mermaid` on `simple.ltac` matches expected.
+- **Test 9**: default mode on updated `doc-simple.md` matches expected.
 
 **Verify:**
 ```
@@ -546,11 +567,11 @@ diff /tmp/ltacproc-test-inline.md tests/fixtures/inline-expected.md
 ```
 
 Add to the test suite:
-- **Test 9**: `--inline` on a fresh copy of `inline-input.md` produces
+- **Test 10**: `--inline` on a fresh copy of `inline-input.md` produces
   content matching `inline-expected.md`.
-- **Test 10**: Running `--inline` twice on the same copy is idempotent
+- **Test 11**: Running `--inline` twice on the same copy is idempotent
   (second run makes no changes to the file).
-- **Test 11**: `--inline` on a file with a serious parse error leaves the
+- **Test 12**: `--inline` on a file with a serious parse error leaves the
   file unchanged.
 
 **Verify:**
@@ -570,6 +591,7 @@ Add to the test suite:
 | `tests/fixtures/simple.ltac` | Raw LTAC fixture |
 | `tests/fixtures/simple.ltac.md.expected` | Expected `ltac/markdown` output |
 | `tests/fixtures/simple-c2.md.expected` | Expected subtree output |
+| `tests/fixtures/simple-star.md.expected` | Expected `ltac/markdown *` output (all packages) |
 | `tests/fixtures/simple.sacm.mermaid.expected` | Expected `sacm/mermaid` output |
 | `tests/fixtures/doc-simple.md` | Markdown document fixture |
 | `tests/fixtures/doc-simple.md.expected` | Expected substituted output |

@@ -143,6 +143,12 @@ SELECTOR begins with a display type,
 optionally followed by a space and element identifier
 (if no element identifier is given the default "current element" is used).
 
+If `*` is given as the element identifier, all packages are rendered in the
+order they were loaded from the LTAC file. Each package is preceded by a
+`## Package ID` Markdown header (where `ID` is the root Claim's identifier).
+A blank line separates each package's output. This works with all display
+types and allows a single selector to generate output for every package at once.
+
 Valid display types are:
 
 * `sacm/mermaid` - SACM notation in mermaid format.
