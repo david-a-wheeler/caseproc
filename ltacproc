@@ -248,9 +248,20 @@ class LTACParser:
 
         Returns one root Node per package.
         Also populates self.registry: Dict[str, Node] mapping each
-        identifier to its Node (for Link resolution).
+        non-cited identifier to its Node (for Link resolution), and
+        self.id_info: Dict[str, dict] tracking per-identifier usage
+        stats for post-parse validation.
         """
         self.registry: Dict[str, Node] = {}
+        # id_info[ident] = {
+        #   'declarations': int,       count of non-cited nodes with this ID
+        #   'citations':    int,       count of cited (^) nodes with this ID
+        #   'statement':    str|None,  first non-empty text seen for this ID
+        #   'decl_lineno':  int|None,  line of first declaration
+        #   'bare_cited':   bool,      any citation used ^ with no [PkgName]
+        #   'cited_pkgs':   set,       named packages from ^[PkgName] citations
+        # }
+        self.id_info: Dict[str, dict] = {}
         self.results: List[Node] = []
         self.node_count: int = 0
         self._stack: List[Tuple[int, Node]] = []
@@ -323,10 +334,33 @@ class LTACParser:
         if node.node_type == 'Link':
             self._links.append((node, lineno))
         elif node.identifier:
-            if node.identifier in self.registry:
-                warn(f"line {lineno}: duplicate identifier {node.identifier!r}")
+            info = self.id_info.setdefault(node.identifier, {
+                'declarations': 0,
+                'citations':    0,
+                'statement':    None,
+                'decl_lineno':  None,
+                'bare_cited':   False,
+                'cited_pkgs':   set(),
+            })
+            if node.is_cited:
+                info['citations'] += 1
+                if node.cited_pkg:
+                    info['cited_pkgs'].add(node.cited_pkg)
+                else:
+                    info['bare_cited'] = True
             else:
-                self.registry[node.identifier] = node
+                if info['declarations'] > 0:
+                    warn(f"line {lineno}: duplicate declaration {node.identifier!r}")
+                else:
+                    info['decl_lineno'] = lineno
+                    self.registry[node.identifier] = node
+                info['declarations'] += 1
+            if node.text:
+                if info['statement'] is None:
+                    info['statement'] = node.text
+                elif node.text != info['statement']:
+                    warn(f"line {lineno}: {node.identifier!r}: statement {node.text!r}"
+                         f" differs from earlier statement {info['statement']!r}")
 
         # Pop stack until top's depth < current depth
         while self._stack and self._stack[-1][0] >= node.depth:
@@ -367,11 +401,11 @@ class LTACParser:
         self._stack = []
 
 
-def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node]]:
-    """Parse LTAC lines and return (roots, registry)."""
+def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
+    """Parse LTAC lines and return (roots, registry, id_info)."""
     parser = LTACParser()
     roots = parser.parse(lines)
-    return roots, parser.registry
+    return roots, parser.registry, parser.id_info
 
 
 def _count_all_nodes(roots: List[Node]) -> int:
@@ -389,20 +423,36 @@ def _count_all_nodes(roots: List[Node]) -> int:
 # LTAC file loader
 # ---------------------------------------------------------------------------
 
-def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node]) -> None:
-    """Parse an LTAC file and merge its roots and registry into the given collections."""
+def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
+                   id_info: Dict[str, dict]) -> None:
+    """Parse an LTAC file and merge its roots, registry, and id_info into the given collections."""
     try:
         with open(path) as f:
             lines = f.readlines()
     except OSError as e:
         panic(f"cannot open {path!r}: {e}")
-    roots, new_registry = parse_ltac_lines(lines)
+    roots, new_registry, new_id_info = parse_ltac_lines(lines)
     all_roots.extend(roots)
     for ident, node in new_registry.items():
         if ident in registry:
-            warn(f"{path}: duplicate identifier {ident!r} (already seen in a previous file)")
+            warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
         else:
             registry[ident] = node
+    for ident, new in new_id_info.items():
+        if ident in id_info:
+            existing = id_info[ident]
+            if new['declarations'] > 0 and existing['declarations'] > 0:
+                warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
+            existing['declarations'] += new['declarations']
+            existing['citations']    += new['citations']
+            existing['bare_cited']    = existing['bare_cited'] or new['bare_cited']
+            existing['cited_pkgs'].update(new['cited_pkgs'])
+            if new['statement'] and existing['statement'] and new['statement'] != existing['statement']:
+                warn(f"{path}: {ident!r}: statement differs from earlier statement")
+            elif new['statement'] and not existing['statement']:
+                existing['statement'] = new['statement']
+        else:
+            id_info[ident] = new
 
 
 # ---------------------------------------------------------------------------
@@ -1186,21 +1236,23 @@ def check_assertion_status(registry: Dict[str, Node]) -> None:
                   f"Axiomatic/Defeated/AsCited are mutually exclusive)")
 
 
-def check_cited_packages(all_roots: List[Node], registry: Dict[str, Node]) -> None:
-    """Warn about external citations that are missing or unresolvable.
+def check_id_info(id_info: Dict[str, dict], all_roots: List[Node]) -> None:
+    """Validate identifier usage across the loaded LTAC.
 
-    A bare ^ with no package name is an incomplete citation.
-    A ^[PkgName] whose package is not loaded is an unresolved citation.
+    Uses the id_info table built during parsing (see LTACParser) to report:
+    - IDs cited (^) but never declared (may indicate a missing package)
+    - Citations using bare ^ with no [PkgName] (incomplete citation)
+    - Citations naming a package not found among the loaded roots
     """
     pkg_names = {'Package ' + root.identifier for root in all_roots if root.identifier}
-    for node in registry.values():
-        if not node.is_cited:
-            continue
-        label = node.identifier or f'(unnamed {node.node_type})'
-        if not node.cited_pkg:
-            warn(f"{label}: cited (^) with no package name")
-        elif node.cited_pkg not in pkg_names:
-            warn(f"{label}: cited package {node.cited_pkg!r} not found in loaded LTAC")
+    for ident, info in id_info.items():
+        if info['citations'] > 0 and info['declarations'] == 0:
+            warn(f"{ident}: cited but never declared")
+        if info['bare_cited']:
+            warn(f"{ident}: cited (^) with no package name")
+        for pkg in sorted(info['cited_pkgs']):
+            if pkg not in pkg_names:
+                warn(f"{ident}: cited package {pkg!r} not found in loaded LTAC")
 
 
 def _process_files(
@@ -1304,12 +1356,13 @@ def main() -> None:
 
     all_roots: List[Node] = []
     registry: Dict[str, Node] = {}
+    id_info: Dict[str, dict] = {}
 
     ltac_path = find_ltac_file(args.ltac)
-    load_ltac_file(ltac_path, all_roots, registry)
+    load_ltac_file(ltac_path, all_roots, registry, id_info)
 
     check_assertion_status(registry)
-    check_cited_packages(all_roots, registry)
+    check_id_info(id_info, all_roots)
 
     if args.select:
         result = render_selector(args.select, registry, all_roots, config)

@@ -1,8 +1,8 @@
 - Claim Security: The system is adequately secure against moderate threats
   - Strategy Processes: Security is argued by examining lifecycle processes
     - Claim Technical: Technical lifecycle processes implement security
-      - Claim ^Requirements: Security requirements are identified and met by the implementation
-      - Claim ^Design: The design has security built in
+      - Claim ^Requirements
+      - Claim ^Design
       - Claim ^Implementation: The implementation process maintains security
       - Claim ^Verification: Integration & verification confirm security
       - Claim ^Deployment: Deployment maintains security

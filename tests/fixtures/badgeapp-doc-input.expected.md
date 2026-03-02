@@ -28,8 +28,8 @@ flowchart BT
     Technical["<b>Technical</b><br>Technical lifecycle processes implement security"]
     NonTechnical[["<b>NonTechnical</b><br>Non-technical lifecycle processes implement security"]]
     Controls[["<b>Controls</b><br>Certifications &amp; controls provide confidence in operating results"]]
-    Requirements[["<b>Requirements</b><br>Security requirements are identified and met by the implementation"]]
-    Design[["<b>Design</b><br>The design has security built in"]]
+    Requirements[["<b>Requirements</b>"]]
+    Design[["<b>Design</b>"]]
     Implementation[["<b>Implementation</b><br>The implementation process maintains security"]]
     Verification[["<b>Verification</b><br>Integration &amp; verification confirm security"]]
     Deployment[["<b>Deployment</b><br>Deployment maintains security"]]
@@ -130,7 +130,7 @@ This is the top-level claim for the entire assurance case.
 ### Claim Requirements: Security requirements are identified and met
 
 <!-- ltac references -->
-References: [Package Security](#package-security)
+References: [Package Requirements](#package-requirements)
 <!-- end ltac -->
 
 The security requirements are documented and verified against the implementation.
@@ -138,7 +138,7 @@ The security requirements are documented and verified against the implementation
 ### Claim Design: The security design is documented and reviewed
 
 <!-- ltac references -->
-References: [Package Security](#package-security)
+References: [Package Design](#package-design)
 <!-- end ltac -->
 
 The system design incorporates security from the ground up.
