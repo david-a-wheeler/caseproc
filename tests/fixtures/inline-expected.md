@@ -38,7 +38,7 @@ flowchart BT
     click X1 "release-notes.md"
     click E1 "hara.pdf"
 
-    BottomPadding[ ]:::invisible ~~~ C1
+    BottomPadding[ ]:::invisible ~~~ E1
     E1 --> C2
     C2 --- Dot1
     C3 --- Dot1

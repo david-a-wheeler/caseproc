@@ -829,6 +829,18 @@ def _sacm_collect_edges(
                 _sacm_edge_line(ctx.diagram_id, s.diagram_id, True, is_counter, is_abstract))
 
 
+def _sacm_leftmost_leaf(node: 'Node') -> 'Node':
+    """Return the leftmost deepest rendered leaf in the subtree.
+
+    Follows the first non-Link child recursively, so that the result is the
+    node that appears at the bottom-left of the BT diagram.
+    """
+    for child in node.children:
+        if child.node_type != 'Link':
+            return _sacm_leftmost_leaf(child)
+    return node
+
+
 def render_sacm(roots: List['Node'], base_url: str = '') -> str:
     """Render package roots as a complete SACM/mermaid code block.
 
@@ -860,8 +872,10 @@ def render_sacm(roots: List['Node'], base_url: str = '') -> str:
 
     # The invisible BottomPadding node prevents GitHub's diagram controls from
     # obscuring the bottom of the diagram; it must be the first edge line.
+    # Link it to the leftmost bottommost leaf so it sits at the bottom-left.
     if roots:
-        edge_lines.insert(0, f'    BottomPadding[ ]:::invisible ~~~ {roots[0].diagram_id}')
+        bottom_node = _sacm_leftmost_leaf(roots[0])
+        edge_lines.insert(0, f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
 
     lines = [_SACM_HEADER]
     lines.extend(node_decl_lines)

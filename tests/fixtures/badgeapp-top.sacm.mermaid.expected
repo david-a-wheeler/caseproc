@@ -28,7 +28,7 @@ flowchart BT
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
 
-    BottomPadding[ ]:::invisible ~~~ Top
+    BottomPadding[ ]:::invisible ~~~ Requirements
     Requirements --- Dot1
     Design --- Dot1
     Implementation --- Dot1
