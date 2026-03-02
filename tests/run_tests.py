@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
+
 """Test suite for ltacproc.
 
 Run with:
-    python tests/run_tests.py
+    python3 tests/run_tests.py
 or:
-    python -m unittest tests.run_tests
+    python3 -m unittest tests.run_tests
 """
 
 import os
