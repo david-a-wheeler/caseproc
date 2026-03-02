@@ -1,0 +1,29 @@
+#!/bin/sh
+# Promote all saved test results to their corresponding fixtures.
+#
+# After running the test suite, tests/results/ contains only the outputs
+# that differ from the current fixtures.  Run this script to accept those
+# results as the new expected values.
+
+RESULTS="$(dirname "$0")/tests/results"
+FIXTURES="$(dirname "$0")/tests/fixtures"
+
+if [ ! -d "$RESULTS" ]; then
+    echo "No results directory found (tests/results/). Run the tests first."
+    exit 0
+fi
+
+count=0
+for result in "$RESULTS"/*; do
+    [ -f "$result" ] || continue
+    name="$(basename "$result")"
+    cp "$result" "$FIXTURES/$name"
+    echo "Accepted: $name"
+    count=$((count + 1))
+done
+
+if [ "$count" -eq 0 ]; then
+    echo "No results to accept."
+else
+    echo "Accepted $count file(s)."
+fi

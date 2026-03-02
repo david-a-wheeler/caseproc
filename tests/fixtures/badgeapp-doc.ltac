@@ -1,4 +1,4 @@
-- Claim Top: The system is adequately secure against moderate threats
+- Claim Security: The system is adequately secure against moderate threats
   - Strategy Processes: Security is argued by examining lifecycle processes
     - Claim Technical: Technical lifecycle processes implement security
       - Claim ^Requirements: Security requirements are identified and met by the implementation
@@ -10,11 +10,11 @@
     - Claim ^NonTechnical: Non-technical lifecycle processes implement security
     - Claim ^Controls: Certifications & controls provide confidence in operating results
 
-- Claim SecReqs: Security requirements are identified and met
+- Claim Requirements: Security requirements are identified and met
   - Evidence ReqSpec: Requirements specification (docs/requirements.md)
   - Evidence TestCoverage: Test coverage report (reports/coverage.html)
   - Context ReqScope: Applies to all user-facing features
 
-- Claim SecDesign: The security design is documented and reviewed
+- Claim Design: The security design is documented and reviewed
   - Evidence DesignDoc: Security architecture document (docs/security-arch.pdf)
   - Evidence ThreatModel: Threat model (docs/threat-model.md)

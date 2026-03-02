@@ -6,7 +6,7 @@ arguing that it is adequately secure against moderate threats.
 ## Packages
 
 <!-- ltac sacm/mermaid * -->
-### Package Top
+### Package Security
 ```mermaid
 ---
 config:
@@ -23,7 +23,7 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    Top["<b>Top</b><br>The system is adequately secure against moderate threats"]
+    Security["<b>Security</b><br>The system is adequately secure against moderate threats"]
     Processes[/"<b>Processes</b><br>Security is argued by examining lifecycle processes"/]
     Technical["<b>Technical</b><br>Technical lifecycle processes implement security"]
     NonTechnical[["<b>NonTechnical</b><br>Non-technical lifecycle processes implement security"]]
@@ -49,10 +49,10 @@ flowchart BT
     NonTechnical --- Dot2
     Controls --- Dot2
     Processes --- Dot2
-    Dot2 --> Top
+    Dot2 --> Security
 ```
 
-### Package SecReqs
+### Package Requirements
 ```mermaid
 ---
 config:
@@ -69,7 +69,7 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    SecReqs["<b>SecReqs</b><br>Security requirements are identified and met"]
+    Requirements["<b>Requirements</b><br>Security requirements are identified and met"]
     ReqSpec[("<b>ReqSpec</b>&nbsp;↗<br>Requirements specification")]
     TestCoverage[("<b>TestCoverage</b>&nbsp;↗<br>Test coverage report")]
     ReqScope[("<b>ReqScope</b>&nbsp;↗<br>Applies to all user-facing features")]
@@ -80,11 +80,11 @@ flowchart BT
     BottomPadding[ ]:::invisible ~~~ ReqSpec
     ReqSpec --- Dot1
     TestCoverage --- Dot1
-    Dot1 --> SecReqs
-    ReqScope --o SecReqs
+    Dot1 --> Requirements
+    ReqScope --o Requirements
 ```
 
-### Package SecDesign
+### Package Design
 ```mermaid
 ---
 config:
@@ -101,7 +101,7 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    SecDesign["<b>SecDesign</b><br>The security design is documented and reviewed"]
+    Design["<b>Design</b><br>The security design is documented and reviewed"]
     DesignDoc[("<b>DesignDoc</b>&nbsp;↗<br>Security architecture document")]
     ThreatModel[("<b>ThreatModel</b>&nbsp;↗<br>Threat model")]
     Dot1((" ")):::sacmDot
@@ -111,7 +111,7 @@ flowchart BT
     BottomPadding[ ]:::invisible ~~~ DesignDoc
     DesignDoc --- Dot1
     ThreatModel --- Dot1
-    Dot1 --> SecDesign
+    Dot1 --> Design
 ```
 <!-- end ltac -->
 
@@ -119,26 +119,26 @@ flowchart BT
 
 Additional context and evidence packages supporting the argument.
 
-### Claim Top: The system is adequately secure against moderate threats
+### Claim Security: The system is adequately secure against moderate threats
 
 <!-- ltac references -->
-References: [Package Top](#package-top)
+References: [Package Security](#package-security)
 <!-- end ltac -->
 
 This is the top-level claim for the entire assurance case.
 
-### Claim SecReqs: Security requirements are identified and met
+### Claim Requirements: Security requirements are identified and met
 
 <!-- ltac references -->
-References: [Package SecReqs](#package-secreqs)
+References: [Package Security](#package-security)
 <!-- end ltac -->
 
 The security requirements are documented and verified against the implementation.
 
-### Claim SecDesign: The security design is documented and reviewed
+### Claim Design: The security design is documented and reviewed
 
 <!-- ltac references -->
-References: [Package SecDesign](#package-secdesign)
+References: [Package Security](#package-security)
 <!-- end ltac -->
 
 The system design incorporates security from the ground up.
@@ -146,7 +146,7 @@ The system design incorporates security from the ground up.
 ### Evidence ReqSpec: Requirements specification
 
 <!-- ltac references -->
-References: [Package SecReqs](#package-secreqs)
+References: [Package Requirements](#package-requirements)
 <!-- end ltac -->
 
 See the full requirements document for details.
@@ -154,7 +154,7 @@ See the full requirements document for details.
 ### Evidence TestCoverage: Test coverage report
 
 <!-- ltac references -->
-References: [Package SecReqs](#package-secreqs)
+References: [Package Requirements](#package-requirements)
 <!-- end ltac -->
 
 All security tests pass with full coverage of requirements.
@@ -162,7 +162,7 @@ All security tests pass with full coverage of requirements.
 ### Evidence DesignDoc: Security architecture document
 
 <!-- ltac references -->
-References: [Package SecDesign](#package-secdesign)
+References: [Package Design](#package-design)
 <!-- end ltac -->
 
 The architecture has been reviewed by the security team.
@@ -170,7 +170,7 @@ The architecture has been reviewed by the security team.
 ### Evidence ThreatModel: Threat model
 
 <!-- ltac references -->
-References: [Package SecDesign](#package-secdesign)
+References: [Package Design](#package-design)
 <!-- end ltac -->
 
 Threats are systematically identified and mitigated.
@@ -178,7 +178,7 @@ Threats are systematically identified and mitigated.
 ### Context ReqScope: Applies to all user-facing features
 
 <!-- ltac references -->
-References: [Package SecReqs](#package-secreqs)
+References: [Package Requirements](#package-requirements)
 <!-- end ltac -->
 
 Defines the scope of the requirements coverage.

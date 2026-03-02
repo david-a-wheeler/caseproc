@@ -6,6 +6,12 @@ Run with:
     python3 tests/run_tests.py
 or:
     python3 -m unittest tests.run_tests
+
+When a test result differs from the expected fixture it is saved to
+tests/results/ with the same filename as the fixture.  Results that
+match are removed from that directory so only failures accumulate.
+Run the top-level `accept` script to promote all saved results to
+their corresponding fixtures.
 """
 
 import os
@@ -18,6 +24,7 @@ import unittest
 # Locate ltacproc relative to this file so tests work from any directory.
 LTACPROC = [sys.executable, os.path.join(os.path.dirname(__file__), '..', 'ltacproc')]
 FIXTURES = os.path.join(os.path.dirname(__file__), 'fixtures')
+RESULTS  = os.path.join(os.path.dirname(__file__), 'results')
 
 
 def run(*args):
@@ -53,6 +60,27 @@ def normalise(s):
     return s.replace('\r\n', '\n')
 
 
+def check(actual, fixture_name):
+    """Normalise *actual*, persist to results/ iff it differs from the fixture.
+
+    If *actual* matches the expected fixture exactly, any pre-existing result
+    file for that fixture is removed so results/ stays clean.  Returns the
+    normalised actual string so callers can still pass it to assertEqual for
+    a readable failure message.
+    """
+    actual_n = normalise(actual)
+    expected = read_fixture(fixture_name)
+    result_path = os.path.join(RESULTS, fixture_name)
+    if actual_n == expected:
+        if os.path.exists(result_path):
+            os.unlink(result_path)
+    else:
+        os.makedirs(RESULTS, exist_ok=True)
+        with open(result_path, 'w', encoding='utf-8', newline='') as f:
+            f.write(actual_n)
+    return actual_n
+
+
 class TestHelp(unittest.TestCase):
     def test_help_exits_zero(self):
         """--help should print usage and exit with code 0."""
@@ -73,21 +101,24 @@ class TestSelectMarkdown(unittest.TestCase):
         """ltac/markdown with no element id renders the full tree."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown')
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('simple.ltac.expected.md'))
+        self.assertEqual(check(result.stdout, 'simple.ltac.expected.md'),
+                         read_fixture('simple.ltac.expected.md'))
         self.assertEqual(result.stderr, '')
 
     def test_subtree_c2(self):
         """ltac/markdown C2 renders only the subtree rooted at C2."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown C2')
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('simple-c2.expected.md'))
+        self.assertEqual(check(result.stdout, 'simple-c2.expected.md'),
+                         read_fixture('simple-c2.expected.md'))
         self.assertEqual(result.stderr, '')
 
     def test_all_packages(self):
-        """ltac/markdown * renders all packages with ## Package headers."""
+        """ltac/markdown * renders all packages with ### Package headers."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown *')
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('simple-star.expected.md'))
+        self.assertEqual(check(result.stdout, 'simple-star.expected.md'),
+                         read_fixture('simple-star.expected.md'))
         self.assertEqual(result.stderr, '')
 
 
@@ -96,8 +127,10 @@ class TestDefaultMode(unittest.TestCase):
         """Default mode replaces stale ltac regions and passes other lines through."""
         result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('doc-simple.expected.md'))
-        self.assertEqual(normalise(result.stderr), read_fixture('doc-simple.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'doc-simple.expected.md'),
+                         read_fixture('doc-simple.expected.md'))
+        self.assertEqual(check(result.stderr, 'doc-simple.stderr.txt'),
+                         read_fixture('doc-simple.stderr.txt'))
 
     def test_validate_exits_zero_no_stdout(self):
         """--validate produces no stdout and exits 0 for a well-formed document."""
@@ -132,22 +165,27 @@ class TestSelectSacm(unittest.TestCase):
         """sacm/mermaid renders the full SACM mermaid diagram for simple.ltac."""
         result = run('--ltac', fixture('simple.ltac'), '--select', 'sacm/mermaid')
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('simple.sacm.mermaid.expected.md'))
+        self.assertEqual(check(result.stdout, 'simple.sacm.mermaid.expected.md'),
+                         read_fixture('simple.sacm.mermaid.expected.md'))
         self.assertEqual(result.stderr, '')
 
     def test_badgeapp_top_sacm_mermaid(self):
         """sacm/mermaid renders the badgeapp top-level assurance case correctly."""
         result = run('--ltac', fixture('badgeapp-top.ltac'), '--select', 'sacm/mermaid')
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('badgeapp-top.sacm.mermaid.expected.md'))
-        self.assertEqual(normalise(result.stderr), read_fixture('badgeapp-top.sacm.mermaid.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'badgeapp-top.sacm.mermaid.expected.md'),
+                         read_fixture('badgeapp-top.sacm.mermaid.expected.md'))
+        self.assertEqual(check(result.stderr, 'badgeapp-top.sacm.mermaid.stderr.txt'),
+                         read_fixture('badgeapp-top.sacm.mermaid.stderr.txt'))
 
     def test_filter_mode_with_sacm_region(self):
         """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
         result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('doc-simple.expected.md'))
-        self.assertEqual(normalise(result.stderr), read_fixture('doc-simple.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'doc-simple.expected.md'),
+                         read_fixture('doc-simple.expected.md'))
+        self.assertEqual(check(result.stderr, 'doc-simple.stderr.txt'),
+                         read_fixture('doc-simple.stderr.txt'))
 
 
 class TestBadgeappDoc(unittest.TestCase):
@@ -156,8 +194,10 @@ class TestBadgeappDoc(unittest.TestCase):
         BottomPadding targets, click lines for evidence URLs, and context edges."""
         result = run('--ltac', fixture('badgeapp-doc.ltac'), fixture('badgeapp-doc-input.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(normalise(result.stdout), read_fixture('badgeapp-doc-input.expected.md'))
-        self.assertEqual(normalise(result.stderr), read_fixture('badgeapp-doc-input.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'badgeapp-doc-input.expected.md'),
+                         read_fixture('badgeapp-doc-input.expected.md'))
+        self.assertEqual(check(result.stderr, 'badgeapp-doc-input.stderr.txt'),
+                         read_fixture('badgeapp-doc-input.stderr.txt'))
 
 
 class TestInlineMode(unittest.TestCase):
@@ -175,8 +215,10 @@ class TestInlineMode(unittest.TestCase):
             result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
-            self.assertEqual(normalise(result.stderr), read_fixture('inline-expected.stderr.txt'))
-            self.assertEqual(read_file(tmp), read_fixture('inline-expected.md'))
+            self.assertEqual(check(result.stderr, 'inline-expected.stderr.txt'),
+                             read_fixture('inline-expected.stderr.txt'))
+            self.assertEqual(check(read_file(tmp), 'inline-expected.md'),
+                             read_fixture('inline-expected.md'))
         finally:
             os.unlink(tmp)
 
@@ -189,9 +231,11 @@ class TestInlineMode(unittest.TestCase):
             result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
-            self.assertEqual(normalise(result.stderr), read_fixture('inline-expected.stderr.txt'))
+            self.assertEqual(check(result.stderr, 'inline-expected.stderr.txt'),
+                             read_fixture('inline-expected.stderr.txt'))
             self.assertEqual(os.path.getmtime(tmp), mtime_after_first)
-            self.assertEqual(read_file(tmp), read_fixture('inline-expected.md'))
+            self.assertEqual(check(read_file(tmp), 'inline-expected.md'),
+                             read_fixture('inline-expected.md'))
         finally:
             os.unlink(tmp)
 

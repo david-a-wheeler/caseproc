@@ -13,7 +13,7 @@ stale content
 
 Additional context and evidence packages supporting the argument.
 
-### Claim Top: The system is adequately secure against moderate threats
+### Claim Security: The system is adequately secure against moderate threats
 
 <!-- ltac references -->
 stale references
@@ -21,7 +21,7 @@ stale references
 
 This is the top-level claim for the entire assurance case.
 
-### Claim SecReqs: Security requirements are identified and met
+### Claim Requirements: Security requirements are identified and met
 
 <!-- ltac references -->
 stale references
@@ -29,7 +29,7 @@ stale references
 
 The security requirements are documented and verified against the implementation.
 
-### Claim SecDesign: The security design is documented and reviewed
+### Claim Design: The security design is documented and reviewed
 
 <!-- ltac references -->
 stale references

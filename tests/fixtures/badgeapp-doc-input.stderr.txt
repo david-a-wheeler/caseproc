@@ -1,3 +1,5 @@
+ltacproc: warning: line 13: duplicate identifier 'Requirements'
+ltacproc: warning: line 18: duplicate identifier 'Design'
 ltacproc: warning: Requirements: cited (^) with no package name
 ltacproc: warning: Design: cited (^) with no package name
 ltacproc: warning: Implementation: cited (^) with no package name
@@ -8,8 +10,6 @@ ltacproc: warning: NonTechnical: cited (^) with no package name
 ltacproc: warning: Controls: cited (^) with no package name
 ltacproc: warning: element Processes has no corresponding header in any processed file
 ltacproc: warning: element Technical has no corresponding header in any processed file
-ltacproc: warning: element Requirements has no corresponding header in any processed file
-ltacproc: warning: element Design has no corresponding header in any processed file
 ltacproc: warning: element Implementation has no corresponding header in any processed file
 ltacproc: warning: element Verification has no corresponding header in any processed file
 ltacproc: warning: element Deployment has no corresponding header in any processed file
