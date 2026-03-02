@@ -258,7 +258,7 @@ class LTACParser:
         #   'citations':    int,       count of cited (^) nodes with this ID
         #   'statement':    str|None,  first non-empty text seen for this ID
         #   'decl_lineno':  int|None,  line of first declaration
-        #   'bare_cited':   bool,      any citation used ^ with no [PkgName]
+        #   (bare ^ with no [PkgName] defaults to "Package {ID}")
         #   'cited_pkgs':   set,       named packages from ^[PkgName] citations
         # }
         self.id_info: Dict[str, dict] = {}
@@ -342,7 +342,6 @@ class LTACParser:
                 'citations':     0,
                 'statement':     None,
                 'decl_lineno':   None,
-                'bare_cited':    False,
                 'cited_pkgs':    set(),
                 'decl_pkg_id':   None,   # pkg root id of the declaration
                 'citing_pkg_ids': [],    # pkg root ids that cite this id, in order
@@ -351,8 +350,6 @@ class LTACParser:
                 info['citations'] += 1
                 if node.cited_pkg:
                     info['cited_pkgs'].add(node.cited_pkg)
-                else:
-                    info['bare_cited'] = True
                 if pkg_root_id and pkg_root_id not in info['citing_pkg_ids']:
                     info['citing_pkg_ids'].append(pkg_root_id)
             else:
@@ -453,7 +450,6 @@ def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
                 warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
             existing['declarations'] += new['declarations']
             existing['citations']    += new['citations']
-            existing['bare_cited']    = existing['bare_cited'] or new['bare_cited']
             existing['cited_pkgs'].update(new['cited_pkgs'])
             if new['statement'] and existing['statement'] and new['statement'] != existing['statement']:
                 warn(f"{path}: {ident!r}: statement differs from earlier statement")
@@ -1281,8 +1277,6 @@ def check_id_info(id_info: Dict[str, dict], all_roots: List[Node]) -> None:
     for ident, info in id_info.items():
         if info['citations'] > 0 and info['declarations'] == 0:
             warn(f"{ident}: cited but never declared")
-        if info['bare_cited']:
-            warn(f"{ident}: cited (^) with no package name")
         for pkg in sorted(info['cited_pkgs']):
             if pkg not in pkg_names:
                 warn(f"{ident}: cited package {pkg!r} not found in loaded LTAC")
@@ -1404,7 +1398,8 @@ def main() -> None:
         if result:
             print(result)
     elif args.validate:
-        _process_files(args.files, io.StringIO(), registry, all_roots, config, id_info, set())
+        if args.files:
+            _process_files(args.files, io.StringIO(), registry, all_roots, config, id_info, set())
     elif args.inline:
         seen_headers: set = set()
         for path in args.files:

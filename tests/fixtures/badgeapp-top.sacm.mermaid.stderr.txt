@@ -1,16 +1,8 @@
 ltacproc: warning: Requirements: cited but never declared
-ltacproc: warning: Requirements: cited (^) with no package name
 ltacproc: warning: Design: cited but never declared
-ltacproc: warning: Design: cited (^) with no package name
 ltacproc: warning: Implementation: cited but never declared
-ltacproc: warning: Implementation: cited (^) with no package name
 ltacproc: warning: Verification: cited but never declared
-ltacproc: warning: Verification: cited (^) with no package name
 ltacproc: warning: Deployment: cited but never declared
-ltacproc: warning: Deployment: cited (^) with no package name
 ltacproc: warning: Maintenance: cited but never declared
-ltacproc: warning: Maintenance: cited (^) with no package name
 ltacproc: warning: NonTechnical: cited but never declared
-ltacproc: warning: NonTechnical: cited (^) with no package name
 ltacproc: warning: Controls: cited but never declared
-ltacproc: warning: Controls: cited (^) with no package name
