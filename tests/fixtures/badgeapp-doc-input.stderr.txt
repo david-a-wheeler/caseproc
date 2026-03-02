@@ -4,5 +4,6 @@ ltacproc: warning: Deployment: cited but never declared
 ltacproc: warning: Maintenance: cited but never declared
 ltacproc: warning: NonTechnical: cited but never declared
 ltacproc: warning: Controls: cited but never declared
+ltacproc: warning: /home/dwheeler/ltacproc/tests/fixtures/badgeapp-doc-input.md:12: header 'Context Details' not found in LTAC
 ltacproc: warning: element Processes has no corresponding header in any processed file
 ltacproc: warning: element Technical has no corresponding header in any processed file

@@ -1103,25 +1103,39 @@ _LTAC_REGION_RE = re.compile(r'^<!--\s*ltac\s+(.+?)\s*-->\s*$')
 # Matches any Markdown header line; group 1 = hashes, group 2 = heading text.
 _HEADER_RE = re.compile(r'^(#+) (.+)')
 
-# Header first-word tokens that identify an LTAC element or package.
-_HEADER_ELEMENT_TYPES = frozenset({
-    'Package', 'Claim', 'Strategy', 'Evidence',
+# Matches an HTML header line; group 1 = level digit, group 2 = inner content.
+_HTML_HEADER_RE = re.compile(r'^<h([1-6])(?:\s[^>]*)?>(.+?)</h\1>', re.IGNORECASE)
+
+# Element type names that can appear as the first word of an LTAC header.
+# The package type word (from pkg_label) is checked separately since it is configurable.
+_ELEMENT_TYPE_NAMES = frozenset({
+    'Claim', 'Strategy', 'Evidence',
     'Justification', 'Context', 'Assumption',
 })
 
+# Parses 'TYPE ID' or 'TYPE ID: statement' from a header string.
+# Group 1 = type word, group 2 = identifier, group 3 = statement (may be absent).
+_HEADER_TEXT_RE = re.compile(r'^(\S+)\s+([^:\s]+)(?::\s*(.+))?$')
 
-def _extract_header_element(header_text: str, registry: Dict[str, Node]) -> Optional[Node]:
-    """Return the Node referenced by a Markdown header, or None if not an LTAC element.
 
-    Recognises headers of the form 'Package ID' or 'Type ID: optional text'.
+def _parse_header_text(
+    header_text: str, pkg_label: str
+) -> Optional[Tuple[str, str, str]]:
+    """Parse an LTAC element header into (type, identifier, statement).
+
+    Recognises 'TYPE ID' and 'TYPE ID: statement' where TYPE is either the
+    package type word (pkg_label stripped of trailing whitespace) or one of
+    the element type names.  Returns None if the header is not LTAC-shaped.
     """
-    parts = header_text.split(None, 2)
-    if not parts or parts[0] not in _HEADER_ELEMENT_TYPES:
+    m = _HEADER_TEXT_RE.match(header_text.strip())
+    if not m:
         return None
-    if len(parts) < 2:
+    type_str = m.group(1)
+    ident = m.group(2)
+    statement = (m.group(3) or '').strip()
+    if type_str not in _ELEMENT_TYPE_NAMES and type_str != pkg_label.rstrip():
         return None
-    raw_id = parts[1].rstrip(':')
-    return registry.get(raw_id)
+    return (type_str, ident, statement)
 
 
 def _consume_region(line_iter, filename: str, start_lineno: int, selector: str) -> bool:
@@ -1153,6 +1167,7 @@ def process_document_stream(
     """
     current_element: Optional[Node] = None
     filename = getattr(f, 'name', '<stream>')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
@@ -1169,12 +1184,31 @@ def process_document_stream(
                 out.write('<!-- end ltac -->\n')
             continue
 
-        m = _HEADER_RE.match(text)
-        if m:
-            node = _extract_header_element(m.group(2).strip(), registry)
-            if node is not None:
-                current_element = node
-                seen_headers.add(node.identifier)
+        header_text = None
+        hm = _HEADER_RE.match(text)
+        if hm:
+            header_text = hm.group(2).strip()
+        else:
+            hm = _HTML_HEADER_RE.match(text)
+            if hm:
+                header_text = hm.group(2).strip()
+
+        if header_text is not None:
+            parsed = _parse_header_text(header_text, pkg_label)
+            if parsed is not None:
+                type_str, ident, stmt = parsed
+                node = registry.get(ident)
+                if node is not None:
+                    current_element = node
+                    seen_headers.add(ident)
+                if ident not in id_info:
+                    warn(f"{filename}:{lineno}: header '{type_str} {ident}'"
+                         f" not found in LTAC")
+                else:
+                    ltac_stmt = id_info[ident].get('statement') or ''
+                    if stmt and ltac_stmt and stmt != ltac_stmt:
+                        warn(f"{filename}:{lineno}: '{ident}': header statement"
+                             f" {stmt!r} differs from LTAC {ltac_stmt!r}")
 
         out.write(text + '\n')
 
