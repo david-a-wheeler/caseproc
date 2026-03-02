@@ -1241,7 +1241,7 @@ Validations on the LTAC file (always):
   - Statement text must be consistent across all uses of the same identifier
   - SACM assertion status must be unambiguous (spec section 11)
   - Cited identifiers (^ID) must have a matching declaration in the loaded LTAC
-  - Explicit citation packages (^[PkgName]) must match a loaded package
+  - Explicit citation packages (^[PkgName] ID): package must be loaded and must declare ID
 
 Additional checks when document files are provided:
   - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
@@ -1340,15 +1340,19 @@ def check_id_info(id_info: Dict[str, dict], all_roots: List[Node],
 
     Uses the id_info table built during parsing (see LTACParser) to report:
     - IDs cited (^) but never declared (may indicate a missing package)
-    - Citations naming a package not found among the loaded roots
+    - Explicit citation packages (^[PkgName]) that are not loaded
+    - Explicit citation packages where the ID is not declared in that package
     """
-    pkg_names = {pkg_label + root.identifier for root in all_roots if root.identifier}
+    pkg_root_ids = {root.identifier for root in all_roots if root.identifier}
     for ident, info in id_info.items():
         if info['citations'] > 0 and info['declarations'] == 0:
             warn(f"{ident}: cited but never declared")
         for pkg in sorted(info['cited_pkgs']):
-            if pkg not in pkg_names:
+            if pkg not in pkg_root_ids:
                 warn(f"{ident}: cited package {pkg!r} not found in loaded LTAC")
+            elif info['decl_pkg_id'] is not None and info['decl_pkg_id'] != pkg:
+                warn(f"{ident}: cited as belonging to '{pkg_label}{pkg}'"
+                     f" but declared in '{pkg_label}{info['decl_pkg_id']}'")
 
 
 def _process_files(
