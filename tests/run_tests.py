@@ -22,9 +22,12 @@ import tempfile
 import unittest
 
 # Locate ltacproc relative to this file so tests work from any directory.
-LTACPROC = [sys.executable, os.path.join(os.path.dirname(__file__), '..', 'ltacproc')]
-FIXTURES = os.path.join(os.path.dirname(__file__), 'fixtures')
-RESULTS  = os.path.join(os.path.dirname(__file__), 'results')
+# Use abspath to normalise away any leading ./ that Python adds to __file__
+# when the script is invoked as ./run_tests.py from the tests/ directory.
+_HERE    = os.path.dirname(os.path.abspath(__file__))
+LTACPROC = [sys.executable, os.path.join(_HERE, '..', 'ltacproc')]
+FIXTURES = os.path.join(_HERE, 'fixtures')
+RESULTS  = os.path.join(_HERE, 'results')
 
 
 def run(*args):
