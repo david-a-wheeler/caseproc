@@ -1,5 +1,4 @@
-## Package C1
-
+### Package C1
 - Claim C1: The software is acceptably safe
   - Strategy AR1: Argue safety by hazard category
     - Claim C2: All hazards have been identified

@@ -49,6 +49,8 @@ def notify(msg: str) -> None:
 DEFAULT_CONFIG = {
     'base_url': '',
     'markdown_base_url': '',
+    'pkg_header_prefix': '### ',
+    'pkg_header_suffix': '\n',
 }
 
 
@@ -911,15 +913,18 @@ def resolve_element(
     return list(all_roots)
 
 
-def render_all_packages(all_roots: List[Node], render_fn, base_url: str) -> str:
-    """Render every package preceded by a '## Package ID' header.
+def render_all_packages(all_roots: List[Node], render_fn, base_url: str, config: dict) -> str:
+    """Render every package preceded by a configurable header.
 
     Package blocks are separated by a blank line.
+    Header format: {pkg_header_prefix}Package {id}{pkg_header_suffix}{content}
     """
+    prefix = config.get('pkg_header_prefix', '### ')
+    suffix = config.get('pkg_header_suffix', '\n')
     blocks = []
     for root in all_roots:
-        header = f"## Package {root.identifier}" if root.identifier else "## Package"
-        blocks.append(f"{header}\n\n{render_fn([root], base_url)}")
+        header = f"{prefix}Package {root.identifier}" if root.identifier else f"{prefix}Package"
+        blocks.append(f"{header}{suffix}{render_fn([root], base_url)}")
     return '\n\n'.join(blocks)
 
 
@@ -948,10 +953,11 @@ def _render_or_all(
     base_url: str,
     registry: Dict[str, Node],
     current_element: Optional[Node],
+    config: dict,
 ) -> str:
     """Resolve element_id and render, or render all packages if element_id is '*'."""
     if element_id == '*':
-        return render_all_packages(all_roots, render_fn, base_url)
+        return render_all_packages(all_roots, render_fn, base_url, config)
     nodes = resolve_element(element_id, registry, all_roots, current_element)
     return render_fn(nodes, base_url)
 
@@ -973,13 +979,13 @@ def render_selector(
 
     if display_type == 'sacm/mermaid':
         sacm_base_url = config.get('base_url', '')
-        return _render_or_all(element_id, all_roots, render_sacm, sacm_base_url, registry, current_element)
+        return _render_or_all(element_id, all_roots, render_sacm, sacm_base_url, registry, current_element, config)
 
     if display_type == 'ltac/markdown':
-        return _render_or_all(element_id, all_roots, render_markdown, base_url, registry, current_element)
+        return _render_or_all(element_id, all_roots, render_markdown, base_url, registry, current_element, config)
 
     if display_type == 'ltac/html':
-        return _render_or_all(element_id, all_roots, render_html, base_url, registry, current_element)
+        return _render_or_all(element_id, all_roots, render_html, base_url, registry, current_element, config)
 
     # statement, references, info operate on a single node
     if element_id == '*':

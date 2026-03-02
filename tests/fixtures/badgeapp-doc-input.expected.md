@@ -6,8 +6,7 @@ arguing that it is adequately secure against moderate threats.
 ## Packages
 
 <!-- ltac sacm/mermaid * -->
-## Package Top
-
+### Package Top
 ```mermaid
 ---
 config:
@@ -53,8 +52,7 @@ flowchart BT
     Dot2 --> Top
 ```
 
-## Package SecReqs
-
+### Package SecReqs
 ```mermaid
 ---
 config:
@@ -86,8 +84,7 @@ flowchart BT
     ReqScope --o SecReqs
 ```
 
-## Package SecDesign
-
+### Package SecDesign
 ```mermaid
 ---
 config:
