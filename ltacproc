@@ -1223,7 +1223,33 @@ def parse_args() -> argparse.Namespace:
         prog='ltacproc',
         description='Process LTAC assurance-case files and inject rendered'
                     ' views into Markdown/HTML documents.',
-        epilog='For full details see docs/design-spec.md.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""\
+Selectors (--select TYPE [ID | *]):
+  ltac/markdown  ID|*   render as an indented Markdown bullet list
+  ltac/html      ID|*   render as a nested HTML list
+  sacm/mermaid   ID|*   render as a SACM Mermaid flowchart
+  statement      ID     one-line statement for an element
+  references     ID     Markdown links to packages that reference the element
+  info           ID     statement followed by references
+  Omit ID to use the element set by the nearest preceding header (filter mode).
+  Use * to render all packages (ltac/* and sacm/mermaid only).
+
+Validations on the LTAC file (always):
+  - Claim/Strategy must not appear under Evidence, Context, or Assumption
+  - Each identifier may be declared at most once
+  - Statement text must be consistent across all uses of the same identifier
+  - SACM assertion status must be unambiguous (spec section 11)
+  - Cited identifiers (^ID) must have a matching declaration in the loaded LTAC
+  - Explicit citation packages (^[PkgName]) must match a loaded package
+
+Additional checks when document files are provided:
+  - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
+      unknown ID (not in LTAC) is flagged
+      mismatched statement text is flagged
+  - Every declared LTAC element should have a corresponding document header
+
+For full details see docs/design-spec.md.""",
     )
     parser.add_argument(
         '--config', type=str, metavar='JSON',
@@ -1249,7 +1275,7 @@ def parse_args() -> argparse.Namespace:
     )
     mode.add_argument(
         '--select', '-s', type=str, metavar='SELECTOR',
-        help='print the selected SELECTOR output to stdout and exit',
+        help='render SELECTOR to stdout and exit (see selector table below)',
     )
     mode.add_argument(
         '--inline', '-i', action='store_true',

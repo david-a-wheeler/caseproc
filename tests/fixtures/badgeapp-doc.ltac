@@ -2,7 +2,7 @@
   - Strategy Processes: Security is argued by examining lifecycle processes
     - Claim Technical: Technical lifecycle processes implement security
       - Claim ^Requirements
-      - Claim ^Design
+      - Claim ^Design: The security design is documented and reviewed
       - Claim ^Implementation: The implementation process maintains security
       - Claim ^Verification: Integration & verification confirm security
       - Claim ^Deployment: Deployment maintains security

@@ -29,7 +29,7 @@ flowchart BT
     NonTechnical[["<b>NonTechnical</b><br>Non-technical lifecycle processes implement security"]]
     Controls[["<b>Controls</b><br>Certifications &amp; controls provide confidence in operating results"]]
     Requirements[["<b>Requirements</b>"]]
-    Design[["<b>Design</b>"]]
+    Design[["<b>Design</b><br>The security design is documented and reviewed"]]
     Implementation[["<b>Implementation</b><br>The implementation process maintains security"]]
     Verification[["<b>Verification</b><br>Integration &amp; verification confirm security"]]
     Deployment[["<b>Deployment</b><br>Deployment maintains security"]]
