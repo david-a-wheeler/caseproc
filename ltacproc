@@ -1237,7 +1237,7 @@ Selectors (--select TYPE [ID | *]):
 
 Validations on the LTAC file (always):
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
-  - Each identifier may be declared at most once
+  - Each identifier may be declared (no ^ prefix) at most once
   - Statement text must be consistent across all uses of the same identifier
   - SACM assertion status must be unambiguous (spec section 11)
   - Cited identifiers (^ID) must have a matching declaration in the loaded LTAC
@@ -1245,8 +1245,7 @@ Validations on the LTAC file (always):
 
 Additional checks when document files are provided:
   - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
-      unknown ID (not in LTAC) is flagged
-      mismatched statement text is flagged
+    unknown ID (not in LTAC) and mismatched statement text are reports
   - Every declared LTAC element should have a corresponding document header
 
 For full details see docs/design-spec.md.""",
