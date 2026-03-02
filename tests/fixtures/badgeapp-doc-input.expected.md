@@ -124,32 +124,64 @@ Additional context and evidence packages supporting the argument.
 
 ### Claim Top: The system is adequately secure against moderate threats
 
+<!-- ltac references -->
+References: [Package Top](#package-top)
+<!-- end ltac -->
+
 This is the top-level claim for the entire assurance case.
 
 ### Claim SecReqs: Security requirements are identified and met
+
+<!-- ltac references -->
+References: [Package SecReqs](#package-secreqs)
+<!-- end ltac -->
 
 The security requirements are documented and verified against the implementation.
 
 ### Claim SecDesign: The security design is documented and reviewed
 
+<!-- ltac references -->
+References: [Package SecDesign](#package-secdesign)
+<!-- end ltac -->
+
 The system design incorporates security from the ground up.
 
 ### Evidence ReqSpec: Requirements specification
+
+<!-- ltac references -->
+References: [Package SecReqs](#package-secreqs)
+<!-- end ltac -->
 
 See the full requirements document for details.
 
 ### Evidence TestCoverage: Test coverage report
 
+<!-- ltac references -->
+References: [Package SecReqs](#package-secreqs)
+<!-- end ltac -->
+
 All security tests pass with full coverage of requirements.
 
 ### Evidence DesignDoc: Security architecture document
+
+<!-- ltac references -->
+References: [Package SecDesign](#package-secdesign)
+<!-- end ltac -->
 
 The architecture has been reviewed by the security team.
 
 ### Evidence ThreatModel: Threat model
 
+<!-- ltac references -->
+References: [Package SecDesign](#package-secdesign)
+<!-- end ltac -->
+
 Threats are systematically identified and mitigated.
 
 ### Context ReqScope: Applies to all user-facing features
+
+<!-- ltac references -->
+References: [Package SecReqs](#package-secreqs)
+<!-- end ltac -->
 
 Defines the scope of the requirements coverage.
