@@ -164,6 +164,25 @@ class TestDefaultMode(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('no corresponding header', result.stderr)
 
+    def test_two_top_level_elements_is_fatal(self):
+        """An LTAC with two root-level elements (different IDs) always exits non-zero."""
+        result = run('--ltac', fixture('two-roots.ltac'), '--select', 'ltac/markdown')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('already has a top-level element', result.stderr)
+
+    def test_duplicate_id_warns(self):
+        """An LTAC with two declarations of the same ID produces a warning but exits 0."""
+        result = run('--ltac', fixture('duplicate-id.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(result.returncode, 0)
+        self.assertIn('duplicate declaration', result.stderr)
+        self.assertIn('C2', result.stderr)
+
+    def test_duplicate_id_error_flag(self):
+        """An LTAC with two declarations of the same ID exits non-zero with --error."""
+        result = run('--ltac', fixture('duplicate-id.ltac'), '--select', 'ltac/markdown', '--error')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('duplicate declaration', result.stderr)
+
     def test_conflicting_assertion_status_is_error(self):
         """A node with two SACM assertion statuses is always an error (no --error flag needed)."""
         result = run('--ltac', fixture('conflict.ltac'), '--select', 'ltac/markdown')
@@ -171,6 +190,92 @@ class TestDefaultMode(unittest.TestCase):
         self.assertIn('conflicting assertion status', result.stderr)
         self.assertIn('C1', result.stderr)
         self.assertNotIn('C2', result.stderr)
+
+
+class TestLTACValidation(unittest.TestCase):
+    def test_cited_not_declared_warns(self):
+        """^ID cited but never declared produces a warning but exits 0."""
+        r = run('--ltac', fixture('cited-not-declared.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('cited but never declared', r.stderr)
+        self.assertIn('C99', r.stderr)
+
+    def test_cited_not_declared_error_flag(self):
+        """^ID cited but never declared exits non-zero with --error."""
+        r = run('--ltac', fixture('cited-not-declared.ltac'), '--select', 'ltac/markdown', '--error')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cited but never declared', r.stderr)
+
+    def test_link_target_not_found_warns(self):
+        """A Link to a nonexistent element produces a warning but exits 0."""
+        r = run('--ltac', fixture('bad-link.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Link target', r.stderr)
+        self.assertIn('NoSuchElement', r.stderr)
+
+    def test_link_target_not_found_error_flag(self):
+        """A Link to a nonexistent element exits non-zero with --error."""
+        r = run('--ltac', fixture('bad-link.ltac'), '--select', 'ltac/markdown', '--error')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('Link target', r.stderr)
+
+    def test_header_not_in_ltac_warns(self):
+        """A document header whose ID is not in the LTAC produces a warning but exits 0."""
+        r = run('--ltac', fixture('simple.ltac'), fixture('unknown-header-input.md'))
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('not found in LTAC', r.stderr)
+        self.assertIn('C99', r.stderr)
+
+    def test_header_not_in_ltac_error_flag(self):
+        """A document header whose ID is not in the LTAC exits non-zero with --error."""
+        r = run('--ltac', fixture('simple.ltac'), fixture('unknown-header-input.md'), '--error')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('not found in LTAC', r.stderr)
+
+    def test_select_nonexistent_element_is_error(self):
+        """--select with an element ID absent from the registry always exits non-zero."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown BOGUS')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('not found in registry', r.stderr)
+
+    def test_unrecognized_syntax_is_error(self):
+        """A line that does not match LTAC syntax always exits non-zero."""
+        r = run('--ltac', fixture('bad-syntax.ltac'), '--select', 'ltac/markdown')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('unrecognized syntax', r.stderr)
+
+    def test_star_invalid_with_statement_selector(self):
+        """'*' is not valid with statement/references/info and always exits non-zero."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'statement *')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('not valid', r.stderr)
+        self.assertIn('statement', r.stderr)
+
+    def test_cited_package_not_found_warns(self):
+        """^[PkgName] where PkgName is not a loaded package produces a warning but exits 0."""
+        r = run('--ltac', fixture('cited-pkg-not-found.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('cited package', r.stderr)
+        self.assertIn('NoSuchPkg', r.stderr)
+
+    def test_cited_package_not_found_error_flag(self):
+        """^[PkgName] where PkgName is not loaded exits non-zero with --error."""
+        r = run('--ltac', fixture('cited-pkg-not-found.ltac'), '--select', 'ltac/markdown', '--error')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cited package', r.stderr)
+
+    def test_wrong_pkg_citation_warns(self):
+        """^[PkgA] ID where ID is declared in PkgB produces a warning but exits 0."""
+        r = run('--ltac', fixture('wrong-pkg-citation.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('cited as belonging to', r.stderr)
+        self.assertIn('C2', r.stderr)
+
+    def test_wrong_pkg_citation_error_flag(self):
+        """^[PkgA] ID where ID is declared in PkgB exits non-zero with --error."""
+        r = run('--ltac', fixture('wrong-pkg-citation.ltac'), '--select', 'ltac/markdown', '--error')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cited as belonging to', r.stderr)
 
 
 class TestSelectSacm(unittest.TestCase):
@@ -336,6 +441,17 @@ class TestInlineMode(unittest.TestCase):
             self.assertEqual(read_file(tmp), original)
         finally:
             os.unlink(tmp)
+
+
+class TestIntroduction(unittest.TestCase):
+    def test_non_ltac_heading_ignored(self):
+        """A heading like 'Introduction' that does not start with an LTAC type
+        is passed through silently without warnings or errors."""
+        r = run('--ltac', fixture('simple.ltac'), fixture('introduction-input.md'))
+        self.assertEqual(r.returncode, 0)
+        self.assertNotIn('Introduction', r.stderr)
+        self.assertEqual(check(r.stdout, 'introduction-output.expected.md'),
+                         read_fixture('introduction-output.expected.md'))
 
 
 class TestUpdate(unittest.TestCase):

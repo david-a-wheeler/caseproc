@@ -1,0 +1,5 @@
+- Claim C1: The software is acceptably safe
+  - Claim C2: All hazards have been identified
+
+- Claim C3: Another top-level claim
+  - Claim ^[C3] C2: All hazards have been identified
