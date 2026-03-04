@@ -1,8 +1,8 @@
-ltacproc: warning: Requirements: cited but never declared
-ltacproc: warning: Design: cited but never declared
-ltacproc: warning: Implementation: cited but never declared
-ltacproc: warning: Verification: cited but never declared
-ltacproc: warning: Deployment: cited but never declared
-ltacproc: warning: Maintenance: cited but never declared
-ltacproc: warning: NonTechnical: cited but never declared
-ltacproc: warning: Controls: cited but never declared
+caseproc: warning: Requirements: cited but never declared
+caseproc: warning: Design: cited but never declared
+caseproc: warning: Implementation: cited but never declared
+caseproc: warning: Verification: cited but never declared
+caseproc: warning: Deployment: cited but never declared
+caseproc: warning: Maintenance: cited but never declared
+caseproc: warning: NonTechnical: cited but never declared
+caseproc: warning: Controls: cited but never declared

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""Test suite for ltacproc.
+"""Test suite for caseproc.
 
 Run with:
     python3 tests/run_tests.py
@@ -21,17 +21,17 @@ import sys
 import tempfile
 import unittest
 
-# Locate ltacproc relative to this file so tests work from any directory.
+# Locate caseproc relative to this file so tests work from any directory.
 # Use abspath to normalise away any leading ./ that Python adds to __file__
 # when the script is invoked as ./run_tests.py from the tests/ directory.
 _HERE    = os.path.dirname(os.path.abspath(__file__))
-LTACPROC = [sys.executable, os.path.join(_HERE, '..', 'ltacproc')]
+LTACPROC = [sys.executable, os.path.join(_HERE, '..', 'caseproc')]
 FIXTURES = os.path.join(_HERE, 'fixtures')
 RESULTS  = os.path.join(_HERE, 'results')
 
 
 def run(*args):
-    """Run ltacproc with the given arguments and return the CompletedProcess."""
+    """Run caseproc with the given arguments and return the CompletedProcess."""
     return subprocess.run(
         LTACPROC + list(args), capture_output=True, text=True, encoding='utf-8'
     )

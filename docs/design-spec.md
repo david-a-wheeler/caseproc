@@ -1,13 +1,13 @@
-# Design specification for ltacproc
+# Design specification for caseproc
 
-The script `ltacproc` is a Python3 script for processing
+The script `caseproc` is a Python3 script for processing
 our extended version of Lightweight Text Assurance Case (LTAC) format
 and generating useful results to enable easy documentation and revision
 of assurance cases.
 
 ## Summary
 
-The script `ltacproc` can take information in LTAC format and
+The script `caseproc` can take information in LTAC format and
 generate SACM notation in mermaid diagram format.
 We eventually hope to support other notations (like GSN and CAE)
 and other diagram formats.
@@ -51,7 +51,7 @@ normal string into a GitHub id fragment.
 ## CLI Usage
 
 ```
-ltacproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
+caseproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
          [--validate | (--select|-s) SELECTOR | (--inline|-i)] [files]
 ```
 
@@ -637,7 +637,7 @@ Not shown: We also need to generate `click` lines.
 
 ## Key Design Decisions
 
-1. **Single file** `ltacproc`, Python 3.8+ (uses dataclasses,
+1. **Single file** `caseproc`, Python 3.8+ (uses dataclasses,
    walrus operator avoided for 3.8 compat). Shebang: `#!/usr/bin/env python3`.
 
 2. **Read package before render**: parser builds full AST first; renderer then

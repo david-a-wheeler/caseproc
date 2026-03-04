@@ -1,25 +1,25 @@
-# Implementation Plan for ltacproc
+# Implementation Plan for caseproc
 
-This plan implements `ltacproc` incrementally. After each step the result is
+This plan implements `caseproc` incrementally. After each step the result is
 reviewed before proceeding. The design spec is `docs/design-spec.md`.
 
-All code lives in a single executable file `ltacproc` at the project root.
+All code lives in a single executable file `caseproc` at the project root.
 Tests live under `tests/`; test input fixtures under `tests/fixtures/`.
 
 ---
 
 ## Step 1: Initial script skeleton
 
-Create `ltacproc` as an executable Python 3 script.
+Create `caseproc` as an executable Python 3 script.
 
-**File: `ltacproc`**
+**File: `caseproc`**
 
 - Shebang: `#!/usr/bin/env python3`
 - Module docstring describing the script.
 - Imports: `sys` only (nothing else yet).
-- `main()` function that prints `"ltacproc: not yet implemented"` and returns.
+- `main()` function that prints `"caseproc: not yet implemented"` and returns.
 - Standard `if __name__ == '__main__': main()` guard at the bottom.
-- Run `chmod +x ltacproc` to make it executable.
+- Run `chmod +x caseproc` to make it executable.
 
 ### 1b: Error reporting functions
 
@@ -31,17 +31,17 @@ _had_error = False
 
 def warn(msg: str) -> None:
     """Print a warning to stderr. Does not set the error flag."""
-    print(f"ltacproc: warning: {msg}", file=sys.stderr)
+    print(f"caseproc: warning: {msg}", file=sys.stderr)
 
 def error(msg: str) -> None:
     """Print an error to stderr and set the error flag."""
     global _had_error
-    print(f"ltacproc: error: {msg}", file=sys.stderr)
+    print(f"caseproc: error: {msg}", file=sys.stderr)
     _had_error = True
 
 def panic(msg: str) -> None:
     """Print a fatal error to stderr and exit immediately."""
-    print(f"ltacproc: fatal: {msg}", file=sys.stderr)
+    print(f"caseproc: fatal: {msg}", file=sys.stderr)
     sys.exit(1)
 ```
 
@@ -58,9 +58,9 @@ a call to `error()` (or use a module-level `_strict` flag checked inside
 
 **Verify:**
 ```
-./ltacproc
+./caseproc
 ```
-Prints: `ltacproc: not yet implemented`
+Prints: `caseproc: not yet implemented`
 
 ---
 
@@ -69,14 +69,14 @@ Prints: `ltacproc: not yet implemented`
 Add `argparse`-based CLI option parsing matching the spec's synopsis:
 
 ```
-ltacproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
+caseproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
          [--validate | (--select|-s) SELECTOR | (--inline|-i)] [files]
 ```
 
-**Add to `ltacproc`:**
+**Add to `caseproc`:**
 
 - Import `argparse`.
-- Build `ArgumentParser` with `prog='ltacproc'`.
+- Build `ArgumentParser` with `prog='caseproc'`.
 - Add arguments:
   - `--config` (type `str`, metavar `JSON`)
   - `--error` (store_true)
@@ -91,9 +91,9 @@ ltacproc [--help] [--config JSON] [--error] [--ltac|-l FILENAME]
 
 **Verify:**
 ```
-./ltacproc --error --config '{}' somefile.md    # prints args
-./ltacproc --validate --select foo              # error: mutually exclusive
-./ltacproc --invalid                            # error: unrecognised argument
+./caseproc --error --config '{}' somefile.md    # prints args
+./caseproc --validate --select foo              # error: mutually exclusive
+./caseproc --invalid                            # error: unrecognised argument
 ```
 
 ---
@@ -108,11 +108,11 @@ Polish all argument descriptions so `--help` is useful.
 - Add `help=` strings to every argument matching the spec's `Meaning:` section.
 - Add `epilog=` pointing to `docs/design-spec.md` for full details.
 - Remove the debug `print(repr(args))` added in Step 2 and replace with a
-  temporary stub: `print("ltacproc: options parsed OK")`.
+  temporary stub: `print("caseproc: options parsed OK")`.
 
 **Verify:**
 ```
-./ltacproc --help
+./caseproc --help
 ```
 Produces readable, complete help output. All flags are listed with descriptions.
 
@@ -122,7 +122,7 @@ Produces readable, complete help output. All flags are listed with descriptions.
 
 Load and validate the JSON configuration passed on the command line.
 
-**Add to `ltacproc`:**
+**Add to `caseproc`:**
 
 - Define `DEFAULT_CONFIG`:
   ```python
@@ -141,13 +141,13 @@ Load and validate the JSON configuration passed on the command line.
 
 **Verify:**
 ```
-./ltacproc
+./caseproc
 # config: {'base_url': '', 'markdown_base_url': ''}
 
-./ltacproc --config '{"base_url": "https://example.com"}'
+./caseproc --config '{"base_url": "https://example.com"}'
 # config: {'base_url': 'https://example.com', 'markdown_base_url': ''}
 
-./ltacproc --config '{"unknown_key": 1}'
+./caseproc --config '{"unknown_key": 1}'
 # warning on stderr; config uses defaults
 ```
 
@@ -160,7 +160,7 @@ Implement the `Node` dataclass, utility functions, the LTAC parser, and the
 
 ### 5a: Utility functions
 
-Add (in order) to `ltacproc`:
+Add (in order) to `caseproc`:
 
 ```python
 def to_github_fragment(text: str) -> str: ...
@@ -274,7 +274,7 @@ Create `tests/fixtures/simple.ltac`:
 
 **Verify:**
 ```
-./ltacproc --ltac tests/fixtures/simple.ltac
+./caseproc --ltac tests/fixtures/simple.ltac
 # debug line: "Loaded 1 package(s), 8 node(s)"
 ```
 
@@ -336,12 +336,12 @@ In the SELECTOR dispatch (6d and later), if `element_id == '*'`, call
 
 **Verify:**
 ```
-./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown"
+./caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown"
 ```
 Produces an indented markdown bullet list of the parsed LTAC tree.
 
 ```
-./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2"
+./caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2"
 ```
 Produces the subtree rooted at C2 only.
 
@@ -354,16 +354,16 @@ Establish a repeatable test suite before the codebase grows further.
 ### 7a: Test runner
 
 Create `tests/run_tests.py` using Python `unittest`. Python is already
-required to run `ltacproc`, making this fully portable across Linux, macOS,
+required to run `caseproc`, making this fully portable across Linux, macOS,
 and Windows without needing a shell, Git Bash, or WSL.
 
 Key design points:
 
-- Locate `ltacproc` relative to the test file using `os.path`:
+- Locate `caseproc` relative to the test file using `os.path`:
   ```python
   import os, sys, subprocess, unittest
   LTACPROC = [sys.executable,
-              os.path.join(os.path.dirname(__file__), '..', 'ltacproc')]
+              os.path.join(os.path.dirname(__file__), '..', 'caseproc')]
   ```
   Using `sys.executable` ensures the same Python interpreter is used
   everywhere and avoids any reliance on shebangs or `PATH`.
@@ -390,13 +390,13 @@ Key design points:
 
 ### 7b: Expected output fixtures
 
-Run (use `python ltacproc` on all platforms; on Unix `./ltacproc` also works):
+Run (use `python caseproc` on all platforms; on Unix `./caseproc` also works):
 ```
-python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown" \
+python caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown" \
   > tests/fixtures/simple.ltac.md.expected
-python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2" \
+python caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2" \
   > tests/fixtures/simple-c2.md.expected
-python ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *" \
+python caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *" \
   > tests/fixtures/simple-star.md.expected
 ```
 Inspect and adjust each file if anything looks wrong, then commit them.
@@ -406,12 +406,12 @@ line, then the same content as `simple.ltac.md.expected`.
 
 ### 7c: First tests
 
-- **Test 1**: `./ltacproc --help` exits 0.
-- **Test 2**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown"`
+- **Test 1**: `./caseproc --help` exits 0.
+- **Test 2**: `./caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown"`
   matches `tests/fixtures/simple.ltac.md.expected`.
-- **Test 3**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2"`
+- **Test 3**: `./caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown C2"`
   matches `tests/fixtures/simple-c2.md.expected` (just the C2 subtree).
-- **Test 4**: `./ltacproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *"`
+- **Test 4**: `./caseproc --ltac tests/fixtures/simple.ltac --select "ltac/markdown *"`
   matches `tests/fixtures/simple-star.md.expected` (all packages with headers).
 
 **Verify:**
@@ -516,12 +516,12 @@ Generate and commit `tests/fixtures/doc-simple.md.expected`.
 ### 8g: Tests for default mode
 
 Add to the test suite:
-- **Test 5**: `./ltacproc --ltac tests/fixtures/simple.ltac tests/fixtures/doc-simple.md`
+- **Test 5**: `./caseproc --ltac tests/fixtures/simple.ltac tests/fixtures/doc-simple.md`
   matches `doc-simple.md.expected`.
-- **Test 6**: `./ltacproc --ltac tests/fixtures/simple.ltac --validate tests/fixtures/doc-simple.md`
+- **Test 6**: `./caseproc --ltac tests/fixtures/simple.ltac --validate tests/fixtures/doc-simple.md`
   exits 0 and produces no stdout.
 - **Test 7**: A fixture with a deliberate structural warning (e.g., Evidence
-  as parent of a Claim); `./ltacproc --ltac ... --error` on it exits non-zero.
+  as parent of a Claim); `./caseproc --ltac ... --error` on it exits non-zero.
 - **Test 8**: Process `doc-simple.md` with a `simple.ltac` that contains an
   extra element not referenced by any header; confirm a warning appears on
   stderr (and exit is non-zero when run with `--error`).
@@ -651,9 +651,9 @@ temporary location before running:
 
 ```sh
 # In the test runner, for each inline test:
-cp tests/fixtures/inline-input.md /tmp/ltacproc-test-inline.md
-./ltacproc --inline /tmp/ltacproc-test-inline.md
-diff /tmp/ltacproc-test-inline.md tests/fixtures/inline-expected.md
+cp tests/fixtures/inline-input.md /tmp/caseproc-test-inline.md
+./caseproc --inline /tmp/caseproc-test-inline.md
+diff /tmp/caseproc-test-inline.md tests/fixtures/inline-expected.md
 ```
 
 Add to the test suite:
@@ -676,7 +676,7 @@ python tests/run_tests.py
 
 | Artifact | Description |
 |---|---|
-| `ltacproc` | Single executable Python 3 script |
+| `caseproc` | Single executable Python 3 script |
 | `tests/run_tests.py` | Test runner (all tests pass) |
 | `tests/fixtures/simple.ltac` | Raw LTAC fixture |
 | `tests/fixtures/simple.ltac.md.expected` | Expected `ltac/markdown` output |

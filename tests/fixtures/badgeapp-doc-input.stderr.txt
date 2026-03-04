@@ -1,9 +1,9 @@
-ltacproc: warning: Implementation: cited but never declared
-ltacproc: warning: Verification: cited but never declared
-ltacproc: warning: Deployment: cited but never declared
-ltacproc: warning: Maintenance: cited but never declared
-ltacproc: warning: NonTechnical: cited but never declared
-ltacproc: warning: Controls: cited but never declared
-ltacproc: warning: /home/dwheeler/ltacproc/tests/fixtures/badgeapp-doc-input.md:12: header 'Context Details' not found in LTAC
-ltacproc: warning: element Processes has no corresponding header in any processed file
-ltacproc: warning: element Technical has no corresponding header in any processed file
+caseproc: warning: Implementation: cited but never declared
+caseproc: warning: Verification: cited but never declared
+caseproc: warning: Deployment: cited but never declared
+caseproc: warning: Maintenance: cited but never declared
+caseproc: warning: NonTechnical: cited but never declared
+caseproc: warning: Controls: cited but never declared
+caseproc: warning: /home/dwheeler/caseproc/tests/fixtures/badgeapp-doc-input.md:12: header 'Context Details' not found in LTAC
+caseproc: warning: element Processes has no corresponding header in any processed file
+caseproc: warning: element Technical has no corresponding header in any processed file
