@@ -7,6 +7,9 @@ It's a simple Python3 script that processes our
 extended version of the Lightweight Text Assurance Case (LTAC) format,
 along with markdown or HTML documentation,
 to generate useful assurance case documentation.
+This includes automatically generating graphics with hyperlinks
+for Structured Assurance Case Metamodel (SACM) and
+Goal Structuring Notation (GSN).
 
 An assurance case is "a body of evidence organized into an argument demonstrating that some claim about a system holds (i.e., is assured). An assurance case is needed when it is important to show that a system exhibits some complex
 property, such as safety, security, privacy, or reliability."
@@ -18,18 +21,23 @@ There are many notations for expressing and maintaining assurance cases,
 including SACM, GSN, and CAE.
 Large assurance cases are often maintained using specialized tools that
 manage databases of such information.
-These tools allow people to edit
+These specialized tools allow people to edit
 diagrams that flexibly present the information graphically.
 For large assurance cases these tools are quite helpful!
-However, it's hard to argue
-for the use of these sophisticated tools for a smaller assurance case.
+However, these sophisticated tools may not be necessary for
+handling smaller assurance cases.
 
-The obvious alternative is to write an assurance as a traditional document.
+An obvious alternative to these sophisticated tools
+is to write an assurance entirely as a traditional document.
+This is possible, of course.
 However, traditional documents don't provide any support for the
-structure between the parts of an assurance case.
-As a result, maintaining them requires a lot of extra work, and they
-often go slowly out of date. They often don't provide any graphics to
-show the overview, or they do so only at a very high level.
+structure of an assurance case.
+As a result, maintaining them requires a lot of extra work, it's easy
+to make mistakes, and the results
+often go slowly out of date. Such documents
+often don't provide any graphics to show the overview, since those are
+difficult to create and maintain, and if they're done at all
+they're often only done at a very high level.
 
 ## Our approach
 
@@ -37,22 +45,26 @@ This tool, `caseproc`, takes a different approach:
 
 * As input, it reads a simple text file written in our
   extended version of the Lightweight Text Assurance Case (LTAC) format.
-  This lets you easily express a hierarchy of structure, and will immediately
-  detect a number of invalid constructs.
+  This simple format is easily understood and used, and makes it
+  easy to express simple hierarchy of structure.
+  The tool will report a various kinds of invalid constructs.
 * As output, it takes a set of 1+ documents (markdown or HTML)
   and inserting graphics and text at specific insertion points.
   Note that it *automatically* generates graphical notation in SACM or
   GSN notation - you don't need to fiddle with the graphics at all.
+  It also automatically generates a number of hypertext links, making it
+  easy to navigate the assurance case.
 
-Currently it can generate SACM notation in mermaid format.
-We eventually hope to support other notations, specifically GSN and CAE.
+Currently it can generate both SACM and GSN notation in mermaid format.
 It can also generate a markdown indented bullet list that looks like LTAC
 format but adds hyperlinks, making it easy to go from a high-level
 summary to specific details and back.
+It might someday support CAE notation as well.
 
 Perhaps most usefully, its `-i` (in place) option
 allows you to update the markdown/HTML files in place.
-So you can simply run the process with a sequence of markdown filenames,
+As a result,
+you can simply run the process with a sequence of markdown filenames,
 and it will update the documents directly.
 
 ## Pros and Cons
