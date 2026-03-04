@@ -1,10 +1,11 @@
-# caseproc
+# caseproc README
 
-`caseproc` is a simple text-based open source software tool
+`caseproc` is a simple open source software tool
 that makes it *easy* and *efficient*
 to create and maintain a moderately-sized assurance case.
 It's a simple Python3 script that processes our
-extended version of the Lightweight Text Assurance Case (LTAC) format
+extended version of the Lightweight Text Assurance Case (LTAC) format,
+along with markdown or HTML documentation,
 to generate useful assurance case documentation.
 
 An assurance case is "a body of evidence organized into an argument demonstrating that some claim about a system holds (i.e., is assured). An assurance case is needed when it is important to show that a system exhibits some complex
