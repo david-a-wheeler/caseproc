@@ -33,7 +33,7 @@ We document our approximations and the options available here.
 
 ## LTAC element mappings to GSN concept
 
-[LTAC](https://www.argevide.com/lightweight-text-assurance-case-ltac/)
+[Our extended version of LTAC](https://www.argevide.com/lightweight-text-assurance-case-ltac/)
 defines six element types, all of which map directly to GSN elements.
 
 | LTAC type | GSN element |
@@ -44,12 +44,14 @@ defines six element types, all of which map directly to GSN elements.
 | Context | Context |
 | Assumption | Assumption |
 | Justification | Justification |
-| Link | Citation of an already-shown element |
+| Link | (Citation of an already-shown element) |
 
 Children support their parents via GSN's **SupportedBy** relationship.
 Context, Assumption, and Justification children use **InContextOf** instead.
+In GSN notation, arrows go down from an upper-level statement to
+the elements that support or provide context.
 
-## Quick note on GSN identifiers
+## GSN identifiers
 
 Many GSN examples have an identifier convention of a short type
 indicator followed by a number.
@@ -63,7 +65,9 @@ within an argument module. That's the sole normative requirement; no defined
 character set, no grammar, no prohibition on spaces.
 
 We require that each identifier be unique across the entire assurance case,
-as a way to simplify things.
+as a way to simplify things. We do *not* require the common GSN
+id convention; people are free to use it, but our tool supports
+more meaningful names and we encourage their use instead.
 
 ## Mermaid approach to GSN
 
@@ -125,17 +129,21 @@ decorator (a small hollow triangle ▽ in the standard).
 
 Labels follow the same conventions as SACM/mermaid.
 The node identifier is **bolded**; if descriptive text is present, a `<br>`
-separates it from the identifier.
+separates it from the identifier. For example:
 
 ```
 <b>G1</b><br>The system is acceptably safe
 ```
 
 For Assumption and Justification, the identifier is followed by a
-**circled letter decorator** embedded in the label text:
+**non-breaking space and circled letter decorator** embedded in the label text:
 
-* **Ⓐ** (U+24B6, Circled Latin Capital Letter A) for Assumption
-* **Ⓙ** (U+24BF, Circled Latin Capital Letter J) for Justification
+* `&nbsp;`**Ⓐ** (U+24B6, Circled Latin Capital Letter A) for Assumption
+* `&nbsp;`**Ⓙ** (U+24BF, Circled Latin Capital Letter J) for Justification
+
+The non-breaking space (`&nbsp;`) prevents the decorator from wrapping onto
+its own line — a single circled letter on a separate line would waste
+significant vertical space in an already-constrained diagram.
 
 These circled letters are the closest mermaid-compatible approximation to
 the GSN convention of placing a small "A" or "J" outside the oval boundary,
@@ -227,12 +235,12 @@ flowchart TD
 
 **GSN shape**: Oval with letter "A" placed at the top-right or bottom-right
 corner (outside the oval boundary).
-**Mermaid shape**: Rounded rectangle `( )` with the circled-A decorator Ⓐ
+**Mermaid shape**: Rounded rectangle `( )` with the circled-A decorator&nbsp;Ⓐ
 appended to the identifier in the label.
 This shape is distinct from Context (stadium `([ ])`) and Goal (plain rectangle `[ ]`).
 
 ```
-A1("<b>A1</b> Ⓐ<br>The threat model is current")
+A1("<b>A1</b>&nbsp;Ⓐ<br>The threat model is current")
 ```
 
 ```mermaid
@@ -243,7 +251,7 @@ config:
     htmlLabels: true
 ---
 flowchart TD
-    A1("<b>A1</b> Ⓐ<br>The threat model is current")
+    A1("<b>A1</b>&nbsp;Ⓐ<br>The threat model is current")
 ```
 
 The Assumption node type automatically carries the "assumed" semantic;
@@ -253,11 +261,11 @@ no `{assumed}` option is needed on Assumption nodes.
 
 **GSN shape**: Oval with letter "J" placed at the top-right or bottom-right
 corner.
-**Mermaid shape**: Rounded rectangle `( )` with the circled-J decorator Ⓙ
+**Mermaid shape**: Rounded rectangle `( )` with the circled-J decorator&nbsp;Ⓙ
 appended to the identifier in the label.
 
 ```
-J1("<b>J1</b> Ⓙ<br>Industry best practice supports this approach")
+J1("<b>J1</b>&nbsp;Ⓙ<br>Industry best practice supports this approach")
 ```
 
 ```mermaid
@@ -268,7 +276,7 @@ config:
     htmlLabels: true
 ---
 flowchart TD
-    J1("<b>J1</b> Ⓙ<br>Industry best practice supports this approach")
+    J1("<b>J1</b>&nbsp;Ⓙ<br>Industry best practice supports this approach")
 ```
 
 ### Cited (away) Goals (LTAC: `^` prefix)
@@ -404,14 +412,14 @@ G2["<b>G2</b><br>Defeated goal statement<br>✗"]
 ### Assumed (`{assumed}`)
 
 On a **Claim**, `{assumed}` is rendered as an **Assumption** rather than
-a Goal: rounded-rectangle shape with Ⓐ decorator and an InContextOf
+a Goal: rounded-rectangle shape with&nbsp;Ⓐ decorator and an InContextOf
 (`--o`) edge to its parent, instead of the usual Goal rectangle and
 SupportedBy (`-->`) edge.
 GSN has a dedicated Assumption element type for exactly this semantic,
 so using it is the natural mapping.
 
 ```
-A1("<b>A1</b> Ⓐ<br>Accepted without argument")
+A1("<b>A1</b>&nbsp;Ⓐ<br>Accepted without argument")
 ```
 
 On **any other element type** (Strategy, Evidence, Context, Justification),
@@ -535,7 +543,7 @@ flowchart TD
     Ev1(("<b>Ev1</b><br>Hazard analysis"))
     G3["<b>G3</b><br>All hazards have been mitigated<br>◇"]
     Verification[["<b>Verification</b><br>Hazard mitigation verified"]]
-    A1("<b>A1</b> Ⓐ<br>Operating environment is as specified")
+    A1("<b>A1</b>&nbsp;Ⓐ<br>Operating environment is as specified")
 
     G1 --> S1
     G1 --o X1
@@ -561,7 +569,7 @@ Key mapping decisions illustrated:
   both G2 and G3 point down to it with independent arrows.
 - `G3` has `{needsSupport}` → `◇` suffix (undeveloped diamond).
 - `^Verification` (cited Goal) → double-bracket `[[ ]]` shape.
-- `A1` (Assumption) → rounded rect `( )` with Ⓐ and `--o` InContextOf arrow
+- `A1` (Assumption) → rounded rect `( )` with&nbsp;Ⓐ and `--o` InContextOf arrow
   pointing down from S1 to A1.
 - No sacmDot: each parent has its own `-->` arrow to each supporting child.
 - All four leaf nodes (Ev1, X1, Verification, A1) link down to BottomPadding
@@ -575,6 +583,6 @@ Key mapping decisions illustrated:
 | Strategy | Strategy | Parallelogram | `[/"..."/]` |
 | Evidence | Solution | Circle | `(("<b>ID</b><br>..."))` |
 | Context | Context | Stadium | `(["<b>ID</b><br>..."])` |
-| Assumption | Assumption | Rounded rect + Ⓐ | `("<b>ID</b> Ⓐ<br>...")` |
-| Justification | Justification | Rounded rect + Ⓙ | `("<b>ID</b> Ⓙ<br>...")` |
+| Assumption | Assumption | Rounded rect + Ⓐ | `("<b>ID</b>&nbsp;Ⓐ<br>...")` |
+| Justification | Justification | Rounded rect + Ⓙ | `("<b>ID</b>&nbsp;Ⓙ<br>...")` |
 | `^`-prefixed Claim | Away/cited Goal | Subroutine | `[["..."]]` |
