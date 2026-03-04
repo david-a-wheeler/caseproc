@@ -135,6 +135,34 @@ class TestSelectMarkdown(unittest.TestCase):
         self.assertEqual(result.stderr, '')
 
 
+class TestSpecialChars(unittest.TestCase):
+    """Characters that need escaping in HTML or Markdown, and & entity pass-through."""
+
+    def test_markdown_escaping(self):
+        """ltac/markdown escapes [ and < in labels; & HTML entities pass through."""
+        r = run('--ltac', fixture('special-chars.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'special-chars.ltac.expected.md')
+        self.assertEqual(actual, read_fixture('special-chars.ltac.expected.md'))
+        # Key assertions on the escaping behaviour
+        self.assertIn(r'\[A\]', r.stdout)           # [ and ] escaped
+        self.assertIn(r'\<', r.stdout)              # < escaped
+        self.assertIn('&alpha;', r.stdout)          # & entity passes through
+        self.assertNotIn('&lt;', r.stdout)          # < not HTML-escaped in markdown
+
+    def test_html_escaping(self):
+        """ltac/html escapes < in text; [ is fine; & HTML entities pass through."""
+        r = run('--ltac', fixture('special-chars.ltac'), '--select', 'ltac/html')
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'special-chars.ltac.html.expected.txt')
+        self.assertEqual(actual, read_fixture('special-chars.ltac.html.expected.txt'))
+        # Key assertions on the escaping behaviour
+        self.assertIn('&lt;', r.stdout)             # < HTML-escaped
+        self.assertIn('[A]', r.stdout)              # [ passed through as-is
+        self.assertIn('&alpha;', r.stdout)          # & entity passes through
+        self.assertNotIn('&amp;alpha;', r.stdout)   # & not double-escaped
+
+
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
         """Default mode replaces stale caseproc regions and passes other lines through."""

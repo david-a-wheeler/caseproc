@@ -1,0 +1,3 @@
+- [Claim SC1: x \< 10 and \[A\] holds true](#claim-sc1-x-10-and-a-holds-true)
+  - [Evidence SE1: Supporting data](#evidence-se1-supporting-data) ([data.pdf](data.pdf))
+  - [Context SX1: Symbols &alpha; and &beta; apply](#context-sx1-symbols-alpha-and-beta-apply)

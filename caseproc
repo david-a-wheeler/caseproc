@@ -185,6 +185,47 @@ def escape_html(text: str) -> str:
     return text
 
 
+def escape_html_content(text: str) -> str:
+    """Escape text for use as HTML element content, preserving & for HTML entities.
+
+    Only escapes < and >.  Ampersands are deliberately left alone so that
+    HTML entities written in the LTAC source (e.g. &alpha;, &le;) survive
+    into the rendered HTML output.
+
+    >>> escape_html_content("x < 10 and y > 0")
+    'x &lt; 10 and y &gt; 0'
+    >>> escape_html_content("&alpha; &le; x &le; &beta;")
+    '&alpha; &le; x &le; &beta;'
+    >>> escape_html_content("[A] holds")
+    '[A] holds'
+    """
+    text = text.replace('<', '&lt;')
+    text = text.replace('>', '&gt;')
+    return text
+
+
+def escape_markdown(text: str) -> str:
+    """Escape characters that are special in Markdown inline syntax.
+
+    Escapes backslash, [, ], and < so they appear as literals in
+    rendered output and do not trigger link or HTML-tag parsing.
+
+    >>> escape_markdown("plain text")
+    'plain text'
+    >>> escape_markdown("[A] holds")
+    '\\\\[A\\\\] holds'
+    >>> escape_markdown("x < 10")
+    'x \\\\< 10'
+    >>> escape_markdown("a & b")
+    'a & b'
+    """
+    text = text.replace('\\', '\\\\')
+    text = text.replace('[', '\\[')
+    text = text.replace(']', '\\]')
+    text = text.replace('<', '\\<')
+    return text
+
+
 def parse_options(raw: str) -> set:
     """Parse a {OPTIONS} suffix string into a set of option names.
 
@@ -530,11 +571,12 @@ def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list,
         label += f' {node.identifier}'
     if node.text:
         label += f': {node.text}'
-    # Anchor always derived from the label itself, so the link target matches
-    # the document heading for this element regardless of depth.
+    # Anchor derived from the raw label; display label has Markdown specials escaped.
     anchor = (base_url + '#' + to_github_fragment(label)) if node.identifier else ''
-    main = f'[{label}]({anchor})' if anchor else label
-    ref_part = f' ([{node.ext_ref}]({node.ext_ref}))' if node.ext_ref else ''
+    display = escape_markdown(label)
+    main = f'[{display}]({anchor})' if anchor else display
+    ref_ext = node.ext_ref or ''
+    ref_part = f' ([{escape_markdown(ref_ext)}]({ref_ext}))' if ref_ext else ''
     lines.append('  ' * indent + f'- {main}{ref_part}')
     for child in node.children:
         _render_markdown_node(child, indent + 1, base_url, lines, pkg_label)
@@ -609,22 +651,26 @@ def _render_html_node(node: Node, indent: int, base_url: str, lines: list,
                       pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
     """Append HTML li element for node and recurse into its children.
 
+    The full 'Type ID: text' label links to its document anchor.  If the node
+    has an ext_ref, it is appended as a separate parenthetical link.
     Link nodes are silently skipped.
     """
     if node.node_type == 'Link':
         return
-    url = _node_url(node, base_url, pkg_label)
-    if url and node.identifier:
-        id_part = f'<a href="{escape_html(url)}">{escape_html(node.identifier)}</a>'
-    elif node.identifier:
-        id_part = escape_html(node.identifier)
-    else:
-        id_part = ''
-    content = escape_html(node.node_type)
-    if id_part:
-        content += f' {id_part}'
+    label = node.node_type
+    if node.identifier:
+        label += f' {node.identifier}'
     if node.text:
-        content += f': {escape_html(node.text)}'
+        label += f': {node.text}'
+    if node.identifier:
+        anchor = base_url + '#' + to_github_fragment(label)
+        main = f'<a href="{escape_html(anchor)}">{escape_html_content(label)}</a>'
+    else:
+        main = escape_html_content(label)
+    if node.ext_ref:
+        main += (f' (<a href="{escape_html(node.ext_ref)}">'
+                 f'{escape_html_content(node.ext_ref)}</a>)')
+    content = main
     prefix = '  ' * indent
     visible_children = [c for c in node.children if c.node_type != 'Link']
     if visible_children:

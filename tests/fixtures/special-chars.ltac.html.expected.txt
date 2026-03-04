@@ -1,0 +1,8 @@
+<ul>
+  <li><a href="#claim-sc1-x-10-and-a-holds-true">Claim SC1: x &lt; 10 and [A] holds true</a>
+  <ul>
+    <li><a href="#evidence-se1-supporting-data">Evidence SE1: Supporting data</a> (<a href="data.pdf">data.pdf</a>)</li>
+    <li><a href="#context-sx1-symbols-alpha-and-beta-apply">Context SX1: Symbols &alpha; and &beta; apply</a></li>
+  </ul>
+  </li>
+</ul>
