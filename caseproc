@@ -1,0 +1,1738 @@
+#!/usr/bin/env python3
+"""caseproc – process LTAC assurance-case files and inject rendered views.
+
+See docs/design-spec.md for the full specification.
+"""
+
+import argparse
+import copy
+import io
+import json
+import os
+import re
+import sys
+import tempfile
+from collections import deque
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Set, Tuple
+
+_had_error = False # If true, we saw an error during processing
+_strict = False # If true, turn warnings into errors
+
+
+def panic(msg: str) -> None:
+    """Print a fatal error to stderr and exit immediately."""
+    print(f"caseproc: fatal: {msg}", file=sys.stderr)
+    sys.exit(1)
+
+
+def error(msg: str) -> None:
+    """Print an error to stderr and set the error flag."""
+    global _had_error
+    print(f"caseproc: error: {msg}", file=sys.stderr)
+    _had_error = True
+
+
+def warn(msg: str) -> None:
+    """Print a warning to stderr; if --error is active, escalate to error()."""
+    if _strict:
+        error(msg)
+    else:
+        print(f"caseproc: warning: {msg}", file=sys.stderr)
+
+
+def notify(msg: str) -> None:
+    """Print an informational notification to stderr."""
+    print(f"caseproc: {msg}", file=sys.stderr)
+
+
+DEFAULT_CONFIG = {
+    'base_url': '',
+    'markdown_base_url': '',
+    'pkg_header_prefix': '### ',
+    'pkg_header_suffix': '\n',
+    'pkg_label': 'Package ',
+}
+
+
+def load_config(config_path: str) -> dict:
+    """Load and validate configuration from a JSON file.
+
+    If config_path is None, return a copy of DEFAULT_CONFIG.
+    Unknown keys produce a warning; known keys are merged over the defaults.
+    """
+    if config_path is None:
+        return dict(DEFAULT_CONFIG)
+    try:
+        with open(config_path, encoding='utf-8') as f:
+            parsed = json.load(f)
+    except FileNotFoundError:
+        panic(f"--config file not found: {config_path!r}")
+    except PermissionError:
+        panic(f"--config file not readable: {config_path!r}")
+    except json.JSONDecodeError as e:
+        panic(f"invalid JSON in --config file {config_path!r}: {e}")
+    if not isinstance(parsed, dict):
+        panic(f"--config file must contain a JSON object, not {type(parsed).__name__}")
+    for key in parsed:
+        if key not in DEFAULT_CONFIG:
+            warn(f"unknown config key: {key!r}")
+    config = dict(DEFAULT_CONFIG)
+    config.update({k: v for k, v in parsed.items() if k in DEFAULT_CONFIG})
+    return config
+
+
+# ---------------------------------------------------------------------------
+# Utility functions
+# ---------------------------------------------------------------------------
+
+def to_github_fragment(text: str) -> str:
+    """Convert heading text to a GitHub anchor fragment id.
+
+    Algorithm (matches GitHub's algorithm):
+    1. Lowercase the entire string.
+    2. Remove every character that is not a Unicode letter, digit,
+       hyphen, or space.
+    3. Replace spaces with hyphens.
+    4. Collapse runs of multiple hyphens into a single hyphen.
+    5. Strip leading and trailing hyphens.
+
+    >>> to_github_fragment("Package C1")
+    'package-c1'
+    >>> to_github_fragment("Claim C1: The software is acceptably safe")
+    'claim-c1-the-software-is-acceptably-safe'
+    >>> to_github_fragment("hello  world")
+    'hello-world'
+    >>> to_github_fragment("well-formed")
+    'well-formed'
+    """
+    text = text.lower()
+    text = re.sub(r'[^\w\s-]', '', text)
+    text = re.sub(r'\s+', '-', text)
+    text = re.sub(r'-+', '-', text)
+    return text.strip('-')
+
+
+# Mermaid flowchart node ID rules are defined by the NODE_STRING token in the
+# flowchart JISON grammar.  Hyphens and dots are permitted in node IDs; only
+# characters with syntactic meaning in Mermaid (spaces, brackets, edge markers,
+# etc.) must be removed.  The reserved word "end" (all lowercase) breaks the
+# parser and must be avoided.  Leading digits require an underscore prefix.
+# Sources:
+#   https://github.com/mermaid-js/mermaid/blob/develop/packages/mermaid/src/diagrams/flowchart/parser/flow.jison
+#   https://mermaid.js.org/syntax/flowchart.html
+def make_mermaid_id(identifier: str, counter: list) -> str:
+    """Return a valid Mermaid node id for the given LTAC identifier.
+
+    Hyphens and dots are preserved (both are legal in Mermaid node IDs).
+    Spaces are converted to underscores; other characters that are syntactically
+    meaningful in Mermaid (brackets, angle brackets, parentheses, braces) are
+    removed.
+    The reserved word 'end' is suffixed with '_' to avoid a Mermaid parse error.
+    If the result is empty, generates '_auto{N}' using counter[0]++.
+    Prefixes with underscore if the first character is a digit.
+
+    >>> make_mermaid_id("C1", [0])
+    'C1'
+    >>> make_mermaid_id("AR-1.0", [0])
+    'AR-1.0'
+    >>> make_mermaid_id("hello world", [0])
+    'hello_world'
+    >>> make_mermaid_id("1st", [0])
+    '_1st'
+    >>> make_mermaid_id("end", [0])
+    'end_'
+    >>> make_mermaid_id("", [0])
+    '_auto0'
+    >>> make_mermaid_id("", [3])
+    '_auto3'
+    """
+    if not identifier:
+        idx = counter[0]
+        counter[0] += 1
+        return f'_auto{idx}'
+    # Spaces become underscores; other Mermaid-syntax characters are removed.
+    result = re.sub(r'\s', '_', identifier)
+    result = re.sub(r'[()\[\]{}<>]', '', result)
+    if not result:
+        idx = counter[0]
+        counter[0] += 1
+        return f'_auto{idx}'
+    if result[0].isdigit():
+        result = '_' + result
+    if result == 'end':
+        result = 'end_'
+    return result
+
+
+def escape_html(text: str) -> str:
+    """Escape text for safe embedding in mermaid HTML labels.
+
+    Replaces & -> &amp;  < -> &lt;  > -> &gt;  " -> &quot;
+
+    >>> escape_html("safe text")
+    'safe text'
+    >>> escape_html('<b>Hello & "World"</b>')
+    '&lt;b&gt;Hello &amp; &quot;World&quot;&lt;/b&gt;'
+    >>> escape_html("a & b & c")
+    'a &amp; b &amp; c'
+    """
+    text = text.replace('&', '&amp;')
+    text = text.replace('<', '&lt;')
+    text = text.replace('>', '&gt;')
+    text = text.replace('"', '&quot;')
+    return text
+
+
+def parse_options(raw: str) -> set:
+    """Parse a {OPTIONS} suffix string into a set of option names.
+
+    raw is the content between { and } (already stripped of braces).
+    Splits on commas, strips whitespace, lowercases each token.
+    Returns a set of lowercase strings.
+
+    >>> sorted(parse_options("counter, abstract"))
+    ['abstract', 'counter']
+    >>> parse_options("DEFEATED")
+    {'defeated'}
+    >>> parse_options("")
+    set()
+    >>> parse_options("  ")
+    set()
+    """
+    if not raw.strip():
+        return set()
+    return {token.strip().lower() for token in raw.split(',') if token.strip()}
+
+
+# ---------------------------------------------------------------------------
+# Data model
+# ---------------------------------------------------------------------------
+
+@dataclass
+class Node:
+    node_type: str           # Claim|Strategy|Justification|Evidence|
+                             # Context|Assumption|Link|Relation|Connector
+    identifier: str          # e.g. "C1"; empty string if absent
+    text: str                # descriptive text (statement / reasoning)
+    ext_ref: str             # text from trailing (...), empty if absent
+    options: Set[str]        # e.g.: needsSupport axiomatic defeated
+                             #        counter abstract assumed
+    children: List['Node']   # child nodes
+    is_cited: bool           # True when identifier had a ^ prefix
+    cited_pkg: str           # package name from ^[PkgName] prefix; '' = default
+    depth: int               # 0-based indentation level (0 = root)
+    parent: Optional['Node'] # back-reference; None for roots
+    link_target: Optional['Node']  # for Link nodes: referenced node
+    diagram_id: str          # computed valid diagram node id for any renderer
+
+
+# ---------------------------------------------------------------------------
+# LTAC parser
+# ---------------------------------------------------------------------------
+
+# Node types that cannot act as inference parents for Claims or Strategies.
+# Used to warn about structurally invalid parent-child relationships.
+_NON_INFERENTIAL_TYPES = frozenset({'Evidence', 'Context', 'Assumption', 'Justification'})
+
+# This parses an LTAC line with a regex, and pulls out relevant pieces.
+# Compiled regexes perform well in Python.
+_LTAC_LINE_RE = re.compile(
+    r'^(?P<indent>(?:  )*)'
+    r'[-*] '
+    r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
+    r'|Context|Assumption|Relation|Link|Connector)'
+    r'(?:\s+(?P<cited>\^)?(?:\[(?P<cited_pkg>[^\]]*)\])?(?P<identifier>[^:{\n(]*))?'
+    r'(?::\s*(?P<text>[^({]*))?'
+    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
+    r'(?:\s*\{(?P<options>[^}\n]*)\})?'
+    r'\s*$'
+)
+
+
+class LTACParser:
+    def parse(self, lines: List[str]) -> List[Node]:
+        """Parse LTAC lines into a forest (list of root Nodes).
+
+        Returns one root Node per package.
+        Also populates self.registry: Dict[str, Node] mapping each
+        non-cited identifier to its Node (for Link resolution), and
+        self.id_info: Dict[str, dict] tracking per-identifier usage
+        stats for post-parse validation.
+        """
+        self.registry: Dict[str, Node] = {}
+        # id_info[ident] = {
+        #   'declarations': int,       count of non-cited nodes with this ID
+        #   'citations':    int,       count of cited (^) nodes with this ID
+        #   'statement':    str|None,  first non-empty text seen for this ID
+        #   'decl_lineno':  int|None,  line of first declaration
+        #   (bare ^ with no [PkgName] defaults to "Package {ID}")
+        #   'cited_pkgs':   set,       named packages from ^[PkgName] citations
+        # }
+        self.id_info: Dict[str, dict] = {}
+        self.results: List[Node] = []
+        self.node_count: int = 0
+        self._stack: List[Tuple[int, Node]] = []
+        self._current_pkg: List[Node] = []
+        self._pkg_root_lineno: Optional[int] = None
+        self._id_counter: List[int] = [0]
+        self._links: List[Tuple[Node, int]] = []
+
+        for lineno, line in enumerate(lines, 1):
+            self._parse_line(lineno, line)
+
+        # Finalize last open package
+        if self._stack or self._current_pkg:
+            self._finalize_package()
+
+        # Resolve Link targets (done after full parse so forward refs work)
+        for node, lineno in self._links:
+            self._resolve_link(node, lineno)
+
+        return self.results
+
+    def _parse_line(self, lineno: int, line: str) -> None:
+        """Process a single LTAC source line, updating parser state."""
+        stripped = line.strip()
+        if not stripped or stripped.startswith('//'):
+            if self._stack or self._current_pkg:
+                self._finalize_package()
+            return
+
+        m = _LTAC_LINE_RE.match(line)
+        if not m:
+            error(f"line {lineno}: unrecognized syntax: {line.rstrip()!r}")
+            return
+
+        node = self._build_node(m, lineno)
+        self._attach_node(node, lineno)
+
+    def _build_node(self, m, lineno: int) -> Node:
+        """Construct a Node from a successful regex match."""
+        depth = len(m.group('indent')) // 2
+        nodetype = m.group('nodetype')
+        is_cited = bool(m.group('cited'))
+        cited_pkg = (m.group('cited_pkg') or '').strip()
+        identifier = (m.group('identifier') or '').strip()
+        text = (m.group('text') or '').strip()
+        ref = (m.group('ref') or '').strip()
+        options = parse_options(m.group('options') or '')
+
+        diagram_id = make_mermaid_id(identifier, self._id_counter)
+
+        node = Node(
+            node_type=nodetype,
+            identifier=identifier,
+            text=text,
+            ext_ref=ref,
+            options=options,
+            children=[],
+            is_cited=is_cited,
+            cited_pkg=cited_pkg,
+            depth=depth,
+            parent=None,
+            link_target=None,
+            diagram_id=diagram_id,
+        )
+        self.node_count += 1
+        return node
+
+    def _attach_node(self, node: Node, lineno: int) -> None:
+        """Register the node's identifier, attach it to the tree, and push it onto the stack."""
+        if node.node_type == 'Link':
+            self._links.append((node, lineno))
+        elif node.identifier:
+            # Package root id: stack[0] is the root if the stack is non-empty;
+            # if empty, the current node is (or will become) the package root.
+            pkg_root_id = self._stack[0][1].identifier if self._stack else node.identifier
+            info = self.id_info.setdefault(node.identifier, {
+                'declarations':  0,
+                'citations':     0,
+                'statement':     None,
+                'decl_lineno':   None,
+                'cited_pkgs':    set(),
+                'decl_pkg_id':   None,   # pkg root id of the declaration
+                'citing_pkg_ids': [],    # pkg root ids that cite this id, in order
+            })
+            if node.is_cited:
+                info['citations'] += 1
+                if node.cited_pkg:
+                    info['cited_pkgs'].add(node.cited_pkg)
+                if pkg_root_id and pkg_root_id not in info['citing_pkg_ids']:
+                    info['citing_pkg_ids'].append(pkg_root_id)
+            else:
+                if info['declarations'] > 0:
+                    warn(f"line {lineno}: duplicate declaration {node.identifier!r}")
+                else:
+                    info['decl_lineno'] = lineno
+                    info['decl_pkg_id'] = pkg_root_id
+                    self.registry[node.identifier] = node
+                info['declarations'] += 1
+            if node.text:
+                if info['statement'] is None:
+                    info['statement'] = node.text
+                elif node.text != info['statement']:
+                    warn(f"line {lineno}: {node.identifier!r}: statement {node.text!r}"
+                         f" differs from earlier statement {info['statement']!r}")
+
+        # Pop stack until top's depth < current depth
+        while self._stack and self._stack[-1][0] >= node.depth:
+            self._stack.pop()
+
+        if self._stack:
+            parent_node = self._stack[-1][1]
+            if (node.node_type in ('Claim', 'Strategy')
+                    and parent_node.node_type in _NON_INFERENTIAL_TYPES):
+                warn(f"line {lineno}: {node.node_type} should not be"
+                     f" a child of {parent_node.node_type}")
+            node.parent = parent_node
+            parent_node.children.append(node)
+        else:
+            if self._current_pkg:
+                panic(
+                    f"package starting at line {self._pkg_root_lineno} "
+                    f"already has a top-level element; only one allowed"
+                )
+            self._current_pkg.append(node)
+            self._pkg_root_lineno = lineno
+
+        self._stack.append((node.depth, node))
+
+    def _resolve_link(self, node: Node, lineno: int) -> None:
+        """Set link_target on a Link node, warning if the target is unknown."""
+        target_id = node.identifier
+        if target_id in self.registry:
+            node.link_target = self.registry[target_id]
+        else:
+            warn(f"line {lineno}: Link target {target_id!r} not found")
+
+    def _finalize_package(self) -> None:
+        """Flush the current package's root into results and reset package state."""
+        self.results.extend(self._current_pkg)
+        self._current_pkg = []
+        self._pkg_root_lineno = None
+        self._stack = []
+
+
+def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
+    """Parse LTAC lines and return (roots, registry, id_info)."""
+    parser = LTACParser()
+    roots = parser.parse(lines)
+    return roots, parser.registry, parser.id_info
+
+
+def _count_all_nodes(roots: List[Node]) -> int:
+    """Count all nodes in the forest by tree traversal."""
+    total = 0
+    stack = list(roots)
+    while stack:
+        node = stack.pop()
+        total += 1
+        stack.extend(node.children)
+    return total
+
+
+# ---------------------------------------------------------------------------
+# LTAC file loader
+# ---------------------------------------------------------------------------
+
+def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
+                   id_info: Dict[str, dict]) -> None:
+    """Parse an LTAC file and merge its roots, registry, and id_info into the given collections."""
+    try:
+        with open(path) as f:
+            lines = f.readlines()
+    except OSError as e:
+        panic(f"cannot open {path!r}: {e}")
+    roots, new_registry, new_id_info = parse_ltac_lines(lines)
+    all_roots.extend(roots)
+    for ident, node in new_registry.items():
+        if ident in registry:
+            warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
+        else:
+            registry[ident] = node
+    for ident, new in new_id_info.items():
+        if ident in id_info:
+            existing = id_info[ident]
+            if new['declarations'] > 0 and existing['declarations'] > 0:
+                warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
+            existing['declarations'] += new['declarations']
+            existing['citations']    += new['citations']
+            existing['cited_pkgs'].update(new['cited_pkgs'])
+            if new['statement'] and existing['statement'] and new['statement'] != existing['statement']:
+                warn(f"{path}: {ident!r}: statement differs from earlier statement")
+            elif new['statement'] and not existing['statement']:
+                existing['statement'] = new['statement']
+            if new['decl_pkg_id'] and not existing['decl_pkg_id']:
+                existing['decl_pkg_id'] = new['decl_pkg_id']
+            for pkg_id in new['citing_pkg_ids']:
+                if pkg_id not in existing['citing_pkg_ids']:
+                    existing['citing_pkg_ids'].append(pkg_id)
+        else:
+            id_info[ident] = new
+
+
+# ---------------------------------------------------------------------------
+# Renderers
+# ---------------------------------------------------------------------------
+
+def _node_url(node: Node, base_url: str, pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+    """Return the hyperlink URL for a node, or '' if none can be determined.
+
+    Uses ext_ref directly if set; otherwise constructs a URL from base_url
+    and a GitHub-style fragment derived from the expected heading for this node:
+    '{pkg_label}ID' for root nodes, 'Type ID: text' for all others.
+    """
+    if node.ext_ref:
+        return node.ext_ref
+    if not (base_url and node.identifier):
+        return ''
+    if node.depth == 0:
+        heading = f"{pkg_label}{node.identifier}"
+    else:
+        heading = f"{node.node_type} {node.identifier}"
+        if node.text:
+            heading += f": {node.text}"
+    return base_url + '#' + to_github_fragment(heading)
+
+
+def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list,
+                          pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
+    """Append a markdown bullet for node and recurse into its children.
+
+    Link nodes are silently skipped (they are citations, not new bullets).
+    """
+    if node.node_type == 'Link':
+        return
+    url = _node_url(node, base_url, pkg_label)
+    if url and node.identifier:
+        id_part = f'[{node.identifier}]({url})'
+    elif node.identifier:
+        id_part = node.identifier
+    else:
+        id_part = ''
+    parts = ['  ' * indent + f'- {node.node_type}']
+    if id_part:
+        parts.append(f' {id_part}')
+    if node.text:
+        parts.append(f': {node.text}')
+    lines.append(''.join(parts))
+    for child in node.children:
+        _render_markdown_node(child, indent + 1, base_url, lines, pkg_label)
+
+
+def render_markdown(roots: List[Node], base_url: str = '',
+                    pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+    """Render a list of nodes as an indented markdown bullet list with hyperlinks.
+
+    Each item is '- NodeType ID: text' where ID is a hyperlink when a URL
+    is available (from ext_ref, or constructed from base_url + anchor).
+    Link nodes are skipped.
+    """
+    lines = []
+    for root in roots:
+        _render_markdown_node(root, 0, base_url, lines, pkg_label)
+    return '\n'.join(lines)
+
+
+def render_statement(node: Node) -> str:
+    """Return a markdown 'Statement:' line for the node's text."""
+    return f"Statement: {node.text}"
+
+
+def _node_pkg(node: Node) -> Node:
+    """Walk up the parent chain and return the package root for this node."""
+    while node.parent is not None:
+        node = node.parent
+    return node
+
+
+def render_references(node: Node, all_roots: List[Node], id_info: Dict[str, dict],
+                      config: dict) -> str:
+    """Return 'References: ' followed by markdown links to all packages that reference node.
+
+    Lists the declaring package first (if any), then any packages that cite
+    the node via ^ID.  Falls back to the node's own package root if the
+    identifier is not in id_info.
+    """
+    base_url = config.get('markdown_base_url', '')
+    ident = node.identifier
+
+    pkg_ids: List[str] = []
+    if ident and ident in id_info:
+        info = id_info[ident]
+        if info['decl_pkg_id']:
+            pkg_ids.append(info['decl_pkg_id'])
+        for pkg_id in info['citing_pkg_ids']:
+            if pkg_id not in pkg_ids:
+                pkg_ids.append(pkg_id)
+
+    if not pkg_ids:
+        pkg_root = _node_pkg(node)
+        if pkg_root not in all_roots:
+            return 'References: None'
+        if pkg_root.identifier:
+            pkg_ids = [pkg_root.identifier]
+
+    if not pkg_ids:
+        return 'References: None'
+
+    pkg_label = config.get('pkg_label', 'Package ')
+    links = []
+    for pkg_id in pkg_ids:
+        heading = f"{pkg_label}{pkg_id}"
+        url = base_url + '#' + to_github_fragment(heading)
+        links.append(f"[{heading}]({url})")
+    return 'References: ' + ', '.join(links)
+
+
+def _render_html_node(node: Node, indent: int, base_url: str, lines: list,
+                      pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
+    """Append HTML li element for node and recurse into its children.
+
+    Link nodes are silently skipped.
+    """
+    if node.node_type == 'Link':
+        return
+    url = _node_url(node, base_url, pkg_label)
+    if url and node.identifier:
+        id_part = f'<a href="{escape_html(url)}">{escape_html(node.identifier)}</a>'
+    elif node.identifier:
+        id_part = escape_html(node.identifier)
+    else:
+        id_part = ''
+    content = escape_html(node.node_type)
+    if id_part:
+        content += f' {id_part}'
+    if node.text:
+        content += f': {escape_html(node.text)}'
+    prefix = '  ' * indent
+    visible_children = [c for c in node.children if c.node_type != 'Link']
+    if visible_children:
+        lines.append(f'{prefix}<li>{content}')
+        lines.append(f'{prefix}<ul>')
+        for child in node.children:
+            _render_html_node(child, indent + 1, base_url, lines, pkg_label)
+        lines.append(f'{prefix}</ul>')
+        lines.append(f'{prefix}</li>')
+    else:
+        lines.append(f'{prefix}<li>{content}</li>')
+
+
+def render_html(roots: List[Node], base_url: str = '',
+                pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+    """Render a list of nodes as a nested HTML ul/li list with hyperlinks.
+
+    Link nodes are skipped. Identifiers are hyperlinked when a URL is available.
+    """
+    lines = ['<ul>']
+    for root in roots:
+        _render_html_node(root, 1, base_url, lines, pkg_label)
+    lines.append('</ul>')
+    return '\n'.join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Mermaid diagram shared utilities
+# ---------------------------------------------------------------------------
+
+def _copy_forest(roots: List['Node']) -> List['Node']:
+    """Return an independent deep copy of the node forest.
+
+    Uses copy.deepcopy so all internal back-references (parent, link_target,
+    children) are remapped to copied nodes.  The originals are untouched,
+    allowing other renderers (ltac/markdown, GSN, …) to use them normally.
+    """
+    return copy.deepcopy(roots)
+
+
+def _collect_bfs(roots: List['Node']) -> List['Node']:
+    """Return every node in the forest in BFS order (roots first)."""
+    result = []
+    q = deque(roots)
+    while q:
+        node = q.popleft()
+        result.append(node)
+        q.extend(node.children)
+    return result
+
+
+def _edge_line(src_id: str, tgt_id: str, is_context: bool,
+               counter: bool = False, abstract: bool = False) -> str:
+    """Return a directed edge line (with arrowhead) from src to tgt.
+
+    is_context → circle head (--o); otherwise arrow head (-->).
+    counter    → adds |⊖| label on the edge.
+    abstract   → uses dashed line style (-.- prefix).
+
+    >>> _edge_line("A", "B", False)
+    '    A --> B'
+    >>> _edge_line("A", "B", True)
+    '    A --o B'
+    >>> _edge_line("A", "B", False, counter=True)
+    '    A -->|⊖| B'
+    >>> _edge_line("A", "B", True, abstract=True)
+    '    A -.-o B'
+    >>> _edge_line("A", "B", False, counter=True, abstract=True)
+    '    A -.->|⊖| B'
+    """
+    base = ('-.-o' if abstract else '--o') if is_context else ('-.->' if abstract else '-->')
+    arrow = f'{base}|⊖|' if counter else base
+    return f'    {src_id} {arrow} {tgt_id}'
+
+
+# ---------------------------------------------------------------------------
+# SACM/mermaid renderer (step 9)
+# ---------------------------------------------------------------------------
+
+# Hair space (U+200A) — required inside sacmDot and Connector nodes.
+_HAIR_SPACE = '\u200a'
+
+
+def _sacm_assertion_suffix(node_type: str, options: Set[str]) -> str:
+    """Return the mermaid assertion-state suffix for the given node type and options.
+
+    Valid nodes carry at most one assertion status (enforced by
+    check_assertion_status).  The order below is a rendering fallback only.
+    Assumption node type is treated as "assumed" regardless of options.
+
+    >>> _sacm_assertion_suffix('Claim', {'defeated'})
+    '<br>✗'
+    >>> _sacm_assertion_suffix('Claim', {'axiomatic'})
+    '<br>━━━'
+    >>> _sacm_assertion_suffix('Assumption', set())
+    '<br>ASSUMED'
+    >>> _sacm_assertion_suffix('Claim', {'assumed'})
+    '<br>ASSUMED'
+    >>> _sacm_assertion_suffix('Claim', {'needssupport'})
+    '<br>...'
+    >>> _sacm_assertion_suffix('Claim', set())
+    ''
+    """
+    if 'defeated' in options:
+        return '<br>✗'
+    if 'axiomatic' in options:
+        return '<br>━━━'
+    if node_type == 'Assumption' or 'assumed' in options:
+        return '<br>ASSUMED'
+    if 'needssupport' in options:
+        return '<br>...'
+    return ''
+
+
+def _sacm_node_decl(node: 'Node') -> str:
+    """Return the mermaid node-declaration line for a single LTAC node.
+
+    Returns '' for Relation and Link nodes (they produce no mermaid declaration).
+    diagram_id must already be set on the node.
+    """
+    if node.node_type in ('Relation', 'Link'):
+        return ''
+
+    if node.node_type == 'Connector':
+        return f'    {node.diagram_id}(("{_HAIR_SPACE}")):::connector'
+
+    did = node.diagram_id
+    eid = escape_html(node.identifier) if node.identifier else ''
+    etxt = escape_html(node.text) if node.text else ''
+    opts = node.options
+
+    suffix = _sacm_assertion_suffix(node.node_type, opts)
+
+    # Evidence and Context use the cylinder shape with a &nbsp;↗ after the ID.
+    if node.node_type in ('Evidence', 'Context'):
+        if eid and etxt:
+            inner = f'<b>{eid}</b>&nbsp;↗<br>{etxt}{suffix}'
+        elif eid:
+            inner = f'<b>{eid}</b>&nbsp;↗{suffix}'
+        else:
+            inner = f'&nbsp;↗<br>{etxt}{suffix}' if etxt else f'&nbsp;↗{suffix}'
+        shape = f'[("{inner}")]'
+    else:
+        # Claim, Strategy, Assumption, Justification
+        if eid and etxt:
+            inner = f'<b>{eid}</b><br>{etxt}{suffix}'
+        elif eid:
+            inner = f'<b>{eid}</b>{suffix}'
+        elif etxt:
+            inner = f'{etxt}{suffix}'
+        else:
+            inner = suffix.removeprefix('<br>') if suffix else ''
+
+        if node.node_type == 'Strategy':
+            shape = f'[/"{inner}"/]'
+        elif node.is_cited:
+            shape = f'[["{inner}"]]'
+        else:
+            # Claim, Assumption, Justification all use plain rectangle
+            shape = f'["{inner}"]'
+
+    abstract_cls = ':::abstractClaim' if 'abstract' in opts else ''
+    return f'    {did}{shape}{abstract_cls}'
+
+
+# Standard mermaid YAML frontmatter and opening classDef lines shared by all
+# sacm/mermaid diagrams.  The closing ``` fence is appended by render_sacm().
+_SACM_HEADER = (
+    '```mermaid\n'
+    '---\n'
+    'config:\n'
+    '  theme: neutral\n'
+    '  flowchart:\n'
+    '    curve: linear\n'
+    '    htmlLabels: true\n'
+    '    rankSpacing: 60\n'
+    '    nodeSpacing: 45\n'
+    '    padding: 15\n'
+    '---\n'
+    'flowchart BT\n'
+    '    classDef invisible opacity:0\n'
+    '    classDef sacmDot fill:#000,stroke:#000\n'
+    '    classDef connector fill:none,stroke:#cccccc,stroke-width:1px;\n'
+    '    classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;'
+)
+
+
+def _sacm_source_edge(src_id: str, dot_id: str, abstract: bool = False) -> str:
+    """Return an undirected source edge (--- or -.-) from a node to a sacmDot.
+
+    abstract → dashed (-.-).  Counter is reflected on the Dot→target edge.
+
+    >>> _sacm_source_edge("A", "Dot1")
+    '    A --- Dot1'
+    >>> _sacm_source_edge("A", "Dot1", abstract=True)
+    '    A -.- Dot1'
+    """
+    return f'    {src_id} {"-.-" if abstract else "---"} {dot_id}'
+
+
+def _sacm_collect_edges(
+    node: 'Node',
+    dot_counter: list,
+    dot_decls: list,
+    edge_lines: list,
+) -> None:
+    """Collect sacmDot declarations and edges for *node* and its subtree.
+
+    Edges are appended in DFS post-order (deepest leaves first, so the last
+    edge written connects to the top-level root).
+
+    Special node-type rules:
+    - Connector: children connect to it with '---'; Connector is a source in
+      its parent's group.
+    - Strategy: children are absorbed into the *grandparent's* inference group;
+      no inference edges emitted at the Strategy level.
+    - Relation: children are absorbed into the *parent's* inference group with
+      Relation's counter/abstract options applied to their edges; Relation
+      produces no mermaid node declaration.
+    - Link: skipped entirely.
+    """
+    if node.node_type == 'Connector':
+        for child in node.children:
+            if child.node_type != 'Link':
+                _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+        for child in node.children:
+            if child.node_type != 'Link':
+                edge_lines.append(f'    {child.diagram_id} --- {node.diagram_id}')
+        return
+
+    if node.node_type in ('Strategy', 'Relation'):
+        # Just recurse; the enclosing Claim handles edge emission for this group.
+        for child in node.children:
+            if child.node_type != 'Link':
+                _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+        return
+
+    # --- Build this node's inference group ---
+    # Each entry is (node, counter:bool, abstract:bool).
+
+    # context_children: list of (ctx_node, counter, abstract)
+    context_children: list = []
+    # strategy_children: list of Strategy Node objects (for context-edge emission)
+    strategy_children: list = []
+    # strategy_ctx: strategy.diagram_id → [(ctx_node, counter, abstract)]
+    strategy_ctx: Dict[str, list] = {}
+    # inference_sources: list of (node, counter, abstract)
+    inference_sources: list = []
+
+    for child in node.children:
+        if child.node_type == 'Context':
+            context_children.append((child, 'counter' in child.options, False))
+
+        elif child.node_type == 'Strategy':
+            strategy_children.append(child)
+            ctx_of_s: list = []
+            for gc in child.children:
+                if gc.node_type == 'Context':
+                    ctx_of_s.append((gc, 'counter' in gc.options, False))
+                elif gc.node_type == 'Relation':
+                    rc, ra = 'counter' in gc.options, 'abstract' in gc.options
+                    for ggc in gc.children:
+                        if ggc.node_type == 'Context':
+                            ctx_of_s.append((ggc, rc, ra))
+                        elif ggc.node_type not in ('Relation', 'Link'):
+                            inference_sources.append((ggc, rc, ra))
+                elif gc.node_type not in ('Relation', 'Link'):
+                    inference_sources.append((gc, 'counter' in gc.options, False))
+            inference_sources.append((child, 'counter' in child.options, False))
+            strategy_ctx[child.diagram_id] = ctx_of_s
+
+        elif child.node_type == 'Relation':
+            rc, ra = 'counter' in child.options, 'abstract' in child.options
+            for gc in child.children:
+                if gc.node_type == 'Context':
+                    context_children.append((gc, rc, ra))
+                elif gc.node_type not in ('Relation', 'Link'):
+                    inference_sources.append((gc, rc, ra))
+
+        elif child.node_type != 'Link':
+            inference_sources.append((child, 'counter' in child.options, False))
+
+    # Recurse into all non-Link children first (post-order: deepest edges first).
+    for child in node.children:
+        if child.node_type != 'Link':
+            _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+
+    # Emit inference edges for this node.
+    if len(inference_sources) == 1:
+        src, is_counter, is_abstract = inference_sources[0]
+        edge_lines.append(_edge_line(
+            src.diagram_id, node.diagram_id, False, is_counter, is_abstract))
+    elif len(inference_sources) >= 2:
+        dot_id = f'Dot{dot_counter[0]}'
+        dot_counter[0] += 1
+        any_counter = any(c for _, c, _ in inference_sources)
+        any_abstract = any(a for _, _, a in inference_sources)
+        dot_decls.append(f'    {dot_id}(("{_HAIR_SPACE}")):::sacmDot')
+        for src, _, is_abstract in inference_sources:
+            edge_lines.append(_sacm_source_edge(src.diagram_id, dot_id, is_abstract))
+        dot_arrow = (
+            '-.->|⊖|' if (any_abstract and any_counter) else
+            '-.->'     if any_abstract else
+            '-->|⊖|'   if any_counter  else '-->'
+        )
+        edge_lines.append(f'    {dot_id} {dot_arrow} {node.diagram_id}')
+
+    # Emit context edges: direct Context children → this node.
+    for ctx, is_counter, is_abstract in context_children:
+        edge_lines.append(
+            _edge_line(ctx.diagram_id, node.diagram_id, True, is_counter, is_abstract))
+
+    # Emit context edges: Context children of Strategy children → that Strategy.
+    for s in strategy_children:
+        for ctx, is_counter, is_abstract in strategy_ctx.get(s.diagram_id, []):
+            edge_lines.append(
+                _edge_line(ctx.diagram_id, s.diagram_id, True, is_counter, is_abstract))
+
+
+def _sacm_leftmost_leaf(node: 'Node') -> 'Node':
+    """Return the leftmost deepest rendered leaf in the subtree.
+
+    Follows the first non-Link child recursively, so that the result is the
+    node that appears at the bottom-left of the BT diagram.
+    """
+    for child in node.children:
+        if child.node_type != 'Link':
+            return _sacm_leftmost_leaf(child)
+    return node
+
+
+def render_sacm(roots: List['Node'], base_url: str = '',
+                pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+    """Render package roots as a complete SACM/mermaid code block.
+
+    Returns the full mermaid fenced block (opening ```mermaid … closing ```).
+    The original nodes are not modified; a deep copy is used internally.
+    Output structure: header → node declarations (BFS) → sacmDot declarations
+    → click lines → blank line → BottomPadding + edges (DFS post-order, deepest first).
+    """
+    roots = _copy_forest(roots)
+
+    # Node declarations (BFS) and click lines collected in a single pass.
+    node_decl_lines = []
+    click_lines = []
+    for node in _collect_bfs(roots):
+        decl = _sacm_node_decl(node)
+        if decl:
+            node_decl_lines.append(decl)
+        if node.node_type not in ('Relation', 'Link'):
+            url = _node_url(node, base_url, pkg_label)
+            if url:
+                click_lines.append(f'    click {node.diagram_id} "{url}"')
+
+    # Collect sacmDot declarations and edges via the inference group algorithm.
+    dot_counter = [1]
+    dot_decls: list = []
+    edge_lines: list = []
+    for root in roots:
+        _sacm_collect_edges(root, dot_counter, dot_decls, edge_lines)
+
+    # The invisible BottomPadding node prevents GitHub's diagram controls from
+    # obscuring the bottom of the diagram; it must be the first edge line.
+    # Link it to the leftmost bottommost leaf so it sits at the bottom-left.
+    if roots:
+        bottom_node = _sacm_leftmost_leaf(roots[0])
+        edge_lines.insert(0, f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
+
+    lines = [_SACM_HEADER]
+    lines.extend(node_decl_lines)
+    lines.extend(dot_decls)
+    lines.extend(click_lines)
+    if edge_lines:
+        lines.append('')  # blank line between declarations and edges
+        lines.extend(edge_lines)
+    lines.append('```')
+    return '\n'.join(lines)
+
+
+# ---------------------------------------------------------------------------
+# GSN/mermaid renderer
+# ---------------------------------------------------------------------------
+
+def _gsn_is_incontextof(node: 'Node') -> bool:
+    """True if node attaches to its parent via InContextOf (--o), not SupportedBy (-->)."""
+    return node.node_type in ('Context', 'Assumption', 'Justification') or \
+           (node.node_type == 'Claim' and 'assumed' in node.options)
+
+
+def _gsn_assertion_suffix(node_type: str, options: Set[str]) -> str:
+    """Return the GSN mermaid assertion-state suffix for the given node type and options.
+
+    >>> _gsn_assertion_suffix('Claim', {'defeated'})
+    '<br>✗'
+    >>> _gsn_assertion_suffix('Claim', {'needssupport'})
+    '<br>◇'
+    >>> _gsn_assertion_suffix('Claim', {'axiomatic'})
+    '<br>AXIOMATIC'
+    >>> _gsn_assertion_suffix('Claim', {'metaclaim'})
+    '<br>METACLAIM'
+    >>> _gsn_assertion_suffix('Strategy', {'assumed'})
+    '<br>ASSUMED'
+    >>> _gsn_assertion_suffix('Assumption', set())
+    ''
+    >>> _gsn_assertion_suffix('Claim', set())
+    ''
+    """
+    if 'defeated' in options:
+        return '<br>✗'
+    if 'needssupport' in options:
+        return '<br>◇'
+    if 'axiomatic' in options:
+        return '<br>AXIOMATIC'
+    if 'metaclaim' in options:
+        return '<br>METACLAIM'
+    if 'assumed' in options and node_type not in ('Claim', 'Assumption'):
+        return '<br>ASSUMED'
+    return ''
+
+
+def _gsn_node_decl(node: 'Node') -> str:
+    """Return the mermaid node-declaration line for a single LTAC node (GSN style).
+
+    Returns '' for Relation, Link, and Connector nodes.
+    diagram_id must already be set on the node.
+    """
+    if node.node_type in ('Relation', 'Link', 'Connector'):
+        return ''
+
+    did = node.diagram_id
+    eid = escape_html(node.identifier) if node.identifier else ''
+    etxt = escape_html(node.text) if node.text else ''
+    opts = node.options
+
+    # Assumed Claim is rendered as an Assumption shape.
+    eff_type = 'Assumption' if (node.node_type == 'Claim' and 'assumed' in opts) else node.node_type
+
+    suffix = _gsn_assertion_suffix(eff_type, opts)
+
+    # Build decorator (only Assumption and Justification have one).
+    if eff_type == 'Assumption':
+        decorator = '&nbsp;Ⓐ'
+    elif eff_type == 'Justification':
+        decorator = '&nbsp;Ⓙ'
+    else:
+        decorator = ''
+
+    # Build inner label.
+    if eid and etxt:
+        inner = f'<b>{eid}</b>{decorator}<br>{etxt}{suffix}'
+    elif eid:
+        inner = f'<b>{eid}</b>{decorator}{suffix}'
+    elif etxt:
+        inner = f'{etxt}{suffix}'
+    else:
+        inner = suffix.removeprefix('<br>') if suffix else ''
+
+    # Shape mapping.
+    if eff_type in ('Assumption', 'Justification'):
+        shape = f'("{inner}")'
+    elif eff_type == 'Evidence':
+        shape = f'(("{inner}"))'
+    elif eff_type == 'Context':
+        shape = f'(["{inner}"])'
+    elif eff_type == 'Strategy':
+        shape = f'[/"{inner}"/]'
+    elif node.is_cited:
+        shape = f'[["{inner}"]]'
+    else:
+        shape = f'["{inner}"]'
+
+    abstract_cls = ':::gsnUndev' if 'abstract' in opts else ''
+    return f'    {did}{shape}{abstract_cls}'
+
+
+_GSN_HEADER = (
+    '```mermaid\n'
+    '---\n'
+    'config:\n'
+    '  theme: neutral\n'
+    '  flowchart:\n'
+    '    curve: linear\n'
+    '    htmlLabels: true\n'
+    '    rankSpacing: 60\n'
+    '    nodeSpacing: 45\n'
+    '    padding: 15\n'
+    '---\n'
+    'flowchart TD\n'
+    '    classDef invisible opacity:0\n'
+    '    classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;'
+)
+
+
+def _gsn_collect_edges(node, edge_lines, leaf_nodes):
+    """Collect GSN edges for *node* and its subtree (DFS pre-order).
+
+    Appends edge strings to edge_lines.  Nodes with no outgoing edges are
+    appended to leaf_nodes.
+    """
+    if node.node_type in ('Link', 'Relation'):
+        return
+    edges_before = len(edge_lines)
+    for child in node.children:
+        if child.node_type == 'Link':
+            if child.link_target is not None:
+                tgt = child.link_target
+                edge_lines.append(_edge_line(
+                    node.diagram_id, tgt.diagram_id,
+                    _gsn_is_incontextof(tgt),
+                    'counter' in child.options, False))
+        elif child.node_type == 'Connector':
+            for gc in child.children:
+                if gc.node_type == 'Link':
+                    if gc.link_target is not None:
+                        tgt = gc.link_target
+                        edge_lines.append(_edge_line(
+                            node.diagram_id, tgt.diagram_id,
+                            _gsn_is_incontextof(tgt),
+                            'counter' in gc.options, False))
+                else:
+                    edge_lines.append(_edge_line(
+                        node.diagram_id, gc.diagram_id,
+                        _gsn_is_incontextof(gc),
+                        'counter' in gc.options, False))
+                    _gsn_collect_edges(gc, edge_lines, leaf_nodes)
+        elif child.node_type == 'Relation':
+            rc = 'counter' in child.options
+            ra = 'abstract' in child.options
+            for gc in child.children:
+                if gc.node_type == 'Link':
+                    if gc.link_target is not None:
+                        tgt = gc.link_target
+                        edge_lines.append(_edge_line(
+                            node.diagram_id, tgt.diagram_id,
+                            _gsn_is_incontextof(tgt), rc, ra))
+                else:
+                    edge_lines.append(_edge_line(
+                        node.diagram_id, gc.diagram_id,
+                        _gsn_is_incontextof(gc), rc, ra))
+                    _gsn_collect_edges(gc, edge_lines, leaf_nodes)
+        else:
+            edge_lines.append(_edge_line(
+                node.diagram_id, child.diagram_id,
+                _gsn_is_incontextof(child),
+                'counter' in child.options, False))
+            _gsn_collect_edges(child, edge_lines, leaf_nodes)
+    if len(edge_lines) == edges_before:
+        leaf_nodes.append(node)
+
+
+def render_gsn(roots: List['Node'], base_url: str = '',
+               pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+    """Render package roots as a complete GSN/mermaid code block.
+
+    Returns the full mermaid fenced block (opening ```mermaid … closing ```).
+    The original nodes are not modified; a deep copy is used internally.
+    Output structure: header → node declarations (BFS) → click lines
+    → blank line → BottomPadding lines + edges (DFS pre-order).
+    """
+    roots = _copy_forest(roots)
+
+    # Node declarations (BFS) and click lines collected in a single pass.
+    node_decl_lines = []
+    click_lines = []
+    for node in _collect_bfs(roots):
+        decl = _gsn_node_decl(node)
+        if decl:
+            node_decl_lines.append(decl)
+        if node.node_type not in ('Relation', 'Link', 'Connector'):
+            url = _node_url(node, base_url, pkg_label)
+            if url:
+                click_lines.append(f'    click {node.diagram_id} "{url}"')
+
+    # Collect edges via DFS pre-order; track leaf nodes.
+    edge_lines: list = []
+    leaf_nodes: list = []
+    for root in roots:
+        _gsn_collect_edges(root, edge_lines, leaf_nodes)
+
+    # BottomPadding: all leaves link down to it (invisible node prevents
+    # diagram controls from obscuring the bottom).
+    bp_lines: list = []
+    first = True
+    seen: set = set()
+    for leaf in leaf_nodes:
+        if leaf.diagram_id not in seen:
+            seen.add(leaf.diagram_id)
+            bp = 'BottomPadding[ ]:::invisible' if first else 'BottomPadding'
+            bp_lines.append(f'    {leaf.diagram_id} ~~~ {bp}')
+            first = False
+    edge_lines = bp_lines + edge_lines
+
+    lines = [_GSN_HEADER]
+    lines.extend(node_decl_lines)
+    lines.extend(click_lines)
+    if edge_lines:
+        lines.append('')  # blank line between declarations and edges
+        lines.extend(edge_lines)
+    lines.append('```')
+    return '\n'.join(lines)
+
+
+def resolve_element(
+    element_id: Optional[str],
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    current_element: Optional[Node],
+) -> List[Node]:
+    """Return the list of nodes to render for the given element_id.
+
+    If element_id is given: look up in registry; call error() and return []
+    if not found.  If element_id is None: use current_element if set, else
+    return all_roots.  ('*' is handled at dispatch time before calling here.)
+    """
+    if element_id is not None:
+        node = registry.get(element_id)
+        if node is None:
+            error(f"element {element_id!r} not found in registry")
+            return []
+        return [node]
+    if current_element is not None:
+        return [current_element]
+    return list(all_roots)
+
+
+def render_all_packages(all_roots: List[Node], render_fn, base_url: str, config: dict) -> str:
+    """Render every package preceded by a configurable header.
+
+    Package blocks are separated by a blank line.
+    Header format: {pkg_header_prefix}{pkg_label}{id}{pkg_header_suffix}{content}
+    """
+    prefix = config.get('pkg_header_prefix', '### ')
+    suffix = config.get('pkg_header_suffix', '\n')
+    pkg_label = config.get('pkg_label', 'Package ')
+    blocks = []
+    for root in all_roots:
+        label = f"{pkg_label}{root.identifier}" if root.identifier else pkg_label.rstrip()
+        header = f"{prefix}{label}"
+        blocks.append(f"{header}{suffix}{render_fn([root], base_url, pkg_label)}")
+    return '\n\n'.join(blocks)
+
+
+_VALID_DISPLAY_TYPES = {'ltac/markdown', 'ltac/html', 'sacm/mermaid',
+                        'gsn/mermaid', 'statement', 'references', 'info'}
+
+
+def parse_selector(selector: str) -> Tuple[str, Optional[str]]:
+    """Parse a SELECTOR string into (display_type, element_id_or_None).
+
+    Format: 'display_type [element_id]'
+    An element_id of '*' is kept as the literal string '*'.
+    Calls error() on unknown display_type.
+    """
+    parts = selector.split(None, 1)
+    display_type = parts[0] if parts else ''
+    element_id: Optional[str] = parts[1].strip() if len(parts) > 1 else None
+    if display_type not in _VALID_DISPLAY_TYPES:
+        error(f"unknown selector type {display_type!r}")
+    return display_type, element_id
+
+
+def _render_or_all(
+    element_id: Optional[str],
+    all_roots: List[Node],
+    render_fn,
+    base_url: str,
+    registry: Dict[str, Node],
+    current_element: Optional[Node],
+    config: dict,
+) -> str:
+    """Resolve element_id and render, or render all packages if element_id is '*'."""
+    pkg_label = config.get('pkg_label', 'Package ')
+    if element_id == '*':
+        return render_all_packages(all_roots, render_fn, base_url, config)
+    nodes = resolve_element(element_id, registry, all_roots, current_element)
+    return render_fn(nodes, base_url, pkg_label)
+
+
+def render_selector(
+    selector: str,
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    config: dict,
+    id_info: Dict[str, dict],
+    current_element: Optional[Node] = None,
+) -> str:
+    """Parse SELECTOR and return the rendered string.
+
+    Dispatches to the appropriate renderer based on display_type.
+    Returns '' if the display_type is unknown (error already reported).
+    """
+    display_type, element_id = parse_selector(selector)
+    base_url = config.get('markdown_base_url', '')
+
+    if display_type == 'sacm/mermaid':
+        sacm_base_url = config.get('base_url', '')
+        return _render_or_all(element_id, all_roots, render_sacm, sacm_base_url, registry, current_element, config)
+
+    if display_type == 'gsn/mermaid':
+        gsn_base_url = config.get('base_url', '')
+        return _render_or_all(element_id, all_roots, render_gsn,
+                              gsn_base_url, registry, current_element, config)
+
+    if display_type == 'ltac/markdown':
+        return _render_or_all(element_id, all_roots, render_markdown, base_url, registry, current_element, config)
+
+    if display_type == 'ltac/html':
+        return _render_or_all(element_id, all_roots, render_html, base_url, registry, current_element, config)
+
+    # statement, references, info operate on a single node
+    if element_id == '*':
+        error(f"'*' is not valid with the '{display_type}' selector")
+        return ''
+    nodes = resolve_element(element_id, registry, all_roots, current_element)
+    if not nodes:
+        return ''
+    node = nodes[0]
+    if display_type == 'statement':
+        return render_statement(node)
+    if display_type == 'references':
+        return render_references(node, all_roots, id_info, config)
+    if display_type == 'info':
+        return render_statement(node) + '\n\n' + render_references(node, all_roots, id_info, config)
+
+    return ''
+
+
+# ---------------------------------------------------------------------------
+# Document processor
+# ---------------------------------------------------------------------------
+
+# Matches '<!-- ltac SELECTOR -->' lines (SELECTOR is captured in group 1).
+_LTAC_REGION_RE = re.compile(r'^<!--\s*ltac\s+(.+?)\s*-->\s*$')
+
+# Matches any Markdown header line; group 1 = hashes, group 2 = heading text.
+_HEADER_RE = re.compile(r'^(#+) (.+)')
+
+# Matches an HTML header line; group 1 = level digit, group 2 = inner content.
+_HTML_HEADER_RE = re.compile(r'^<h([1-6])(?:\s[^>]*)?>(.+?)</h\1>', re.IGNORECASE)
+
+# Element type names that can appear as the first word of an LTAC header.
+# The package type word (from pkg_label) is checked separately since it is configurable.
+_ELEMENT_TYPE_NAMES = frozenset({
+    'Claim', 'Strategy', 'Evidence',
+    'Justification', 'Context', 'Assumption',
+})
+
+# Parses 'TYPE ID' or 'TYPE ID: statement' from a header string.
+# Group 1 = type word, group 2 = identifier, group 3 = statement (may be absent).
+_HEADER_TEXT_RE = re.compile(r'^(\S+)\s+([^:\s]+)(?::\s*(.+))?$')
+
+
+def _parse_header_text(
+    header_text: str, pkg_label: str
+) -> Optional[Tuple[str, str, str]]:
+    """Parse an LTAC element header into (type, identifier, statement).
+
+    Recognises 'TYPE ID' and 'TYPE ID: statement' where TYPE is either the
+    package type word (pkg_label stripped of trailing whitespace) or one of
+    the element type names.  Returns None if the header is not LTAC-shaped.
+    """
+    m = _HEADER_TEXT_RE.match(header_text.strip())
+    if not m:
+        return None
+    type_str = m.group(1)
+    ident = m.group(2)
+    statement = (m.group(3) or '').strip()
+    if type_str not in _ELEMENT_TYPE_NAMES and type_str != pkg_label.rstrip():
+        return None
+    return (type_str, ident, statement)
+
+
+def _consume_region(line_iter, filename: str, start_lineno: int, selector: str) -> bool:
+    """Consume lines from line_iter until '<!-- end ltac -->', return True if found.
+
+    If EOF is reached before finding the end marker, calls error() and returns False.
+    """
+    for _, line in line_iter:
+        if line.strip() == '<!-- end ltac -->':
+            return True
+    error(f"{filename}:{start_lineno}: unclosed '<!-- ltac {selector} -->' region")
+    return False
+
+
+def process_document_stream(
+    f,
+    out,
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    config: dict,
+    id_info: Dict[str, dict],
+    seen_headers: set,
+) -> None:
+    """Process a document file line by line, replacing ltac selector regions.
+
+    Writes all output to `out`.  Updates `seen_headers` with identifiers of
+    LTAC elements encountered as Markdown headers.  Uses the already-loaded
+    registry and all_roots; performs no LTAC parsing.
+    """
+    current_element: Optional[Node] = None
+    filename = getattr(f, 'name', '<stream>')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
+    line_iter = enumerate(f, 1)
+    for lineno, line in line_iter:
+        text = line.rstrip('\r\n')
+
+        m = _LTAC_REGION_RE.match(text)
+        if m:
+            selector = m.group(1)
+            found_end = _consume_region(line_iter, filename, lineno, selector)
+            rendered = render_selector(selector, registry, all_roots, config, id_info, current_element)
+            out.write(text + '\n')
+            if found_end:
+                if rendered:
+                    out.write(rendered + '\n')
+                out.write('<!-- end ltac -->\n')
+            continue
+
+        header_text = None
+        hm = _HEADER_RE.match(text)
+        if hm:
+            header_text = hm.group(2).strip()
+        else:
+            hm = _HTML_HEADER_RE.match(text)
+            if hm:
+                header_text = hm.group(2).strip()
+
+        if header_text is not None:
+            parsed = _parse_header_text(header_text, pkg_label)
+            if parsed is not None:
+                type_str, ident, stmt = parsed
+                node = registry.get(ident)
+                if node is not None:
+                    current_element = node
+                    seen_headers.add(ident)
+                if ident not in id_info:
+                    warn(f"{filename}:{lineno}: header '{type_str} {ident}'"
+                         f" not found in LTAC")
+                else:
+                    ltac_stmt = id_info[ident].get('statement') or ''
+                    if stmt and ltac_stmt and stmt != ltac_stmt:
+                        warn(f"{filename}:{lineno}: '{ident}': header statement"
+                             f" {stmt!r} differs from LTAC {ltac_stmt!r}")
+
+        out.write(text + '\n')
+
+
+# ---------------------------------------------------------------------------
+# CLI helpers
+# ---------------------------------------------------------------------------
+
+def parse_args() -> argparse.Namespace:
+    """Build the argument parser, define all flags, and parse the command line."""
+    parser = argparse.ArgumentParser(
+        prog='caseproc',
+        description='Process LTAC assurance-case files and inject rendered'
+                    ' views into Markdown/HTML documents.',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""\
+Selectors (--select TYPE [ID | *]):
+  ltac/markdown  ID|*   render as an indented Markdown bullet list
+  ltac/html      ID|*   render as a nested HTML list
+  sacm/mermaid   ID|*   render as a SACM Mermaid flowchart
+  statement      ID     one-line statement for an element
+  references     ID     Markdown links to packages that reference the element
+  info           ID     statement followed by references
+  Omit ID to use the element set by the nearest preceding header (filter mode).
+  Use * to render all packages (ltac/* and sacm/mermaid only).
+
+Validations on the LTAC file (always):
+  - Claim/Strategy must not appear under Evidence, Context, or Assumption
+  - Each identifier must be declared (no ^ prefix) exactly once
+  - Statement text must be consistent across all uses of the same identifier
+  - SACM assertion status must be unambiguous (spec section 11)
+  - Cited identifiers (^ID) must have a matching declaration in the loaded LTAC
+  - Explicit citation packages (^[PkgName] ID): package must be loaded and must declare ID
+
+Additional checks when document files are provided:
+  - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
+    unknown ID (not in LTAC) and mismatched statement text are flagged
+  - Every declared LTAC element should have a corresponding document header
+
+Configuration keys (--config FILE, JSON object):
+  base_url           base URL for hyperlinks in sacm/mermaid output (default: "")
+  markdown_base_url  base URL for hyperlinks in ltac/markdown and ltac/html output (default: "")
+  pkg_label          word used to identify packages in headers and output (default: "Package ")
+  pkg_header_prefix  string prepended to each package header when rendering * (default: "### ")
+  pkg_header_suffix  string appended after each package header when rendering * (default: newline)
+
+For full details see docs/design-spec.md.""",
+    )
+    parser.add_argument(
+        '--config', type=str, metavar='FILE',
+        help='path to a JSON file containing configuration key/value pairs',
+    )
+    parser.add_argument(
+        '--error', action='store_true',
+        help='treat warnings as errors (non-zero exit on any warning)',
+    )
+    parser.add_argument(
+        '--ltac', '-l', type=str, metavar='FILENAME',
+        help='LTAC file to load (default: case.ltac or docs/case.ltac)',
+    )
+    parser.add_argument(
+        'files', nargs='*',
+        help='Markdown/HTML files to process (default: stdin)',
+    )
+
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument(
+        '--validate', action='store_true',
+        help='validate and report warnings/errors; do not produce output',
+    )
+    mode.add_argument(
+        '--select', '-s', type=str, metavar='SELECTOR',
+        help='render SELECTOR to stdout and exit (see selector table below)',
+    )
+    mode.add_argument(
+        '--inline', '-i', action='store_true',
+        help='rewrite each file in place with updated marked regions',
+    )
+    mode.add_argument(
+        '--selftest', action='store_true',
+        help='run the built-in doctest suite and exit (0 = all pass, 1 = any fail)',
+    )
+
+    return parser.parse_args()
+
+
+def find_ltac_file(ltac_arg: Optional[str]) -> str:
+    """Determine the path of the LTAC file to load.
+
+    If --ltac was given, use that path directly.
+    Otherwise try case.ltac in the current directory, then docs/case.ltac.
+    Calls panic() (and exits) if no file can be found.
+    """
+    if ltac_arg:
+        return ltac_arg
+    if os.path.exists('case.ltac'):
+        return 'case.ltac'
+    if os.path.exists('docs/case.ltac'):
+        return 'docs/case.ltac'
+    panic("no LTAC file found; use --ltac or create case.ltac")
+
+
+# SACM spec section 11 defines AssertionStatus as a mutually exclusive
+# enumeration: Asserted (default), NeedsSupport, Assumed, Axiomatic, Defeated,
+# AsCited.  An Assumption node implicitly carries Assumed; a cross-citation
+# (^[PkgName]) implicitly carries AsCited.
+def check_assertion_status(registry: Dict[str, Node]) -> None:
+    """Error if any node carries more than one SACM assertion status.
+
+    SACM spec section 11 defines AssertionStatus as a mutually exclusive
+    enumeration with six values: Asserted (default, no option needed),
+    NeedsSupport, Assumed, Axiomatic, Defeated, AsCited.
+    """
+    for node in registry.values():
+        active = []
+        if node.node_type == 'Assumption' or 'assumed' in node.options:
+            active.append('Assumed')
+        if 'needssupport' in node.options:
+            active.append('NeedsSupport')
+        if 'axiomatic' in node.options:
+            active.append('Axiomatic')
+        if 'defeated' in node.options:
+            active.append('Defeated')
+        if node.is_cited:
+            active.append('AsCited')
+        if len(active) >= 2:
+            label = node.identifier or f'(unnamed {node.node_type})'
+            error(f"{label}: conflicting assertion status: {', '.join(active)}"
+                  f" (SACM spec section 11: Asserted/NeedsSupport/Assumed/"
+                  f"Axiomatic/Defeated/AsCited are mutually exclusive)")
+
+
+def check_id_info(id_info: Dict[str, dict], all_roots: List[Node],
+                  pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
+    """Validate identifier usage across the loaded LTAC.
+
+    Uses the id_info table built during parsing (see LTACParser) to report:
+    - IDs cited (^) but never declared (may indicate a missing package)
+    - Explicit citation packages (^[PkgName]) that are not loaded
+    - Explicit citation packages where the ID is not declared in that package
+    """
+    pkg_root_ids = {root.identifier for root in all_roots if root.identifier}
+    for ident, info in id_info.items():
+        if info['citations'] > 0 and info['declarations'] == 0:
+            warn(f"{ident}: cited but never declared")
+        for pkg in sorted(info['cited_pkgs']):
+            if pkg not in pkg_root_ids:
+                warn(f"{ident}: cited package {pkg!r} not found in loaded LTAC")
+            elif info['decl_pkg_id'] is not None and info['decl_pkg_id'] != pkg:
+                warn(f"{ident}: cited as belonging to '{pkg_label}{pkg}'"
+                     f" but declared in '{pkg_label}{info['decl_pkg_id']}'")
+
+
+def _process_files(
+    files: List[str],
+    out,
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    config: dict,
+    id_info: Dict[str, dict],
+    seen_headers: set,
+) -> None:
+    """Open each file and call process_document_stream; fall back to stdin if none given."""
+    if files:
+        for path in files:
+            try:
+                with open(path) as f:
+                    process_document_stream(f, out, registry, all_roots, config, id_info, seen_headers)
+            except OSError as e:
+                error(f"cannot open {path!r}: {e}")
+    else:
+        process_document_stream(sys.stdin, out, registry, all_roots, config, id_info, seen_headers)
+
+
+def _check_header_coverage(registry: Dict[str, Node], seen_headers: set) -> None:
+    """Warn about every registry element with no corresponding Markdown header."""
+    for ident in registry:
+        if ident not in seen_headers:
+            warn(f"element {ident} has no corresponding header in any processed file")
+
+
+def _inline_rewrite_file(
+    path: str,
+    registry: Dict[str, Node],
+    all_roots: List[Node],
+    config: dict,
+    id_info: Dict[str, dict],
+    seen_headers: set,
+) -> None:
+    """Process a single file in --inline mode, rewriting it atomically if content changed.
+
+    Reads the file, renders all ltac regions, and writes back only if the content
+    differs.  Leaves the file unchanged if any processing errors occur.
+    """
+    global _had_error
+    error_before = _had_error
+    try:
+        with open(path) as f:
+            original = f.read()
+    except OSError as e:
+        error(f"cannot open {path!r}: {e}")
+        return
+    buf = io.StringIO()
+    with io.StringIO(original) as src:
+        process_document_stream(src, buf, registry, all_roots, config, id_info, seen_headers)
+    if _had_error and not error_before:
+        # Errors occurred while processing this file; leave it untouched.
+        return
+    new_content = buf.getvalue()
+    if new_content == original:
+        return  # No change; skip the write.
+    dir_ = os.path.dirname(os.path.abspath(path))
+    try:
+        fd, tmp = tempfile.mkstemp(dir=dir_)
+        try:
+            with os.fdopen(fd, 'w') as tf:
+                tf.write(new_content)
+            os.replace(tmp, path)
+        except Exception:
+            try:
+                os.unlink(tmp)
+            except OSError:
+                pass
+            raise
+    except OSError as e:
+        error(f"cannot write {path!r}: {e}")
+
+
+def run_selftests() -> None:
+    """Run all doctests embedded in this module and exit.
+
+    Exits with code 0 if every test passes, 1 if any fail.
+    Failed tests are shown with ndiff output so differences are easy to spot.
+    """
+    import doctest
+    failures, _ = doctest.testmod(optionflags=doctest.REPORT_NDIFF)
+    sys.exit(0 if failures == 0 else 1)
+
+
+def main() -> None:
+    """Entry point: parse arguments, load configuration and LTAC data, then dispatch."""
+    global _strict
+
+    args = parse_args()
+
+    if args.selftest:
+        run_selftests()
+        return  # run_selftests() calls sys.exit(); this is a safety net
+
+    if args.error:
+        _strict = True
+
+    config = load_config(args.config)
+
+    all_roots: List[Node] = []
+    registry: Dict[str, Node] = {}
+    id_info: Dict[str, dict] = {}
+
+    ltac_path = find_ltac_file(args.ltac)
+    load_ltac_file(ltac_path, all_roots, registry, id_info)
+
+    check_assertion_status(registry)
+    check_id_info(id_info, all_roots, config.get('pkg_label', 'Package '))
+
+    if args.select:
+        result = render_selector(args.select, registry, all_roots, config, id_info)
+        if result:
+            print(result)
+    elif args.validate:
+        if args.files:
+            _process_files(args.files, io.StringIO(), registry, all_roots, config, id_info, set())
+    elif args.inline:
+        seen_headers: set = set()
+        for path in args.files:
+            _inline_rewrite_file(path, registry, all_roots, config, id_info, seen_headers)
+        _check_header_coverage(registry, seen_headers)
+    else:
+        seen_headers: set = set()
+        _process_files(args.files, sys.stdout, registry, all_roots, config, id_info, seen_headers)
+        _check_header_coverage(registry, seen_headers)
+
+    if _had_error:
+        sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()

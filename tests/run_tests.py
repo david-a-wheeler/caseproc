@@ -190,6 +190,14 @@ class TestSelectSacm(unittest.TestCase):
                          read_fixture('doc-simple.stderr.txt'))
 
 
+class TestSelectGsn(unittest.TestCase):
+    def test_select_gsn_mermaid(self):
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'gsn/mermaid')
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'simple.gsn.mermaid.expected.md')
+        self.assertEqual(actual, read_fixture('simple.gsn.mermaid.expected.md'))
+
+
 class TestBadgeappDoc(unittest.TestCase):
     def test_badgeapp_doc_filter_mode(self):
         """Filter mode renders all three packages via sacm/mermaid * with correct
