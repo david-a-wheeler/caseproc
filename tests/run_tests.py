@@ -12,6 +12,17 @@ tests/results/ with the same filename as the fixture.  Results that
 match are removed from that directory so only failures accumulate.
 Run the top-level `accept` script to promote all saved results to
 their corresponding fixtures.
+
+Fixture naming conventions (tests/fixtures/):
+  <name>.ltac                            LTAC input file
+  <name>-input.md                        Markdown/HTML document input file
+  <name>-output.expected.md              Expected stdout when processing <name>-input.md
+  <name>-stderr.expected.txt             Expected stderr for a <name> scenario
+  <ltac>.<selector>.expected.md          Expected stdout for --select <selector> on <ltac>.ltac
+  <ltac>.<selector>.stderr.expected.txt  Expected stderr for --select <selector> on <ltac>.ltac
+Only input files carry "input" in their name; all expected files carry
+"expected".  Inline tests copy the input fixture to a temporary file
+before running --inline, so the fixture itself is never modified.
 """
 
 import os
@@ -127,16 +138,16 @@ class TestSelectMarkdown(unittest.TestCase):
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
         """Default mode replaces stale caseproc regions and passes other lines through."""
-        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
+        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(check(result.stdout, 'doc-simple.expected.md'),
-                         read_fixture('doc-simple.expected.md'))
-        self.assertEqual(check(result.stderr, 'doc-simple.stderr.txt'),
-                         read_fixture('doc-simple.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'doc-simple-output.expected.md'),
+                         read_fixture('doc-simple-output.expected.md'))
+        self.assertEqual(check(result.stderr, 'doc-simple-stderr.expected.txt'),
+                         read_fixture('doc-simple-stderr.expected.txt'))
 
     def test_validate_exits_zero_no_stdout(self):
         """--validate produces no stdout and exits 0 for a well-formed document."""
-        result = run('--ltac', fixture('simple.ltac'), '--validate', fixture('doc-simple.md'))
+        result = run('--ltac', fixture('simple.ltac'), '--validate', fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, '')
         self.assertEqual(result.stderr, '')
@@ -149,7 +160,7 @@ class TestDefaultMode(unittest.TestCase):
 
     def test_header_coverage_warning(self):
         """Elements without a matching Markdown header produce warnings; --error makes exit non-zero."""
-        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'), '--error')
+        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple-input.md'), '--error')
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('no corresponding header', result.stderr)
 
@@ -177,17 +188,17 @@ class TestSelectSacm(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         self.assertEqual(check(result.stdout, 'badgeapp-top.sacm.mermaid.expected.md'),
                          read_fixture('badgeapp-top.sacm.mermaid.expected.md'))
-        self.assertEqual(check(result.stderr, 'badgeapp-top.sacm.mermaid.stderr.txt'),
-                         read_fixture('badgeapp-top.sacm.mermaid.stderr.txt'))
+        self.assertEqual(check(result.stderr, 'badgeapp-top.sacm.mermaid.stderr.expected.txt'),
+                         read_fixture('badgeapp-top.sacm.mermaid.stderr.expected.txt'))
 
     def test_filter_mode_with_sacm_region(self):
-        """Default mode correctly replaces a sacm/mermaid region in doc-simple.md."""
-        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple.md'))
+        """Default mode correctly replaces a sacm/mermaid region in doc-simple-input.md."""
+        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(check(result.stdout, 'doc-simple.expected.md'),
-                         read_fixture('doc-simple.expected.md'))
-        self.assertEqual(check(result.stderr, 'doc-simple.stderr.txt'),
-                         read_fixture('doc-simple.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'doc-simple-output.expected.md'),
+                         read_fixture('doc-simple-output.expected.md'))
+        self.assertEqual(check(result.stderr, 'doc-simple-stderr.expected.txt'),
+                         read_fixture('doc-simple-stderr.expected.txt'))
 
 
 class TestSelectGsn(unittest.TestCase):
@@ -204,10 +215,10 @@ class TestBadgeappDoc(unittest.TestCase):
         BottomPadding targets, click lines for evidence URLs, and context edges."""
         result = run('--ltac', fixture('badgeapp-doc.ltac'), fixture('badgeapp-doc-input.md'))
         self.assertEqual(result.returncode, 0)
-        self.assertEqual(check(result.stdout, 'badgeapp-doc-input.expected.md'),
-                         read_fixture('badgeapp-doc-input.expected.md'))
-        self.assertEqual(check(result.stderr, 'badgeapp-doc-input.stderr.txt'),
-                         read_fixture('badgeapp-doc-input.stderr.txt'))
+        self.assertEqual(check(result.stdout, 'badgeapp-doc-output.expected.md'),
+                         read_fixture('badgeapp-doc-output.expected.md'))
+        self.assertEqual(check(result.stderr, 'badgeapp-doc-stderr.expected.txt'),
+                         read_fixture('badgeapp-doc-stderr.expected.txt'))
 
 
 class TestConfig(unittest.TestCase):
@@ -289,10 +300,10 @@ class TestInlineMode(unittest.TestCase):
             result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
-            self.assertEqual(check(result.stderr, 'inline-expected.stderr.txt'),
-                             read_fixture('inline-expected.stderr.txt'))
-            self.assertEqual(check(read_file(tmp), 'inline-expected.md'),
-                             read_fixture('inline-expected.md'))
+            self.assertEqual(check(result.stderr, 'inline-stderr.expected.txt'),
+                             read_fixture('inline-stderr.expected.txt'))
+            self.assertEqual(check(read_file(tmp), 'inline-output.expected.md'),
+                             read_fixture('inline-output.expected.md'))
         finally:
             os.unlink(tmp)
 
@@ -305,11 +316,11 @@ class TestInlineMode(unittest.TestCase):
             result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
-            self.assertEqual(check(result.stderr, 'inline-expected.stderr.txt'),
-                             read_fixture('inline-expected.stderr.txt'))
+            self.assertEqual(check(result.stderr, 'inline-stderr.expected.txt'),
+                             read_fixture('inline-stderr.expected.txt'))
             self.assertEqual(os.path.getmtime(tmp), mtime_after_first)
-            self.assertEqual(check(read_file(tmp), 'inline-expected.md'),
-                             read_fixture('inline-expected.md'))
+            self.assertEqual(check(read_file(tmp), 'inline-output.expected.md'),
+                             read_fixture('inline-output.expected.md'))
         finally:
             os.unlink(tmp)
 
@@ -333,8 +344,8 @@ class TestUpdate(unittest.TestCase):
         r = run('--ltac', fixture('simple.ltac'), '--update',
                 fixture('update-input.md'))
         self.assertEqual(r.returncode, 0)
-        actual = check(r.stdout, 'update-expected.md')
-        self.assertEqual(actual, read_fixture('update-expected.md'))
+        actual = check(r.stdout, 'update-output.expected.md')
+        self.assertEqual(actual, read_fixture('update-output.expected.md'))
         self.assertIn('updated Claim C1:', r.stderr)
         self.assertIn('Wrong statement here', r.stderr)
         self.assertIn('acceptably safe', r.stderr)
