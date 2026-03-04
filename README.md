@@ -67,6 +67,28 @@ As a result,
 you can simply run the process with a sequence of markdown filenames,
 and it will update the documents directly.
 
+## Handling evolution
+
+Assurance cases evolve.
+Claims get refined, strategies get renamed,
+and statement wording gets clarified.
+If you *purely* do this in a document, the diagrams and document
+headings easily go out of sync, and there's no hint that there's a problem.
+One of the advantages of a database-based tool is that when a
+statement is changed, it's immediately updated everywhere.
+
+When a document header such as `## Claim C1: Old wording` no longer
+matches the authoritative statement in the LTAC file,
+`caseproc` normally warns about the discrepancy.
+That warning is useful for catching accidental drift.
+But when you have *intentionally* updated the LTAC and simply want
+all the document headers to catch up automatically,
+its `--update` flag (and matching configuration flag) does exactly that:
+it rewrites every stale header statement to match the LTAC,
+treating the LTAC as the authoritative source.
+A notification is printed to stderr for each header changed,
+so you always have a clear record of what was updated and why.
+
 ## Pros and Cons
 
 The big pro of this approach is that it takes very little time to

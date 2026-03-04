@@ -52,6 +52,7 @@ DEFAULT_CONFIG = {
     'pkg_header_prefix': '### ',
     'pkg_header_suffix': '\n',
     'pkg_label': 'Package ',
+    'update': False,
 }
 
 
@@ -1408,6 +1409,7 @@ def process_document_stream(
     current_element: Optional[Node] = None
     filename = getattr(f, 'name', '<stream>')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
+    do_update = config.get('update', False)
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
@@ -1425,9 +1427,11 @@ def process_document_stream(
             continue
 
         header_text = None
+        is_markdown_header = False
         hm = _HEADER_RE.match(text)
         if hm:
             header_text = hm.group(2).strip()
+            is_markdown_header = True
         else:
             hm = _HTML_HEADER_RE.match(text)
             if hm:
@@ -1447,8 +1451,18 @@ def process_document_stream(
                 else:
                     ltac_stmt = id_info[ident].get('statement') or ''
                     if stmt and ltac_stmt and stmt != ltac_stmt:
-                        warn(f"{filename}:{lineno}: '{ident}': header statement"
-                             f" {stmt!r} differs from LTAC {ltac_stmt!r}")
+                        if do_update and node is not None:
+                            new_header_text = f"{type_str} {ident}: {ltac_stmt}"
+                            if is_markdown_header:
+                                text = f"{hm.group(1)} {new_header_text}"
+                            else:
+                                level = hm.group(1)
+                                text = f"<h{level}>{new_header_text}</h{level}>"
+                            notify(f"{filename}:{lineno}: updated {type_str} {ident}:"
+                                   f" {stmt!r} -> {ltac_stmt!r}")
+                        else:
+                            warn(f"{filename}:{lineno}: '{ident}': header statement"
+                                 f" {stmt!r} differs from LTAC {ltac_stmt!r}")
 
         out.write(text + '\n')
 
@@ -1494,6 +1508,7 @@ Configuration keys (--config FILE, JSON object):
   pkg_label          word used to identify packages in headers and output (default: "Package ")
   pkg_header_prefix  string prepended to each package header when rendering * (default: "### ")
   pkg_header_suffix  string appended after each package header when rendering * (default: newline)
+  update             if true, rewrite stale headers instead of warning (default: false)
 
 For full details see docs/design-spec.md.""",
     )
@@ -1504,6 +1519,10 @@ For full details see docs/design-spec.md.""",
     parser.add_argument(
         '--error', action='store_true',
         help='treat warnings as errors (non-zero exit on any warning)',
+    )
+    parser.add_argument(
+        '--update', action='store_true',
+        help='update document headers whose statement differs from the LTAC',
     )
     parser.add_argument(
         '--ltac', '-l', type=str, metavar='FILENAME',
@@ -1702,6 +1721,8 @@ def main() -> None:
         _strict = True
 
     config = load_config(args.config)
+    if args.update:
+        config['update'] = True
 
     all_roots: List[Node] = []
     registry: Dict[str, Node] = {}

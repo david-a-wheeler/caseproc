@@ -327,5 +327,25 @@ class TestInlineMode(unittest.TestCase):
             os.unlink(tmp)
 
 
+class TestUpdate(unittest.TestCase):
+    def test_update_header_statement(self):
+        """--update rewrites a stale header statement to match the LTAC."""
+        r = run('--ltac', fixture('simple.ltac'), '--update',
+                fixture('update-input.md'))
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'update-expected.md')
+        self.assertEqual(actual, read_fixture('update-expected.md'))
+        self.assertIn('updated Claim C1:', r.stderr)
+        self.assertIn('Wrong statement here', r.stderr)
+        self.assertIn('acceptably safe', r.stderr)
+
+    def test_no_update_without_flag(self):
+        """Without --update, a stale header still produces a warning, not a rewrite."""
+        r = run('--ltac', fixture('simple.ltac'), fixture('update-input.md'))
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('differs from LTAC', r.stderr)
+        self.assertIn('Wrong statement here', r.stdout)
+
+
 if __name__ == '__main__':
     unittest.main()
