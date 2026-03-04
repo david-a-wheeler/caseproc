@@ -1483,24 +1483,30 @@ Selectors (--select TYPE [ID | *]):
   ltac/markdown  ID|*   render as an indented Markdown bullet list
   ltac/html      ID|*   render as a nested HTML list
   sacm/mermaid   ID|*   render as a SACM Mermaid flowchart
+  gsn/mermaid    ID|*   render as a GSN Mermaid flowchart
   statement      ID     one-line statement for an element
   references     ID     Markdown links to packages that reference the element
   info           ID     statement followed by references
   Omit ID to use the element set by the nearest preceding header (filter mode).
-  Use * to render all packages (ltac/* and sacm/mermaid only).
+  Use * to render all packages (ltac/*, sacm/mermaid, and gsn/mermaid only).
+
+In documents, use <!-- ltac SELECTOR --> ... <!-- end ltac -->
+to surround where these go.
 
 Validations on the LTAC file (always):
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
   - Statement text must be consistent across all uses of the same identifier
   - SACM assertion status must be unambiguous (spec section 11)
-  - Cited identifiers (^ID) must have a matching declaration in the loaded LTAC
-  - Explicit citation packages (^[PkgName] ID): package must be loaded and must declare ID
+  - Cited identifiers (^ID) must have a matching declaration
+  - Explicit citation packages (^[PkgName] ID): package must declare ID
 
 Additional checks when document files are provided:
   - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
-    unknown ID (not in LTAC) and mismatched statement text are flagged
-  - Every declared LTAC element should have a corresponding document header
+    unknown ID (not in LTAC) is flagged. Mismatched statement text are
+    flagged (if "update" is false) or updated (if "update" is true).
+  - Every declared LTAC element must have a corresponding document header
+    (else they are flagged)
 
 Configuration keys (--config FILE, JSON object):
   base_url           base URL for hyperlinks in sacm/mermaid output (default: "")
