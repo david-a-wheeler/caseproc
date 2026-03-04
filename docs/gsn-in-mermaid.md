@@ -327,9 +327,41 @@ G1 -.-> G2
 G1 -.-o X1
 ```
 
+### Relation nodes
+
+A `Relation` element produces no GSN graphical node.
+Its children connect directly to the Relation's parent.
+The Relation's `{counter}` and `{abstract}` options are applied to
+those edges (same effect as placing those options directly on the child).
+All other options on a Relation (assertion state options such as
+`{defeated}`, `{needsSupport}`, etc.) have no GSN graphical equivalent
+and are ignored.
+
+For example:
+
+```ltac
+- Claim G1: ...
+  - Relation R1 {counter}
+    - Claim G2: ...
+```
+
+produces:
+
+```
+G1 -->|⊖| G2
+```
+
 ## Special assertion states
 
-These reuse the LTAC options established for SACM wherever equivalent.
+### General translation principle
+
+LTAC options are translated to `gsn/mermaid` output only when there is
+a natural, obvious mapping to a GSN graphical element or edge style.
+Options with no GSN graphical equivalent are **silently ignored** rather
+than approximated with SACM-borrowed conventions that would be
+unfamiliar to GSN readers.
+The goal is to capture in the diagram whatever information the LTAC
+source expresses, as faithfully as GSN notation allows.
 
 ### Undeveloped / NeedsSupport (`{needsSupport}`)
 
@@ -366,27 +398,28 @@ the element; `✗` is the closest inline text approximation.
 G2["<b>G2</b><br>Defeated goal statement<br>✗"]
 ```
 
+### Assumed (`{assumed}` on a Claim)
+
+A Claim carrying `{assumed}` is rendered as an **Assumption** rather
+than a Goal: rounded-rectangle shape with Ⓐ decorator and an
+InContextOf (`--o`) edge to its parent, instead of the usual Goal
+rectangle and SupportedBy (`-->`) edge.
+
+GSN has a dedicated Assumption element type for exactly this semantic,
+so using it is the natural mapping.
+
+```
+A1("<b>A1</b> Ⓐ<br>Accepted without argument")
+```
+
+The `{assumed}` option on any other element type has no GSN graphical
+equivalent and is ignored.
+
 ### Axiomatic (`{axiomatic}`)
 
-Append `━━━` suffix (same as SACM).
-GSN has no direct axiomatic concept, but the option is kept for
-consistency with SACM workflows where the same LTAC source is rendered
-in both notations.
-
-```
-G1["<b>G1</b><br>Safety-critical property<br>━━━"]
-```
-
-### Assumed (`{assumed}`)
-
-Append `ASSUMED` suffix (same as SACM).
-Normally not needed on Assumption nodes (those always carry the
-Ⓐ decorator), but can be applied to a Goal that is accepted without
-argument.
-
-```
-G1["<b>G1</b><br>Accepted without argument<br>ASSUMED"]
-```
+GSN has no axiomatic concept and no corresponding graphical notation.
+This option is **ignored** in `gsn/mermaid` output.
+(In SACM/mermaid it appends `━━━`.)
 
 ### Abstract / Uninstantiated (`{abstract}`)
 
@@ -419,20 +452,30 @@ A summary:
 
 The following LTAC `{options}` apply to `gsn/mermaid` output.
 
-| Option | Effect | SACM equivalent |
-|---|---|---|
-| *(default)* | Normal node | asserted |
-| `needsSupport` | Appends `◇` (undeveloped diamond) | Appends `...` |
-| `defeated` | Appends `✗` | Same |
-| `axiomatic` | Appends `━━━` | Same |
-| `assumed` | Appends `ASSUMED` | Same |
-| `abstract` | Dashed border (`:::gsnUndev`) | `:::abstractClaim` |
-| `asCited` / `^` prefix | Double-bracket `[[ ]]` shape | Same |
-| `counter` | `|⊖|` edge label | Same |
-| `isCounter` | Alias for `counter` | Same |
+Options that have a natural GSN graphical mapping are translated;
+all others are silently ignored.
 
-The SACM-specific `metaClaim` option has no GSN equivalent and is ignored
-when rendering `gsn/mermaid`.
+**Translated options:**
+
+| Option | Effect in `gsn/mermaid` | SACM/mermaid comparison |
+|---|---|---|
+| `needsSupport` | Appends `◇` (undeveloped diamond) | Appends `...` |
+| `defeated` | Appends `✗` to label | Same |
+| `assumed` on a Claim | Renders as Assumption shape + InContextOf edge | Appends `ASSUMED` |
+| `abstract` on a node | Dashed border (`:::gsnUndev`) | `:::abstractClaim` |
+| `abstract` on a Relation | Dashed edge (`-.->` / `-.-o`) | Same |
+| `asCited` / `^` prefix | Double-bracket `[[ ]]` shape | Same |
+| `counter` / `isCounter` | `\|⊖\|` label on edge | Same |
+| `counter` on a Relation | `\|⊖\|` label on children's edges | Same |
+
+**Ignored options (no GSN graphical equivalent):**
+
+| Option | SACM/mermaid behaviour |
+|---|---|
+| `axiomatic` | Appends `━━━` |
+| `assumed` on non-Claim nodes | Appends `ASSUMED` |
+| `metaClaim` | Affects sacmDot grouping |
+| Assertion state options on `Relation` | Varies |
 
 ## Complete LTAC → GSN/mermaid example
 
