@@ -355,13 +355,16 @@ G1 -->|⊖| G2
 
 ### General translation principle
 
-LTAC options are translated to `gsn/mermaid` output only when there is
-a natural, obvious mapping to a GSN graphical element or edge style.
-Options with no GSN graphical equivalent are **silently ignored** rather
-than approximated with SACM-borrowed conventions that would be
-unfamiliar to GSN readers.
 The goal is to capture in the diagram whatever information the LTAC
 source expresses, as faithfully as GSN notation allows.
+
+Where a GSN graphical notation exists (a shape, decorator, or edge style),
+we use it.
+Where no GSN graphical notation exists but the information is still worth
+conveying, we fall back to a plain text suffix in the node label
+(e.g. `AXIOMATIC`, `ASSUMED`).
+Only options with no meaningful representation in a GSN diagram at all
+are silently ignored.
 
 ### Undeveloped / NeedsSupport (`{needsSupport}`)
 
@@ -398,13 +401,12 @@ the element; `✗` is the closest inline text approximation.
 G2["<b>G2</b><br>Defeated goal statement<br>✗"]
 ```
 
-### Assumed (`{assumed}` on a Claim)
+### Assumed (`{assumed}`)
 
-A Claim carrying `{assumed}` is rendered as an **Assumption** rather
-than a Goal: rounded-rectangle shape with Ⓐ decorator and an
-InContextOf (`--o`) edge to its parent, instead of the usual Goal
-rectangle and SupportedBy (`-->`) edge.
-
+On a **Claim**, `{assumed}` is rendered as an **Assumption** rather than
+a Goal: rounded-rectangle shape with Ⓐ decorator and an InContextOf
+(`--o`) edge to its parent, instead of the usual Goal rectangle and
+SupportedBy (`-->`) edge.
 GSN has a dedicated Assumption element type for exactly this semantic,
 so using it is the natural mapping.
 
@@ -412,14 +414,25 @@ so using it is the natural mapping.
 A1("<b>A1</b> Ⓐ<br>Accepted without argument")
 ```
 
-The `{assumed}` option on any other element type has no GSN graphical
-equivalent and is ignored.
+On **any other element type** (Strategy, Evidence, Context, Justification),
+there is no equivalent GSN shape transformation, so `{assumed}` falls back
+to appending an `ASSUMED` text suffix — the same text used by SACM/mermaid.
+This is rare in practice but preserves the information from the LTAC source.
+
+```
+S1[/"<b>S1</b><br>Argument reasoning<br>ASSUMED"/]
+```
 
 ### Axiomatic (`{axiomatic}`)
 
-GSN has no axiomatic concept and no corresponding graphical notation.
-This option is **ignored** in `gsn/mermaid` output.
-(In SACM/mermaid it appends `━━━`.)
+GSN has no axiomatic concept and no dedicated graphical notation for it.
+We append an `AXIOMATIC` text suffix, which conveys the information clearly
+to any reader without borrowing SACM-specific decoration.
+This applies to any element type (Goal, Strategy, Justification, etc.).
+
+```
+G1["<b>G1</b><br>Safety-critical property<br>AXIOMATIC"]
+```
 
 ### Abstract / Uninstantiated (`{abstract}`)
 
@@ -452,8 +465,7 @@ A summary:
 
 The following LTAC `{options}` apply to `gsn/mermaid` output.
 
-Options that have a natural GSN graphical mapping are translated;
-all others are silently ignored.
+See the General translation principle above for the overall approach.
 
 **Translated options:**
 
@@ -462,18 +474,18 @@ all others are silently ignored.
 | `needsSupport` | Appends `◇` (undeveloped diamond) | Appends `...` |
 | `defeated` | Appends `✗` to label | Same |
 | `assumed` on a Claim | Renders as Assumption shape + InContextOf edge | Appends `ASSUMED` |
+| `assumed` on other types | Appends `ASSUMED` text suffix | Same |
+| `axiomatic` | Appends `AXIOMATIC` text suffix | Appends `━━━` |
 | `abstract` on a node | Dashed border (`:::gsnUndev`) | `:::abstractClaim` |
 | `abstract` on a Relation | Dashed edge (`-.->` / `-.-o`) | Same |
 | `asCited` / `^` prefix | Double-bracket `[[ ]]` shape | Same |
 | `counter` / `isCounter` | `\|⊖\|` label on edge | Same |
 | `counter` on a Relation | `\|⊖\|` label on children's edges | Same |
 
-**Ignored options (no GSN graphical equivalent):**
+**Ignored options (no meaningful GSN representation):**
 
 | Option | SACM/mermaid behaviour |
 |---|---|
-| `axiomatic` | Appends `━━━` |
-| `assumed` on non-Claim nodes | Appends `ASSUMED` |
 | `metaClaim` | Affects sacmDot grouping |
 | Assertion state options on `Relation` | Varies |
 
