@@ -1651,9 +1651,11 @@ Validations on the LTAC file (always):
   - Each identifier must be declared (no ^ prefix) exactly once
   - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
+    (use --update to make LTAC statements consistent with their declaration)
   - SACM assertion status must be unambiguous (spec section 11)
   - Cited identifiers (^ID) must have a matching declaration
   - Explicit citation packages (^[PkgName] ID): package must declare ID
+  - All generated anchor names (e.g., "claim-x-is-secure") are unique
 
 Additional checks when document files are provided:
   - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked:
