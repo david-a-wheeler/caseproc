@@ -56,6 +56,19 @@ quantitative assessment of case quality.
 It supports modularization, hierarchical abstraction, and integration
 with safety analyses, making it one of the most feature-rich tools available,
 though also one of the most complex to learn.
+See
+[AdvoCATE: An Assurance Case Automation Toolset](https://www.faa.gov/about/office_org/headquarters_offices/ang/redac/redac-sas-201503-advocate.pdf); its abstract says, "We present AdvoCATE, an Assurance Case Automation ToolsEt, to
+support the automated construction and assessment of safety cases. In
+addition to manual creation and editing, it has a growing suite of
+automated features.  In this paper, we highlight its capabilities
+for (i) inclusion of specific metadata, (ii) translation to and from
+various formats, including those of other widely used safety case tools,
+(iii) composition, with auto-generated safety case fragments, and (iv)
+computation of safety case metrics which, we believe, will provide a
+transparent, quantitative basis for assessment of the state of a safety
+case as it evolves. The tool primarily supports the Goal Structuring
+Notation (GSN), is compliant with the GSN Community Standard Version 1,
+and the Object Modeling Group Argumentation Metamodel (OMG ARM)."
 
 **[OntoGSN](https://fortiss.github.io/OntoGSN/)**
 ([GitHub](https://github.com/Tomas-Bueno-Momcilovic/OntoGSN),
@@ -188,6 +201,26 @@ Core features include real-time online collaboration, modular assurance
 cases with reusable templates, role-based access control, a full audit log
 with baselines, integrated verification steps, continuous assurance via
 live data feeds, and a REST API for external integration.
+
+## Related tools
+
+The paper [Explainable Compliance Detection with Multi-Hop Natural Language Inference on Assurance Case Structure](https://arxiv.org/pdf/2506.08713v1)
+discusses "EXPLAIN". Per its abstract:
+"Ensuring complex systems meet regulations typically requires checking
+the validity of assurance cases through a claim-argument-evidence
+framework. Some challenges in this process include the complicated
+nature of legal and technical texts, the need for model explanations, and
+limited access to assurance case data. We propose a compliance detection
+approach based on Natural Language Inference (NLI): EXplainable CompLiance
+detection with Argumentative Inference of Multihop reasoning (EXCLAIM). We
+formulate the claim-argument-evidence structure of an assurance case as a
+multi-hop inference for explainable and traceable compliance detection. We
+address the limited number of assurance cases by generating them using
+large language models (LLMs). We introduce metrics that measure the
+coverage and structural consistency. We demonstrate the effectiveness
+of the generated assurance case from GDPR requirements in a multi-hop
+inference task as a case study. Our results highlight the potential of
+NLI-based approaches in automating the regulatory compliance process."
 
 ## Not separate assurance case tools
 
