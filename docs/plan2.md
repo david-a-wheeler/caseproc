@@ -24,7 +24,7 @@ In the config file:
   command line gives a different list. This value is optional.
 
 Eliminate the `--inline` (-i) flag, make that functionality the default.
-Replace its position with `--filter`, which processes the Markdown/HTML
+Replace its position with `--stdout`, which processes the Markdown/HTML
 file(s) and sends them concatenated to stdout (this is the former default).
 Normally users will update the LTAC and the content files (Markdown/HTML),
 then they'll run this tool to fix everything up.
@@ -40,6 +40,12 @@ If none are found, panic with error.
 We want to make it easier for the program to rewrite LTAC files when
 specifically told do. To make that easier, remove support for "//" comments
 in LTAC, and require LTAC to use "-" bullets (stop supporting `*` bullets).
+This is technically a breaking change but no current users use it, and
+we've already updated the extended LTAC spec to reflect this change.
+
+A brief note: it's a design goal that the default operation of the
+tool idempotent.
+That is, running it twice with default settings should produce the same result.
 
 In the content files (Markdown/HTML) we already modify text within
 marked regions.
@@ -53,17 +59,18 @@ then just before that
 we will re-insert HTML anchor lines with just the component type "-" ID
 in GitHub's format, e.g., "Claim Foo Bar" would become
 `<a id="claim-foo-bar"></a>`.
+Note that this means the tool stays idempotent - we remove possibly-obsolete
+anchor lines, and re-insert anchor lines once we know what the correct
+ones are.
 We'll modify the mermaid and generated LTAC hyperlinks to link to simply
 component type "-" ID, e.g., `claim-foo-bar`; that way, the graphics
 and generated LTAC hyperlinks will work even if a statement changes.
 Currently, we update the header statement if it's out of date for its ID,
 as long as `update` is true. Let's rename `update` to `update_headers`
 in the configuration, and make that true by default.
-Change the `--update` command line option to temporarily print
-`update option shown`; we'll later implement something else with that option.
 
 Now that the `--update` command flag no longer influences Markdown/HTML
-headers, I want to change its meaning.
+headers, I want to radically change its meaning.
 I want `--update` to mean that we will update the *LTAC* file.
 When `--update` is selected, after reading and validating the LTAC file,
 rewrite the LTAC file so that any Link or Citation with a statement
@@ -83,9 +90,15 @@ You can use multiple `--rename` options.
 
 A --restate "LABEL" "STATEMENT" for changing statement to STATEMENT.
 Then fixes content docs.
-You can use multiple `--restate` options, but you can't use
-`--rename` and `--restate` in the same command (we'd then have to track
-their order, Python's processing system makes that harder).
+You can use multiple `--restate` options.
+
+NOTE: You can use *both* `--restate` and `--rename` in the same command,
+and multiple of them. Thus, we must use Python's
+argparse with ordered mixed options via action='append' on
+a shared namespace, to ensure that they are done in the order on the
+command line. If they fail (e.g., there is no OLD at that point, or
+LABEL doesn't exist), then the whole operation fails as a panic
+and the LTAC file is unchanged.
 
 Most of the time the LTAC file is processed only as input.
 However, the `--update`, `--rename`, and `--restate` options
