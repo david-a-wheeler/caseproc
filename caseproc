@@ -1560,6 +1560,7 @@ In documents, use <!-- caseproc SELECTOR --> ... <!-- end caseproc -->
 to surround where these go.
 
 Validations on the LTAC file (always):
+  - There must be no circularities (this prevents circular reasoning)
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
   - Statement text must be consistent across all uses of the same identifier
@@ -1693,6 +1694,63 @@ def check_id_info(id_info: Dict[str, dict], all_roots: List[Node],
                      f" but declared in '{pkg_label}{info['decl_pkg_id']}'")
 
 
+def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> None:
+    """Panic if any circular dependency exists in the LTAC model.
+
+    Performs an iterative DFS over the logical dependency graph.  For each
+    node, its logical successors are its structural children (non-cited,
+    non-Link), any cited child's declared node (^ID → registry[ID]), and
+    any Link child's link_target.  A node encountered while already on the
+    current DFS path (a back-edge) means circular reasoning is possible.
+    """
+    visiting: Set[int] = set()  # id(node) of nodes on the current DFS path
+    done: Set[int] = set()      # id(node) of fully-explored nodes
+
+    def successors(node: Node):
+        for child in node.children:
+            if child.is_cited:
+                target = registry.get(child.identifier)
+                if target is not None:
+                    yield target
+            elif child.node_type == 'Link':
+                if child.link_target is not None:
+                    yield child.link_target
+            else:
+                yield child
+
+    def dfs(start: Node) -> None:
+        path = [start]
+        visiting.add(id(start))
+        stack = [(start, successors(start))]
+        while stack:
+            node, children = stack[-1]
+            try:
+                succ = next(children)
+                key = id(succ)
+                if key in done:
+                    continue
+                if key in visiting:
+                    start_idx = next(i for i, n in enumerate(path) if id(n) == key)
+                    cycle = path[start_idx:] + [succ]
+                    trail = ' -> '.join(n.identifier or f'({n.node_type})' for n in cycle)
+                    panic(f"circularity detected: {trail}")
+                visiting.add(key)
+                path.append(succ)
+                stack.append((succ, successors(succ)))
+            except StopIteration:
+                stack.pop()
+                path.pop()
+                visiting.discard(id(node))
+                done.add(id(node))
+
+    for root in all_roots:
+        if id(root) not in done:
+            dfs(root)
+    for node in registry.values():
+        if id(node) not in done:
+            dfs(node)
+
+
 def _process_files(
     files: List[str],
     out,
@@ -1805,6 +1863,7 @@ def main() -> None:
 
     check_assertion_status(registry)
     check_id_info(id_info, all_roots, config.get('pkg_label', 'Package '))
+    check_circularities(registry, all_roots)
 
     if args.select:
         result = render_selector(args.select, registry, all_roots, config, id_info)

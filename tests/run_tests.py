@@ -502,5 +502,21 @@ class TestUpdate(unittest.TestCase):
         self.assertIn('Wrong statement here', r.stdout)
 
 
+class TestCircularity(unittest.TestCase):
+    def test_circular_is_fatal(self):
+        """A circular LTAC always exits non-zero with a circularity message showing the cycle."""
+        r = run('--ltac', fixture('circular.ltac'), '--select', 'ltac/markdown')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('circularity', r.stderr)
+        self.assertIn('C2', r.stderr)
+        self.assertIn('C4', r.stderr)
+
+    def test_multi_cite_no_cycle(self):
+        """The same node cited by two different paths is acceptable (no cycle)."""
+        r = run('--ltac', fixture('multi-cite.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertNotIn('circularity', r.stderr)
+
+
 if __name__ == '__main__':
     unittest.main()
