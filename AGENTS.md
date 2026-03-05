@@ -30,4 +30,5 @@ keyword parameters for config-driven behaviour; add the key to `DEFAULT_CONFIG`
 and read it from `config` inside the function.
 
 Changing rendered output requires updating the corresponding golden files in
-`tests/fixtures/`. Run `tests/run_tests.py` to verify.
+`tests/fixtures/`. Run `tests/run_tests.py` to verify. To accept all
+differing test results as the new expected values, run `tests/accept_tests`.

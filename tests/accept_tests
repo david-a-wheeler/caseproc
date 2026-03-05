@@ -5,8 +5,8 @@
 # that differ from the current fixtures.  Run this script to accept those
 # results as the new expected values.
 
-RESULTS="$(dirname "$0")/tests/results"
-FIXTURES="$(dirname "$0")/tests/fixtures"
+RESULTS="$(dirname "$0")/results"
+FIXTURES="$(dirname "$0")/fixtures"
 
 if [ ! -d "$RESULTS" ]; then
     echo "No results directory found (tests/results/). Run the tests first."
