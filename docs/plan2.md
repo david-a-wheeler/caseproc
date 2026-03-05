@@ -37,8 +37,9 @@ look for the file `case.md`, `case.html`, `docs/case.md`, and
 `docs/case.html` in that order; if found, use that file.
 If none are found, panic with error.
 
-We want to make it easier for the program to rewrite LTAC files when
-specifically told do. To make that easier, remove support for "//" comments
+We want to make it easier for the program to rewrite LTAC files, but only
+when specifically told to do it.
+To make that easier, remove support for "//" comments
 in LTAC, and require LTAC to use "-" bullets (stop supporting `*` bullets).
 This is technically a breaking change but no current users use it, and
 we've already updated the extended LTAC spec to reflect this change.
@@ -54,7 +55,7 @@ where the `CASE_ID` is the GitHub ID possible for an assurance case component
 (`package-...`, `claim-...`, `evidence-...`, etc.).
 In *addition*, when we see a Markdown header (`#...`) or HTML header
 (`<hNUMBER...>TEXT</hNUMBER>`, where the initial text matches
-assurance case component type ("Package ID.."Claim ID...", "Strategy ID..."),
+assurance case component type ("Package ID...", "Claim ID...", "Strategy ID..."),
 then just before that
 we will re-insert HTML anchor lines with just the component type "-" ID
 in GitHub's format, e.g., "Claim Foo Bar" would become
@@ -71,6 +72,9 @@ in the configuration, and make that true by default.
 
 Now that the `--update` command flag no longer influences Markdown/HTML
 headers, I want to radically change its meaning.
+This is a backwards-incompatible change, but I'm the only user today
+so that's fine.
+
 I want `--update` to mean that we will update the *LTAC* file.
 When `--update` is selected, after reading and validating the LTAC file,
 rewrite the LTAC file so that any Link or Citation with a statement
@@ -88,7 +92,8 @@ a --rename "OLD" "NEW" for renaming a label everywhere from OLD to NEW.
 Do validate first, just to make sure there are no weird problems, and
 to ensure OLD is used and NEW is not already used. Then fixes content docs.
 You can use multiple `--rename` options.
-If it fails (there is no OLD at that point or NEW is already in use),
+If it fails (there is no OLD declared in the LTAC file
+or NEW is already declared in the LTAC file),
 then the entire command fails as a panic
 and the LTAC file is unchanged.
 
@@ -116,6 +121,12 @@ Most of the time the LTAC file is processed only as input.
 However, the `--update`, `--rename`, and `--restate` options
 modify the LTAC file in place,
 providing many of the benefits of a database-based approach without the hassle.
+In all cases the system processes all options, then validates the LTAC,
+and only *then* (once it passes validation) will it apply operations that
+modify the LTAC in place. That way, we aren't modifying corrupt files.
+When regenerating the LTAC, put a blank line between each package,
+and keep them in the same order as when they were originally specified.
+(Test to verify this.)
 
 Whenever doing an in-place edit (LTAC, Markdown, HTML), generate the files
 first as temporary files.
