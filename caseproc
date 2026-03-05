@@ -396,7 +396,14 @@ class LTACParser:
                 'cited_pkgs':    set(),
                 'decl_pkg_id':   None,   # pkg root id of the declaration
                 'citing_pkg_ids': [],    # pkg root ids that cite this id, in order
+                'node_type':     None,   # type on first use (declaration or citation)
             })
+            # Type must be consistent across all uses of an ID.
+            if info['node_type'] is None:
+                info['node_type'] = node.node_type
+            elif info['node_type'] != node.node_type:
+                error(f"line {lineno}: {node.identifier!r}: type {node.node_type!r}"
+                      f" conflicts with earlier use as {info['node_type']!r}")
             if node.is_cited:
                 info['citations'] += 1
                 if node.cited_pkg:
@@ -1563,6 +1570,7 @@ Validations on the LTAC file (always):
   - There must be no circularities (this prevents circular reasoning)
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
+  - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
   - SACM assertion status must be unambiguous (spec section 11)
   - Cited identifiers (^ID) must have a matching declaration

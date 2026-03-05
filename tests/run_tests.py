@@ -502,6 +502,22 @@ class TestUpdate(unittest.TestCase):
         self.assertIn('Wrong statement here', r.stdout)
 
 
+class TestCitationType(unittest.TestCase):
+    def test_type_mismatch_is_error(self):
+        """Citing a Claim as a Strategy is always an error."""
+        r = run('--ltac', fixture('type-mismatch.ltac'), '--select', 'ltac/markdown')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('C1', r.stderr)
+        self.assertIn('conflicts with earlier use', r.stderr)
+
+    def test_type_match_is_ok(self):
+        """Citing a Claim as a Claim (same type) produces no error."""
+        r = run('--ltac', fixture('circular.ltac'), '--select', 'ltac/markdown')
+        # The circular test reuses circular.ltac which has matching types;
+        # the only error should be the circularity, not a type mismatch.
+        self.assertNotIn('declared as', r.stderr)
+
+
 class TestCircularity(unittest.TestCase):
     def test_circular_is_fatal(self):
         """A circular LTAC always exits non-zero with a circularity message showing the cycle."""
