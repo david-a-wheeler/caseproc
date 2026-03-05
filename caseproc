@@ -1640,7 +1640,7 @@ For full details see docs/design-spec.md.""",
     )
     parser.add_argument(
         '--update', action='store_true',
-        help='update document headers whose statement differs from the LTAC',
+        help='update the LTAC file to synchronize citation statements with their declarations',
     )
     parser.add_argument(
         '--ltac', '-l', type=str, metavar='FILENAME',
@@ -1661,8 +1661,8 @@ For full details see docs/design-spec.md.""",
         help='render SELECTOR to stdout and exit (see selector table below)',
     )
     mode.add_argument(
-        '--inline', '-i', action='store_true',
-        help='rewrite each file in place with updated marked regions',
+        '--stdout', action='store_true',
+        help='process content files and write concatenated result to stdout',
     )
     mode.add_argument(
         '--selftest', action='store_true',
@@ -1906,7 +1906,7 @@ def main() -> None:
             config_path = 'docs/case.config'
     config = load_config(config_path)
     if args.update:
-        config['update_headers'] = True
+        notify("--update: LTAC synchronization not yet implemented")
 
     all_roots: List[Node] = []
     registry: Dict[str, Node] = {}
@@ -1929,6 +1929,11 @@ def main() -> None:
                 content_files = [candidate]
                 break
 
+    _NO_FILES_MSG = (
+        "no content files found; specify files on the command line, set content_files "
+        "in config, or create one of: case.md, case.html, docs/case.md, docs/case.html"
+    )
+
     if args.select:
         result = render_selector(args.select, registry, all_roots, config, id_info)
         if result:
@@ -1936,14 +1941,19 @@ def main() -> None:
     elif args.validate:
         if content_files:
             _process_files(content_files, io.StringIO(), registry, all_roots, config, id_info, set())
-    elif args.inline:
+    elif args.stdout:
+        if not content_files:
+            panic(_NO_FILES_MSG)
+        seen_headers: set = set()
+        _process_files(content_files, sys.stdout, registry, all_roots, config, id_info, seen_headers)
+        _check_header_coverage(registry, seen_headers)
+    else:
+        # Default mode: rewrite content files in place.
+        if not content_files:
+            panic(_NO_FILES_MSG)
         seen_headers: set = set()
         for path in content_files:
             _inline_rewrite_file(path, registry, all_roots, config, id_info, seen_headers)
-        _check_header_coverage(registry, seen_headers)
-    else:
-        seen_headers: set = set()
-        _process_files(content_files, sys.stdout, registry, all_roots, config, id_info, seen_headers)
         _check_header_coverage(registry, seen_headers)
 
     if _had_error:

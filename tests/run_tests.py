@@ -175,10 +175,10 @@ class TestSpecialChars(unittest.TestCase):
 
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
-        """Default mode replaces stale caseproc regions and passes other lines through."""
+        """--stdout replaces stale caseproc regions and passes other lines through."""
         result = run('--ltac', fixture('simple.ltac'),
                      '--config', fixture('doc-simple.config'),
-                     fixture('doc-simple-input.md'))
+                     '--stdout', fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(check(result.stdout, 'doc-simple-output.expected.md'),
                          read_fixture('doc-simple-output.expected.md'))
@@ -200,7 +200,8 @@ class TestDefaultMode(unittest.TestCase):
 
     def test_header_coverage_warning(self):
         """Elements without a matching Markdown header produce warnings; --error makes exit non-zero."""
-        result = run('--ltac', fixture('simple.ltac'), fixture('doc-simple-input.md'), '--error')
+        result = run('--ltac', fixture('simple.ltac'), '--stdout',
+                     fixture('doc-simple-input.md'), '--error')
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('no corresponding header', result.stderr)
 
@@ -261,14 +262,15 @@ class TestLTACValidation(unittest.TestCase):
 
     def test_header_not_in_ltac_warns(self):
         """A document header whose ID is not in the LTAC produces a warning but exits 0."""
-        r = run('--ltac', fixture('simple.ltac'), fixture('unknown-header-input.md'))
+        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('unknown-header-input.md'))
         self.assertEqual(r.returncode, 0)
         self.assertIn('not found in LTAC', r.stderr)
         self.assertIn('C99', r.stderr)
 
     def test_header_not_in_ltac_error_flag(self):
         """A document header whose ID is not in the LTAC exits non-zero with --error."""
-        r = run('--ltac', fixture('simple.ltac'), fixture('unknown-header-input.md'), '--error')
+        r = run('--ltac', fixture('simple.ltac'), '--stdout',
+                fixture('unknown-header-input.md'), '--error')
         self.assertNotEqual(r.returncode, 0)
         self.assertIn('not found in LTAC', r.stderr)
 
@@ -341,10 +343,10 @@ class TestSelectSacm(unittest.TestCase):
                          read_fixture('badgeapp-top.sacm.mermaid.stderr.expected.txt'))
 
     def test_filter_mode_with_sacm_region(self):
-        """Default mode correctly replaces a sacm/mermaid region in doc-simple-input.md."""
+        """--stdout correctly replaces a sacm/mermaid region in doc-simple-input.md."""
         result = run('--ltac', fixture('simple.ltac'),
                      '--config', fixture('doc-simple.config'),
-                     fixture('doc-simple-input.md'))
+                     '--stdout', fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(check(result.stdout, 'doc-simple-output.expected.md'),
                          read_fixture('doc-simple-output.expected.md'))
@@ -364,11 +366,11 @@ class TestSelectGsn(unittest.TestCase):
 
 class TestBadgeappDoc(unittest.TestCase):
     def test_badgeapp_doc_filter_mode(self):
-        """Filter mode renders all three packages via sacm/mermaid * with correct
+        """--stdout renders all three packages via sacm/mermaid * with correct
         BottomPadding targets, click lines for evidence URLs, and context edges."""
         result = run('--ltac', fixture('badgeapp-doc.ltac'),
                      '--config', fixture('badgeapp-doc.config'),
-                     fixture('badgeapp-doc-input.md'))
+                     '--stdout', fixture('badgeapp-doc-input.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(check(result.stdout, 'badgeapp-doc-output.expected.md'),
                          read_fixture('badgeapp-doc-output.expected.md'))
@@ -449,10 +451,10 @@ class TestInlineMode(unittest.TestCase):
         return path
 
     def test_inline_updates_file(self):
-        """--inline rewrites a file with stale regions to the correct content."""
+        """Default mode rewrites a file with stale regions to the correct content."""
         tmp = self._tmp_copy('inline-input.md')
         try:
-            result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
+            result = run('--ltac', fixture('simple.ltac'), tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
             self.assertEqual(check(result.stderr, 'inline-stderr.expected.txt'),
@@ -463,12 +465,12 @@ class TestInlineMode(unittest.TestCase):
             os.unlink(tmp)
 
     def test_inline_idempotent(self):
-        """Running --inline twice produces the same result; second run makes no changes."""
+        """Running the default mode twice produces the same result; second run makes no changes."""
         tmp = self._tmp_copy('inline-input.md')
         try:
-            run('--ltac', fixture('simple.ltac'), '--inline', tmp)
+            run('--ltac', fixture('simple.ltac'), tmp)
             mtime_after_first = os.path.getmtime(tmp)
-            result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
+            result = run('--ltac', fixture('simple.ltac'), tmp)
             self.assertEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
             self.assertEqual(check(result.stderr, 'inline-stderr.expected.txt'),
@@ -480,11 +482,11 @@ class TestInlineMode(unittest.TestCase):
             os.unlink(tmp)
 
     def test_inline_error_leaves_file_unchanged(self):
-        """--inline on a file with a parse error leaves the file unchanged."""
+        """Default mode on a file with a parse error leaves the file unchanged."""
         tmp = self._tmp_copy('inline-error-input.md')
         try:
             original = read_fixture('inline-error-input.md')
-            result = run('--ltac', fixture('simple.ltac'), '--inline', tmp)
+            result = run('--ltac', fixture('simple.ltac'), tmp)
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(result.stdout, '')
             self.assertIn('unclosed', result.stderr)
@@ -497,7 +499,7 @@ class TestIntroduction(unittest.TestCase):
     def test_non_ltac_heading_ignored(self):
         """A heading like 'Introduction' that does not start with an LTAC type
         is passed through silently without warnings or errors."""
-        r = run('--ltac', fixture('simple.ltac'), fixture('introduction-input.md'))
+        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('introduction-input.md'))
         self.assertEqual(r.returncode, 0)
         self.assertNotIn('Introduction', r.stderr)
         self.assertEqual(check(r.stdout, 'introduction-output.expected.md'),
@@ -505,20 +507,19 @@ class TestIntroduction(unittest.TestCase):
 
 
 class TestUpdate(unittest.TestCase):
-    def test_update_header_statement(self):
-        """--update rewrites a stale header statement to match the LTAC."""
+    def test_update_ltac_stub(self):
+        """--update prints a stub notification (LTAC synchronization not yet implemented)."""
         r = run('--ltac', fixture('simple.ltac'), '--update',
-                fixture('update-input.md'))
+                '--stdout', fixture('update-input.md'))
         self.assertEqual(r.returncode, 0)
+        # Header still updates by default (update_headers=True).
         actual = check(r.stdout, 'update-output.expected.md')
         self.assertEqual(actual, read_fixture('update-output.expected.md'))
-        self.assertIn('updated Claim C1:', r.stderr)
-        self.assertIn('Wrong statement here', r.stderr)
-        self.assertIn('acceptably safe', r.stderr)
+        self.assertIn('not yet implemented', r.stderr)
 
     def test_update_header_default(self):
         """update_headers defaults to True, so stale headers are rewritten even without --update."""
-        r = run('--ltac', fixture('simple.ltac'), fixture('update-input.md'))
+        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('update-input.md'))
         self.assertEqual(r.returncode, 0)
         actual = check(r.stdout, 'update-output.expected.md')
         self.assertEqual(actual, read_fixture('update-output.expected.md'))
