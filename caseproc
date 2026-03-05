@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""caseproc - process assurance case LTAC file and inject into Markdown/HTML
+"""caseproc - process assurance case LTAC file and update Markdown/HTML
 """
 
 import argparse
@@ -1578,15 +1578,17 @@ def parse_args() -> argparse.Namespace:
     """Build the argument parser, define all flags, and parse the command line."""
     parser = argparse.ArgumentParser(
         prog='caseproc',
-        description='Process assurance case LTAC file and inject'
-                    'into Markdown/HTML',
+        description='Process assurance case LTAC file and update Markdown/HTML',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""\
-This program normally modifies Markdown/HTML file(s), specifically
-headers involving assurance case elements or packages, their anchors, and
-the text regions inside <!-- caseproc SELECTOR --> ... <!-- end caseproc -->.
-You simply edit the LTAC file, run this program, and your documentation
-is updated with graphics, hyperlinks, and updated material.
+This program normally updates (modifies) Markdown/HTML file(s).
+It will update headers involving assurance case elements or packages,
+their HTML anchors, and the text regions inside
+!-- caseproc SELECTOR --> ... <!-- end caseproc -->.
+The intended use is that you simply edit the LTAC file for the high-level
+argument and the Markdown/HTML for all details. Then run this program;
+it updates your Markdown/HTML documentation with graphics, hyperlinks,
+and other material.
 
 Selectors are of format `KIND [ID | *]`, where KIND is:
   ltac/markdown  ID|*   render as an indented Markdown bullet list
@@ -1644,7 +1646,7 @@ For full details see docs/design-spec.md.""",
     )
     parser.add_argument(
         'files', nargs='*',
-        help='Markdown/HTML files to process (default: stdin)',
+        help='Markdown/HTML files to update (default: stdin)',
     )
 
     mode = parser.add_mutually_exclusive_group()
