@@ -48,6 +48,7 @@ def notify(msg: str) -> None:
 
 DEFAULT_CONFIG = {
     'base_url': '',
+    'bottom_padding': True,
     'markdown_base_url': '',
     'pkg_header_prefix': '### ',
     'pkg_header_suffix': '\n',
@@ -582,14 +583,15 @@ def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list,
         _render_markdown_node(child, indent + 1, base_url, lines, pkg_label)
 
 
-def render_markdown(roots: List[Node], base_url: str = '',
-                    pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+def render_markdown(roots: List[Node], config: dict) -> str:
     """Render a list of nodes as an indented markdown bullet list with hyperlinks.
 
     Each item is '- NodeType ID: text' where ID is a hyperlink when a URL
     is available (from ext_ref, or constructed from base_url + anchor).
     Link nodes are skipped.
     """
+    base_url = config.get('markdown_base_url', '')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     lines = []
     for root in roots:
         _render_markdown_node(root, 0, base_url, lines, pkg_label)
@@ -684,12 +686,13 @@ def _render_html_node(node: Node, indent: int, base_url: str, lines: list,
         lines.append(f'{prefix}<li>{content}</li>')
 
 
-def render_html(roots: List[Node], base_url: str = '',
-                pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+def render_html(roots: List[Node], config: dict) -> str:
     """Render a list of nodes as a nested HTML ul/li list with hyperlinks.
 
     Link nodes are skipped. Identifiers are hyperlinked when a URL is available.
     """
+    base_url = config.get('markdown_base_url', '')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     lines = ['<ul>']
     for root in roots:
         _render_html_node(root, 1, base_url, lines, pkg_label)
@@ -1002,8 +1005,7 @@ def _sacm_leftmost_leaf(node: 'Node') -> 'Node':
     return node
 
 
-def render_sacm(roots: List['Node'], base_url: str = '',
-                pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+def render_sacm(roots: List['Node'], config: dict) -> str:
     """Render package roots as a complete SACM/mermaid code block.
 
     Returns the full mermaid fenced block (opening ```mermaid … closing ```).
@@ -1011,6 +1013,9 @@ def render_sacm(roots: List['Node'], base_url: str = '',
     Output structure: header → node declarations (BFS) → sacmDot declarations
     → click lines → blank line → BottomPadding + edges (DFS post-order, deepest first).
     """
+    base_url = config.get('base_url', '')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
+    bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
     roots = _copy_forest(roots)
 
     # Node declarations (BFS) and click lines collected in a single pass.
@@ -1035,7 +1040,7 @@ def render_sacm(roots: List['Node'], base_url: str = '',
     # The invisible BottomPadding node prevents GitHub's diagram controls from
     # obscuring the bottom of the diagram; it must be the first edge line.
     # Link it to the leftmost bottommost leaf so it sits at the bottom-left.
-    if roots:
+    if bottom_padding and roots:
         bottom_node = _sacm_leftmost_leaf(roots[0])
         edge_lines.insert(0, f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
 
@@ -1221,8 +1226,7 @@ def _gsn_collect_edges(node, edge_lines, leaf_nodes):
         leaf_nodes.append(node)
 
 
-def render_gsn(roots: List['Node'], base_url: str = '',
-               pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> str:
+def render_gsn(roots: List['Node'], config: dict) -> str:
     """Render package roots as a complete GSN/mermaid code block.
 
     Returns the full mermaid fenced block (opening ```mermaid … closing ```).
@@ -1230,6 +1234,9 @@ def render_gsn(roots: List['Node'], base_url: str = '',
     Output structure: header → node declarations (BFS) → click lines
     → blank line → BottomPadding lines + edges (DFS pre-order).
     """
+    base_url = config.get('base_url', '')
+    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
+    bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
     roots = _copy_forest(roots)
 
     # Node declarations (BFS) and click lines collected in a single pass.
@@ -1253,14 +1260,15 @@ def render_gsn(roots: List['Node'], base_url: str = '',
     # BottomPadding: all leaves link down to it (invisible node prevents
     # diagram controls from obscuring the bottom).
     bp_lines: list = []
-    first = True
-    seen: set = set()
-    for leaf in leaf_nodes:
-        if leaf.diagram_id not in seen:
-            seen.add(leaf.diagram_id)
-            bp = 'BottomPadding[ ]:::invisible' if first else 'BottomPadding'
-            bp_lines.append(f'    {leaf.diagram_id} ~~~ {bp}')
-            first = False
+    if bottom_padding:
+        first = True
+        seen: set = set()
+        for leaf in leaf_nodes:
+            if leaf.diagram_id not in seen:
+                seen.add(leaf.diagram_id)
+                bp = 'BottomPadding[ ]:::invisible' if first else 'BottomPadding'
+                bp_lines.append(f'    {leaf.diagram_id} ~~~ {bp}')
+                first = False
     edge_lines = bp_lines + edge_lines
 
     lines = [_GSN_HEADER]
@@ -1296,7 +1304,7 @@ def resolve_element(
     return list(all_roots)
 
 
-def render_all_packages(all_roots: List[Node], render_fn, base_url: str, config: dict) -> str:
+def render_all_packages(all_roots: List[Node], render_fn, config: dict) -> str:
     """Render every package preceded by a configurable header.
 
     Package blocks are separated by a blank line.
@@ -1309,7 +1317,7 @@ def render_all_packages(all_roots: List[Node], render_fn, base_url: str, config:
     for root in all_roots:
         label = f"{pkg_label}{root.identifier}" if root.identifier else pkg_label.rstrip()
         header = f"{prefix}{label}"
-        blocks.append(f"{header}{suffix}{render_fn([root], base_url, pkg_label)}")
+        blocks.append(f"{header}{suffix}{render_fn([root], config)}")
     return '\n\n'.join(blocks)
 
 
@@ -1336,17 +1344,15 @@ def _render_or_all(
     element_id: Optional[str],
     all_roots: List[Node],
     render_fn,
-    base_url: str,
     registry: Dict[str, Node],
     current_element: Optional[Node],
     config: dict,
 ) -> str:
     """Resolve element_id and render, or render all packages if element_id is '*'."""
-    pkg_label = config.get('pkg_label', 'Package ')
     if element_id == '*':
-        return render_all_packages(all_roots, render_fn, base_url, config)
+        return render_all_packages(all_roots, render_fn, config)
     nodes = resolve_element(element_id, registry, all_roots, current_element)
-    return render_fn(nodes, base_url, pkg_label)
+    return render_fn(nodes, config)
 
 
 def render_selector(
@@ -1363,22 +1369,18 @@ def render_selector(
     Returns '' if the display_type is unknown (error already reported).
     """
     display_type, element_id = parse_selector(selector)
-    base_url = config.get('markdown_base_url', '')
 
     if display_type == 'sacm/mermaid':
-        sacm_base_url = config.get('base_url', '')
-        return _render_or_all(element_id, all_roots, render_sacm, sacm_base_url, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
 
     if display_type == 'gsn/mermaid':
-        gsn_base_url = config.get('base_url', '')
-        return _render_or_all(element_id, all_roots, render_gsn,
-                              gsn_base_url, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config)
 
     if display_type == 'ltac/markdown':
-        return _render_or_all(element_id, all_roots, render_markdown, base_url, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config)
 
     if display_type == 'ltac/html':
-        return _render_or_all(element_id, all_roots, render_html, base_url, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_html, registry, current_element, config)
 
     # statement, references, info operate on a single node
     if element_id == '*':
