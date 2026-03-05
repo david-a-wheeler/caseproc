@@ -1625,13 +1625,14 @@ def parse_args() -> argparse.Namespace:
         description='Process assurance case LTAC file and update Markdown/HTML',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""\
-This program normally updates (modifies) Markdown/HTML file(s).
-It will update headers involving assurance case elements or packages,
-their HTML anchors, and the text regions inside
+This program normally updates (modifies) document file(s) in Markdown/HTML
+to update headers involving assurance case elements or packages,
+their HTML anchors, and all text regions inside the markers
 !-- caseproc SELECTOR --> ... <!-- end caseproc -->.
 The intended use is that you simply edit the LTAC file for the high-level
-argument and the Markdown/HTML for all details. Then run this program;
-it updates your Markdown/HTML documentation with graphics, hyperlinks,
+argument and the document files (Markdown/HTML) for all details
+("content" in SACM parlance). Then run this program to validate the structure
+and update your Markdown/HTML documentation files with graphics, hyperlinks,
 and other material.
 
 Selectors are of format `KIND [ID | *]`, where KIND is:
@@ -1642,19 +1643,21 @@ Selectors are of format `KIND [ID | *]`, where KIND is:
   statement      ID     one-line statement for an element
   references     ID     Markdown links to packages that reference the element
   info           ID     statement followed by references
-  Omit ID to use the element set by the nearest preceding header (filter mode).
-  Use * to render all packages (ltac/*, sacm/mermaid, and gsn/mermaid only).
+Omit ID to use the element set by the nearest preceding header (filter mode).
+Use * to render all packages (ltac/*, sacm/mermaid, and gsn/mermaid only).
 
 Validations on the LTAC file (always):
   - There must be no circularities (this prevents circular reasoning)
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
+  - Citing identifiers (^ID) must have a matching declaration
+  - In citations naming a package (^[PkgName] ID) the package must declare ID
   - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
     (use --update to make LTAC statements consistent with their declaration)
-  - SACM assertion status must be unambiguous (spec section 11)
-  - Cited identifiers (^ID) must have a matching declaration
-  - Explicit citation packages (^[PkgName] ID): package must declare ID
+  - Each element may carry at most one assertion status option
+    (needsSupport, axiomatic, defeated, assumed); more than one is an error
+    (see SACM specification section 11)
   - All generated anchor names (e.g., "claim-x-is-secure") are unique
 
 Additional checks when document files are provided:
