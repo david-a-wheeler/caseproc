@@ -406,6 +406,33 @@ class TestBadgeappDoc(unittest.TestCase):
                          read_fixture('badgeapp-doc-stderr.expected.txt'))
 
 
+class TestStress(unittest.TestCase):
+    def _tmp_copy(self, name):
+        """Copy a fixture to tests/results/<name> and return its path."""
+        os.makedirs(RESULTS, exist_ok=True)
+        path = os.path.join(RESULTS, name)
+        shutil.copy(fixture(name), path)
+        return path
+
+    def test_stress_inline(self):
+        """Inline update of a large LTAC (1000+ elements, 50+ packages, 6+ levels deep)
+        with sacm/mermaid *, gsn/mermaid *, ltac/markdown *, and element stubs."""
+        tmp = self._tmp_copy('stress-test-input.md')
+        try:
+            result = run('--ltac', fixture('stress-test.ltac'),
+                         '--config', fixture('stress-test.config'),
+                         tmp)
+            self.assertEqual(result.returncode, 0)
+            self.assertEqual(result.stdout, '')
+            self.assertEqual(check(result.stderr, 'stress-test-stderr.expected.txt'),
+                             read_fixture('stress-test-stderr.expected.txt'))
+            self.assertEqual(check(read_file(tmp), 'stress-test-output.expected.md'),
+                             read_fixture('stress-test-output.expected.md'))
+        finally:
+            if os.path.exists(tmp):
+                os.unlink(tmp)
+
+
 class TestConfig(unittest.TestCase):
     def test_config_file_overrides_default(self):
         """--config FILE merges JSON object keys over defaults."""
