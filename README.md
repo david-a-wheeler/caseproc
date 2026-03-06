@@ -68,21 +68,25 @@ and AI can make the same mistakes.
 
 This tool, `caseproc`, takes a completely different approach:
 
-* As input, it reads a simple text file written in our
+* As input, it reads a simple text file (default file `[docs/]case.ltac`)
+  written in our
   extended version of the Lightweight Text Assurance Case (LTAC) format.
   This simple format is easily understood and used, and makes it
   easy to express simple hierarchy of structure and high-level statements.
   The tool will identify and report various kinds of invalid constructs
-  (e.g., citations of undefined terms, invalid types, etc.)
-* As output, it takes a set of 1+ documents (in markdown or HTML)
-  and inserts/updates graphics and text.
+  (e.g., citations of undefined elements, invalid types, logical circularity,
+  unreachable elements, and so on).
+* As output, it updates a set of 1+ documents (in markdown or HTML),
+  including fixing headers and inserting/updating graphics
+  (default file `[docs/]case.[md,html]`).
   Note that it *automatically* generates graphical notation in SACM or
   GSN notation - you don't need to fiddle with the graphics at all.
   It also automatically generates a number of hypertext links, making it
   easy to navigate the assurance case.
   The expectation is that humans and AIs would edit these documents to
-  provide all the details; `caseproc` fills or updates the higher-level
-  structure, keeping all information easily in sync.
+  provide all the details (aka "content").
+  In contrast, `caseproc` updates the document to
+  keep all information easily in sync.
 
 Currently the tool can generate both SACM and GSN notation in mermaid format.
 It can also generate a markdown indented bullet list that looks like LTAC
@@ -92,15 +96,30 @@ It might someday support CAE notation as well.
 The tool can also insert various cross-references and update heading names
 as appropriate.
 
-Perhaps most usefully, its `-i` (in place) option
-allows you to update the markdown/HTML files in place.
 As a result,
 you can simply run the process with a sequence of markdown filenames,
 and it will update the documents directly.
 
+The result is *much* easier to integrate into version control systems like git,
+since all information is kept in simple text files.
+Both AI and humans find this really easy to follow
+(AI systems already know how to handle indented structures thanks to
+Python, YAML, and so on).
+It's remarkably easy to edit, too - no fussing over moving objects in
+a graphical display.
+
 ## Handling evolution
 
 Assurance cases evolve. This tool is designed to easily handle that.
+
+This tool does a number of validations and produces various warnings.
+The `--help` provides a full list, but for example,
+each identifier must be declared (no ^ prefix) exactly once, and it
+will tell you if that rule is violated.
+We also warn every time a declared LTAC element fails to have a
+corresponding document header.
+If the statement in LTAC is changed, the documents will be updated to
+match (if the id is the unchanged).
 
 Claims get refined, strategies get renamed,
 and statement wording gets clarified.
@@ -115,27 +134,18 @@ tool for many tasks.
 Our goal is to get many of those benefits using a different and
 simpler approach.
 
-This tool does a number of validations and produces various warnings.
-The `--help` provides a full list, but for example,
-each identifier must be declared (no ^ prefix) exactly once, and it
-will tell you if that rule is violated.
-We also warn every time a declared LTAC element fails to have a
-corresponding document header.
-
-We also have another trick to make editing easier.
-When a markdown
-document header such as `## Claim C1: Old wording` has the same
-label but its statement no longer
-matches the authoritative statement in the LTAC file,
-`caseproc` normally warns about the discrepancy.
-That warning is useful for catching accidental drift.
-But when you have *intentionally* updated the LTAC and simply want
-all the document headers to catch up automatically,
-use the `--update` flag (or matching configuration flag) will do exactly that.
-It will rewrites every stale markdown header statement to match the LTAC,
-treating the LTAC as the authoritative source.
-A notification is printed to stderr for each header that's changed,
-so you always have a clear record of what was updated and why.
+Our solution is a few special options.
+Normally we only *read* the LTAC file, but a few options will *update* it.
+The `--update` option updates the LTAC file so all elements that cite the
+*real* element will have their statements updated to match.
+The option `--rename OLD NEW` let you rename IDs in
+the LTAC and document files, while
+`--restate LABEL STATEMENT` lets you change the statment of a given label
+in the LTAC and document files.
+This has the advantage of database-based approaches
+(you can do one operation to change
+certain values "everywhere") while staying with the full transparency
+of a text-based approach.
 
 ## Pros and Cons
 
