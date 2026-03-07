@@ -261,6 +261,40 @@ def detect_line_ending(text: str) -> str:
     return '\n'
 
 
+def hyperlink(content: str, url: str, fmt: str) -> str:
+    """Return a hyperlink in the given format ('markdown' or 'html').
+
+    For markdown: [escaped content](url)
+    For html:     <a href="url">escaped content</a>
+    content is escaped for the target format.
+
+    >>> hyperlink("Claim C1", "#claim-c1", "markdown")
+    '[Claim C1](#claim-c1)'
+    >>> hyperlink("Claim C1", "#claim-c1", "html")
+    '<a href="#claim-c1">Claim C1</a>'
+    >>> hyperlink("A & B", "#x", "markdown")
+    '[A & B](#x)'
+    >>> hyperlink("A & B", "#x", "html")
+    '<a href="#x">A &amp; B</a>'
+    """
+    if fmt == 'html':
+        return f'<a href="{escape_html(url)}">{escape_html(content)}</a>'
+    return f'[{escape_markdown(content)}]({url})'
+
+
+def bold(text: str, fmt: str) -> str:
+    """Wrap text in bold markup for the given format.
+
+    >>> bold("Package Foo", "markdown")
+    '**Package Foo**'
+    >>> bold("Package Foo", "html")
+    '<b>Package Foo</b>'
+    """
+    if fmt == 'html':
+        return f'<b>{text}</b>'
+    return f'**{text}**'
+
+
 def parse_options(raw: str) -> set:
     """Parse a {OPTIONS} suffix string into a set of option names.
 
