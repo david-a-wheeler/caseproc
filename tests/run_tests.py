@@ -529,6 +529,29 @@ class TestInlineMode(unittest.TestCase):
             os.unlink(tmp)
 
 
+class TestLineEndings(unittest.TestCase):
+    def test_crlf_file_preserved(self):
+        """A CRLF document file is updated and written back with CRLF line endings."""
+        # Build a minimal CRLF document with an inline region.
+        crlf_content = (
+            '<!-- caseproc ltac/markdown -->\r\n'
+            '<!-- end caseproc -->\r\n'
+        )
+        os.makedirs(RESULTS, exist_ok=True)
+        tmp = os.path.join(RESULTS, 'crlf-test.md')
+        with open(tmp, 'w', encoding='utf-8', newline='') as f:
+            f.write(crlf_content)
+        try:
+            result = run('--ltac', fixture('simple.ltac'), tmp)
+            self.assertEqual(result.returncode, 0)
+            with open(tmp, 'rb') as f:
+                raw = f.read()
+            self.assertIn(b'\r\n', raw, 'Output file should contain CRLF line endings')
+            self.assertNotIn(b'\r\r', raw, 'Output file should not have double CR')
+        finally:
+            os.unlink(tmp)
+
+
 class TestIntroduction(unittest.TestCase):
     def test_non_ltac_heading_ignored(self):
         """A heading like 'Introduction' that does not start with an LTAC type

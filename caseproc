@@ -245,6 +245,22 @@ def escape_markdown(text: str) -> str:
     return text
 
 
+def detect_line_ending(text: str) -> str:
+    """Return '\\r\\n' if the first newline in text is CRLF, else '\\n'.
+
+    >>> detect_line_ending('a\\r\\nb\\r\\n')
+    '\\r\\n'
+    >>> detect_line_ending('a\\nb\\n')
+    '\\n'
+    >>> detect_line_ending('')
+    '\\n'
+    """
+    idx = text.find('\n')
+    if idx > 0 and text[idx - 1] == '\r':
+        return '\r\n'
+    return '\n'
+
+
 def parse_options(raw: str) -> set:
     """Parse a {OPTIONS} suffix string into a set of option names.
 
@@ -2035,17 +2051,19 @@ def apply_restate(roots: List[Node], registry: Dict[str, Node],
     id_info[label]['statement'] = stmt
 
 
-def _make_temp(path: str, content: str) -> Optional[str]:
+def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str]:
     """Write content to a temp file in the same directory as path.
 
+    If line_ending is '\\r\\n', converts all '\\n' to '\\r\\n' before writing.
     Returns the temp file path, or None if writing failed (error already reported).
     """
     dir_ = os.path.dirname(os.path.abspath(path))
     try:
         fd, tmp = tempfile.mkstemp(dir=dir_)
         try:
-            with os.fdopen(fd, 'w') as f:
-                f.write(content)
+            encoded = content.replace('\n', line_ending).encode('utf-8')
+            with os.fdopen(fd, 'wb') as f:
+                f.write(encoded)
         except Exception:
             try:
                 os.unlink(tmp)
@@ -2094,21 +2112,24 @@ def _inline_rewrite_file(
     global _had_error
     error_before = _had_error
     try:
-        with open(path) as f:
+        with open(path, newline='') as f:
             original = f.read()
     except OSError as e:
         error(f"cannot open {path!r}: {e}")
         return None
+    line_ending = detect_line_ending(original)
+    # Normalise to LF for internal processing; restore on write.
+    original_lf = original.replace('\r\n', '\n')
     buf = io.StringIO()
-    with io.StringIO(original) as src:
+    with io.StringIO(original_lf) as src:
         process_document_stream(src, buf, registry, all_roots, config, id_info, seen_headers)
     if _had_error and not error_before:
         # Errors occurred while processing this file; leave it untouched.
         return None
     new_content = buf.getvalue()
-    if new_content == original:
+    if new_content == original_lf:
         return None  # No change needed.
-    tmp = _make_temp(path, new_content)
+    tmp = _make_temp(path, new_content, line_ending)
     if tmp is None:
         return None
     return (tmp, path)
@@ -2153,6 +2174,11 @@ def main() -> None:
 
     ltac_path = find_ltac_file(args.ltac, config)
     load_ltac_file(ltac_path, all_roots, registry, id_info)
+    try:
+        with open(ltac_path, newline='') as _f:
+            ltac_line_ending = detect_line_ending(_f.read())
+    except OSError:
+        ltac_line_ending = '\n'
 
     check_assertion_status(registry)
     check_id_info(id_info)
@@ -2163,7 +2189,7 @@ def main() -> None:
     if args.update:
         changed = apply_ltac_update(all_roots, registry)
         if changed:
-            tmp = _make_temp(ltac_path, write_ltac(all_roots))
+            tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
             if tmp is None:
                 panic("cannot write updated LTAC file")
             commit_updates([(tmp, ltac_path)])
