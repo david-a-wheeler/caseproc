@@ -194,14 +194,66 @@ That way, users can easily change just the config value
 `default_representation` to `gsn` and they'll get gsn for every package.
 Users don't *have* to change it, then they'll just get the default.
 
-Let's add new selectors sacm, gsn, and ltac. Each of them select
-the `/markdown` or `/html` variations of them depending on whether or not
-the containing document is markdown or html.
-E.g., `sacm` is interpreted as `sacm/mermaid` when generating markdown.
-We'll keep the selectors with the specific variation names, in case
-we need to force the use of one.
+Let's extend the selector syntax to three parts: `NOTATION/RENDERER/FORMAT`,
+filling in defaults right-to-left based on the document type:
 
-??? /mermaid, /markdown. How handle mermaid in HTML?
+| Written | Interpreted as |
+|---|---|
+| `sacm` | `sacm/mermaid/{doc-format}` |
+| `sacm/mermaid` | `sacm/mermaid/{doc-format}` |
+| `sacm/mermaid/markdown` | explicit |
+| `sacm/mermaid/html` | explicit |
+| `gsn` | `gsn/mermaid/{doc-format}` |
+| `gsn/mermaid` | `gsn/mermaid/{doc-format}` |
+| `gsn/mermaid/markdown` | explicit |
+| `gsn/mermaid/html` | explicit |
+| `ltac` | `ltac/{doc-format}` |
+| `ltac/markdown` | explicit |
+| `ltac/html` | explicit |
+
+`ltac` has no separate renderer level (its renderer is its format),
+so it stays two-part. The rule is: fill in missing parts from the right
+using the document type.
+
+We'll keep the explicit variation names in case the user needs to force
+the use of a specific format.
+
+`sacm/mermaid/html` and `gsn/mermaid/html` generate `<pre class="mermaid">`
+blocks (the Mermaid v10+ standard):
+
+~~~~html
+<pre class="mermaid">
+flowchart BT
+  ...
+</pre>
+~~~~
+
+Add a config key `mermaid_js_url` with the default value:
+
+```
+https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+```
+
+When generating a Mermaid diagram in an HTML document, caseproc checks
+whether the document already contains a `<script` tag referencing the
+`mermaid_js_url`. If not, it injects the following block immediately
+before the first generated `<pre class="mermaid">`:
+
+~~~~html
+<script type="module">
+  import mermaid from 'URL';
+  mermaid.initialize({ startOnLoad: true });
+</script>
+~~~~
+
+Setting `mermaid_js_url` to `""` disables auto-injection entirely,
+for users who manage the script themselves in their HTML template.
+
+We inject before the first diagram rather than into `<head>` because
+caseproc doesn't require a valid full HTML document structure;
+injecting into `<head>` would require parsing/locating it, while
+injecting before the first diagram is always correct and works in
+partial HTML files.
 
 The `pkg_defines` selector shows the word `Defines: `,
 followed by a comma-separated list of "TYPE ID" (e.g., "Claim Foo")
