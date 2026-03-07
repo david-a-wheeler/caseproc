@@ -173,15 +173,15 @@ by `Justification`, `Assumption`, or `Strategy`
 caseproc [--config FILE] [--error] [--update]
          [--rename OLD NEW] [--restate LABEL STATEMENT]
          [--ltac FILENAME]
-         [--validate | --select SELECTOR | --stdout | --selftest]
+         [--validate | --select SELECTOR | --stdout | --selftest | --missing]
          [files ...]
 ```
 
 ### Normal mode (default)
 
 With no mode flag, `caseproc` updates the listed document files in place.
-It validates the LTAC, renders fresh content for all marked regions, updates
-element headings and anchors, and writes the changes back atomically.
+It validates the LTAC, renders fresh content for all marked regions, and
+writes the changes back atomically.
 If no files are given, it tries the document auto-discovery sequence
 (see [Auto-discovery](#auto-discovery)).
 
@@ -191,7 +191,8 @@ document files, then run `caseproc` to resync everything.
 ### --validate
 
 Validates the LTAC and, if document files are given (or auto-discovered),
-cross-checks their headers against the LTAC.
+checks that every declared LTAC element has a corresponding `element`
+selector in the documents.
 Produces no output and modifies no files.
 Exit code is non-zero if any error was reported.
 Useful in CI to confirm the assurance case is internally consistent.
@@ -211,6 +212,21 @@ Useful for previewing output or for piping into other tools.
 
 Runs the built-in doctest suite and exits.
 Exit code is 0 if all tests pass, 1 if any fail.
+
+### --missing
+
+Scans the document files for declared LTAC elements that have no
+corresponding `element` selector.  For each missing element, appends a
+skeleton `<!-- caseproc element ID -->…<!-- end caseproc -->` region at
+the end of the first document file.
+Also marks leaf `Claim` and `Strategy` nodes (those with no supporting
+children) with `{needsSupport}` in the LTAC file, unless they already
+carry an assertion-status option.
+Rewrites both the document files and the LTAC file in place.
+
+`--missing` is intended as a one-time scaffolding aid when bringing an
+existing LTAC file into a new document.  After running it, review and
+reorganize the inserted regions as needed.
 
 ### --ltac FILENAME
 
@@ -267,27 +283,45 @@ A selector identifies what to render and in what format.
 Selectors appear after `--select` on the command line or inside marked
 regions in document files (see [Marked regions](#marked-regions)).
 
-Format: `KIND [ID | *]`
+### Selector syntax
 
-| Selector | Description |
-|---|---|
-| `ltac/markdown [ID\|*]` | Indented Markdown bullet list with hyperlinks |
-| `ltac/html [ID\|*]` | Nested HTML `<ul>` list with hyperlinks |
-| `sacm/mermaid [ID\|*]` | SACM notation as a Mermaid bottom-up flowchart |
-| `gsn/mermaid [ID\|*]` | GSN notation as a Mermaid top-down flowchart |
-| `statement [ID]` | Single-line statement: `Statement: …` |
-| `references [ID]` | Markdown links to all packages that reference the element |
-| `info [ID]` | Statement followed by a blank line followed by references |
+```
+KIND [ID | *]
+```
 
-**`ID`** — the identifier of the element to render.
-If omitted (only valid in document filter mode), the element is taken from
-the nearest preceding document header that matches an LTAC element.
+**`KIND`** is one of the values in the table below.
+Shorthand kinds (`sacm`, `gsn`, `ltac`) are auto-expanded based on
+the document format (markdown or HTML) and the `default_renderer` config key.
 
-**`*`** — renders all packages in the order they appear in the LTAC file.
-Only supported with `ltac/markdown`, `ltac/html`, `sacm/mermaid`, and
-`gsn/mermaid`.
-Each package is preceded by a configurable header (see `pkg_header_prefix`
-and `pkg_header_suffix` in [Configuration](#configuration)).
+**`ID`** is the identifier of the element or package to render.
+For selectors that accept `*`, all packages are rendered in order.
+
+| Selector | `ID` | Description |
+|---|---|---|
+| `element ID` | required | Heading + cross-references for one element |
+| `package [ID\|*]` | optional | Heading + diagram + index for one or all packages |
+| `sacm [ID\|*]` | optional | SACM diagram (auto-detects markdown/HTML format) |
+| `sacm/mermaid [ID\|*]` | optional | SACM Mermaid diagram (auto-detects format) |
+| `sacm/mermaid/markdown [ID\|*]` | optional | SACM diagram as a fenced Mermaid block |
+| `sacm/mermaid/html [ID\|*]` | optional | SACM diagram as `<pre class="mermaid">` |
+| `gsn [ID\|*]` | optional | GSN diagram (auto-detects format) |
+| `gsn/mermaid [ID\|*]` | optional | GSN Mermaid diagram (auto-detects format) |
+| `gsn/mermaid/markdown [ID\|*]` | optional | GSN diagram as a fenced Mermaid block |
+| `gsn/mermaid/html [ID\|*]` | optional | GSN diagram as `<pre class="mermaid">` |
+| `ltac [ID\|*]` | optional | LTAC argument list (auto-detects format) |
+| `ltac/markdown [ID\|*]` | optional | LTAC as an indented Markdown bullet list |
+| `ltac/html [ID\|*]` | optional | LTAC as a nested HTML `<ul>` list |
+| `statement ID` | required | Single-line statement: `Statement: …` |
+
+The shorthand expansions are:
+
+| Written | Expands to (Markdown doc) | Expands to (HTML doc) |
+|---|---|---|
+| `sacm` | `sacm/mermaid/markdown` | `sacm/mermaid/html` |
+| `sacm/mermaid` | `sacm/mermaid/markdown` | `sacm/mermaid/html` |
+| `gsn` | `gsn/mermaid/markdown` | `gsn/mermaid/html` |
+| `gsn/mermaid` | `gsn/mermaid/markdown` | `gsn/mermaid/html` |
+| `ltac` | `ltac/markdown` | `ltac/html` |
 
 ---
 
@@ -301,13 +335,19 @@ All keys are optional; unrecognized keys produce a warning.
 |---|---|---|
 | `base_url` | `""` | Base URL for hyperlinks in `sacm/mermaid` and `gsn/mermaid` output.  Set to the GitHub URL of the rendered output document so that diagram node `click` targets resolve correctly. |
 | `bottom_padding` | `true` | Adds an invisible `BottomPadding` node in Mermaid diagrams to prevent GitHub's floating diagram controls from obscuring the bottom row of nodes. |
+| `default_renderer` | `"mermaid"` | Renderer used when expanding the `sacm` and `gsn` shorthand selectors.  Currently only `"mermaid"` is supported. |
+| `default_representation` | `"sacm"` | Diagram notation used by the `package` selector.  Accepts `"sacm"` or `"gsn"`. |
 | `document_files` | `[]` | List of document files to process; equivalent to listing them on the command line.  Command-line files take priority. |
+| `element_level` | `3` | Markdown/HTML heading level (1–6) used by the `element` selector.  Can also be set per-document with `caseproc-config`. |
+| `element_selections` | `"referenced_by,supported_by,supports"` | Comma-separated list of sub-sections rendered inside each `element` region.  Valid values: `referenced_by`, `supported_by`, `supports`. |
 | `ltac_file` | `""` | Path to the LTAC file; overridden by `--ltac`. |
 | `markdown_base_url` | `""` | Base URL for hyperlinks in `ltac/markdown` and `ltac/html` output. |
-| `pkg_header_prefix` | `"### "` | String prepended to each package header when rendering `*`. |
-| `pkg_header_suffix` | `"\n"` | String appended after each package header when rendering `*` (a newline by default, producing a blank separator line). |
-| `pkg_label` | `"Package "` | Word (with trailing space) used to identify packages in headers and rendered output. |
-| `update_headers` | `true` | When `true`, stale element statement text in document headers is silently rewritten to match the LTAC declaration.  When `false`, a mismatch produces a warning instead. |
+| `mermaid_js_url` | CDN URL | URL of the Mermaid JS script injected into HTML output.  Set to `""` to disable injection. |
+| `package_level` | `3` | Heading level (1–6) used by the `package` selector.  Can also be set per-document with `caseproc-config`. |
+| `package_selections` | `"representation,pkg_defines,pkg_citing,pkg_cited"` | Comma-separated list of sub-sections rendered inside each `package` region.  Valid values: `representation`, `pkg_defines`, `pkg_citing`, `pkg_cited`. |
+| `pkg_header_prefix` | `"### "` | String prepended to each package header when rendering `*` with `ltac/*` selectors. |
+| `pkg_header_suffix` | `"\n"` | String appended after each package header when rendering `*` with `ltac/*` selectors (a newline by default, producing a blank separator line). |
+| `pkg_label` | `"Package "` | Word (with trailing space) used to identify packages in rendered output. |
 
 ---
 
@@ -327,64 +367,88 @@ marks a region whose content `caseproc` replaces with freshly rendered
 output for `SELECTOR`.
 The opening and closing comment lines are preserved; only the content
 between them is replaced.
-If `SELECTOR` produces no output (for example, `references` for an element
-with no package references), the region is left empty.
+If `SELECTOR` produces no output, the region is left empty.
 
 Marked regions may use any selector.
 The most common patterns are:
 
 ```markdown
+<!-- caseproc package * -->
 <!-- caseproc sacm/mermaid * -->
 <!-- caseproc gsn/mermaid * -->
 <!-- caseproc ltac/markdown * -->
 <!-- caseproc sacm/mermaid C1 -->
-<!-- caseproc statement -->
-<!-- caseproc references -->
-<!-- caseproc info -->
+<!-- caseproc element C1 -->
+<!-- caseproc statement C1 -->
 ```
 
-When `ID` is omitted, the *current element* is used: the element
-corresponding to the most recently seen document header that matched an
-LTAC element (see [Document headers](#document-headers) below).
+### element and package selectors
 
-### Document headers
+The `element` and `package` selectors generate structured headings and
+cross-reference sub-sections, providing a stable home for each piece of
+the assurance case in the document.
 
-`caseproc` scans every header line in the document for LTAC-shaped text.
-A header matches if its text has the form:
+**`<!-- caseproc element ID -->`** generates:
+
+- A heading at the level specified by `element_level` (default: `###`),
+  using the element's type and identifier as its text, with a stable
+  HTML anchor for deep-linking.
+- Sub-sections controlled by `element_selections`:
+  - `referenced_by` — lists packages that reference this element.
+  - `supported_by` — lists the element's direct supporting children.
+  - `supports` — lists what this element directly supports.
+
+**`<!-- caseproc package [ID|*] -->`** generates:
+
+- A heading at the level specified by `package_level` (default: `###`),
+  with a stable HTML anchor.
+- Sub-sections controlled by `package_selections`:
+  - `representation` — the default diagram (SACM or GSN per `default_representation`).
+  - `pkg_defines` — lists elements defined in this package.
+  - `pkg_citing` — lists elements from other packages cited here.
+  - `pkg_cited` — lists elements from this package cited elsewhere.
+
+`*` renders all packages in order.
+
+`caseproc` warns if a declared LTAC element has no corresponding `element`
+selector in any processed document.  Use `--missing` to scaffold the
+missing regions automatically.
+
+### Per-document configuration
+
+A document may override selected configuration keys for itself using
+`caseproc-config` directives:
 
 ```
-TYPE ID
-TYPE ID: statement text
-Package ID
-Package ID: statement text
+<!-- caseproc-config KEY = VALUE -->
 ```
 
-where `TYPE` is one of the LTAC element type names and `Package` is the
-configured `pkg_label` (stripped of its trailing space).
+The directive takes effect from that point in the document onward.
+Currently supported keys:
 
-When a header matches:
+| Key | Accepted values |
+|---|---|
+| `element_level` | `1`–`6` |
+| `package_level` | `1`–`6` |
 
-1. `caseproc` sets the *current element* to the matched identifier, so
-   subsequent selectors without an explicit `ID` use it.
-2. A stable HTML anchor `<a id="TYPE-ID"></a>` (e.g., `<a id="claim-c1"></a>`)
-   is inserted immediately before the header line.  Any previously generated
-   anchor for the same element is stripped and replaced.
-3. If `update_headers` is `true` (the default) and the header's statement
-   text differs from the LTAC declaration, the header is rewritten to use
-   the LTAC statement text.
-4. If `update_headers` is `false` and the statement text differs, a warning
-   is produced.
+Example — use level-2 headings for packages and level-3 for elements:
 
-A header that names an identifier not present in the LTAC produces a warning.
-A warning is also produced if a declared LTAC element has no corresponding
-header in any processed document (each element is expected to have a
-place for its supporting detail).
+```markdown
+<!-- caseproc-config package_level = 2 -->
+<!-- caseproc-config element_level = 3 -->
+```
+
+Do **not** use `<!-- caseproc config ... -->` (without the hyphen); that
+syntax is recognized and produces a helpful error directing you to the
+correct form.
 
 ### Anchor naming
 
-Anchors follow GitHub's convention for fragment identifiers:
+Anchors for element and package headings are derived from the element type
+and identifier only (statement text is excluded so that anchors remain
+stable when statements change):
 
-1. Take the full heading text (e.g., `Claim C1: The system is safe`).
+1. Form the string `TYPE ID` (e.g., `Claim C1`, `Package Requirements`).
 2. Lowercase everything.
 3. Remove characters that are not Unicode letters, digits, hyphens, or spaces.
 4. Replace spaces with hyphens.
@@ -392,11 +456,11 @@ Anchors follow GitHub's convention for fragment identifiers:
 
 Examples:
 
-| Heading text | Anchor id |
+| Type + Identifier | Anchor id |
 |---|---|
 | `Claim C1` | `claim-c1` |
 | `Package Requirements` | `package-requirements` |
-| `Strategy AR1: Argue by hazard` | `strategy-ar1-argue-by-hazard` |
+| `Strategy AR1` | `strategy-ar1` |
 
 ---
 
@@ -529,12 +593,9 @@ Errors cause a non-zero exit; warnings do not (unless `--error` is given).
 
 **Additional checks when document files are processed:**
 
-- An element identifier in a document header that is not in the LTAC.
-- A mismatch between a header's statement and the LTAC declaration
-  (warning, or silent rewrite if `update_headers` is `true`).
-- A declared LTAC element with no corresponding document header.
-- A non-LTAC header section name that caseproc cannot cross-reference
-  (informational only).
+- A declared LTAC element with no corresponding `element` selector in any
+  processed document (each element is expected to have a place for its
+  supporting detail).
 
 ---
 
@@ -559,8 +620,9 @@ Example: if `- Claim ^C1: Old statement` is found but the declaration is
 
 Renames identifier `OLD` to `NEW` in the LTAC forest and then rewrites the
 LTAC file.
-When document files are also processed in the same run, all headers and
-marked regions in those documents are updated to use the new name.
+When document files are also processed in the same run, all `element` and
+`package` selectors and `statement` selectors in those documents are updated
+to use the new name.
 
 After renaming, all validations are re-run; if any errors result, no files
 are written.
@@ -569,8 +631,6 @@ are written.
 
 Changes the statement text of `LABEL` to `STATEMENT` in the LTAC forest and
 rewrites the LTAC file.
-When document files are also processed, the corresponding document headers
-are updated to use the new statement (subject to `update_headers`).
 
 `--rename` and `--restate` may be given more than once per invocation;
 mutations are applied in the order specified.
