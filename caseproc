@@ -2040,13 +2040,17 @@ If you don't want to perform an in-place update of the files, use --stdout.
 Selectors are of format `KIND [ID | *]`, where KIND is:
   ltac/markdown  ID|*   render as an indented Markdown bullet list
   ltac/html      ID|*   render as a nested HTML list
-  sacm/mermaid   ID|*   render as a SACM Mermaid flowchart
-  gsn/mermaid    ID|*   render as a GSN Mermaid flowchart
-  statement      ID     one-line statement for an element
-  references     ID     Markdown links to packages that reference the element
-  info           ID     statement followed by references
-Omit ID to use the element set by the nearest preceding header (filter mode).
-Use * to render all packages (ltac/*, sacm/mermaid, and gsn/mermaid only).
+  element        ID    heading + cross-references for one element
+  package        ID|*  heading + diagram + index for one or all packages
+  sacm           ID|*  SACM mermaid diagram (auto-detects markdown/HTML output)
+  sacm/mermaid/markdown  ID|*  explicit markdown fenced block
+  sacm/mermaid/html      ID|*  explicit <pre class="mermaid"> block
+  gsn            ID|*  GSN mermaid diagram (auto-detects format)
+  ltac           ID|*  LTAC argument list (auto-detects format)
+  ltac/markdown  ID|*  LTAC as Markdown bullet list
+  ltac/html      ID|*  LTAC as HTML <ul> list
+  statement      ID    one-line statement for an element
+Use * to render all packages (package/ltac/sacm/gsn selectors).
 
 Validations on the LTAC file (always):
   - There must be no circularities (this prevents circular reasoning)
@@ -2066,11 +2070,16 @@ Additional checks when document files are provided:
     in the document (used to generate the element's heading and cross-references).
 
 Configuration keys (--config FILE, JSON object):
-  base_url           base URL for hyperlinks in sacm/mermaid and gsn/mermaid output (default: "")
+  base_url           base URL for hyperlinks in sacm/gsn mermaid output (default: "")
   markdown_base_url  base URL for hyperlinks in ltac/markdown and ltac/html output (default: "")
+  default_renderer   renderer for 'sacm'/'gsn' shorthands: "mermaid" (default)
+  default_representation  content for 'package' selector: "sacm" (default)
+  element_level      heading level (1-6) for 'element' selector (default: 3)
+  element_selections comma-separated list for element sub-sections (default: referenced_by,supported_by,supports)
+  mermaid_js_url     URL for Mermaid JS script in HTML output (default: CDN URL; "" disables)
+  package_level      heading level (1-6) for 'package' selector (default: 3)
+  package_selections comma-separated list for package sub-sections (default: representation,pkg_defines,pkg_citing,pkg_cited)
   pkg_label          word used to identify packages in output (default: "Package ")
-  pkg_header_prefix  string prepended to each package header when rendering * (default: "### ")
-  pkg_header_suffix  string appended after each package header when rendering * (default: newline)
 
 For full details see docs/design-spec.md.""",
     )
