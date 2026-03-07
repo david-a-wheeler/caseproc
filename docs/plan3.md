@@ -125,9 +125,10 @@ its following blank line entirely.
 
 `supported_by`:
 ~~~~
-Supported by: (starting with this element's definition in bold wrapping
-the link, a hyperlinked list of all its children elements, including
-cited and link elements, comma-separated)
+Supported by: (starting with this element's definition we present
+a hyperlinked list of all its children elements, including
+cited and link elements, comma-separated. Nothing is specifically special
+here, they're all children, so we don't expect to bold anything here.)
 
 ~~~~
 
@@ -139,7 +140,8 @@ blank line entirely.
 Supports: (hyperlinked list. First it's the parent of this element's
   definition in bold wrapping the link, followed by the list of all
   parents of citations of this element in LTAC file order. If it's a
-  top-level item with no direct parent, just omit the parent.)
+  top-level item with no direct parent, omit that parent, but we'd still
+  present this list if there are any parents of citations of this element.)
 
 ~~~~
 
@@ -293,7 +295,10 @@ that has a hyperlink to its header (`#TYPE-ID`),
 followed by a blank line. These are all of the elements that are
 *defined* in this package (don't use `^`), starting with the top element
 (which is normally a claim). Bold the top element, to emphasize
-its special status. Markdown bolds with `**..**`, HTML with `<b>...</b>`.
+its special status.
+As usual, this is done by having bold wrap the hyperlink of the top element,
+using the same bold(hyperlink(...)), so
+Markdown bolds with `**..**`, while HTML with `<b>...</b>`.
 Thus, we can easily jump from here
 to the details of any element defined in this package from the
 representation *or* this list.
