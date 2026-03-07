@@ -357,6 +357,36 @@ class TestSelectSacm(unittest.TestCase):
                          read_fixture('doc-simple-stderr.expected.txt'))
 
 
+class TestSelectorExpansion(unittest.TestCase):
+    def test_sacm_shorthand_equals_sacm_mermaid(self):
+        """'sacm' expands to 'sacm/mermaid/markdown' on a markdown context."""
+        r1 = run('--ltac', fixture('simple.ltac'),
+                 '--config', fixture('simple.sacm.mermaid.config'),
+                 '--select', 'sacm')
+        r2 = run('--ltac', fixture('simple.ltac'),
+                 '--config', fixture('simple.sacm.mermaid.config'),
+                 '--select', 'sacm/mermaid')
+        self.assertEqual(r1.returncode, 0)
+        self.assertEqual(r1.stdout, r2.stdout)
+
+    def test_gsn_shorthand_equals_gsn_mermaid(self):
+        """'gsn' expands to 'gsn/mermaid/markdown' on a markdown context."""
+        r1 = run('--ltac', fixture('simple.ltac'),
+                 '--config', fixture('simple.gsn.mermaid.config'),
+                 '--select', 'gsn')
+        r2 = run('--ltac', fixture('simple.ltac'),
+                 '--config', fixture('simple.gsn.mermaid.config'),
+                 '--select', 'gsn/mermaid')
+        self.assertEqual(r1.returncode, 0)
+        self.assertEqual(r1.stdout, r2.stdout)
+
+    def test_ltac_shorthand_expands(self):
+        """'ltac' in --select expands (defaults to markdown)."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Claim', r.stdout)
+
+
 class TestSelectGsn(unittest.TestCase):
     def test_select_gsn_mermaid(self):
         r = run('--ltac', fixture('simple.ltac'),

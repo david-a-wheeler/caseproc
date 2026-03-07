@@ -1453,20 +1453,73 @@ def render_all_packages(all_roots: List[Node], render_fn, config: dict) -> str:
     return '\n\n'.join(blocks)
 
 
-_VALID_DISPLAY_TYPES = {'ltac/markdown', 'ltac/html', 'sacm/mermaid',
-                        'gsn/mermaid', 'statement', 'references', 'info'}
+_VALID_DISPLAY_TYPES = {
+    'ltac/markdown', 'ltac/html',
+    'sacm/mermaid', 'sacm/mermaid/markdown', 'sacm/mermaid/html',
+    'gsn/mermaid',  'gsn/mermaid/markdown',  'gsn/mermaid/html',
+    'statement', 'references', 'info',
+    'element', 'package',
+    'referenced_by', 'supported_by', 'supports',
+    'representation', 'pkg_defines', 'pkg_citing', 'pkg_cited',
+}
 
 
-def parse_selector(selector: str) -> Tuple[str, Optional[str]]:
+def expand_selector(raw: str, doc_format: str, config: dict) -> str:
+    """Expand a shorthand selector to its canonical three-part form.
+
+    Rules (fill in missing parts right-to-left using doc_format and
+    default_renderer):
+      sacm            -> sacm/{renderer}/{doc_format}
+      sacm/mermaid    -> sacm/mermaid/{doc_format}
+      sacm/mermaid/markdown -> explicit
+      sacm/mermaid/html     -> explicit
+      gsn             -> gsn/{renderer}/{doc_format}
+      gsn/mermaid     -> gsn/mermaid/{doc_format}
+      ltac            -> ltac/{doc_format}
+      ltac/markdown   -> ltac/markdown  (explicit, no third part)
+      ltac/html       -> ltac/html
+      everything else -> unchanged
+
+    >>> expand_selector('sacm', 'markdown', {'default_renderer': 'mermaid'})
+    'sacm/mermaid/markdown'
+    >>> expand_selector('sacm/mermaid', 'html', {'default_renderer': 'mermaid'})
+    'sacm/mermaid/html'
+    >>> expand_selector('sacm/mermaid/markdown', 'html', {})
+    'sacm/mermaid/markdown'
+    >>> expand_selector('ltac', 'html', {})
+    'ltac/html'
+    >>> expand_selector('statement', 'markdown', {})
+    'statement'
+    """
+    renderer = config.get('default_renderer', 'mermaid')
+    parts = raw.split('/')
+    if parts[0] in ('sacm', 'gsn'):
+        if len(parts) == 1:
+            return f'{parts[0]}/{renderer}/{doc_format}'
+        if len(parts) == 2:
+            return f'{parts[0]}/{parts[1]}/{doc_format}'
+        return raw  # explicit three-part, pass through
+    if parts[0] == 'ltac':
+        if len(parts) == 1:
+            return f'ltac/{doc_format}'
+        return raw  # explicit two-part, pass through
+    return raw
+
+
+def parse_selector(selector: str, doc_format: str = 'markdown',
+                   config: dict = None) -> Tuple[str, Optional[str]]:
     """Parse a SELECTOR string into (display_type, element_id_or_None).
 
     Format: 'display_type [element_id]'
     An element_id of '*' is kept as the literal string '*'.
+    Expands shorthand forms (sacm, gsn, ltac) using doc_format and config.
     Calls error() on unknown display_type.
     """
+    config = config or {}
     parts = selector.split(None, 1)
-    display_type = parts[0] if parts else ''
+    raw_type = parts[0] if parts else ''
     element_id: Optional[str] = parts[1].strip() if len(parts) > 1 else None
+    display_type = expand_selector(raw_type, doc_format, config)
     if display_type not in _VALID_DISPLAY_TYPES:
         error(f"unknown selector type {display_type!r}")
     return display_type, element_id
@@ -1494,19 +1547,30 @@ def render_selector(
     config: dict,
     id_info: Dict[str, dict],
     current_element: Optional[Node] = None,
+    doc_format: str = 'markdown',
 ) -> str:
     """Parse SELECTOR and return the rendered string.
 
     Dispatches to the appropriate renderer based on display_type.
     Returns '' if the display_type is unknown (error already reported).
     """
-    display_type, element_id = parse_selector(selector)
+    display_type, element_id = parse_selector(selector, doc_format, config)
 
-    if display_type == 'sacm/mermaid':
+    if display_type == 'config':
+        error("use '<!-- caseproc-config KEY = VALUE -->' (not '<!-- caseproc config ...-->')")
+        return ''
+
+    if display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
 
-    if display_type == 'gsn/mermaid':
+    if display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config)
+
+    if display_type == 'sacm/mermaid/html':
+        return _render_or_all(element_id, all_roots, render_sacm_html, registry, current_element, config)
+
+    if display_type == 'gsn/mermaid/html':
+        return _render_or_all(element_id, all_roots, render_gsn_html, registry, current_element, config)
 
     if display_type == 'ltac/markdown':
         return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config)
@@ -1629,7 +1693,8 @@ def process_document_stream(
         if m:
             selector = m.group(1)
             found_end = _consume_region(line_iter, filename, lineno, selector)
-            rendered = render_selector(selector, registry, all_roots, config, id_info, current_element)
+            rendered = render_selector(selector, registry, all_roots, config, id_info,
+                                       current_element, doc_format)
             out.write(text + '\n')
             if found_end:
                 if rendered:
@@ -2299,7 +2364,8 @@ def main() -> None:
     )
 
     if args.select:
-        result = render_selector(args.select, registry, all_roots, config, id_info)
+        result = render_selector(args.select, registry, all_roots, config, id_info,
+                                 doc_format='markdown')
         if result:
             print(result)
         if ltac_pair:
