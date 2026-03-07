@@ -1435,6 +1435,7 @@ _VALID_DISPLAY_TYPES = {
     'gsn/mermaid',  'gsn/mermaid/markdown',  'gsn/mermaid/html',
     'statement',
     'element', 'package',
+    'warning',
     'config',  # recognized to give a helpful error directing users to caseproc-config
     'referenced_by', 'supported_by', 'supports',
     'representation', 'pkg_defines', 'pkg_citing', 'pkg_cited',
@@ -1798,6 +1799,20 @@ def render_package_selector(pkg_id_or_star: str, all_roots: List[Node],
     return _render_single_package(pkg_root, all_roots, id_info, config, state)
 
 
+_WARNING_TEXT = (
+    '<!-- WARNING: DO NOT EDIT text within caseproc SELECTOR ... end caseproc. -->\n'
+    '<!-- Those regions are regenerated. -->'
+)
+
+
+def render_warning(element_id: Optional[str]) -> str:
+    """Render the warning selector.  Refuses any element_id argument."""
+    if element_id is not None:
+        error("'warning' selector takes no parameters")
+        return ''
+    return _WARNING_TEXT
+
+
 def render_selector(
     selector: str,
     registry: Dict[str, Node],
@@ -1818,6 +1833,9 @@ def render_selector(
     if display_type == 'config':
         error("use '<!-- caseproc-config KEY = VALUE -->' (not '<!-- caseproc config ...-->')")
         return ''
+
+    if display_type == 'warning':
+        return render_warning(element_id)
 
     if display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
@@ -1959,21 +1977,53 @@ def process_document_stream(
     id_info: Dict[str, dict],
     seen_element_ids: set,
     doc_format: str = 'markdown',
+    add_missing: bool = False,
 ) -> None:
     """Process a document file line by line, replacing ltac selector regions.
 
     Writes all output to `out`.  Updates `seen_element_ids` with identifiers of
     LTAC elements rendered via 'element' selectors.  Uses the already-loaded
     registry and all_roots; performs no LTAC parsing.
+
+    When `add_missing` is True, appends skeleton element regions for every
+    declared LTAC element not yet seen via an 'element' selector.  In HTML
+    documents the injection happens immediately before the first `</body>` tag;
+    in Markdown documents (or HTML without `</body>`) it happens at EOF.
     """
     _doc_state = DocState(doc_format=doc_format, seen_element_ids=seen_element_ids)
     filename = getattr(f, 'name', '<stream>')
 
     config = dict(config)  # local copy so directives don't affect caller's config
 
+    _injected = False
+
+    def _inject_missing() -> None:
+        nonlocal _injected
+        if _injected:
+            return
+        _injected = True
+        all_ids = [node.identifier for node in _all_nodes(all_roots)
+                   if not node.is_cited and node.identifier]
+        missing = [ident for ident in all_ids if ident not in _doc_state.seen_element_ids]
+        if not missing:
+            return
+        inj_state = DocState(doc_format=doc_format, seen_element_ids=_doc_state.seen_element_ids)
+        out.write('\n')
+        for ident in missing:
+            rendered = render_element_selector(ident, registry, [], id_info, config, inj_state)
+            out.write(f'<!-- caseproc element {ident} -->\n')
+            out.write(rendered + '\n')
+            out.write('<!-- end caseproc -->\n')
+            out.write('\n')
+
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
+
+        if add_missing and '</body>' in text.lower():
+            _inject_missing()
+            out.write(text + '\n')
+            continue
 
         cm = _CASEPROC_CONFIG_RE.match(text)
         if cm:
@@ -1997,10 +2047,64 @@ def process_document_stream(
 
         out.write(text + '\n')
 
+    if add_missing:
+        _inject_missing()
+
 
 # ---------------------------------------------------------------------------
 # CLI helpers
 # ---------------------------------------------------------------------------
+
+_START_LTAC = """\
+- Claim Top: Top level claim
+  - Claim G2: G2 is true
+  - Claim G3: G3 is true
+"""
+
+_START_DOC = """\
+# Stub Assurance Case
+
+This is a sample assurance case for you to edit.
+
+<!-- caseproc warning -->
+<!-- end caseproc -->
+
+## Packages
+
+<!-- caseproc package * -->
+<!-- end caseproc -->
+
+## Elements
+"""
+
+_START_CANDIDATES = (
+    'case.ltac', 'docs/case.ltac',
+    'case.md', 'case.markdown', 'case.html',
+    'docs/case.md', 'docs/case.markdown', 'docs/case.html',
+)
+
+
+def _check_no_existing_case_files() -> None:
+    """Panic if any well-known case file already exists."""
+    for path in _START_CANDIDATES:
+        if os.path.exists(path):
+            panic(f"--start: {path!r} already exists; remove it before using --start")
+
+
+def _write_start_stubs() -> None:
+    """Write initial case.ltac and case.md stubs for --start."""
+    try:
+        with open('case.ltac', 'w', encoding='utf-8') as f:
+            f.write(_START_LTAC)
+    except OSError as e:
+        panic(f"--start: cannot write case.ltac: {e}")
+    try:
+        with open('case.md', 'w', encoding='utf-8') as f:
+            f.write(_START_DOC)
+    except OSError as e:
+        panic(f"--start: cannot write case.md: {e}")
+    notify("created case.ltac and case.md")
+
 
 class _MutationAction(argparse.Action):
     """Accumulate --rename and --restate operations as ordered tagged tuples."""
@@ -2032,7 +2136,7 @@ be updated, but *only* those regions.
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
---rename, --restate, and --missing *may* modify the LTAC file.
+--rename, --restate, --missing, and --start *may* modify the LTAC file.
 All file updates are done carefully. The updated files are generated
 first as temporary files, then the originals are moved to .backup/,
 and only then are the generated files moved to their final destinations.
@@ -2051,6 +2155,7 @@ Selectors are of format `KIND [ID | *]`, where KIND is:
   ltac/markdown  ID|*  LTAC as Markdown bullet list
   ltac/html      ID|*  LTAC as HTML <ul> list
   statement      ID    one-line statement for an element
+  warning              fixed "do not edit" warning comment (no ID)
 Use * to render all packages (package/ltac/sacm/gsn selectors).
 
 Validations on the LTAC file (always):
@@ -2135,8 +2240,13 @@ For full details see docs/design-spec.md.""",
     )
     mode.add_argument(
         '--missing', action='store_true',
-        help='insert element selectors for missing elements and flag leaf elements '
-             'with needsSupport; rewrites document files in place',
+        help='re-render document files and insert element selectors for missing elements; '
+             'also flags leaf elements with needsSupport in the LTAC',
+    )
+    mode.add_argument(
+        '--start', action='store_true',
+        help='create starter case.ltac and case.md, then populate them '
+             '(panics if any case file already exists)',
     )
 
     return parser.parse_args()
@@ -2336,55 +2446,6 @@ def _process_files(
                                 seen_element_ids, 'markdown')
 
 
-def _has_user_content(doc_text: str, element_id: str) -> bool:
-    """Return True if the document has non-caseproc content after the element region.
-
-    Returns False if the element region is absent, or if the text between
-    the end of the element region and the next element/package region consists
-    only of blank lines and caseproc directives.
-    """
-    start_marker = f'<!-- caseproc element {element_id} -->'
-    end_marker = '<!-- end caseproc -->'
-    next_element_re = re.compile(r'<!--\s*caseproc\s+(?:element|package)\s')
-    pos = doc_text.find(start_marker)
-    if pos == -1:
-        return False
-    pos = doc_text.find(end_marker, pos)
-    if pos == -1:
-        return False
-    pos += len(end_marker)
-    for line in doc_text[pos:].splitlines():
-        stripped = line.strip()
-        if not stripped:
-            continue
-        if next_element_re.match(stripped):
-            return False
-        if stripped.startswith('<!-- caseproc') or stripped.startswith('<!--caseproc'):
-            continue
-        return True
-    return False
-
-
-def _add_missing_elements(doc_text: str, missing_ids: List[str],
-                          registry: Dict[str, Node], id_info: Dict[str, dict],
-                          config: dict, doc_format: str) -> str:
-    """Append element regions for each missing_ids entry to doc_text."""
-    state = DocState(doc_format=doc_format)
-    insertions = []
-    for ident in missing_ids:
-        state.current_id = ident
-        rendered = render_element_selector(ident, registry, [], id_info, config, state)
-        block = (f'<!-- caseproc element {ident} -->\n'
-                 f'{rendered}\n'
-                 f'<!-- end caseproc -->\n')
-        insertions.append(block)
-    addition = '\n'.join(insertions)
-    if doc_format == 'html':
-        idx = doc_text.lower().rfind('</body>')
-        if idx != -1:
-            return doc_text[:idx] + addition + '\n' + doc_text[idx:]
-    return doc_text + '\n' + addition
-
 
 _ASSERTION_STATUSES = frozenset({'needssupport', 'assumed', 'axiomatic', 'defeated', 'ascited'})
 
@@ -2576,6 +2637,7 @@ def _inline_rewrite_file(
     config: dict,
     id_info: Dict[str, dict],
     seen_element_ids: set,
+    add_missing: bool = False,
 ) -> Optional[Tuple[str, str]]:
     """Process a single document file, writing updated content to a temp file.
 
@@ -2596,7 +2658,8 @@ def _inline_rewrite_file(
     buf = io.StringIO()
     with io.StringIO(original_lf) as src:
         process_document_stream(src, buf, registry, all_roots, config, id_info,
-                                seen_element_ids, detect_doc_format(path))
+                                seen_element_ids, detect_doc_format(path),
+                                add_missing=add_missing)
     if _had_error and not error_before:
         # Errors occurred while processing this file; leave it untouched.
         return None
@@ -2629,6 +2692,13 @@ def main() -> None:
     if args.selftest:
         run_selftests()
         return  # run_selftests() calls sys.exit(); this is a safety net
+
+    # --start must fire before find_ltac_file() because it creates case.ltac.
+    # After writing the stubs, execution falls through to the normal LTAC
+    # loading below, which will find the newly created case.ltac.
+    if args.start:
+        _check_no_existing_case_files()
+        _write_start_stubs()
 
     if args.error:
         _strict = True
@@ -2693,14 +2763,16 @@ def main() -> None:
     if not document_files:
         document_files = list(config.get('document_files', []))
     if not document_files:
-        for candidate in ('case.md', 'case.html', 'docs/case.md', 'docs/case.html'):
+        for candidate in ('case.md', 'case.markdown', 'case.html',
+                          'docs/case.md', 'docs/case.markdown', 'docs/case.html'):
             if os.path.exists(candidate):
                 document_files = [candidate]
                 break
 
     _NO_FILES_MSG = (
         "no document files found; specify files on the command line, set document_files "
-        "in config, or create one of: case.md, case.html, docs/case.md, docs/case.html"
+        "in config, or create one of: case.md, case.markdown, case.html, "
+        "docs/case.md, docs/case.markdown, docs/case.html"
     )
 
     if args.select:
@@ -2725,54 +2797,30 @@ def main() -> None:
         _check_element_coverage(registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair])
-    elif args.missing:
+    elif args.missing or args.start:
         if not document_files:
             panic(_NO_FILES_MSG)
         seen_element_ids: set = set()
-        # Cache document text for user-content detection.
-        doc_text_cache: Dict[str, str] = {}
-        for path in document_files:
-            try:
-                with open(path, newline='') as f:
-                    doc_text_cache[path] = f.read().replace('\r\n', '\n')
-            except OSError as e:
-                error(f"cannot open {path!r}: {e}")
-                continue
-            with io.StringIO(doc_text_cache[path]) as src:
-                process_document_stream(src, io.StringIO(), registry, all_roots,
-                                        config, id_info, seen_element_ids,
-                                        detect_doc_format(path))
-        # Collect missing IDs (in LTAC order).
-        all_ids_in_order = [n.identifier for n in _all_nodes(all_roots)
-                            if not n.is_cited and n.identifier]
-        missing_ids = [i for i in all_ids_in_order if i not in seen_element_ids]
-        # Collect seen IDs with no user content.
-        empty_ids = [i for i in seen_element_ids
-                     if not any(_has_user_content(doc_text_cache.get(p, ''), i)
-                                for p in document_files)]
-        # Append missing elements to the last document.
-        if missing_ids and document_files:
-            last_path = document_files[-1]
-            doc_text = doc_text_cache.get(last_path, '')
-            doc_format = detect_doc_format(last_path)
-            new_text = _add_missing_elements(doc_text, missing_ids,
-                                             registry, id_info, config, doc_format)
-            line_ending = detect_line_ending(doc_text)
-            tmp = _make_temp(last_path, new_text, line_ending)
-            if tmp is not None:
-                pairs = ([ltac_pair] if ltac_pair else [])
-                pairs.append((tmp, last_path))
-                commit_updates(pairs)
-                ltac_pair = None
-        # Mark needsSupport on leaf elements that are missing or empty.
-        candidates = missing_ids + [i for i in empty_ids if i not in missing_ids]
-        changed = _mark_needs_support(candidates, registry)
+        # Re-render all files; inject missing element regions into the last file.
+        pairs = []
+        for i, path in enumerate(document_files):
+            is_last = (i == len(document_files) - 1)
+            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info,
+                                        seen_element_ids, add_missing=is_last)
+            if pair:
+                pairs.append(pair)
+        # Mark needsSupport on all leaf elements that lack an assertion status.
+        all_ids_ordered = [node.identifier for node in _all_nodes(all_roots)
+                           if not node.is_cited and node.identifier]
+        changed = _mark_needs_support(all_ids_ordered, registry)
         if changed:
             tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
             if tmp is not None:
-                if ltac_pair:
-                    commit_updates([ltac_pair])
-                commit_updates([(tmp, ltac_path)])
+                pairs.append((tmp, ltac_path))
+        if ltac_pair:
+            pairs.append(ltac_pair)
+        if pairs:
+            commit_updates(pairs)
     else:
         # Default mode: rewrite document files in place.
         if not document_files and not ltac_pair:

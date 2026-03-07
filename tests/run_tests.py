@@ -1109,5 +1109,124 @@ class TestCaseprocConfig(unittest.TestCase):
             os.unlink(tmp)
 
 
+class TestWarningSelector(unittest.TestCase):
+    def test_warning_select_outputs_text(self):
+        """--select warning outputs the fixed warning comment."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'warning')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('DO NOT EDIT', r.stdout)
+        self.assertIn('regenerated', r.stdout)
+        self.assertEqual(r.stderr, '')
+
+    def test_warning_with_id_is_error(self):
+        """'warning C1' (with an ID) produces an error."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'warning C1')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('no parameters', r.stderr)
+
+    def test_warning_region_rendered(self):
+        """A <!-- caseproc warning --> region is filled with the warning text."""
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc warning -->\n')
+            f.write('stale content\n')
+            f.write('<!-- end caseproc -->\n')
+            tmp = f.name
+        try:
+            r = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('DO NOT EDIT', r.stdout)
+            self.assertNotIn('stale content', r.stdout)
+        finally:
+            os.unlink(tmp)
+
+    def test_missing_rerenders_warning_region(self):
+        """--missing re-renders stale warning and package regions, not just appends."""
+        import tempfile, os
+        ltac = '- Claim Root: Root claim\n'
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
+            f.write(ltac)
+            ltac_path = f.name
+        doc = (
+            '<!-- caseproc warning -->\n'
+            'stale warning\n'
+            '<!-- end caseproc -->\n'
+            '\n'
+            '<!-- caseproc element Root -->\n'
+            '<!-- end caseproc -->\n'
+        )
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write(doc)
+            doc_path = f.name
+        try:
+            r = run('--ltac', ltac_path, '--missing', doc_path)
+            self.assertEqual(r.returncode, 0)
+            content = read_file(doc_path)
+            self.assertIn('DO NOT EDIT', content)
+            self.assertNotIn('stale warning', content)
+        finally:
+            os.unlink(ltac_path)
+            os.unlink(doc_path)
+
+
+class TestStartOption(unittest.TestCase):
+    def _make_workdir(self):
+        """Create a temporary working directory under tests/."""
+        base = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tmp_start')
+        os.makedirs(base, exist_ok=True)
+        d = tempfile.mkdtemp(dir=base)
+        return d
+
+    def test_start_creates_files(self):
+        """--start creates case.ltac and case.md and populates them."""
+        workdir = self._make_workdir()
+        try:
+            r = subprocess.run(
+                LTACPROC + ['--start'],
+                capture_output=True, text=True, encoding='utf-8',
+                cwd=workdir,
+            )
+            self.assertEqual(r.returncode, 0, r.stderr)
+            ltac_path = os.path.join(workdir, 'case.ltac')
+            doc_path = os.path.join(workdir, 'case.md')
+            self.assertTrue(os.path.exists(ltac_path), 'case.ltac not created')
+            self.assertTrue(os.path.exists(doc_path), 'case.md not created')
+            ltac_content = read_file(ltac_path)
+            doc_content = read_file(doc_path)
+            # LTAC: G2 and G3 are leaves and should gain {needssupport}
+            self.assertIn('needssupport', ltac_content)
+            self.assertIn('Top', ltac_content)
+            # Doc: warning region filled
+            self.assertIn('DO NOT EDIT', doc_content)
+            # Doc: element regions for all three nodes appended
+            self.assertIn('<!-- caseproc element Top -->', doc_content)
+            self.assertIn('<!-- caseproc element G2 -->', doc_content)
+            self.assertIn('<!-- caseproc element G3 -->', doc_content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_start_fails_if_files_exist(self):
+        """--start panics when case files already exist."""
+        workdir = self._make_workdir()
+        try:
+            # First run succeeds.
+            r1 = subprocess.run(
+                LTACPROC + ['--start'],
+                capture_output=True, text=True, encoding='utf-8',
+                cwd=workdir,
+            )
+            self.assertEqual(r1.returncode, 0, r1.stderr)
+            # Second run must fail.
+            r2 = subprocess.run(
+                LTACPROC + ['--start'],
+                capture_output=True, text=True, encoding='utf-8',
+                cwd=workdir,
+            )
+            self.assertNotEqual(r2.returncode, 0)
+            self.assertIn('already exists', r2.stderr)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+
 if __name__ == '__main__':
     unittest.main()
