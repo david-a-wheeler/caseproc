@@ -190,7 +190,6 @@ class TestDefaultMode(unittest.TestCase):
         result = run('--ltac', fixture('simple.ltac'), '--validate', fixture('doc-simple-input.md'))
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, '')
-        self.assertEqual(result.stderr, '')
 
     def test_structural_warning_with_error_flag(self):
         """A structurally invalid LTAC file (Claim under Evidence) exits non-zero with --error."""
@@ -198,12 +197,12 @@ class TestDefaultMode(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('should not be a child of', result.stderr)
 
-    def test_header_coverage_warning(self):
-        """Elements without a matching Markdown header produce warnings; --error makes exit non-zero."""
+    def test_element_coverage_warning(self):
+        """Elements without a matching 'element' selector produce warnings; --error makes exit non-zero."""
         result = run('--ltac', fixture('simple.ltac'), '--stdout',
-                     fixture('doc-simple-input.md'), '--error')
+                     fixture('element-selector-input.md'), '--error')
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn('no corresponding header', result.stderr)
+        self.assertIn("no 'element' selector", result.stderr)
 
     def test_two_top_level_elements_is_fatal(self):
         """An LTAC with two root-level elements (different IDs) always exits non-zero."""
@@ -259,20 +258,6 @@ class TestLTACValidation(unittest.TestCase):
         r = run('--ltac', fixture('bad-link.ltac'), '--select', 'ltac/markdown', '--error')
         self.assertNotEqual(r.returncode, 0)
         self.assertIn('Link target', r.stderr)
-
-    def test_header_not_in_ltac_warns(self):
-        """A document header whose ID is not in the LTAC produces a warning but exits 0."""
-        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('unknown-header-input.md'))
-        self.assertEqual(r.returncode, 0)
-        self.assertIn('not found in LTAC', r.stderr)
-        self.assertIn('C99', r.stderr)
-
-    def test_header_not_in_ltac_error_flag(self):
-        """A document header whose ID is not in the LTAC exits non-zero with --error."""
-        r = run('--ltac', fixture('simple.ltac'), '--stdout',
-                fixture('unknown-header-input.md'), '--error')
-        self.assertNotEqual(r.returncode, 0)
-        self.assertIn('not found in LTAC', r.stderr)
 
     def test_select_nonexistent_element_is_error(self):
         """--select with an element ID absent from the registry always exits non-zero."""
@@ -714,14 +699,6 @@ class TestUpdate(unittest.TestCase):
         finally:
             os.unlink(tmp_ltac)
 
-    def test_update_header_default(self):
-        """update_headers defaults to True, so stale headers are rewritten even without --update."""
-        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('update-input.md'))
-        self.assertEqual(r.returncode, 0)
-        actual = check(r.stdout, 'update-output.expected.md')
-        self.assertEqual(actual, read_fixture('update-output.expected.md'))
-        self.assertIn('updated Claim C1:', r.stderr)
-        self.assertNotIn('Wrong statement here', r.stdout)
 
 
 class TestReachability(unittest.TestCase):

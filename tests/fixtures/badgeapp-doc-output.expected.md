@@ -133,73 +133,125 @@ flowchart BT
 
 Additional context and evidence packages supporting the argument.
 
+<!-- caseproc element Security -->
 <a id="claim-security"></a>
 ### Claim Security: The system is adequately secure against moderate threats
 
-<!-- caseproc references -->
+Referenced by: **[Package Security](#package-security)**
+
+Supported by: **[Strategy Processes](#strategy-processes)**
+<!-- end caseproc -->
+
+<!-- caseproc references Security -->
 References: [Package Security](#package-security)
 <!-- end caseproc -->
 
 This is the top-level claim for the entire assurance case.
 
+<!-- caseproc element Requirements -->
 <a id="claim-requirements"></a>
 ### Claim Requirements: Security requirements are identified and met
 
-<!-- caseproc references -->
+Referenced by: **[Package Requirements](#package-requirements)**, [Package Security](#package-security)
+
+Supported by: **[Evidence ReqSpec](#evidence-reqspec)**, [Evidence TestCoverage](#evidence-testcoverage), [Context ReqScope](#context-reqscope)
+
+Supports: [Claim Technical](#claim-technical)
+<!-- end caseproc -->
+
+<!-- caseproc references Requirements -->
 References: [Package Requirements](#package-requirements), [Package Security](#package-security)
 <!-- end caseproc -->
 
 The security requirements are documented and verified against the implementation.
 
+<!-- caseproc element Design -->
 <a id="claim-design"></a>
 ### Claim Design: The security design is documented and reviewed
 
-<!-- caseproc references -->
+Referenced by: **[Package Design](#package-design)**, [Package Security](#package-security)
+
+Supported by: **[Evidence DesignDoc](#evidence-designdoc)**, [Evidence ThreatModel](#evidence-threatmodel)
+
+Supports: [Claim Technical](#claim-technical)
+<!-- end caseproc -->
+
+<!-- caseproc references Design -->
 References: [Package Design](#package-design), [Package Security](#package-security)
 <!-- end caseproc -->
 
 The system design incorporates security from the ground up.
 
+<!-- caseproc element ReqSpec -->
 <a id="evidence-reqspec"></a>
 ### Evidence ReqSpec: Requirements specification
 
-<!-- caseproc references -->
+Referenced by: **[Package Requirements](#package-requirements)**
+
+Supports: **[Claim Requirements](#claim-requirements)**
+<!-- end caseproc -->
+
+<!-- caseproc references ReqSpec -->
 References: [Package Requirements](#package-requirements)
 <!-- end caseproc -->
 
 See the full requirements document for details.
 
+<!-- caseproc element TestCoverage -->
 <a id="evidence-testcoverage"></a>
 ### Evidence TestCoverage: Test coverage report
 
-<!-- caseproc references -->
+Referenced by: **[Package Requirements](#package-requirements)**
+
+Supports: **[Claim Requirements](#claim-requirements)**
+<!-- end caseproc -->
+
+<!-- caseproc references TestCoverage -->
 References: [Package Requirements](#package-requirements)
 <!-- end caseproc -->
 
 All security tests pass with full coverage of requirements.
 
+<!-- caseproc element DesignDoc -->
 <a id="evidence-designdoc"></a>
 ### Evidence DesignDoc: Security architecture document
 
-<!-- caseproc references -->
+Referenced by: **[Package Design](#package-design)**
+
+Supports: **[Claim Design](#claim-design)**
+<!-- end caseproc -->
+
+<!-- caseproc references DesignDoc -->
 References: [Package Design](#package-design)
 <!-- end caseproc -->
 
 The architecture has been reviewed by the security team.
 
+<!-- caseproc element ThreatModel -->
 <a id="evidence-threatmodel"></a>
 ### Evidence ThreatModel: Threat model
 
-<!-- caseproc references -->
+Referenced by: **[Package Design](#package-design)**
+
+Supports: **[Claim Design](#claim-design)**
+<!-- end caseproc -->
+
+<!-- caseproc references ThreatModel -->
 References: [Package Design](#package-design)
 <!-- end caseproc -->
 
 Threats are systematically identified and mitigated.
 
+<!-- caseproc element ReqScope -->
 <a id="context-reqscope"></a>
 ### Context ReqScope: Applies to all user-facing features
 
-<!-- caseproc references -->
+Referenced by: **[Package Requirements](#package-requirements)**
+
+Supports: **[Claim Requirements](#claim-requirements)**
+<!-- end caseproc -->
+
+<!-- caseproc references ReqScope -->
 References: [Package Requirements](#package-requirements)
 <!-- end caseproc -->
 

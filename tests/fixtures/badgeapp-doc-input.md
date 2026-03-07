@@ -13,65 +13,73 @@ stale content
 
 Additional context and evidence packages supporting the argument.
 
-### Claim Security: The system is adequately secure against moderate threats
+<!-- caseproc element Security -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references Security -->
 stale references
 <!-- end caseproc -->
 
 This is the top-level claim for the entire assurance case.
 
-### Claim Requirements: Security requirements are identified and met
+<!-- caseproc element Requirements -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references Requirements -->
 stale references
 <!-- end caseproc -->
 
 The security requirements are documented and verified against the implementation.
 
-### Claim Design: The security design is documented and reviewed
+<!-- caseproc element Design -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references Design -->
 stale references
 <!-- end caseproc -->
 
 The system design incorporates security from the ground up.
 
-### Evidence ReqSpec: Requirements specification
+<!-- caseproc element ReqSpec -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references ReqSpec -->
 stale references
 <!-- end caseproc -->
 
 See the full requirements document for details.
 
-### Evidence TestCoverage: Test coverage report
+<!-- caseproc element TestCoverage -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references TestCoverage -->
 stale references
 <!-- end caseproc -->
 
 All security tests pass with full coverage of requirements.
 
-### Evidence DesignDoc: Security architecture document
+<!-- caseproc element DesignDoc -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references DesignDoc -->
 stale references
 <!-- end caseproc -->
 
 The architecture has been reviewed by the security team.
 
-### Evidence ThreatModel: Threat model
+<!-- caseproc element ThreatModel -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references ThreatModel -->
 stale references
 <!-- end caseproc -->
 
 Threats are systematically identified and mitigated.
 
-### Context ReqScope: Applies to all user-facing features
+<!-- caseproc element ReqScope -->
+<!-- end caseproc -->
 
-<!-- caseproc references -->
+<!-- caseproc references ReqScope -->
 <!-- end caseproc -->
 
 Defines the scope of the requirements coverage.

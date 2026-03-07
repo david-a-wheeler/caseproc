@@ -1,6 +1,6 @@
-caseproc: warning: element AR1 has no corresponding header in any processed file
-caseproc: warning: element C2 has no corresponding header in any processed file
-caseproc: warning: element E1 has no corresponding header in any processed file
-caseproc: warning: element C3 has no corresponding header in any processed file
-caseproc: warning: element A1 has no corresponding header in any processed file
-caseproc: warning: element X1 has no corresponding header in any processed file
+caseproc: warning: element 'AR1' has no 'element' selector in any processed file
+caseproc: warning: element 'C2' has no 'element' selector in any processed file
+caseproc: warning: element 'E1' has no 'element' selector in any processed file
+caseproc: warning: element 'C3' has no 'element' selector in any processed file
+caseproc: warning: element 'A1' has no 'element' selector in any processed file
+caseproc: warning: element 'X1' has no 'element' selector in any processed file

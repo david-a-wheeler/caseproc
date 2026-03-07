@@ -8907,6850 +8907,12250 @@ flowchart TD
 
 ## Element Details
 
+<!-- caseproc element G1 -->
 <a id="claim-g1"></a>
 ### Claim G1: Statement of G1
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supported by: **[Context Xscope](#context-xscope)**, [Assumption Asys](#assumption-asys), [Evidence Esys1](#evidence-esys1), [Strategy Sdecomp](#strategy-sdecomp), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references G1 -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim G1.
 
+<!-- caseproc element Xscope -->
 <a id="context-xscope"></a>
 ### Context Xscope: Scope of Sys
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supports: **[Claim G1](#claim-g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references Xscope -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Context Xscope.
 
+<!-- caseproc element Asys -->
 <a id="assumption-asys"></a>
 ### Assumption Asys: Assumption of Sys
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supports: **[Claim G1](#claim-g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references Asys -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Assumption Asys.
 
+<!-- caseproc element Esys1 -->
 <a id="evidence-esys1"></a>
 ### Evidence Esys1: System-level evidence
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supports: **[Claim G1](#claim-g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references Esys1 -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Evidence Esys1.
 
+<!-- caseproc element Sdecomp -->
 <a id="strategy-sdecomp"></a>
 ### Strategy Sdecomp: Decompose by large area
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supported by: **[Claim L1top](#claim-l1top)**, [Claim L2top](#claim-l2top), [Claim L3top](#claim-l3top), [Claim L4top](#claim-l4top), [Claim L5top](#claim-l5top)
+
+Supports: **[Claim G1](#claim-g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references Sdecomp -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Strategy Sdecomp.
 
+<!-- caseproc element Scomps -->
 <a id="strategy-scomps"></a>
 ### Strategy Scomps: Argue by component
 
-<!-- caseproc references -->
+Referenced by: **[Package G1](#package-g1)**
+
+Supported by: **[Claim C01top](#claim-c01top)**, [Claim C02top](#claim-c02top), [Claim C03top](#claim-c03top), [Claim C04top](#claim-c04top), [Claim C05top](#claim-c05top), [Claim C06top](#claim-c06top), [Claim C07top](#claim-c07top), [Claim C08top](#claim-c08top), [Claim C09top](#claim-c09top), [Claim C10top](#claim-c10top), [Claim C11top](#claim-c11top), [Claim C12top](#claim-c12top), [Claim C13top](#claim-c13top), [Claim C14top](#claim-c14top), [Claim C15top](#claim-c15top), [Claim C16top](#claim-c16top), [Claim C17top](#claim-c17top), [Claim C18top](#claim-c18top), [Claim C19top](#claim-c19top), [Claim C20top](#claim-c20top), [Claim C21top](#claim-c21top), [Claim C22top](#claim-c22top), [Claim C23top](#claim-c23top), [Claim C24top](#claim-c24top), [Claim C25top](#claim-c25top), [Claim C26top](#claim-c26top), [Claim C27top](#claim-c27top), [Claim C28top](#claim-c28top), [Claim C29top](#claim-c29top), [Claim C30top](#claim-c30top), [Claim C31top](#claim-c31top), [Claim C32top](#claim-c32top), [Claim C33top](#claim-c33top), [Claim C34top](#claim-c34top), [Claim C35top](#claim-c35top), [Claim C36top](#claim-c36top), [Claim C37top](#claim-c37top), [Claim C38top](#claim-c38top), [Claim C39top](#claim-c39top), [Claim C40top](#claim-c40top), [Claim C41top](#claim-c41top), [Claim C42top](#claim-c42top), [Claim C43top](#claim-c43top), [Claim C44top](#claim-c44top), [Claim C45top](#claim-c45top)
+
+Supports: **[Claim G1](#claim-g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references Scomps -->
 References: [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Strategy Scomps.
 
+<!-- caseproc element L1top -->
 <a id="claim-l1top"></a>
 ### Claim L1top: Statement of L1top
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**, [Package G1](#package-g1)
+
+Supported by: **[Context L1Xctx](#context-l1xctx)**, [Evidence L1Esh1](#evidence-l1esh1), [Evidence L1Esh2](#evidence-l1esh2), [Strategy L1Smain](#strategy-l1smain)
+
+Supports: [Strategy Sdecomp](#strategy-sdecomp)
+<!-- end caseproc -->
+
+<!-- caseproc references L1top -->
 References: [Package L1top](#package-l1top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim L1top.
 
+<!-- caseproc element L1Xctx -->
 <a id="context-l1xctx"></a>
 ### Context L1Xctx: Context of L1Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1top](#claim-l1top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Xctx -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Context L1Xctx.
 
+<!-- caseproc element L1Esh1 -->
 <a id="evidence-l1esh1"></a>
 ### Evidence L1Esh1: Shared evidence A of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1top](#claim-l1top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Esh1 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Esh1.
 
+<!-- caseproc element L1Esh2 -->
 <a id="evidence-l1esh2"></a>
 ### Evidence L1Esh2: Shared evidence B of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1top](#claim-l1top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Esh2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Esh2.
 
+<!-- caseproc element L1Smain -->
 <a id="strategy-l1smain"></a>
 ### Strategy L1Smain: Main strategy of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1G2](#claim-l1g2)**, [Claim C08top](#claim-c08top), [Claim C09top](#claim-c09top), [Claim C10top](#claim-c10top), [Claim C11top](#claim-c11top), [Claim C12top](#claim-c12top), [Claim L1Gbr1](#claim-l1gbr1), [Claim L1Gbr2](#claim-l1gbr2), [Claim L1Gbr3](#claim-l1gbr3), [Claim L1Gbr4](#claim-l1gbr4), [Claim L1Gbr5](#claim-l1gbr5), [Claim L1Gbr6](#claim-l1gbr6), [Claim L1Gbr7](#claim-l1gbr7), [Claim L1Gbr8](#claim-l1gbr8)
+
+Supports: **[Claim L1top](#claim-l1top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Smain -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Strategy L1Smain.
 
+<!-- caseproc element L1G2 -->
 <a id="claim-l1g2"></a>
 ### Claim L1G2: Level-2 claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Strategy L1S2](#strategy-l1s2)**, [Claim L1G2b](#claim-l1g2b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G2.
 
+<!-- caseproc element L1S2 -->
 <a id="strategy-l1s2"></a>
 ### Strategy L1S2: Level-3 strategy of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1G3](#claim-l1g3)**, [Claim L1G3c](#claim-l1g3c)
+
+Supports: **[Claim L1G2](#claim-l1g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1S2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Strategy L1S2.
 
+<!-- caseproc element L1G3 -->
 <a id="claim-l1g3"></a>
 ### Claim L1G3: Level-4 claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Strategy L1S3](#strategy-l1s3)**, [Claim L1G3b](#claim-l1g3b)
+
+Supports: **[Strategy L1S2](#strategy-l1s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G3 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G3.
 
+<!-- caseproc element L1S3 -->
 <a id="strategy-l1s3"></a>
 ### Strategy L1S3: Level-5 strategy of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1G4](#claim-l1g4)**, [Claim L1G4b](#claim-l1g4b)
+
+Supports: **[Claim L1G3](#claim-l1g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1S3 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Strategy L1S3.
 
+<!-- caseproc element L1G4 -->
 <a id="claim-l1g4"></a>
 ### Claim L1G4: Level-6 claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Edeep](#evidence-l1edeep)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Strategy L1S3](#strategy-l1s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G4 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G4.
 
+<!-- caseproc element L1Edeep -->
 <a id="evidence-l1edeep"></a>
 ### Evidence L1Edeep: Deep evidence of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1G4](#claim-l1g4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Edeep -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Edeep.
 
+<!-- caseproc element L1G4b -->
 <a id="claim-l1g4b"></a>
 ### Claim L1G4b: Level-6 alt claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Strategy L1S3](#strategy-l1s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G4b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G4b.
 
+<!-- caseproc element L1G3b -->
 <a id="claim-l1g3b"></a>
 ### Claim L1G3b: Level-5 alt claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh1](#evidence-l1esh1)**
+
+Supports: **[Claim L1G3](#claim-l1g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G3b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G3b.
 
+<!-- caseproc element L1G3c -->
 <a id="claim-l1g3c"></a>
 ### Claim L1G3c: Level-4 alt claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Justification L1J1](#justification-l1j1)**, [Evidence L1Esh2](#evidence-l1esh2)
+
+Supports: **[Strategy L1S2](#strategy-l1s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G3c -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G3c.
 
+<!-- caseproc element L1J1 -->
 <a id="justification-l1j1"></a>
 ### Justification L1J1: Justification of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1G3c](#claim-l1g3c)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1J1 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Justification L1J1.
 
+<!-- caseproc element L1G2b -->
 <a id="claim-l1g2b"></a>
 ### Claim L1G2b: Level-3 alt claim of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Strategy L1S2b](#strategy-l1s2b)**
+
+Supports: **[Claim L1G2](#claim-l1g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G2b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G2b.
 
+<!-- caseproc element L1S2b -->
 <a id="strategy-l1s2b"></a>
 ### Strategy L1S2b: Level-4 alt strategy of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1G3d](#claim-l1g3d)**, [Claim L1G3e](#claim-l1g3e)
+
+Supports: **[Claim L1G2b](#claim-l1g2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1S2b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Strategy L1S2b.
 
+<!-- caseproc element L1G3d -->
 <a id="claim-l1g3d"></a>
 ### Claim L1G3d: Level-5 claim D of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh1](#evidence-l1esh1)**, [Evidence L1Esh2](#evidence-l1esh2)
+
+Supports: **[Strategy L1S2b](#strategy-l1s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G3d -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G3d.
 
+<!-- caseproc element L1G3e -->
 <a id="claim-l1g3e"></a>
 ### Claim L1G3e: Level-5 claim E of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1E2](#evidence-l1e2)**
+
+Supports: **[Strategy L1S2b](#strategy-l1s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1G3e -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1G3e.
 
+<!-- caseproc element L1E2 -->
 <a id="evidence-l1e2"></a>
 ### Evidence L1E2: Extra evidence of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1G3e](#claim-l1g3e)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1E2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1E2.
 
+<!-- caseproc element L1Gbr1 -->
 <a id="claim-l1gbr1"></a>
 ### Claim L1Gbr1: Breadth claim 1 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr1a](#claim-l1gbr1a)**, [Claim L1Gbr1b](#claim-l1gbr1b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr1 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr1.
 
+<!-- caseproc element L1Gbr1a -->
 <a id="claim-l1gbr1a"></a>
 ### Claim L1Gbr1a: Sub-claim 1a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr1](#evidence-l1ebr1)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr1](#claim-l1gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr1a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr1a.
 
+<!-- caseproc element L1Ebr1 -->
 <a id="evidence-l1ebr1"></a>
 ### Evidence L1Ebr1: Evidence for breadth 1 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr1a](#claim-l1gbr1a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr1 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr1.
 
+<!-- caseproc element L1Gbr1b -->
 <a id="claim-l1gbr1b"></a>
 ### Claim L1Gbr1b: Sub-claim 1b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr1](#claim-l1gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr1b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr1b.
 
+<!-- caseproc element L1Gbr2 -->
 <a id="claim-l1gbr2"></a>
 ### Claim L1Gbr2: Breadth claim 2 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr2a](#claim-l1gbr2a)**, [Claim L1Gbr2b](#claim-l1gbr2b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr2.
 
+<!-- caseproc element L1Gbr2a -->
 <a id="claim-l1gbr2a"></a>
 ### Claim L1Gbr2a: Sub-claim 2a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr2](#evidence-l1ebr2)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr2](#claim-l1gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr2a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr2a.
 
+<!-- caseproc element L1Ebr2 -->
 <a id="evidence-l1ebr2"></a>
 ### Evidence L1Ebr2: Evidence for breadth 2 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr2a](#claim-l1gbr2a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr2 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr2.
 
+<!-- caseproc element L1Gbr2b -->
 <a id="claim-l1gbr2b"></a>
 ### Claim L1Gbr2b: Sub-claim 2b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr2](#claim-l1gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr2b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr2b.
 
+<!-- caseproc element L1Gbr3 -->
 <a id="claim-l1gbr3"></a>
 ### Claim L1Gbr3: Breadth claim 3 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr3a](#claim-l1gbr3a)**, [Claim L1Gbr3b](#claim-l1gbr3b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr3 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr3.
 
+<!-- caseproc element L1Gbr3a -->
 <a id="claim-l1gbr3a"></a>
 ### Claim L1Gbr3a: Sub-claim 3a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr3](#evidence-l1ebr3)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr3](#claim-l1gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr3a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr3a.
 
+<!-- caseproc element L1Ebr3 -->
 <a id="evidence-l1ebr3"></a>
 ### Evidence L1Ebr3: Evidence for breadth 3 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr3a](#claim-l1gbr3a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr3 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr3.
 
+<!-- caseproc element L1Gbr3b -->
 <a id="claim-l1gbr3b"></a>
 ### Claim L1Gbr3b: Sub-claim 3b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr3](#claim-l1gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr3b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr3b.
 
+<!-- caseproc element L1Gbr4 -->
 <a id="claim-l1gbr4"></a>
 ### Claim L1Gbr4: Breadth claim 4 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr4a](#claim-l1gbr4a)**, [Claim L1Gbr4b](#claim-l1gbr4b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr4 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr4.
 
+<!-- caseproc element L1Gbr4a -->
 <a id="claim-l1gbr4a"></a>
 ### Claim L1Gbr4a: Sub-claim 4a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr4](#evidence-l1ebr4)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr4](#claim-l1gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr4a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr4a.
 
+<!-- caseproc element L1Ebr4 -->
 <a id="evidence-l1ebr4"></a>
 ### Evidence L1Ebr4: Evidence for breadth 4 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr4a](#claim-l1gbr4a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr4 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr4.
 
+<!-- caseproc element L1Gbr4b -->
 <a id="claim-l1gbr4b"></a>
 ### Claim L1Gbr4b: Sub-claim 4b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr4](#claim-l1gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr4b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr4b.
 
+<!-- caseproc element L1Gbr5 -->
 <a id="claim-l1gbr5"></a>
 ### Claim L1Gbr5: Breadth claim 5 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr5a](#claim-l1gbr5a)**, [Claim L1Gbr5b](#claim-l1gbr5b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr5 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr5.
 
+<!-- caseproc element L1Gbr5a -->
 <a id="claim-l1gbr5a"></a>
 ### Claim L1Gbr5a: Sub-claim 5a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr5](#evidence-l1ebr5)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr5](#claim-l1gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr5a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr5a.
 
+<!-- caseproc element L1Ebr5 -->
 <a id="evidence-l1ebr5"></a>
 ### Evidence L1Ebr5: Evidence for breadth 5 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr5a](#claim-l1gbr5a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr5 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr5.
 
+<!-- caseproc element L1Gbr5b -->
 <a id="claim-l1gbr5b"></a>
 ### Claim L1Gbr5b: Sub-claim 5b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr5](#claim-l1gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr5b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr5b.
 
+<!-- caseproc element L1Gbr6 -->
 <a id="claim-l1gbr6"></a>
 ### Claim L1Gbr6: Breadth claim 6 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr6a](#claim-l1gbr6a)**, [Claim L1Gbr6b](#claim-l1gbr6b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr6 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr6.
 
+<!-- caseproc element L1Gbr6a -->
 <a id="claim-l1gbr6a"></a>
 ### Claim L1Gbr6a: Sub-claim 6a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr6](#evidence-l1ebr6)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr6](#claim-l1gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr6a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr6a.
 
+<!-- caseproc element L1Ebr6 -->
 <a id="evidence-l1ebr6"></a>
 ### Evidence L1Ebr6: Evidence for breadth 6 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr6a](#claim-l1gbr6a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr6 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr6.
 
+<!-- caseproc element L1Gbr6b -->
 <a id="claim-l1gbr6b"></a>
 ### Claim L1Gbr6b: Sub-claim 6b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr6](#claim-l1gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr6b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr6b.
 
+<!-- caseproc element L1Gbr7 -->
 <a id="claim-l1gbr7"></a>
 ### Claim L1Gbr7: Breadth claim 7 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr7a](#claim-l1gbr7a)**, [Claim L1Gbr7b](#claim-l1gbr7b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr7 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr7.
 
+<!-- caseproc element L1Gbr7a -->
 <a id="claim-l1gbr7a"></a>
 ### Claim L1Gbr7a: Sub-claim 7a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr7](#evidence-l1ebr7)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr7](#claim-l1gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr7a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr7a.
 
+<!-- caseproc element L1Ebr7 -->
 <a id="evidence-l1ebr7"></a>
 ### Evidence L1Ebr7: Evidence for breadth 7 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr7a](#claim-l1gbr7a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr7 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr7.
 
+<!-- caseproc element L1Gbr7b -->
 <a id="claim-l1gbr7b"></a>
 ### Claim L1Gbr7b: Sub-claim 7b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr7](#claim-l1gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr7b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr7b.
 
+<!-- caseproc element L1Gbr8 -->
 <a id="claim-l1gbr8"></a>
 ### Claim L1Gbr8: Breadth claim 8 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Claim L1Gbr8a](#claim-l1gbr8a)**, [Claim L1Gbr8b](#claim-l1gbr8b)
+
+Supports: **[Strategy L1Smain](#strategy-l1smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr8 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr8.
 
+<!-- caseproc element L1Gbr8a -->
 <a id="claim-l1gbr8a"></a>
 ### Claim L1Gbr8a: Sub-claim 8a of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Ebr8](#evidence-l1ebr8)**, [Evidence L1Esh1](#evidence-l1esh1)
+
+Supports: **[Claim L1Gbr8](#claim-l1gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr8a -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr8a.
 
+<!-- caseproc element L1Ebr8 -->
 <a id="evidence-l1ebr8"></a>
 ### Evidence L1Ebr8: Evidence for breadth 8 of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supports: **[Claim L1Gbr8a](#claim-l1gbr8a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Ebr8 -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Evidence L1Ebr8.
 
+<!-- caseproc element L1Gbr8b -->
 <a id="claim-l1gbr8b"></a>
 ### Claim L1Gbr8b: Sub-claim 8b of L1
 
-<!-- caseproc references -->
+Referenced by: **[Package L1top](#package-l1top)**
+
+Supported by: **[Evidence L1Esh2](#evidence-l1esh2)**
+
+Supports: **[Claim L1Gbr8](#claim-l1gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L1Gbr8b -->
 References: [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim L1Gbr8b.
 
+<!-- caseproc element L2top -->
 <a id="claim-l2top"></a>
 ### Claim L2top: Statement of L2top
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**, [Package G1](#package-g1)
+
+Supported by: **[Context L2Xctx](#context-l2xctx)**, [Evidence L2Esh1](#evidence-l2esh1), [Evidence L2Esh2](#evidence-l2esh2), [Strategy L2Smain](#strategy-l2smain)
+
+Supports: [Strategy Sdecomp](#strategy-sdecomp)
+<!-- end caseproc -->
+
+<!-- caseproc references L2top -->
 References: [Package L2top](#package-l2top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim L2top.
 
+<!-- caseproc element L2Xctx -->
 <a id="context-l2xctx"></a>
 ### Context L2Xctx: Context of L2Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2top](#claim-l2top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Xctx -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Context L2Xctx.
 
+<!-- caseproc element L2Esh1 -->
 <a id="evidence-l2esh1"></a>
 ### Evidence L2Esh1: Shared evidence A of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2top](#claim-l2top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Esh1 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Esh1.
 
+<!-- caseproc element L2Esh2 -->
 <a id="evidence-l2esh2"></a>
 ### Evidence L2Esh2: Shared evidence B of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2top](#claim-l2top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Esh2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Esh2.
 
+<!-- caseproc element L2Smain -->
 <a id="strategy-l2smain"></a>
 ### Strategy L2Smain: Main strategy of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2G2](#claim-l2g2)**, [Claim C15top](#claim-c15top), [Claim C16top](#claim-c16top), [Claim C17top](#claim-c17top), [Claim C18top](#claim-c18top), [Claim C19top](#claim-c19top), [Claim L2Gbr1](#claim-l2gbr1), [Claim L2Gbr2](#claim-l2gbr2), [Claim L2Gbr3](#claim-l2gbr3), [Claim L2Gbr4](#claim-l2gbr4), [Claim L2Gbr5](#claim-l2gbr5), [Claim L2Gbr6](#claim-l2gbr6), [Claim L2Gbr7](#claim-l2gbr7), [Claim L2Gbr8](#claim-l2gbr8)
+
+Supports: **[Claim L2top](#claim-l2top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Smain -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Strategy L2Smain.
 
+<!-- caseproc element L2G2 -->
 <a id="claim-l2g2"></a>
 ### Claim L2G2: Level-2 claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Strategy L2S2](#strategy-l2s2)**, [Claim L2G2b](#claim-l2g2b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G2.
 
+<!-- caseproc element L2S2 -->
 <a id="strategy-l2s2"></a>
 ### Strategy L2S2: Level-3 strategy of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2G3](#claim-l2g3)**, [Claim L2G3c](#claim-l2g3c)
+
+Supports: **[Claim L2G2](#claim-l2g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2S2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Strategy L2S2.
 
+<!-- caseproc element L2G3 -->
 <a id="claim-l2g3"></a>
 ### Claim L2G3: Level-4 claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Strategy L2S3](#strategy-l2s3)**, [Claim L2G3b](#claim-l2g3b)
+
+Supports: **[Strategy L2S2](#strategy-l2s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G3 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G3.
 
+<!-- caseproc element L2S3 -->
 <a id="strategy-l2s3"></a>
 ### Strategy L2S3: Level-5 strategy of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2G4](#claim-l2g4)**, [Claim L2G4b](#claim-l2g4b)
+
+Supports: **[Claim L2G3](#claim-l2g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2S3 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Strategy L2S3.
 
+<!-- caseproc element L2G4 -->
 <a id="claim-l2g4"></a>
 ### Claim L2G4: Level-6 claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Edeep](#evidence-l2edeep)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Strategy L2S3](#strategy-l2s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G4 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G4.
 
+<!-- caseproc element L2Edeep -->
 <a id="evidence-l2edeep"></a>
 ### Evidence L2Edeep: Deep evidence of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2G4](#claim-l2g4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Edeep -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Edeep.
 
+<!-- caseproc element L2G4b -->
 <a id="claim-l2g4b"></a>
 ### Claim L2G4b: Level-6 alt claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Strategy L2S3](#strategy-l2s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G4b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G4b.
 
+<!-- caseproc element L2G3b -->
 <a id="claim-l2g3b"></a>
 ### Claim L2G3b: Level-5 alt claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh1](#evidence-l2esh1)**
+
+Supports: **[Claim L2G3](#claim-l2g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G3b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G3b.
 
+<!-- caseproc element L2G3c -->
 <a id="claim-l2g3c"></a>
 ### Claim L2G3c: Level-4 alt claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Justification L2J1](#justification-l2j1)**, [Evidence L2Esh2](#evidence-l2esh2)
+
+Supports: **[Strategy L2S2](#strategy-l2s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G3c -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G3c.
 
+<!-- caseproc element L2J1 -->
 <a id="justification-l2j1"></a>
 ### Justification L2J1: Justification of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2G3c](#claim-l2g3c)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2J1 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Justification L2J1.
 
+<!-- caseproc element L2G2b -->
 <a id="claim-l2g2b"></a>
 ### Claim L2G2b: Level-3 alt claim of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Strategy L2S2b](#strategy-l2s2b)**
+
+Supports: **[Claim L2G2](#claim-l2g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G2b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G2b.
 
+<!-- caseproc element L2S2b -->
 <a id="strategy-l2s2b"></a>
 ### Strategy L2S2b: Level-4 alt strategy of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2G3d](#claim-l2g3d)**, [Claim L2G3e](#claim-l2g3e)
+
+Supports: **[Claim L2G2b](#claim-l2g2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2S2b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Strategy L2S2b.
 
+<!-- caseproc element L2G3d -->
 <a id="claim-l2g3d"></a>
 ### Claim L2G3d: Level-5 claim D of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh1](#evidence-l2esh1)**, [Evidence L2Esh2](#evidence-l2esh2)
+
+Supports: **[Strategy L2S2b](#strategy-l2s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G3d -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G3d.
 
+<!-- caseproc element L2G3e -->
 <a id="claim-l2g3e"></a>
 ### Claim L2G3e: Level-5 claim E of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2E2](#evidence-l2e2)**
+
+Supports: **[Strategy L2S2b](#strategy-l2s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2G3e -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2G3e.
 
+<!-- caseproc element L2E2 -->
 <a id="evidence-l2e2"></a>
 ### Evidence L2E2: Extra evidence of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2G3e](#claim-l2g3e)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2E2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2E2.
 
+<!-- caseproc element L2Gbr1 -->
 <a id="claim-l2gbr1"></a>
 ### Claim L2Gbr1: Breadth claim 1 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr1a](#claim-l2gbr1a)**, [Claim L2Gbr1b](#claim-l2gbr1b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr1 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr1.
 
+<!-- caseproc element L2Gbr1a -->
 <a id="claim-l2gbr1a"></a>
 ### Claim L2Gbr1a: Sub-claim 1a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr1](#evidence-l2ebr1)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr1](#claim-l2gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr1a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr1a.
 
+<!-- caseproc element L2Ebr1 -->
 <a id="evidence-l2ebr1"></a>
 ### Evidence L2Ebr1: Evidence for breadth 1 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr1a](#claim-l2gbr1a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr1 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr1.
 
+<!-- caseproc element L2Gbr1b -->
 <a id="claim-l2gbr1b"></a>
 ### Claim L2Gbr1b: Sub-claim 1b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr1](#claim-l2gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr1b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr1b.
 
+<!-- caseproc element L2Gbr2 -->
 <a id="claim-l2gbr2"></a>
 ### Claim L2Gbr2: Breadth claim 2 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr2a](#claim-l2gbr2a)**, [Claim L2Gbr2b](#claim-l2gbr2b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr2.
 
+<!-- caseproc element L2Gbr2a -->
 <a id="claim-l2gbr2a"></a>
 ### Claim L2Gbr2a: Sub-claim 2a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr2](#evidence-l2ebr2)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr2](#claim-l2gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr2a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr2a.
 
+<!-- caseproc element L2Ebr2 -->
 <a id="evidence-l2ebr2"></a>
 ### Evidence L2Ebr2: Evidence for breadth 2 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr2a](#claim-l2gbr2a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr2 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr2.
 
+<!-- caseproc element L2Gbr2b -->
 <a id="claim-l2gbr2b"></a>
 ### Claim L2Gbr2b: Sub-claim 2b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr2](#claim-l2gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr2b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr2b.
 
+<!-- caseproc element L2Gbr3 -->
 <a id="claim-l2gbr3"></a>
 ### Claim L2Gbr3: Breadth claim 3 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr3a](#claim-l2gbr3a)**, [Claim L2Gbr3b](#claim-l2gbr3b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr3 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr3.
 
+<!-- caseproc element L2Gbr3a -->
 <a id="claim-l2gbr3a"></a>
 ### Claim L2Gbr3a: Sub-claim 3a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr3](#evidence-l2ebr3)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr3](#claim-l2gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr3a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr3a.
 
+<!-- caseproc element L2Ebr3 -->
 <a id="evidence-l2ebr3"></a>
 ### Evidence L2Ebr3: Evidence for breadth 3 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr3a](#claim-l2gbr3a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr3 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr3.
 
+<!-- caseproc element L2Gbr3b -->
 <a id="claim-l2gbr3b"></a>
 ### Claim L2Gbr3b: Sub-claim 3b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr3](#claim-l2gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr3b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr3b.
 
+<!-- caseproc element L2Gbr4 -->
 <a id="claim-l2gbr4"></a>
 ### Claim L2Gbr4: Breadth claim 4 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr4a](#claim-l2gbr4a)**, [Claim L2Gbr4b](#claim-l2gbr4b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr4 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr4.
 
+<!-- caseproc element L2Gbr4a -->
 <a id="claim-l2gbr4a"></a>
 ### Claim L2Gbr4a: Sub-claim 4a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr4](#evidence-l2ebr4)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr4](#claim-l2gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr4a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr4a.
 
+<!-- caseproc element L2Ebr4 -->
 <a id="evidence-l2ebr4"></a>
 ### Evidence L2Ebr4: Evidence for breadth 4 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr4a](#claim-l2gbr4a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr4 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr4.
 
+<!-- caseproc element L2Gbr4b -->
 <a id="claim-l2gbr4b"></a>
 ### Claim L2Gbr4b: Sub-claim 4b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr4](#claim-l2gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr4b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr4b.
 
+<!-- caseproc element L2Gbr5 -->
 <a id="claim-l2gbr5"></a>
 ### Claim L2Gbr5: Breadth claim 5 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr5a](#claim-l2gbr5a)**, [Claim L2Gbr5b](#claim-l2gbr5b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr5 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr5.
 
+<!-- caseproc element L2Gbr5a -->
 <a id="claim-l2gbr5a"></a>
 ### Claim L2Gbr5a: Sub-claim 5a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr5](#evidence-l2ebr5)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr5](#claim-l2gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr5a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr5a.
 
+<!-- caseproc element L2Ebr5 -->
 <a id="evidence-l2ebr5"></a>
 ### Evidence L2Ebr5: Evidence for breadth 5 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr5a](#claim-l2gbr5a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr5 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr5.
 
+<!-- caseproc element L2Gbr5b -->
 <a id="claim-l2gbr5b"></a>
 ### Claim L2Gbr5b: Sub-claim 5b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr5](#claim-l2gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr5b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr5b.
 
+<!-- caseproc element L2Gbr6 -->
 <a id="claim-l2gbr6"></a>
 ### Claim L2Gbr6: Breadth claim 6 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr6a](#claim-l2gbr6a)**, [Claim L2Gbr6b](#claim-l2gbr6b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr6 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr6.
 
+<!-- caseproc element L2Gbr6a -->
 <a id="claim-l2gbr6a"></a>
 ### Claim L2Gbr6a: Sub-claim 6a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr6](#evidence-l2ebr6)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr6](#claim-l2gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr6a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr6a.
 
+<!-- caseproc element L2Ebr6 -->
 <a id="evidence-l2ebr6"></a>
 ### Evidence L2Ebr6: Evidence for breadth 6 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr6a](#claim-l2gbr6a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr6 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr6.
 
+<!-- caseproc element L2Gbr6b -->
 <a id="claim-l2gbr6b"></a>
 ### Claim L2Gbr6b: Sub-claim 6b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr6](#claim-l2gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr6b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr6b.
 
+<!-- caseproc element L2Gbr7 -->
 <a id="claim-l2gbr7"></a>
 ### Claim L2Gbr7: Breadth claim 7 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr7a](#claim-l2gbr7a)**, [Claim L2Gbr7b](#claim-l2gbr7b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr7 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr7.
 
+<!-- caseproc element L2Gbr7a -->
 <a id="claim-l2gbr7a"></a>
 ### Claim L2Gbr7a: Sub-claim 7a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr7](#evidence-l2ebr7)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr7](#claim-l2gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr7a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr7a.
 
+<!-- caseproc element L2Ebr7 -->
 <a id="evidence-l2ebr7"></a>
 ### Evidence L2Ebr7: Evidence for breadth 7 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr7a](#claim-l2gbr7a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr7 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr7.
 
+<!-- caseproc element L2Gbr7b -->
 <a id="claim-l2gbr7b"></a>
 ### Claim L2Gbr7b: Sub-claim 7b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr7](#claim-l2gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr7b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr7b.
 
+<!-- caseproc element L2Gbr8 -->
 <a id="claim-l2gbr8"></a>
 ### Claim L2Gbr8: Breadth claim 8 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Claim L2Gbr8a](#claim-l2gbr8a)**, [Claim L2Gbr8b](#claim-l2gbr8b)
+
+Supports: **[Strategy L2Smain](#strategy-l2smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr8 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr8.
 
+<!-- caseproc element L2Gbr8a -->
 <a id="claim-l2gbr8a"></a>
 ### Claim L2Gbr8a: Sub-claim 8a of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Ebr8](#evidence-l2ebr8)**, [Evidence L2Esh1](#evidence-l2esh1)
+
+Supports: **[Claim L2Gbr8](#claim-l2gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr8a -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr8a.
 
+<!-- caseproc element L2Ebr8 -->
 <a id="evidence-l2ebr8"></a>
 ### Evidence L2Ebr8: Evidence for breadth 8 of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supports: **[Claim L2Gbr8a](#claim-l2gbr8a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Ebr8 -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Evidence L2Ebr8.
 
+<!-- caseproc element L2Gbr8b -->
 <a id="claim-l2gbr8b"></a>
 ### Claim L2Gbr8b: Sub-claim 8b of L2
 
-<!-- caseproc references -->
+Referenced by: **[Package L2top](#package-l2top)**
+
+Supported by: **[Evidence L2Esh2](#evidence-l2esh2)**
+
+Supports: **[Claim L2Gbr8](#claim-l2gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L2Gbr8b -->
 References: [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim L2Gbr8b.
 
+<!-- caseproc element L3top -->
 <a id="claim-l3top"></a>
 ### Claim L3top: Statement of L3top
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**, [Package G1](#package-g1)
+
+Supported by: **[Context L3Xctx](#context-l3xctx)**, [Evidence L3Esh1](#evidence-l3esh1), [Evidence L3Esh2](#evidence-l3esh2), [Strategy L3Smain](#strategy-l3smain)
+
+Supports: [Strategy Sdecomp](#strategy-sdecomp)
+<!-- end caseproc -->
+
+<!-- caseproc references L3top -->
 References: [Package L3top](#package-l3top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim L3top.
 
+<!-- caseproc element L3Xctx -->
 <a id="context-l3xctx"></a>
 ### Context L3Xctx: Context of L3Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3top](#claim-l3top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Xctx -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Context L3Xctx.
 
+<!-- caseproc element L3Esh1 -->
 <a id="evidence-l3esh1"></a>
 ### Evidence L3Esh1: Shared evidence A of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3top](#claim-l3top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Esh1 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Esh1.
 
+<!-- caseproc element L3Esh2 -->
 <a id="evidence-l3esh2"></a>
 ### Evidence L3Esh2: Shared evidence B of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3top](#claim-l3top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Esh2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Esh2.
 
+<!-- caseproc element L3Smain -->
 <a id="strategy-l3smain"></a>
 ### Strategy L3Smain: Main strategy of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3G2](#claim-l3g2)**, [Claim C22top](#claim-c22top), [Claim C23top](#claim-c23top), [Claim C24top](#claim-c24top), [Claim C25top](#claim-c25top), [Claim C26top](#claim-c26top), [Claim L3Gbr1](#claim-l3gbr1), [Claim L3Gbr2](#claim-l3gbr2), [Claim L3Gbr3](#claim-l3gbr3), [Claim L3Gbr4](#claim-l3gbr4), [Claim L3Gbr5](#claim-l3gbr5), [Claim L3Gbr6](#claim-l3gbr6), [Claim L3Gbr7](#claim-l3gbr7), [Claim L3Gbr8](#claim-l3gbr8)
+
+Supports: **[Claim L3top](#claim-l3top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Smain -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Strategy L3Smain.
 
+<!-- caseproc element L3G2 -->
 <a id="claim-l3g2"></a>
 ### Claim L3G2: Level-2 claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Strategy L3S2](#strategy-l3s2)**, [Claim L3G2b](#claim-l3g2b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G2.
 
+<!-- caseproc element L3S2 -->
 <a id="strategy-l3s2"></a>
 ### Strategy L3S2: Level-3 strategy of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3G3](#claim-l3g3)**, [Claim L3G3c](#claim-l3g3c)
+
+Supports: **[Claim L3G2](#claim-l3g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3S2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Strategy L3S2.
 
+<!-- caseproc element L3G3 -->
 <a id="claim-l3g3"></a>
 ### Claim L3G3: Level-4 claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Strategy L3S3](#strategy-l3s3)**, [Claim L3G3b](#claim-l3g3b)
+
+Supports: **[Strategy L3S2](#strategy-l3s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G3 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G3.
 
+<!-- caseproc element L3S3 -->
 <a id="strategy-l3s3"></a>
 ### Strategy L3S3: Level-5 strategy of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3G4](#claim-l3g4)**, [Claim L3G4b](#claim-l3g4b)
+
+Supports: **[Claim L3G3](#claim-l3g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3S3 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Strategy L3S3.
 
+<!-- caseproc element L3G4 -->
 <a id="claim-l3g4"></a>
 ### Claim L3G4: Level-6 claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Edeep](#evidence-l3edeep)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Strategy L3S3](#strategy-l3s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G4 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G4.
 
+<!-- caseproc element L3Edeep -->
 <a id="evidence-l3edeep"></a>
 ### Evidence L3Edeep: Deep evidence of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3G4](#claim-l3g4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Edeep -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Edeep.
 
+<!-- caseproc element L3G4b -->
 <a id="claim-l3g4b"></a>
 ### Claim L3G4b: Level-6 alt claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Strategy L3S3](#strategy-l3s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G4b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G4b.
 
+<!-- caseproc element L3G3b -->
 <a id="claim-l3g3b"></a>
 ### Claim L3G3b: Level-5 alt claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh1](#evidence-l3esh1)**
+
+Supports: **[Claim L3G3](#claim-l3g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G3b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G3b.
 
+<!-- caseproc element L3G3c -->
 <a id="claim-l3g3c"></a>
 ### Claim L3G3c: Level-4 alt claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Justification L3J1](#justification-l3j1)**, [Evidence L3Esh2](#evidence-l3esh2)
+
+Supports: **[Strategy L3S2](#strategy-l3s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G3c -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G3c.
 
+<!-- caseproc element L3J1 -->
 <a id="justification-l3j1"></a>
 ### Justification L3J1: Justification of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3G3c](#claim-l3g3c)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3J1 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Justification L3J1.
 
+<!-- caseproc element L3G2b -->
 <a id="claim-l3g2b"></a>
 ### Claim L3G2b: Level-3 alt claim of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Strategy L3S2b](#strategy-l3s2b)**
+
+Supports: **[Claim L3G2](#claim-l3g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G2b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G2b.
 
+<!-- caseproc element L3S2b -->
 <a id="strategy-l3s2b"></a>
 ### Strategy L3S2b: Level-4 alt strategy of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3G3d](#claim-l3g3d)**, [Claim L3G3e](#claim-l3g3e)
+
+Supports: **[Claim L3G2b](#claim-l3g2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3S2b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Strategy L3S2b.
 
+<!-- caseproc element L3G3d -->
 <a id="claim-l3g3d"></a>
 ### Claim L3G3d: Level-5 claim D of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh1](#evidence-l3esh1)**, [Evidence L3Esh2](#evidence-l3esh2)
+
+Supports: **[Strategy L3S2b](#strategy-l3s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G3d -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G3d.
 
+<!-- caseproc element L3G3e -->
 <a id="claim-l3g3e"></a>
 ### Claim L3G3e: Level-5 claim E of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3E2](#evidence-l3e2)**
+
+Supports: **[Strategy L3S2b](#strategy-l3s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3G3e -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3G3e.
 
+<!-- caseproc element L3E2 -->
 <a id="evidence-l3e2"></a>
 ### Evidence L3E2: Extra evidence of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3G3e](#claim-l3g3e)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3E2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3E2.
 
+<!-- caseproc element L3Gbr1 -->
 <a id="claim-l3gbr1"></a>
 ### Claim L3Gbr1: Breadth claim 1 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr1a](#claim-l3gbr1a)**, [Claim L3Gbr1b](#claim-l3gbr1b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr1 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr1.
 
+<!-- caseproc element L3Gbr1a -->
 <a id="claim-l3gbr1a"></a>
 ### Claim L3Gbr1a: Sub-claim 1a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr1](#evidence-l3ebr1)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr1](#claim-l3gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr1a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr1a.
 
+<!-- caseproc element L3Ebr1 -->
 <a id="evidence-l3ebr1"></a>
 ### Evidence L3Ebr1: Evidence for breadth 1 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr1a](#claim-l3gbr1a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr1 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr1.
 
+<!-- caseproc element L3Gbr1b -->
 <a id="claim-l3gbr1b"></a>
 ### Claim L3Gbr1b: Sub-claim 1b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr1](#claim-l3gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr1b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr1b.
 
+<!-- caseproc element L3Gbr2 -->
 <a id="claim-l3gbr2"></a>
 ### Claim L3Gbr2: Breadth claim 2 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr2a](#claim-l3gbr2a)**, [Claim L3Gbr2b](#claim-l3gbr2b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr2.
 
+<!-- caseproc element L3Gbr2a -->
 <a id="claim-l3gbr2a"></a>
 ### Claim L3Gbr2a: Sub-claim 2a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr2](#evidence-l3ebr2)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr2](#claim-l3gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr2a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr2a.
 
+<!-- caseproc element L3Ebr2 -->
 <a id="evidence-l3ebr2"></a>
 ### Evidence L3Ebr2: Evidence for breadth 2 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr2a](#claim-l3gbr2a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr2 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr2.
 
+<!-- caseproc element L3Gbr2b -->
 <a id="claim-l3gbr2b"></a>
 ### Claim L3Gbr2b: Sub-claim 2b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr2](#claim-l3gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr2b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr2b.
 
+<!-- caseproc element L3Gbr3 -->
 <a id="claim-l3gbr3"></a>
 ### Claim L3Gbr3: Breadth claim 3 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr3a](#claim-l3gbr3a)**, [Claim L3Gbr3b](#claim-l3gbr3b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr3 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr3.
 
+<!-- caseproc element L3Gbr3a -->
 <a id="claim-l3gbr3a"></a>
 ### Claim L3Gbr3a: Sub-claim 3a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr3](#evidence-l3ebr3)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr3](#claim-l3gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr3a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr3a.
 
+<!-- caseproc element L3Ebr3 -->
 <a id="evidence-l3ebr3"></a>
 ### Evidence L3Ebr3: Evidence for breadth 3 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr3a](#claim-l3gbr3a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr3 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr3.
 
+<!-- caseproc element L3Gbr3b -->
 <a id="claim-l3gbr3b"></a>
 ### Claim L3Gbr3b: Sub-claim 3b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr3](#claim-l3gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr3b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr3b.
 
+<!-- caseproc element L3Gbr4 -->
 <a id="claim-l3gbr4"></a>
 ### Claim L3Gbr4: Breadth claim 4 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr4a](#claim-l3gbr4a)**, [Claim L3Gbr4b](#claim-l3gbr4b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr4 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr4.
 
+<!-- caseproc element L3Gbr4a -->
 <a id="claim-l3gbr4a"></a>
 ### Claim L3Gbr4a: Sub-claim 4a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr4](#evidence-l3ebr4)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr4](#claim-l3gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr4a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr4a.
 
+<!-- caseproc element L3Ebr4 -->
 <a id="evidence-l3ebr4"></a>
 ### Evidence L3Ebr4: Evidence for breadth 4 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr4a](#claim-l3gbr4a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr4 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr4.
 
+<!-- caseproc element L3Gbr4b -->
 <a id="claim-l3gbr4b"></a>
 ### Claim L3Gbr4b: Sub-claim 4b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr4](#claim-l3gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr4b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr4b.
 
+<!-- caseproc element L3Gbr5 -->
 <a id="claim-l3gbr5"></a>
 ### Claim L3Gbr5: Breadth claim 5 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr5a](#claim-l3gbr5a)**, [Claim L3Gbr5b](#claim-l3gbr5b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr5 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr5.
 
+<!-- caseproc element L3Gbr5a -->
 <a id="claim-l3gbr5a"></a>
 ### Claim L3Gbr5a: Sub-claim 5a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr5](#evidence-l3ebr5)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr5](#claim-l3gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr5a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr5a.
 
+<!-- caseproc element L3Ebr5 -->
 <a id="evidence-l3ebr5"></a>
 ### Evidence L3Ebr5: Evidence for breadth 5 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr5a](#claim-l3gbr5a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr5 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr5.
 
+<!-- caseproc element L3Gbr5b -->
 <a id="claim-l3gbr5b"></a>
 ### Claim L3Gbr5b: Sub-claim 5b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr5](#claim-l3gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr5b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr5b.
 
+<!-- caseproc element L3Gbr6 -->
 <a id="claim-l3gbr6"></a>
 ### Claim L3Gbr6: Breadth claim 6 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr6a](#claim-l3gbr6a)**, [Claim L3Gbr6b](#claim-l3gbr6b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr6 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr6.
 
+<!-- caseproc element L3Gbr6a -->
 <a id="claim-l3gbr6a"></a>
 ### Claim L3Gbr6a: Sub-claim 6a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr6](#evidence-l3ebr6)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr6](#claim-l3gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr6a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr6a.
 
+<!-- caseproc element L3Ebr6 -->
 <a id="evidence-l3ebr6"></a>
 ### Evidence L3Ebr6: Evidence for breadth 6 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr6a](#claim-l3gbr6a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr6 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr6.
 
+<!-- caseproc element L3Gbr6b -->
 <a id="claim-l3gbr6b"></a>
 ### Claim L3Gbr6b: Sub-claim 6b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr6](#claim-l3gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr6b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr6b.
 
+<!-- caseproc element L3Gbr7 -->
 <a id="claim-l3gbr7"></a>
 ### Claim L3Gbr7: Breadth claim 7 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr7a](#claim-l3gbr7a)**, [Claim L3Gbr7b](#claim-l3gbr7b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr7 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr7.
 
+<!-- caseproc element L3Gbr7a -->
 <a id="claim-l3gbr7a"></a>
 ### Claim L3Gbr7a: Sub-claim 7a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr7](#evidence-l3ebr7)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr7](#claim-l3gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr7a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr7a.
 
+<!-- caseproc element L3Ebr7 -->
 <a id="evidence-l3ebr7"></a>
 ### Evidence L3Ebr7: Evidence for breadth 7 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr7a](#claim-l3gbr7a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr7 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr7.
 
+<!-- caseproc element L3Gbr7b -->
 <a id="claim-l3gbr7b"></a>
 ### Claim L3Gbr7b: Sub-claim 7b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr7](#claim-l3gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr7b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr7b.
 
+<!-- caseproc element L3Gbr8 -->
 <a id="claim-l3gbr8"></a>
 ### Claim L3Gbr8: Breadth claim 8 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Claim L3Gbr8a](#claim-l3gbr8a)**, [Claim L3Gbr8b](#claim-l3gbr8b)
+
+Supports: **[Strategy L3Smain](#strategy-l3smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr8 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr8.
 
+<!-- caseproc element L3Gbr8a -->
 <a id="claim-l3gbr8a"></a>
 ### Claim L3Gbr8a: Sub-claim 8a of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Ebr8](#evidence-l3ebr8)**, [Evidence L3Esh1](#evidence-l3esh1)
+
+Supports: **[Claim L3Gbr8](#claim-l3gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr8a -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr8a.
 
+<!-- caseproc element L3Ebr8 -->
 <a id="evidence-l3ebr8"></a>
 ### Evidence L3Ebr8: Evidence for breadth 8 of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supports: **[Claim L3Gbr8a](#claim-l3gbr8a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Ebr8 -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Evidence L3Ebr8.
 
+<!-- caseproc element L3Gbr8b -->
 <a id="claim-l3gbr8b"></a>
 ### Claim L3Gbr8b: Sub-claim 8b of L3
 
-<!-- caseproc references -->
+Referenced by: **[Package L3top](#package-l3top)**
+
+Supported by: **[Evidence L3Esh2](#evidence-l3esh2)**
+
+Supports: **[Claim L3Gbr8](#claim-l3gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L3Gbr8b -->
 References: [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim L3Gbr8b.
 
+<!-- caseproc element L4top -->
 <a id="claim-l4top"></a>
 ### Claim L4top: Statement of L4top
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**, [Package G1](#package-g1)
+
+Supported by: **[Context L4Xctx](#context-l4xctx)**, [Evidence L4Esh1](#evidence-l4esh1), [Evidence L4Esh2](#evidence-l4esh2), [Strategy L4Smain](#strategy-l4smain)
+
+Supports: [Strategy Sdecomp](#strategy-sdecomp)
+<!-- end caseproc -->
+
+<!-- caseproc references L4top -->
 References: [Package L4top](#package-l4top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim L4top.
 
+<!-- caseproc element L4Xctx -->
 <a id="context-l4xctx"></a>
 ### Context L4Xctx: Context of L4Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4top](#claim-l4top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Xctx -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Context L4Xctx.
 
+<!-- caseproc element L4Esh1 -->
 <a id="evidence-l4esh1"></a>
 ### Evidence L4Esh1: Shared evidence A of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4top](#claim-l4top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Esh1 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Esh1.
 
+<!-- caseproc element L4Esh2 -->
 <a id="evidence-l4esh2"></a>
 ### Evidence L4Esh2: Shared evidence B of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4top](#claim-l4top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Esh2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Esh2.
 
+<!-- caseproc element L4Smain -->
 <a id="strategy-l4smain"></a>
 ### Strategy L4Smain: Main strategy of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4G2](#claim-l4g2)**, [Claim C29top](#claim-c29top), [Claim C30top](#claim-c30top), [Claim C31top](#claim-c31top), [Claim C32top](#claim-c32top), [Claim C33top](#claim-c33top), [Claim L4Gbr1](#claim-l4gbr1), [Claim L4Gbr2](#claim-l4gbr2), [Claim L4Gbr3](#claim-l4gbr3), [Claim L4Gbr4](#claim-l4gbr4), [Claim L4Gbr5](#claim-l4gbr5), [Claim L4Gbr6](#claim-l4gbr6), [Claim L4Gbr7](#claim-l4gbr7), [Claim L4Gbr8](#claim-l4gbr8)
+
+Supports: **[Claim L4top](#claim-l4top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Smain -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Strategy L4Smain.
 
+<!-- caseproc element L4G2 -->
 <a id="claim-l4g2"></a>
 ### Claim L4G2: Level-2 claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Strategy L4S2](#strategy-l4s2)**, [Claim L4G2b](#claim-l4g2b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G2.
 
+<!-- caseproc element L4S2 -->
 <a id="strategy-l4s2"></a>
 ### Strategy L4S2: Level-3 strategy of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4G3](#claim-l4g3)**, [Claim L4G3c](#claim-l4g3c)
+
+Supports: **[Claim L4G2](#claim-l4g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4S2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Strategy L4S2.
 
+<!-- caseproc element L4G3 -->
 <a id="claim-l4g3"></a>
 ### Claim L4G3: Level-4 claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Strategy L4S3](#strategy-l4s3)**, [Claim L4G3b](#claim-l4g3b)
+
+Supports: **[Strategy L4S2](#strategy-l4s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G3 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G3.
 
+<!-- caseproc element L4S3 -->
 <a id="strategy-l4s3"></a>
 ### Strategy L4S3: Level-5 strategy of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4G4](#claim-l4g4)**, [Claim L4G4b](#claim-l4g4b)
+
+Supports: **[Claim L4G3](#claim-l4g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4S3 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Strategy L4S3.
 
+<!-- caseproc element L4G4 -->
 <a id="claim-l4g4"></a>
 ### Claim L4G4: Level-6 claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Edeep](#evidence-l4edeep)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Strategy L4S3](#strategy-l4s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G4 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G4.
 
+<!-- caseproc element L4Edeep -->
 <a id="evidence-l4edeep"></a>
 ### Evidence L4Edeep: Deep evidence of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4G4](#claim-l4g4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Edeep -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Edeep.
 
+<!-- caseproc element L4G4b -->
 <a id="claim-l4g4b"></a>
 ### Claim L4G4b: Level-6 alt claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Strategy L4S3](#strategy-l4s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G4b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G4b.
 
+<!-- caseproc element L4G3b -->
 <a id="claim-l4g3b"></a>
 ### Claim L4G3b: Level-5 alt claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh1](#evidence-l4esh1)**
+
+Supports: **[Claim L4G3](#claim-l4g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G3b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G3b.
 
+<!-- caseproc element L4G3c -->
 <a id="claim-l4g3c"></a>
 ### Claim L4G3c: Level-4 alt claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Justification L4J1](#justification-l4j1)**, [Evidence L4Esh2](#evidence-l4esh2)
+
+Supports: **[Strategy L4S2](#strategy-l4s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G3c -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G3c.
 
+<!-- caseproc element L4J1 -->
 <a id="justification-l4j1"></a>
 ### Justification L4J1: Justification of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4G3c](#claim-l4g3c)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4J1 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Justification L4J1.
 
+<!-- caseproc element L4G2b -->
 <a id="claim-l4g2b"></a>
 ### Claim L4G2b: Level-3 alt claim of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Strategy L4S2b](#strategy-l4s2b)**
+
+Supports: **[Claim L4G2](#claim-l4g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G2b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G2b.
 
+<!-- caseproc element L4S2b -->
 <a id="strategy-l4s2b"></a>
 ### Strategy L4S2b: Level-4 alt strategy of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4G3d](#claim-l4g3d)**, [Claim L4G3e](#claim-l4g3e)
+
+Supports: **[Claim L4G2b](#claim-l4g2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4S2b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Strategy L4S2b.
 
+<!-- caseproc element L4G3d -->
 <a id="claim-l4g3d"></a>
 ### Claim L4G3d: Level-5 claim D of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh1](#evidence-l4esh1)**, [Evidence L4Esh2](#evidence-l4esh2)
+
+Supports: **[Strategy L4S2b](#strategy-l4s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G3d -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G3d.
 
+<!-- caseproc element L4G3e -->
 <a id="claim-l4g3e"></a>
 ### Claim L4G3e: Level-5 claim E of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4E2](#evidence-l4e2)**
+
+Supports: **[Strategy L4S2b](#strategy-l4s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4G3e -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4G3e.
 
+<!-- caseproc element L4E2 -->
 <a id="evidence-l4e2"></a>
 ### Evidence L4E2: Extra evidence of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4G3e](#claim-l4g3e)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4E2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4E2.
 
+<!-- caseproc element L4Gbr1 -->
 <a id="claim-l4gbr1"></a>
 ### Claim L4Gbr1: Breadth claim 1 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr1a](#claim-l4gbr1a)**, [Claim L4Gbr1b](#claim-l4gbr1b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr1 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr1.
 
+<!-- caseproc element L4Gbr1a -->
 <a id="claim-l4gbr1a"></a>
 ### Claim L4Gbr1a: Sub-claim 1a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr1](#evidence-l4ebr1)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr1](#claim-l4gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr1a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr1a.
 
+<!-- caseproc element L4Ebr1 -->
 <a id="evidence-l4ebr1"></a>
 ### Evidence L4Ebr1: Evidence for breadth 1 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr1a](#claim-l4gbr1a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr1 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr1.
 
+<!-- caseproc element L4Gbr1b -->
 <a id="claim-l4gbr1b"></a>
 ### Claim L4Gbr1b: Sub-claim 1b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr1](#claim-l4gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr1b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr1b.
 
+<!-- caseproc element L4Gbr2 -->
 <a id="claim-l4gbr2"></a>
 ### Claim L4Gbr2: Breadth claim 2 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr2a](#claim-l4gbr2a)**, [Claim L4Gbr2b](#claim-l4gbr2b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr2.
 
+<!-- caseproc element L4Gbr2a -->
 <a id="claim-l4gbr2a"></a>
 ### Claim L4Gbr2a: Sub-claim 2a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr2](#evidence-l4ebr2)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr2](#claim-l4gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr2a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr2a.
 
+<!-- caseproc element L4Ebr2 -->
 <a id="evidence-l4ebr2"></a>
 ### Evidence L4Ebr2: Evidence for breadth 2 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr2a](#claim-l4gbr2a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr2 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr2.
 
+<!-- caseproc element L4Gbr2b -->
 <a id="claim-l4gbr2b"></a>
 ### Claim L4Gbr2b: Sub-claim 2b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr2](#claim-l4gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr2b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr2b.
 
+<!-- caseproc element L4Gbr3 -->
 <a id="claim-l4gbr3"></a>
 ### Claim L4Gbr3: Breadth claim 3 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr3a](#claim-l4gbr3a)**, [Claim L4Gbr3b](#claim-l4gbr3b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr3 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr3.
 
+<!-- caseproc element L4Gbr3a -->
 <a id="claim-l4gbr3a"></a>
 ### Claim L4Gbr3a: Sub-claim 3a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr3](#evidence-l4ebr3)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr3](#claim-l4gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr3a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr3a.
 
+<!-- caseproc element L4Ebr3 -->
 <a id="evidence-l4ebr3"></a>
 ### Evidence L4Ebr3: Evidence for breadth 3 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr3a](#claim-l4gbr3a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr3 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr3.
 
+<!-- caseproc element L4Gbr3b -->
 <a id="claim-l4gbr3b"></a>
 ### Claim L4Gbr3b: Sub-claim 3b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr3](#claim-l4gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr3b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr3b.
 
+<!-- caseproc element L4Gbr4 -->
 <a id="claim-l4gbr4"></a>
 ### Claim L4Gbr4: Breadth claim 4 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr4a](#claim-l4gbr4a)**, [Claim L4Gbr4b](#claim-l4gbr4b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr4 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr4.
 
+<!-- caseproc element L4Gbr4a -->
 <a id="claim-l4gbr4a"></a>
 ### Claim L4Gbr4a: Sub-claim 4a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr4](#evidence-l4ebr4)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr4](#claim-l4gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr4a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr4a.
 
+<!-- caseproc element L4Ebr4 -->
 <a id="evidence-l4ebr4"></a>
 ### Evidence L4Ebr4: Evidence for breadth 4 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr4a](#claim-l4gbr4a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr4 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr4.
 
+<!-- caseproc element L4Gbr4b -->
 <a id="claim-l4gbr4b"></a>
 ### Claim L4Gbr4b: Sub-claim 4b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr4](#claim-l4gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr4b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr4b.
 
+<!-- caseproc element L4Gbr5 -->
 <a id="claim-l4gbr5"></a>
 ### Claim L4Gbr5: Breadth claim 5 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr5a](#claim-l4gbr5a)**, [Claim L4Gbr5b](#claim-l4gbr5b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr5 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr5.
 
+<!-- caseproc element L4Gbr5a -->
 <a id="claim-l4gbr5a"></a>
 ### Claim L4Gbr5a: Sub-claim 5a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr5](#evidence-l4ebr5)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr5](#claim-l4gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr5a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr5a.
 
+<!-- caseproc element L4Ebr5 -->
 <a id="evidence-l4ebr5"></a>
 ### Evidence L4Ebr5: Evidence for breadth 5 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr5a](#claim-l4gbr5a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr5 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr5.
 
+<!-- caseproc element L4Gbr5b -->
 <a id="claim-l4gbr5b"></a>
 ### Claim L4Gbr5b: Sub-claim 5b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr5](#claim-l4gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr5b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr5b.
 
+<!-- caseproc element L4Gbr6 -->
 <a id="claim-l4gbr6"></a>
 ### Claim L4Gbr6: Breadth claim 6 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr6a](#claim-l4gbr6a)**, [Claim L4Gbr6b](#claim-l4gbr6b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr6 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr6.
 
+<!-- caseproc element L4Gbr6a -->
 <a id="claim-l4gbr6a"></a>
 ### Claim L4Gbr6a: Sub-claim 6a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr6](#evidence-l4ebr6)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr6](#claim-l4gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr6a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr6a.
 
+<!-- caseproc element L4Ebr6 -->
 <a id="evidence-l4ebr6"></a>
 ### Evidence L4Ebr6: Evidence for breadth 6 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr6a](#claim-l4gbr6a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr6 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr6.
 
+<!-- caseproc element L4Gbr6b -->
 <a id="claim-l4gbr6b"></a>
 ### Claim L4Gbr6b: Sub-claim 6b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr6](#claim-l4gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr6b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr6b.
 
+<!-- caseproc element L4Gbr7 -->
 <a id="claim-l4gbr7"></a>
 ### Claim L4Gbr7: Breadth claim 7 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr7a](#claim-l4gbr7a)**, [Claim L4Gbr7b](#claim-l4gbr7b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr7 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr7.
 
+<!-- caseproc element L4Gbr7a -->
 <a id="claim-l4gbr7a"></a>
 ### Claim L4Gbr7a: Sub-claim 7a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr7](#evidence-l4ebr7)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr7](#claim-l4gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr7a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr7a.
 
+<!-- caseproc element L4Ebr7 -->
 <a id="evidence-l4ebr7"></a>
 ### Evidence L4Ebr7: Evidence for breadth 7 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr7a](#claim-l4gbr7a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr7 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr7.
 
+<!-- caseproc element L4Gbr7b -->
 <a id="claim-l4gbr7b"></a>
 ### Claim L4Gbr7b: Sub-claim 7b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr7](#claim-l4gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr7b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr7b.
 
+<!-- caseproc element L4Gbr8 -->
 <a id="claim-l4gbr8"></a>
 ### Claim L4Gbr8: Breadth claim 8 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Claim L4Gbr8a](#claim-l4gbr8a)**, [Claim L4Gbr8b](#claim-l4gbr8b)
+
+Supports: **[Strategy L4Smain](#strategy-l4smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr8 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr8.
 
+<!-- caseproc element L4Gbr8a -->
 <a id="claim-l4gbr8a"></a>
 ### Claim L4Gbr8a: Sub-claim 8a of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Ebr8](#evidence-l4ebr8)**, [Evidence L4Esh1](#evidence-l4esh1)
+
+Supports: **[Claim L4Gbr8](#claim-l4gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr8a -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr8a.
 
+<!-- caseproc element L4Ebr8 -->
 <a id="evidence-l4ebr8"></a>
 ### Evidence L4Ebr8: Evidence for breadth 8 of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supports: **[Claim L4Gbr8a](#claim-l4gbr8a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Ebr8 -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Evidence L4Ebr8.
 
+<!-- caseproc element L4Gbr8b -->
 <a id="claim-l4gbr8b"></a>
 ### Claim L4Gbr8b: Sub-claim 8b of L4
 
-<!-- caseproc references -->
+Referenced by: **[Package L4top](#package-l4top)**
+
+Supported by: **[Evidence L4Esh2](#evidence-l4esh2)**
+
+Supports: **[Claim L4Gbr8](#claim-l4gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L4Gbr8b -->
 References: [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim L4Gbr8b.
 
+<!-- caseproc element L5top -->
 <a id="claim-l5top"></a>
 ### Claim L5top: Statement of L5top
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**, [Package G1](#package-g1)
+
+Supported by: **[Context L5Xctx](#context-l5xctx)**, [Evidence L5Esh1](#evidence-l5esh1), [Evidence L5Esh2](#evidence-l5esh2), [Strategy L5Smain](#strategy-l5smain)
+
+Supports: [Strategy Sdecomp](#strategy-sdecomp)
+<!-- end caseproc -->
+
+<!-- caseproc references L5top -->
 References: [Package L5top](#package-l5top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim L5top.
 
+<!-- caseproc element L5Xctx -->
 <a id="context-l5xctx"></a>
 ### Context L5Xctx: Context of L5Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5top](#claim-l5top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Xctx -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Context L5Xctx.
 
+<!-- caseproc element L5Esh1 -->
 <a id="evidence-l5esh1"></a>
 ### Evidence L5Esh1: Shared evidence A of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5top](#claim-l5top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Esh1 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Esh1.
 
+<!-- caseproc element L5Esh2 -->
 <a id="evidence-l5esh2"></a>
 ### Evidence L5Esh2: Shared evidence B of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5top](#claim-l5top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Esh2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Esh2.
 
+<!-- caseproc element L5Smain -->
 <a id="strategy-l5smain"></a>
 ### Strategy L5Smain: Main strategy of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5G2](#claim-l5g2)**, [Claim C36top](#claim-c36top), [Claim C37top](#claim-c37top), [Claim C38top](#claim-c38top), [Claim C39top](#claim-c39top), [Claim C40top](#claim-c40top), [Claim L5Gbr1](#claim-l5gbr1), [Claim L5Gbr2](#claim-l5gbr2), [Claim L5Gbr3](#claim-l5gbr3), [Claim L5Gbr4](#claim-l5gbr4), [Claim L5Gbr5](#claim-l5gbr5), [Claim L5Gbr6](#claim-l5gbr6), [Claim L5Gbr7](#claim-l5gbr7), [Claim L5Gbr8](#claim-l5gbr8)
+
+Supports: **[Claim L5top](#claim-l5top)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Smain -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Strategy L5Smain.
 
+<!-- caseproc element L5G2 -->
 <a id="claim-l5g2"></a>
 ### Claim L5G2: Level-2 claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Strategy L5S2](#strategy-l5s2)**, [Claim L5G2b](#claim-l5g2b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G2.
 
+<!-- caseproc element L5S2 -->
 <a id="strategy-l5s2"></a>
 ### Strategy L5S2: Level-3 strategy of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5G3](#claim-l5g3)**, [Claim L5G3c](#claim-l5g3c)
+
+Supports: **[Claim L5G2](#claim-l5g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5S2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Strategy L5S2.
 
+<!-- caseproc element L5G3 -->
 <a id="claim-l5g3"></a>
 ### Claim L5G3: Level-4 claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Strategy L5S3](#strategy-l5s3)**, [Claim L5G3b](#claim-l5g3b)
+
+Supports: **[Strategy L5S2](#strategy-l5s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G3 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G3.
 
+<!-- caseproc element L5S3 -->
 <a id="strategy-l5s3"></a>
 ### Strategy L5S3: Level-5 strategy of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5G4](#claim-l5g4)**, [Claim L5G4b](#claim-l5g4b)
+
+Supports: **[Claim L5G3](#claim-l5g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5S3 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Strategy L5S3.
 
+<!-- caseproc element L5G4 -->
 <a id="claim-l5g4"></a>
 ### Claim L5G4: Level-6 claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Edeep](#evidence-l5edeep)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Strategy L5S3](#strategy-l5s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G4 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G4.
 
+<!-- caseproc element L5Edeep -->
 <a id="evidence-l5edeep"></a>
 ### Evidence L5Edeep: Deep evidence of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5G4](#claim-l5g4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Edeep -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Edeep.
 
+<!-- caseproc element L5G4b -->
 <a id="claim-l5g4b"></a>
 ### Claim L5G4b: Level-6 alt claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Strategy L5S3](#strategy-l5s3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G4b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G4b.
 
+<!-- caseproc element L5G3b -->
 <a id="claim-l5g3b"></a>
 ### Claim L5G3b: Level-5 alt claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh1](#evidence-l5esh1)**
+
+Supports: **[Claim L5G3](#claim-l5g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G3b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G3b.
 
+<!-- caseproc element L5G3c -->
 <a id="claim-l5g3c"></a>
 ### Claim L5G3c: Level-4 alt claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Justification L5J1](#justification-l5j1)**, [Evidence L5Esh2](#evidence-l5esh2)
+
+Supports: **[Strategy L5S2](#strategy-l5s2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G3c -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G3c.
 
+<!-- caseproc element L5J1 -->
 <a id="justification-l5j1"></a>
 ### Justification L5J1: Justification of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5G3c](#claim-l5g3c)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5J1 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Justification L5J1.
 
+<!-- caseproc element L5G2b -->
 <a id="claim-l5g2b"></a>
 ### Claim L5G2b: Level-3 alt claim of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Strategy L5S2b](#strategy-l5s2b)**
+
+Supports: **[Claim L5G2](#claim-l5g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G2b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G2b.
 
+<!-- caseproc element L5S2b -->
 <a id="strategy-l5s2b"></a>
 ### Strategy L5S2b: Level-4 alt strategy of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5G3d](#claim-l5g3d)**, [Claim L5G3e](#claim-l5g3e)
+
+Supports: **[Claim L5G2b](#claim-l5g2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5S2b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Strategy L5S2b.
 
+<!-- caseproc element L5G3d -->
 <a id="claim-l5g3d"></a>
 ### Claim L5G3d: Level-5 claim D of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh1](#evidence-l5esh1)**, [Evidence L5Esh2](#evidence-l5esh2)
+
+Supports: **[Strategy L5S2b](#strategy-l5s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G3d -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G3d.
 
+<!-- caseproc element L5G3e -->
 <a id="claim-l5g3e"></a>
 ### Claim L5G3e: Level-5 claim E of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5E2](#evidence-l5e2)**
+
+Supports: **[Strategy L5S2b](#strategy-l5s2b)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5G3e -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5G3e.
 
+<!-- caseproc element L5E2 -->
 <a id="evidence-l5e2"></a>
 ### Evidence L5E2: Extra evidence of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5G3e](#claim-l5g3e)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5E2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5E2.
 
+<!-- caseproc element L5Gbr1 -->
 <a id="claim-l5gbr1"></a>
 ### Claim L5Gbr1: Breadth claim 1 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr1a](#claim-l5gbr1a)**, [Claim L5Gbr1b](#claim-l5gbr1b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr1 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr1.
 
+<!-- caseproc element L5Gbr1a -->
 <a id="claim-l5gbr1a"></a>
 ### Claim L5Gbr1a: Sub-claim 1a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr1](#evidence-l5ebr1)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr1](#claim-l5gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr1a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr1a.
 
+<!-- caseproc element L5Ebr1 -->
 <a id="evidence-l5ebr1"></a>
 ### Evidence L5Ebr1: Evidence for breadth 1 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr1a](#claim-l5gbr1a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr1 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr1.
 
+<!-- caseproc element L5Gbr1b -->
 <a id="claim-l5gbr1b"></a>
 ### Claim L5Gbr1b: Sub-claim 1b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr1](#claim-l5gbr1)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr1b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr1b.
 
+<!-- caseproc element L5Gbr2 -->
 <a id="claim-l5gbr2"></a>
 ### Claim L5Gbr2: Breadth claim 2 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr2a](#claim-l5gbr2a)**, [Claim L5Gbr2b](#claim-l5gbr2b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr2.
 
+<!-- caseproc element L5Gbr2a -->
 <a id="claim-l5gbr2a"></a>
 ### Claim L5Gbr2a: Sub-claim 2a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr2](#evidence-l5ebr2)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr2](#claim-l5gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr2a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr2a.
 
+<!-- caseproc element L5Ebr2 -->
 <a id="evidence-l5ebr2"></a>
 ### Evidence L5Ebr2: Evidence for breadth 2 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr2a](#claim-l5gbr2a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr2 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr2.
 
+<!-- caseproc element L5Gbr2b -->
 <a id="claim-l5gbr2b"></a>
 ### Claim L5Gbr2b: Sub-claim 2b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr2](#claim-l5gbr2)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr2b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr2b.
 
+<!-- caseproc element L5Gbr3 -->
 <a id="claim-l5gbr3"></a>
 ### Claim L5Gbr3: Breadth claim 3 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr3a](#claim-l5gbr3a)**, [Claim L5Gbr3b](#claim-l5gbr3b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr3 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr3.
 
+<!-- caseproc element L5Gbr3a -->
 <a id="claim-l5gbr3a"></a>
 ### Claim L5Gbr3a: Sub-claim 3a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr3](#evidence-l5ebr3)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr3](#claim-l5gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr3a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr3a.
 
+<!-- caseproc element L5Ebr3 -->
 <a id="evidence-l5ebr3"></a>
 ### Evidence L5Ebr3: Evidence for breadth 3 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr3a](#claim-l5gbr3a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr3 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr3.
 
+<!-- caseproc element L5Gbr3b -->
 <a id="claim-l5gbr3b"></a>
 ### Claim L5Gbr3b: Sub-claim 3b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr3](#claim-l5gbr3)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr3b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr3b.
 
+<!-- caseproc element L5Gbr4 -->
 <a id="claim-l5gbr4"></a>
 ### Claim L5Gbr4: Breadth claim 4 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr4a](#claim-l5gbr4a)**, [Claim L5Gbr4b](#claim-l5gbr4b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr4 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr4.
 
+<!-- caseproc element L5Gbr4a -->
 <a id="claim-l5gbr4a"></a>
 ### Claim L5Gbr4a: Sub-claim 4a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr4](#evidence-l5ebr4)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr4](#claim-l5gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr4a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr4a.
 
+<!-- caseproc element L5Ebr4 -->
 <a id="evidence-l5ebr4"></a>
 ### Evidence L5Ebr4: Evidence for breadth 4 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr4a](#claim-l5gbr4a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr4 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr4.
 
+<!-- caseproc element L5Gbr4b -->
 <a id="claim-l5gbr4b"></a>
 ### Claim L5Gbr4b: Sub-claim 4b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr4](#claim-l5gbr4)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr4b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr4b.
 
+<!-- caseproc element L5Gbr5 -->
 <a id="claim-l5gbr5"></a>
 ### Claim L5Gbr5: Breadth claim 5 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr5a](#claim-l5gbr5a)**, [Claim L5Gbr5b](#claim-l5gbr5b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr5 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr5.
 
+<!-- caseproc element L5Gbr5a -->
 <a id="claim-l5gbr5a"></a>
 ### Claim L5Gbr5a: Sub-claim 5a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr5](#evidence-l5ebr5)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr5](#claim-l5gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr5a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr5a.
 
+<!-- caseproc element L5Ebr5 -->
 <a id="evidence-l5ebr5"></a>
 ### Evidence L5Ebr5: Evidence for breadth 5 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr5a](#claim-l5gbr5a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr5 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr5.
 
+<!-- caseproc element L5Gbr5b -->
 <a id="claim-l5gbr5b"></a>
 ### Claim L5Gbr5b: Sub-claim 5b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr5](#claim-l5gbr5)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr5b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr5b.
 
+<!-- caseproc element L5Gbr6 -->
 <a id="claim-l5gbr6"></a>
 ### Claim L5Gbr6: Breadth claim 6 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr6a](#claim-l5gbr6a)**, [Claim L5Gbr6b](#claim-l5gbr6b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr6 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr6.
 
+<!-- caseproc element L5Gbr6a -->
 <a id="claim-l5gbr6a"></a>
 ### Claim L5Gbr6a: Sub-claim 6a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr6](#evidence-l5ebr6)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr6](#claim-l5gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr6a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr6a.
 
+<!-- caseproc element L5Ebr6 -->
 <a id="evidence-l5ebr6"></a>
 ### Evidence L5Ebr6: Evidence for breadth 6 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr6a](#claim-l5gbr6a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr6 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr6.
 
+<!-- caseproc element L5Gbr6b -->
 <a id="claim-l5gbr6b"></a>
 ### Claim L5Gbr6b: Sub-claim 6b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr6](#claim-l5gbr6)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr6b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr6b.
 
+<!-- caseproc element L5Gbr7 -->
 <a id="claim-l5gbr7"></a>
 ### Claim L5Gbr7: Breadth claim 7 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr7a](#claim-l5gbr7a)**, [Claim L5Gbr7b](#claim-l5gbr7b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr7 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr7.
 
+<!-- caseproc element L5Gbr7a -->
 <a id="claim-l5gbr7a"></a>
 ### Claim L5Gbr7a: Sub-claim 7a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr7](#evidence-l5ebr7)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr7](#claim-l5gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr7a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr7a.
 
+<!-- caseproc element L5Ebr7 -->
 <a id="evidence-l5ebr7"></a>
 ### Evidence L5Ebr7: Evidence for breadth 7 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr7a](#claim-l5gbr7a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr7 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr7.
 
+<!-- caseproc element L5Gbr7b -->
 <a id="claim-l5gbr7b"></a>
 ### Claim L5Gbr7b: Sub-claim 7b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr7](#claim-l5gbr7)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr7b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr7b.
 
+<!-- caseproc element L5Gbr8 -->
 <a id="claim-l5gbr8"></a>
 ### Claim L5Gbr8: Breadth claim 8 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Claim L5Gbr8a](#claim-l5gbr8a)**, [Claim L5Gbr8b](#claim-l5gbr8b)
+
+Supports: **[Strategy L5Smain](#strategy-l5smain)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr8 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr8.
 
+<!-- caseproc element L5Gbr8a -->
 <a id="claim-l5gbr8a"></a>
 ### Claim L5Gbr8a: Sub-claim 8a of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Ebr8](#evidence-l5ebr8)**, [Evidence L5Esh1](#evidence-l5esh1)
+
+Supports: **[Claim L5Gbr8](#claim-l5gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr8a -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr8a.
 
+<!-- caseproc element L5Ebr8 -->
 <a id="evidence-l5ebr8"></a>
 ### Evidence L5Ebr8: Evidence for breadth 8 of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supports: **[Claim L5Gbr8a](#claim-l5gbr8a)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Ebr8 -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Evidence L5Ebr8.
 
+<!-- caseproc element L5Gbr8b -->
 <a id="claim-l5gbr8b"></a>
 ### Claim L5Gbr8b: Sub-claim 8b of L5
 
-<!-- caseproc references -->
+Referenced by: **[Package L5top](#package-l5top)**
+
+Supported by: **[Evidence L5Esh2](#evidence-l5esh2)**
+
+Supports: **[Claim L5Gbr8](#claim-l5gbr8)**
+<!-- end caseproc -->
+
+<!-- caseproc references L5Gbr8b -->
 References: [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim L5Gbr8b.
 
+<!-- caseproc element C01top -->
 <a id="claim-c01top"></a>
 ### Claim C01top: Statement of C01top
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**, [Package G1](#package-g1)
+
+Supported by: **[Claim C02top](#claim-c02top)**, [Context C01Xctx](#context-c01xctx), [Evidence C01Esh](#evidence-c01esh), [Strategy C01Sass](#strategy-c01sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C01top -->
 References: [Package C01top](#package-c01top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C01top.
 
+<!-- caseproc element C01Xctx -->
 <a id="context-c01xctx"></a>
 ### Context C01Xctx: Context of C01Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01top](#claim-c01top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01Xctx -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Context C01Xctx.
 
+<!-- caseproc element C01Esh -->
 <a id="evidence-c01esh"></a>
 ### Evidence C01Esh: Shared evidence of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01top](#claim-c01top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01Esh -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Evidence C01Esh.
 
+<!-- caseproc element C01Sass -->
 <a id="strategy-c01sass"></a>
 ### Strategy C01Sass: Assertion strategy of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supported by: **[Claim C01G1](#claim-c01g1)**, [Claim C01G2](#claim-c01g2), [Claim C01G3](#claim-c01g3)
+
+Supports: **[Claim C01top](#claim-c01top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01Sass -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Strategy C01Sass.
 
+<!-- caseproc element C01G1 -->
 <a id="claim-c01g1"></a>
 ### Claim C01G1: Sub-claim 1 of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supported by: **[Evidence C01E1](#evidence-c01e1)**, [Context C01Xctx](#context-c01xctx)
+
+Supports: **[Strategy C01Sass](#strategy-c01sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01G1 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Claim C01G1.
 
+<!-- caseproc element C01E1 -->
 <a id="evidence-c01e1"></a>
 ### Evidence C01E1: Evidence 1 of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01G1](#claim-c01g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01E1 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Evidence C01E1.
 
+<!-- caseproc element C01G2 -->
 <a id="claim-c01g2"></a>
 ### Claim C01G2: Sub-claim 2 of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supported by: **[Justification C01J1](#justification-c01j1)**, [Evidence C01Esh](#evidence-c01esh)
+
+Supports: **[Strategy C01Sass](#strategy-c01sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01G2 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Claim C01G2.
 
+<!-- caseproc element C01J1 -->
 <a id="justification-c01j1"></a>
 ### Justification C01J1: Justification of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01G2](#claim-c01g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01J1 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Justification C01J1.
 
+<!-- caseproc element C01G3 -->
 <a id="claim-c01g3"></a>
 ### Claim C01G3: Sub-claim 3 of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supported by: **[Assumption C01A1](#assumption-c01a1)**, [Evidence C01E2](#evidence-c01e2), [Evidence C01E1](#evidence-c01e1)
+
+Supports: **[Strategy C01Sass](#strategy-c01sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01G3 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Claim C01G3.
 
+<!-- caseproc element C01A1 -->
 <a id="assumption-c01a1"></a>
 ### Assumption C01A1: Assumption of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01G3](#claim-c01g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01A1 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Assumption C01A1.
 
+<!-- caseproc element C01E2 -->
 <a id="evidence-c01e2"></a>
 ### Evidence C01E2: Evidence 2 of C01
 
-<!-- caseproc references -->
+Referenced by: **[Package C01top](#package-c01top)**
+
+Supports: **[Claim C01G3](#claim-c01g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C01E2 -->
 References: [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Evidence C01E2.
 
+<!-- caseproc element C02top -->
 <a id="claim-c02top"></a>
 ### Claim C02top: Statement of C02top
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**, [Package G1](#package-g1), [Package C01top](#package-c01top)
+
+Supported by: **[Claim C03top](#claim-c03top)**, [Context C02Xctx](#context-c02xctx), [Evidence C02Esh](#evidence-c02esh), [Strategy C02Sass](#strategy-c02sass)
+
+Supports: [Claim C01top](#claim-c01top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C02top -->
 References: [Package C02top](#package-c02top), [Package G1](#package-g1), [Package C01top](#package-c01top)
 <!-- end caseproc -->
 
 Stub for Claim C02top.
 
+<!-- caseproc element C02Xctx -->
 <a id="context-c02xctx"></a>
 ### Context C02Xctx: Context of C02Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02top](#claim-c02top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02Xctx -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Context C02Xctx.
 
+<!-- caseproc element C02Esh -->
 <a id="evidence-c02esh"></a>
 ### Evidence C02Esh: Shared evidence of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02top](#claim-c02top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02Esh -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Evidence C02Esh.
 
+<!-- caseproc element C02Sass -->
 <a id="strategy-c02sass"></a>
 ### Strategy C02Sass: Assertion strategy of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supported by: **[Claim C02G1](#claim-c02g1)**, [Claim C02G2](#claim-c02g2), [Claim C02G3](#claim-c02g3)
+
+Supports: **[Claim C02top](#claim-c02top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02Sass -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Strategy C02Sass.
 
+<!-- caseproc element C02G1 -->
 <a id="claim-c02g1"></a>
 ### Claim C02G1: Sub-claim 1 of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supported by: **[Evidence C02E1](#evidence-c02e1)**, [Context C02Xctx](#context-c02xctx)
+
+Supports: **[Strategy C02Sass](#strategy-c02sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02G1 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Claim C02G1.
 
+<!-- caseproc element C02E1 -->
 <a id="evidence-c02e1"></a>
 ### Evidence C02E1: Evidence 1 of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02G1](#claim-c02g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02E1 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Evidence C02E1.
 
+<!-- caseproc element C02G2 -->
 <a id="claim-c02g2"></a>
 ### Claim C02G2: Sub-claim 2 of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supported by: **[Justification C02J1](#justification-c02j1)**, [Evidence C02Esh](#evidence-c02esh)
+
+Supports: **[Strategy C02Sass](#strategy-c02sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02G2 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Claim C02G2.
 
+<!-- caseproc element C02J1 -->
 <a id="justification-c02j1"></a>
 ### Justification C02J1: Justification of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02G2](#claim-c02g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02J1 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Justification C02J1.
 
+<!-- caseproc element C02G3 -->
 <a id="claim-c02g3"></a>
 ### Claim C02G3: Sub-claim 3 of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supported by: **[Assumption C02A1](#assumption-c02a1)**, [Evidence C02E2](#evidence-c02e2), [Evidence C02E1](#evidence-c02e1)
+
+Supports: **[Strategy C02Sass](#strategy-c02sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02G3 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Claim C02G3.
 
+<!-- caseproc element C02A1 -->
 <a id="assumption-c02a1"></a>
 ### Assumption C02A1: Assumption of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02G3](#claim-c02g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02A1 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Assumption C02A1.
 
+<!-- caseproc element C02E2 -->
 <a id="evidence-c02e2"></a>
 ### Evidence C02E2: Evidence 2 of C02
 
-<!-- caseproc references -->
+Referenced by: **[Package C02top](#package-c02top)**
+
+Supports: **[Claim C02G3](#claim-c02g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C02E2 -->
 References: [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Evidence C02E2.
 
+<!-- caseproc element C03top -->
 <a id="claim-c03top"></a>
 ### Claim C03top: Statement of C03top
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**, [Package G1](#package-g1), [Package C02top](#package-c02top)
+
+Supported by: **[Claim C04top](#claim-c04top)**, [Context C03Xctx](#context-c03xctx), [Evidence C03Esh](#evidence-c03esh), [Strategy C03Sass](#strategy-c03sass)
+
+Supports: [Claim C02top](#claim-c02top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C03top -->
 References: [Package C03top](#package-c03top), [Package G1](#package-g1), [Package C02top](#package-c02top)
 <!-- end caseproc -->
 
 Stub for Claim C03top.
 
+<!-- caseproc element C03Xctx -->
 <a id="context-c03xctx"></a>
 ### Context C03Xctx: Context of C03Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03top](#claim-c03top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03Xctx -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Context C03Xctx.
 
+<!-- caseproc element C03Esh -->
 <a id="evidence-c03esh"></a>
 ### Evidence C03Esh: Shared evidence of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03top](#claim-c03top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03Esh -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Evidence C03Esh.
 
+<!-- caseproc element C03Sass -->
 <a id="strategy-c03sass"></a>
 ### Strategy C03Sass: Assertion strategy of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supported by: **[Claim C03G1](#claim-c03g1)**, [Claim C03G2](#claim-c03g2), [Claim C03G3](#claim-c03g3)
+
+Supports: **[Claim C03top](#claim-c03top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03Sass -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Strategy C03Sass.
 
+<!-- caseproc element C03G1 -->
 <a id="claim-c03g1"></a>
 ### Claim C03G1: Sub-claim 1 of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supported by: **[Evidence C03E1](#evidence-c03e1)**, [Context C03Xctx](#context-c03xctx)
+
+Supports: **[Strategy C03Sass](#strategy-c03sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03G1 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Claim C03G1.
 
+<!-- caseproc element C03E1 -->
 <a id="evidence-c03e1"></a>
 ### Evidence C03E1: Evidence 1 of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03G1](#claim-c03g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03E1 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Evidence C03E1.
 
+<!-- caseproc element C03G2 -->
 <a id="claim-c03g2"></a>
 ### Claim C03G2: Sub-claim 2 of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supported by: **[Justification C03J1](#justification-c03j1)**, [Evidence C03Esh](#evidence-c03esh)
+
+Supports: **[Strategy C03Sass](#strategy-c03sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03G2 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Claim C03G2.
 
+<!-- caseproc element C03J1 -->
 <a id="justification-c03j1"></a>
 ### Justification C03J1: Justification of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03G2](#claim-c03g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03J1 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Justification C03J1.
 
+<!-- caseproc element C03G3 -->
 <a id="claim-c03g3"></a>
 ### Claim C03G3: Sub-claim 3 of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supported by: **[Assumption C03A1](#assumption-c03a1)**, [Evidence C03E2](#evidence-c03e2), [Evidence C03E1](#evidence-c03e1)
+
+Supports: **[Strategy C03Sass](#strategy-c03sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03G3 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Claim C03G3.
 
+<!-- caseproc element C03A1 -->
 <a id="assumption-c03a1"></a>
 ### Assumption C03A1: Assumption of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03G3](#claim-c03g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03A1 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Assumption C03A1.
 
+<!-- caseproc element C03E2 -->
 <a id="evidence-c03e2"></a>
 ### Evidence C03E2: Evidence 2 of C03
 
-<!-- caseproc references -->
+Referenced by: **[Package C03top](#package-c03top)**
+
+Supports: **[Claim C03G3](#claim-c03g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C03E2 -->
 References: [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Evidence C03E2.
 
+<!-- caseproc element C04top -->
 <a id="claim-c04top"></a>
 ### Claim C04top: Statement of C04top
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**, [Package G1](#package-g1), [Package C03top](#package-c03top)
+
+Supported by: **[Claim C05top](#claim-c05top)**, [Context C04Xctx](#context-c04xctx), [Evidence C04Esh](#evidence-c04esh), [Strategy C04Sass](#strategy-c04sass)
+
+Supports: [Claim C03top](#claim-c03top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C04top -->
 References: [Package C04top](#package-c04top), [Package G1](#package-g1), [Package C03top](#package-c03top)
 <!-- end caseproc -->
 
 Stub for Claim C04top.
 
+<!-- caseproc element C04Xctx -->
 <a id="context-c04xctx"></a>
 ### Context C04Xctx: Context of C04Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04top](#claim-c04top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04Xctx -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Context C04Xctx.
 
+<!-- caseproc element C04Esh -->
 <a id="evidence-c04esh"></a>
 ### Evidence C04Esh: Shared evidence of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04top](#claim-c04top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04Esh -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Evidence C04Esh.
 
+<!-- caseproc element C04Sass -->
 <a id="strategy-c04sass"></a>
 ### Strategy C04Sass: Assertion strategy of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supported by: **[Claim C04G1](#claim-c04g1)**, [Claim C04G2](#claim-c04g2), [Claim C04G3](#claim-c04g3)
+
+Supports: **[Claim C04top](#claim-c04top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04Sass -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Strategy C04Sass.
 
+<!-- caseproc element C04G1 -->
 <a id="claim-c04g1"></a>
 ### Claim C04G1: Sub-claim 1 of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supported by: **[Evidence C04E1](#evidence-c04e1)**, [Context C04Xctx](#context-c04xctx)
+
+Supports: **[Strategy C04Sass](#strategy-c04sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04G1 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Claim C04G1.
 
+<!-- caseproc element C04E1 -->
 <a id="evidence-c04e1"></a>
 ### Evidence C04E1: Evidence 1 of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04G1](#claim-c04g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04E1 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Evidence C04E1.
 
+<!-- caseproc element C04G2 -->
 <a id="claim-c04g2"></a>
 ### Claim C04G2: Sub-claim 2 of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supported by: **[Justification C04J1](#justification-c04j1)**, [Evidence C04Esh](#evidence-c04esh)
+
+Supports: **[Strategy C04Sass](#strategy-c04sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04G2 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Claim C04G2.
 
+<!-- caseproc element C04J1 -->
 <a id="justification-c04j1"></a>
 ### Justification C04J1: Justification of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04G2](#claim-c04g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04J1 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Justification C04J1.
 
+<!-- caseproc element C04G3 -->
 <a id="claim-c04g3"></a>
 ### Claim C04G3: Sub-claim 3 of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supported by: **[Assumption C04A1](#assumption-c04a1)**, [Evidence C04E2](#evidence-c04e2), [Evidence C04E1](#evidence-c04e1)
+
+Supports: **[Strategy C04Sass](#strategy-c04sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04G3 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Claim C04G3.
 
+<!-- caseproc element C04A1 -->
 <a id="assumption-c04a1"></a>
 ### Assumption C04A1: Assumption of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04G3](#claim-c04g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04A1 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Assumption C04A1.
 
+<!-- caseproc element C04E2 -->
 <a id="evidence-c04e2"></a>
 ### Evidence C04E2: Evidence 2 of C04
 
-<!-- caseproc references -->
+Referenced by: **[Package C04top](#package-c04top)**
+
+Supports: **[Claim C04G3](#claim-c04g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C04E2 -->
 References: [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Evidence C04E2.
 
+<!-- caseproc element C05top -->
 <a id="claim-c05top"></a>
 ### Claim C05top: Statement of C05top
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**, [Package G1](#package-g1), [Package C04top](#package-c04top)
+
+Supported by: **[Claim C06top](#claim-c06top)**, [Context C05Xctx](#context-c05xctx), [Evidence C05Esh](#evidence-c05esh), [Strategy C05Sass](#strategy-c05sass)
+
+Supports: [Claim C04top](#claim-c04top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C05top -->
 References: [Package C05top](#package-c05top), [Package G1](#package-g1), [Package C04top](#package-c04top)
 <!-- end caseproc -->
 
 Stub for Claim C05top.
 
+<!-- caseproc element C05Xctx -->
 <a id="context-c05xctx"></a>
 ### Context C05Xctx: Context of C05Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05top](#claim-c05top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05Xctx -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Context C05Xctx.
 
+<!-- caseproc element C05Esh -->
 <a id="evidence-c05esh"></a>
 ### Evidence C05Esh: Shared evidence of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05top](#claim-c05top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05Esh -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Evidence C05Esh.
 
+<!-- caseproc element C05Sass -->
 <a id="strategy-c05sass"></a>
 ### Strategy C05Sass: Assertion strategy of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supported by: **[Claim C05G1](#claim-c05g1)**, [Claim C05G2](#claim-c05g2), [Claim C05G3](#claim-c05g3)
+
+Supports: **[Claim C05top](#claim-c05top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05Sass -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Strategy C05Sass.
 
+<!-- caseproc element C05G1 -->
 <a id="claim-c05g1"></a>
 ### Claim C05G1: Sub-claim 1 of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supported by: **[Evidence C05E1](#evidence-c05e1)**, [Context C05Xctx](#context-c05xctx)
+
+Supports: **[Strategy C05Sass](#strategy-c05sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05G1 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Claim C05G1.
 
+<!-- caseproc element C05E1 -->
 <a id="evidence-c05e1"></a>
 ### Evidence C05E1: Evidence 1 of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05G1](#claim-c05g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05E1 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Evidence C05E1.
 
+<!-- caseproc element C05G2 -->
 <a id="claim-c05g2"></a>
 ### Claim C05G2: Sub-claim 2 of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supported by: **[Justification C05J1](#justification-c05j1)**, [Evidence C05Esh](#evidence-c05esh)
+
+Supports: **[Strategy C05Sass](#strategy-c05sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05G2 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Claim C05G2.
 
+<!-- caseproc element C05J1 -->
 <a id="justification-c05j1"></a>
 ### Justification C05J1: Justification of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05G2](#claim-c05g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05J1 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Justification C05J1.
 
+<!-- caseproc element C05G3 -->
 <a id="claim-c05g3"></a>
 ### Claim C05G3: Sub-claim 3 of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supported by: **[Assumption C05A1](#assumption-c05a1)**, [Evidence C05E2](#evidence-c05e2), [Evidence C05E1](#evidence-c05e1)
+
+Supports: **[Strategy C05Sass](#strategy-c05sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05G3 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Claim C05G3.
 
+<!-- caseproc element C05A1 -->
 <a id="assumption-c05a1"></a>
 ### Assumption C05A1: Assumption of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05G3](#claim-c05g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05A1 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Assumption C05A1.
 
+<!-- caseproc element C05E2 -->
 <a id="evidence-c05e2"></a>
 ### Evidence C05E2: Evidence 2 of C05
 
-<!-- caseproc references -->
+Referenced by: **[Package C05top](#package-c05top)**
+
+Supports: **[Claim C05G3](#claim-c05g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C05E2 -->
 References: [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Evidence C05E2.
 
+<!-- caseproc element C06top -->
 <a id="claim-c06top"></a>
 ### Claim C06top: Statement of C06top
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**, [Package G1](#package-g1), [Package C05top](#package-c05top)
+
+Supported by: **[Claim C07top](#claim-c07top)**, [Context C06Xctx](#context-c06xctx), [Evidence C06Esh](#evidence-c06esh), [Strategy C06Sass](#strategy-c06sass)
+
+Supports: [Claim C05top](#claim-c05top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C06top -->
 References: [Package C06top](#package-c06top), [Package G1](#package-g1), [Package C05top](#package-c05top)
 <!-- end caseproc -->
 
 Stub for Claim C06top.
 
+<!-- caseproc element C06Xctx -->
 <a id="context-c06xctx"></a>
 ### Context C06Xctx: Context of C06Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06top](#claim-c06top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06Xctx -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Context C06Xctx.
 
+<!-- caseproc element C06Esh -->
 <a id="evidence-c06esh"></a>
 ### Evidence C06Esh: Shared evidence of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06top](#claim-c06top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06Esh -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Evidence C06Esh.
 
+<!-- caseproc element C06Sass -->
 <a id="strategy-c06sass"></a>
 ### Strategy C06Sass: Assertion strategy of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supported by: **[Claim C06G1](#claim-c06g1)**, [Claim C06G2](#claim-c06g2), [Claim C06G3](#claim-c06g3)
+
+Supports: **[Claim C06top](#claim-c06top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06Sass -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Strategy C06Sass.
 
+<!-- caseproc element C06G1 -->
 <a id="claim-c06g1"></a>
 ### Claim C06G1: Sub-claim 1 of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supported by: **[Evidence C06E1](#evidence-c06e1)**, [Context C06Xctx](#context-c06xctx)
+
+Supports: **[Strategy C06Sass](#strategy-c06sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06G1 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Claim C06G1.
 
+<!-- caseproc element C06E1 -->
 <a id="evidence-c06e1"></a>
 ### Evidence C06E1: Evidence 1 of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06G1](#claim-c06g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06E1 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Evidence C06E1.
 
+<!-- caseproc element C06G2 -->
 <a id="claim-c06g2"></a>
 ### Claim C06G2: Sub-claim 2 of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supported by: **[Justification C06J1](#justification-c06j1)**, [Evidence C06Esh](#evidence-c06esh)
+
+Supports: **[Strategy C06Sass](#strategy-c06sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06G2 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Claim C06G2.
 
+<!-- caseproc element C06J1 -->
 <a id="justification-c06j1"></a>
 ### Justification C06J1: Justification of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06G2](#claim-c06g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06J1 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Justification C06J1.
 
+<!-- caseproc element C06G3 -->
 <a id="claim-c06g3"></a>
 ### Claim C06G3: Sub-claim 3 of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supported by: **[Assumption C06A1](#assumption-c06a1)**, [Evidence C06E2](#evidence-c06e2), [Evidence C06E1](#evidence-c06e1)
+
+Supports: **[Strategy C06Sass](#strategy-c06sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06G3 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Claim C06G3.
 
+<!-- caseproc element C06A1 -->
 <a id="assumption-c06a1"></a>
 ### Assumption C06A1: Assumption of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06G3](#claim-c06g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06A1 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Assumption C06A1.
 
+<!-- caseproc element C06E2 -->
 <a id="evidence-c06e2"></a>
 ### Evidence C06E2: Evidence 2 of C06
 
-<!-- caseproc references -->
+Referenced by: **[Package C06top](#package-c06top)**
+
+Supports: **[Claim C06G3](#claim-c06g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C06E2 -->
 References: [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Evidence C06E2.
 
+<!-- caseproc element C07top -->
 <a id="claim-c07top"></a>
 ### Claim C07top: Statement of C07top
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**, [Package G1](#package-g1), [Package C06top](#package-c06top)
+
+Supported by: **[Claim C08top](#claim-c08top)**, [Context C07Xctx](#context-c07xctx), [Evidence C07Esh](#evidence-c07esh), [Strategy C07Sass](#strategy-c07sass)
+
+Supports: [Claim C06top](#claim-c06top), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C07top -->
 References: [Package C07top](#package-c07top), [Package G1](#package-g1), [Package C06top](#package-c06top)
 <!-- end caseproc -->
 
 Stub for Claim C07top.
 
+<!-- caseproc element C07Xctx -->
 <a id="context-c07xctx"></a>
 ### Context C07Xctx: Context of C07Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07top](#claim-c07top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07Xctx -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Context C07Xctx.
 
+<!-- caseproc element C07Esh -->
 <a id="evidence-c07esh"></a>
 ### Evidence C07Esh: Shared evidence of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07top](#claim-c07top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07Esh -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Evidence C07Esh.
 
+<!-- caseproc element C07Sass -->
 <a id="strategy-c07sass"></a>
 ### Strategy C07Sass: Assertion strategy of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supported by: **[Claim C07G1](#claim-c07g1)**, [Claim C07G2](#claim-c07g2), [Claim C07G3](#claim-c07g3)
+
+Supports: **[Claim C07top](#claim-c07top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07Sass -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Strategy C07Sass.
 
+<!-- caseproc element C07G1 -->
 <a id="claim-c07g1"></a>
 ### Claim C07G1: Sub-claim 1 of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supported by: **[Evidence C07E1](#evidence-c07e1)**, [Context C07Xctx](#context-c07xctx)
+
+Supports: **[Strategy C07Sass](#strategy-c07sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07G1 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Claim C07G1.
 
+<!-- caseproc element C07E1 -->
 <a id="evidence-c07e1"></a>
 ### Evidence C07E1: Evidence 1 of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07G1](#claim-c07g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07E1 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Evidence C07E1.
 
+<!-- caseproc element C07G2 -->
 <a id="claim-c07g2"></a>
 ### Claim C07G2: Sub-claim 2 of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supported by: **[Justification C07J1](#justification-c07j1)**, [Evidence C07Esh](#evidence-c07esh)
+
+Supports: **[Strategy C07Sass](#strategy-c07sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07G2 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Claim C07G2.
 
+<!-- caseproc element C07J1 -->
 <a id="justification-c07j1"></a>
 ### Justification C07J1: Justification of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07G2](#claim-c07g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07J1 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Justification C07J1.
 
+<!-- caseproc element C07G3 -->
 <a id="claim-c07g3"></a>
 ### Claim C07G3: Sub-claim 3 of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supported by: **[Assumption C07A1](#assumption-c07a1)**, [Evidence C07E2](#evidence-c07e2), [Evidence C07E1](#evidence-c07e1)
+
+Supports: **[Strategy C07Sass](#strategy-c07sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07G3 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Claim C07G3.
 
+<!-- caseproc element C07A1 -->
 <a id="assumption-c07a1"></a>
 ### Assumption C07A1: Assumption of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07G3](#claim-c07g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07A1 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Assumption C07A1.
 
+<!-- caseproc element C07E2 -->
 <a id="evidence-c07e2"></a>
 ### Evidence C07E2: Evidence 2 of C07
 
-<!-- caseproc references -->
+Referenced by: **[Package C07top](#package-c07top)**
+
+Supports: **[Claim C07G3](#claim-c07g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C07E2 -->
 References: [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Evidence C07E2.
 
+<!-- caseproc element C08top -->
 <a id="claim-c08top"></a>
 ### Claim C08top: Statement of C08top
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**, [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C07top](#package-c07top)
+
+Supported by: **[Claim C09top](#claim-c09top)**, [Context C08Xctx](#context-c08xctx), [Evidence C08Esh](#evidence-c08esh), [Strategy C08Sass](#strategy-c08sass)
+
+Supports: [Claim C07top](#claim-c07top), [Strategy L1Smain](#strategy-l1smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C08top -->
 References: [Package C08top](#package-c08top), [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C07top](#package-c07top)
 <!-- end caseproc -->
 
 Stub for Claim C08top.
 
+<!-- caseproc element C08Xctx -->
 <a id="context-c08xctx"></a>
 ### Context C08Xctx: Context of C08Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08top](#claim-c08top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08Xctx -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Context C08Xctx.
 
+<!-- caseproc element C08Esh -->
 <a id="evidence-c08esh"></a>
 ### Evidence C08Esh: Shared evidence of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08top](#claim-c08top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08Esh -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Evidence C08Esh.
 
+<!-- caseproc element C08Sass -->
 <a id="strategy-c08sass"></a>
 ### Strategy C08Sass: Assertion strategy of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supported by: **[Claim C08G1](#claim-c08g1)**, [Claim C08G2](#claim-c08g2), [Claim C08G3](#claim-c08g3)
+
+Supports: **[Claim C08top](#claim-c08top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08Sass -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Strategy C08Sass.
 
+<!-- caseproc element C08G1 -->
 <a id="claim-c08g1"></a>
 ### Claim C08G1: Sub-claim 1 of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supported by: **[Evidence C08E1](#evidence-c08e1)**, [Context C08Xctx](#context-c08xctx)
+
+Supports: **[Strategy C08Sass](#strategy-c08sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08G1 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Claim C08G1.
 
+<!-- caseproc element C08E1 -->
 <a id="evidence-c08e1"></a>
 ### Evidence C08E1: Evidence 1 of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08G1](#claim-c08g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08E1 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Evidence C08E1.
 
+<!-- caseproc element C08G2 -->
 <a id="claim-c08g2"></a>
 ### Claim C08G2: Sub-claim 2 of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supported by: **[Justification C08J1](#justification-c08j1)**, [Evidence C08Esh](#evidence-c08esh)
+
+Supports: **[Strategy C08Sass](#strategy-c08sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08G2 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Claim C08G2.
 
+<!-- caseproc element C08J1 -->
 <a id="justification-c08j1"></a>
 ### Justification C08J1: Justification of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08G2](#claim-c08g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08J1 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Justification C08J1.
 
+<!-- caseproc element C08G3 -->
 <a id="claim-c08g3"></a>
 ### Claim C08G3: Sub-claim 3 of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supported by: **[Assumption C08A1](#assumption-c08a1)**, [Evidence C08E2](#evidence-c08e2), [Evidence C08E1](#evidence-c08e1)
+
+Supports: **[Strategy C08Sass](#strategy-c08sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08G3 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Claim C08G3.
 
+<!-- caseproc element C08A1 -->
 <a id="assumption-c08a1"></a>
 ### Assumption C08A1: Assumption of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08G3](#claim-c08g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08A1 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Assumption C08A1.
 
+<!-- caseproc element C08E2 -->
 <a id="evidence-c08e2"></a>
 ### Evidence C08E2: Evidence 2 of C08
 
-<!-- caseproc references -->
+Referenced by: **[Package C08top](#package-c08top)**
+
+Supports: **[Claim C08G3](#claim-c08g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C08E2 -->
 References: [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Evidence C08E2.
 
+<!-- caseproc element C09top -->
 <a id="claim-c09top"></a>
 ### Claim C09top: Statement of C09top
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**, [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C08top](#package-c08top)
+
+Supported by: **[Claim C10top](#claim-c10top)**, [Context C09Xctx](#context-c09xctx), [Evidence C09Esh](#evidence-c09esh), [Strategy C09Sass](#strategy-c09sass)
+
+Supports: [Claim C08top](#claim-c08top), [Strategy L1Smain](#strategy-l1smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C09top -->
 References: [Package C09top](#package-c09top), [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C08top](#package-c08top)
 <!-- end caseproc -->
 
 Stub for Claim C09top.
 
+<!-- caseproc element C09Xctx -->
 <a id="context-c09xctx"></a>
 ### Context C09Xctx: Context of C09Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09top](#claim-c09top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09Xctx -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Context C09Xctx.
 
+<!-- caseproc element C09Esh -->
 <a id="evidence-c09esh"></a>
 ### Evidence C09Esh: Shared evidence of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09top](#claim-c09top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09Esh -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Evidence C09Esh.
 
+<!-- caseproc element C09Sass -->
 <a id="strategy-c09sass"></a>
 ### Strategy C09Sass: Assertion strategy of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supported by: **[Claim C09G1](#claim-c09g1)**, [Claim C09G2](#claim-c09g2), [Claim C09G3](#claim-c09g3)
+
+Supports: **[Claim C09top](#claim-c09top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09Sass -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Strategy C09Sass.
 
+<!-- caseproc element C09G1 -->
 <a id="claim-c09g1"></a>
 ### Claim C09G1: Sub-claim 1 of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supported by: **[Evidence C09E1](#evidence-c09e1)**, [Context C09Xctx](#context-c09xctx)
+
+Supports: **[Strategy C09Sass](#strategy-c09sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09G1 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Claim C09G1.
 
+<!-- caseproc element C09E1 -->
 <a id="evidence-c09e1"></a>
 ### Evidence C09E1: Evidence 1 of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09G1](#claim-c09g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09E1 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Evidence C09E1.
 
+<!-- caseproc element C09G2 -->
 <a id="claim-c09g2"></a>
 ### Claim C09G2: Sub-claim 2 of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supported by: **[Justification C09J1](#justification-c09j1)**, [Evidence C09Esh](#evidence-c09esh)
+
+Supports: **[Strategy C09Sass](#strategy-c09sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09G2 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Claim C09G2.
 
+<!-- caseproc element C09J1 -->
 <a id="justification-c09j1"></a>
 ### Justification C09J1: Justification of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09G2](#claim-c09g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09J1 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Justification C09J1.
 
+<!-- caseproc element C09G3 -->
 <a id="claim-c09g3"></a>
 ### Claim C09G3: Sub-claim 3 of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supported by: **[Assumption C09A1](#assumption-c09a1)**, [Evidence C09E2](#evidence-c09e2), [Evidence C09E1](#evidence-c09e1)
+
+Supports: **[Strategy C09Sass](#strategy-c09sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09G3 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Claim C09G3.
 
+<!-- caseproc element C09A1 -->
 <a id="assumption-c09a1"></a>
 ### Assumption C09A1: Assumption of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09G3](#claim-c09g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09A1 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Assumption C09A1.
 
+<!-- caseproc element C09E2 -->
 <a id="evidence-c09e2"></a>
 ### Evidence C09E2: Evidence 2 of C09
 
-<!-- caseproc references -->
+Referenced by: **[Package C09top](#package-c09top)**
+
+Supports: **[Claim C09G3](#claim-c09g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C09E2 -->
 References: [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Evidence C09E2.
 
+<!-- caseproc element C10top -->
 <a id="claim-c10top"></a>
 ### Claim C10top: Statement of C10top
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**, [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C09top](#package-c09top)
+
+Supported by: **[Claim C11top](#claim-c11top)**, [Context C10Xctx](#context-c10xctx), [Evidence C10Esh](#evidence-c10esh), [Strategy C10Sass](#strategy-c10sass)
+
+Supports: [Claim C09top](#claim-c09top), [Strategy L1Smain](#strategy-l1smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C10top -->
 References: [Package C10top](#package-c10top), [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C09top](#package-c09top)
 <!-- end caseproc -->
 
 Stub for Claim C10top.
 
+<!-- caseproc element C10Xctx -->
 <a id="context-c10xctx"></a>
 ### Context C10Xctx: Context of C10Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10top](#claim-c10top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10Xctx -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Context C10Xctx.
 
+<!-- caseproc element C10Esh -->
 <a id="evidence-c10esh"></a>
 ### Evidence C10Esh: Shared evidence of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10top](#claim-c10top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10Esh -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Evidence C10Esh.
 
+<!-- caseproc element C10Sass -->
 <a id="strategy-c10sass"></a>
 ### Strategy C10Sass: Assertion strategy of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supported by: **[Claim C10G1](#claim-c10g1)**, [Claim C10G2](#claim-c10g2), [Claim C10G3](#claim-c10g3)
+
+Supports: **[Claim C10top](#claim-c10top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10Sass -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Strategy C10Sass.
 
+<!-- caseproc element C10G1 -->
 <a id="claim-c10g1"></a>
 ### Claim C10G1: Sub-claim 1 of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supported by: **[Evidence C10E1](#evidence-c10e1)**, [Context C10Xctx](#context-c10xctx)
+
+Supports: **[Strategy C10Sass](#strategy-c10sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10G1 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Claim C10G1.
 
+<!-- caseproc element C10E1 -->
 <a id="evidence-c10e1"></a>
 ### Evidence C10E1: Evidence 1 of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10G1](#claim-c10g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10E1 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Evidence C10E1.
 
+<!-- caseproc element C10G2 -->
 <a id="claim-c10g2"></a>
 ### Claim C10G2: Sub-claim 2 of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supported by: **[Justification C10J1](#justification-c10j1)**, [Evidence C10Esh](#evidence-c10esh)
+
+Supports: **[Strategy C10Sass](#strategy-c10sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10G2 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Claim C10G2.
 
+<!-- caseproc element C10J1 -->
 <a id="justification-c10j1"></a>
 ### Justification C10J1: Justification of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10G2](#claim-c10g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10J1 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Justification C10J1.
 
+<!-- caseproc element C10G3 -->
 <a id="claim-c10g3"></a>
 ### Claim C10G3: Sub-claim 3 of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supported by: **[Assumption C10A1](#assumption-c10a1)**, [Evidence C10E2](#evidence-c10e2), [Evidence C10E1](#evidence-c10e1)
+
+Supports: **[Strategy C10Sass](#strategy-c10sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10G3 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Claim C10G3.
 
+<!-- caseproc element C10A1 -->
 <a id="assumption-c10a1"></a>
 ### Assumption C10A1: Assumption of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10G3](#claim-c10g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10A1 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Assumption C10A1.
 
+<!-- caseproc element C10E2 -->
 <a id="evidence-c10e2"></a>
 ### Evidence C10E2: Evidence 2 of C10
 
-<!-- caseproc references -->
+Referenced by: **[Package C10top](#package-c10top)**
+
+Supports: **[Claim C10G3](#claim-c10g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C10E2 -->
 References: [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Evidence C10E2.
 
+<!-- caseproc element C11top -->
 <a id="claim-c11top"></a>
 ### Claim C11top: Statement of C11top
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**, [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C10top](#package-c10top)
+
+Supported by: **[Context C11Xctx](#context-c11xctx)**, [Evidence C11Esh](#evidence-c11esh), [Strategy C11Sass](#strategy-c11sass)
+
+Supports: [Claim C10top](#claim-c10top), [Strategy L1Smain](#strategy-l1smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C11top -->
 References: [Package C11top](#package-c11top), [Package G1](#package-g1), [Package L1top](#package-l1top), [Package C10top](#package-c10top)
 <!-- end caseproc -->
 
 Stub for Claim C11top.
 
+<!-- caseproc element C11Xctx -->
 <a id="context-c11xctx"></a>
 ### Context C11Xctx: Context of C11Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11top](#claim-c11top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11Xctx -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Context C11Xctx.
 
+<!-- caseproc element C11Esh -->
 <a id="evidence-c11esh"></a>
 ### Evidence C11Esh: Shared evidence of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11top](#claim-c11top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11Esh -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Evidence C11Esh.
 
+<!-- caseproc element C11Sass -->
 <a id="strategy-c11sass"></a>
 ### Strategy C11Sass: Assertion strategy of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supported by: **[Claim C11G1](#claim-c11g1)**, [Claim C11G2](#claim-c11g2), [Claim C11G3](#claim-c11g3)
+
+Supports: **[Claim C11top](#claim-c11top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11Sass -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Strategy C11Sass.
 
+<!-- caseproc element C11G1 -->
 <a id="claim-c11g1"></a>
 ### Claim C11G1: Sub-claim 1 of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supported by: **[Evidence C11E1](#evidence-c11e1)**, [Context C11Xctx](#context-c11xctx)
+
+Supports: **[Strategy C11Sass](#strategy-c11sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11G1 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Claim C11G1.
 
+<!-- caseproc element C11E1 -->
 <a id="evidence-c11e1"></a>
 ### Evidence C11E1: Evidence 1 of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11G1](#claim-c11g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11E1 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Evidence C11E1.
 
+<!-- caseproc element C11G2 -->
 <a id="claim-c11g2"></a>
 ### Claim C11G2: Sub-claim 2 of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supported by: **[Justification C11J1](#justification-c11j1)**, [Evidence C11Esh](#evidence-c11esh)
+
+Supports: **[Strategy C11Sass](#strategy-c11sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11G2 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Claim C11G2.
 
+<!-- caseproc element C11J1 -->
 <a id="justification-c11j1"></a>
 ### Justification C11J1: Justification of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11G2](#claim-c11g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11J1 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Justification C11J1.
 
+<!-- caseproc element C11G3 -->
 <a id="claim-c11g3"></a>
 ### Claim C11G3: Sub-claim 3 of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supported by: **[Assumption C11A1](#assumption-c11a1)**, [Evidence C11E2](#evidence-c11e2), [Evidence C11E1](#evidence-c11e1)
+
+Supports: **[Strategy C11Sass](#strategy-c11sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11G3 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Claim C11G3.
 
+<!-- caseproc element C11A1 -->
 <a id="assumption-c11a1"></a>
 ### Assumption C11A1: Assumption of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11G3](#claim-c11g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11A1 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Assumption C11A1.
 
+<!-- caseproc element C11E2 -->
 <a id="evidence-c11e2"></a>
 ### Evidence C11E2: Evidence 2 of C11
 
-<!-- caseproc references -->
+Referenced by: **[Package C11top](#package-c11top)**
+
+Supports: **[Claim C11G3](#claim-c11g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C11E2 -->
 References: [Package C11top](#package-c11top)
 <!-- end caseproc -->
 
 Stub for Evidence C11E2.
 
+<!-- caseproc element C12top -->
 <a id="claim-c12top"></a>
 ### Claim C12top: Statement of C12top
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**, [Package G1](#package-g1), [Package L1top](#package-l1top)
+
+Supported by: **[Context C12Xctx](#context-c12xctx)**, [Evidence C12Esh](#evidence-c12esh), [Strategy C12Sass](#strategy-c12sass)
+
+Supports: [Strategy L1Smain](#strategy-l1smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C12top -->
 References: [Package C12top](#package-c12top), [Package G1](#package-g1), [Package L1top](#package-l1top)
 <!-- end caseproc -->
 
 Stub for Claim C12top.
 
+<!-- caseproc element C12Xctx -->
 <a id="context-c12xctx"></a>
 ### Context C12Xctx: Context of C12Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12top](#claim-c12top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12Xctx -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Context C12Xctx.
 
+<!-- caseproc element C12Esh -->
 <a id="evidence-c12esh"></a>
 ### Evidence C12Esh: Shared evidence of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12top](#claim-c12top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12Esh -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Evidence C12Esh.
 
+<!-- caseproc element C12Sass -->
 <a id="strategy-c12sass"></a>
 ### Strategy C12Sass: Assertion strategy of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supported by: **[Claim C12G1](#claim-c12g1)**, [Claim C12G2](#claim-c12g2), [Claim C12G3](#claim-c12g3)
+
+Supports: **[Claim C12top](#claim-c12top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12Sass -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Strategy C12Sass.
 
+<!-- caseproc element C12G1 -->
 <a id="claim-c12g1"></a>
 ### Claim C12G1: Sub-claim 1 of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supported by: **[Evidence C12E1](#evidence-c12e1)**, [Context C12Xctx](#context-c12xctx)
+
+Supports: **[Strategy C12Sass](#strategy-c12sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12G1 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Claim C12G1.
 
+<!-- caseproc element C12E1 -->
 <a id="evidence-c12e1"></a>
 ### Evidence C12E1: Evidence 1 of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12G1](#claim-c12g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12E1 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Evidence C12E1.
 
+<!-- caseproc element C12G2 -->
 <a id="claim-c12g2"></a>
 ### Claim C12G2: Sub-claim 2 of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supported by: **[Justification C12J1](#justification-c12j1)**, [Evidence C12Esh](#evidence-c12esh)
+
+Supports: **[Strategy C12Sass](#strategy-c12sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12G2 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Claim C12G2.
 
+<!-- caseproc element C12J1 -->
 <a id="justification-c12j1"></a>
 ### Justification C12J1: Justification of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12G2](#claim-c12g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12J1 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Justification C12J1.
 
+<!-- caseproc element C12G3 -->
 <a id="claim-c12g3"></a>
 ### Claim C12G3: Sub-claim 3 of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supported by: **[Assumption C12A1](#assumption-c12a1)**, [Evidence C12E2](#evidence-c12e2), [Evidence C12E1](#evidence-c12e1)
+
+Supports: **[Strategy C12Sass](#strategy-c12sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12G3 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Claim C12G3.
 
+<!-- caseproc element C12A1 -->
 <a id="assumption-c12a1"></a>
 ### Assumption C12A1: Assumption of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12G3](#claim-c12g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12A1 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Assumption C12A1.
 
+<!-- caseproc element C12E2 -->
 <a id="evidence-c12e2"></a>
 ### Evidence C12E2: Evidence 2 of C12
 
-<!-- caseproc references -->
+Referenced by: **[Package C12top](#package-c12top)**
+
+Supports: **[Claim C12G3](#claim-c12g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C12E2 -->
 References: [Package C12top](#package-c12top)
 <!-- end caseproc -->
 
 Stub for Evidence C12E2.
 
+<!-- caseproc element C13top -->
 <a id="claim-c13top"></a>
 ### Claim C13top: Statement of C13top
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C13Xctx](#context-c13xctx)**, [Evidence C13Esh](#evidence-c13esh), [Strategy C13Sass](#strategy-c13sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C13top -->
 References: [Package C13top](#package-c13top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C13top.
 
+<!-- caseproc element C13Xctx -->
 <a id="context-c13xctx"></a>
 ### Context C13Xctx: Context of C13Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13top](#claim-c13top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13Xctx -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Context C13Xctx.
 
+<!-- caseproc element C13Esh -->
 <a id="evidence-c13esh"></a>
 ### Evidence C13Esh: Shared evidence of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13top](#claim-c13top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13Esh -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Evidence C13Esh.
 
+<!-- caseproc element C13Sass -->
 <a id="strategy-c13sass"></a>
 ### Strategy C13Sass: Assertion strategy of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supported by: **[Claim C13G1](#claim-c13g1)**, [Claim C13G2](#claim-c13g2), [Claim C13G3](#claim-c13g3)
+
+Supports: **[Claim C13top](#claim-c13top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13Sass -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Strategy C13Sass.
 
+<!-- caseproc element C13G1 -->
 <a id="claim-c13g1"></a>
 ### Claim C13G1: Sub-claim 1 of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supported by: **[Evidence C13E1](#evidence-c13e1)**, [Context C13Xctx](#context-c13xctx)
+
+Supports: **[Strategy C13Sass](#strategy-c13sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13G1 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Claim C13G1.
 
+<!-- caseproc element C13E1 -->
 <a id="evidence-c13e1"></a>
 ### Evidence C13E1: Evidence 1 of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13G1](#claim-c13g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13E1 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Evidence C13E1.
 
+<!-- caseproc element C13G2 -->
 <a id="claim-c13g2"></a>
 ### Claim C13G2: Sub-claim 2 of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supported by: **[Justification C13J1](#justification-c13j1)**, [Evidence C13Esh](#evidence-c13esh)
+
+Supports: **[Strategy C13Sass](#strategy-c13sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13G2 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Claim C13G2.
 
+<!-- caseproc element C13J1 -->
 <a id="justification-c13j1"></a>
 ### Justification C13J1: Justification of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13G2](#claim-c13g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13J1 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Justification C13J1.
 
+<!-- caseproc element C13G3 -->
 <a id="claim-c13g3"></a>
 ### Claim C13G3: Sub-claim 3 of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supported by: **[Assumption C13A1](#assumption-c13a1)**, [Evidence C13E2](#evidence-c13e2), [Evidence C13E1](#evidence-c13e1)
+
+Supports: **[Strategy C13Sass](#strategy-c13sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13G3 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Claim C13G3.
 
+<!-- caseproc element C13A1 -->
 <a id="assumption-c13a1"></a>
 ### Assumption C13A1: Assumption of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13G3](#claim-c13g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13A1 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Assumption C13A1.
 
+<!-- caseproc element C13E2 -->
 <a id="evidence-c13e2"></a>
 ### Evidence C13E2: Evidence 2 of C13
 
-<!-- caseproc references -->
+Referenced by: **[Package C13top](#package-c13top)**
+
+Supports: **[Claim C13G3](#claim-c13g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C13E2 -->
 References: [Package C13top](#package-c13top)
 <!-- end caseproc -->
 
 Stub for Evidence C13E2.
 
+<!-- caseproc element C14top -->
 <a id="claim-c14top"></a>
 ### Claim C14top: Statement of C14top
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C14Xctx](#context-c14xctx)**, [Evidence C14Esh](#evidence-c14esh), [Strategy C14Sass](#strategy-c14sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C14top -->
 References: [Package C14top](#package-c14top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C14top.
 
+<!-- caseproc element C14Xctx -->
 <a id="context-c14xctx"></a>
 ### Context C14Xctx: Context of C14Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14top](#claim-c14top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14Xctx -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Context C14Xctx.
 
+<!-- caseproc element C14Esh -->
 <a id="evidence-c14esh"></a>
 ### Evidence C14Esh: Shared evidence of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14top](#claim-c14top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14Esh -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Evidence C14Esh.
 
+<!-- caseproc element C14Sass -->
 <a id="strategy-c14sass"></a>
 ### Strategy C14Sass: Assertion strategy of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supported by: **[Claim C14G1](#claim-c14g1)**, [Claim C14G2](#claim-c14g2), [Claim C14G3](#claim-c14g3)
+
+Supports: **[Claim C14top](#claim-c14top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14Sass -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Strategy C14Sass.
 
+<!-- caseproc element C14G1 -->
 <a id="claim-c14g1"></a>
 ### Claim C14G1: Sub-claim 1 of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supported by: **[Evidence C14E1](#evidence-c14e1)**, [Context C14Xctx](#context-c14xctx)
+
+Supports: **[Strategy C14Sass](#strategy-c14sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14G1 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Claim C14G1.
 
+<!-- caseproc element C14E1 -->
 <a id="evidence-c14e1"></a>
 ### Evidence C14E1: Evidence 1 of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14G1](#claim-c14g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14E1 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Evidence C14E1.
 
+<!-- caseproc element C14G2 -->
 <a id="claim-c14g2"></a>
 ### Claim C14G2: Sub-claim 2 of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supported by: **[Justification C14J1](#justification-c14j1)**, [Evidence C14Esh](#evidence-c14esh)
+
+Supports: **[Strategy C14Sass](#strategy-c14sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14G2 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Claim C14G2.
 
+<!-- caseproc element C14J1 -->
 <a id="justification-c14j1"></a>
 ### Justification C14J1: Justification of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14G2](#claim-c14g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14J1 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Justification C14J1.
 
+<!-- caseproc element C14G3 -->
 <a id="claim-c14g3"></a>
 ### Claim C14G3: Sub-claim 3 of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supported by: **[Assumption C14A1](#assumption-c14a1)**, [Evidence C14E2](#evidence-c14e2), [Evidence C14E1](#evidence-c14e1)
+
+Supports: **[Strategy C14Sass](#strategy-c14sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14G3 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Claim C14G3.
 
+<!-- caseproc element C14A1 -->
 <a id="assumption-c14a1"></a>
 ### Assumption C14A1: Assumption of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14G3](#claim-c14g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14A1 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Assumption C14A1.
 
+<!-- caseproc element C14E2 -->
 <a id="evidence-c14e2"></a>
 ### Evidence C14E2: Evidence 2 of C14
 
-<!-- caseproc references -->
+Referenced by: **[Package C14top](#package-c14top)**
+
+Supports: **[Claim C14G3](#claim-c14g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C14E2 -->
 References: [Package C14top](#package-c14top)
 <!-- end caseproc -->
 
 Stub for Evidence C14E2.
 
+<!-- caseproc element C15top -->
 <a id="claim-c15top"></a>
 ### Claim C15top: Statement of C15top
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**, [Package G1](#package-g1), [Package L2top](#package-l2top)
+
+Supported by: **[Context C15Xctx](#context-c15xctx)**, [Evidence C15Esh](#evidence-c15esh), [Strategy C15Sass](#strategy-c15sass)
+
+Supports: [Strategy L2Smain](#strategy-l2smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C15top -->
 References: [Package C15top](#package-c15top), [Package G1](#package-g1), [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim C15top.
 
+<!-- caseproc element C15Xctx -->
 <a id="context-c15xctx"></a>
 ### Context C15Xctx: Context of C15Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15top](#claim-c15top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15Xctx -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Context C15Xctx.
 
+<!-- caseproc element C15Esh -->
 <a id="evidence-c15esh"></a>
 ### Evidence C15Esh: Shared evidence of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15top](#claim-c15top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15Esh -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Evidence C15Esh.
 
+<!-- caseproc element C15Sass -->
 <a id="strategy-c15sass"></a>
 ### Strategy C15Sass: Assertion strategy of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supported by: **[Claim C15G1](#claim-c15g1)**, [Claim C15G2](#claim-c15g2), [Claim C15G3](#claim-c15g3)
+
+Supports: **[Claim C15top](#claim-c15top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15Sass -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Strategy C15Sass.
 
+<!-- caseproc element C15G1 -->
 <a id="claim-c15g1"></a>
 ### Claim C15G1: Sub-claim 1 of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supported by: **[Evidence C15E1](#evidence-c15e1)**, [Context C15Xctx](#context-c15xctx)
+
+Supports: **[Strategy C15Sass](#strategy-c15sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15G1 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Claim C15G1.
 
+<!-- caseproc element C15E1 -->
 <a id="evidence-c15e1"></a>
 ### Evidence C15E1: Evidence 1 of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15G1](#claim-c15g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15E1 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Evidence C15E1.
 
+<!-- caseproc element C15G2 -->
 <a id="claim-c15g2"></a>
 ### Claim C15G2: Sub-claim 2 of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supported by: **[Justification C15J1](#justification-c15j1)**, [Evidence C15Esh](#evidence-c15esh)
+
+Supports: **[Strategy C15Sass](#strategy-c15sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15G2 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Claim C15G2.
 
+<!-- caseproc element C15J1 -->
 <a id="justification-c15j1"></a>
 ### Justification C15J1: Justification of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15G2](#claim-c15g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15J1 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Justification C15J1.
 
+<!-- caseproc element C15G3 -->
 <a id="claim-c15g3"></a>
 ### Claim C15G3: Sub-claim 3 of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supported by: **[Assumption C15A1](#assumption-c15a1)**, [Evidence C15E2](#evidence-c15e2), [Evidence C15E1](#evidence-c15e1)
+
+Supports: **[Strategy C15Sass](#strategy-c15sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15G3 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Claim C15G3.
 
+<!-- caseproc element C15A1 -->
 <a id="assumption-c15a1"></a>
 ### Assumption C15A1: Assumption of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15G3](#claim-c15g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15A1 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Assumption C15A1.
 
+<!-- caseproc element C15E2 -->
 <a id="evidence-c15e2"></a>
 ### Evidence C15E2: Evidence 2 of C15
 
-<!-- caseproc references -->
+Referenced by: **[Package C15top](#package-c15top)**
+
+Supports: **[Claim C15G3](#claim-c15g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C15E2 -->
 References: [Package C15top](#package-c15top)
 <!-- end caseproc -->
 
 Stub for Evidence C15E2.
 
+<!-- caseproc element C16top -->
 <a id="claim-c16top"></a>
 ### Claim C16top: Statement of C16top
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**, [Package G1](#package-g1), [Package L2top](#package-l2top)
+
+Supported by: **[Context C16Xctx](#context-c16xctx)**, [Evidence C16Esh](#evidence-c16esh), [Strategy C16Sass](#strategy-c16sass)
+
+Supports: [Strategy L2Smain](#strategy-l2smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C16top -->
 References: [Package C16top](#package-c16top), [Package G1](#package-g1), [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim C16top.
 
+<!-- caseproc element C16Xctx -->
 <a id="context-c16xctx"></a>
 ### Context C16Xctx: Context of C16Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16top](#claim-c16top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16Xctx -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Context C16Xctx.
 
+<!-- caseproc element C16Esh -->
 <a id="evidence-c16esh"></a>
 ### Evidence C16Esh: Shared evidence of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16top](#claim-c16top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16Esh -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Evidence C16Esh.
 
+<!-- caseproc element C16Sass -->
 <a id="strategy-c16sass"></a>
 ### Strategy C16Sass: Assertion strategy of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supported by: **[Claim C16G1](#claim-c16g1)**, [Claim C16G2](#claim-c16g2), [Claim C16G3](#claim-c16g3)
+
+Supports: **[Claim C16top](#claim-c16top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16Sass -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Strategy C16Sass.
 
+<!-- caseproc element C16G1 -->
 <a id="claim-c16g1"></a>
 ### Claim C16G1: Sub-claim 1 of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supported by: **[Evidence C16E1](#evidence-c16e1)**, [Context C16Xctx](#context-c16xctx)
+
+Supports: **[Strategy C16Sass](#strategy-c16sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16G1 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Claim C16G1.
 
+<!-- caseproc element C16E1 -->
 <a id="evidence-c16e1"></a>
 ### Evidence C16E1: Evidence 1 of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16G1](#claim-c16g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16E1 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Evidence C16E1.
 
+<!-- caseproc element C16G2 -->
 <a id="claim-c16g2"></a>
 ### Claim C16G2: Sub-claim 2 of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supported by: **[Justification C16J1](#justification-c16j1)**, [Evidence C16Esh](#evidence-c16esh)
+
+Supports: **[Strategy C16Sass](#strategy-c16sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16G2 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Claim C16G2.
 
+<!-- caseproc element C16J1 -->
 <a id="justification-c16j1"></a>
 ### Justification C16J1: Justification of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16G2](#claim-c16g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16J1 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Justification C16J1.
 
+<!-- caseproc element C16G3 -->
 <a id="claim-c16g3"></a>
 ### Claim C16G3: Sub-claim 3 of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supported by: **[Assumption C16A1](#assumption-c16a1)**, [Evidence C16E2](#evidence-c16e2), [Evidence C16E1](#evidence-c16e1)
+
+Supports: **[Strategy C16Sass](#strategy-c16sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16G3 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Claim C16G3.
 
+<!-- caseproc element C16A1 -->
 <a id="assumption-c16a1"></a>
 ### Assumption C16A1: Assumption of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16G3](#claim-c16g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16A1 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Assumption C16A1.
 
+<!-- caseproc element C16E2 -->
 <a id="evidence-c16e2"></a>
 ### Evidence C16E2: Evidence 2 of C16
 
-<!-- caseproc references -->
+Referenced by: **[Package C16top](#package-c16top)**
+
+Supports: **[Claim C16G3](#claim-c16g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C16E2 -->
 References: [Package C16top](#package-c16top)
 <!-- end caseproc -->
 
 Stub for Evidence C16E2.
 
+<!-- caseproc element C17top -->
 <a id="claim-c17top"></a>
 ### Claim C17top: Statement of C17top
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**, [Package G1](#package-g1), [Package L2top](#package-l2top)
+
+Supported by: **[Context C17Xctx](#context-c17xctx)**, [Evidence C17Esh](#evidence-c17esh), [Strategy C17Sass](#strategy-c17sass)
+
+Supports: [Strategy L2Smain](#strategy-l2smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C17top -->
 References: [Package C17top](#package-c17top), [Package G1](#package-g1), [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim C17top.
 
+<!-- caseproc element C17Xctx -->
 <a id="context-c17xctx"></a>
 ### Context C17Xctx: Context of C17Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17top](#claim-c17top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17Xctx -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Context C17Xctx.
 
+<!-- caseproc element C17Esh -->
 <a id="evidence-c17esh"></a>
 ### Evidence C17Esh: Shared evidence of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17top](#claim-c17top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17Esh -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Evidence C17Esh.
 
+<!-- caseproc element C17Sass -->
 <a id="strategy-c17sass"></a>
 ### Strategy C17Sass: Assertion strategy of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supported by: **[Claim C17G1](#claim-c17g1)**, [Claim C17G2](#claim-c17g2), [Claim C17G3](#claim-c17g3)
+
+Supports: **[Claim C17top](#claim-c17top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17Sass -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Strategy C17Sass.
 
+<!-- caseproc element C17G1 -->
 <a id="claim-c17g1"></a>
 ### Claim C17G1: Sub-claim 1 of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supported by: **[Evidence C17E1](#evidence-c17e1)**, [Context C17Xctx](#context-c17xctx)
+
+Supports: **[Strategy C17Sass](#strategy-c17sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17G1 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Claim C17G1.
 
+<!-- caseproc element C17E1 -->
 <a id="evidence-c17e1"></a>
 ### Evidence C17E1: Evidence 1 of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17G1](#claim-c17g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17E1 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Evidence C17E1.
 
+<!-- caseproc element C17G2 -->
 <a id="claim-c17g2"></a>
 ### Claim C17G2: Sub-claim 2 of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supported by: **[Justification C17J1](#justification-c17j1)**, [Evidence C17Esh](#evidence-c17esh)
+
+Supports: **[Strategy C17Sass](#strategy-c17sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17G2 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Claim C17G2.
 
+<!-- caseproc element C17J1 -->
 <a id="justification-c17j1"></a>
 ### Justification C17J1: Justification of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17G2](#claim-c17g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17J1 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Justification C17J1.
 
+<!-- caseproc element C17G3 -->
 <a id="claim-c17g3"></a>
 ### Claim C17G3: Sub-claim 3 of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supported by: **[Assumption C17A1](#assumption-c17a1)**, [Evidence C17E2](#evidence-c17e2), [Evidence C17E1](#evidence-c17e1)
+
+Supports: **[Strategy C17Sass](#strategy-c17sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17G3 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Claim C17G3.
 
+<!-- caseproc element C17A1 -->
 <a id="assumption-c17a1"></a>
 ### Assumption C17A1: Assumption of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17G3](#claim-c17g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17A1 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Assumption C17A1.
 
+<!-- caseproc element C17E2 -->
 <a id="evidence-c17e2"></a>
 ### Evidence C17E2: Evidence 2 of C17
 
-<!-- caseproc references -->
+Referenced by: **[Package C17top](#package-c17top)**
+
+Supports: **[Claim C17G3](#claim-c17g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C17E2 -->
 References: [Package C17top](#package-c17top)
 <!-- end caseproc -->
 
 Stub for Evidence C17E2.
 
+<!-- caseproc element C18top -->
 <a id="claim-c18top"></a>
 ### Claim C18top: Statement of C18top
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**, [Package G1](#package-g1), [Package L2top](#package-l2top)
+
+Supported by: **[Context C18Xctx](#context-c18xctx)**, [Evidence C18Esh](#evidence-c18esh), [Strategy C18Sass](#strategy-c18sass)
+
+Supports: [Strategy L2Smain](#strategy-l2smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C18top -->
 References: [Package C18top](#package-c18top), [Package G1](#package-g1), [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim C18top.
 
+<!-- caseproc element C18Xctx -->
 <a id="context-c18xctx"></a>
 ### Context C18Xctx: Context of C18Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18top](#claim-c18top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18Xctx -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Context C18Xctx.
 
+<!-- caseproc element C18Esh -->
 <a id="evidence-c18esh"></a>
 ### Evidence C18Esh: Shared evidence of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18top](#claim-c18top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18Esh -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Evidence C18Esh.
 
+<!-- caseproc element C18Sass -->
 <a id="strategy-c18sass"></a>
 ### Strategy C18Sass: Assertion strategy of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supported by: **[Claim C18G1](#claim-c18g1)**, [Claim C18G2](#claim-c18g2), [Claim C18G3](#claim-c18g3)
+
+Supports: **[Claim C18top](#claim-c18top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18Sass -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Strategy C18Sass.
 
+<!-- caseproc element C18G1 -->
 <a id="claim-c18g1"></a>
 ### Claim C18G1: Sub-claim 1 of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supported by: **[Evidence C18E1](#evidence-c18e1)**, [Context C18Xctx](#context-c18xctx)
+
+Supports: **[Strategy C18Sass](#strategy-c18sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18G1 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Claim C18G1.
 
+<!-- caseproc element C18E1 -->
 <a id="evidence-c18e1"></a>
 ### Evidence C18E1: Evidence 1 of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18G1](#claim-c18g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18E1 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Evidence C18E1.
 
+<!-- caseproc element C18G2 -->
 <a id="claim-c18g2"></a>
 ### Claim C18G2: Sub-claim 2 of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supported by: **[Justification C18J1](#justification-c18j1)**, [Evidence C18Esh](#evidence-c18esh)
+
+Supports: **[Strategy C18Sass](#strategy-c18sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18G2 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Claim C18G2.
 
+<!-- caseproc element C18J1 -->
 <a id="justification-c18j1"></a>
 ### Justification C18J1: Justification of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18G2](#claim-c18g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18J1 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Justification C18J1.
 
+<!-- caseproc element C18G3 -->
 <a id="claim-c18g3"></a>
 ### Claim C18G3: Sub-claim 3 of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supported by: **[Assumption C18A1](#assumption-c18a1)**, [Evidence C18E2](#evidence-c18e2), [Evidence C18E1](#evidence-c18e1)
+
+Supports: **[Strategy C18Sass](#strategy-c18sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18G3 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Claim C18G3.
 
+<!-- caseproc element C18A1 -->
 <a id="assumption-c18a1"></a>
 ### Assumption C18A1: Assumption of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18G3](#claim-c18g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18A1 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Assumption C18A1.
 
+<!-- caseproc element C18E2 -->
 <a id="evidence-c18e2"></a>
 ### Evidence C18E2: Evidence 2 of C18
 
-<!-- caseproc references -->
+Referenced by: **[Package C18top](#package-c18top)**
+
+Supports: **[Claim C18G3](#claim-c18g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C18E2 -->
 References: [Package C18top](#package-c18top)
 <!-- end caseproc -->
 
 Stub for Evidence C18E2.
 
+<!-- caseproc element C19top -->
 <a id="claim-c19top"></a>
 ### Claim C19top: Statement of C19top
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**, [Package G1](#package-g1), [Package L2top](#package-l2top)
+
+Supported by: **[Context C19Xctx](#context-c19xctx)**, [Evidence C19Esh](#evidence-c19esh), [Strategy C19Sass](#strategy-c19sass)
+
+Supports: [Strategy L2Smain](#strategy-l2smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C19top -->
 References: [Package C19top](#package-c19top), [Package G1](#package-g1), [Package L2top](#package-l2top)
 <!-- end caseproc -->
 
 Stub for Claim C19top.
 
+<!-- caseproc element C19Xctx -->
 <a id="context-c19xctx"></a>
 ### Context C19Xctx: Context of C19Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19top](#claim-c19top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19Xctx -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Context C19Xctx.
 
+<!-- caseproc element C19Esh -->
 <a id="evidence-c19esh"></a>
 ### Evidence C19Esh: Shared evidence of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19top](#claim-c19top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19Esh -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Evidence C19Esh.
 
+<!-- caseproc element C19Sass -->
 <a id="strategy-c19sass"></a>
 ### Strategy C19Sass: Assertion strategy of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supported by: **[Claim C19G1](#claim-c19g1)**, [Claim C19G2](#claim-c19g2), [Claim C19G3](#claim-c19g3)
+
+Supports: **[Claim C19top](#claim-c19top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19Sass -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Strategy C19Sass.
 
+<!-- caseproc element C19G1 -->
 <a id="claim-c19g1"></a>
 ### Claim C19G1: Sub-claim 1 of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supported by: **[Evidence C19E1](#evidence-c19e1)**, [Context C19Xctx](#context-c19xctx)
+
+Supports: **[Strategy C19Sass](#strategy-c19sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19G1 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Claim C19G1.
 
+<!-- caseproc element C19E1 -->
 <a id="evidence-c19e1"></a>
 ### Evidence C19E1: Evidence 1 of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19G1](#claim-c19g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19E1 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Evidence C19E1.
 
+<!-- caseproc element C19G2 -->
 <a id="claim-c19g2"></a>
 ### Claim C19G2: Sub-claim 2 of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supported by: **[Justification C19J1](#justification-c19j1)**, [Evidence C19Esh](#evidence-c19esh)
+
+Supports: **[Strategy C19Sass](#strategy-c19sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19G2 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Claim C19G2.
 
+<!-- caseproc element C19J1 -->
 <a id="justification-c19j1"></a>
 ### Justification C19J1: Justification of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19G2](#claim-c19g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19J1 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Justification C19J1.
 
+<!-- caseproc element C19G3 -->
 <a id="claim-c19g3"></a>
 ### Claim C19G3: Sub-claim 3 of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supported by: **[Assumption C19A1](#assumption-c19a1)**, [Evidence C19E2](#evidence-c19e2), [Evidence C19E1](#evidence-c19e1)
+
+Supports: **[Strategy C19Sass](#strategy-c19sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19G3 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Claim C19G3.
 
+<!-- caseproc element C19A1 -->
 <a id="assumption-c19a1"></a>
 ### Assumption C19A1: Assumption of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19G3](#claim-c19g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19A1 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Assumption C19A1.
 
+<!-- caseproc element C19E2 -->
 <a id="evidence-c19e2"></a>
 ### Evidence C19E2: Evidence 2 of C19
 
-<!-- caseproc references -->
+Referenced by: **[Package C19top](#package-c19top)**
+
+Supports: **[Claim C19G3](#claim-c19g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C19E2 -->
 References: [Package C19top](#package-c19top)
 <!-- end caseproc -->
 
 Stub for Evidence C19E2.
 
+<!-- caseproc element C20top -->
 <a id="claim-c20top"></a>
 ### Claim C20top: Statement of C20top
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C20Xctx](#context-c20xctx)**, [Evidence C20Esh](#evidence-c20esh), [Strategy C20Sass](#strategy-c20sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C20top -->
 References: [Package C20top](#package-c20top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C20top.
 
+<!-- caseproc element C20Xctx -->
 <a id="context-c20xctx"></a>
 ### Context C20Xctx: Context of C20Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20top](#claim-c20top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20Xctx -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Context C20Xctx.
 
+<!-- caseproc element C20Esh -->
 <a id="evidence-c20esh"></a>
 ### Evidence C20Esh: Shared evidence of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20top](#claim-c20top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20Esh -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Evidence C20Esh.
 
+<!-- caseproc element C20Sass -->
 <a id="strategy-c20sass"></a>
 ### Strategy C20Sass: Assertion strategy of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supported by: **[Claim C20G1](#claim-c20g1)**, [Claim C20G2](#claim-c20g2), [Claim C20G3](#claim-c20g3)
+
+Supports: **[Claim C20top](#claim-c20top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20Sass -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Strategy C20Sass.
 
+<!-- caseproc element C20G1 -->
 <a id="claim-c20g1"></a>
 ### Claim C20G1: Sub-claim 1 of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supported by: **[Evidence C20E1](#evidence-c20e1)**, [Context C20Xctx](#context-c20xctx)
+
+Supports: **[Strategy C20Sass](#strategy-c20sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20G1 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Claim C20G1.
 
+<!-- caseproc element C20E1 -->
 <a id="evidence-c20e1"></a>
 ### Evidence C20E1: Evidence 1 of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20G1](#claim-c20g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20E1 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Evidence C20E1.
 
+<!-- caseproc element C20G2 -->
 <a id="claim-c20g2"></a>
 ### Claim C20G2: Sub-claim 2 of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supported by: **[Justification C20J1](#justification-c20j1)**, [Evidence C20Esh](#evidence-c20esh)
+
+Supports: **[Strategy C20Sass](#strategy-c20sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20G2 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Claim C20G2.
 
+<!-- caseproc element C20J1 -->
 <a id="justification-c20j1"></a>
 ### Justification C20J1: Justification of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20G2](#claim-c20g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20J1 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Justification C20J1.
 
+<!-- caseproc element C20G3 -->
 <a id="claim-c20g3"></a>
 ### Claim C20G3: Sub-claim 3 of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supported by: **[Assumption C20A1](#assumption-c20a1)**, [Evidence C20E2](#evidence-c20e2), [Evidence C20E1](#evidence-c20e1)
+
+Supports: **[Strategy C20Sass](#strategy-c20sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20G3 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Claim C20G3.
 
+<!-- caseproc element C20A1 -->
 <a id="assumption-c20a1"></a>
 ### Assumption C20A1: Assumption of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20G3](#claim-c20g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20A1 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Assumption C20A1.
 
+<!-- caseproc element C20E2 -->
 <a id="evidence-c20e2"></a>
 ### Evidence C20E2: Evidence 2 of C20
 
-<!-- caseproc references -->
+Referenced by: **[Package C20top](#package-c20top)**
+
+Supports: **[Claim C20G3](#claim-c20g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C20E2 -->
 References: [Package C20top](#package-c20top)
 <!-- end caseproc -->
 
 Stub for Evidence C20E2.
 
+<!-- caseproc element C21top -->
 <a id="claim-c21top"></a>
 ### Claim C21top: Statement of C21top
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C21Xctx](#context-c21xctx)**, [Evidence C21Esh](#evidence-c21esh), [Strategy C21Sass](#strategy-c21sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C21top -->
 References: [Package C21top](#package-c21top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C21top.
 
+<!-- caseproc element C21Xctx -->
 <a id="context-c21xctx"></a>
 ### Context C21Xctx: Context of C21Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21top](#claim-c21top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21Xctx -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Context C21Xctx.
 
+<!-- caseproc element C21Esh -->
 <a id="evidence-c21esh"></a>
 ### Evidence C21Esh: Shared evidence of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21top](#claim-c21top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21Esh -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Evidence C21Esh.
 
+<!-- caseproc element C21Sass -->
 <a id="strategy-c21sass"></a>
 ### Strategy C21Sass: Assertion strategy of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supported by: **[Claim C21G1](#claim-c21g1)**, [Claim C21G2](#claim-c21g2), [Claim C21G3](#claim-c21g3)
+
+Supports: **[Claim C21top](#claim-c21top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21Sass -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Strategy C21Sass.
 
+<!-- caseproc element C21G1 -->
 <a id="claim-c21g1"></a>
 ### Claim C21G1: Sub-claim 1 of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supported by: **[Evidence C21E1](#evidence-c21e1)**, [Context C21Xctx](#context-c21xctx)
+
+Supports: **[Strategy C21Sass](#strategy-c21sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21G1 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Claim C21G1.
 
+<!-- caseproc element C21E1 -->
 <a id="evidence-c21e1"></a>
 ### Evidence C21E1: Evidence 1 of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21G1](#claim-c21g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21E1 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Evidence C21E1.
 
+<!-- caseproc element C21G2 -->
 <a id="claim-c21g2"></a>
 ### Claim C21G2: Sub-claim 2 of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supported by: **[Justification C21J1](#justification-c21j1)**, [Evidence C21Esh](#evidence-c21esh)
+
+Supports: **[Strategy C21Sass](#strategy-c21sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21G2 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Claim C21G2.
 
+<!-- caseproc element C21J1 -->
 <a id="justification-c21j1"></a>
 ### Justification C21J1: Justification of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21G2](#claim-c21g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21J1 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Justification C21J1.
 
+<!-- caseproc element C21G3 -->
 <a id="claim-c21g3"></a>
 ### Claim C21G3: Sub-claim 3 of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supported by: **[Assumption C21A1](#assumption-c21a1)**, [Evidence C21E2](#evidence-c21e2), [Evidence C21E1](#evidence-c21e1)
+
+Supports: **[Strategy C21Sass](#strategy-c21sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21G3 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Claim C21G3.
 
+<!-- caseproc element C21A1 -->
 <a id="assumption-c21a1"></a>
 ### Assumption C21A1: Assumption of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21G3](#claim-c21g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21A1 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Assumption C21A1.
 
+<!-- caseproc element C21E2 -->
 <a id="evidence-c21e2"></a>
 ### Evidence C21E2: Evidence 2 of C21
 
-<!-- caseproc references -->
+Referenced by: **[Package C21top](#package-c21top)**
+
+Supports: **[Claim C21G3](#claim-c21g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C21E2 -->
 References: [Package C21top](#package-c21top)
 <!-- end caseproc -->
 
 Stub for Evidence C21E2.
 
+<!-- caseproc element C22top -->
 <a id="claim-c22top"></a>
 ### Claim C22top: Statement of C22top
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**, [Package G1](#package-g1), [Package L3top](#package-l3top)
+
+Supported by: **[Context C22Xctx](#context-c22xctx)**, [Evidence C22Esh](#evidence-c22esh), [Strategy C22Sass](#strategy-c22sass)
+
+Supports: [Strategy L3Smain](#strategy-l3smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C22top -->
 References: [Package C22top](#package-c22top), [Package G1](#package-g1), [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim C22top.
 
+<!-- caseproc element C22Xctx -->
 <a id="context-c22xctx"></a>
 ### Context C22Xctx: Context of C22Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22top](#claim-c22top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22Xctx -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Context C22Xctx.
 
+<!-- caseproc element C22Esh -->
 <a id="evidence-c22esh"></a>
 ### Evidence C22Esh: Shared evidence of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22top](#claim-c22top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22Esh -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Evidence C22Esh.
 
+<!-- caseproc element C22Sass -->
 <a id="strategy-c22sass"></a>
 ### Strategy C22Sass: Assertion strategy of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supported by: **[Claim C22G1](#claim-c22g1)**, [Claim C22G2](#claim-c22g2), [Claim C22G3](#claim-c22g3)
+
+Supports: **[Claim C22top](#claim-c22top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22Sass -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Strategy C22Sass.
 
+<!-- caseproc element C22G1 -->
 <a id="claim-c22g1"></a>
 ### Claim C22G1: Sub-claim 1 of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supported by: **[Evidence C22E1](#evidence-c22e1)**, [Context C22Xctx](#context-c22xctx)
+
+Supports: **[Strategy C22Sass](#strategy-c22sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22G1 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Claim C22G1.
 
+<!-- caseproc element C22E1 -->
 <a id="evidence-c22e1"></a>
 ### Evidence C22E1: Evidence 1 of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22G1](#claim-c22g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22E1 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Evidence C22E1.
 
+<!-- caseproc element C22G2 -->
 <a id="claim-c22g2"></a>
 ### Claim C22G2: Sub-claim 2 of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supported by: **[Justification C22J1](#justification-c22j1)**, [Evidence C22Esh](#evidence-c22esh)
+
+Supports: **[Strategy C22Sass](#strategy-c22sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22G2 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Claim C22G2.
 
+<!-- caseproc element C22J1 -->
 <a id="justification-c22j1"></a>
 ### Justification C22J1: Justification of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22G2](#claim-c22g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22J1 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Justification C22J1.
 
+<!-- caseproc element C22G3 -->
 <a id="claim-c22g3"></a>
 ### Claim C22G3: Sub-claim 3 of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supported by: **[Assumption C22A1](#assumption-c22a1)**, [Evidence C22E2](#evidence-c22e2), [Evidence C22E1](#evidence-c22e1)
+
+Supports: **[Strategy C22Sass](#strategy-c22sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22G3 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Claim C22G3.
 
+<!-- caseproc element C22A1 -->
 <a id="assumption-c22a1"></a>
 ### Assumption C22A1: Assumption of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22G3](#claim-c22g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22A1 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Assumption C22A1.
 
+<!-- caseproc element C22E2 -->
 <a id="evidence-c22e2"></a>
 ### Evidence C22E2: Evidence 2 of C22
 
-<!-- caseproc references -->
+Referenced by: **[Package C22top](#package-c22top)**
+
+Supports: **[Claim C22G3](#claim-c22g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C22E2 -->
 References: [Package C22top](#package-c22top)
 <!-- end caseproc -->
 
 Stub for Evidence C22E2.
 
+<!-- caseproc element C23top -->
 <a id="claim-c23top"></a>
 ### Claim C23top: Statement of C23top
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**, [Package G1](#package-g1), [Package L3top](#package-l3top)
+
+Supported by: **[Context C23Xctx](#context-c23xctx)**, [Evidence C23Esh](#evidence-c23esh), [Strategy C23Sass](#strategy-c23sass)
+
+Supports: [Strategy L3Smain](#strategy-l3smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C23top -->
 References: [Package C23top](#package-c23top), [Package G1](#package-g1), [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim C23top.
 
+<!-- caseproc element C23Xctx -->
 <a id="context-c23xctx"></a>
 ### Context C23Xctx: Context of C23Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23top](#claim-c23top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23Xctx -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Context C23Xctx.
 
+<!-- caseproc element C23Esh -->
 <a id="evidence-c23esh"></a>
 ### Evidence C23Esh: Shared evidence of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23top](#claim-c23top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23Esh -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Evidence C23Esh.
 
+<!-- caseproc element C23Sass -->
 <a id="strategy-c23sass"></a>
 ### Strategy C23Sass: Assertion strategy of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supported by: **[Claim C23G1](#claim-c23g1)**, [Claim C23G2](#claim-c23g2), [Claim C23G3](#claim-c23g3)
+
+Supports: **[Claim C23top](#claim-c23top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23Sass -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Strategy C23Sass.
 
+<!-- caseproc element C23G1 -->
 <a id="claim-c23g1"></a>
 ### Claim C23G1: Sub-claim 1 of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supported by: **[Evidence C23E1](#evidence-c23e1)**, [Context C23Xctx](#context-c23xctx)
+
+Supports: **[Strategy C23Sass](#strategy-c23sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23G1 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Claim C23G1.
 
+<!-- caseproc element C23E1 -->
 <a id="evidence-c23e1"></a>
 ### Evidence C23E1: Evidence 1 of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23G1](#claim-c23g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23E1 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Evidence C23E1.
 
+<!-- caseproc element C23G2 -->
 <a id="claim-c23g2"></a>
 ### Claim C23G2: Sub-claim 2 of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supported by: **[Justification C23J1](#justification-c23j1)**, [Evidence C23Esh](#evidence-c23esh)
+
+Supports: **[Strategy C23Sass](#strategy-c23sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23G2 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Claim C23G2.
 
+<!-- caseproc element C23J1 -->
 <a id="justification-c23j1"></a>
 ### Justification C23J1: Justification of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23G2](#claim-c23g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23J1 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Justification C23J1.
 
+<!-- caseproc element C23G3 -->
 <a id="claim-c23g3"></a>
 ### Claim C23G3: Sub-claim 3 of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supported by: **[Assumption C23A1](#assumption-c23a1)**, [Evidence C23E2](#evidence-c23e2), [Evidence C23E1](#evidence-c23e1)
+
+Supports: **[Strategy C23Sass](#strategy-c23sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23G3 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Claim C23G3.
 
+<!-- caseproc element C23A1 -->
 <a id="assumption-c23a1"></a>
 ### Assumption C23A1: Assumption of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23G3](#claim-c23g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23A1 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Assumption C23A1.
 
+<!-- caseproc element C23E2 -->
 <a id="evidence-c23e2"></a>
 ### Evidence C23E2: Evidence 2 of C23
 
-<!-- caseproc references -->
+Referenced by: **[Package C23top](#package-c23top)**
+
+Supports: **[Claim C23G3](#claim-c23g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C23E2 -->
 References: [Package C23top](#package-c23top)
 <!-- end caseproc -->
 
 Stub for Evidence C23E2.
 
+<!-- caseproc element C24top -->
 <a id="claim-c24top"></a>
 ### Claim C24top: Statement of C24top
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**, [Package G1](#package-g1), [Package L3top](#package-l3top)
+
+Supported by: **[Context C24Xctx](#context-c24xctx)**, [Evidence C24Esh](#evidence-c24esh), [Strategy C24Sass](#strategy-c24sass)
+
+Supports: [Strategy L3Smain](#strategy-l3smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C24top -->
 References: [Package C24top](#package-c24top), [Package G1](#package-g1), [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim C24top.
 
+<!-- caseproc element C24Xctx -->
 <a id="context-c24xctx"></a>
 ### Context C24Xctx: Context of C24Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24top](#claim-c24top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24Xctx -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Context C24Xctx.
 
+<!-- caseproc element C24Esh -->
 <a id="evidence-c24esh"></a>
 ### Evidence C24Esh: Shared evidence of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24top](#claim-c24top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24Esh -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Evidence C24Esh.
 
+<!-- caseproc element C24Sass -->
 <a id="strategy-c24sass"></a>
 ### Strategy C24Sass: Assertion strategy of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supported by: **[Claim C24G1](#claim-c24g1)**, [Claim C24G2](#claim-c24g2), [Claim C24G3](#claim-c24g3)
+
+Supports: **[Claim C24top](#claim-c24top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24Sass -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Strategy C24Sass.
 
+<!-- caseproc element C24G1 -->
 <a id="claim-c24g1"></a>
 ### Claim C24G1: Sub-claim 1 of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supported by: **[Evidence C24E1](#evidence-c24e1)**, [Context C24Xctx](#context-c24xctx)
+
+Supports: **[Strategy C24Sass](#strategy-c24sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24G1 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Claim C24G1.
 
+<!-- caseproc element C24E1 -->
 <a id="evidence-c24e1"></a>
 ### Evidence C24E1: Evidence 1 of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24G1](#claim-c24g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24E1 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Evidence C24E1.
 
+<!-- caseproc element C24G2 -->
 <a id="claim-c24g2"></a>
 ### Claim C24G2: Sub-claim 2 of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supported by: **[Justification C24J1](#justification-c24j1)**, [Evidence C24Esh](#evidence-c24esh)
+
+Supports: **[Strategy C24Sass](#strategy-c24sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24G2 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Claim C24G2.
 
+<!-- caseproc element C24J1 -->
 <a id="justification-c24j1"></a>
 ### Justification C24J1: Justification of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24G2](#claim-c24g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24J1 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Justification C24J1.
 
+<!-- caseproc element C24G3 -->
 <a id="claim-c24g3"></a>
 ### Claim C24G3: Sub-claim 3 of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supported by: **[Assumption C24A1](#assumption-c24a1)**, [Evidence C24E2](#evidence-c24e2), [Evidence C24E1](#evidence-c24e1)
+
+Supports: **[Strategy C24Sass](#strategy-c24sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24G3 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Claim C24G3.
 
+<!-- caseproc element C24A1 -->
 <a id="assumption-c24a1"></a>
 ### Assumption C24A1: Assumption of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24G3](#claim-c24g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24A1 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Assumption C24A1.
 
+<!-- caseproc element C24E2 -->
 <a id="evidence-c24e2"></a>
 ### Evidence C24E2: Evidence 2 of C24
 
-<!-- caseproc references -->
+Referenced by: **[Package C24top](#package-c24top)**
+
+Supports: **[Claim C24G3](#claim-c24g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C24E2 -->
 References: [Package C24top](#package-c24top)
 <!-- end caseproc -->
 
 Stub for Evidence C24E2.
 
+<!-- caseproc element C25top -->
 <a id="claim-c25top"></a>
 ### Claim C25top: Statement of C25top
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**, [Package G1](#package-g1), [Package L3top](#package-l3top)
+
+Supported by: **[Context C25Xctx](#context-c25xctx)**, [Evidence C25Esh](#evidence-c25esh), [Strategy C25Sass](#strategy-c25sass)
+
+Supports: [Strategy L3Smain](#strategy-l3smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C25top -->
 References: [Package C25top](#package-c25top), [Package G1](#package-g1), [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim C25top.
 
+<!-- caseproc element C25Xctx -->
 <a id="context-c25xctx"></a>
 ### Context C25Xctx: Context of C25Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25top](#claim-c25top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25Xctx -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Context C25Xctx.
 
+<!-- caseproc element C25Esh -->
 <a id="evidence-c25esh"></a>
 ### Evidence C25Esh: Shared evidence of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25top](#claim-c25top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25Esh -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Evidence C25Esh.
 
+<!-- caseproc element C25Sass -->
 <a id="strategy-c25sass"></a>
 ### Strategy C25Sass: Assertion strategy of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supported by: **[Claim C25G1](#claim-c25g1)**, [Claim C25G2](#claim-c25g2), [Claim C25G3](#claim-c25g3)
+
+Supports: **[Claim C25top](#claim-c25top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25Sass -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Strategy C25Sass.
 
+<!-- caseproc element C25G1 -->
 <a id="claim-c25g1"></a>
 ### Claim C25G1: Sub-claim 1 of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supported by: **[Evidence C25E1](#evidence-c25e1)**, [Context C25Xctx](#context-c25xctx)
+
+Supports: **[Strategy C25Sass](#strategy-c25sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25G1 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Claim C25G1.
 
+<!-- caseproc element C25E1 -->
 <a id="evidence-c25e1"></a>
 ### Evidence C25E1: Evidence 1 of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25G1](#claim-c25g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25E1 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Evidence C25E1.
 
+<!-- caseproc element C25G2 -->
 <a id="claim-c25g2"></a>
 ### Claim C25G2: Sub-claim 2 of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supported by: **[Justification C25J1](#justification-c25j1)**, [Evidence C25Esh](#evidence-c25esh)
+
+Supports: **[Strategy C25Sass](#strategy-c25sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25G2 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Claim C25G2.
 
+<!-- caseproc element C25J1 -->
 <a id="justification-c25j1"></a>
 ### Justification C25J1: Justification of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25G2](#claim-c25g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25J1 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Justification C25J1.
 
+<!-- caseproc element C25G3 -->
 <a id="claim-c25g3"></a>
 ### Claim C25G3: Sub-claim 3 of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supported by: **[Assumption C25A1](#assumption-c25a1)**, [Evidence C25E2](#evidence-c25e2), [Evidence C25E1](#evidence-c25e1)
+
+Supports: **[Strategy C25Sass](#strategy-c25sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25G3 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Claim C25G3.
 
+<!-- caseproc element C25A1 -->
 <a id="assumption-c25a1"></a>
 ### Assumption C25A1: Assumption of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25G3](#claim-c25g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25A1 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Assumption C25A1.
 
+<!-- caseproc element C25E2 -->
 <a id="evidence-c25e2"></a>
 ### Evidence C25E2: Evidence 2 of C25
 
-<!-- caseproc references -->
+Referenced by: **[Package C25top](#package-c25top)**
+
+Supports: **[Claim C25G3](#claim-c25g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C25E2 -->
 References: [Package C25top](#package-c25top)
 <!-- end caseproc -->
 
 Stub for Evidence C25E2.
 
+<!-- caseproc element C26top -->
 <a id="claim-c26top"></a>
 ### Claim C26top: Statement of C26top
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**, [Package G1](#package-g1), [Package L3top](#package-l3top)
+
+Supported by: **[Context C26Xctx](#context-c26xctx)**, [Evidence C26Esh](#evidence-c26esh), [Strategy C26Sass](#strategy-c26sass)
+
+Supports: [Strategy L3Smain](#strategy-l3smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C26top -->
 References: [Package C26top](#package-c26top), [Package G1](#package-g1), [Package L3top](#package-l3top)
 <!-- end caseproc -->
 
 Stub for Claim C26top.
 
+<!-- caseproc element C26Xctx -->
 <a id="context-c26xctx"></a>
 ### Context C26Xctx: Context of C26Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26top](#claim-c26top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26Xctx -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Context C26Xctx.
 
+<!-- caseproc element C26Esh -->
 <a id="evidence-c26esh"></a>
 ### Evidence C26Esh: Shared evidence of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26top](#claim-c26top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26Esh -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Evidence C26Esh.
 
+<!-- caseproc element C26Sass -->
 <a id="strategy-c26sass"></a>
 ### Strategy C26Sass: Assertion strategy of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supported by: **[Claim C26G1](#claim-c26g1)**, [Claim C26G2](#claim-c26g2), [Claim C26G3](#claim-c26g3)
+
+Supports: **[Claim C26top](#claim-c26top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26Sass -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Strategy C26Sass.
 
+<!-- caseproc element C26G1 -->
 <a id="claim-c26g1"></a>
 ### Claim C26G1: Sub-claim 1 of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supported by: **[Evidence C26E1](#evidence-c26e1)**, [Context C26Xctx](#context-c26xctx)
+
+Supports: **[Strategy C26Sass](#strategy-c26sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26G1 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Claim C26G1.
 
+<!-- caseproc element C26E1 -->
 <a id="evidence-c26e1"></a>
 ### Evidence C26E1: Evidence 1 of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26G1](#claim-c26g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26E1 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Evidence C26E1.
 
+<!-- caseproc element C26G2 -->
 <a id="claim-c26g2"></a>
 ### Claim C26G2: Sub-claim 2 of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supported by: **[Justification C26J1](#justification-c26j1)**, [Evidence C26Esh](#evidence-c26esh)
+
+Supports: **[Strategy C26Sass](#strategy-c26sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26G2 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Claim C26G2.
 
+<!-- caseproc element C26J1 -->
 <a id="justification-c26j1"></a>
 ### Justification C26J1: Justification of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26G2](#claim-c26g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26J1 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Justification C26J1.
 
+<!-- caseproc element C26G3 -->
 <a id="claim-c26g3"></a>
 ### Claim C26G3: Sub-claim 3 of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supported by: **[Assumption C26A1](#assumption-c26a1)**, [Evidence C26E2](#evidence-c26e2), [Evidence C26E1](#evidence-c26e1)
+
+Supports: **[Strategy C26Sass](#strategy-c26sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26G3 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Claim C26G3.
 
+<!-- caseproc element C26A1 -->
 <a id="assumption-c26a1"></a>
 ### Assumption C26A1: Assumption of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26G3](#claim-c26g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26A1 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Assumption C26A1.
 
+<!-- caseproc element C26E2 -->
 <a id="evidence-c26e2"></a>
 ### Evidence C26E2: Evidence 2 of C26
 
-<!-- caseproc references -->
+Referenced by: **[Package C26top](#package-c26top)**
+
+Supports: **[Claim C26G3](#claim-c26g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C26E2 -->
 References: [Package C26top](#package-c26top)
 <!-- end caseproc -->
 
 Stub for Evidence C26E2.
 
+<!-- caseproc element C27top -->
 <a id="claim-c27top"></a>
 ### Claim C27top: Statement of C27top
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C27Xctx](#context-c27xctx)**, [Evidence C27Esh](#evidence-c27esh), [Strategy C27Sass](#strategy-c27sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C27top -->
 References: [Package C27top](#package-c27top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C27top.
 
+<!-- caseproc element C27Xctx -->
 <a id="context-c27xctx"></a>
 ### Context C27Xctx: Context of C27Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27top](#claim-c27top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27Xctx -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Context C27Xctx.
 
+<!-- caseproc element C27Esh -->
 <a id="evidence-c27esh"></a>
 ### Evidence C27Esh: Shared evidence of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27top](#claim-c27top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27Esh -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Evidence C27Esh.
 
+<!-- caseproc element C27Sass -->
 <a id="strategy-c27sass"></a>
 ### Strategy C27Sass: Assertion strategy of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supported by: **[Claim C27G1](#claim-c27g1)**, [Claim C27G2](#claim-c27g2), [Claim C27G3](#claim-c27g3)
+
+Supports: **[Claim C27top](#claim-c27top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27Sass -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Strategy C27Sass.
 
+<!-- caseproc element C27G1 -->
 <a id="claim-c27g1"></a>
 ### Claim C27G1: Sub-claim 1 of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supported by: **[Evidence C27E1](#evidence-c27e1)**, [Context C27Xctx](#context-c27xctx)
+
+Supports: **[Strategy C27Sass](#strategy-c27sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27G1 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Claim C27G1.
 
+<!-- caseproc element C27E1 -->
 <a id="evidence-c27e1"></a>
 ### Evidence C27E1: Evidence 1 of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27G1](#claim-c27g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27E1 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Evidence C27E1.
 
+<!-- caseproc element C27G2 -->
 <a id="claim-c27g2"></a>
 ### Claim C27G2: Sub-claim 2 of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supported by: **[Justification C27J1](#justification-c27j1)**, [Evidence C27Esh](#evidence-c27esh)
+
+Supports: **[Strategy C27Sass](#strategy-c27sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27G2 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Claim C27G2.
 
+<!-- caseproc element C27J1 -->
 <a id="justification-c27j1"></a>
 ### Justification C27J1: Justification of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27G2](#claim-c27g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27J1 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Justification C27J1.
 
+<!-- caseproc element C27G3 -->
 <a id="claim-c27g3"></a>
 ### Claim C27G3: Sub-claim 3 of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supported by: **[Assumption C27A1](#assumption-c27a1)**, [Evidence C27E2](#evidence-c27e2), [Evidence C27E1](#evidence-c27e1)
+
+Supports: **[Strategy C27Sass](#strategy-c27sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27G3 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Claim C27G3.
 
+<!-- caseproc element C27A1 -->
 <a id="assumption-c27a1"></a>
 ### Assumption C27A1: Assumption of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27G3](#claim-c27g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27A1 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Assumption C27A1.
 
+<!-- caseproc element C27E2 -->
 <a id="evidence-c27e2"></a>
 ### Evidence C27E2: Evidence 2 of C27
 
-<!-- caseproc references -->
+Referenced by: **[Package C27top](#package-c27top)**
+
+Supports: **[Claim C27G3](#claim-c27g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C27E2 -->
 References: [Package C27top](#package-c27top)
 <!-- end caseproc -->
 
 Stub for Evidence C27E2.
 
+<!-- caseproc element C28top -->
 <a id="claim-c28top"></a>
 ### Claim C28top: Statement of C28top
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C28Xctx](#context-c28xctx)**, [Evidence C28Esh](#evidence-c28esh), [Strategy C28Sass](#strategy-c28sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C28top -->
 References: [Package C28top](#package-c28top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C28top.
 
+<!-- caseproc element C28Xctx -->
 <a id="context-c28xctx"></a>
 ### Context C28Xctx: Context of C28Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28top](#claim-c28top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28Xctx -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Context C28Xctx.
 
+<!-- caseproc element C28Esh -->
 <a id="evidence-c28esh"></a>
 ### Evidence C28Esh: Shared evidence of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28top](#claim-c28top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28Esh -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Evidence C28Esh.
 
+<!-- caseproc element C28Sass -->
 <a id="strategy-c28sass"></a>
 ### Strategy C28Sass: Assertion strategy of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supported by: **[Claim C28G1](#claim-c28g1)**, [Claim C28G2](#claim-c28g2), [Claim C28G3](#claim-c28g3)
+
+Supports: **[Claim C28top](#claim-c28top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28Sass -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Strategy C28Sass.
 
+<!-- caseproc element C28G1 -->
 <a id="claim-c28g1"></a>
 ### Claim C28G1: Sub-claim 1 of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supported by: **[Evidence C28E1](#evidence-c28e1)**, [Context C28Xctx](#context-c28xctx)
+
+Supports: **[Strategy C28Sass](#strategy-c28sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28G1 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Claim C28G1.
 
+<!-- caseproc element C28E1 -->
 <a id="evidence-c28e1"></a>
 ### Evidence C28E1: Evidence 1 of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28G1](#claim-c28g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28E1 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Evidence C28E1.
 
+<!-- caseproc element C28G2 -->
 <a id="claim-c28g2"></a>
 ### Claim C28G2: Sub-claim 2 of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supported by: **[Justification C28J1](#justification-c28j1)**, [Evidence C28Esh](#evidence-c28esh)
+
+Supports: **[Strategy C28Sass](#strategy-c28sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28G2 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Claim C28G2.
 
+<!-- caseproc element C28J1 -->
 <a id="justification-c28j1"></a>
 ### Justification C28J1: Justification of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28G2](#claim-c28g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28J1 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Justification C28J1.
 
+<!-- caseproc element C28G3 -->
 <a id="claim-c28g3"></a>
 ### Claim C28G3: Sub-claim 3 of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supported by: **[Assumption C28A1](#assumption-c28a1)**, [Evidence C28E2](#evidence-c28e2), [Evidence C28E1](#evidence-c28e1)
+
+Supports: **[Strategy C28Sass](#strategy-c28sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28G3 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Claim C28G3.
 
+<!-- caseproc element C28A1 -->
 <a id="assumption-c28a1"></a>
 ### Assumption C28A1: Assumption of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28G3](#claim-c28g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28A1 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Assumption C28A1.
 
+<!-- caseproc element C28E2 -->
 <a id="evidence-c28e2"></a>
 ### Evidence C28E2: Evidence 2 of C28
 
-<!-- caseproc references -->
+Referenced by: **[Package C28top](#package-c28top)**
+
+Supports: **[Claim C28G3](#claim-c28g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C28E2 -->
 References: [Package C28top](#package-c28top)
 <!-- end caseproc -->
 
 Stub for Evidence C28E2.
 
+<!-- caseproc element C29top -->
 <a id="claim-c29top"></a>
 ### Claim C29top: Statement of C29top
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**, [Package G1](#package-g1), [Package L4top](#package-l4top)
+
+Supported by: **[Context C29Xctx](#context-c29xctx)**, [Evidence C29Esh](#evidence-c29esh), [Strategy C29Sass](#strategy-c29sass)
+
+Supports: [Strategy L4Smain](#strategy-l4smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C29top -->
 References: [Package C29top](#package-c29top), [Package G1](#package-g1), [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim C29top.
 
+<!-- caseproc element C29Xctx -->
 <a id="context-c29xctx"></a>
 ### Context C29Xctx: Context of C29Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29top](#claim-c29top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29Xctx -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Context C29Xctx.
 
+<!-- caseproc element C29Esh -->
 <a id="evidence-c29esh"></a>
 ### Evidence C29Esh: Shared evidence of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29top](#claim-c29top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29Esh -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Evidence C29Esh.
 
+<!-- caseproc element C29Sass -->
 <a id="strategy-c29sass"></a>
 ### Strategy C29Sass: Assertion strategy of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supported by: **[Claim C29G1](#claim-c29g1)**, [Claim C29G2](#claim-c29g2), [Claim C29G3](#claim-c29g3)
+
+Supports: **[Claim C29top](#claim-c29top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29Sass -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Strategy C29Sass.
 
+<!-- caseproc element C29G1 -->
 <a id="claim-c29g1"></a>
 ### Claim C29G1: Sub-claim 1 of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supported by: **[Evidence C29E1](#evidence-c29e1)**, [Context C29Xctx](#context-c29xctx)
+
+Supports: **[Strategy C29Sass](#strategy-c29sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29G1 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Claim C29G1.
 
+<!-- caseproc element C29E1 -->
 <a id="evidence-c29e1"></a>
 ### Evidence C29E1: Evidence 1 of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29G1](#claim-c29g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29E1 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Evidence C29E1.
 
+<!-- caseproc element C29G2 -->
 <a id="claim-c29g2"></a>
 ### Claim C29G2: Sub-claim 2 of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supported by: **[Justification C29J1](#justification-c29j1)**, [Evidence C29Esh](#evidence-c29esh)
+
+Supports: **[Strategy C29Sass](#strategy-c29sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29G2 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Claim C29G2.
 
+<!-- caseproc element C29J1 -->
 <a id="justification-c29j1"></a>
 ### Justification C29J1: Justification of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29G2](#claim-c29g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29J1 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Justification C29J1.
 
+<!-- caseproc element C29G3 -->
 <a id="claim-c29g3"></a>
 ### Claim C29G3: Sub-claim 3 of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supported by: **[Assumption C29A1](#assumption-c29a1)**, [Evidence C29E2](#evidence-c29e2), [Evidence C29E1](#evidence-c29e1)
+
+Supports: **[Strategy C29Sass](#strategy-c29sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29G3 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Claim C29G3.
 
+<!-- caseproc element C29A1 -->
 <a id="assumption-c29a1"></a>
 ### Assumption C29A1: Assumption of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29G3](#claim-c29g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29A1 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Assumption C29A1.
 
+<!-- caseproc element C29E2 -->
 <a id="evidence-c29e2"></a>
 ### Evidence C29E2: Evidence 2 of C29
 
-<!-- caseproc references -->
+Referenced by: **[Package C29top](#package-c29top)**
+
+Supports: **[Claim C29G3](#claim-c29g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C29E2 -->
 References: [Package C29top](#package-c29top)
 <!-- end caseproc -->
 
 Stub for Evidence C29E2.
 
+<!-- caseproc element C30top -->
 <a id="claim-c30top"></a>
 ### Claim C30top: Statement of C30top
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**, [Package G1](#package-g1), [Package L4top](#package-l4top)
+
+Supported by: **[Context C30Xctx](#context-c30xctx)**, [Evidence C30Esh](#evidence-c30esh), [Strategy C30Sass](#strategy-c30sass)
+
+Supports: [Strategy L4Smain](#strategy-l4smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C30top -->
 References: [Package C30top](#package-c30top), [Package G1](#package-g1), [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim C30top.
 
+<!-- caseproc element C30Xctx -->
 <a id="context-c30xctx"></a>
 ### Context C30Xctx: Context of C30Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30top](#claim-c30top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30Xctx -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Context C30Xctx.
 
+<!-- caseproc element C30Esh -->
 <a id="evidence-c30esh"></a>
 ### Evidence C30Esh: Shared evidence of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30top](#claim-c30top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30Esh -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Evidence C30Esh.
 
+<!-- caseproc element C30Sass -->
 <a id="strategy-c30sass"></a>
 ### Strategy C30Sass: Assertion strategy of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supported by: **[Claim C30G1](#claim-c30g1)**, [Claim C30G2](#claim-c30g2), [Claim C30G3](#claim-c30g3)
+
+Supports: **[Claim C30top](#claim-c30top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30Sass -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Strategy C30Sass.
 
+<!-- caseproc element C30G1 -->
 <a id="claim-c30g1"></a>
 ### Claim C30G1: Sub-claim 1 of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supported by: **[Evidence C30E1](#evidence-c30e1)**, [Context C30Xctx](#context-c30xctx)
+
+Supports: **[Strategy C30Sass](#strategy-c30sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30G1 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Claim C30G1.
 
+<!-- caseproc element C30E1 -->
 <a id="evidence-c30e1"></a>
 ### Evidence C30E1: Evidence 1 of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30G1](#claim-c30g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30E1 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Evidence C30E1.
 
+<!-- caseproc element C30G2 -->
 <a id="claim-c30g2"></a>
 ### Claim C30G2: Sub-claim 2 of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supported by: **[Justification C30J1](#justification-c30j1)**, [Evidence C30Esh](#evidence-c30esh)
+
+Supports: **[Strategy C30Sass](#strategy-c30sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30G2 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Claim C30G2.
 
+<!-- caseproc element C30J1 -->
 <a id="justification-c30j1"></a>
 ### Justification C30J1: Justification of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30G2](#claim-c30g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30J1 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Justification C30J1.
 
+<!-- caseproc element C30G3 -->
 <a id="claim-c30g3"></a>
 ### Claim C30G3: Sub-claim 3 of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supported by: **[Assumption C30A1](#assumption-c30a1)**, [Evidence C30E2](#evidence-c30e2), [Evidence C30E1](#evidence-c30e1)
+
+Supports: **[Strategy C30Sass](#strategy-c30sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30G3 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Claim C30G3.
 
+<!-- caseproc element C30A1 -->
 <a id="assumption-c30a1"></a>
 ### Assumption C30A1: Assumption of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30G3](#claim-c30g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30A1 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Assumption C30A1.
 
+<!-- caseproc element C30E2 -->
 <a id="evidence-c30e2"></a>
 ### Evidence C30E2: Evidence 2 of C30
 
-<!-- caseproc references -->
+Referenced by: **[Package C30top](#package-c30top)**
+
+Supports: **[Claim C30G3](#claim-c30g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C30E2 -->
 References: [Package C30top](#package-c30top)
 <!-- end caseproc -->
 
 Stub for Evidence C30E2.
 
+<!-- caseproc element C31top -->
 <a id="claim-c31top"></a>
 ### Claim C31top: Statement of C31top
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**, [Package G1](#package-g1), [Package L4top](#package-l4top)
+
+Supported by: **[Context C31Xctx](#context-c31xctx)**, [Evidence C31Esh](#evidence-c31esh), [Strategy C31Sass](#strategy-c31sass)
+
+Supports: [Strategy L4Smain](#strategy-l4smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C31top -->
 References: [Package C31top](#package-c31top), [Package G1](#package-g1), [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim C31top.
 
+<!-- caseproc element C31Xctx -->
 <a id="context-c31xctx"></a>
 ### Context C31Xctx: Context of C31Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31top](#claim-c31top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31Xctx -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Context C31Xctx.
 
+<!-- caseproc element C31Esh -->
 <a id="evidence-c31esh"></a>
 ### Evidence C31Esh: Shared evidence of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31top](#claim-c31top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31Esh -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Evidence C31Esh.
 
+<!-- caseproc element C31Sass -->
 <a id="strategy-c31sass"></a>
 ### Strategy C31Sass: Assertion strategy of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supported by: **[Claim C31G1](#claim-c31g1)**, [Claim C31G2](#claim-c31g2), [Claim C31G3](#claim-c31g3)
+
+Supports: **[Claim C31top](#claim-c31top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31Sass -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Strategy C31Sass.
 
+<!-- caseproc element C31G1 -->
 <a id="claim-c31g1"></a>
 ### Claim C31G1: Sub-claim 1 of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supported by: **[Evidence C31E1](#evidence-c31e1)**, [Context C31Xctx](#context-c31xctx)
+
+Supports: **[Strategy C31Sass](#strategy-c31sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31G1 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Claim C31G1.
 
+<!-- caseproc element C31E1 -->
 <a id="evidence-c31e1"></a>
 ### Evidence C31E1: Evidence 1 of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31G1](#claim-c31g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31E1 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Evidence C31E1.
 
+<!-- caseproc element C31G2 -->
 <a id="claim-c31g2"></a>
 ### Claim C31G2: Sub-claim 2 of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supported by: **[Justification C31J1](#justification-c31j1)**, [Evidence C31Esh](#evidence-c31esh)
+
+Supports: **[Strategy C31Sass](#strategy-c31sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31G2 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Claim C31G2.
 
+<!-- caseproc element C31J1 -->
 <a id="justification-c31j1"></a>
 ### Justification C31J1: Justification of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31G2](#claim-c31g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31J1 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Justification C31J1.
 
+<!-- caseproc element C31G3 -->
 <a id="claim-c31g3"></a>
 ### Claim C31G3: Sub-claim 3 of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supported by: **[Assumption C31A1](#assumption-c31a1)**, [Evidence C31E2](#evidence-c31e2), [Evidence C31E1](#evidence-c31e1)
+
+Supports: **[Strategy C31Sass](#strategy-c31sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31G3 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Claim C31G3.
 
+<!-- caseproc element C31A1 -->
 <a id="assumption-c31a1"></a>
 ### Assumption C31A1: Assumption of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31G3](#claim-c31g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31A1 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Assumption C31A1.
 
+<!-- caseproc element C31E2 -->
 <a id="evidence-c31e2"></a>
 ### Evidence C31E2: Evidence 2 of C31
 
-<!-- caseproc references -->
+Referenced by: **[Package C31top](#package-c31top)**
+
+Supports: **[Claim C31G3](#claim-c31g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C31E2 -->
 References: [Package C31top](#package-c31top)
 <!-- end caseproc -->
 
 Stub for Evidence C31E2.
 
+<!-- caseproc element C32top -->
 <a id="claim-c32top"></a>
 ### Claim C32top: Statement of C32top
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**, [Package G1](#package-g1), [Package L4top](#package-l4top)
+
+Supported by: **[Context C32Xctx](#context-c32xctx)**, [Evidence C32Esh](#evidence-c32esh), [Strategy C32Sass](#strategy-c32sass)
+
+Supports: [Strategy L4Smain](#strategy-l4smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C32top -->
 References: [Package C32top](#package-c32top), [Package G1](#package-g1), [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim C32top.
 
+<!-- caseproc element C32Xctx -->
 <a id="context-c32xctx"></a>
 ### Context C32Xctx: Context of C32Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32top](#claim-c32top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32Xctx -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Context C32Xctx.
 
+<!-- caseproc element C32Esh -->
 <a id="evidence-c32esh"></a>
 ### Evidence C32Esh: Shared evidence of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32top](#claim-c32top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32Esh -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Evidence C32Esh.
 
+<!-- caseproc element C32Sass -->
 <a id="strategy-c32sass"></a>
 ### Strategy C32Sass: Assertion strategy of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supported by: **[Claim C32G1](#claim-c32g1)**, [Claim C32G2](#claim-c32g2), [Claim C32G3](#claim-c32g3)
+
+Supports: **[Claim C32top](#claim-c32top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32Sass -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Strategy C32Sass.
 
+<!-- caseproc element C32G1 -->
 <a id="claim-c32g1"></a>
 ### Claim C32G1: Sub-claim 1 of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supported by: **[Evidence C32E1](#evidence-c32e1)**, [Context C32Xctx](#context-c32xctx)
+
+Supports: **[Strategy C32Sass](#strategy-c32sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32G1 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Claim C32G1.
 
+<!-- caseproc element C32E1 -->
 <a id="evidence-c32e1"></a>
 ### Evidence C32E1: Evidence 1 of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32G1](#claim-c32g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32E1 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Evidence C32E1.
 
+<!-- caseproc element C32G2 -->
 <a id="claim-c32g2"></a>
 ### Claim C32G2: Sub-claim 2 of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supported by: **[Justification C32J1](#justification-c32j1)**, [Evidence C32Esh](#evidence-c32esh)
+
+Supports: **[Strategy C32Sass](#strategy-c32sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32G2 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Claim C32G2.
 
+<!-- caseproc element C32J1 -->
 <a id="justification-c32j1"></a>
 ### Justification C32J1: Justification of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32G2](#claim-c32g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32J1 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Justification C32J1.
 
+<!-- caseproc element C32G3 -->
 <a id="claim-c32g3"></a>
 ### Claim C32G3: Sub-claim 3 of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supported by: **[Assumption C32A1](#assumption-c32a1)**, [Evidence C32E2](#evidence-c32e2), [Evidence C32E1](#evidence-c32e1)
+
+Supports: **[Strategy C32Sass](#strategy-c32sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32G3 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Claim C32G3.
 
+<!-- caseproc element C32A1 -->
 <a id="assumption-c32a1"></a>
 ### Assumption C32A1: Assumption of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32G3](#claim-c32g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32A1 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Assumption C32A1.
 
+<!-- caseproc element C32E2 -->
 <a id="evidence-c32e2"></a>
 ### Evidence C32E2: Evidence 2 of C32
 
-<!-- caseproc references -->
+Referenced by: **[Package C32top](#package-c32top)**
+
+Supports: **[Claim C32G3](#claim-c32g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C32E2 -->
 References: [Package C32top](#package-c32top)
 <!-- end caseproc -->
 
 Stub for Evidence C32E2.
 
+<!-- caseproc element C33top -->
 <a id="claim-c33top"></a>
 ### Claim C33top: Statement of C33top
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**, [Package G1](#package-g1), [Package L4top](#package-l4top)
+
+Supported by: **[Context C33Xctx](#context-c33xctx)**, [Evidence C33Esh](#evidence-c33esh), [Strategy C33Sass](#strategy-c33sass)
+
+Supports: [Strategy L4Smain](#strategy-l4smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C33top -->
 References: [Package C33top](#package-c33top), [Package G1](#package-g1), [Package L4top](#package-l4top)
 <!-- end caseproc -->
 
 Stub for Claim C33top.
 
+<!-- caseproc element C33Xctx -->
 <a id="context-c33xctx"></a>
 ### Context C33Xctx: Context of C33Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33top](#claim-c33top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33Xctx -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Context C33Xctx.
 
+<!-- caseproc element C33Esh -->
 <a id="evidence-c33esh"></a>
 ### Evidence C33Esh: Shared evidence of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33top](#claim-c33top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33Esh -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Evidence C33Esh.
 
+<!-- caseproc element C33Sass -->
 <a id="strategy-c33sass"></a>
 ### Strategy C33Sass: Assertion strategy of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supported by: **[Claim C33G1](#claim-c33g1)**, [Claim C33G2](#claim-c33g2), [Claim C33G3](#claim-c33g3)
+
+Supports: **[Claim C33top](#claim-c33top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33Sass -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Strategy C33Sass.
 
+<!-- caseproc element C33G1 -->
 <a id="claim-c33g1"></a>
 ### Claim C33G1: Sub-claim 1 of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supported by: **[Evidence C33E1](#evidence-c33e1)**, [Context C33Xctx](#context-c33xctx)
+
+Supports: **[Strategy C33Sass](#strategy-c33sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33G1 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Claim C33G1.
 
+<!-- caseproc element C33E1 -->
 <a id="evidence-c33e1"></a>
 ### Evidence C33E1: Evidence 1 of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33G1](#claim-c33g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33E1 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Evidence C33E1.
 
+<!-- caseproc element C33G2 -->
 <a id="claim-c33g2"></a>
 ### Claim C33G2: Sub-claim 2 of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supported by: **[Justification C33J1](#justification-c33j1)**, [Evidence C33Esh](#evidence-c33esh)
+
+Supports: **[Strategy C33Sass](#strategy-c33sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33G2 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Claim C33G2.
 
+<!-- caseproc element C33J1 -->
 <a id="justification-c33j1"></a>
 ### Justification C33J1: Justification of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33G2](#claim-c33g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33J1 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Justification C33J1.
 
+<!-- caseproc element C33G3 -->
 <a id="claim-c33g3"></a>
 ### Claim C33G3: Sub-claim 3 of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supported by: **[Assumption C33A1](#assumption-c33a1)**, [Evidence C33E2](#evidence-c33e2), [Evidence C33E1](#evidence-c33e1)
+
+Supports: **[Strategy C33Sass](#strategy-c33sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33G3 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Claim C33G3.
 
+<!-- caseproc element C33A1 -->
 <a id="assumption-c33a1"></a>
 ### Assumption C33A1: Assumption of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33G3](#claim-c33g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33A1 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Assumption C33A1.
 
+<!-- caseproc element C33E2 -->
 <a id="evidence-c33e2"></a>
 ### Evidence C33E2: Evidence 2 of C33
 
-<!-- caseproc references -->
+Referenced by: **[Package C33top](#package-c33top)**
+
+Supports: **[Claim C33G3](#claim-c33g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C33E2 -->
 References: [Package C33top](#package-c33top)
 <!-- end caseproc -->
 
 Stub for Evidence C33E2.
 
+<!-- caseproc element C34top -->
 <a id="claim-c34top"></a>
 ### Claim C34top: Statement of C34top
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C34Xctx](#context-c34xctx)**, [Evidence C34Esh](#evidence-c34esh), [Strategy C34Sass](#strategy-c34sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C34top -->
 References: [Package C34top](#package-c34top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C34top.
 
+<!-- caseproc element C34Xctx -->
 <a id="context-c34xctx"></a>
 ### Context C34Xctx: Context of C34Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34top](#claim-c34top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34Xctx -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Context C34Xctx.
 
+<!-- caseproc element C34Esh -->
 <a id="evidence-c34esh"></a>
 ### Evidence C34Esh: Shared evidence of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34top](#claim-c34top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34Esh -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Evidence C34Esh.
 
+<!-- caseproc element C34Sass -->
 <a id="strategy-c34sass"></a>
 ### Strategy C34Sass: Assertion strategy of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supported by: **[Claim C34G1](#claim-c34g1)**, [Claim C34G2](#claim-c34g2), [Claim C34G3](#claim-c34g3)
+
+Supports: **[Claim C34top](#claim-c34top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34Sass -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Strategy C34Sass.
 
+<!-- caseproc element C34G1 -->
 <a id="claim-c34g1"></a>
 ### Claim C34G1: Sub-claim 1 of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supported by: **[Evidence C34E1](#evidence-c34e1)**, [Context C34Xctx](#context-c34xctx)
+
+Supports: **[Strategy C34Sass](#strategy-c34sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34G1 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Claim C34G1.
 
+<!-- caseproc element C34E1 -->
 <a id="evidence-c34e1"></a>
 ### Evidence C34E1: Evidence 1 of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34G1](#claim-c34g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34E1 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Evidence C34E1.
 
+<!-- caseproc element C34G2 -->
 <a id="claim-c34g2"></a>
 ### Claim C34G2: Sub-claim 2 of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supported by: **[Justification C34J1](#justification-c34j1)**, [Evidence C34Esh](#evidence-c34esh)
+
+Supports: **[Strategy C34Sass](#strategy-c34sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34G2 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Claim C34G2.
 
+<!-- caseproc element C34J1 -->
 <a id="justification-c34j1"></a>
 ### Justification C34J1: Justification of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34G2](#claim-c34g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34J1 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Justification C34J1.
 
+<!-- caseproc element C34G3 -->
 <a id="claim-c34g3"></a>
 ### Claim C34G3: Sub-claim 3 of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supported by: **[Assumption C34A1](#assumption-c34a1)**, [Evidence C34E2](#evidence-c34e2), [Evidence C34E1](#evidence-c34e1)
+
+Supports: **[Strategy C34Sass](#strategy-c34sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34G3 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Claim C34G3.
 
+<!-- caseproc element C34A1 -->
 <a id="assumption-c34a1"></a>
 ### Assumption C34A1: Assumption of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34G3](#claim-c34g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34A1 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Assumption C34A1.
 
+<!-- caseproc element C34E2 -->
 <a id="evidence-c34e2"></a>
 ### Evidence C34E2: Evidence 2 of C34
 
-<!-- caseproc references -->
+Referenced by: **[Package C34top](#package-c34top)**
+
+Supports: **[Claim C34G3](#claim-c34g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C34E2 -->
 References: [Package C34top](#package-c34top)
 <!-- end caseproc -->
 
 Stub for Evidence C34E2.
 
+<!-- caseproc element C35top -->
 <a id="claim-c35top"></a>
 ### Claim C35top: Statement of C35top
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C35Xctx](#context-c35xctx)**, [Evidence C35Esh](#evidence-c35esh), [Strategy C35Sass](#strategy-c35sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C35top -->
 References: [Package C35top](#package-c35top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C35top.
 
+<!-- caseproc element C35Xctx -->
 <a id="context-c35xctx"></a>
 ### Context C35Xctx: Context of C35Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35top](#claim-c35top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35Xctx -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Context C35Xctx.
 
+<!-- caseproc element C35Esh -->
 <a id="evidence-c35esh"></a>
 ### Evidence C35Esh: Shared evidence of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35top](#claim-c35top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35Esh -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Evidence C35Esh.
 
+<!-- caseproc element C35Sass -->
 <a id="strategy-c35sass"></a>
 ### Strategy C35Sass: Assertion strategy of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supported by: **[Claim C35G1](#claim-c35g1)**, [Claim C35G2](#claim-c35g2), [Claim C35G3](#claim-c35g3)
+
+Supports: **[Claim C35top](#claim-c35top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35Sass -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Strategy C35Sass.
 
+<!-- caseproc element C35G1 -->
 <a id="claim-c35g1"></a>
 ### Claim C35G1: Sub-claim 1 of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supported by: **[Evidence C35E1](#evidence-c35e1)**, [Context C35Xctx](#context-c35xctx)
+
+Supports: **[Strategy C35Sass](#strategy-c35sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35G1 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Claim C35G1.
 
+<!-- caseproc element C35E1 -->
 <a id="evidence-c35e1"></a>
 ### Evidence C35E1: Evidence 1 of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35G1](#claim-c35g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35E1 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Evidence C35E1.
 
+<!-- caseproc element C35G2 -->
 <a id="claim-c35g2"></a>
 ### Claim C35G2: Sub-claim 2 of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supported by: **[Justification C35J1](#justification-c35j1)**, [Evidence C35Esh](#evidence-c35esh)
+
+Supports: **[Strategy C35Sass](#strategy-c35sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35G2 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Claim C35G2.
 
+<!-- caseproc element C35J1 -->
 <a id="justification-c35j1"></a>
 ### Justification C35J1: Justification of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35G2](#claim-c35g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35J1 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Justification C35J1.
 
+<!-- caseproc element C35G3 -->
 <a id="claim-c35g3"></a>
 ### Claim C35G3: Sub-claim 3 of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supported by: **[Assumption C35A1](#assumption-c35a1)**, [Evidence C35E2](#evidence-c35e2), [Evidence C35E1](#evidence-c35e1)
+
+Supports: **[Strategy C35Sass](#strategy-c35sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35G3 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Claim C35G3.
 
+<!-- caseproc element C35A1 -->
 <a id="assumption-c35a1"></a>
 ### Assumption C35A1: Assumption of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35G3](#claim-c35g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35A1 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Assumption C35A1.
 
+<!-- caseproc element C35E2 -->
 <a id="evidence-c35e2"></a>
 ### Evidence C35E2: Evidence 2 of C35
 
-<!-- caseproc references -->
+Referenced by: **[Package C35top](#package-c35top)**
+
+Supports: **[Claim C35G3](#claim-c35g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C35E2 -->
 References: [Package C35top](#package-c35top)
 <!-- end caseproc -->
 
 Stub for Evidence C35E2.
 
+<!-- caseproc element C36top -->
 <a id="claim-c36top"></a>
 ### Claim C36top: Statement of C36top
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**, [Package G1](#package-g1), [Package L5top](#package-l5top)
+
+Supported by: **[Context C36Xctx](#context-c36xctx)**, [Evidence C36Esh](#evidence-c36esh), [Strategy C36Sass](#strategy-c36sass)
+
+Supports: [Strategy L5Smain](#strategy-l5smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C36top -->
 References: [Package C36top](#package-c36top), [Package G1](#package-g1), [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim C36top.
 
+<!-- caseproc element C36Xctx -->
 <a id="context-c36xctx"></a>
 ### Context C36Xctx: Context of C36Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36top](#claim-c36top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36Xctx -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Context C36Xctx.
 
+<!-- caseproc element C36Esh -->
 <a id="evidence-c36esh"></a>
 ### Evidence C36Esh: Shared evidence of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36top](#claim-c36top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36Esh -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Evidence C36Esh.
 
+<!-- caseproc element C36Sass -->
 <a id="strategy-c36sass"></a>
 ### Strategy C36Sass: Assertion strategy of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supported by: **[Claim C36G1](#claim-c36g1)**, [Claim C36G2](#claim-c36g2), [Claim C36G3](#claim-c36g3)
+
+Supports: **[Claim C36top](#claim-c36top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36Sass -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Strategy C36Sass.
 
+<!-- caseproc element C36G1 -->
 <a id="claim-c36g1"></a>
 ### Claim C36G1: Sub-claim 1 of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supported by: **[Evidence C36E1](#evidence-c36e1)**, [Context C36Xctx](#context-c36xctx)
+
+Supports: **[Strategy C36Sass](#strategy-c36sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36G1 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Claim C36G1.
 
+<!-- caseproc element C36E1 -->
 <a id="evidence-c36e1"></a>
 ### Evidence C36E1: Evidence 1 of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36G1](#claim-c36g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36E1 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Evidence C36E1.
 
+<!-- caseproc element C36G2 -->
 <a id="claim-c36g2"></a>
 ### Claim C36G2: Sub-claim 2 of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supported by: **[Justification C36J1](#justification-c36j1)**, [Evidence C36Esh](#evidence-c36esh)
+
+Supports: **[Strategy C36Sass](#strategy-c36sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36G2 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Claim C36G2.
 
+<!-- caseproc element C36J1 -->
 <a id="justification-c36j1"></a>
 ### Justification C36J1: Justification of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36G2](#claim-c36g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36J1 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Justification C36J1.
 
+<!-- caseproc element C36G3 -->
 <a id="claim-c36g3"></a>
 ### Claim C36G3: Sub-claim 3 of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supported by: **[Assumption C36A1](#assumption-c36a1)**, [Evidence C36E2](#evidence-c36e2), [Evidence C36E1](#evidence-c36e1)
+
+Supports: **[Strategy C36Sass](#strategy-c36sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36G3 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Claim C36G3.
 
+<!-- caseproc element C36A1 -->
 <a id="assumption-c36a1"></a>
 ### Assumption C36A1: Assumption of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36G3](#claim-c36g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36A1 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Assumption C36A1.
 
+<!-- caseproc element C36E2 -->
 <a id="evidence-c36e2"></a>
 ### Evidence C36E2: Evidence 2 of C36
 
-<!-- caseproc references -->
+Referenced by: **[Package C36top](#package-c36top)**
+
+Supports: **[Claim C36G3](#claim-c36g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C36E2 -->
 References: [Package C36top](#package-c36top)
 <!-- end caseproc -->
 
 Stub for Evidence C36E2.
 
+<!-- caseproc element C37top -->
 <a id="claim-c37top"></a>
 ### Claim C37top: Statement of C37top
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**, [Package G1](#package-g1), [Package L5top](#package-l5top)
+
+Supported by: **[Context C37Xctx](#context-c37xctx)**, [Evidence C37Esh](#evidence-c37esh), [Strategy C37Sass](#strategy-c37sass)
+
+Supports: [Strategy L5Smain](#strategy-l5smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C37top -->
 References: [Package C37top](#package-c37top), [Package G1](#package-g1), [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim C37top.
 
+<!-- caseproc element C37Xctx -->
 <a id="context-c37xctx"></a>
 ### Context C37Xctx: Context of C37Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37top](#claim-c37top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37Xctx -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Context C37Xctx.
 
+<!-- caseproc element C37Esh -->
 <a id="evidence-c37esh"></a>
 ### Evidence C37Esh: Shared evidence of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37top](#claim-c37top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37Esh -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Evidence C37Esh.
 
+<!-- caseproc element C37Sass -->
 <a id="strategy-c37sass"></a>
 ### Strategy C37Sass: Assertion strategy of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supported by: **[Claim C37G1](#claim-c37g1)**, [Claim C37G2](#claim-c37g2), [Claim C37G3](#claim-c37g3)
+
+Supports: **[Claim C37top](#claim-c37top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37Sass -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Strategy C37Sass.
 
+<!-- caseproc element C37G1 -->
 <a id="claim-c37g1"></a>
 ### Claim C37G1: Sub-claim 1 of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supported by: **[Evidence C37E1](#evidence-c37e1)**, [Context C37Xctx](#context-c37xctx)
+
+Supports: **[Strategy C37Sass](#strategy-c37sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37G1 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Claim C37G1.
 
+<!-- caseproc element C37E1 -->
 <a id="evidence-c37e1"></a>
 ### Evidence C37E1: Evidence 1 of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37G1](#claim-c37g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37E1 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Evidence C37E1.
 
+<!-- caseproc element C37G2 -->
 <a id="claim-c37g2"></a>
 ### Claim C37G2: Sub-claim 2 of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supported by: **[Justification C37J1](#justification-c37j1)**, [Evidence C37Esh](#evidence-c37esh)
+
+Supports: **[Strategy C37Sass](#strategy-c37sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37G2 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Claim C37G2.
 
+<!-- caseproc element C37J1 -->
 <a id="justification-c37j1"></a>
 ### Justification C37J1: Justification of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37G2](#claim-c37g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37J1 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Justification C37J1.
 
+<!-- caseproc element C37G3 -->
 <a id="claim-c37g3"></a>
 ### Claim C37G3: Sub-claim 3 of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supported by: **[Assumption C37A1](#assumption-c37a1)**, [Evidence C37E2](#evidence-c37e2), [Evidence C37E1](#evidence-c37e1)
+
+Supports: **[Strategy C37Sass](#strategy-c37sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37G3 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Claim C37G3.
 
+<!-- caseproc element C37A1 -->
 <a id="assumption-c37a1"></a>
 ### Assumption C37A1: Assumption of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37G3](#claim-c37g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37A1 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Assumption C37A1.
 
+<!-- caseproc element C37E2 -->
 <a id="evidence-c37e2"></a>
 ### Evidence C37E2: Evidence 2 of C37
 
-<!-- caseproc references -->
+Referenced by: **[Package C37top](#package-c37top)**
+
+Supports: **[Claim C37G3](#claim-c37g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C37E2 -->
 References: [Package C37top](#package-c37top)
 <!-- end caseproc -->
 
 Stub for Evidence C37E2.
 
+<!-- caseproc element C38top -->
 <a id="claim-c38top"></a>
 ### Claim C38top: Statement of C38top
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**, [Package G1](#package-g1), [Package L5top](#package-l5top)
+
+Supported by: **[Context C38Xctx](#context-c38xctx)**, [Evidence C38Esh](#evidence-c38esh), [Strategy C38Sass](#strategy-c38sass)
+
+Supports: [Strategy L5Smain](#strategy-l5smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C38top -->
 References: [Package C38top](#package-c38top), [Package G1](#package-g1), [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim C38top.
 
+<!-- caseproc element C38Xctx -->
 <a id="context-c38xctx"></a>
 ### Context C38Xctx: Context of C38Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38top](#claim-c38top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38Xctx -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Context C38Xctx.
 
+<!-- caseproc element C38Esh -->
 <a id="evidence-c38esh"></a>
 ### Evidence C38Esh: Shared evidence of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38top](#claim-c38top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38Esh -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Evidence C38Esh.
 
+<!-- caseproc element C38Sass -->
 <a id="strategy-c38sass"></a>
 ### Strategy C38Sass: Assertion strategy of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supported by: **[Claim C38G1](#claim-c38g1)**, [Claim C38G2](#claim-c38g2), [Claim C38G3](#claim-c38g3)
+
+Supports: **[Claim C38top](#claim-c38top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38Sass -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Strategy C38Sass.
 
+<!-- caseproc element C38G1 -->
 <a id="claim-c38g1"></a>
 ### Claim C38G1: Sub-claim 1 of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supported by: **[Evidence C38E1](#evidence-c38e1)**, [Context C38Xctx](#context-c38xctx)
+
+Supports: **[Strategy C38Sass](#strategy-c38sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38G1 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Claim C38G1.
 
+<!-- caseproc element C38E1 -->
 <a id="evidence-c38e1"></a>
 ### Evidence C38E1: Evidence 1 of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38G1](#claim-c38g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38E1 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Evidence C38E1.
 
+<!-- caseproc element C38G2 -->
 <a id="claim-c38g2"></a>
 ### Claim C38G2: Sub-claim 2 of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supported by: **[Justification C38J1](#justification-c38j1)**, [Evidence C38Esh](#evidence-c38esh)
+
+Supports: **[Strategy C38Sass](#strategy-c38sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38G2 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Claim C38G2.
 
+<!-- caseproc element C38J1 -->
 <a id="justification-c38j1"></a>
 ### Justification C38J1: Justification of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38G2](#claim-c38g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38J1 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Justification C38J1.
 
+<!-- caseproc element C38G3 -->
 <a id="claim-c38g3"></a>
 ### Claim C38G3: Sub-claim 3 of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supported by: **[Assumption C38A1](#assumption-c38a1)**, [Evidence C38E2](#evidence-c38e2), [Evidence C38E1](#evidence-c38e1)
+
+Supports: **[Strategy C38Sass](#strategy-c38sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38G3 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Claim C38G3.
 
+<!-- caseproc element C38A1 -->
 <a id="assumption-c38a1"></a>
 ### Assumption C38A1: Assumption of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38G3](#claim-c38g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38A1 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Assumption C38A1.
 
+<!-- caseproc element C38E2 -->
 <a id="evidence-c38e2"></a>
 ### Evidence C38E2: Evidence 2 of C38
 
-<!-- caseproc references -->
+Referenced by: **[Package C38top](#package-c38top)**
+
+Supports: **[Claim C38G3](#claim-c38g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C38E2 -->
 References: [Package C38top](#package-c38top)
 <!-- end caseproc -->
 
 Stub for Evidence C38E2.
 
+<!-- caseproc element C39top -->
 <a id="claim-c39top"></a>
 ### Claim C39top: Statement of C39top
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**, [Package G1](#package-g1), [Package L5top](#package-l5top)
+
+Supported by: **[Context C39Xctx](#context-c39xctx)**, [Evidence C39Esh](#evidence-c39esh), [Strategy C39Sass](#strategy-c39sass)
+
+Supports: [Strategy L5Smain](#strategy-l5smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C39top -->
 References: [Package C39top](#package-c39top), [Package G1](#package-g1), [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim C39top.
 
+<!-- caseproc element C39Xctx -->
 <a id="context-c39xctx"></a>
 ### Context C39Xctx: Context of C39Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39top](#claim-c39top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39Xctx -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Context C39Xctx.
 
+<!-- caseproc element C39Esh -->
 <a id="evidence-c39esh"></a>
 ### Evidence C39Esh: Shared evidence of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39top](#claim-c39top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39Esh -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Evidence C39Esh.
 
+<!-- caseproc element C39Sass -->
 <a id="strategy-c39sass"></a>
 ### Strategy C39Sass: Assertion strategy of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supported by: **[Claim C39G1](#claim-c39g1)**, [Claim C39G2](#claim-c39g2), [Claim C39G3](#claim-c39g3)
+
+Supports: **[Claim C39top](#claim-c39top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39Sass -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Strategy C39Sass.
 
+<!-- caseproc element C39G1 -->
 <a id="claim-c39g1"></a>
 ### Claim C39G1: Sub-claim 1 of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supported by: **[Evidence C39E1](#evidence-c39e1)**, [Context C39Xctx](#context-c39xctx)
+
+Supports: **[Strategy C39Sass](#strategy-c39sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39G1 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Claim C39G1.
 
+<!-- caseproc element C39E1 -->
 <a id="evidence-c39e1"></a>
 ### Evidence C39E1: Evidence 1 of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39G1](#claim-c39g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39E1 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Evidence C39E1.
 
+<!-- caseproc element C39G2 -->
 <a id="claim-c39g2"></a>
 ### Claim C39G2: Sub-claim 2 of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supported by: **[Justification C39J1](#justification-c39j1)**, [Evidence C39Esh](#evidence-c39esh)
+
+Supports: **[Strategy C39Sass](#strategy-c39sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39G2 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Claim C39G2.
 
+<!-- caseproc element C39J1 -->
 <a id="justification-c39j1"></a>
 ### Justification C39J1: Justification of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39G2](#claim-c39g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39J1 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Justification C39J1.
 
+<!-- caseproc element C39G3 -->
 <a id="claim-c39g3"></a>
 ### Claim C39G3: Sub-claim 3 of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supported by: **[Assumption C39A1](#assumption-c39a1)**, [Evidence C39E2](#evidence-c39e2), [Evidence C39E1](#evidence-c39e1)
+
+Supports: **[Strategy C39Sass](#strategy-c39sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39G3 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Claim C39G3.
 
+<!-- caseproc element C39A1 -->
 <a id="assumption-c39a1"></a>
 ### Assumption C39A1: Assumption of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39G3](#claim-c39g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39A1 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Assumption C39A1.
 
+<!-- caseproc element C39E2 -->
 <a id="evidence-c39e2"></a>
 ### Evidence C39E2: Evidence 2 of C39
 
-<!-- caseproc references -->
+Referenced by: **[Package C39top](#package-c39top)**
+
+Supports: **[Claim C39G3](#claim-c39g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C39E2 -->
 References: [Package C39top](#package-c39top)
 <!-- end caseproc -->
 
 Stub for Evidence C39E2.
 
+<!-- caseproc element C40top -->
 <a id="claim-c40top"></a>
 ### Claim C40top: Statement of C40top
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**, [Package G1](#package-g1), [Package L5top](#package-l5top)
+
+Supported by: **[Context C40Xctx](#context-c40xctx)**, [Evidence C40Esh](#evidence-c40esh), [Strategy C40Sass](#strategy-c40sass)
+
+Supports: [Strategy L5Smain](#strategy-l5smain), [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C40top -->
 References: [Package C40top](#package-c40top), [Package G1](#package-g1), [Package L5top](#package-l5top)
 <!-- end caseproc -->
 
 Stub for Claim C40top.
 
+<!-- caseproc element C40Xctx -->
 <a id="context-c40xctx"></a>
 ### Context C40Xctx: Context of C40Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40top](#claim-c40top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40Xctx -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Context C40Xctx.
 
+<!-- caseproc element C40Esh -->
 <a id="evidence-c40esh"></a>
 ### Evidence C40Esh: Shared evidence of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40top](#claim-c40top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40Esh -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Evidence C40Esh.
 
+<!-- caseproc element C40Sass -->
 <a id="strategy-c40sass"></a>
 ### Strategy C40Sass: Assertion strategy of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supported by: **[Claim C40G1](#claim-c40g1)**, [Claim C40G2](#claim-c40g2), [Claim C40G3](#claim-c40g3)
+
+Supports: **[Claim C40top](#claim-c40top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40Sass -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Strategy C40Sass.
 
+<!-- caseproc element C40G1 -->
 <a id="claim-c40g1"></a>
 ### Claim C40G1: Sub-claim 1 of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supported by: **[Evidence C40E1](#evidence-c40e1)**, [Context C40Xctx](#context-c40xctx)
+
+Supports: **[Strategy C40Sass](#strategy-c40sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40G1 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Claim C40G1.
 
+<!-- caseproc element C40E1 -->
 <a id="evidence-c40e1"></a>
 ### Evidence C40E1: Evidence 1 of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40G1](#claim-c40g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40E1 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Evidence C40E1.
 
+<!-- caseproc element C40G2 -->
 <a id="claim-c40g2"></a>
 ### Claim C40G2: Sub-claim 2 of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supported by: **[Justification C40J1](#justification-c40j1)**, [Evidence C40Esh](#evidence-c40esh)
+
+Supports: **[Strategy C40Sass](#strategy-c40sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40G2 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Claim C40G2.
 
+<!-- caseproc element C40J1 -->
 <a id="justification-c40j1"></a>
 ### Justification C40J1: Justification of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40G2](#claim-c40g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40J1 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Justification C40J1.
 
+<!-- caseproc element C40G3 -->
 <a id="claim-c40g3"></a>
 ### Claim C40G3: Sub-claim 3 of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supported by: **[Assumption C40A1](#assumption-c40a1)**, [Evidence C40E2](#evidence-c40e2), [Evidence C40E1](#evidence-c40e1)
+
+Supports: **[Strategy C40Sass](#strategy-c40sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40G3 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Claim C40G3.
 
+<!-- caseproc element C40A1 -->
 <a id="assumption-c40a1"></a>
 ### Assumption C40A1: Assumption of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40G3](#claim-c40g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40A1 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Assumption C40A1.
 
+<!-- caseproc element C40E2 -->
 <a id="evidence-c40e2"></a>
 ### Evidence C40E2: Evidence 2 of C40
 
-<!-- caseproc references -->
+Referenced by: **[Package C40top](#package-c40top)**
+
+Supports: **[Claim C40G3](#claim-c40g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C40E2 -->
 References: [Package C40top](#package-c40top)
 <!-- end caseproc -->
 
 Stub for Evidence C40E2.
 
+<!-- caseproc element C41top -->
 <a id="claim-c41top"></a>
 ### Claim C41top: Statement of C41top
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C41Xctx](#context-c41xctx)**, [Evidence C41Esh](#evidence-c41esh), [Strategy C41Sass](#strategy-c41sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C41top -->
 References: [Package C41top](#package-c41top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C41top.
 
+<!-- caseproc element C41Xctx -->
 <a id="context-c41xctx"></a>
 ### Context C41Xctx: Context of C41Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41top](#claim-c41top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41Xctx -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Context C41Xctx.
 
+<!-- caseproc element C41Esh -->
 <a id="evidence-c41esh"></a>
 ### Evidence C41Esh: Shared evidence of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41top](#claim-c41top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41Esh -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Evidence C41Esh.
 
+<!-- caseproc element C41Sass -->
 <a id="strategy-c41sass"></a>
 ### Strategy C41Sass: Assertion strategy of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supported by: **[Claim C41G1](#claim-c41g1)**, [Claim C41G2](#claim-c41g2), [Claim C41G3](#claim-c41g3)
+
+Supports: **[Claim C41top](#claim-c41top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41Sass -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Strategy C41Sass.
 
+<!-- caseproc element C41G1 -->
 <a id="claim-c41g1"></a>
 ### Claim C41G1: Sub-claim 1 of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supported by: **[Evidence C41E1](#evidence-c41e1)**, [Context C41Xctx](#context-c41xctx)
+
+Supports: **[Strategy C41Sass](#strategy-c41sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41G1 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Claim C41G1.
 
+<!-- caseproc element C41E1 -->
 <a id="evidence-c41e1"></a>
 ### Evidence C41E1: Evidence 1 of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41G1](#claim-c41g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41E1 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Evidence C41E1.
 
+<!-- caseproc element C41G2 -->
 <a id="claim-c41g2"></a>
 ### Claim C41G2: Sub-claim 2 of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supported by: **[Justification C41J1](#justification-c41j1)**, [Evidence C41Esh](#evidence-c41esh)
+
+Supports: **[Strategy C41Sass](#strategy-c41sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41G2 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Claim C41G2.
 
+<!-- caseproc element C41J1 -->
 <a id="justification-c41j1"></a>
 ### Justification C41J1: Justification of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41G2](#claim-c41g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41J1 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Justification C41J1.
 
+<!-- caseproc element C41G3 -->
 <a id="claim-c41g3"></a>
 ### Claim C41G3: Sub-claim 3 of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supported by: **[Assumption C41A1](#assumption-c41a1)**, [Evidence C41E2](#evidence-c41e2), [Evidence C41E1](#evidence-c41e1)
+
+Supports: **[Strategy C41Sass](#strategy-c41sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41G3 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Claim C41G3.
 
+<!-- caseproc element C41A1 -->
 <a id="assumption-c41a1"></a>
 ### Assumption C41A1: Assumption of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41G3](#claim-c41g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41A1 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Assumption C41A1.
 
+<!-- caseproc element C41E2 -->
 <a id="evidence-c41e2"></a>
 ### Evidence C41E2: Evidence 2 of C41
 
-<!-- caseproc references -->
+Referenced by: **[Package C41top](#package-c41top)**
+
+Supports: **[Claim C41G3](#claim-c41g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C41E2 -->
 References: [Package C41top](#package-c41top)
 <!-- end caseproc -->
 
 Stub for Evidence C41E2.
 
+<!-- caseproc element C42top -->
 <a id="claim-c42top"></a>
 ### Claim C42top: Statement of C42top
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C42Xctx](#context-c42xctx)**, [Evidence C42Esh](#evidence-c42esh), [Strategy C42Sass](#strategy-c42sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C42top -->
 References: [Package C42top](#package-c42top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C42top.
 
+<!-- caseproc element C42Xctx -->
 <a id="context-c42xctx"></a>
 ### Context C42Xctx: Context of C42Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42top](#claim-c42top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42Xctx -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Context C42Xctx.
 
+<!-- caseproc element C42Esh -->
 <a id="evidence-c42esh"></a>
 ### Evidence C42Esh: Shared evidence of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42top](#claim-c42top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42Esh -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Evidence C42Esh.
 
+<!-- caseproc element C42Sass -->
 <a id="strategy-c42sass"></a>
 ### Strategy C42Sass: Assertion strategy of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supported by: **[Claim C42G1](#claim-c42g1)**, [Claim C42G2](#claim-c42g2), [Claim C42G3](#claim-c42g3)
+
+Supports: **[Claim C42top](#claim-c42top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42Sass -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Strategy C42Sass.
 
+<!-- caseproc element C42G1 -->
 <a id="claim-c42g1"></a>
 ### Claim C42G1: Sub-claim 1 of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supported by: **[Evidence C42E1](#evidence-c42e1)**, [Context C42Xctx](#context-c42xctx)
+
+Supports: **[Strategy C42Sass](#strategy-c42sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42G1 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Claim C42G1.
 
+<!-- caseproc element C42E1 -->
 <a id="evidence-c42e1"></a>
 ### Evidence C42E1: Evidence 1 of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42G1](#claim-c42g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42E1 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Evidence C42E1.
 
+<!-- caseproc element C42G2 -->
 <a id="claim-c42g2"></a>
 ### Claim C42G2: Sub-claim 2 of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supported by: **[Justification C42J1](#justification-c42j1)**, [Evidence C42Esh](#evidence-c42esh)
+
+Supports: **[Strategy C42Sass](#strategy-c42sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42G2 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Claim C42G2.
 
+<!-- caseproc element C42J1 -->
 <a id="justification-c42j1"></a>
 ### Justification C42J1: Justification of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42G2](#claim-c42g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42J1 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Justification C42J1.
 
+<!-- caseproc element C42G3 -->
 <a id="claim-c42g3"></a>
 ### Claim C42G3: Sub-claim 3 of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supported by: **[Assumption C42A1](#assumption-c42a1)**, [Evidence C42E2](#evidence-c42e2), [Evidence C42E1](#evidence-c42e1)
+
+Supports: **[Strategy C42Sass](#strategy-c42sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42G3 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Claim C42G3.
 
+<!-- caseproc element C42A1 -->
 <a id="assumption-c42a1"></a>
 ### Assumption C42A1: Assumption of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42G3](#claim-c42g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42A1 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Assumption C42A1.
 
+<!-- caseproc element C42E2 -->
 <a id="evidence-c42e2"></a>
 ### Evidence C42E2: Evidence 2 of C42
 
-<!-- caseproc references -->
+Referenced by: **[Package C42top](#package-c42top)**
+
+Supports: **[Claim C42G3](#claim-c42g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C42E2 -->
 References: [Package C42top](#package-c42top)
 <!-- end caseproc -->
 
 Stub for Evidence C42E2.
 
+<!-- caseproc element C43top -->
 <a id="claim-c43top"></a>
 ### Claim C43top: Statement of C43top
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C43Xctx](#context-c43xctx)**, [Evidence C43Esh](#evidence-c43esh), [Strategy C43Sass](#strategy-c43sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C43top -->
 References: [Package C43top](#package-c43top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C43top.
 
+<!-- caseproc element C43Xctx -->
 <a id="context-c43xctx"></a>
 ### Context C43Xctx: Context of C43Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43top](#claim-c43top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43Xctx -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Context C43Xctx.
 
+<!-- caseproc element C43Esh -->
 <a id="evidence-c43esh"></a>
 ### Evidence C43Esh: Shared evidence of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43top](#claim-c43top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43Esh -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Evidence C43Esh.
 
+<!-- caseproc element C43Sass -->
 <a id="strategy-c43sass"></a>
 ### Strategy C43Sass: Assertion strategy of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supported by: **[Claim C43G1](#claim-c43g1)**, [Claim C43G2](#claim-c43g2), [Claim C43G3](#claim-c43g3)
+
+Supports: **[Claim C43top](#claim-c43top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43Sass -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Strategy C43Sass.
 
+<!-- caseproc element C43G1 -->
 <a id="claim-c43g1"></a>
 ### Claim C43G1: Sub-claim 1 of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supported by: **[Evidence C43E1](#evidence-c43e1)**, [Context C43Xctx](#context-c43xctx)
+
+Supports: **[Strategy C43Sass](#strategy-c43sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43G1 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Claim C43G1.
 
+<!-- caseproc element C43E1 -->
 <a id="evidence-c43e1"></a>
 ### Evidence C43E1: Evidence 1 of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43G1](#claim-c43g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43E1 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Evidence C43E1.
 
+<!-- caseproc element C43G2 -->
 <a id="claim-c43g2"></a>
 ### Claim C43G2: Sub-claim 2 of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supported by: **[Justification C43J1](#justification-c43j1)**, [Evidence C43Esh](#evidence-c43esh)
+
+Supports: **[Strategy C43Sass](#strategy-c43sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43G2 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Claim C43G2.
 
+<!-- caseproc element C43J1 -->
 <a id="justification-c43j1"></a>
 ### Justification C43J1: Justification of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43G2](#claim-c43g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43J1 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Justification C43J1.
 
+<!-- caseproc element C43G3 -->
 <a id="claim-c43g3"></a>
 ### Claim C43G3: Sub-claim 3 of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supported by: **[Assumption C43A1](#assumption-c43a1)**, [Evidence C43E2](#evidence-c43e2), [Evidence C43E1](#evidence-c43e1)
+
+Supports: **[Strategy C43Sass](#strategy-c43sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43G3 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Claim C43G3.
 
+<!-- caseproc element C43A1 -->
 <a id="assumption-c43a1"></a>
 ### Assumption C43A1: Assumption of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43G3](#claim-c43g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43A1 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Assumption C43A1.
 
+<!-- caseproc element C43E2 -->
 <a id="evidence-c43e2"></a>
 ### Evidence C43E2: Evidence 2 of C43
 
-<!-- caseproc references -->
+Referenced by: **[Package C43top](#package-c43top)**
+
+Supports: **[Claim C43G3](#claim-c43g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C43E2 -->
 References: [Package C43top](#package-c43top)
 <!-- end caseproc -->
 
 Stub for Evidence C43E2.
 
+<!-- caseproc element C44top -->
 <a id="claim-c44top"></a>
 ### Claim C44top: Statement of C44top
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C44Xctx](#context-c44xctx)**, [Evidence C44Esh](#evidence-c44esh), [Strategy C44Sass](#strategy-c44sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C44top -->
 References: [Package C44top](#package-c44top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C44top.
 
+<!-- caseproc element C44Xctx -->
 <a id="context-c44xctx"></a>
 ### Context C44Xctx: Context of C44Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44top](#claim-c44top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44Xctx -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Context C44Xctx.
 
+<!-- caseproc element C44Esh -->
 <a id="evidence-c44esh"></a>
 ### Evidence C44Esh: Shared evidence of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44top](#claim-c44top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44Esh -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Evidence C44Esh.
 
+<!-- caseproc element C44Sass -->
 <a id="strategy-c44sass"></a>
 ### Strategy C44Sass: Assertion strategy of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supported by: **[Claim C44G1](#claim-c44g1)**, [Claim C44G2](#claim-c44g2), [Claim C44G3](#claim-c44g3)
+
+Supports: **[Claim C44top](#claim-c44top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44Sass -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Strategy C44Sass.
 
+<!-- caseproc element C44G1 -->
 <a id="claim-c44g1"></a>
 ### Claim C44G1: Sub-claim 1 of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supported by: **[Evidence C44E1](#evidence-c44e1)**, [Context C44Xctx](#context-c44xctx)
+
+Supports: **[Strategy C44Sass](#strategy-c44sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44G1 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Claim C44G1.
 
+<!-- caseproc element C44E1 -->
 <a id="evidence-c44e1"></a>
 ### Evidence C44E1: Evidence 1 of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44G1](#claim-c44g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44E1 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Evidence C44E1.
 
+<!-- caseproc element C44G2 -->
 <a id="claim-c44g2"></a>
 ### Claim C44G2: Sub-claim 2 of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supported by: **[Justification C44J1](#justification-c44j1)**, [Evidence C44Esh](#evidence-c44esh)
+
+Supports: **[Strategy C44Sass](#strategy-c44sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44G2 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Claim C44G2.
 
+<!-- caseproc element C44J1 -->
 <a id="justification-c44j1"></a>
 ### Justification C44J1: Justification of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44G2](#claim-c44g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44J1 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Justification C44J1.
 
+<!-- caseproc element C44G3 -->
 <a id="claim-c44g3"></a>
 ### Claim C44G3: Sub-claim 3 of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supported by: **[Assumption C44A1](#assumption-c44a1)**, [Evidence C44E2](#evidence-c44e2), [Evidence C44E1](#evidence-c44e1)
+
+Supports: **[Strategy C44Sass](#strategy-c44sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44G3 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Claim C44G3.
 
+<!-- caseproc element C44A1 -->
 <a id="assumption-c44a1"></a>
 ### Assumption C44A1: Assumption of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44G3](#claim-c44g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44A1 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Assumption C44A1.
 
+<!-- caseproc element C44E2 -->
 <a id="evidence-c44e2"></a>
 ### Evidence C44E2: Evidence 2 of C44
 
-<!-- caseproc references -->
+Referenced by: **[Package C44top](#package-c44top)**
+
+Supports: **[Claim C44G3](#claim-c44g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C44E2 -->
 References: [Package C44top](#package-c44top)
 <!-- end caseproc -->
 
 Stub for Evidence C44E2.
 
+<!-- caseproc element C45top -->
 <a id="claim-c45top"></a>
 ### Claim C45top: Statement of C45top
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**, [Package G1](#package-g1)
+
+Supported by: **[Context C45Xctx](#context-c45xctx)**, [Evidence C45Esh](#evidence-c45esh), [Strategy C45Sass](#strategy-c45sass)
+
+Supports: [Strategy Scomps](#strategy-scomps)
+<!-- end caseproc -->
+
+<!-- caseproc references C45top -->
 References: [Package C45top](#package-c45top), [Package G1](#package-g1)
 <!-- end caseproc -->
 
 Stub for Claim C45top.
 
+<!-- caseproc element C45Xctx -->
 <a id="context-c45xctx"></a>
 ### Context C45Xctx: Context of C45Xctx
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45top](#claim-c45top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45Xctx -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Context C45Xctx.
 
+<!-- caseproc element C45Esh -->
 <a id="evidence-c45esh"></a>
 ### Evidence C45Esh: Shared evidence of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45top](#claim-c45top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45Esh -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Evidence C45Esh.
 
+<!-- caseproc element C45Sass -->
 <a id="strategy-c45sass"></a>
 ### Strategy C45Sass: Assertion strategy of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supported by: **[Claim C45G1](#claim-c45g1)**, [Claim C45G2](#claim-c45g2), [Claim C45G3](#claim-c45g3)
+
+Supports: **[Claim C45top](#claim-c45top)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45Sass -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Strategy C45Sass.
 
+<!-- caseproc element C45G1 -->
 <a id="claim-c45g1"></a>
 ### Claim C45G1: Sub-claim 1 of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supported by: **[Evidence C45E1](#evidence-c45e1)**, [Context C45Xctx](#context-c45xctx)
+
+Supports: **[Strategy C45Sass](#strategy-c45sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45G1 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Claim C45G1.
 
+<!-- caseproc element C45E1 -->
 <a id="evidence-c45e1"></a>
 ### Evidence C45E1: Evidence 1 of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45G1](#claim-c45g1)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45E1 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Evidence C45E1.
 
+<!-- caseproc element C45G2 -->
 <a id="claim-c45g2"></a>
 ### Claim C45G2: Sub-claim 2 of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supported by: **[Justification C45J1](#justification-c45j1)**, [Evidence C45Esh](#evidence-c45esh)
+
+Supports: **[Strategy C45Sass](#strategy-c45sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45G2 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Claim C45G2.
 
+<!-- caseproc element C45J1 -->
 <a id="justification-c45j1"></a>
 ### Justification C45J1: Justification of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45G2](#claim-c45g2)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45J1 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Justification C45J1.
 
+<!-- caseproc element C45G3 -->
 <a id="claim-c45g3"></a>
 ### Claim C45G3: Sub-claim 3 of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supported by: **[Assumption C45A1](#assumption-c45a1)**, [Evidence C45E2](#evidence-c45e2), [Evidence C45E1](#evidence-c45e1)
+
+Supports: **[Strategy C45Sass](#strategy-c45sass)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45G3 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Claim C45G3.
 
+<!-- caseproc element C45A1 -->
 <a id="assumption-c45a1"></a>
 ### Assumption C45A1: Assumption of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45G3](#claim-c45g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45A1 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 
 Stub for Assumption C45A1.
 
+<!-- caseproc element C45E2 -->
 <a id="evidence-c45e2"></a>
 ### Evidence C45E2: Evidence 2 of C45
 
-<!-- caseproc references -->
+Referenced by: **[Package C45top](#package-c45top)**
+
+Supports: **[Claim C45G3](#claim-c45g3)**
+<!-- end caseproc -->
+
+<!-- caseproc references C45E2 -->
 References: [Package C45top](#package-c45top)
 <!-- end caseproc -->
 

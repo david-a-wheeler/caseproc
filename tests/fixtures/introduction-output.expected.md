@@ -2,8 +2,14 @@
 
 This document describes the assurance case for the software.
 
+<!-- caseproc element C1 -->
 <a id="claim-c1"></a>
-## Claim C1: The software is acceptably safe
+### Claim C1: The software is acceptably safe
+
+Referenced by: **[Package C1](#package-c1)**
+
+Supported by: **[Strategy AR1](#strategy-ar1)**, [Assumption A1](#assumption-a1), [Context X1](#context-x1)
+<!-- end caseproc -->
 
 <!-- caseproc ltac/markdown C1 -->
 - [Claim C1: The software is acceptably safe](#claim-c1)

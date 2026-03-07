@@ -64,7 +64,6 @@ DEFAULT_CONFIG = {
     'pkg_header_prefix': '### ',
     'pkg_header_suffix': '\n',
     'pkg_label': 'Package ',
-    'update_headers': True,
 }
 
 
@@ -1959,44 +1958,6 @@ def _maybe_inject_mermaid_js(rendered: str, config: dict, state: 'DocState') -> 
 # Matches '<!-- caseproc SELECTOR -->' lines (SELECTOR is captured in group 1).
 _CASEPROC_REGION_RE = re.compile(r'^<!--\s*caseproc\s+(.+?)\s*-->\s*$')
 
-# Matches any Markdown header line; group 1 = hashes, group 2 = heading text.
-_HEADER_RE = re.compile(r'^(#+) (.+)')
-
-# Matches an HTML header line; group 1 = level digit, group 2 = inner content.
-_HTML_HEADER_RE = re.compile(r'^<h([1-6])(?:\s[^>]*)?>(.+?)</h\1>', re.IGNORECASE)
-
-# Element type names that can appear as the first word of an LTAC header.
-# The package type word (from pkg_label) is checked separately since it is configurable.
-_ELEMENT_TYPE_NAMES = frozenset({
-    'Claim', 'Strategy', 'Evidence',
-    'Justification', 'Context', 'Assumption',
-})
-
-# Parses 'TYPE ID' or 'TYPE ID: statement' from a header string.
-# Group 1 = type word, group 2 = identifier, group 3 = statement (may be absent).
-_HEADER_TEXT_RE = re.compile(r'^(\S+)\s+([^:\s]+)(?::\s*(.+))?$')
-
-
-def _parse_header_text(
-    header_text: str, pkg_label: str
-) -> Optional[Tuple[str, str, str]]:
-    """Parse an LTAC element header into (type, identifier, statement).
-
-    Recognises 'TYPE ID' and 'TYPE ID: statement' where TYPE is either the
-    package type word (pkg_label stripped of trailing whitespace) or one of
-    the element type names.  Returns None if the header is not LTAC-shaped.
-    """
-    m = _HEADER_TEXT_RE.match(header_text.strip())
-    if not m:
-        return None
-    type_str = m.group(1)
-    ident = m.group(2)
-    statement = (m.group(3) or '').strip()
-    if type_str not in _ELEMENT_TYPE_NAMES and type_str != pkg_label.rstrip():
-        return None
-    return (type_str, ident, statement)
-
-
 def _consume_region(line_iter, filename: str, start_lineno: int, selector: str) -> bool:
     """Consume lines from line_iter until '<!-- end caseproc -->', return True if found.
 
@@ -2016,42 +1977,28 @@ def process_document_stream(
     all_roots: List[Node],
     config: dict,
     id_info: Dict[str, dict],
-    seen_headers: set,
+    seen_element_ids: set,
     doc_format: str = 'markdown',
 ) -> None:
     """Process a document file line by line, replacing ltac selector regions.
 
-    Writes all output to `out`.  Updates `seen_headers` with identifiers of
-    LTAC elements encountered as Markdown headers.  Uses the already-loaded
+    Writes all output to `out`.  Updates `seen_element_ids` with identifiers of
+    LTAC elements rendered via 'element' selectors.  Uses the already-loaded
     registry and all_roots; performs no LTAC parsing.
     """
-    current_element: Optional[Node] = None
-    _doc_state = DocState(doc_format=doc_format)
+    _doc_state = DocState(doc_format=doc_format, seen_element_ids=seen_element_ids)
     filename = getattr(f, 'name', '<stream>')
-    pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
-    do_update = config.get('update_headers', True)
-
-    # Regex to strip stale component anchor lines (re-inserted correctly below).
-    _pkg_frag = re.escape(to_github_fragment(pkg_label.rstrip()))
-    _anchor_strip_re = re.compile(
-        rf'^<a\s+id="(?:claim|strategy|evidence|justification|context|assumption|{_pkg_frag})-[^"]*"\s*></a>\s*$',
-        re.IGNORECASE,
-    )
 
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
-
-        # Strip stale component anchor lines; they are re-inserted correctly below.
-        if _anchor_strip_re.match(text):
-            continue
 
         m = _CASEPROC_REGION_RE.match(text)
         if m:
             selector = m.group(1)
             found_end = _consume_region(line_iter, filename, lineno, selector)
             rendered = render_selector(selector, registry, all_roots, config, id_info,
-                                       current_element, doc_format, _doc_state)
+                                       doc_format=doc_format, state=_doc_state)
             rendered = _maybe_inject_mermaid_js(rendered, config, _doc_state)
             out.write(text + '\n')
             if found_end:
@@ -2060,48 +2007,6 @@ def process_document_stream(
                 out.write('<!-- end caseproc -->\n')
             continue
 
-        header_text = None
-        is_markdown_header = False
-        hm = _HEADER_RE.match(text)
-        if hm:
-            header_text = hm.group(2).strip()
-            is_markdown_header = True
-        else:
-            hm = _HTML_HEADER_RE.match(text)
-            if hm:
-                header_text = hm.group(2).strip()
-
-        emit_anchor = None
-        if header_text is not None:
-            parsed = _parse_header_text(header_text, pkg_label)
-            if parsed is not None:
-                type_str, ident, stmt = parsed
-                node = registry.get(ident)
-                if node is not None:
-                    current_element = node
-                    seen_headers.add(ident)
-                if ident not in id_info:
-                    warn(f"{filename}:{lineno}: header '{type_str} {ident}'"
-                         f" not found in LTAC")
-                else:
-                    emit_anchor = _component_anchor_id(type_str, ident)
-                    ltac_stmt = id_info[ident].get('statement') or ''
-                    if stmt and ltac_stmt and stmt != ltac_stmt:
-                        if do_update and node is not None:
-                            new_header_text = f"{type_str} {ident}: {ltac_stmt}"
-                            if is_markdown_header:
-                                text = f"{hm.group(1)} {new_header_text}"
-                            else:
-                                level = hm.group(1)
-                                text = f"<h{level}>{new_header_text}</h{level}>"
-                            notify(f"{filename}:{lineno}: updated {type_str} {ident}:"
-                                   f" {stmt!r} -> {ltac_stmt!r}")
-                        else:
-                            warn(f"{filename}:{lineno}: '{ident}': header statement"
-                                 f" {stmt!r} differs from LTAC {ltac_stmt!r}")
-
-        if emit_anchor is not None:
-            out.write(f'<a id="{emit_anchor}"></a>\n')
         out.write(text + '\n')
 
 
@@ -2169,20 +2074,15 @@ Validations on the LTAC file (always):
   - All generated anchor names (e.g., "claim-x-is-secure") must be unique
 
 Additional checks when document files are provided:
-  - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked, and
-    they must not have an unknown ID (one not in the LTAC).
-    By default headers' statements are updated, but if update_headers is false,
-    each statement much match its LTAC definition's statement.
-  - Every declared LTAC element must have a corresponding document header
-    (as this is where the additional information about it can be placed).
+  - Every declared LTAC element should have a corresponding 'element' selector
+    in the document (used to generate the element's heading and cross-references).
 
 Configuration keys (--config FILE, JSON object):
   base_url           base URL for hyperlinks in sacm/mermaid and gsn/mermaid output (default: "")
   markdown_base_url  base URL for hyperlinks in ltac/markdown and ltac/html output (default: "")
-  pkg_label          word used to identify packages in headers and output (default: "Package ")
+  pkg_label          word used to identify packages in output (default: "Package ")
   pkg_header_prefix  string prepended to each package header when rendering * (default: "### ")
   pkg_header_suffix  string appended after each package header when rendering * (default: newline)
-  update_headers     if true, rewrite stale headers instead of warning (default: false)
 
 For full details see docs/design-spec.md.""",
     )
@@ -2417,7 +2317,7 @@ def _process_files(
     all_roots: List[Node],
     config: dict,
     id_info: Dict[str, dict],
-    seen_headers: set,
+    seen_element_ids: set,
 ) -> None:
     """Open each file and call process_document_stream; fall back to stdin if none given."""
     if files:
@@ -2425,19 +2325,19 @@ def _process_files(
             try:
                 with open(path) as f:
                     process_document_stream(f, out, registry, all_roots, config, id_info,
-                                            seen_headers, detect_doc_format(path))
+                                            seen_element_ids, detect_doc_format(path))
             except OSError as e:
                 error(f"cannot open {path!r}: {e}")
     else:
         process_document_stream(sys.stdin, out, registry, all_roots, config, id_info,
-                                seen_headers, 'markdown')
+                                seen_element_ids, 'markdown')
 
 
-def _check_header_coverage(registry: Dict[str, Node], seen_headers: set) -> None:
-    """Warn about every registry element with no corresponding Markdown header."""
+def _check_element_coverage(registry: Dict[str, Node], seen_element_ids: set) -> None:
+    """Warn about every registry element with no corresponding element selector."""
     for ident in registry:
-        if ident not in seen_headers:
-            warn(f"element {ident} has no corresponding header in any processed file")
+        if ident not in seen_element_ids:
+            warn(f"element {ident!r} has no 'element' selector in any processed file")
 
 
 def _write_ltac_node(node: 'Node', lines: list) -> None:
@@ -2593,7 +2493,7 @@ def _inline_rewrite_file(
     all_roots: List[Node],
     config: dict,
     id_info: Dict[str, dict],
-    seen_headers: set,
+    seen_element_ids: set,
 ) -> Optional[Tuple[str, str]]:
     """Process a single document file, writing updated content to a temp file.
 
@@ -2614,7 +2514,7 @@ def _inline_rewrite_file(
     buf = io.StringIO()
     with io.StringIO(original_lf) as src:
         process_document_stream(src, buf, registry, all_roots, config, id_info,
-                                seen_headers, detect_doc_format(path))
+                                seen_element_ids, detect_doc_format(path))
     if _had_error and not error_before:
         # Errors occurred while processing this file; leave it untouched.
         return None
@@ -2730,31 +2630,33 @@ def main() -> None:
             commit_updates([ltac_pair])
     elif args.validate:
         if document_files:
-            _process_files(document_files, io.StringIO(), registry, all_roots, config, id_info, set())
+            seen_element_ids: set = set()
+            _process_files(document_files, io.StringIO(), registry, all_roots, config, id_info, seen_element_ids)
+            _check_element_coverage(registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair])
     elif args.stdout:
         if not document_files:
             panic(_NO_FILES_MSG)
-        seen_headers: set = set()
-        _process_files(document_files, sys.stdout, registry, all_roots, config, id_info, seen_headers)
-        _check_header_coverage(registry, seen_headers)
+        seen_element_ids: set = set()
+        _process_files(document_files, sys.stdout, registry, all_roots, config, id_info, seen_element_ids)
+        _check_element_coverage(registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair])
     else:
         # Default mode: rewrite document files in place.
         if not document_files and not ltac_pair:
             panic(_NO_FILES_MSG)
-        seen_headers: set = set()
+        seen_element_ids: set = set()
         pairs = ([ltac_pair] if ltac_pair else [])
         for path in document_files:
-            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info, seen_headers)
+            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info, seen_element_ids)
             if pair is not None:
                 pairs.append(pair)
         if pairs:
             commit_updates(pairs)
         if document_files:
-            _check_header_coverage(registry, seen_headers)
+            _check_element_coverage(registry, seen_element_ids)
 
     if _had_error:
         sys.exit(1)

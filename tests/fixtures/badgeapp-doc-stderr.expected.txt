@@ -4,6 +4,5 @@ caseproc: warning: Deployment: cited but never declared
 caseproc: warning: Maintenance: cited but never declared
 caseproc: warning: NonTechnical: cited but never declared
 caseproc: warning: Controls: cited but never declared
-caseproc: warning: /home/dwheeler/caseproc/tests/fixtures/badgeapp-doc-input.md:12: header 'Context Details' not found in LTAC
-caseproc: warning: element Processes has no corresponding header in any processed file
-caseproc: warning: element Technical has no corresponding header in any processed file
+caseproc: warning: element 'Processes' has no 'element' selector in any processed file
+caseproc: warning: element 'Technical' has no 'element' selector in any processed file

@@ -1,6 +1,8 @@
-# Package C1
+<!-- caseproc package C1 -->
+<!-- end caseproc -->
 
-## Claim C1: The software is acceptably safe
+<!-- caseproc element C1 -->
+<!-- end caseproc -->
 
 <!-- caseproc statement C1 -->
 STALE STATEMENT
