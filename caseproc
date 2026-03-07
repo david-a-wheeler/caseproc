@@ -2027,11 +2027,12 @@ The intended normal use is that you simply edit the LTAC file for the
 high-level argument and the document file(s) in Markdown/HTML for all details
 (the "content" in SACM parlance). Then run this program to validate the
 structure and update your document files in Markdown/HTML with graphics,
-hyperlinks, and other material.
+hyperlinks, and other material. The document files' marked regions will
+be updated, but *only* those regions.
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
---rename, and --restate *do* modify the LTAC file.
+--rename, --restate, and --missing *may* modify the LTAC file.
 All file updates are done carefully. The updated files are generated
 first as temporary files, then the originals are moved to .backup/,
 and only then are the generated files moved to their final destinations.
