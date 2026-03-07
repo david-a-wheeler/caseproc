@@ -13,6 +13,10 @@ for the supporting detail; `caseproc` keeps them in sync.
 
 LTAC (Lightweight Text Assurance Case) is a plain-text format for
 representing an assurance case argument.
+We have extended LTAC to handle larger assurance cases
+(e.g., by adding support for multiple packages, citations, and various
+markings).
+
 Each element occupies exactly one line, indented with two spaces per level.
 
 ### LTAC Element types
@@ -79,19 +83,18 @@ the `^` prefix:
 
 ```
 - Claim ^OtherTop
-- Claim ^[PackageName] OtherTop
 ```
 
 The bare form `^ID` resolves to the declared element with identifier `ID`
 in any loaded package.
-The bracketed form `^[PackageName] ID` additionally asserts that the
-element belongs to the package whose root identifier is `PackageName`;
-`caseproc` warns if the named package does not declare that element.
 
 Cross-package citations are rendered as `asCited` in SACM notation
 (double-bracket shape) and as away goals in GSN notation (subroutine shape).
-In generated diagrams, clicking a citation navigates to the cited package's
-section in the document.
+In generated diagrams, clicking a citation navigates to the package
+section in the document that includes that element's definition
+(so you can see it in context).
+Clicking on the element where it's defined will bring you to the
+more detailed information about that element (if it exists).
 
 ### Reachability
 
@@ -389,17 +392,42 @@ The opening and closing comment lines are preserved; only the content
 between them is replaced.
 If `SELECTOR` produces no output, the region is left empty.
 
+Do *NOT* edit text within such regions! Your text will be replaced
+then text time it's regenerated!
+
 Marked regions may use any selector.
-The most common patterns are:
+A common document structure might look like this:
 
 ```markdown
+# Assurance case introduction
+
 <!-- caseproc warning -->
+<!-- end caseproc -->
+
+## Introduction
+
+Some introductory text
+
+## Packages
 <!-- caseproc package * -->
+<!-- end caseproc -->
+
+<!-- caseproc element C1 -->
+<!-- end caseproc -->
+... information about C1 ...
+
+<!-- caseproc element C2 -->
+<!-- end caseproc -->
+... information about C2 ...
+```
+
+But you not limited to that. Other examples:
+
+```markdown
 <!-- caseproc sacm/mermaid * -->
 <!-- caseproc gsn/mermaid * -->
 <!-- caseproc ltac/markdown * -->
 <!-- caseproc sacm/mermaid C1 -->
-<!-- caseproc element C1 -->
 <!-- caseproc statement C1 -->
 ```
 
