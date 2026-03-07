@@ -173,7 +173,7 @@ by `Justification`, `Assumption`, or `Strategy`
 caseproc [--config FILE] [--error] [--update]
          [--rename OLD NEW] [--restate LABEL STATEMENT]
          [--ltac FILENAME]
-         [--validate | --select SELECTOR | --stdout | --selftest | --missing]
+         [--validate | --select SELECTOR | --stdout | --selftest | --missing | --start]
          [files ...]
 ```
 
@@ -215,18 +215,37 @@ Exit code is 0 if all tests pass, 1 if any fail.
 
 ### --missing
 
-Scans the document files for declared LTAC elements that have no
-corresponding `element` selector.  For each missing element, appends a
-skeleton `<!-- caseproc element ID -->…<!-- end caseproc -->` region at
-the end of the first document file.
-Also marks leaf `Claim` and `Strategy` nodes (those with no supporting
-children) with `{needsSupport}` in the LTAC file, unless they already
-carry an assertion-status option.
-Rewrites both the document files and the LTAC file in place.
+Re-renders all marked regions in the document files (the same way normal
+mode does) and, for every declared LTAC element that has no corresponding
+`element` selector, appends a skeleton
+`<!-- caseproc element ID -->…<!-- end caseproc -->` region.
+In HTML documents the appended regions are inserted immediately before
+`</body>`; in Markdown documents they are appended at EOF.
+
+Also marks every leaf node (no supporting children) that lacks an
+assertion-status option with `{needsSupport}` in the LTAC file.
+
+Rewrites document files and the LTAC file in place.
 
 `--missing` is intended as a one-time scaffolding aid when bringing an
 existing LTAC file into a new document.  After running it, review and
 reorganize the inserted regions as needed.
+
+### --start
+
+Creates a starter `case.ltac` and `case.md` in the current directory and
+then populates them (equivalent to running `--missing` on the new files).
+Panics if any of the following files already exists:
+`case.ltac`, `docs/case.ltac`, `case.md`, `case.markdown`, `case.html`,
+`docs/case.md`, `docs/case.markdown`, `docs/case.html`.
+
+After `--start`:
+- `case.md` has its `warning` and `package *` regions filled in and
+  skeleton `element` regions appended for every node in the LTAC.
+- `case.ltac` has `{needsSupport}` added to all leaf claims.
+
+`--start` is intended as a quick on-ramp for new projects and tutorials.
+Edit the generated files and run `caseproc` (normal mode) to continue.
 
 ### --ltac FILENAME
 
@@ -312,6 +331,7 @@ For selectors that accept `*`, all packages are rendered in order.
 | `ltac/markdown [ID\|*]` | optional | LTAC as an indented Markdown bullet list |
 | `ltac/html [ID\|*]` | optional | LTAC as a nested HTML `<ul>` list |
 | `statement ID` | required | Single-line statement: `Statement: …` |
+| `warning` | none | Fixed "do not edit" comment pair |
 
 The shorthand expansions are:
 
@@ -373,6 +393,7 @@ Marked regions may use any selector.
 The most common patterns are:
 
 ```markdown
+<!-- caseproc warning -->
 <!-- caseproc package * -->
 <!-- caseproc sacm/mermaid * -->
 <!-- caseproc gsn/mermaid * -->
@@ -649,7 +670,8 @@ If neither exists, it exits with an error.
 
 Similarly, if no document files are given on the command line and no
 `document_files` config key is set, it looks for any of the following
-(in order): `case.md`, `case.html`, `docs/case.md`, `docs/case.html`.
+(in order): `case.md`, `case.markdown`, `case.html`,
+`docs/case.md`, `docs/case.markdown`, `docs/case.html`.
 
 Config file auto-discovery: `case.config` in the current directory, then
 `docs/case.config`.
