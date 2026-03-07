@@ -1,0 +1,8 @@
+- Claim C1: The software is acceptably safe
+  - Strategy AR1: Argue safety by hazard category
+    - Claim C2: All hazards have been identified
+      - Evidence E1: Hazard analysis (hara.pdf)
+    - Claim C3: All hazards have been mitigated
+      - Link E1
+  - Assumption A1: Threat model is current
+  - Context X1: Scope is release v1.0 (release-notes.md)

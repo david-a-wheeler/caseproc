@@ -1,0 +1,8 @@
+Note that when generating SACM (step 9), we must *not* modify the data      
+    structure we read in as LTAC. A user might ask to display it at             
+    ltac/markdown or (later) GSN. Make sure you copy data (esp. the nodes and   
+     edges) so that any manipulation of the graph to generate SACM won't        
+    interfere with the data we read in. I suspect the solution is to add a      
+    deep copy method to the graph, do a deep copy before generating SACM, and   
+     only manipulate the *copied* data structure to insert relationships and    
+    perform other changes for SACM.

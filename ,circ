@@ -1,0 +1,49 @@
+Modify the `caseproc` validation route so it verifies there are no
+circularities in the input LTAC model. A circularity should cause
+a panic error, showing at least string showing the trail of IDs
+where the start and end are the same.
+
+It's fine to cite the same element several times, or to have
+multiple links refer to another element. However, if you follow
+the links and citations, you should never have a case where
+there is a loop, as that would enable circular reasoning.
+
+This is an example of a structure that IS acceptable, though odd.
+Claims C3 and C4 both cite C5, C5 ends up citing C6, but there's no
+circularity:
+
+```
+- Claim C1
+  - Claim C2
+    - Claim C3
+      - Claim ^C5
+    - Claim C4
+      - Claim ^C5
+    - Claim C6
+      - Claim C7
+
+- Claim C5
+  - Claim ^[C1] C6
+```
+
+This is an example of a structure that is
+NOT acceptable, because it would allow following C1->C2->^C4->C4->^C2->C2
+(note that C2 is encountered again):
+
+```
+- Claim C1
+  - Claim C2
+    - Claim C3
+    - Claim ^C4
+
+- Claim C4
+  - Claim ^C2
+```
+
+Before implementing, consider the various algorithms and approaches
+for detecting circularities in this directed data structure, and propose
+the top options. I'd like this resolution to be clearly correct, but
+also to be fast. We can trade off some speed so it's clear, but I don't
+think we should need to trade away too much. It's okay if we must change
+our current data structures to do it, but again, we want this to be clear
+(not complex).

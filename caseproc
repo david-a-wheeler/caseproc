@@ -281,7 +281,6 @@ class Node:
                              #        counter abstract assumed
     children: List['Node']   # child nodes
     is_cited: bool           # True when identifier had a ^ prefix
-    cited_pkg: str           # package name from ^[PkgName] prefix; '' = default
     depth: int               # 0-based indentation level (0 = root)
     parent: Optional['Node'] # back-reference; None for roots
     link_target: Optional['Node']  # for Link nodes: referenced node
@@ -303,7 +302,7 @@ _LTAC_LINE_RE = re.compile(
     r'[-] '
     r'(?P<nodetype>Claim|Strategy|Evidence|Justification'
     r'|Context|Assumption|Relation|Link|Connector)'
-    r'(?:\s+(?P<cited>\^)?(?:\[(?P<cited_pkg>[^\]]*)\])?(?P<identifier>[^:{\n(]*))?'
+    r'(?:\s+(?P<cited>\^)?(?P<identifier>[^:{\n(]*))?'
     r'(?::\s*(?P<text>[^({]*))?'
     r'(?:\s*\((?P<ref>[^)\n]*)\))?'
     r'(?:\s*\{(?P<options>[^}\n]*)\})?'
@@ -327,8 +326,6 @@ class LTACParser:
         #   'citations':    int,       count of cited (^) nodes with this ID
         #   'statement':    str|None,  first non-empty text seen for this ID
         #   'decl_lineno':  int|None,  line of first declaration
-        #   (bare ^ with no [PkgName] defaults to "Package {ID}")
-        #   'cited_pkgs':   set,       named packages from ^[PkgName] citations
         # }
         self.id_info: Dict[str, dict] = {}
         self.results: List[Node] = []
@@ -373,7 +370,6 @@ class LTACParser:
         depth = len(m.group('indent')) // 2
         nodetype = m.group('nodetype')
         is_cited = bool(m.group('cited'))
-        cited_pkg = (m.group('cited_pkg') or '').strip()
         identifier = (m.group('identifier') or '').strip()
         text = (m.group('text') or '').strip()
         ref = (m.group('ref') or '').strip()
@@ -389,7 +385,6 @@ class LTACParser:
             options=options,
             children=[],
             is_cited=is_cited,
-            cited_pkg=cited_pkg,
             depth=depth,
             parent=None,
             link_target=None,
@@ -411,7 +406,6 @@ class LTACParser:
                 'citations':     0,
                 'statement':     None,
                 'decl_lineno':   None,
-                'cited_pkgs':    set(),
                 'decl_pkg_id':   None,   # pkg root id of the declaration
                 'citing_pkg_ids': [],    # pkg root ids that cite this id, in order
                 'node_type':     None,   # type on first use (declaration or citation)
@@ -424,8 +418,6 @@ class LTACParser:
                       f" conflicts with earlier use as {info['node_type']!r}")
             if node.is_cited:
                 info['citations'] += 1
-                if node.cited_pkg:
-                    info['cited_pkgs'].add(node.cited_pkg)
                 if pkg_root_id and pkg_root_id not in info['citing_pkg_ids']:
                     info['citing_pkg_ids'].append(pkg_root_id)
             else:
@@ -529,7 +521,6 @@ def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
                 warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
             existing['declarations'] += new['declarations']
             existing['citations']    += new['citations']
-            existing['cited_pkgs'].update(new['cited_pkgs'])
             if new['statement'] and existing['statement'] and new['statement'] != existing['statement']:
                 warn(f"{path}: {ident!r}: statement differs from earlier statement")
             elif new['statement'] and not existing['statement']:
@@ -1665,7 +1656,6 @@ Validations on the LTAC file (always):
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
   - Citing identifiers (^ID) must have a matching declaration
-  - In citations naming a package (^[PkgName] ID) the package must declare ID
   - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
     (use --update to make LTAC statements consistent with their declaration)
@@ -1765,7 +1755,7 @@ def find_ltac_file(ltac_arg: Optional[str], config: dict) -> str:
 # SACM spec section 11 defines AssertionStatus as a mutually exclusive
 # enumeration: Asserted (default), NeedsSupport, Assumed, Axiomatic, Defeated,
 # AsCited.  An Assumption node implicitly carries Assumed; a cross-citation
-# (^[PkgName]) implicitly carries AsCited.
+# (^ID) implicitly carries AsCited.
 def check_assertion_status(registry: Dict[str, Node]) -> None:
     """Error if any node carries more than one SACM assertion status.
 
@@ -1792,25 +1782,15 @@ def check_assertion_status(registry: Dict[str, Node]) -> None:
                   f"Axiomatic/Defeated/AsCited are mutually exclusive)")
 
 
-def check_id_info(id_info: Dict[str, dict], all_roots: List[Node],
-                  pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
+def check_id_info(id_info: Dict[str, dict]) -> None:
     """Validate identifier usage across the loaded LTAC.
 
     Uses the id_info table built during parsing (see LTACParser) to report:
     - IDs cited (^) but never declared (may indicate a missing package)
-    - Explicit citation packages (^[PkgName]) that are not loaded
-    - Explicit citation packages where the ID is not declared in that package
     """
-    pkg_root_ids = {root.identifier for root in all_roots if root.identifier}
     for ident, info in id_info.items():
         if info['citations'] > 0 and info['declarations'] == 0:
             warn(f"{ident}: cited but never declared")
-        for pkg in sorted(info['cited_pkgs']):
-            if pkg not in pkg_root_ids:
-                warn(f"{ident}: cited package {pkg!r} not found in loaded LTAC")
-            elif info['decl_pkg_id'] is not None and info['decl_pkg_id'] != pkg:
-                warn(f"{ident}: cited as belonging to '{pkg_label}{pkg}'"
-                     f" but declared in '{pkg_label}{info['decl_pkg_id']}'")
 
 
 def check_anchor_uniqueness(registry: Dict[str, Node]) -> None:
@@ -1957,12 +1937,10 @@ def _write_ltac_node(node: 'Node', lines: list) -> None:
     """Append LTAC lines for *node* and all its descendants to *lines*."""
     indent = '  ' * node.depth
     line = f'{indent}- {node.node_type}'
-    if node.identifier or node.is_cited or node.cited_pkg:
+    if node.identifier or node.is_cited:
         line += ' '
         if node.is_cited:
             line += '^'
-        if node.cited_pkg:
-            line += f'[{node.cited_pkg}]'
         line += node.identifier
     if node.text:
         line += f': {node.text}'
@@ -2177,7 +2155,7 @@ def main() -> None:
     load_ltac_file(ltac_path, all_roots, registry, id_info)
 
     check_assertion_status(registry)
-    check_id_info(id_info, all_roots, config.get('pkg_label', 'Package '))
+    check_id_info(id_info)
     check_anchor_uniqueness(registry)
     check_circularities(registry, all_roots)
     check_reachability(all_roots, registry)
@@ -2199,7 +2177,7 @@ def main() -> None:
             else:
                 apply_restate(all_roots, registry, id_info, a, b)
         check_assertion_status(registry)
-        check_id_info(id_info, all_roots, config.get('pkg_label', 'Package '))
+        check_id_info(id_info)
         check_anchor_uniqueness(registry)
         check_circularities(registry, all_roots)
         check_reachability(all_roots, registry)

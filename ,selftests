@@ -1,0 +1,36 @@
+I'd like to add some built-in self-test unit tests within
+some leaf function docstrings.
+Currently our tests focus on testing the main interface,
+but it'd be helpful to have smaller unit tests for
+some of the modules.
+
+Add a function like this near the end (but above main):
+
+def run_selftests():
+    import doctest
+    doctest.testmod()
+
+Modify our test program to invoke this. It could be `--selftest` or
+simply calling `run_selftests()` directly; tell me the pros and cons of each.
+
+Look at the pure functions (especially those that are leaves).
+Add a few self-tests to some of them in their docstrings if it's
+not too difficult. Here's a trivial example:
+
+def add(a, b):
+    """
+    Adds two numbers.
+    >>> add(2, 2)
+    4
+    >>> add(-1, 1)
+    0
+    """
+    return a + b
+
+If a function is hard to test, but it can be logically broken into
+smaller pieces some of which are easier to test, do that.
+
+I don't want this complicated. Let's avoid adding test
+cases where we'd have to
+mock something, for example. I just want a few unit tests to
+provide some additional confidence in the code and improve its documentation.

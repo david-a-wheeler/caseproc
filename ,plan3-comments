@@ -1,0 +1,103 @@
+                                
+● This is much more complete. Here's my review:                                 
+                                                   
+  What's Well Resolved                                                          
+                                                                                
+  - Current-element tracking → "current ID" set by element/package ✓            
+  - HTML mode specified ✓                                                       
+  - element_selections/package_selections is an elegant configuration approach ✓
+  - default_representation config cleanly handles the single-point-of-change
+  requirement ✓
+  - pkg_root, pkg_defines, pkg_citing, pkg_cited are precisely defined ✓
+  - Trailing blank-line suppression noted ✓
+  - Migration strategy addressed ✓
+  - update_headers retirement addressed ✓
+
+  ---
+  Issues and Suggestions
+
+  1. package in markdown — missing explicit anchor
+
+  The plan says: "In markdown we don't need to add <a id="package-ID"></a>;
+  that's done by the markdown processor."
+
+  This is risky. GitHub Markdown generates anchors by lowercasing and stripping
+  special characters, so ### Package Foo.Bar would become #package-foobar (dot
+  stripped), not #package-foo.bar. Since LTAC IDs can contain dots and other
+  non-alphanumeric chars, links to #package-ID from pkg_cited/pkg_citing would
+  break. The element selector rightly generates an explicit <a> — package should
+   too, for consistency and correctness.
+
+  2. HTML <h3 id="..."> includes the statement
+
+  The draft shows:
+  <h3 id="ELEMENT_TYPE-ID-ELEMENT_STATEMENT">
+  Including the full statement in the id is problematic — statements contain
+  spaces, colons, and other characters that make fragment IDs unreliable. The <a
+   id="..."> is already doing the anchor job. The <h3> probably shouldn't have
+  its own id, or if it does, it should just be ELEMENT_TYPE-ID.
+
+  3. referenced_by semantics need precision
+
+  "hyperlinked list of packages containing it, starting with the one it's
+  defined in" — does "containing it" mean packages that cite it, or packages
+  where it appears (defined or cited)? An element is only defined in one
+  package, but it could be cited in many. Be explicit: "the package that defines
+   it, followed by all packages that cite it, in LTAC file order."
+
+  4. supports semantics need precision
+
+  "hyperlinked list of parents of the definition and all citations" — unclear.
+  Does this mean: all elements for which this element is a structural child? Say
+   so directly: "all elements in any package that have this element as a direct
+  structural child (i.e., this element's parent(s) in the argument tree)."
+
+  5. config directive — behavior questions
+
+  <!-- caseproc config KEY = VALUE... --> needs a few things specified:
+  - Is the directive itself preserved in the output (like the <!-- caseproc ...
+  --> markers), or consumed/stripped?
+  - Does it take effect immediately (affecting selectors later in the same
+  pass), or after the current region?
+  - What happens on --validate? Is a config directive in a document applied when
+   cross-checking?
+
+  6. package * loop and marked regions
+
+  The plan explains that package * loops through packages setting current ID
+  each time. This means a single <!-- caseproc package * --> region generates
+  all packages with their package_selections inline. This is powerful but worth
+  stating explicitly in the plan, because it's a significant behavioral
+  difference from how * currently works (just generates diagrams/lists, no
+  heading nesting).
+
+  7. Fate of existing format-specific selectors
+
+  The plan adds sacm, gsn, ltac as format-detecting aliases, but doesn't say
+  what happens to sacm/mermaid, gsn/mermaid, ltac/markdown, ltac/html. The
+  Discussion section asks about this. My suggestion: keep the explicit variants
+  (they're useful in mixed documents or when you want to force a format),
+  deprecate or remove statement, references, info since they're superseded by
+  element_selections.
+
+  8. "Option to add missing elements to documents" is a stub
+
+  Lines 224–227 are too vague to be actionable. "Add markers to LTAC" — what
+  kind of markers? "Identify leaf nodes" — to do what with them? Either flesh
+  this out or move it to a separate plan doc.
+
+  ---
+  Minor Points
+
+  - Line 120–121: "In markdown we don't need to add <a id="package-ID"></a>" —
+  contradicts the anchor-correctness point above.
+  - Line 137: package_selections default includes representation — but
+  representation is itself an indirect selector (reads default_representation).
+  Worth noting in the plan that this is the indirection point users should
+  change.
+  - "we don't show a separate statement" (line 122) for package — is this
+  intentional forever, or just for now? Package roots are Claims and do have
+  statement text. Consider whether pkg_root or the heading itself should show
+  the statement.
+
+✻ Sautéed for 1m 16s                                    

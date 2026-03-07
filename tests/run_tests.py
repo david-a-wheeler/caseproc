@@ -321,31 +321,6 @@ class TestLTACValidation(unittest.TestCase):
         self.assertIn('not valid', r.stderr)
         self.assertIn('statement', r.stderr)
 
-    def test_cited_package_not_found_warns(self):
-        """^[PkgName] where PkgName is not a loaded package produces a warning but exits 0."""
-        r = run('--ltac', fixture('cited-pkg-not-found.ltac'), '--select', 'ltac/markdown')
-        self.assertEqual(r.returncode, 0)
-        self.assertIn('cited package', r.stderr)
-        self.assertIn('NoSuchPkg', r.stderr)
-
-    def test_cited_package_not_found_error_flag(self):
-        """^[PkgName] where PkgName is not loaded exits non-zero with --error."""
-        r = run('--ltac', fixture('cited-pkg-not-found.ltac'), '--select', 'ltac/markdown', '--error')
-        self.assertNotEqual(r.returncode, 0)
-        self.assertIn('cited package', r.stderr)
-
-    def test_wrong_pkg_citation_warns(self):
-        """^[PkgA] ID where ID is declared in PkgB produces a warning but exits 0."""
-        r = run('--ltac', fixture('wrong-pkg-citation.ltac'), '--select', 'ltac/markdown')
-        self.assertEqual(r.returncode, 0)
-        self.assertIn('cited as belonging to', r.stderr)
-        self.assertIn('C2', r.stderr)
-
-    def test_wrong_pkg_citation_error_flag(self):
-        """^[PkgA] ID where ID is declared in PkgB exits non-zero with --error."""
-        r = run('--ltac', fixture('wrong-pkg-citation.ltac'), '--select', 'ltac/markdown', '--error')
-        self.assertNotEqual(r.returncode, 0)
-        self.assertIn('cited as belonging to', r.stderr)
 
 
 class TestSelectSacm(unittest.TestCase):

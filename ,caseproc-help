@@ -1,0 +1,98 @@
+usage: caseproc [-h] [--config FILE] [--error] [--update] [--rename OLD NEW]
+                [--restate LABEL STATEMENT] [--ltac FILENAME]
+                [--validate | --select SELECTOR | --stdout | --selftest]
+                [files ...]
+
+Process assurance case LTAC file and update documentation files (Markdown/HTML)
+
+positional arguments:
+  files                 Documentation file(s) (Markdown/HTML) to update in
+                        place (default: auto-discover case.md etc.)
+
+options:
+  -h, --help            show this help message and exit
+  --config FILE         path to a JSON file containing configuration key/value
+                        pairs
+  --error               treat warnings as errors (non-zero exit on any
+                        warning)
+  --update              update the LTAC file to synchronize citation
+                        statements with their declarations
+  --rename OLD NEW      rename identifier OLD to NEW in LTAC and document
+                        files
+  --restate LABEL STATEMENT
+                        update the statement for LABEL in LTAC and document
+                        files
+  --ltac FILENAME, -l FILENAME
+                        LTAC file to load (default: case.ltac or
+                        docs/case.ltac)
+  --validate            validate and report warnings/errors; do not produce
+                        output
+  --select SELECTOR, -s SELECTOR
+                        render SELECTOR to stdout and exit (see selector table
+                        below)
+  --stdout              process document files and write concatenated result
+                        to stdout
+  --selftest            run the built-in doctest suite and exit (0 = all pass,
+                        1 = any fail)
+
+This program normally reads an LTAC file and then updates (modifies)
+document file(s) in Markdown/HTML to update them: their headers that involve
+assurance case elements or packages, their HTML anchors, and all text regions
+inside the markers <!-- caseproc SELECTOR --> ... <!-- end caseproc -->.
+
+The intended normal use is that you simply edit the LTAC file for the
+high-level argument and the document file(s) in Markdown/HTML for all details
+(the "content" in SACM parlance). Then run this program to validate the
+structure and update your document files in Markdown/HTML with graphics,
+hyperlinks, and other material.
+
+By default the program treats the LTAC file strictly as an input and
+it will *not* modify the LTAC file. However, the options --update,
+--rename, and --restate *do* modify the LTAC file.
+All file updates are done carefully. The updated files are generated
+first as temporary files, then the originals are moved to .backup/,
+and only then are the generated files moved to their final destinations.
+If you don't want to perform an in-place update of the files, use --stdout.
+
+Selectors are of format `KIND [ID | *]`, where KIND is:
+  ltac/markdown  ID|*   render as an indented Markdown bullet list
+  ltac/html      ID|*   render as a nested HTML list
+  sacm/mermaid   ID|*   render as a SACM Mermaid flowchart
+  gsn/mermaid    ID|*   render as a GSN Mermaid flowchart
+  statement      ID     one-line statement for an element
+  references     ID     Markdown links to packages that reference the element
+  info           ID     statement followed by references
+Omit ID to use the element set by the nearest preceding header (filter mode).
+Use * to render all packages (ltac/*, sacm/mermaid, and gsn/mermaid only).
+
+Validations on the LTAC file (always):
+  - There must be no circularities (this prevents circular reasoning)
+  - All elements must be reachable from the first node of the first package
+  - Claim/Strategy must not appear under Evidence, Context, or Assumption
+  - Each identifier must be declared (no ^ prefix) exactly once
+  - Citing identifiers (^ID) must have a matching declaration
+  - In citations naming a package (^[PkgName] ID) the package must declare ID
+  - Element type must be consistent across all uses of the same identifier
+  - Statement text must be consistent across all uses of the same identifier
+    (use --update to make LTAC statements consistent with their declaration)
+  - Each element must carry at *most* one assertion status option
+    (needsSupport, axiomatic, defeated, assumed); see SACM spec section 11
+  - All generated anchor names (e.g., "claim-x-is-secure") must be unique
+
+Additional checks when document files are provided:
+  - Headers matching "TYPE ID" or "TYPE ID: statement" are cross-checked, and
+    they must not have an unknown ID (one not in the LTAC).
+    By default headers' statements are updated, but if update_headers is false,
+    each statement much match its LTAC definition's statement.
+  - Every declared LTAC element must have a corresponding document header
+    (as this is where the additional information about it can be placed).
+
+Configuration keys (--config FILE, JSON object):
+  base_url           base URL for hyperlinks in sacm/mermaid and gsn/mermaid output (default: "")
+  markdown_base_url  base URL for hyperlinks in ltac/markdown and ltac/html output (default: "")
+  pkg_label          word used to identify packages in headers and output (default: "Package ")
+  pkg_header_prefix  string prepended to each package header when rendering * (default: "### ")
+  pkg_header_suffix  string appended after each package header when rendering * (default: newline)
+  update_headers     if true, rewrite stale headers instead of warning (default: false)
+
+For full details see docs/design-spec.md.

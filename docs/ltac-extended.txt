@@ -22,7 +22,7 @@ has many extensions.
 6. If an element is to be used more than once, it should be defined once only and other occurrences should be defined as links. A Link entry is a citation of previously defined element (often evidence or context) without repeating it.
 7. Identifiers are optional, but when specified, they should be unique within the package except links. Links are citations of existing elements and they use existing identifiers within the package.
   - Identifiers G1, G2 can be used for claims, or Cxt1, Cxt2 can be used for context elements. Any letters, digits and other characters except ':' can be used in identifiers. Identifiers’ prefixes other than presented in point 1 and "^" are acceptable.
-  - An identifier beginning with "^" is an external reference that refers to an element in another package. After the "^" is an optional package name surrounded by square brackets, followed by an element name. If the package name is not given, the package name is "Package" + space + ID. Implementations may use this information to generate hyperlinks. External references should only be Claims or Justifications.
+  - An identifier beginning with "^" is an external reference that refers to an element in another package. LTAC identifiers are globally unique, so no package qualifier is needed. Implementations may use this information to generate hyperlinks. External references should only be Claims or Justifications.
 8. After the identifier, a colon (':') separates it from the descriptive text, the element name. The text cannot contain new line characters. The text can contain colons (':'). An example of a correct element definition:
 ```
   - Claim C1: System is sufficiently safe
@@ -56,7 +56,7 @@ has many extensions.
       - Evidence Ev1: Hazard analysis (HARA report.pdf)
     - Claim G3: All hazards have been mitigated {defeated}
       - Link Ev1
-    - Claim ^[Package IVV] Verification: Hazard mitigation verified
+    - Claim ^Verification: Hazard mitigation verified
 ```
 
 # LTAC mapping to GSN (Goal Structuring Notation)
@@ -126,7 +126,7 @@ will become siblings of the Strategy and share the AssertedRelationship.
 
 This specification extends LTAC as follows:
 
-- Adds external identifiers beginning with "^", with an optional package name.
+- Adds external identifiers beginning with "^" for cross-package references; identifiers are globally unique so no package qualifier is needed.
 - An "LTACargument" became a "Package".
   Elements can refer to elements in other packages,
   equivalent to how SACM packages can refer to elements in other
@@ -152,9 +152,7 @@ NodeType        = "Claim" | "Strategy" | "Evidence" | "Justification" | "Context
 
 Identifier      = LocalIdentifier | ExternalIdentifier ;
 
-ExternalIdentifier = "^" [ "[" PackageIdentifier "]" ] LocalIdentifier ;
-
-PackageIdentifier = { Character - "]" - Newline } ;
+ExternalIdentifier = "^" LocalIdentifier ;
 
 LocalIdentifier = { Character - ":" - "^" - Newline } ;   (* e.g., C1, C1.1, Ev5, J1, X3 *)
 

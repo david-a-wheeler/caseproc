@@ -1,0 +1,38 @@
+Please create a plan to generate a Python script called `ltac2mermaid`.
+Only use dependencies built in to Python (but *do* use those as appropriate).
+Put the plan, along with a basic design output for this script,
+in `,ltac2mermaid-plan.txt` for my review.
+
+The script `ltac2mermaid` is a filter for converting packages in
+LTAC format into mermaid presentations, by default into SACM using our
+conventions as defined in `docs/sacm-mermaid.md`.
+
+It will process the set of files provided; if no files are provided,
+or the filename is `-`, it will process standard input.
+By default its results go to standard output.
+
+By default, its input is a set of LTAC commands.
+By default, its output is mermaid displaying SACM notation with our
+conventions per `docs/sacm-mermaid.md`.
+
+It will need to read the whole set of LTAC commands before generating the
+result, since it may need to reorganize some nodes.
+
+Identify in your plan how to organize it well into clear reusable parts.
+For example, there should be a simple routine for turning a
+normal string into a GitHub id fragment.
+
+The option `--inline` or `-i` will cause it to process each file
+(or standard input), presumed to be markdown. It will simply read and
+write back out lines that aren't relevant.
+Whenever it finds a section of LTAC commands, it reads those, then
+replaces the mermaid diagram following it (adding it if there is none).
+If filenames are given, it will replace the file with this revised file.
+
+The option `--gsn` or `-g` will cause it to generate GSN notation instead.
+
+The option `--help` provides help.
+
+Be sure to review `docs/sacm-mermaid.md` and
+`https://www.argevide.com/documents/ltac.txt` before beginning creating
+the plan.
