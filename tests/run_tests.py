@@ -940,5 +940,85 @@ class TestCommitUpdates(unittest.TestCase):
             _shutil.rmtree(tmpdir)
 
 
+class TestCaseprocConfig(unittest.TestCase):
+    def test_config_directive_changes_level(self):
+        """<!-- caseproc-config element_level = 2 --> changes heading level for element regions."""
+        r = run('--ltac', fixture('simple.ltac'), '--stdout', fixture('element-selector-input.md'),
+                '--config', fixture('doc-simple.config'))
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('### Claim C1:', r.stdout)  # default level 3
+
+        # Now with a doc that overrides element_level via directive
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc-config element_level = 2 -->\n')
+            f.write('<!-- caseproc element C1 -->\n')
+            f.write('<!-- end caseproc -->\n')
+            tmp = f.name
+        try:
+            r2 = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertEqual(r2.returncode, 0)
+            self.assertIn('## Claim C1:', r2.stdout)
+        finally:
+            os.unlink(tmp)
+
+    def test_config_directive_invalid_key_warns(self):
+        """An unknown key in caseproc-config produces a warning."""
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc-config no_such_key = value -->\n')
+            tmp = f.name
+        try:
+            r = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('unknown key', r.stderr)
+        finally:
+            os.unlink(tmp)
+
+    def test_config_directive_invalid_value_warns(self):
+        """An out-of-range value in caseproc-config produces a warning."""
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc-config element_level = 9 -->\n')
+            tmp = f.name
+        try:
+            r = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('invalid value', r.stderr)
+        finally:
+            os.unlink(tmp)
+
+    def test_config_directive_persists_across_regions(self):
+        """A caseproc-config directive affects all subsequent element regions in the file."""
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc-config element_level = 1 -->\n')
+            f.write('<!-- caseproc element C1 -->\n')
+            f.write('<!-- end caseproc -->\n')
+            tmp = f.name
+        try:
+            r = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('# Claim C1:', r.stdout)
+            self.assertNotIn('## Claim C1:', r.stdout)
+            self.assertNotIn('### Claim C1:', r.stdout)
+        finally:
+            os.unlink(tmp)
+
+    def test_config_wrong_syntax_is_error(self):
+        """'<!-- caseproc config KEY = VALUE -->' (wrong form) produces an error."""
+        import tempfile, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write('<!-- caseproc config element_level = 2 -->\n')
+            f.write('<!-- end caseproc -->\n')
+            tmp = f.name
+        try:
+            r = run('--ltac', fixture('simple.ltac'), '--stdout', tmp)
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('caseproc-config', r.stderr)
+        finally:
+            os.unlink(tmp)
+
+
 if __name__ == '__main__':
     unittest.main()

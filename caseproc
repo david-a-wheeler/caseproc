@@ -1481,6 +1481,7 @@ _VALID_DISPLAY_TYPES = {
     'gsn/mermaid',  'gsn/mermaid/markdown',  'gsn/mermaid/html',
     'statement', 'references', 'info',
     'element', 'package',
+    'config',  # recognized to give a helpful error directing users to caseproc-config
     'referenced_by', 'supported_by', 'supports',
     'representation', 'pkg_defines', 'pkg_citing', 'pkg_cited',
 }
@@ -1958,6 +1959,35 @@ def _maybe_inject_mermaid_js(rendered: str, config: dict, state: 'DocState') -> 
 # Matches '<!-- caseproc SELECTOR -->' lines (SELECTOR is captured in group 1).
 _CASEPROC_REGION_RE = re.compile(r'^<!--\s*caseproc\s+(.+?)\s*-->\s*$')
 
+# Matches '<!-- caseproc-config KEY = VALUE -->' directives.
+_CASEPROC_CONFIG_RE = re.compile(r'^<!--\s*caseproc-config\s+(\S+)\s*=\s*(.*?)\s*-->\s*$')
+
+# Allowed dynamically-settable config keys and their validation patterns.
+_ALLOWED_CONFIG_VALUES = {
+    'element_level': re.compile(r'^[1-6]$'),
+    'package_level': re.compile(r'^[1-6]$'),
+}
+
+
+def apply_config_directive(key: str, value: str, config: dict,
+                           filename: str, lineno: int) -> None:
+    """Apply a caseproc-config directive, warning on invalid key or value."""
+    if key not in DEFAULT_CONFIG:
+        warn(f"{filename}:{lineno}: caseproc-config: unknown key {key!r}")
+        return
+    pattern = _ALLOWED_CONFIG_VALUES.get(key)
+    if pattern is None:
+        warn(f"{filename}:{lineno}: caseproc-config: key {key!r} is not dynamically settable")
+        return
+    if not pattern.match(value):
+        warn(f"{filename}:{lineno}: caseproc-config: invalid value {value!r} for {key!r}")
+        return
+    if key in ('element_level', 'package_level'):
+        config[key] = int(value)
+    else:
+        config[key] = value
+
+
 def _consume_region(line_iter, filename: str, start_lineno: int, selector: str) -> bool:
     """Consume lines from line_iter until '<!-- end caseproc -->', return True if found.
 
@@ -1989,9 +2019,17 @@ def process_document_stream(
     _doc_state = DocState(doc_format=doc_format, seen_element_ids=seen_element_ids)
     filename = getattr(f, 'name', '<stream>')
 
+    config = dict(config)  # local copy so directives don't affect caller's config
+
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
+
+        cm = _CASEPROC_CONFIG_RE.match(text)
+        if cm:
+            apply_config_directive(cm.group(1), cm.group(2), config, filename, lineno)
+            out.write(text + '\n')
+            continue
 
         m = _CASEPROC_REGION_RE.match(text)
         if m:
