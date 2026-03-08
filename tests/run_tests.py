@@ -1234,6 +1234,125 @@ class TestStartOption(unittest.TestCase):
             shutil.rmtree(workdir, ignore_errors=True)
 
 
+class TestNormalPath(unittest.TestCase):
+    """Tests that verify auto-discovery of case.ltac and case.md in CWD.
+
+    Each test creates a temporary working directory, copies fixtures into it
+    as 'case.ltac' / 'case.md', and runs caseproc as a subprocess with that
+    directory as the CWD — exactly how a real user would use the tool.
+    """
+
+    def _make_workdir(self):
+        base = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'tmp_normal')
+        os.makedirs(base, exist_ok=True)
+        return tempfile.mkdtemp(dir=base)
+
+    def _run_in(self, workdir, *args):
+        """Run caseproc in workdir with the given arguments."""
+        return subprocess.run(
+            LTACPROC + list(args),
+            capture_output=True, text=True, encoding='utf-8',
+            cwd=workdir,
+        )
+
+    def test_autodiscover_ltac(self):
+        """caseproc discovers case.ltac automatically when --ltac is omitted."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            shutil.copy(fixture('inline-input.md'), os.path.join(workdir, 'case.md'))
+            # Pass relative doc path; no --ltac flag.
+            r = self._run_in(workdir, 'case.md')
+            self.assertEqual(r.returncode, 0, r.stderr)
+            content = read_file(os.path.join(workdir, 'case.md'))
+            self.assertNotIn('STALE STATEMENT', content)
+            self.assertIn('C1', content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_doc(self):
+        """caseproc discovers case.md automatically when no document file is given."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            shutil.copy(fixture('inline-input.md'), os.path.join(workdir, 'case.md'))
+            # Pass relative --ltac; no document file argument.
+            r = self._run_in(workdir, '--ltac', 'case.ltac')
+            self.assertEqual(r.returncode, 0, r.stderr)
+            content = read_file(os.path.join(workdir, 'case.md'))
+            self.assertNotIn('STALE STATEMENT', content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_both(self):
+        """caseproc with no arguments discovers both case.ltac and case.md."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            shutil.copy(fixture('inline-input.md'), os.path.join(workdir, 'case.md'))
+            r = self._run_in(workdir)  # zero arguments
+            self.assertEqual(r.returncode, 0, r.stderr)
+            content = read_file(os.path.join(workdir, 'case.md'))
+            self.assertNotIn('STALE STATEMENT', content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_docs_subdir(self):
+        """case.ltac and case.md under docs/ are also auto-discovered."""
+        workdir = self._make_workdir()
+        try:
+            docs = os.path.join(workdir, 'docs')
+            os.makedirs(docs)
+            shutil.copy(fixture('simple.ltac'), os.path.join(docs, 'case.ltac'))
+            shutil.copy(fixture('inline-input.md'), os.path.join(docs, 'case.md'))
+            r = self._run_in(workdir)  # zero arguments; no files in workdir root
+            self.assertEqual(r.returncode, 0, r.stderr)
+            content = read_file(os.path.join(docs, 'case.md'))
+            self.assertNotIn('STALE STATEMENT', content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_validate(self):
+        """--validate without --ltac auto-discovers case.ltac."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            r = self._run_in(workdir, '--validate')
+            self.assertEqual(r.returncode, 0, r.stderr)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_validate_with_doc(self):
+        """--validate discovers both case.ltac and case.md and processes the doc."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            shutil.copy(fixture('inline-input.md'), os.path.join(workdir, 'case.md'))
+            r = self._run_in(workdir, '--validate')
+            self.assertEqual(r.returncode, 0, r.stderr)
+            # validate does not modify the file
+            content = read_file(os.path.join(workdir, 'case.md'))
+            self.assertIn('STALE STATEMENT', content)  # unchanged by --validate
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+    def test_autodiscover_missing(self):
+        """--missing discovers case.ltac, re-renders case.md, and appends stubs."""
+        workdir = self._make_workdir()
+        try:
+            shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
+            # A minimal doc with no element regions so --missing adds stubs.
+            with open(os.path.join(workdir, 'case.md'), 'w', encoding='utf-8') as f:
+                f.write('# Test\n\n<!-- caseproc package * -->\n<!-- end caseproc -->\n')
+            r = self._run_in(workdir, '--missing')
+            self.assertEqual(r.returncode, 0, r.stderr)
+            content = read_file(os.path.join(workdir, 'case.md'))
+            # --missing appends element regions for undocumented nodes
+            self.assertIn('<!-- caseproc element', content)
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+
+
 class TestGsnConnectorVisible(unittest.TestCase):
     """GSN Stage 1: Connector nodes produce a visible gray-circle in the diagram."""
 
