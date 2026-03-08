@@ -1,0 +1,4 @@
+- [Claim C1: complies with {NIST SP 800-53} controls](#claim-c1)
+  - [Claim C2: mid-text {note} is literal text](#claim-c2)
+  - [Claim C3: trailing brace escapes work](#claim-c3) ([ref.md](ref.md))
+  - [Claim C4: normal options](#claim-c4)

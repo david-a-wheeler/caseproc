@@ -178,6 +178,22 @@ class TestSpecialChars(unittest.TestCase):
         self.assertIn('&alpha;', r.stdout)          # & entity passes through
         self.assertNotIn('&amp;alpha;', r.stdout)   # & not double-escaped
 
+    def test_mid_brace_is_text_not_options(self):
+        """Braces in the middle of text are literal; only trailing {} sets options.
+        An empty {} at line-end means 'no options', allowing a statement to end
+        with a {...} parenthetical without it being consumed as options."""
+        r = run('--ltac', fixture('mid-brace.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'mid-brace.ltac.expected.md')
+        self.assertEqual(actual, read_fixture('mid-brace.ltac.expected.md'))
+        # Mid-text braces appear verbatim in the link label
+        self.assertIn('{NIST SP 800-53}', r.stdout)   # C1: mid-brace in text
+        self.assertIn('{note}', r.stdout)              # C2: mid-brace in text
+        # C3 has a ref but the trailing {} suppresses options
+        self.assertIn('[ref.md](ref.md)', r.stdout)    # C3: ref still works with {}
+        # C4's {needsSupport} is real options (not shown in ltac/markdown link label)
+        self.assertNotIn('needsSupport', r.stdout)     # options never appear in labels
+
     def test_mid_paren_is_text_not_ref(self):
         """Parentheses in the middle of text are literal; only trailing (ref) is a ref."""
         r = run('--ltac', fixture('mid-paren.ltac'), '--select', 'ltac/markdown')

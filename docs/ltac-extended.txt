@@ -46,6 +46,10 @@ has many extensions.
   j) It's not allowed to add additional text to an LTAC package. Each line must contain one element. We don't allow blank lines so that an LTAC package is usually also legal markdown.
   k) LTAC is a code. In Markdown you should place 3 backticks ` ``` ` on a line above and below the code block to present LTAC packages.
   l) Elements can include "{Options}" which may influence how they are translated into various formats.
+10. Decorators
+  a) After the ELement text you may add an optional parentheses-enclosed reference (a URL or file being referred to)
+  b) After that you may add an optional curly-brace-enclosed comma-separated list of options that mark the element
+  c) To supply text ending in parentheses or braces, use `()` and/or `{}`
 
 # LTAC example
 ```

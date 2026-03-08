@@ -1,0 +1,4 @@
+- Claim C1: uses bcrypt (for password storage) and salted hashes
+  - Evidence E1: bcrypt used (see hashing module) to store passwords (app/models/user.rb)
+  - Context X1: applies to local (not GitHub SSO) users
+  - Claim C2: rate limiting (Rack::Attack) is enforced (config/initializers/rack_attack.rb)
