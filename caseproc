@@ -389,8 +389,8 @@ _LTAC_LINE_RE = re.compile(
     r'|Context|Assumption|Relation|Link|Connector)'
     r'(?:\s+(?P<cited>\^)?(?P<identifier>[^:{\n(]*))?'
     r'(?::\s*(?P<text>.*?))?'
-    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
     r'(?:\s*\{(?P<options>[^}\n]*)\})?'
+    r'(?:\s*\((?P<ref>[^)\n]*)\))?'
     r'\s*$'
 )
 
@@ -2898,10 +2898,10 @@ def _write_ltac_node(node: 'Node', lines: list) -> None:
         line += node.identifier
     if node.text:
         line += f': {node.text}'
-    if node.ext_ref:
-        line += f' ({node.ext_ref})'
     if node.options:
         line += ' {' + ', '.join(sorted(node.options)) + '}'
+    if node.ext_ref:
+        line += f' ({node.ext_ref})'
     lines.append(line)
     for child in node.children:
         _write_ltac_node(child, lines)

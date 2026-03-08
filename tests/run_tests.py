@@ -212,6 +212,19 @@ class TestSpecialChars(unittest.TestCase):
         self.assertNotIn('hashes)', r.stdout)  # C1 label ends at 'hashes', no ref
         self.assertNotIn('users)', r.stdout)   # X1 label ends at 'users', no ref
 
+    def test_options_before_ref(self):
+        """Options {…} come before reference (…) in the new grammar order."""
+        r = run('--ltac', fixture('ref-and-options.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        actual = check(r.stdout, 'ref-and-options.ltac.expected.md')
+        self.assertEqual(actual, read_fixture('ref-and-options.ltac.expected.md'))
+        # References are rendered as links
+        self.assertIn('[safety-case.pdf](safety-case.pdf)', r.stdout)
+        self.assertIn('[tests.pdf](tests.pdf)', r.stdout)
+        # Options do not appear in link labels
+        self.assertNotIn('needsSupport', r.stdout)
+        self.assertNotIn('undeveloped', r.stdout)
+
 
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
