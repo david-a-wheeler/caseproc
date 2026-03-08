@@ -69,6 +69,7 @@ DEFAULT_CONFIG = {
     'pkg_header_suffix': '\n',
     'pkg_label': 'Package ',
     'stats': False,
+    'warn_dubious_reference': True,
 }
 
 
@@ -2129,7 +2130,10 @@ _ALLOWED_CONFIG_VALUES = {
     'package_level': re.compile(r'^[1-6]$'),
     'max_mermaid_children':    re.compile(r'^(0|[1-9][0-9]*)\Z'),
     'narrowed_mermaid_children': re.compile(r'^(0|[1-9][0-9]*)\Z'),
+    'warn_dubious_reference': re.compile(r'^(true|false)$', re.IGNORECASE),
 }
+
+_BOOLEAN_CONFIG_KEYS = frozenset({'warn_dubious_reference'})
 
 
 def config_invariant_checker(config: dict,
@@ -2175,6 +2179,8 @@ def apply_config_directive(key: str, value: str, config: dict,
     if key in ('element_level', 'package_level',
                'max_mermaid_children', 'narrowed_mermaid_children'):
         config[key] = int(value)
+    elif key in _BOOLEAN_CONFIG_KEYS:
+        config[key] = value.lower() == 'true'
     else:
         config[key] = value
     if key in ('max_mermaid_children', 'narrowed_mermaid_children'):
@@ -2696,6 +2702,36 @@ def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None
             label = f"{root.node_type} {root.identifier}" if root.identifier else root.node_type
             error(f"{label}: package root is unreachable from {all_roots[0].node_type}"
                   f" {all_roots[0].identifier}")
+
+
+def _is_dubious_reference(ref: str) -> bool:
+    """Return True if ref is non-empty, has no '.' anywhere, and doesn't start with '#'.
+
+    Such references are likely to be parenthetical comments accidentally parsed
+    as references rather than genuine file paths or URLs.
+    """
+    return bool(ref) and '.' not in ref and not ref.startswith('#')
+
+
+def check_dubious_references(all_roots: List[Node], id_info: Dict[str, dict],
+                              config: dict) -> None:
+    """Warn for each node whose reference looks like it may be a parenthetical comment.
+
+    Controlled by config key 'warn_dubious_reference' (default True).
+    A reference is dubious if it is non-empty, contains no '.', and does not
+    start with '#'.
+    """
+    if not config.get('warn_dubious_reference', True):
+        return
+    for node in _all_nodes(all_roots):
+        if not node.ext_ref or not _is_dubious_reference(node.ext_ref):
+            continue
+        info = id_info.get(node.identifier, {}) if node.identifier else {}
+        lineno = info.get('decl_lineno') if not node.is_cited else None
+        loc = f"line {lineno}: " if lineno else ""
+        label = f"{node.node_type} {node.identifier}" if node.identifier else node.node_type
+        warn(f"{loc}{label}: dubious reference ({node.ext_ref!r}): has no '.' and doesn't "
+             f"start with '#' — looks like a parenthetical comment; use {{}} escape if intended")
 
 
 def _process_files(
@@ -3313,6 +3349,21 @@ def main() -> None:
         "in config, or create one of: case.md, case.markdown, case.html, "
         "docs/case.md, docs/case.markdown, docs/case.html"
     )
+
+    # Pre-scan document files for caseproc-config directives so that checks
+    # below (e.g. check_dubious_references) respect per-document settings.
+    for _doc_path in document_files:
+        try:
+            with open(_doc_path, encoding='utf-8', errors='replace') as _doc_f:
+                for _lineno, _line in enumerate(_doc_f, 1):
+                    _cm = _CASEPROC_CONFIG_RE.match(_line.rstrip('\r\n'))
+                    if _cm:
+                        apply_config_directive(_cm.group(1), _cm.group(2), config,
+                                               _doc_path, _lineno)
+        except OSError:
+            pass
+
+    check_dubious_references(all_roots, id_info, config)
 
     if args.select:
         result = render_selector(args.select, registry, all_roots, config, id_info,

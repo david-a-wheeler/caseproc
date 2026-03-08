@@ -257,6 +257,62 @@ class TestSpecialChars(unittest.TestCase):
             os.unlink(tmp_path)
 
 
+class TestDubiousReference(unittest.TestCase):
+    def _make_ltac(self, ref):
+        """Write a temp LTAC file with a single element using the given ref string."""
+        import tempfile, os
+        content = f'- Claim C1: the system is safe ({ref})\n'
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
+            f.write(content)
+        return f.name
+
+    def test_dubious_reference_warns(self):
+        """A reference with no '.' and not starting with '#' triggers a warning."""
+        import os
+        path = self._make_ltac('no-dot-here')
+        try:
+            r = run('--ltac', path, '--validate')
+            self.assertIn('dubious', r.stderr.lower() + r.stdout.lower())
+        finally:
+            os.unlink(path)
+
+    def test_dotted_reference_no_warn(self):
+        """A reference containing a '.' does not trigger the dubious warning."""
+        import os
+        path = self._make_ltac('report.pdf')
+        try:
+            r = run('--ltac', path, '--validate')
+            self.assertNotIn('dubious', r.stderr.lower() + r.stdout.lower())
+        finally:
+            os.unlink(path)
+
+    def test_fragment_reference_no_warn(self):
+        """A reference starting with '#' does not trigger the dubious warning."""
+        import os
+        path = self._make_ltac('#see-also')
+        try:
+            r = run('--ltac', path, '--validate')
+            self.assertNotIn('dubious', r.stderr.lower() + r.stdout.lower())
+        finally:
+            os.unlink(path)
+
+    def test_warn_dubious_reference_false_suppresses(self):
+        """warn_dubious_reference=false suppresses the warning via caseproc-config."""
+        import tempfile, os
+        ltac = self._make_ltac('no-dot-here')
+        md = tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False)
+        md.write('<!-- caseproc-config warn_dubious_reference = false -->\n')
+        md.write('<!-- caseproc package * -->\n<!-- end caseproc -->\n')
+        md.write('<!-- caseproc element C1 -->\n<!-- end caseproc -->\n')
+        md.close()
+        try:
+            r = run('--ltac', ltac, '--validate', md.name)
+            self.assertNotIn('dubious', r.stderr.lower() + r.stdout.lower())
+        finally:
+            os.unlink(ltac)
+            os.unlink(md.name)
+
+
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
         """--stdout replaces stale caseproc regions and passes other lines through."""

@@ -1,0 +1,4 @@
+- Claim C1: Foo (really a foo) ()
+  - Claim C2: Bar {really a bar} {}
+  - Claim C3: Baz (really a bar) {needssupport}
+  - Claim C4: Fizz (fizz.txt)
