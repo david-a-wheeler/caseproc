@@ -24,19 +24,28 @@ tests and case.ltac, do a grep first - I suspect doing both a reference and
 options is extremely rare. There may not even be a test of this; if there
 isn't, add one where we have both an option and a reference.
 
-## Warn on reference without "."
+## Warn on dubious reference
 
 It's really easy to add a parenthetical at the end of a statement
 and have it incorrectly interpreted as a reference.
 
-Let's add a new config option, `warn_undotted_reference`, default true.
+Let's add a new config option, `warn_dubious_reference`, default true.
 If true, we emit a warning every time we read a reference from an LTAC
-file that is non-empty but fails to include a `.` somewhere.
+file that is non-empty but "dubious".
+
+Whether or not a reference is "dubious" is a heuristic.
+For now, let's say a reference is "dubious" if it doesn't begin with `#`
+and it has no `.` anywhere.
+Originally I called this `dotless` but I imagine the heuristic could change,
+so let's just give the heuristic a name and we can adjust it.
 
 Normal references normally have a dot, e.g.,
 in the URL domain name or to introduce a file extension.
 It's not strictly *required*, but as a warning of a potential problem,
 it's not a bad heuristic.
+The one case where a reference might not have a dot is if it's a pure
+fragment URL (e.g., `#see-also`); that might be better handled with
+element context, but I think we should allow it.
 
 It's easy to add a dot, e.g., you can add `./` before a local directory.
 If you use domain `localhost`, adding a period technically changes the
