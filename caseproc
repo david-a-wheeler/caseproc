@@ -66,6 +66,7 @@ DEFAULT_CONFIG = {
     'pkg_header_prefix': '### ',
     'pkg_header_suffix': '\n',
     'pkg_label': 'Package ',
+    'stats': False,
 }
 
 
@@ -575,6 +576,13 @@ def _all_nodes(roots: List[Node]):
         node = stack.pop()
         yield node
         stack.extend(node.children)
+
+
+def _recalc_depths(node: 'Node', new_depth: int) -> None:
+    """Recursively update depth for node and all descendants."""
+    node.depth = new_depth
+    for child in node.children:
+        _recalc_depths(child, new_depth + 1)
 
 
 # ---------------------------------------------------------------------------
@@ -2312,11 +2320,21 @@ def _write_start_stubs() -> None:
 
 
 class _MutationAction(argparse.Action):
-    """Accumulate --rename and --restate operations as ordered tagged tuples."""
+    """Accumulate --rename/--restate/--detach/--attach operations as ordered tuples.
+
+    All four options share a single ordered queue (dest='mutations').
+    Tuples are (op, a, b) where b is None for --detach (single-argument option).
+    The order on the command line is the order of application.
+    """
     def __call__(self, parser, namespace, values, option_string=None):
         mutations = getattr(namespace, self.dest, None) or []
-        op = 'rename' if option_string == '--rename' else 'restate'
-        mutations.append((op, values[0], values[1]))
+        op = option_string.lstrip('-')   # 'rename', 'restate', 'detach', or 'attach'
+        if isinstance(values, list):
+            a = values[0]
+            b = values[1] if len(values) > 1 else None
+        else:
+            a, b = values, None
+        mutations.append((op, a, b))
         setattr(namespace, self.dest, mutations)
 
 
@@ -2341,7 +2359,13 @@ be updated, but *only* those regions.
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
---rename, --restate, --missing, and --start *may* modify the LTAC file.
+--rename, --restate, --detach, --attach, --missing, and --start *may* modify the LTAC file.
+
+The options --rename, --restate, --detach, and --attach all share a single
+ordered mutation queue. They are applied to the LTAC tree in the order
+they appear on the command line. Order matters: for example,
+'--detach C2 --attach C2 C1' detaches C2 first, then attaches C2 to C1.
+
 All file updates are done carefully. The updated files are generated
 first as temporary files, then the originals are moved to .backup/,
 and only then are the generated files moved to their final destinations.
@@ -2405,6 +2429,10 @@ For full details see docs/design-spec.md.""",
         help='treat warnings as errors (non-zero exit on any warning)',
     )
     parser.add_argument(
+        '--stats', action='store_true', default=False,
+        help='after processing, print statistics about the LTAC structure and documents',
+    )
+    parser.add_argument(
         '--update', action='store_true',
         help='update the LTAC file to synchronize citation statements with their declarations',
     )
@@ -2417,6 +2445,27 @@ For full details see docs/design-spec.md.""",
         '--restate', nargs=2, metavar=('LABEL', 'STATEMENT'),
         dest='mutations', action=_MutationAction,
         help='update the statement for LABEL in LTAC and document files',
+    )
+    parser.add_argument(
+        '--detach', metavar='ID',
+        nargs=1, action=_MutationAction, dest='mutations', default=None,
+        help=(
+            "replace ID's definition with a citation (^ID) in its current location "
+            "and move its subtree to a new top-level package. "
+            "Panics if ID is not defined or is already a top-level package root. "
+            "Joins the shared mutation queue with --rename, --restate, and --attach."
+        ),
+    )
+    parser.add_argument(
+        '--attach', metavar=('ID', 'DESTINATION'),
+        nargs=2, action=_MutationAction, dest='mutations', default=None,
+        help=(
+            "move top-level ID's definition inline under DESTINATION, replacing "
+            "the ^ID citation there. "
+            "Panics if ID or DESTINATION is not defined, ID is not top-level, "
+            "or ID is not cited as a direct child of DESTINATION. "
+            "Joins the shared mutation queue with --rename, --restate, and --detach."
+        ),
     )
     parser.set_defaults(mutations=[])
     parser.add_argument(
@@ -2690,6 +2739,145 @@ def _check_element_coverage(registry: Dict[str, Node], seen_element_ids: set) ->
             warn(f"element {ident!r} has no 'element' selector in any processed file")
 
 
+# ---------------------------------------------------------------------------
+# Statistics
+# ---------------------------------------------------------------------------
+
+def _compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
+                        id_info: Dict[str, dict]) -> dict:
+    """Compute statistics from the loaded LTAC forest."""
+    from collections import Counter
+    type_counts: Counter = Counter()
+    option_counts: Counter = Counter()
+    total_citations = 0
+    leaf_claims = 0
+    pkg_sizes = []
+
+    for root in all_roots:
+        size = 0
+        for node in _all_nodes([root]):
+            if node.is_cited:
+                total_citations += 1
+            else:
+                type_counts[node.node_type] += 1
+                size += 1
+                for opt in node.options:
+                    option_counts[opt] += 1
+                if node.node_type == 'Claim' and not node.children:
+                    leaf_claims += 1
+        pkg_sizes.append((size, root.identifier or '(unnamed)'))
+
+    largest_pkg = max(pkg_sizes, key=lambda x: x[0]) if pkg_sizes else (0, '')
+    return {
+        'type_counts':     type_counts,
+        'total_elements':  sum(type_counts.values()),
+        'total_citations': total_citations,
+        'leaf_claims':     leaf_claims,
+        'largest_pkg':     largest_pkg,
+        'option_counts':   option_counts,
+    }
+
+
+def _scan_doc_stats(path: str) -> dict:
+    """Scan a document file and return document-level statistics."""
+    pkg_regions = 0
+    elem_regions = 0
+    config_stmts = 0
+    empty_elem_regions = 0
+
+    try:
+        with open(path, encoding='utf-8', errors='replace') as f:
+            lines = f.readlines()
+    except OSError:
+        return {}
+
+    i = 0
+    in_elem_region = False
+    after_end = False
+    gap_has_content = False
+
+    while i < len(lines):
+        text = lines[i].rstrip('\r\n')
+        cm = _CASEPROC_CONFIG_RE.match(text)
+        if cm:
+            config_stmts += 1
+            i += 1
+            continue
+        m = _CASEPROC_REGION_RE.match(text)
+        if m:
+            if after_end and not gap_has_content:
+                empty_elem_regions += 1
+            after_end = False
+            gap_has_content = False
+            selector = m.group(1)
+            kind = selector.split()[0] if selector else ''
+            if kind == 'package':
+                pkg_regions += 1
+            elif kind == 'element':
+                elem_regions += 1
+                in_elem_region = True
+            i += 1
+            while i < len(lines):
+                t = lines[i].rstrip('\r\n')
+                if t.strip() == '<!-- end caseproc -->':
+                    if in_elem_region:
+                        after_end = True
+                    in_elem_region = False
+                    i += 1
+                    break
+                i += 1
+            continue
+        if after_end and text.strip() and not text.strip().startswith('<!--'):
+            gap_has_content = True
+        i += 1
+
+    if after_end and not gap_has_content:
+        empty_elem_regions += 1
+
+    return {
+        'pkg_regions':        pkg_regions,
+        'elem_regions':       elem_regions,
+        'config_stmts':       config_stmts,
+        'empty_elem_regions': empty_elem_regions,
+    }
+
+
+def _print_stats(ltac_stats: dict, doc_stats: Optional[dict]) -> None:
+    """Print a statistics report to stdout."""
+    print('=== caseproc statistics ===')
+    print()
+    print('LTAC structure:')
+    print('  Elements by type:')
+    type_counts = ltac_stats['type_counts']
+    if type_counts:
+        max_len = max(len(t) for t in type_counts)
+        for node_type, count in sorted(type_counts.items()):
+            print(f'    {node_type:<{max_len}}  {count}')
+    else:
+        print('    (none)')
+    print(f"  Total elements defined:               {ltac_stats['total_elements']}")
+    print(f"  Total citations:                      {ltac_stats['total_citations']}")
+    print(f"  Leaf Claims (no children, not cited): {ltac_stats['leaf_claims']}")
+    pkg_size, pkg_name = ltac_stats['largest_pkg']
+    print(f'  Largest package: {pkg_name} ({pkg_size} elements)')
+    option_counts = ltac_stats['option_counts']
+    if option_counts:
+        print('  Elements with each option:')
+        max_opt = max(len(o) for o in option_counts)
+        for opt, count in sorted(option_counts.items()):
+            print(f'    {opt:<{max_opt}}  {count}')
+    if doc_stats is not None:
+        print()
+        print('Documents:')
+        pkg_r = doc_stats['pkg_regions']
+        typical = '  (typical)' if pkg_r == 1 else ''
+        print(f"  Package regions:         {pkg_r}{typical}")
+        print(f"  Element regions:         {doc_stats['elem_regions']}")
+        if doc_stats['config_stmts']:
+            print(f"  Config statements:       {doc_stats['config_stmts']}")
+        print(f"  Elements with no prose:  {doc_stats['empty_elem_regions']}")
+
+
 def _write_ltac_node(node: 'Node', lines: list) -> None:
     """Append LTAC lines for *node* and all its descendants to *lines*."""
     indent = '  ' * node.depth
@@ -2790,6 +2978,116 @@ def apply_restate(roots: List[Node], registry: Dict[str, Node],
         if node.identifier == label:
             node.text = stmt
     id_info[label]['statement'] = stmt
+
+
+def apply_detach(roots: List[Node], registry: Dict[str, Node],
+                 id_info: Dict[str, dict], target_id: str) -> None:
+    """Replace target_id's definition with a citation; promote subtree to new package.
+
+    Panics if target_id is not defined, or if its definition is already a
+    top-level package root (has no parent).
+    """
+    node = registry.get(target_id)
+    if node is None:
+        panic(f"--detach: {target_id!r} is not defined")
+    if node.parent is None:
+        panic(f"--detach: {target_id!r} is a top-level package root; cannot detach")
+
+    parent = node.parent
+    idx = parent.children.index(node)
+
+    # Build a cited replacement node at the same position.
+    cited = Node(
+        node_type=node.node_type,
+        identifier=node.identifier,
+        text=node.text,
+        ext_ref='',
+        options=set(),
+        children=[],
+        is_cited=True,
+        depth=node.depth,
+        parent=parent,
+        link_target=None,
+        diagram_id=None,
+    )
+    parent.children[idx] = cited
+
+    # Detach the definition node and make it a new package root.
+    node.parent = None
+    _recalc_depths(node, 0)
+    roots.append(node)
+
+    # Update id_info: the new package root ID for node and all descendants.
+    new_pkg_id = node.identifier
+    old_pkg_id = id_info.get(node.identifier, {}).get('decl_pkg_id')
+    for n in _all_nodes([node]):
+        if n.identifier and n.identifier in id_info:
+            info = id_info[n.identifier]
+            if info.get('decl_pkg_id') == old_pkg_id:
+                info['decl_pkg_id'] = new_pkg_id
+
+    # Record the new citation under the original package.
+    id_info[target_id]['citations'] = id_info[target_id].get('citations', 0) + 1
+    pkg_root = cited
+    while pkg_root.parent is not None:
+        pkg_root = pkg_root.parent
+    citing_pkg = pkg_root.identifier
+    if citing_pkg and citing_pkg not in id_info[target_id].get('citing_pkg_ids', []):
+        id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
+
+
+def apply_attach(roots: List[Node], registry: Dict[str, Node],
+                 id_info: Dict[str, dict], target_id: str, dest_id: str) -> None:
+    """Move top-level target_id's definition inline under dest_id, replacing ^citation.
+
+    Panics if:
+    - target_id is not defined
+    - dest_id is not defined
+    - target_id is not a top-level package root
+    - target_id is not cited (^) as a direct child of dest_id
+    """
+    node = registry.get(target_id)
+    if node is None:
+        panic(f"--attach: {target_id!r} is not defined")
+    dest = registry.get(dest_id)
+    if dest is None:
+        panic(f"--attach: {dest_id!r} is not defined")
+    if node.parent is not None:
+        panic(f"--attach: {target_id!r} is not a top-level package root")
+
+    # Find the citation of target_id among dest's direct children.
+    cited_node = None
+    cited_idx = None
+    for i, child in enumerate(dest.children):
+        if child.is_cited and child.identifier == target_id:
+            cited_node = child
+            cited_idx = i
+            break
+    if cited_node is None:
+        panic(f"--attach: {target_id!r} is not cited as a direct child of {dest_id!r}")
+
+    # Remove the top-level package.
+    roots.remove(node)
+
+    # Replace the citation with the full definition.
+    dest.children[cited_idx] = node
+    node.parent = dest
+    _recalc_depths(node, dest.depth + 1)
+
+    # Update id_info: decl_pkg_id for node and all descendants changes to dest's pkg.
+    dest_pkg_root = dest
+    while dest_pkg_root.parent is not None:
+        dest_pkg_root = dest_pkg_root.parent
+    new_pkg_id = dest_pkg_root.identifier
+    old_pkg_id = node.identifier  # was its own package root
+    for n in _all_nodes([node]):
+        if n.identifier and n.identifier in id_info:
+            info = id_info[n.identifier]
+            if info.get('decl_pkg_id') == old_pkg_id:
+                info['decl_pkg_id'] = new_pkg_id
+
+    # Decrement the citation count.
+    id_info[target_id]['citations'] = max(0, id_info[target_id].get('citations', 1) - 1)
 
 
 def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str]:
@@ -2952,8 +3250,12 @@ def main() -> None:
         for op, a, b in args.mutations:
             if op == 'rename':
                 apply_rename(all_roots, registry, id_info, a, b)
-            else:
+            elif op == 'restate':
                 apply_restate(all_roots, registry, id_info, a, b)
+            elif op == 'detach':
+                apply_detach(all_roots, registry, id_info, a)
+            elif op == 'attach':
+                apply_attach(all_roots, registry, id_info, a, b)
         check_assertion_status(registry)
         check_id_info(id_info)
         check_anchor_uniqueness(registry)
@@ -3043,6 +3345,19 @@ def main() -> None:
             commit_updates(pairs)
         if document_files:
             _check_element_coverage(registry, seen_element_ids)
+
+    if args.stats:
+        ltac_stats = _compute_ltac_stats(all_roots, registry, id_info)
+        if document_files:
+            doc_totals: dict = {'pkg_regions': 0, 'elem_regions': 0,
+                                'config_stmts': 0, 'empty_elem_regions': 0}
+            for path in document_files:
+                ds = _scan_doc_stats(path)
+                for k in doc_totals:
+                    doc_totals[k] += ds.get(k, 0)
+            _print_stats(ltac_stats, doc_totals)
+        else:
+            _print_stats(ltac_stats, None)
 
     if _had_error:
         sys.exit(1)
