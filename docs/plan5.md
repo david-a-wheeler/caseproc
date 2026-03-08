@@ -53,11 +53,12 @@ Ensure we make enough of a copy that we don't mess up the original data,
 as we make some temporary additions purely for visual improvement.
 A shallow copy won't be enough; if a deep copy is necessary, that's okay.
 
-In SACM, I believe we currently transform a strategy (argument)
-that is the sole child of a Claim, if it has children,
-into being a sibling of its former children under a Relation
-(which is represented with a sacmDot).
-For example, this:
+In SACM, `_sacm_collect_edges` already performs the Strategy-absorption
+transform for every Strategy, unconditionally (not just when it is the
+sole child).  When a Claim has a Strategy child, the Strategy's
+non-Context children are added directly to the Claim's `inference_sources`,
+and the Strategy itself is appended last — making it a sibling of its
+former children behind the same sacmDot.  For example, this LTAC:
 
 ~~~~
 - Claim Top
@@ -68,11 +69,12 @@ For example, this:
     - Claim C4
 ~~~~
 
-is already transformed into this (if represented as LTAC):
+is already rendered as if it were (using a conceptual Relation to
+represent the sacmDot grouping):
 
 ~~~~
 - Claim Top
-  - Relation (Unnamed)
+  - Relation (Unnamed sacmDot)
     - Claim C1
     - Claim C2
     - Claim C3
@@ -80,13 +82,18 @@ is already transformed into this (if represented as LTAC):
     - Strategy S1
 ~~~~
 
+Stage 2 does **not** need to implement this transform; it is already done.
+The width-management transform simply counts the `inference_sources` list
+that feeds each sacmDot, since that is what is already "visually expressed"
+after the absorption.
+
 For all mermaid processing,
-let's look for cases there are more than `max_mermaid_children` (default 8)   
+let's look for cases where there are more than `max_mermaid_children` (default 8)
 children that will be rendered from an Element
-(which may be a Relation).
-Note that we consider this *after* we move a SACM Argument to become a sibling.
-Note that if in SACM there are different sacmDots, they are considered
-separately (e.g., context vs. inference).
+(which may be a sacmDot/Relation).
+In SACM, each sacmDot's `inference_sources` list is checked separately
+(context children form their own group and are not counted together with
+inference children).
 This "max children" is used for anything that has *visually* expressed
 children.
 
