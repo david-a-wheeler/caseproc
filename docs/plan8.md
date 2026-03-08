@@ -35,7 +35,7 @@ If there are some other interesting statistics, suggest them
 It'd be nice to make it easy to manipulate the LTAC tree.
 Let's add two new options:
 
-`--prune ID`: Replace ID's definition in a tree with a citation of ID,
+`--detach ID`: Replace ID's definition in a tree with a citation of ID,
 and create a new package after the current package with its structure.
 Panic if `ID` isn't defined or its definition is a top level (package head).
 
@@ -47,7 +47,7 @@ That is, given:
     - Claim C3: Baz
 ~~~~
 
-The command `--prune C2` would produce:
+The command `--detach C2` would produce:
 
 ~~~~ltac
 - Claim C1: Foo
@@ -57,16 +57,16 @@ The command `--prune C2` would produce:
   - Claim C3: Baz
 ~~~~
 
-The next option we'll add is `--graft ID DESTINATION`, which is
-the reverse of `--prune`. Given ID, which is defined at a top level,
+The next option we'll add is `--attach ID DESTINATION`, which is
+the reverse of `--detach`. Given ID, which is defined at a top level,
 it moves its definition to be under the DESTINATION id,
 where ID is currently cited
 (making ID no longer cited under DESTINATION).
 Panic if ID isn't defined, DESTINATION isn't defined,
 ID isn't top-level, or ID isn't cited under DESTINATION.
 
-Given the produced LTAC after `--prune C2`, the option
-`--graft C2 C1` would reverse it and produce our previous LTAC.
+Given the produced LTAC after `--detach C2`, the option
+`--attach C2 C1` would reverse it and produce our previous LTAC.
 
 Let me clear up a misunderstanding: if ID is also cited elsewhere
 in the tree, that is *not* a problem - it would still be cited.
@@ -77,7 +77,7 @@ We do require that there be only 1 definition (1 use of ID without ^)
 and that there be no cycles, but an ID inside a tree can be cited in
 many other places.
 
-The `--prune` and `--graft` options
+The `--detach` and `--attach` options
 should go into the same queue that
 `--restate` and `--rename` use.
 If there's more than one such use, they are applied in order.
