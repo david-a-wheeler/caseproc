@@ -47,7 +47,7 @@ than being transparent).
 
 ## Stage 2: Width-management transform
 
-If we're rendering a diagram, and we may do some
+If we're rendering a diagram, we may do some
 transformations specifically for that kind of notation.
 Ensure we make enough of a copy that we don't mess up the original data,
 as we make some temporary additions purely for visual improvement.
@@ -69,12 +69,12 @@ former children behind the same sacmDot.  For example, this LTAC:
     - Claim C4
 ~~~~
 
-is already rendered as if it were (using a conceptual Relation to
-represent the sacmDot grouping):
+is already rendered as if it were (using a conceptual sacmDot node to
+represent the sacmDot grouping — this is internal rendering, not LTAC syntax):
 
 ~~~~
 - Claim Top
-  - Relation (Unnamed sacmDot)
+  - sacmDot (auto-generated)
     - Claim C1
     - Claim C2
     - Claim C3
@@ -88,36 +88,37 @@ that feeds each sacmDot, since that is what is already "visually expressed"
 after the absorption.
 
 For all mermaid processing,
-let's look for cases where there are more than `max_mermaid_children` (default 8)
-children that will be rendered from an Element
-(which may be a sacmDot/Relation).
+let's look for cases where there are more than
+`max_mermaid_children` (default 8)
+children that will be rendered on the visual image.
+For SACM, this means the inference_sources list feeding each sacmDot.
 In SACM, each sacmDot's `inference_sources` list is checked separately
 (context children form their own group and are not counted together with
-inference children).
+inference children, since they are visually separate).
 This "max children" is used for anything that has *visually* expressed
 children.
 
 In those cases, keep `narrowed_mermaid_children` (default 6), the leftmost
 and rightmost maximally even totalling up to that number.
-Add add a Connector link in the
+Add a Connector link in the
 middle (between the kept children; if we have an odd number, prefer fewer
 on the left). The Connector will have as children the remaining children.
 Then the algorithm recurses (we could have several layers).
-E.g., with 9 children, we would have [0,1,2, Connector(3,4,5), 6,7,8]).
+E.g., with 9 children, we would have [0,1,2, Connector(3,4,5), 6,7,8].
 We do this intentionally, because mermaid naively renders left-to-right;
 if we put them on the edge, mermaid would end up taking *more* room
 on the screen (what we're trying to avoid).
 
 We need to give these Synthetic Connectors names that are okay for
-Mermaid but unlikely to interfer with real IDs.
+Mermaid but unlikely to interfere with real IDs.
 Use `SynConnect_` followed by a random 8-digit hex number.
 
 So continuing the example, if `max_mermaid_children` is 4,
-and `narrowed_mermaid_children` is 3, we'd end up with:
+and `narrowed_mermaid_children` is 2, we'd end up with:
 
 ~~~~
 - Claim Top
-  - Relation (Unnamed)
+  - sacmDot (auto-generated)
     - Claim C1
     - Connector SynConnect_0a0a0a0a
       - Claim C2
@@ -126,17 +127,19 @@ and `narrowed_mermaid_children` is 3, we'd end up with:
     - Strategy S1
 ~~~~
 
-
 If `max_mermaid_children` is 0, the algorithm immediately returns and
 makes no transforms.
+
+Add the bottompadding *after* this (and other transforms).
 
 Let's ensure that caseproc-config can change these values
 `max_mermaid_children` and `narrowed_mermaid_children`.
 For the value checks, they must be integers, e.g.  `^(0|[1-9][0-9]*)\Z`.
 Check that.
 
-We presume that we have the invariant
-`narrowed_mermaid_children < max_mermaid_children`.
+This discussion presumes the configuration values satisfy the invariants
+`narrowed_mermaid_children < max_mermaid_children` (so things improve)
+and `narrowed_mermaid_children >= 2` (so there's enough room).
 Let's create a routine `config_invariant_checker`.
 The routine will check that invariant, and panic with message if it's wrong.
 We'll call the routine
