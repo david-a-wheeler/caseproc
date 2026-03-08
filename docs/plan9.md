@@ -62,3 +62,14 @@ Here are some examples:
   - Claim C3: Baz (really a bar) {needsSupport}
   - Claim C4: Fizz (fizz.txt)
 ~~~~
+
+## Look for unnecessary changes in LTAC extensions text
+
+File `docs/ltac-extended.txt` was modified from `docs/ltac.txt` with
+our extensions. We want to keep the changes that add new functionality,
+fix spelling errors, add clarifications, etc. However, maybe there
+are some lines that didn't need to change. Identify which lines
+could be restored to exactly their original form without loss
+(e.g., maybe they break lines differently).
+
+Don't *implement* the changes yet - just identify them for review.
