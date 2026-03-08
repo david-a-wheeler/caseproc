@@ -2900,8 +2900,12 @@ def _write_ltac_node(node: 'Node', lines: list) -> None:
         line += f': {node.text}'
     if node.options:
         line += ' {' + ', '.join(sorted(node.options)) + '}'
+    elif node.text and node.text.endswith('}'):
+        line += ' {}'  # escape: text ends with '}', no real options to disambiguate
     if node.ext_ref:
         line += f' ({node.ext_ref})'
+    elif node.text and node.text.endswith(')') and not node.options:
+        line += ' ()'  # escape: text ends with ')', no real ref or options to disambiguate
     lines.append(line)
     for child in node.children:
         _write_ltac_node(child, lines)

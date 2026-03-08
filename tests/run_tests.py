@@ -225,6 +225,37 @@ class TestSpecialChars(unittest.TestCase):
         self.assertNotIn('needsSupport', r.stdout)
         self.assertNotIn('undeveloped', r.stdout)
 
+    def test_escape_roundtrip(self):
+        """write_ltac adds {} and () escapes when needed; LTAC round-trips correctly."""
+        import tempfile, os
+        src = fixture('escape-roundtrip.ltac')
+        with open(src) as f:
+            original = f.read()
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as tmp:
+            tmp.write(original)
+            tmp_path = tmp.name
+        try:
+            # --restate with the existing value is a no-op mutation that triggers write_ltac
+            r = run('--ltac', tmp_path, '--restate', 'C4', 'Fizz')
+            self.assertEqual(r.returncode, 0, r.stderr)
+            with open(tmp_path) as f:
+                written = f.read()
+            # The written LTAC should match the original exactly (escapes preserved)
+            self.assertEqual(written, original, f'Round-trip mismatch:\n{written}')
+            # Verify the parsed text values survive the round-trip
+            r2 = run('--ltac', tmp_path, '--select', 'ltac/markdown')
+            self.assertEqual(r2.returncode, 0)
+            # C1: text ends with ')', escape () was needed
+            self.assertIn('Foo (really a foo)', r2.stdout)
+            # C2: text ends with '}', escape {} was needed
+            self.assertIn('Bar {really a bar}', r2.stdout)
+            # C3: text ends with ')', but has real options — no escape needed
+            self.assertIn('Baz (really a bar)', r2.stdout)
+            # C4: real ref, no text-ending issues
+            self.assertIn('[fizz.txt](fizz.txt)', r2.stdout)
+        finally:
+            os.unlink(tmp_path)
+
 
 class TestDefaultMode(unittest.TestCase):
     def test_filter_mode_output(self):
