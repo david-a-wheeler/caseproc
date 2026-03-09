@@ -3,14 +3,13 @@ v1.5.0 2026-03-04 (based on v1.1.2, 26.02.2026)
 Argevide and David A. Wheeler
 Original: https://www.argevide.com/documents/ltac.txt
 
-NOTE: This "Extended LTAC" is based on LTAC v1.1.2, 26.02.2026 but
-has many extensions developed by David A. Wheeler.
+NOTE: This "Extended LTAC" is based on LTAC v1.1.2, 26.02.2026 from Argevide but has extensions developed by David A. Wheeler.
 
 1. LTAC is a text format for representing assurance case arguments regardless of the notation originally used. LTAC can be mapped to GSN, CAE, TRUST-IT, and SACM notations. An LTAC package contains a set of elements, each presented in a separate line.
 2. LTAC defines its own element types that can be mapped to GSN, CAE, TRUST-IT, and SACM. LTAC defines its own syntax described below which is different from the rules of GSN, CAE, TRUST-IT, or SACM. Only the rules described below apply to LTAC.
-3. The allowed element types are Claim, Strategy, Justification, Evidence, Context and Assumption. Each package in LTAC should start (at the top) with a claim.
+3. The allowed element types are Claim, Strategy, Justification, Evidence, Context, Assumption, and Relation. Each package in LTAC should start (at the top) with a claim.
 4. A keyword 'Link' is used to cite an already specified element within the same package.
-5. Each element is defined in one line in LTAC that begins with dash and a type keyword (or 'Link' keyword) followed optionally by an identifier, e.g.
+5. Each element is defined in one line in LTAC that begins with dash and a type keyword (or 'Link' keyword). This is followed optionally by an identifier or by "^" and a mandatory identifier, e.g.
   - Claim C1
   - Strategy S1
   - Justification J1
@@ -19,6 +18,7 @@ has many extensions developed by David A. Wheeler.
   - Assumption A1
   - Relation R1
   - Link C4
+  - Claim ^C22
 6. If an element is to be used more than once, it should be defined once only and other occurrences should be defined as links. A Link entry is a citation of previously defined element (often evidence or context) without repeating it.
 7. Identifiers are optional, but when specified, they should be unique within the package except links. Links are citations of existing elements and they use existing identifiers within the package.
   - Identifiers G1, G2 can be used for claims, or Cxt1, Cxt2 can be used for context elements. Any letters, digits and other characters except ':' can be used in identifiers. Identifiers’ prefixes other than presented in point 1 and "^" are acceptable.
@@ -43,13 +43,13 @@ has many extensions developed by David A. Wheeler.
     - Justifications and Assumptions should be used for higher-level claims and strategies.
 	- If a Claim is to be supported by Evidence and by Strategy, the Evidence should be replaced by a Claim describing it and this Claim can be supported by this Evidence element
   i) LTAC can be used to present a single module argument, not modular arguments. Interfaces and away elements cannot be represented in LTAC. Other more advanced notations can be used to represent modular arguments.
-  j) It's not allowed to add additional text to an LTAC package. Each line must contain one element. We don't allow blank lines so that an LTAC package is usually also legal markdown.
+  j) Each non-blank line must contain one element, link, or citation, you can't add additional text about on following lines about an element.
   k) LTAC is a code. In Markdown you should place 3 backticks ` ``` ` on a line above and below the code block to present LTAC packages.
   l) Elements can include "{Options}" which may influence how they are translated into various formats.
-10. Decorators
+10. Options and references
   a) After the element text you may add an optional curly-brace-enclosed comma-separated list of options that mark the element
   b) After that you may add an optional parentheses-enclosed reference (a URL or file being referred to)
-  c) To supply text ending in parentheses or braces, use `()` and/or `{}`
+  c) To define text ending in parentheses or braces, use `{}` or `()` afterwards to indicate they are not options and/or referencs
   d) Options are an ordered, case-insensitive, non-duplicative, comma-separated list of options. Comparisons of option values must be case-insensitive; implementations are free to normalize options to lowercase when reading or writing.
 
 # LTAC example
@@ -93,53 +93,33 @@ LTAC packages can be mapped to CAE.
 - Strategy in LTAC corresponds to ArgumentReasoning in SACM.
 - Evidence in LTAC corresponds to ArtifactReference in SACM.
 - Context in LTAC corresponds to ArtifactReference with an AssertedContext connection in SACM
-- Assumption in LTAC corresponds to Claim with assertionDeclaration
-  "assumed" in SACM.
+- Assumption in LTAC corresponds to Claim with assertionDeclaration "assumed" in SACM.
 - Justification in LTAC corresponds to Claim in SACM.
 - Link in LTAC is used to cite elements in SACM which support more than one element.
-- Relation in LTAC corresponds to AssertedRelationship in SACM.
-  Typically this doesn't need to be shown separately in LTAC, but it *does*
-  need to be in LTAC when applying options to the relationship.
+- Relation in LTAC corresponds to AssertedRelationship in SACM. Typically this doesn't need to be shown separately in LTAC, but it *does* need to be in LTAC when applying options to the relationship.
 
-By default assertionDeclaration=asserted and abstract=false.
-Any element that uses an
-external reference sets its assertionDeclaration=asCited.
+By default assertionDeclaration=asserted and abstract=false. Any element that uses an external reference sets its assertionDeclaration=asCited.
 
 Certain options are defined to enable better SACM support:
 
 - asserted: assertionDeclaration=asserted (the default)
-- needsSupport: assertionDeclaration=needsSupport
+- needssupport: assertionDeclaration=needsSupport
 - assumed: assertionDeclaration=assumed
 - axiomatic: assertionDeclaration=axiomatic
 - defeated: assertionDeclaration=defeated
-- asCited: assertionDeclaration=asCited
-- isCounter: isCounter=true (counters declared purpose).
-  Counter-evidence doesn't always lead to the defeat of a claim, but it might.
+- ascited: assertionDeclaration=asCited
+- iscounter: isCounter=true (counters declared purpose). Counter-evidence doesn't always lead to the defeat of a claim, but it might.
 - abstract: isAbstract=true
-- `metaClaim`: metaClaim=true
+- metaclaim: metaClaim=true
 
-Unless otherwise noted, parents are connected through children via
-a SACM AssertedRelationship with default the assertionDeclaration `asserted`.
-When a Strategy (ArgumentReasoning), sub-Claims, and/or
-Evidence share the same parent Claim,
-they all connect to a single shared AssertedRelationship
-(represented by default as a dot).
-If a Strategy has sub-Claims as Children, the children
-will become siblings of the Strategy and share the AssertedRelationship.
+Unless otherwise noted, parents are connected through children via a SACM AssertedRelationship with default the assertionDeclaration `asserted`. When a Strategy (ArgumentReasoning), sub-Claims, and/or Evidence share the same parent Claim, they all connect to a single shared AssertedRelationship (represented by default as a dot). If a Strategy has sub-Claims as Children, the children will become siblings of the Strategy and share the AssertedRelationship.
 
 # Extensions
 
 This specification extends LTAC as follows:
 
-- Adds external identifiers beginning with "^" for cross-package references; identifiers are globally unique so no package qualifier is needed.
-  Cross-package citations have their own grammar form: the "^" and LocalIdentifier are
-  mandatory (to name the cited element), while ": text" is optional (and when present
-  must match the declared element's text; tools may fill it in automatically).
-- An "LTACargument" became a "Package".
-  Elements can refer to elements in other packages,
-  equivalent to how SACM packages can refer to elements in other
-  SACM packages. This added support for cross-links is critical for
-  non-trivial assurance cases. A case "component" is an element or package.
+- Adds citation identifiers beginning with "^" for cross-package references; identifiers are globally unique so no package qualifier is needed. Cross-package citations have their own grammar form: the "^" and Identifier are mandatory (to name the cited element), while ": text" is optional (and when present must match the declared element's text; tools may fill it in automatically).
+- An "LTACargument" became a "Package", and 1+ packages are supported. Elements can refer to elements in other packages, equivalent to how SACM packages can refer to elements in other SACM packages. This support for cross-links is critical for non-trivial assurance cases. We intentionally avoid the term "argument" here to reduce confusion, because in SACM and CAE an argument is equivalent to GSN Strategy. A case "component" is an element or a package.
 - Adds mapping to SACM.
 - Adds a "Relation" element type so SACM relationships can be defined
 - Allows {Options} for richer mapping
@@ -183,3 +163,4 @@ LTAC is licensed under the Creative Commons Attribution 4.0 International Licens
 To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
 
 Comments and questions regarding LTAC should be sent to support@argevide.com
+Comments and questions regarding this extension go to dwheeler @ dwheeler . com
