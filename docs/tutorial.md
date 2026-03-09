@@ -42,12 +42,20 @@ Here's what the file `case.ltac' might look like:
   - Claim G3: G3 is true {needssupport}
 ~~~~
 
-Every non-blank line expresses an `element` of the case by starting with indentation (2 spaces per level) and `-`. A `Claim` is true-or-false claim. This is normally followed by its ID; every element must must have a unique ID, and while spaces are allowed, short is good. If you don't specify an ID, the text is used as an ID (keeping spaces but removing a few characters like parentheses and curly braces). That said, we strongly encourage assigning an ID to each element. This is followed by colon, space, and the statement of the claim.
+Every non-blank line expresses an `element` of the case by starting with indentation (2 spaces per level) and `-`. There are several types of elements such as `Claim`, `Strategy`, `Assumption`, and `Evidence`. A `Claim` is a true-or-false claim. The element type is usually followed by its ID, which is usually short and *may* have spaces.
+
+Strictly speaking, the ID is syntactically optional. If you don't specify an ID, the text is used as an ID (keeping spaces but removing a few characters like parentheses and curly braces). That said, we strongly encourage assigning an ID to each element; assigning IDs makes things easier.
+
+Every element in an assurance case has an ID (either stated directly or inferred from the text after the colon). Each ID is required to be globally unique.
+
+This type and optional ID is followed by colon, space, and the textual statement(in this case, the true/false statement of the claim).
 
 You can insert a blank line and start another "package" of elements,
 starting again from the top (0 indents). You can cite an element, instead of
 defining it, by using "^" in front of its ID.
-This makes it easy to break down a complicated assurance case into
+You can cite an element as many times as you want, but you can only define it
+(use with with a leading "^") once in assurance case.
+Citations make it easy to break down a complicated assurance case into
 a number of smaller packages.
 
 The file `case.md` contains markdown with all the details.
