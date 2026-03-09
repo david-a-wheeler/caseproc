@@ -568,6 +568,23 @@ class LTACParser:
                 warn(f"line {lineno}: {node.node_type} should not be"
                      f" a child of {parent_node.node_type}")
             node.parent = parent_node
+            if node.identifier:
+                for sib in parent_node.children:
+                    if sib.identifier != node.identifier:
+                        continue
+                    if node.is_cited and sib.is_cited:
+                        warn(f"line {lineno}: duplicate citation ^{node.identifier!r}"
+                             f" under same parent")
+                    elif node.is_cited or sib.is_cited:
+                        warn(f"line {lineno}: citation ^{node.identifier!r} and its"
+                             f" definition appear as siblings under same parent")
+                    else:
+                        warn(f"line {lineno}: duplicate sibling identifier"
+                             f" {node.identifier!r}")
+            if node.is_cited and node.node_type not in ('Claim', 'Justification'):
+                warn(f"line {lineno}: external citation ^{node.identifier!r} has type"
+                     f" {node.node_type!r}; only Claim and Justification are"
+                     f" recommended for cross-package citations")
             parent_node.children.append(node)
         else:
             if self._current_pkg:
