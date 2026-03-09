@@ -97,13 +97,20 @@ explicitly to preserve it.
 ### Cross-package citations
 
 An element in one package may cite a claim from another package using
-the `^` prefix:
+the `^` prefix.  Cross-package citations have a distinct syntax: the
+identifier is mandatory (it names the cited element), while `: text` is
+optional:
 
 ```
+- Claim ^OtherTop:
 - Claim ^OtherTop: The other system is safe
 ```
 
-The bare form `^ID` resolves to the declared element with identifier `ID`
+The first form is a placeholder — the identifier is required but the text
+may be left empty and filled in by `--update`.  When text is present it
+must match the declared element's text; `--update` will correct it if not.
+
+`^ID` resolves to the declared element with identifier `ID`
 in any loaded package.
 
 Cross-package citations are rendered as `asCited` in SACM notation

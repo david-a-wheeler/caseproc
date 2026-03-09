@@ -1,7 +1,7 @@
-- Claim C1
-  - Claim C2
-    - Claim C3
-    - Claim ^C4
+- Claim C1:
+  - Claim C2:
+    - Claim C3:
+    - Claim ^C4:
 
-- Claim C4
-  - Claim ^C2
+- Claim C4:
+  - Claim ^C2:

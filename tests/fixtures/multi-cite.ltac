@@ -1,11 +1,11 @@
-- Claim C1
-  - Claim C2
-    - Claim C3
-      - Claim ^C5
-    - Claim C4
-      - Claim ^C5
-    - Claim C6
-      - Claim C7
+- Claim C1:
+  - Claim C2:
+    - Claim C3:
+      - Claim ^C5:
+    - Claim C4:
+      - Claim ^C5:
+    - Claim C6:
+      - Claim C7:
 
-- Claim C5
-  - Claim ^C6
+- Claim C5:
+  - Claim ^C6:

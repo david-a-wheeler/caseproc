@@ -480,9 +480,15 @@ class LTACParser:
         nodetype = m.group('nodetype')
         is_cited = bool(m.group('cited'))
         identifier = (m.group('identifier') or '').strip()
+        has_colon = m.group('text') is not None
         text = (m.group('text') or '').strip()
         ref = (m.group('ref') or '').strip()
         options = parse_options(m.group('options') or '')
+
+        if is_cited and not identifier:
+            error(f"line {lineno}: citation requires an identifier (e.g. '- {nodetype} ^ID:')")
+        elif not is_cited and nodetype not in ('Link', 'Connector') and not has_colon:
+            error(f"line {lineno}: element requires ':' after the identifier (e.g. '- {nodetype} ID: text')")
 
         id_inferred = False
         if not identifier and nodetype not in ('Link', 'Connector'):
