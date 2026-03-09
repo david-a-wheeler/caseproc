@@ -1089,13 +1089,14 @@ def _sacm_assertion_suffix(node_type: str, options: List[str]) -> str:
     """
     if 'defeated' in options:
         return '<br>✗'
-    if 'axiomatic' in options:
+    elif 'axiomatic' in options:
         return '<br>━━━'
-    if node_type == 'Assumption' or 'assumed' in options:
+    elif node_type == 'Assumption' or 'assumed' in options:
         return '<br>ASSUMED'
-    if 'needssupport' in options:
+    elif 'needssupport' in options:
         return '<br>...'
-    return ''
+    else:
+        return ''
 
 
 def _sacm_node_decl(node: 'Node') -> str:
@@ -1408,15 +1409,16 @@ def _gsn_assertion_suffix(node_type: str, options: List[str]) -> str:
     """
     if 'defeated' in options:
         return '<br>✗'
-    if 'needssupport' in options:
+    elif 'needssupport' in options:
         return '<br>◇'
-    if 'axiomatic' in options:
+    elif 'axiomatic' in options:
         return '<br>AXIOMATIC'
-    if 'metaclaim' in options:
+    elif 'metaclaim' in options:
         return '<br>METACLAIM'
-    if 'assumed' in options and node_type not in ('Claim', 'Assumption'):
+    elif 'assumed' in options and node_type not in ('Claim', 'Assumption'):
         return '<br>ASSUMED'
-    return ''
+    else:
+        return ''
 
 
 def _gsn_node_decl(node: 'Node') -> str:
@@ -1892,18 +1894,19 @@ def render_representation(pkg_root: Node, all_roots: List[Node],
     selector = f'{notation}/{renderer}/{fmt}'
     if selector in ('sacm/mermaid/markdown', 'sacm/mermaid'):
         return render_sacm([pkg_root], config)
-    if selector == 'sacm/mermaid/html':
+    elif selector == 'sacm/mermaid/html':
         return render_sacm_html([pkg_root], config)
-    if selector in ('gsn/mermaid/markdown', 'gsn/mermaid'):
+    elif selector in ('gsn/mermaid/markdown', 'gsn/mermaid'):
         return render_gsn([pkg_root], config)
-    if selector == 'gsn/mermaid/html':
+    elif selector == 'gsn/mermaid/html':
         return render_gsn_html([pkg_root], config)
-    if selector == 'ltac/markdown':
+    elif selector == 'ltac/markdown':
         return render_markdown([pkg_root], config)
-    if selector == 'ltac/html':
+    elif selector == 'ltac/html':
         return render_html([pkg_root], config)
-    error(f"unsupported representation {selector!r}")
-    return ''
+    else:
+        error(f"unsupported representation {selector!r}")
+        return ''
 
 
 def _apply_selections(selections: List[str], render_map: Dict[str, callable],
@@ -2052,52 +2055,42 @@ def render_selector(
     if display_type == 'config':
         error("use '<!-- caseproc-config KEY = VALUE -->' (not '<!-- caseproc config ...-->')")
         return ''
-
-    if display_type == 'warning':
+    elif display_type == 'warning':
         return render_warning(element_id)
-
-    if display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
+    elif display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
-
-    if display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
+    elif display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config)
-
-    if display_type == 'sacm/mermaid/html':
+    elif display_type == 'sacm/mermaid/html':
         return _render_or_all(element_id, all_roots, render_sacm_html, registry, current_element, config)
-
-    if display_type == 'gsn/mermaid/html':
+    elif display_type == 'gsn/mermaid/html':
         return _render_or_all(element_id, all_roots, render_gsn_html, registry, current_element, config)
-
-    if display_type == 'ltac/markdown':
+    elif display_type == 'ltac/markdown':
         return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config)
-
-    if display_type == 'ltac/html':
+    elif display_type == 'ltac/html':
         return _render_or_all(element_id, all_roots, render_html, registry, current_element, config)
-
-    if display_type == 'element':
+    elif display_type == 'element':
         if element_id is None:
             error("'element' selector requires an explicit ID")
             return ''
         _state = state or DocState(doc_format=doc_format)
         return render_element_selector(element_id, registry, all_roots, id_info, config, _state)
-
-    if display_type == 'package':
+    elif display_type == 'package':
         _state = state or DocState(doc_format=doc_format)
         pkg_id = element_id if element_id is not None else '*'
         return render_package_selector(pkg_id, all_roots, registry, id_info, config, _state)
-
-    # statement operates on a single node
-    if element_id == '*':
-        error(f"'*' is not valid with the '{display_type}' selector")
+    else:
+        # statement operates on a single node
+        if element_id == '*':
+            error(f"'*' is not valid with the '{display_type}' selector")
+            return ''
+        nodes = resolve_element(element_id, registry, all_roots, current_element)
+        if not nodes:
+            return ''
+        node = nodes[0]
+        if display_type == 'statement':
+            return render_statement(node)
         return ''
-    nodes = resolve_element(element_id, registry, all_roots, current_element)
-    if not nodes:
-        return ''
-    node = nodes[0]
-    if display_type == 'statement':
-        return render_statement(node)
-
-    return ''
 
 
 # ---------------------------------------------------------------------------
@@ -2198,7 +2191,7 @@ def apply_config_directive(key: str, value: str, config: dict,
     if pattern is None:
         warn(f"{filename}:{lineno}: caseproc-config: key {key!r} is not dynamically settable")
         return
-    if not pattern.match(value):
+    elif not pattern.match(value):
         warn(f"{filename}:{lineno}: caseproc-config: invalid value {value!r} for {key!r}")
         return
     if key in ('element_level', 'package_level',
