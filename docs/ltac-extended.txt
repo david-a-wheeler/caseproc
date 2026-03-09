@@ -132,6 +132,9 @@ will become siblings of the Strategy and share the AssertedRelationship.
 This specification extends LTAC as follows:
 
 - Adds external identifiers beginning with "^" for cross-package references; identifiers are globally unique so no package qualifier is needed.
+  Cross-package citations have their own grammar form: the "^" and LocalIdentifier are
+  mandatory (to name the cited element), while ": text" is optional (and when present
+  must match the declared element's text; tools may fill it in automatically).
 - An "LTACargument" became a "Package".
   Elements can refer to elements in other packages,
   equivalent to how SACM packages can refer to elements in other
@@ -150,16 +153,14 @@ Package         = Element { Element } ;
 BlankLine       = Newline ;
 
 Element         = Indent "-" WS NodeType [WS Identifier] ":" WS Text [WS Options] [WS Reference] Newline
-                  [ ElementList ] 
+                  [ ElementList ]
+                | Indent "-" WS NodeType WS "^" Identifier [":" WS Text [WS Options] [WS Reference]] Newline
+                  [ ElementList ]
                 | Indent "-" WS "Link" WS Identifier [WS Options] Newline ;
 
 NodeType        = "Claim" | "Strategy" | "Evidence" | "Justification" | "Context" | "Assumption" | "Relation" ;
 
-Identifier      = LocalIdentifier | ExternalIdentifier ;
-
-ExternalIdentifier = "^" LocalIdentifier ;
-
-LocalIdentifier = { Character - ":" - "^" - Newline } ;   (* e.g., C1, C1.1, Ev5, J1, X3 *)
+Identifier      = { Character - ":" - "^" - Newline } ;   (* e.g., C1, C1.1, Ev5, J1, X3; "^" is forbidden *)
 
 Text            = { Character - Newline } ;       (* descriptive label text *)
 
