@@ -11,6 +11,9 @@ To run our test suite, run:
 
 Run `./caseproc --help` to see how to execute it.
 
+If you're running on Linux or MacOS, don't add a `python3` or `python`
+prefix to run `tests/run_tests.py` or `caseproc`, that's not necessary.
+
 See README.md for more.
 
 ## Key architecture notes for AI assistants
