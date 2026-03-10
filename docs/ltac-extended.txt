@@ -7,7 +7,7 @@ NOTE: This "Extended LTAC" is based on LTAC v1.1.2, 26.02.2026 from Argevide but
 
 1. LTAC is a text format for representing assurance case arguments regardless of the notation originally used. LTAC can be mapped to GSN, CAE, TRUST-IT, and SACM notations. An LTAC package contains a set of elements, each presented in a separate line.
 2. LTAC defines its own element types that can be mapped to GSN, CAE, TRUST-IT, and SACM. LTAC defines its own syntax described below which is different from the rules of GSN, CAE, TRUST-IT, or SACM. Only the rules described below apply to LTAC.
-3. The allowed element types are Claim, Strategy, Justification, Evidence, Context, Assumption, and Relation. Each package in LTAC should start (at the top) with a claim.
+3. The allowed element types are Claim, Strategy, Justification, Evidence, Context, Assumption, and Relation. Each package in LTAC should start (at the top) with a Claim or Justification.
 4. A keyword 'Link' is used to cite an already specified element within the same package.
 5. Each element is defined in one line in LTAC that begins with dash and a type keyword (or 'Link' keyword). This is followed optionally by an identifier or by "^" and a mandatory identifier, e.g.
   - Claim C1

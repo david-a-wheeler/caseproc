@@ -443,6 +443,11 @@ class LTACParser:
         self._pkg_root_lineno: Optional[int] = None
         self._id_counter: List[int] = [0]
         self._links: List[Tuple[Node, int]] = []
+        # For empty-statement check (item 4): track declarations that usually
+        # carry a statement (non-Link, non-Relation, non-cited) and whether
+        # any such declaration has a non-empty statement.
+        self._empty_decl_ids: List[Tuple[str, int]] = []
+        self._has_nonempty_decl: bool = False
 
         for lineno, line in enumerate(lines, 1):
             self._parse_line(lineno, line)
@@ -454,6 +459,13 @@ class LTACParser:
         # Resolve Link targets (done after full parse so forward refs work)
         for node, lineno in self._links:
             self._resolve_link(node, lineno)
+
+        # Warn about declarations with no statement when some declarations do
+        # have statements (i.e. the mix is inconsistent; pure-ID demos are ok).
+        if self._has_nonempty_decl and self._empty_decl_ids:
+            for ident, ln in self._empty_decl_ids:
+                warn(f"line {ln}: {ident!r}: declaration has no statement"
+                     f" (other declarations do)")
 
         return self.results
 
@@ -488,6 +500,9 @@ class LTACParser:
             error(f"line {lineno}: citation requires an identifier (e.g. '- {nodetype} ^ID:')")
         elif not is_cited and nodetype not in ('Link', 'Connector') and not has_colon:
             error(f"line {lineno}: element requires ':' after the identifier (e.g. '- {nodetype} ID: text')")
+        elif not is_cited and nodetype not in ('Link', 'Connector') and not identifier and not text:
+            error(f"line {lineno}: {nodetype} element has no identifier and no statement;"
+                  f" cannot contribute to the argument")
 
         id_inferred = False
         if not identifier and nodetype not in ('Link', 'Connector'):
@@ -548,6 +563,13 @@ class LTACParser:
                     info['decl_pkg_id'] = pkg_root_id
                     self.registry[node.identifier] = node
                 info['declarations'] += 1
+                # Track empty/non-empty statements for declarations that
+                # normally carry a statement (not Relation, not Link).
+                if node.node_type != 'Relation':
+                    if node.text:
+                        self._has_nonempty_decl = True
+                    else:
+                        self._empty_decl_ids.append((node.identifier, lineno))
             if node.text:
                 if info['statement'] is None:
                     info['statement'] = node.text
@@ -568,18 +590,12 @@ class LTACParser:
                      f" a child of {parent_node.node_type}")
             node.parent = parent_node
             if node.identifier:
+                parent_label = (f" under {parent_node.identifier!r}"
+                                if parent_node.identifier else "")
                 for sib in parent_node.children:
-                    if sib.identifier != node.identifier:
-                        continue
-                    if node.is_cited and sib.is_cited:
-                        warn(f"line {lineno}: duplicate citation ^{node.identifier!r}"
-                             f" under same parent")
-                    elif node.is_cited or sib.is_cited:
-                        warn(f"line {lineno}: citation ^{node.identifier!r} and its"
-                             f" definition appear as siblings under same parent")
-                    else:
+                    if sib.identifier == node.identifier:
                         warn(f"line {lineno}: duplicate sibling identifier"
-                             f" {node.identifier!r}")
+                             f" {node.identifier!r}{parent_label}")
             if node.is_cited and node.node_type not in ('Claim', 'Justification'):
                 warn(f"line {lineno}: external citation ^{node.identifier!r} has type"
                      f" {node.node_type!r}; only Claim and Justification are"
@@ -2413,12 +2429,14 @@ Reference is a file path, URL, or anchor (e.g. (report.pdf)).
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
---rename, --restate, --detach, --move, --missing, and --start *may* modify the LTAC file.
+--rename, --restate, --detach, --move, --missing, and --start
+*may* modify the LTAC file.
 
 The options --rename, --restate, --detach, and --move all share a single
 ordered mutation queue. They are applied to the LTAC tree in the order
 they appear on the command line. Order matters: for example,
-'--detach C2 --move C2 C1' detaches C2 first (leaving ^C2 in place), then moves C2 under C1.
+'--detach C2 --move C2 C1' detaches C2 first (leaving ^C2 in place),
+then moves C2 under C1.
 
 All file updates are done carefully. The updated files are generated
 first as temporary files, then the originals are moved to .backup/,
@@ -2444,19 +2462,25 @@ Use * to render all packages (package/ltac/sacm/gsn selectors).
 Validations on the LTAC file (always):
   - There must be no circularities (this prevents circular reasoning)
   - All elements must be reachable from the first node of the first package
+  - Each package must start with a Claim or Justification (per LTAC spec rule 3)
   - Claim/Strategy must not appear under Evidence, Context, or Assumption
   - Each identifier must be declared (no ^ prefix) exactly once
-  - Citing identifiers (^ID) must have a matching declaration
+  - Citing identifiers (^ID) must have a matching declaration (usually to
+    a different package, but this is not required)
   - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
     (use --update to make LTAC citations consistent with their declaration)
   - Each element must carry at *most* one assertion status option
     (needsSupport, axiomatic, defeated, assumed); see SACM spec section 11
   - All generated anchor names (e.g., "claim-x-is-secure") must be unique
-  - No two siblings may share the same identifier (whether declared or cited)
+  - No two siblings may share the same identifier (declared, cited, or Link)
   - Cross-package citations (^ID) should have type Claim or Justification
+  - Evidence nodes must not have children (Evidence is a leaf)
+  - Elements with neither an identifier nor a statement are reported as errors
+  - Declarations missing a statement give warnings if any declaration has one
   - References that look like parenthetical comments (no '.' and no '#') are
-    flagged as possibly dubious (when warn_dubious_reference is true)
+    flagged as possibly dubious (when warn_dubious_reference is true); add a
+    `()` afterwards to escape a closing parenthetical comment
 
 Additional checks when document files are provided:
   - Every declared LTAC element should have a corresponding 'element' selector
@@ -2773,6 +2797,44 @@ def check_dubious_references(all_roots: List[Node], id_info: Dict[str, dict],
         label = f"{node.node_type} {node.identifier}" if node.identifier else node.node_type
         warn(f"{loc}{label}: dubious reference ({node.ext_ref!r}): has no '.' and doesn't "
              f"start with '#' — looks like a parenthetical comment; use {{}} escape if intended")
+
+
+def check_package_roots(all_roots: List[Node], id_info: Dict[str, dict]) -> None:
+    """Warn if any package does not start with a Claim or Justification.
+
+    Per the LTAC spec (rule 3), each package should start at the top with a
+    Claim or Justification.  Any other root type is flagged as a warning.
+    """
+    for root in all_roots:
+        if root.node_type not in ('Claim', 'Justification'):
+            info = id_info.get(root.identifier, {}) if root.identifier else {}
+            lineno = info.get('decl_lineno')
+            loc = f"line {lineno}: " if lineno else ""
+            label = (f"{root.node_type} {root.identifier}"
+                     if root.identifier else root.node_type)
+            warn(f"{loc}{label}: package starts with {root.node_type!r};"
+                 f" expected Claim or Justification")
+
+
+def check_evidence_children(all_roots: List[Node], id_info: Dict[str, dict]) -> None:
+    """Warn for every Evidence node that has children.
+
+    Evidence is a leaf node type (analogous to GSN Solution).  Having children
+    under an Evidence node is structurally invalid per the LTAC spec.
+    """
+    for node in _all_nodes(all_roots):
+        if node.node_type != 'Evidence':
+            continue
+        real_children = [c for c in node.children
+                         if c.node_type not in ('Context', 'Relation', 'Link')]
+        if not real_children:
+            continue
+        info = id_info.get(node.identifier, {}) if node.identifier else {}
+        lineno = info.get('decl_lineno') if not node.is_cited else None
+        loc = f"line {lineno}: " if lineno else ""
+        label = (f"Evidence {node.identifier}" if node.identifier else "Evidence")
+        warn(f"{loc}{label}: Evidence should not have children"
+             f" (Evidence is a leaf node)")
 
 
 def _process_files(
@@ -3347,6 +3409,8 @@ def main() -> None:
     check_anchor_uniqueness(registry)
     check_circularities(registry, all_roots)
     check_reachability(all_roots, registry)
+    check_package_roots(all_roots, id_info)
+    check_evidence_children(all_roots, id_info)
 
     if args.update:
         changed = apply_ltac_update(all_roots, registry)
@@ -3373,6 +3437,8 @@ def main() -> None:
         check_anchor_uniqueness(registry)
         check_circularities(registry, all_roots)
         check_reachability(all_roots, registry)
+        check_package_roots(all_roots, id_info)
+        check_evidence_children(all_roots, id_info)
         if _had_error:
             panic("LTAC validation failed after mutations; no files updated")
         tmp = _make_temp(ltac_path, write_ltac(all_roots))

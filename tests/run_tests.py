@@ -1939,5 +1939,188 @@ class TestMermaidWidthConfig(unittest.TestCase):
             os.unlink(doc_path)
 
 
+class TestPlan10Validations(unittest.TestCase):
+    """Tests for plan10 validations: package roots, Evidence children,
+    no-ID/no-statement, empty statements, and duplicate sibling identifiers."""
+
+    def _ltac(self, content):
+        """Write content to a temp .ltac file and return its path."""
+        import tempfile as _tf
+        fd, path = _tf.mkstemp(suffix='.ltac')
+        with os.fdopen(fd, 'w') as f:
+            f.write(content)
+        return path
+
+    def test_package_root_not_claim_warns(self):
+        """A package starting with Strategy (not Claim/Justification) should warn."""
+        path = self._ltac('- Strategy S1: Argument by hazard\n  - Claim C1: Safe\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('expected Claim or Justification', r.stderr)
+            self.assertIn('S1', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_package_root_not_claim_error_flag(self):
+        """Package-root warning becomes an error with --error."""
+        path = self._ltac('- Strategy S1: Argument\n  - Claim C1: Safe\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown', '--error')
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('expected Claim or Justification', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_package_root_claim_ok(self):
+        """A package starting with Claim produces no package-root warning."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown')
+        self.assertEqual(r.returncode, 0)
+        self.assertNotIn('expected Claim or Justification', r.stderr)
+
+    def test_package_root_justification_ok(self):
+        """A package starting with Justification produces no package-root warning."""
+        path = self._ltac('- Justification J1: System is safe by design\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertNotIn('expected Claim or Justification', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_evidence_with_children_warns(self):
+        """An Evidence node with a child claim should warn."""
+        path = self._ltac(
+            '- Claim C1: Safe\n'
+            '  - Evidence E1: test results\n'
+            '    - Claim C2: sub-claim under evidence\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('Evidence should not have children', r.stderr)
+            self.assertIn('E1', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_evidence_with_context_ok(self):
+        """An Evidence node with only a Context child should not warn."""
+        path = self._ltac(
+            '- Claim C1: Safe\n'
+            '  - Evidence E1: test results\n'
+            '    - Context X1: scope\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertNotIn('Evidence should not have children', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_evidence_without_children_ok(self):
+        """An Evidence leaf node produces no children warning."""
+        path = self._ltac('- Claim C1: Safe\n  - Evidence E1: test results\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertNotIn('Evidence should not have children', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_no_id_no_statement_is_error(self):
+        """An element with no identifier and no statement is always an error."""
+        path = self._ltac('- Claim C1: Safe\n  - Evidence:\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('no identifier and no statement', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_id_no_statement_ok_in_demo(self):
+        """All-ID-no-statement (pure demo) produces no empty-statement warning."""
+        path = self._ltac('- Claim C1:\n  - Evidence E1:\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertNotIn('declaration has no statement', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_mixed_empty_statement_warns(self):
+        """A declaration with no statement when others have statements warns."""
+        path = self._ltac(
+            '- Claim C1: The system is safe\n'
+            '  - Evidence E1:\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('declaration has no statement', r.stderr)
+            self.assertIn('E1', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_empty_statement_error_flag(self):
+        """Mixed empty-statement warning becomes error with --error."""
+        path = self._ltac('- Claim C1: Safe\n  - Evidence E1:\n')
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown', '--error')
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('declaration has no statement', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_duplicate_link_warns(self):
+        """Two Link entries citing the same element under one parent should warn."""
+        path = self._ltac(
+            '- Claim C1: Safe\n'
+            '  - Evidence E1: test results\n'
+            '  - Claim C2: Sub-claim\n'
+            '    - Link E1\n'
+            '    - Link E1\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('duplicate sibling identifier', r.stderr)
+            self.assertIn('E1', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_duplicate_link_error_flag(self):
+        """Duplicate Link warning becomes error with --error."""
+        path = self._ltac(
+            '- Claim C1: Safe\n'
+            '  - Evidence E1: test results\n'
+            '  - Claim C2: Sub-claim\n'
+            '    - Link E1\n'
+            '    - Link E1\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown', '--error')
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('duplicate sibling identifier', r.stderr)
+        finally:
+            os.unlink(path)
+
+    def test_distinct_links_ok(self):
+        """Two Links to different elements under the same parent are fine."""
+        path = self._ltac(
+            '- Claim C1: Safe\n'
+            '  - Evidence E1: test results\n'
+            '  - Evidence E2: more results\n'
+            '  - Claim C2: Sub-claim\n'
+            '    - Link E1\n'
+            '    - Link E2\n'
+        )
+        try:
+            r = run('--ltac', path, '--select', 'ltac/markdown')
+            self.assertEqual(r.returncode, 0)
+            self.assertNotIn('duplicate sibling identifier', r.stderr)
+        finally:
+            os.unlink(path)
+
+
 if __name__ == '__main__':
     unittest.main()
