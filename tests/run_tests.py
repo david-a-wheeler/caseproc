@@ -52,7 +52,7 @@ import unittest
 # Use abspath to normalise away any leading ./ that Python adds to __file__
 # when the script is invoked as ./run_tests.py from the tests/ directory.
 _HERE    = os.path.dirname(os.path.abspath(__file__))
-LTACPROC = [sys.executable, os.path.join(_HERE, '..', 'caseproc')]
+LTACPROC = [sys.executable, os.path.join(_HERE, '..', 'caseproc.py')]
 FIXTURES = os.path.join(_HERE, 'fixtures')
 RESULTS  = os.path.join(_HERE, 'results')
 

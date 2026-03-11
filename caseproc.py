@@ -18,7 +18,18 @@ from collections import deque
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Set, Tuple
 
-CASEPROC_VERSION = '0.1.0'
+__version__ = '0.1.0'
+
+# Python version support: we currently support Python 3.8 and later.
+# Python 3.8 reached end-of-life on 2024-10-07, so we will eventually drop it.
+# While supporting 3.8 we must avoid features introduced in later versions:
+# - No X|Y union type syntax in annotations (e.g. "int | None"),
+#   use Optional[X] instead; union syntax requires 3.10.
+# - No lowercase built-in generics in annotations (e.g. list[int],
+#   dict[str, int]); use typing.List, typing.Dict, etc. instead;
+#   lowercase generics require 3.9.
+# - No dict merge operator (d1 | d2), requires 3.9; use {**d1, **d2} instead.
+# The walrus operator := is fine; it was introduced in 3.8.
 
 _had_error = False # If true, we saw an error during processing
 _strict = False # If true, turn warnings into errors
@@ -2511,7 +2522,7 @@ Configuration keys (--config FILE, JSON object):
 For full details see docs/design-spec.md.""",
     )
     parser.add_argument(
-        '--version', action='version', version=CASEPROC_VERSION,
+        '--version', action='version', version=__version__,
         help='print version and exit',
     )
     parser.add_argument(
