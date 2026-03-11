@@ -488,6 +488,12 @@ class LTACParser:
                 self._finalize_package()
             return
 
+        leading = len(line) - len(line.lstrip(' '))
+        if leading % 2 != 0:
+            error(f"line {lineno}: indentation must be an even number of spaces"
+                  f" (got {leading}): {line.rstrip()!r}")
+            return
+
         m = _LTAC_LINE_RE.match(line)
         if not m:
             error(f"line {lineno}: unrecognized syntax: {line.rstrip()!r}")
@@ -592,6 +598,16 @@ class LTACParser:
         # Pop stack until top's depth < current depth
         while self._stack and self._stack[-1][0] >= node.depth:
             self._stack.pop()
+
+        # Validate depth: must not jump more than one level deeper than parent.
+        if self._stack:
+            parent_depth = self._stack[-1][0]
+            if node.depth > parent_depth + 1:
+                error(f"line {lineno}: indentation jumps from depth {parent_depth}"
+                      f" to depth {node.depth} (increase must be exactly 2 spaces / 1 level)")
+        elif node.depth > 0:
+            error(f"line {lineno}: indentation is {node.depth * 2} spaces but"
+                  f" there is no parent node to attach to")
 
         if self._stack:
             parent_node = self._stack[-1][1]
