@@ -303,19 +303,22 @@ class TestDubiousReference(unittest.TestCase):
             os.unlink(path)
 
     def test_warn_dubious_reference_false_suppresses(self):
-        """warn_dubious_reference=false suppresses the warning via caseproc-config."""
-        import tempfile, os
+        """warn_dubious_reference=false in the config file suppresses the warning."""
+        import tempfile, os, json
         ltac = self._make_ltac('no-dot-here')
+        cfg = tempfile.NamedTemporaryFile(mode='w', suffix='.config', delete=False)
+        json.dump({'warn_dubious_reference': False}, cfg)
+        cfg.close()
         md = tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False)
-        md.write('<!-- caseproc-config warn_dubious_reference = false -->\n')
         md.write('<!-- caseproc package * -->\n<!-- end caseproc -->\n')
         md.write('<!-- caseproc element C1 -->\n<!-- end caseproc -->\n')
         md.close()
         try:
-            r = run('--ltac', ltac, '--validate', md.name)
+            r = run('--ltac', ltac, '--config', cfg.name, '--validate', md.name)
             self.assertNotIn('dubious', r.stderr.lower() + r.stdout.lower())
         finally:
             os.unlink(ltac)
+            os.unlink(cfg.name)
             os.unlink(md.name)
 
 
@@ -2039,8 +2042,7 @@ class TestPlan10Validations(unittest.TestCase):
         try:
             r = run('--ltac', path, '--select', 'ltac/markdown')
             self.assertEqual(r.returncode, 0)
-            self.assertIn('Evidence should not have children', r.stderr)
-            self.assertIn('E1', r.stderr)
+            self.assertIn('should not be a child of Evidence', r.stderr)
         finally:
             os.unlink(path)
 

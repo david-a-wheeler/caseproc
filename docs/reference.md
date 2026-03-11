@@ -419,6 +419,7 @@ All keys are optional; unrecognized keys produce a warning.
 | `pkg_header_prefix` | `"### "` | String prepended to each package header when rendering `*` with `ltac/*` selectors. |
 | `pkg_header_suffix` | `"\n"` | String appended after each package header when rendering `*` with `ltac/*` selectors (a newline by default, producing a blank separator line). |
 | `pkg_label` | `"Package "` | Word (with trailing space) used to identify packages in rendered output. |
+| `warn_dubious_reference` | `true` | Warn when a node's reference field looks like a parenthetical comment (non-empty, no `.`, doesn't start with `#`).  Set to `false` to suppress these warnings.  Must be set in the config file; cannot be set per-document. |
 
 ---
 
@@ -529,6 +530,10 @@ Currently supported keys:
 | `max_mermaid_children` | non-negative integer |
 | `narrowed_mermaid_children` | non-negative integer |
 | `package_level` | `1`–`6` |
+
+Keys that affect LTAC parsing (such as `warn_dubious_reference`) cannot be
+set per-document because LTAC is parsed before documents are read.
+Set them in the `--config` JSON file instead.
 
 Example — use level-2 headings for packages and level-3 for elements:
 

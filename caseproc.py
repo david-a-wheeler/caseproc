@@ -31,9 +31,17 @@ __version__ = '0.1.0'
 # - No dict merge operator (d1 | d2), requires 3.9; use {**d1, **d2} instead.
 # The walrus operator := is fine; it was introduced in 3.8.
 
+# We generally perform validations as soon we have the information needed:
+# - Per-line in _parse_line when reading LTAC file (e.g., valid indentation)
+# - Per-node, in _build_node and _attach_node (e.g., parent compatibility)
+# - After the LTAC is fully read (e.g., cycle detection)
+# - After the documents are processed (e.g., to report uncovered elements)
+# We want to report problems as soon as we can detect them.
+
+# Implement panic/error/warning/notify reports
+
 _had_error = False # If true, we saw an error during processing
 _strict = False # If true, turn warnings into errors
-
 
 def panic(msg: str) -> None:
     """Print a fatal error to stderr and exit immediately."""
@@ -401,6 +409,8 @@ class Node:
 # Node types that cannot act as inference parents for Claims or Strategies.
 # Used to warn about structurally invalid parent-child relationships.
 _NON_INFERENTIAL_TYPES = frozenset({'Evidence', 'Context', 'Assumption', 'Justification'})
+# Explicit assertion-status options (all lowercase, matching parse_options output).
+_STATUS_OPTIONS = frozenset({'assumed', 'needssupport', 'axiomatic', 'defeated'})
 
 def _infer_id(text: str) -> str:
     """Derive an LTAC identifier from element text for nodes with no explicit ID.
@@ -430,7 +440,7 @@ _LTAC_LINE_RE = re.compile(
 
 
 class LTACParser:
-    def parse(self, lines: List[str]) -> List[Node]:
+    def parse(self, lines: List[str], config: Optional[dict] = None) -> List[Node]:
         """Parse LTAC lines into a forest (list of root Nodes).
 
         Returns one root Node per package.
@@ -439,6 +449,7 @@ class LTACParser:
         self.id_info: Dict[str, dict] tracking per-identifier usage
         stats for post-parse validation.
         """
+        self._warn_dubious_reference: bool = (config or {}).get('warn_dubious_reference', True)
         self.registry: Dict[str, Node] = {}
         # id_info[ident] = {
         #   'declarations': int,       count of non-cited nodes with this ID
@@ -543,6 +554,24 @@ class LTACParser:
             id_inferred=id_inferred,
         )
         self.node_count += 1
+
+        # Assertion status: SACM spec section 11 requires mutual exclusivity.
+        active = _STATUS_OPTIONS.intersection(options)
+        if nodetype == 'Assumption': active = active | {'assumed'}
+        if is_cited:                 active = active | {'ascited'}
+        if len(active) >= 2:
+            label = identifier or f'(unnamed {nodetype})'
+            error(f"line {lineno}: {label}: conflicting assertion status:"
+                  f" {', '.join(sorted(active))} (mutually exclusive per SACM spec section 11)")
+
+        # Dubious reference: warn if the reference looks like a parenthetical comment.
+        if self._warn_dubious_reference and _is_dubious_reference(ref):
+            label = f"{nodetype} {identifier}" if identifier else nodetype
+            warn(f"line {lineno}: {label}: dubious reference ({ref!r}):"
+                 f" has no '.' and doesn't start with '#'"
+                 f" — looks like a parenthetical comment;"
+                 f" use {{}} escape if intended")
+
         return node
 
     def _attach_node(self, node: Node, lineno: int) -> None:
@@ -615,6 +644,15 @@ class LTACParser:
                     and parent_node.node_type in _NON_INFERENTIAL_TYPES):
                 warn(f"line {lineno}: {node.node_type} should not be"
                      f" a child of {parent_node.node_type}")
+            # Evidence is a leaf node; non-metadata children are invalid.
+            # Claim and Strategy are excluded here because the _NON_INFERENTIAL_TYPES
+            # check above already warns when they appear under Evidence, avoiding
+            # a duplicate warning for the same issue.
+            if (parent_node.node_type == 'Evidence'
+                    and node.node_type not in ('Claim', 'Strategy',
+                                               'Context', 'Relation', 'Link')):
+                warn(f"line {lineno}: {node.node_type} should not be a child of"
+                     f" Evidence (Evidence is a leaf node)")
             node.parent = parent_node
             if node.identifier:
                 parent_label = (f" under {parent_node.identifier!r}"
@@ -634,6 +672,10 @@ class LTACParser:
                     f"package starting at line {self._pkg_root_lineno} "
                     f"already has a top-level element; only one allowed"
                 )
+            if node.node_type not in ('Claim', 'Justification'):
+                warn(f"line {lineno}: {node.node_type} {node.identifier!r}:"
+                     f" package starts with {node.node_type!r};"
+                     f" expected Claim or Justification")
             self._current_pkg.append(node)
             self._pkg_root_lineno = lineno
 
@@ -659,10 +701,10 @@ class LTACParser:
         self._stack = []
 
 
-def parse_ltac_lines(lines: List[str]) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
+def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
     """Parse LTAC lines and return (roots, registry, id_info)."""
     parser = LTACParser()
-    roots = parser.parse(lines)
+    roots = parser.parse(lines, config=config)
     return roots, parser.registry, parser.id_info
 
 
@@ -687,14 +729,14 @@ def _recalc_depths(node: 'Node', new_depth: int) -> None:
 # ---------------------------------------------------------------------------
 
 def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
-                   id_info: Dict[str, dict]) -> None:
+                   id_info: Dict[str, dict], config: Optional[dict] = None) -> None:
     """Parse an LTAC file and merge its roots, registry, and id_info into the given collections."""
     try:
         with open(path) as f:
             lines = f.readlines()
     except OSError as e:
         panic(f"cannot open {path!r}: {e}")
-    roots, new_registry, new_id_info = parse_ltac_lines(lines)
+    roots, new_registry, new_id_info = parse_ltac_lines(lines, config=config)
     all_roots.extend(roots)
     for ident, node in new_registry.items():
         if ident in registry:
@@ -2196,10 +2238,7 @@ _ALLOWED_CONFIG_VALUES = {
     'package_level': re.compile(r'^[1-6]$'),
     'max_mermaid_children':    re.compile(r'^(0|[1-9][0-9]*)\Z'),
     'narrowed_mermaid_children': re.compile(r'^(0|[1-9][0-9]*)\Z'),
-    'warn_dubious_reference': re.compile(r'^(true|false)$', re.IGNORECASE),
 }
-
-_BOOLEAN_CONFIG_KEYS = frozenset({'warn_dubious_reference'})
 
 
 def config_invariant_checker(config: dict,
@@ -2245,8 +2284,6 @@ def apply_config_directive(key: str, value: str, config: dict,
     if key in ('element_level', 'package_level',
                'max_mermaid_children', 'narrowed_mermaid_children'):
         config[key] = int(value)
-    elif key in _BOOLEAN_CONFIG_KEYS:
-        config[key] = value.lower() == 'true'
     else:
         config[key] = value
     if key in ('max_mermaid_children', 'narrowed_mermaid_children'):
@@ -2513,8 +2550,8 @@ Validations on the LTAC file (always):
   - Elements with neither an identifier nor a statement are reported as errors
   - Declarations missing a statement give warnings if any declaration has one
   - References that look like parenthetical comments (no '.' and no '#') are
-    flagged as possibly dubious (when warn_dubious_reference is true); add a
-    `()` afterwards to escape a closing parenthetical comment
+    flagged as possibly dubious (disable with warn_dubious_reference=false in
+    the --config file); add a `()` afterwards to escape a closing parenthetical
 
 Additional checks when document files are provided:
   - Every declared LTAC element should have a corresponding 'element' selector
@@ -2534,6 +2571,7 @@ Configuration keys (--config FILE, JSON object):
   package_level      heading level (1-6) for 'package' selector (default: 3)
   package_selections comma-separated list for package sub-sections (default: representation,pkg_defines,pkg_citing,pkg_cited)
   pkg_label          word used to identify packages in output (default: "Package ")
+  warn_dubious_reference  warn when a reference looks like a parenthetical comment (default: true)
 
 For full details see docs/design-spec.md.""",
     )
@@ -2665,30 +2703,6 @@ def find_ltac_file(ltac_arg: Optional[str], config: dict) -> str:
 # enumeration: Asserted (default), NeedsSupport, Assumed, Axiomatic, Defeated,
 # AsCited.  An Assumption node implicitly carries Assumed; a cross-citation
 # (^ID) implicitly carries AsCited.
-def check_assertion_status(registry: Dict[str, Node]) -> None:
-    """Error if any node carries more than one SACM assertion status.
-
-    SACM spec section 11 defines AssertionStatus as a mutually exclusive
-    enumeration with six values: Asserted (default, no option needed),
-    NeedsSupport, Assumed, Axiomatic, Defeated, AsCited.
-    """
-    for node in registry.values():
-        active = []
-        if node.node_type == 'Assumption' or 'assumed' in node.options:
-            active.append('Assumed')
-        if 'needssupport' in node.options:
-            active.append('NeedsSupport')
-        if 'axiomatic' in node.options:
-            active.append('Axiomatic')
-        if 'defeated' in node.options:
-            active.append('Defeated')
-        if node.is_cited:
-            active.append('AsCited')
-        if len(active) >= 2:
-            label = node.identifier or f'(unnamed {node.node_type})'
-            error(f"{label}: conflicting assertion status: {', '.join(active)}"
-                  f" (SACM spec section 11: Asserted/NeedsSupport/Assumed/"
-                  f"Axiomatic/Defeated/AsCited are mutually exclusive)")
 
 
 def check_id_info(id_info: Dict[str, dict]) -> None:
@@ -2823,63 +2837,7 @@ def _is_dubious_reference(ref: str) -> bool:
     return bool(ref) and '.' not in ref and not ref.startswith('#')
 
 
-def check_dubious_references(all_roots: List[Node], id_info: Dict[str, dict],
-                              config: dict) -> None:
-    """Warn for each node whose reference looks like it may be a parenthetical comment.
 
-    Controlled by config key 'warn_dubious_reference' (default True).
-    A reference is dubious if it is non-empty, contains no '.', and does not
-    start with '#'.
-    """
-    if not config.get('warn_dubious_reference', True):
-        return
-    for node in _all_nodes(all_roots):
-        if not node.ext_ref or not _is_dubious_reference(node.ext_ref):
-            continue
-        info = id_info.get(node.identifier, {}) if node.identifier else {}
-        lineno = info.get('decl_lineno') if not node.is_cited else None
-        loc = f"line {lineno}: " if lineno else ""
-        label = f"{node.node_type} {node.identifier}" if node.identifier else node.node_type
-        warn(f"{loc}{label}: dubious reference ({node.ext_ref!r}): has no '.' and doesn't "
-             f"start with '#' — looks like a parenthetical comment; use {{}} escape if intended")
-
-
-def check_package_roots(all_roots: List[Node], id_info: Dict[str, dict]) -> None:
-    """Warn if any package does not start with a Claim or Justification.
-
-    Per the LTAC spec (rule 3), each package should start at the top with a
-    Claim or Justification.  Any other root type is flagged as a warning.
-    """
-    for root in all_roots:
-        if root.node_type not in ('Claim', 'Justification'):
-            info = id_info.get(root.identifier, {}) if root.identifier else {}
-            lineno = info.get('decl_lineno')
-            loc = f"line {lineno}: " if lineno else ""
-            label = (f"{root.node_type} {root.identifier}"
-                     if root.identifier else root.node_type)
-            warn(f"{loc}{label}: package starts with {root.node_type!r};"
-                 f" expected Claim or Justification")
-
-
-def check_evidence_children(all_roots: List[Node], id_info: Dict[str, dict]) -> None:
-    """Warn for every Evidence node that has children.
-
-    Evidence is a leaf node type (analogous to GSN Solution).  Having children
-    under an Evidence node is structurally invalid per the LTAC spec.
-    """
-    for node in _all_nodes(all_roots):
-        if node.node_type != 'Evidence':
-            continue
-        real_children = [c for c in node.children
-                         if c.node_type not in ('Context', 'Relation', 'Link')]
-        if not real_children:
-            continue
-        info = id_info.get(node.identifier, {}) if node.identifier else {}
-        lineno = info.get('decl_lineno') if not node.is_cited else None
-        loc = f"line {lineno}: " if lineno else ""
-        label = (f"Evidence {node.identifier}" if node.identifier else "Evidence")
-        warn(f"{loc}{label}: Evidence should not have children"
-             f" (Evidence is a leaf node)")
 
 
 def _process_files(
@@ -3445,20 +3403,18 @@ def main() -> None:
     id_info: Dict[str, dict] = {}
 
     ltac_path = find_ltac_file(args.ltac, config)
-    load_ltac_file(ltac_path, all_roots, registry, id_info)
+    load_ltac_file(ltac_path, all_roots, registry, id_info, config=config)
     try:
         with open(ltac_path, newline='') as _f:
             ltac_line_ending = detect_line_ending(_f.read())
     except OSError:
         ltac_line_ending = '\n'
 
-    check_assertion_status(registry)
+    # LTAC pase complete. Perform validations needing all LTAC data
     check_id_info(id_info)
     check_anchor_uniqueness(registry)
     check_circularities(registry, all_roots)
     check_reachability(all_roots, registry)
-    check_package_roots(all_roots, id_info)
-    check_evidence_children(all_roots, id_info)
 
     if args.update:
         changed = apply_ltac_update(all_roots, registry)
@@ -3480,13 +3436,10 @@ def main() -> None:
                 apply_detach(all_roots, registry, id_info, a)
             elif op == 'move':
                 apply_move(all_roots, registry, id_info, a, b)
-        check_assertion_status(registry)
         check_id_info(id_info)
         check_anchor_uniqueness(registry)
         check_circularities(registry, all_roots)
         check_reachability(all_roots, registry)
-        check_package_roots(all_roots, id_info)
-        check_evidence_children(all_roots, id_info)
         if _had_error:
             panic("LTAC validation failed after mutations; no files updated")
         tmp = _make_temp(ltac_path, write_ltac(all_roots))
@@ -3511,21 +3464,6 @@ def main() -> None:
         "docs/case.md, docs/case.markdown, docs/case.html"
     )
 
-    # Pre-scan document files for caseproc-config directives so that checks
-    # below (e.g. check_dubious_references) respect per-document settings.
-    for _doc_path in document_files:
-        try:
-            with open(_doc_path, encoding='utf-8', errors='replace') as _doc_f:
-                for _lineno, _line in enumerate(_doc_f, 1):
-                    _cm = _CASEPROC_CONFIG_RE.match(_line.rstrip('\r\n'))
-                    if _cm:
-                        apply_config_directive(_cm.group(1), _cm.group(2), config,
-                                               _doc_path, _lineno)
-        except OSError:
-            pass
-
-    check_dubious_references(all_roots, id_info, config)
-
     if args.select:
         result = render_selector(args.select, registry, all_roots, config, id_info,
                                  doc_format='markdown')
@@ -3537,6 +3475,7 @@ def main() -> None:
         if document_files:
             seen_element_ids: set = set()
             _process_files(document_files, io.StringIO(), registry, all_roots, config, id_info, seen_element_ids, strip=args.strip)
+            # This validation requires that we read all document files
             _check_element_coverage(registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair])
