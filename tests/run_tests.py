@@ -1379,19 +1379,19 @@ class TestCommitUpdates(unittest.TestCase):
             _shutil.rmtree(tmpdir)
 
 
-class TestMissingOption(unittest.TestCase):
+class TestFixMissingOption(unittest.TestCase):
     def _tmp_copy(self, name):
         os.makedirs(RESULTS, exist_ok=True)
         path = os.path.join(RESULTS, name)
         shutil.copy(fixture(name), path)
         return path
 
-    def test_missing_adds_element_regions(self):
-        """--missing appends element regions for elements not yet in the document."""
+    def test_fixmissing_adds_element_regions(self):
+        """--fixmissing inserts element regions for elements not yet in the document."""
         tmp_doc = self._tmp_copy('element-selector-input.md')
         tmp_ltac = self._tmp_copy('simple.ltac')
         try:
-            r = run('--ltac', tmp_ltac, '--missing', tmp_doc)
+            r = run('--ltac', tmp_ltac, '--fixmissing', tmp_doc)
             self.assertEqual(r.returncode, 0)
             content = read_file(tmp_doc)
             # AR1, C2, E1, C3, A1, X1 were not in the document; they should be added.
@@ -1402,8 +1402,8 @@ class TestMissingOption(unittest.TestCase):
             os.unlink(tmp_doc)
             os.unlink(tmp_ltac)
 
-    def test_missing_adds_needs_support_to_leaf(self):
-        """--missing adds {needssupport} to leaf elements in the LTAC."""
+    def test_fixmissing_adds_needs_support_to_leaf(self):
+        """--fixmissing adds {needssupport} to leaf elements in the LTAC."""
         import tempfile
         # Create a minimal LTAC with a leaf claim (no children).
         ltac = '- Claim Root: Root claim\n  - Claim Leaf: A leaf with no children\n'
@@ -1415,7 +1415,7 @@ class TestMissingOption(unittest.TestCase):
             f.write('# Assurance Case\n')
             doc_path = f.name
         try:
-            r = run('--ltac', ltac_path, '--missing', doc_path)
+            r = run('--ltac', ltac_path, '--fixmissing', doc_path)
             self.assertEqual(r.returncode, 0)
             ltac_content = read_file(ltac_path)
             self.assertIn('needssupport', ltac_content)
@@ -1423,8 +1423,8 @@ class TestMissingOption(unittest.TestCase):
             os.unlink(ltac_path)
             os.unlink(doc_path)
 
-    def test_missing_does_not_add_needs_support_to_non_leaf(self):
-        """--missing does not add {needssupport} to non-leaf elements."""
+    def test_fixmissing_does_not_add_needs_support_to_non_leaf(self):
+        """--fixmissing does not add {needssupport} to non-leaf elements."""
         import tempfile
         ltac = '- Claim Root: Root claim\n  - Claim Child: A child\n    - Evidence E1: evidence\n'
         with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
@@ -1434,7 +1434,7 @@ class TestMissingOption(unittest.TestCase):
             f.write('# Test\n')
             doc_path = f.name
         try:
-            r = run('--ltac', ltac_path, '--missing', doc_path)
+            r = run('--ltac', ltac_path, '--fixmissing', doc_path)
             self.assertEqual(r.returncode, 0)
             ltac_content = read_file(ltac_path)
             lines = ltac_content.splitlines()
@@ -1447,8 +1447,8 @@ class TestMissingOption(unittest.TestCase):
             os.unlink(ltac_path)
             os.unlink(doc_path)
 
-    def test_missing_does_not_add_needs_support_if_already_has_status(self):
-        """--missing does not add {needssupport} if element already has an assertion status."""
+    def test_fixmissing_does_not_add_needs_support_if_already_has_status(self):
+        """--fixmissing does not add {needssupport} if element already has an assertion status."""
         import tempfile
         ltac = '- Claim Root: Root claim\n  - Claim Leaf: leaf {assumed}\n'
         with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
@@ -1458,11 +1458,39 @@ class TestMissingOption(unittest.TestCase):
             f.write('# Test\n')
             doc_path = f.name
         try:
-            r = run('--ltac', ltac_path, '--missing', doc_path)
+            r = run('--ltac', ltac_path, '--fixmissing', doc_path)
             self.assertEqual(r.returncode, 0)
             ltac_content = read_file(ltac_path)
             # The {assumed} element should NOT get {needssupport} added.
             self.assertNotIn('needssupport', ltac_content)
+        finally:
+            os.unlink(ltac_path)
+            os.unlink(doc_path)
+
+    def test_fixmissing_places_near_predecessor(self):
+        """--fixmissing inserts new stubs near their LTAC predecessor, not at the end."""
+        import tempfile
+        # LTAC: A -> B -> C (chain)
+        ltac = '- Claim A: top\n  - Claim B: mid\n    - Claim C: leaf\n'
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
+            f.write(ltac)
+            ltac_path = f.name
+        # Doc has only A; B and C are missing.
+        doc = '<!-- verocase element A -->\n<!-- end verocase -->\nSome prose.\n'
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.md', delete=False) as f:
+            f.write(doc)
+            doc_path = f.name
+        try:
+            r = run('--ltac', ltac_path, '--fixmissing', doc_path)
+            self.assertEqual(r.returncode, 0)
+            content = read_file(doc_path)
+            # B and C should both be present
+            self.assertIn('<!-- verocase element B -->', content)
+            self.assertIn('<!-- verocase element C -->', content)
+            # B should appear before C in the document
+            pos_b = content.index('<!-- verocase element B -->')
+            pos_c = content.index('<!-- verocase element C -->')
+            self.assertLess(pos_b, pos_c)
         finally:
             os.unlink(ltac_path)
             os.unlink(doc_path)
@@ -1579,8 +1607,8 @@ class TestWarningSelector(unittest.TestCase):
         finally:
             os.unlink(tmp)
 
-    def test_missing_rerenders_warning_region(self):
-        """--missing re-renders stale warning and package regions, not just appends."""
+    def test_fixmissing_rerenders_warning_region(self):
+        """--fixmissing re-renders stale warning and package regions, not just appends."""
         import tempfile, os
         ltac = '- Claim Root: Root claim\n'
         with tempfile.NamedTemporaryFile(mode='w', suffix='.ltac', delete=False) as f:
@@ -1598,7 +1626,7 @@ class TestWarningSelector(unittest.TestCase):
             f.write(doc)
             doc_path = f.name
         try:
-            r = run('--ltac', ltac_path, '--missing', doc_path)
+            r = run('--ltac', ltac_path, '--fixmissing', doc_path)
             self.assertEqual(r.returncode, 0)
             content = read_file(doc_path)
             self.assertIn('DO NOT EDIT', content)
@@ -1804,18 +1832,18 @@ class TestNormalPath(unittest.TestCase):
         finally:
             shutil.rmtree(workdir, ignore_errors=True)
 
-    def test_autodiscover_missing(self):
-        """--missing discovers case.ltac, re-renders case.md, and appends stubs."""
+    def test_autodiscover_fixmissing(self):
+        """--fixmissing discovers case.ltac, re-renders case.md, and inserts stubs."""
         workdir = self._make_workdir()
         try:
             shutil.copy(fixture('simple.ltac'), os.path.join(workdir, 'case.ltac'))
-            # A minimal doc with no element regions so --missing adds stubs.
+            # A minimal doc with no element regions so --fixmissing adds stubs.
             with open(os.path.join(workdir, 'case.md'), 'w', encoding='utf-8') as f:
                 f.write('# Test\n\n<!-- verocase package * -->\n<!-- end verocase -->\n')
-            r = self._run_in(workdir, '--missing')
+            r = self._run_in(workdir, '--fixmissing')
             self.assertEqual(r.returncode, 0, r.stderr)
             content = read_file(os.path.join(workdir, 'case.md'))
-            # --missing appends element regions for undocumented nodes
+            # --fixmissing inserts element regions for undocumented nodes
             self.assertIn('<!-- verocase element', content)
         finally:
             shutil.rmtree(workdir, ignore_errors=True)
@@ -2162,6 +2190,623 @@ class TestPlan10Validations(unittest.TestCase):
             self.assertNotIn('duplicate sibling identifier', r.stderr)
         finally:
             os.unlink(path)
+
+
+class TestAnalysisOptions(unittest.TestCase):
+    """Tests for the read-only analysis options: --missing, --empty, --orphans,
+    --misplaced, --leaves, --packages."""
+
+    def _write_ltac(self, content):
+        fd, path = tempfile.mkstemp(suffix='.ltac')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return path
+
+    def _write_doc(self, content):
+        fd, path = tempfile.mkstemp(suffix='.md')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return path
+
+    def test_missing_analysis_lists_missing_elements(self):
+        """--missing (analysis) lists LTAC elements with no document selector region."""
+        ltac = '- Claim Root: root\n  - Claim Child: child\n'
+        doc = '<!-- verocase element Root -->\n<!-- end verocase -->\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--missing', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('missing', r.stdout.lower())
+            self.assertIn('Child', r.stdout)
+            self.assertNotIn('Root', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_missing_analysis_none_when_all_present(self):
+        """--missing prints (none) when all LTAC elements have document regions."""
+        ltac = '- Claim Root: root\n'
+        doc = '<!-- verocase element Root -->\n<!-- end verocase -->\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--missing', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('(none)', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_missing_analysis_does_not_modify_files(self):
+        """--missing (analysis) does not modify document or LTAC files."""
+        ltac = '- Claim Root: root\n  - Claim Child: child\n'
+        doc = '<!-- verocase element Root -->\n<!-- end verocase -->\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            original_doc = open(doc_p, encoding='utf-8').read()
+            original_ltac = open(ltac_p, encoding='utf-8').read()
+            r = run('--ltac', ltac_p, '--missing', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertEqual(open(doc_p, encoding='utf-8').read(), original_doc)
+            self.assertEqual(open(ltac_p, encoding='utf-8').read(), original_ltac)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_empty_lists_regions_with_no_prose(self):
+        """--empty lists elements whose document region has no human-written prose."""
+        ltac = '- Claim Root: root\n  - Claim Child: child\n'
+        doc = (
+            '<!-- verocase element Root -->\n'
+            '<!-- end verocase -->\n'
+            '\n'
+            '<!-- verocase element Child -->\n'
+            '<!-- end verocase -->\n'
+            'Some prose for Child.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--empty', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('Root', r.stdout)
+            self.assertNotIn('Child', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_orphans_lists_regions_not_in_ltac(self):
+        """--orphans lists document regions with no matching LTAC declaration."""
+        ltac = '- Claim Root: root\n'
+        doc = (
+            '<!-- verocase element Root -->\n'
+            '<!-- end verocase -->\n'
+            '<!-- verocase element OldElement -->\n'
+            '<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--orphans', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('OldElement', r.stdout)
+            self.assertNotIn('Root', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_misplaced_detects_wrong_order(self):
+        """--misplaced detects elements whose document order differs from LTAC order."""
+        ltac = '- Claim A: a\n  - Claim B: b\n    - Claim C: c\n'
+        # Document has A, C, B - wrong order (C before B)
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\n'
+            '<!-- verocase element C -->\n<!-- end verocase -->\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--misplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            # Either C or B should be reported as misplaced
+            self.assertTrue('C' in r.stdout or 'B' in r.stdout,
+                            f'Expected misplaced element in output: {r.stdout}')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_misplaced_none_when_correct_order(self):
+        """--misplaced reports (none) when all elements appear in LTAC order."""
+        ltac = '- Claim A: a\n  - Claim B: b\n    - Claim C: c\n'
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\n'
+            '<!-- verocase element C -->\n<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--misplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('(none)', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_leaves_lists_leaf_elements(self):
+        """--leaves lists elements with no children."""
+        ltac = '- Claim Root: root\n  - Claim Leaf: leaf claim\n  - Evidence Ev: evidence\n'
+        ltac_p = self._write_ltac(ltac)
+        try:
+            r = run('--ltac', ltac_p, '--leaves')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('All leaves:', r.stdout)
+            self.assertIn('Leaf', r.stdout)
+            self.assertIn('Ev', r.stdout)
+            self.assertNotIn('- Claim Root', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+
+    def test_leaves_highlights_needssupport(self):
+        """--leaves shows {needssupport} leaves in a separate section."""
+        ltac = '- Claim Root: root\n  - Claim NS: needs support {needssupport}\n  - Claim OK: axiomatic {axiomatic}\n'
+        ltac_p = self._write_ltac(ltac)
+        try:
+            r = run('--ltac', ltac_p, '--leaves')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('needssupport', r.stdout)
+            self.assertIn('NS', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+
+    def test_packages_lists_package_structure(self):
+        """--packages shows each package with element counts and direct children."""
+        ltac = '- Claim Root: root claim\n  - Claim Child1: first\n  - Claim Child2: second\n'
+        ltac_p = self._write_ltac(ltac)
+        try:
+            r = run('--ltac', ltac_p, '--packages')
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('Package Root', r.stdout)
+            self.assertIn('elements', r.stdout)
+            self.assertIn('Child1', r.stdout)
+            self.assertIn('Child2', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+
+    def test_analysis_options_combinable(self):
+        """Multiple analysis options can be combined in a single run."""
+        ltac = '- Claim Root: root\n  - Claim Child: child\n'
+        ltac_p = self._write_ltac(ltac)
+        try:
+            r = run('--ltac', ltac_p, '--leaves', '--packages')
+            self.assertEqual(r.returncode, 0)
+            # Both reports present
+            self.assertIn('Leaf', r.stdout)
+            self.assertIn('Package', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+
+    def test_analysis_cannot_combine_with_fixmissing(self):
+        """Analysis options cannot be combined with --fixmissing."""
+        ltac = '- Claim Root: root\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc('# Test\n')
+        try:
+            r = run('--ltac', ltac_p, '--missing', '--fixmissing', doc_p)
+            self.assertNotEqual(r.returncode, 0)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+
+class TestLtacTxtSelector(unittest.TestCase):
+    """Tests for the ltac/txt selector format."""
+
+    def test_ltac_txt_produces_raw_ltac(self):
+        """ltac/txt renders raw LTAC syntax (no Markdown headings or HTML)."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/txt C1')
+        self.assertEqual(r.returncode, 0)
+        # Should contain LTAC syntax
+        self.assertIn('- Claim C1:', r.stdout)
+        # Should NOT contain Markdown link syntax
+        self.assertNotIn('](', r.stdout)
+        # Should NOT contain HTML comment markers
+        self.assertNotIn('<!-- verocase', r.stdout)
+
+    def test_ltac_txt_full_tree(self):
+        """ltac/txt without ID renders the full forest."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/txt')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('- Claim C1:', r.stdout)
+        self.assertIn('- Strategy AR1:', r.stdout)
+
+    def test_ltac_txt_subtree(self):
+        """ltac/txt ID renders only that element and its subtree."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/txt AR1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('- Strategy AR1:', r.stdout)
+        self.assertIn('C2', r.stdout)
+        # Should not include C1 (AR1's parent)
+        self.assertNotIn('- Claim C1:', r.stdout)
+
+    def test_ltac_txt_normalized_depth(self):
+        """ltac/txt of a subtree starts at depth 0 (no leading spaces for root)."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/txt AR1')
+        self.assertEqual(r.returncode, 0)
+        # AR1 is at depth 1 in the tree, but ltac/txt should show it at depth 0
+        lines = r.stdout.strip().splitlines()
+        # First line should start with '- Strategy AR1'
+        self.assertTrue(lines[0].startswith('- Strategy AR1'),
+                        f'Expected "- Strategy AR1..." but got: {lines[0]!r}')
+
+
+class TestInfoSelector(unittest.TestCase):
+    """Tests for the info selector."""
+
+    def test_info_shows_element_header(self):
+        """info ID shows the element type, ID, and statement."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info C1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Element: Claim C1:', r.stdout)
+
+    def test_info_shows_ancestors_package_root(self):
+        """info ID for a package root shows 'Ancestors: (package root)'."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info C1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('(package root)', r.stdout)
+
+    def test_info_shows_ancestors_non_root(self):
+        """info ID for a non-root element shows ancestor chain."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info C2')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Ancestors (root first):', r.stdout)
+        self.assertIn('C1', r.stdout)
+        self.assertIn('AR1', r.stdout)
+
+    def test_info_shows_children(self):
+        """info ID shows the element's children."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info AR1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Children:', r.stdout)
+        self.assertIn('C2', r.stdout)
+        self.assertIn('C3', r.stdout)
+
+    def test_info_shows_descendants_count(self):
+        """info ID shows a descendant count."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info C1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Descendants:', r.stdout)
+
+    def test_info_shows_citations_count(self):
+        """info ID shows citation count."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info C1')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Citations:', r.stdout)
+
+    def test_info_requires_explicit_id(self):
+        """'info' without an ID produces an error."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info')
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('explicit element ID', r.stderr)
+
+    def test_info_unknown_id_errors(self):
+        """'info NOSUCHID' produces an error."""
+        r = run('--ltac', fixture('simple.ltac'), '--select', 'info NOSUCHID')
+        self.assertNotEqual(r.returncode, 0)
+
+
+class TestFixMisplaced(unittest.TestCase):
+    """Tests for the --fixmisplaced option."""
+
+    def _write_ltac(self, content):
+        fd, path = tempfile.mkstemp(suffix='.ltac')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return path
+
+    def _write_doc(self, content):
+        fd, path = tempfile.mkstemp(suffix='.md')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return path
+
+    def test_fixmisplaced_corrects_order(self):
+        """--fixmisplaced moves elements to match LTAC order."""
+        ltac = '- Claim A: a\n  - Claim B: b\n    - Claim C: c\n'
+        # Document has A, C, B - wrong order
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse A.\n'
+            '<!-- verocase element C -->\n<!-- end verocase -->\nProse C.\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse B.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            content = normalise(open(doc_p, encoding='utf-8').read())
+            pos_a = content.index('<!-- verocase element A -->')
+            pos_b = content.index('<!-- verocase element B -->')
+            pos_c = content.index('<!-- verocase element C -->')
+            self.assertLess(pos_a, pos_b, 'A should come before B')
+            self.assertLess(pos_b, pos_c, 'B should come before C')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_fixmisplaced_preserves_prose(self):
+        """--fixmisplaced preserves prose content when moving regions."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        doc = (
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse for B.\n'
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse for A.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            content = normalise(open(doc_p, encoding='utf-8').read())
+            self.assertIn('Prose for A.', content)
+            self.assertIn('Prose for B.', content)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_fixmisplaced_no_change_on_correct_order(self):
+        """--fixmisplaced on an already-ordered document keeps elements in order."""
+        ltac = '- Claim A: a\n  - Claim B: b\n    - Claim C: c\n'
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\n'
+            '<!-- verocase element C -->\n<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            content = normalise(open(doc_p, encoding='utf-8').read())
+            # Elements should remain in A, B, C order
+            pos_a = content.index('<!-- verocase element A -->')
+            pos_b = content.index('<!-- verocase element B -->')
+            pos_c = content.index('<!-- verocase element C -->')
+            self.assertLess(pos_a, pos_b)
+            self.assertLess(pos_b, pos_c)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_analysis_misplaced_does_not_modify_files(self):
+        """--misplaced (analysis) does not modify the document file."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        doc = (
+            '<!-- verocase element B -->\n<!-- end verocase -->\n'
+            '<!-- verocase element A -->\n<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            original = open(doc_p, encoding='utf-8').read()
+            r = run('--ltac', ltac_p, '--misplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertEqual(open(doc_p, encoding='utf-8').read(), original)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+
+class TestInfoDescendantsShortcuts(unittest.TestCase):
+    """Tests for the --info and --descendants shortcut flags."""
+
+    def test_info_flag_matches_select_info(self):
+        """--info ID produces the same output as --select 'info ID'."""
+        r1 = run('--ltac', fixture('simple.ltac'), '--info', 'C1')
+        r2 = run('--ltac', fixture('simple.ltac'), '--select', 'info C1')
+        self.assertEqual(r1.returncode, 0)
+        self.assertEqual(r2.returncode, 0)
+        self.assertEqual(r1.stdout, r2.stdout)
+
+    def test_info_flag_shows_element_context(self):
+        """--info ID shows the element header, package, ancestors, and children."""
+        r = run('--ltac', fixture('simple.ltac'), '--info', 'C2')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('Claim C2', r.stdout)
+        self.assertIn('Package', r.stdout)
+        self.assertIn('Ancestors', r.stdout)
+        self.assertIn('Children', r.stdout)
+
+    def test_info_flag_unknown_id_errors(self):
+        """--info with an unknown ID produces an error and exits non-zero."""
+        r = run('--ltac', fixture('simple.ltac'), '--info', 'NOSUCHID')
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_descendants_flag_matches_select_ltac_txt(self):
+        """--descendants ID produces the same output as --select 'ltac/txt ID'."""
+        r1 = run('--ltac', fixture('simple.ltac'), '--descendants', 'C1')
+        r2 = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/txt C1')
+        self.assertEqual(r1.returncode, 0)
+        self.assertEqual(r2.returncode, 0)
+        self.assertEqual(r1.stdout, r2.stdout)
+
+    def test_descendants_flag_shows_ltac_subtree(self):
+        """--descendants ID shows the element and all its descendants in LTAC syntax."""
+        r = run('--ltac', fixture('simple.ltac'), '--descendants', 'C1')
+        self.assertEqual(r.returncode, 0)
+        # Should include root and children in LTAC format
+        self.assertIn('Claim C1', r.stdout)
+        self.assertIn('Strategy AR1', r.stdout)
+        self.assertIn('- ', r.stdout)  # LTAC bullet lines
+
+    def test_descendants_flag_unknown_id_errors(self):
+        """--descendants with an unknown ID produces an error and exits non-zero."""
+        r = run('--ltac', fixture('simple.ltac'), '--descendants', 'NOSUCHID')
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_info_and_select_are_mutually_exclusive(self):
+        """--info and --select cannot be used together."""
+        r = run('--ltac', fixture('simple.ltac'), '--info', 'C1', '--select', 'ltac/markdown')
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_descendants_and_select_are_mutually_exclusive(self):
+        """--descendants and --select cannot be used together."""
+        r = run('--ltac', fixture('simple.ltac'), '--descendants', 'C1', '--select', 'ltac/markdown')
+        self.assertNotEqual(r.returncode, 0)
+
+
+class TestReadOnly(unittest.TestCase):
+    """Verify that read-only options never modify any stored file."""
+
+    def setUp(self):
+        ltac = (
+            '- Claim Root: Root claim\n'
+            '  - Claim Child: A child claim\n'
+            '    - Evidence Ev1: Evidence item\n'
+        )
+        doc = (
+            '<!-- verocase element Root -->\n<!-- end verocase -->\nProse here.\n'
+            '<!-- verocase element Child -->\n<!-- end verocase -->\n'
+        )
+        fd, self.ltac_path = tempfile.mkstemp(suffix='.ltac')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(ltac)
+        fd, self.doc_path = tempfile.mkstemp(suffix='.md')
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(doc)
+        self.ltac_orig = open(self.ltac_path, encoding='utf-8').read()
+        self.doc_orig = open(self.doc_path, encoding='utf-8').read()
+
+    def tearDown(self):
+        for p in (self.ltac_path, self.doc_path):
+            if os.path.exists(p):
+                os.unlink(p)
+
+    def _assert_files_unchanged(self, *args):
+        """Run verocase with the given args and assert neither file was modified."""
+        r = run(*args)
+        self.assertEqual(r.returncode, 0,
+                         f'verocase {args} exited non-zero: {r.stderr}')
+        with open(self.ltac_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.ltac_orig,
+                             f'verocase {args} modified the LTAC file')
+        with open(self.doc_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.doc_orig,
+                             f'verocase {args} modified the document file')
+
+    # --- Analysis options (as listed in --help) ---
+
+    def test_missing_is_readonly(self):
+        """--missing never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--missing', self.doc_path)
+
+    def test_empty_is_readonly(self):
+        """--empty never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--empty', self.doc_path)
+
+    def test_orphans_is_readonly(self):
+        """--orphans never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--orphans', self.doc_path)
+
+    def test_misplaced_is_readonly(self):
+        """--misplaced never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--misplaced', self.doc_path)
+
+    def test_leaves_is_readonly(self):
+        """--leaves never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--leaves', self.doc_path)
+
+    def test_packages_is_readonly(self):
+        """--packages never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--packages', self.doc_path)
+
+    # --- Read-only modes ---
+
+    def test_validate_is_readonly(self):
+        """--validate never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--validate', self.doc_path)
+
+    def test_select_is_readonly(self):
+        """--select never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--select', 'ltac/markdown')
+
+    def test_stdout_does_not_modify_files(self):
+        """--stdout writes to stdout and never modifies the document file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--stdout', self.doc_path)
+
+    def test_info_is_readonly(self):
+        """--info never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--info', 'Root')
+
+    def test_descendants_is_readonly(self):
+        """--descendants never modifies any file."""
+        self._assert_files_unchanged(
+            '--ltac', self.ltac_path, '--descendants', 'Root')
+
+    # --- Conflict guards ---
+
+    def test_analysis_blocked_with_fixmissing(self):
+        """Analysis options cannot be combined with --fixmissing."""
+        r = run('--ltac', self.ltac_path, '--missing', '--fixmissing', self.doc_path)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cannot be combined', r.stderr)
+
+    def test_analysis_blocked_with_fixmisplaced(self):
+        """Analysis options cannot be combined with --fixmisplaced."""
+        r = run('--ltac', self.ltac_path, '--leaves', '--fixmisplaced', self.doc_path)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cannot be combined', r.stderr)
+
+    def test_analysis_blocked_with_update(self):
+        """Analysis options cannot be combined with --update (checked before any write)."""
+        r = run('--ltac', self.ltac_path, '--missing', '--update', self.doc_path)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cannot be combined', r.stderr)
+        with open(self.ltac_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.ltac_orig,
+                             '--update must not have run before the error')
+
+    def test_analysis_blocked_with_rename(self):
+        """Analysis options cannot be combined with --rename (checked before any write)."""
+        r = run('--ltac', self.ltac_path, '--missing',
+                '--rename', 'Root', 'NewRoot', self.doc_path)
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn('cannot be combined', r.stderr)
+        with open(self.ltac_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.ltac_orig,
+                             '--rename must not have run before the error')
+
+    # --- Combinability ---
+
+    def test_multiple_analysis_options_combinable(self):
+        """All six analysis options can be freely combined with each other."""
+        r = run('--ltac', self.ltac_path, '--missing', '--empty',
+                '--orphans', '--misplaced', '--leaves', '--packages', self.doc_path)
+        self.assertEqual(r.returncode, 0)
+        with open(self.ltac_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.ltac_orig)
+        with open(self.doc_path, encoding='utf-8') as f:
+            self.assertEqual(f.read(), self.doc_orig)
+
+    # --- Help annotation ---
+
+    def test_help_marks_readonly_options(self):
+        """--help output marks read-only options with [READ-ONLY]."""
+        r = run('--help')
+        self.assertEqual(r.returncode, 0)
+        self.assertIn('[READ-ONLY]', r.stdout)
 
 
 if __name__ == '__main__':

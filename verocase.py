@@ -732,6 +732,19 @@ def _all_nodes(roots: List[Node]):
         stack.extend(node.children)
 
 
+def _all_nodes_forward(roots: List[Node]):
+    """Yield every node in the forest in LTAC (as-written) depth-first order.
+
+    Unlike _all_nodes, this preserves first-child-first order matching the
+    order elements appear in the LTAC file.
+    """
+    stack = list(reversed(roots))
+    while stack:
+        node = stack.pop()
+        yield node
+        stack.extend(reversed(node.children))
+
+
 def _recalc_depths(node: 'Node', new_depth: int) -> None:
     """Recursively update depth for node and all descendants."""
     node.depth = new_depth
@@ -1756,11 +1769,12 @@ def render_all_packages(all_roots: List[Node], render_fn, config: dict) -> str:
 
 
 _VALID_DISPLAY_TYPES = {
-    'ltac/markdown', 'ltac/html',
+    'ltac/markdown', 'ltac/html', 'ltac/txt',
     'sacm/mermaid', 'sacm/mermaid/markdown', 'sacm/mermaid/html',
     'gsn/mermaid',  'gsn/mermaid/markdown',  'gsn/mermaid/html',
     'statement',
     'element', 'package',
+    'info',
     'warning',
     'config',  # recognized to give a helpful error directing users to verocase-config
     'referenced_by', 'supported_by', 'supports',
@@ -2174,6 +2188,16 @@ def render_selector(
         return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config)
     elif display_type == 'ltac/html':
         return _render_or_all(element_id, all_roots, render_html, registry, current_element, config)
+    elif display_type == 'ltac/txt':
+        nodes = resolve_element(element_id, registry, all_roots, current_element)
+        if not nodes:
+            return ''
+        return render_ltac_txt(nodes, config)
+    elif display_type == 'info':
+        if element_id is None or element_id == '*':
+            error("'info' selector requires an explicit element ID")
+            return ''
+        return render_info(element_id, all_roots, registry, id_info)
     elif display_type == 'element':
         if element_id is None:
             error("'element' selector requires an explicit ID")
@@ -2589,11 +2613,24 @@ them. A typical document uses these selectors:
   <!-- verocase package MyPkg -->    diagram + index for package MyPkg
   <!-- verocase element MyElem -->   heading + cross-refs for element MyElem
 
-Use --missing to scaffold element regions for elements not yet in the document.
+Use --fixmissing to scaffold element regions for elements not yet in the document.
+
+Read-only options (marked [READ-ONLY] in --help; never modify any stored file):
+  --validate, --select, --info, --descendants, --stdout
+  --missing, --empty, --orphans, --misplaced, --leaves, --packages
+  (--stats does not itself modify files but combines with any mode)
+
+File-modifying options (modify document files, LTAC, or both):
+  default mode, --fixmissing, --fixmisplaced, --start,
+  --update, --rename, --restate, --detach, --move
+
+The read-only analysis options listed above may be freely combined with
+each other.  They cannot be combined with any file-modifying option;
+verocase will exit with an error if you try.
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
---rename, --restate, --detach, --move, --missing, and --start
+--rename, --restate, --detach, --move, --fixmissing, and --start
 *may* modify the LTAC file.
 
 The options --rename, --restate, --detach, and --move all share a single
@@ -2619,9 +2656,15 @@ Selectors are of format `KIND [ID | *]`, where KIND is:
   ltac           ID|*  LTAC argument list (auto-detects format)
   ltac/markdown  ID|*  LTAC as Markdown bullet list
   ltac/html      ID|*  LTAC as HTML <ul> list
+  ltac/txt       ID|*  LTAC as raw text (no Markdown/HTML; shows IDs, options, refs)
+  info           ID    full context: ancestors, children, citation parents, counts
   statement      ID    one-line statement for an element
   warning              fixed "do not edit" warning comment (no ID)
 Use * to render all packages (package/ltac/sacm/gsn selectors).
+
+Shortcuts for common selectors:
+  --info ID          same as --select "info ID"
+  --descendants ID   same as --select "ltac/txt ID"
 
 Validations on the LTAC file (always):
   - There must be no circularities (this prevents circular reasoning)
@@ -2649,7 +2692,7 @@ Validations on the LTAC file (always):
 Additional checks when document files are provided:
   - Every declared LTAC element should have a corresponding 'element' selector
     in a document (used to generate the element's heading and cross-references;
-    use --missing to fix this)
+    use --fixmissing to fix this)
 
 Configuration keys (--config FILE, JSON object):
   document_files     list of document file paths to process (default: auto-discover)
@@ -2684,7 +2727,8 @@ Configuration keys (--config FILE, JSON object):
     )
     parser.add_argument(
         '--stats', action='store_true', default=False,
-        help='after processing, print statistics about the LTAC structure and documents',
+        help='print statistics about the LTAC structure and documents; '
+             'may be combined with any mode (does not itself modify files)',
     )
     parser.add_argument(
         '--strip', action='store_true', default=False,
@@ -2748,32 +2792,86 @@ Configuration keys (--config FILE, JSON object):
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument(
         '--validate', action='store_true',
-        help='validate and report warnings/errors; do not produce output',
+        help='[READ-ONLY] validate and report warnings/errors; do not modify any file',
     )
     mode.add_argument(
         '--select', '-s', type=str, metavar='SELECTOR',
-        help='render SELECTOR to stdout and exit (see selector table below)',
+        help='[READ-ONLY] render SELECTOR to stdout and exit (see selector table below)',
     )
     mode.add_argument(
         '--stdout', action='store_true',
-        help='process document files and write concatenated result to stdout',
+        help='[READ-ONLY] process document files and write result to stdout '
+             'without modifying any stored file',
     )
     mode.add_argument(
         '--selftest', action='store_true',
         help='run the built-in doctest suite and exit (0 = all pass, 1 = any fail)',
     )
     mode.add_argument(
-        '--missing', action='store_true',
-        help='re-render document files and insert element selectors for missing elements; '
+        '--fixmissing', action='store_true',
+        help='re-render document files and insert element selectors for missing elements '
+             'near their natural position in LTAC order; '
              'may modify the LTAC to add needsSupport to some leaf elements',
     )
     mode.add_argument(
+        '--fixmisplaced', action='store_true',
+        help='move element regions that appear in the wrong order (relative to LTAC order) '
+             'to their correct position in the document; use --misplaced first to preview',
+    )
+    mode.add_argument(
         '--start', action='store_true',
-        help='create starter case.ltac and case.md files, then run --missing '
+        help='create starter case.ltac and case.md files, then run --fixmissing '
              'to add missing sections for elements and needsSupport markings '
              'to the new LTAC file. After --start, edit case.ltac and case.md '
              'to describe your system, then run verocase normally. '
              '(panics if any case file already exists)',
+    )
+    mode.add_argument(
+        '--info', type=str, metavar='ID',
+        help='[READ-ONLY] print full context for element ID: package, ancestors, children, '
+             'descendant count, and citation parents. Shorthand for --select "info ID".',
+    )
+    mode.add_argument(
+        '--descendants', type=str, metavar='ID',
+        help='[READ-ONLY] print the LTAC definition of element ID and all its descendants '
+             'in LTAC source form. Shorthand for --select "ltac/txt ID".',
+    )
+
+    # Analysis options: read-only; never modify any file.
+    # May be freely combined with each other and with --stats, --validate, --select,
+    # --info, --descendants.  Cannot be combined with any file-modifying option
+    # (--fixmissing, --fixmisplaced, --start, --update, --rename, --restate,
+    # --detach, --move).
+    parser.add_argument(
+        '--missing', action='store_true', default=False,
+        help='[READ-ONLY] list LTAC elements that have no selector region in any document; '
+             'use --fixmissing to scaffold them',
+    )
+    parser.add_argument(
+        '--empty', action='store_true', default=False,
+        help='[READ-ONLY] list elements whose selector region exists but has no '
+             'human-written prose after <!-- end verocase -->',
+    )
+    parser.add_argument(
+        '--orphans', action='store_true', default=False,
+        help='[READ-ONLY] list document selector regions that have no matching LTAC '
+             'declaration (stale regions left after rename/removal)',
+    )
+    parser.add_argument(
+        '--misplaced', action='store_true', default=False,
+        help='[READ-ONLY] list elements whose selector region appears in the document '
+             'in a different order than their LTAC declaration order; '
+             'use --fixmisplaced to fix them',
+    )
+    parser.add_argument(
+        '--leaves', action='store_true', default=False,
+        help='[READ-ONLY] list leaf elements (no children in LTAC) with their options '
+             'and references; leads with the {needssupport} subset',
+    )
+    parser.add_argument(
+        '--packages', action='store_true', default=False,
+        help='[READ-ONLY] list each package with element counts and the direct children '
+             'of its root',
     )
 
     return parser.parse_args()
@@ -3176,6 +3274,758 @@ def write_ltac(roots: List['Node']) -> str:
     return '\n'.join(lines)
 
 
+# ---------------------------------------------------------------------------
+# Analysis helpers
+# ---------------------------------------------------------------------------
+
+def _scan_document_elements(paths):
+    """Scan document files and return element region info.
+
+    Returns a tuple (ordered_ids, id_info) where:
+    - ordered_ids: list of (identifier, filepath, lineno) for element regions,
+      in document order
+    - id_info: dict mapping identifier ->
+      {'has_prose': bool, 'filepath': str, 'lineno': int}
+    """
+    ordered_ids = []
+    id_info = {}
+
+    for path in paths:
+        try:
+            with open(path, encoding='utf-8', errors='replace') as f:
+                lines = f.readlines()
+        except OSError:
+            continue
+
+        i = 0
+        in_elem_region = False
+        current_ident = None
+        current_lineno = None
+        after_end = False
+        gap_has_content = False
+
+        while i < len(lines):
+            text = lines[i].rstrip('\r\n')
+            # Skip config lines
+            cm = _CASEPROC_CONFIG_RE.match(text)
+            if cm:
+                i += 1
+                continue
+            m = _CASEPROC_REGION_RE.match(text)
+            if m:
+                # If we were tracking prose after an end marker, finalize
+                if after_end and current_ident is not None:
+                    id_info[current_ident]['has_prose'] = gap_has_content
+                after_end = False
+                gap_has_content = False
+                in_elem_region = False
+                current_ident = None
+                current_lineno = None
+
+                selector = m.group(1)
+                parts = selector.split(None, 1)
+                kind = parts[0] if parts else ''
+                if kind == 'element' and len(parts) == 2:
+                    ident = parts[1].strip()
+                    in_elem_region = True
+                    current_ident = ident
+                    current_lineno = i + 1  # 1-based
+                    ordered_ids.append((ident, path, i + 1))
+                    id_info[ident] = {'has_prose': False, 'filepath': path, 'lineno': i + 1}
+
+                i += 1
+                # Consume until end verocase
+                while i < len(lines):
+                    t = lines[i].rstrip('\r\n')
+                    if t.strip() == '<!-- end verocase -->':
+                        if in_elem_region:
+                            after_end = True
+                        in_elem_region = False
+                        i += 1
+                        break
+                    i += 1
+                continue
+
+            # Check for prose after end verocase
+            if after_end and text.strip() and not text.strip().startswith('<!--'):
+                gap_has_content = True
+            i += 1
+
+        # Finalize the last region
+        if after_end and current_ident is not None:
+            id_info[current_ident]['has_prose'] = gap_has_content
+
+    return ordered_ids, id_info
+
+
+def _analysis_missing(all_roots, registry, document_files):
+    """Print analysis of LTAC elements missing from documents."""
+    ordered_ids, _ = _scan_document_elements(document_files)
+    seen = {ident for ident, _, _ in ordered_ids}
+    all_ids_ordered = [node for node in _all_nodes_forward(all_roots)
+                       if not node.is_cited and node.identifier
+                       and node.node_type not in ('Link',)]
+    missing = [node for node in all_ids_ordered if node.identifier not in seen]
+    print("Elements missing a selector region in the document(s):")
+    if not missing:
+        print("  (none)")
+    else:
+        for node in missing:
+            print(f"{node.node_type} {node.identifier}")
+
+
+def _analysis_empty(document_files, registry):
+    """Print analysis of elements with selector regions but no prose."""
+    _, elem_info = _scan_document_elements(document_files)
+    empty = [(ident, info) for ident, info in elem_info.items() if not info['has_prose']]
+    print("Elements with no prose in the document(s):")
+    if not empty:
+        print("  (none)")
+    else:
+        for ident, info in empty:
+            node = registry.get(ident)
+            type_str = node.node_type if node else '?'
+            print(f"{type_str} {ident}")
+
+
+def _analysis_orphans(document_files, registry):
+    """Print analysis of document regions not in LTAC."""
+    ordered_ids, elem_info = _scan_document_elements(document_files)
+    orphans = [(ident, info) for ident, info in elem_info.items() if ident not in registry]
+    print("Orphaned selector regions in the document(s) (not in LTAC):")
+    if not orphans:
+        print("  (none)")
+    else:
+        for ident, info in orphans:
+            print(f"element {ident}")
+
+
+def _analysis_misplaced(document_files, all_roots, registry):
+    """Print analysis of elements whose document order differs from LTAC order.
+
+    Returns a list of (ident, lineno, filepath, expected_predecessor_ident) tuples
+    for misplaced elements.  Prints the analysis report.
+    """
+    # LTAC order: depth-first forward order, exclude citations and Links
+    ltac_order = [node.identifier for node in _all_nodes_forward(all_roots)
+                  if not node.is_cited and node.identifier
+                  and node.node_type not in ('Link',)]
+    ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
+
+    # Document order: only elements that are also in the registry
+    ordered_ids, elem_info = _scan_document_elements(document_files)
+    doc_entries = [(ident, filepath, lineno) for ident, filepath, lineno in ordered_ids
+                   if ident in registry]
+
+    if not doc_entries:
+        print("Misplaced elements (document order differs from LTAC order):")
+        print("  (none)")
+        return []
+
+    # Find misplaced elements: those not in the LCS of LTAC order within document order.
+    # LCS algorithm: find longest subsequence of doc_entries whose LTAC positions are
+    # monotonically increasing.
+    doc_ids = [ident for ident, _, _ in doc_entries]
+
+    # Compute LCS (patience sorting / LIS in LTAC rank space)
+    ranks = [ltac_pos.get(ident, -1) for ident in doc_ids]
+    # Longest increasing subsequence indices
+    from bisect import bisect_left
+    tails = []   # tails[i] = smallest ending rank for an increasing subsequence of length i+1
+    tail_idx = []  # index in doc_entries corresponding to each tail
+    predecessor = [-1] * len(doc_ids)
+
+    for i, r in enumerate(ranks):
+        if r < 0:
+            continue  # skip elements not in LTAC (shouldn't happen since we filter above)
+        pos = bisect_left(tails, r)
+        if pos == len(tails):
+            tails.append(r)
+            tail_idx.append(i)
+        else:
+            tails[pos] = r
+            tail_idx[pos] = i
+        if pos > 0:
+            predecessor[i] = tail_idx[pos - 1]
+
+    # Reconstruct LCS indices
+    if not tail_idx:
+        lis_indices = set()
+    else:
+        lis_indices = set()
+        idx = tail_idx[-1]
+        while idx >= 0:
+            lis_indices.add(idx)
+            idx = predecessor[idx]
+
+    # Misplaced = elements in doc_entries that are NOT in the LIS
+    misplaced_entries = []
+    for i, (ident, filepath, lineno) in enumerate(doc_entries):
+        if i not in lis_indices:
+            misplaced_entries.append((ident, lineno, filepath))
+
+    print("Misplaced elements (document order differs from LTAC order):")
+    if not misplaced_entries:
+        print("  (none)")
+        return []
+
+    # For each misplaced element, find expected predecessor in LTAC order
+    # (nearest preceding element in LTAC order that has a document entry)
+    doc_id_to_entry = {ident: (lineno, filepath) for ident, filepath, lineno in doc_entries}
+    result = []
+    for ident, lineno, filepath in misplaced_entries:
+        ltac_idx = ltac_pos.get(ident, -1)
+        pred_ident = None
+        for j in range(ltac_idx - 1, -1, -1):
+            candidate = ltac_order[j]
+            if candidate in doc_id_to_entry:
+                pred_ident = candidate
+                break
+        node = registry.get(ident)
+        type_str = node.node_type if node else '?'
+        if pred_ident is not None:
+            pred_lineno, pred_filepath = doc_id_to_entry[pred_ident]
+            pred_node = registry.get(pred_ident)
+            pred_type = pred_node.node_type if pred_node else '?'
+            print(f"{type_str} {ident}: at line {lineno}, expected after {pred_type} {pred_ident} (line {pred_lineno})")
+        else:
+            print(f"{type_str} {ident}: at line {lineno}, expected at start of document")
+        result.append((ident, lineno, filepath, pred_ident))
+    return result
+
+
+def _ltac_node_line(node, depth_offset=0):
+    """Format a single LTAC node as a line string, with depth normalized by depth_offset."""
+    indent = '  ' * (node.depth - depth_offset)
+    line = f'{indent}- {node.node_type}'
+    write_id = (node.identifier or node.is_cited) and not (
+        node.id_inferred and _infer_id(node.text) == node.identifier
+    )
+    if write_id:
+        line += ' '
+        if node.is_cited:
+            line += '^'
+        line += node.identifier
+    if node.text:
+        line += f': {node.text}'
+    if node.options:
+        line += ' {' + ', '.join(node.options) + '}'
+    elif node.text and node.text.endswith('}'):
+        line += ' {}'
+    if node.ext_ref:
+        line += f' ({node.ext_ref})'
+    elif node.text and node.text.endswith(')') and not node.options:
+        line += ' ()'
+    return line
+
+
+def _analysis_leaves(all_roots):
+    """Print list of leaf elements."""
+    leaves = []
+    for node in _all_nodes_forward(all_roots):
+        if node.is_cited or node.node_type in ('Link',):
+            continue
+        if node.node_type in ('Strategy', 'Context'):
+            # Omit Strategy/Context leaves unless they carry a problem flag
+            if not node.children:
+                has_problem = any(o in ('needssupport', 'defeated') for o in node.options)
+                if not has_problem:
+                    continue
+        if not node.children:
+            leaves.append(node)
+
+    ns_leaves = [n for n in leaves if 'needssupport' in n.options]
+
+    print("Leaf elements:")
+    if ns_leaves:
+        print("Leaves with {needssupport}:")
+        for n in ns_leaves:
+            print(_ltac_node_line(n, depth_offset=n.depth))
+        print()
+    print("All leaves:")
+    if not leaves:
+        print("  (none)")
+    else:
+        for n in leaves:
+            print(_ltac_node_line(n, depth_offset=n.depth))
+
+
+def _subtree_count(node):
+    """Count node and all its descendants."""
+    count = 0
+    stack = [node]
+    while stack:
+        n = stack.pop()
+        count += 1
+        stack.extend(n.children)
+    return count
+
+
+def _analysis_packages(all_roots):
+    """Print package structure with element counts."""
+    print("Packages:")
+    for root in all_roots:
+        pkg_count = _subtree_count(root)
+        root_line = _ltac_node_line(root, depth_offset=0)
+        print(f"Package {root.identifier} ({pkg_count} elements)")
+        print(root_line)
+        for child in root.children:
+            child_count = _subtree_count(child)
+            child_line = _ltac_node_line(child, depth_offset=0)
+            print(f"{child_line} ({child_count} elements)")
+        print()
+
+
+def render_ltac_txt(node_list, config=None):
+    """Render a list of nodes as raw LTAC text, normalizing indentation to depth 0.
+
+    Each node in node_list is treated as a root; its subtree is rendered
+    with the node at depth 0 regardless of its actual tree depth.
+    """
+    lines = []
+    for root in node_list:
+        depth_offset = root.depth
+        _write_ltac_node_normalized(root, lines, depth_offset)
+    return '\n'.join(lines)
+
+
+def _write_ltac_node_normalized(node, lines, depth_offset):
+    """Append LTAC lines for node and all its descendants, normalizing depth."""
+    lines.append(_ltac_node_line(node, depth_offset=depth_offset))
+    for child in node.children:
+        _write_ltac_node_normalized(child, lines, depth_offset)
+
+
+def render_info(element_id, all_roots, registry, id_info):
+    """Render full context for a single element ID to a string."""
+    node = registry.get(element_id)
+    if node is None:
+        error(f"info: element {element_id!r} not found")
+        return ''
+
+    lines = []
+
+    # Element header line
+    header = f"{node.node_type} {node.identifier}"
+    if node.text:
+        header += f": {node.text}"
+    lines.append(f"Element: {header}")
+
+    # Package
+    pkg_root = node
+    while pkg_root.parent is not None:
+        pkg_root = pkg_root.parent
+    pkg_name = pkg_root.identifier or '(unnamed)'
+    lines.append(f"Package: {pkg_name}")
+
+    # Ancestors
+    ancestors = []
+    anc = node.parent
+    while anc is not None:
+        ancestors.append(anc)
+        anc = anc.parent
+    ancestors.reverse()  # root first
+
+    if not ancestors:
+        lines.append("Ancestors: (package root)")
+    else:
+        lines.append("Ancestors (root first):")
+        for anc in ancestors:
+            lines.append("  " + _ltac_node_line(anc, depth_offset=anc.depth))
+
+    # Children
+    if not node.children:
+        lines.append("Children: (none)")
+    else:
+        lines.append("Children:")
+        for child in node.children:
+            lines.append("  " + _ltac_node_line(child, depth_offset=child.depth))
+
+    # Descendants count (including self)
+    desc_count = _subtree_count(node)
+    lines.append(f"Descendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
+
+    # Citations: how many times this element is cited by others
+    info = id_info.get(element_id, {})
+    citation_count = info.get('citations', 0)
+    citing_pkg_ids = info.get('citing_pkg_ids', [])
+    lines.append(f"Citations: {citation_count}")
+    if citation_count > 0:
+        # Find the actual citing nodes
+        for citing_pkg_id in citing_pkg_ids:
+            citing_root = registry.get(citing_pkg_id)
+            if citing_root is None:
+                continue
+            # Walk the citing package to find nodes that cite element_id
+            for n in _all_nodes([citing_root]):
+                if n.is_cited and n.identifier == element_id:
+                    parent_node = n.parent
+                    if parent_node:
+                        parent_desc = f"{parent_node.node_type} {parent_node.identifier}"
+                        citing_pkg_root = parent_node
+                        while citing_pkg_root.parent is not None:
+                            citing_pkg_root = citing_pkg_root.parent
+                        cp_name = citing_pkg_root.identifier or '(unnamed)'
+                        lines.append(f"  Cited as ^{element_id} by: {parent_desc} (Package {cp_name})")
+                    else:
+                        lines.append(f"  Cited as ^{element_id} (package root)")
+
+    return '\n'.join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Smart missing-element placement
+# ---------------------------------------------------------------------------
+
+def _scan_region_ends(lines):
+    """Scan a list of lines and return a dict mapping element ident -> last line index.
+
+    The 'last line index' is the index of the last line of the element's full
+    region: the <!-- end verocase --> line and all following prose lines up to
+    (but not including) the next verocase marker or end of file.
+    """
+    ident_region_end = {}
+    i = 0
+    current_ident = None
+    after_end = False
+
+    while i < len(lines):
+        text = lines[i].rstrip('\r\n')
+        cm = _CASEPROC_CONFIG_RE.match(text)
+        if cm:
+            if after_end and current_ident is not None:
+                ident_region_end[current_ident] = i - 1
+            after_end = False
+            current_ident = None
+            i += 1
+            continue
+        m = _CASEPROC_REGION_RE.match(text)
+        if m:
+            if after_end and current_ident is not None:
+                ident_region_end[current_ident] = i - 1
+            after_end = False
+            selector = m.group(1)
+            parts = selector.split(None, 1)
+            kind = parts[0] if parts else ''
+            if kind == 'element' and len(parts) == 2:
+                current_ident = parts[1].strip()
+            else:
+                current_ident = None
+            i += 1
+            while i < len(lines):
+                t = lines[i].rstrip('\r\n')
+                if t.strip() == '<!-- end verocase -->':
+                    if current_ident is not None:
+                        after_end = True
+                    i += 1
+                    break
+                i += 1
+            continue
+        i += 1
+
+    if after_end and current_ident is not None:
+        ident_region_end[current_ident] = len(lines) - 1
+
+    return ident_region_end
+
+
+def _insert_missing_stubs(content, all_roots, registry, id_info, config,
+                          seen_element_ids, doc_format):
+    """Insert missing element stubs at their natural positions in the document.
+
+    Processes insertions one at a time in LTAC order, updating line positions
+    after each insertion so that subsequent elements can find their correct
+    predecessor.
+
+    content: document content after normal re-rendering (existing regions updated)
+    Returns: (new_content, count_added)
+    """
+    # Get LTAC order: all declared non-cited non-Link elements
+    ltac_ordered = [node for node in _all_nodes_forward(all_roots)
+                    if not node.is_cited and node.identifier
+                    and node.node_type not in ('Link',)]
+
+    missing = [node for node in ltac_ordered
+               if node.identifier not in seen_element_ids]
+    if not missing:
+        return content, 0
+
+    lines = content.split('\n')
+    if lines and lines[-1] == '':
+        lines = lines[:-1]
+        had_trailing_newline = True
+    else:
+        had_trailing_newline = False
+
+    placed_ids = set(seen_element_ids)
+    inj_state = DocState(doc_format=doc_format, seen_element_ids=set(seen_element_ids))
+
+    for node in missing:
+        ident = node.identifier
+        ltac_idx = ltac_ordered.index(node)
+
+        # Re-scan the current lines to get up-to-date positions
+        ident_region_end = _scan_region_ends(lines)
+
+        # Find nearest predecessor in LTAC order that has a region in current lines
+        pred_ident = None
+        for j in range(ltac_idx - 1, -1, -1):
+            candidate = ltac_ordered[j].identifier
+            if candidate in placed_ids and candidate in ident_region_end:
+                pred_ident = candidate
+                break
+
+        # Build the stub content
+        rendered = render_element_selector(ident, registry, [], id_info, config, inj_state)
+        stub_lines = ['', f'<!-- verocase element {ident} -->']
+        stub_lines.extend(rendered.split('\n'))
+        stub_lines.append('<!-- end verocase -->')
+        stub_lines.append('')
+
+        if pred_ident is not None:
+            after_line = ident_region_end[pred_ident]
+        else:
+            after_line = len(lines) - 1
+
+        # Insert stub_lines immediately after after_line
+        lines[after_line + 1:after_line + 1] = stub_lines
+        placed_ids.add(ident)
+
+    new_content = '\n'.join(lines)
+    if had_trailing_newline:
+        new_content += '\n'
+
+    notify(f"Adding {len(missing)} formerly missing element(s)")
+    return new_content, len(missing)
+
+
+# ---------------------------------------------------------------------------
+# --fixmisplaced implementation
+# ---------------------------------------------------------------------------
+
+def _fixmisplaced_document(path, all_roots, registry, id_info, config,
+                           seen_element_ids, doc_format):
+    """Move misplaced element regions to their correct LTAC order positions.
+
+    Returns a (tmp_path, final_path) pair, or None if no changes or error.
+    """
+    try:
+        with open(path, newline='') as f:
+            original = f.read()
+    except OSError as e:
+        error(f"cannot open {path!r}: {e}")
+        return None
+
+    line_ending = detect_line_ending(original)
+    content = original.replace('\r\n', '\n')
+    lines = content.split('\n')
+    if lines and lines[-1] == '':
+        lines = lines[:-1]
+        had_trailing = True
+    else:
+        had_trailing = False
+
+    # Scan document to find element regions (start line, end line of full region)
+    # A "full region" is from <!-- verocase element X --> through the end of
+    # following prose (up to but not including the next verocase marker).
+    # Format: ident -> (start_line_idx, end_line_idx)  (0-based, inclusive)
+    region_map = {}   # ident -> (start_idx, end_idx)
+    region_order = [] # ident in document order
+
+    i = 0
+    current_ident = None
+    region_start = None
+    after_end = False
+    end_line_idx = None
+
+    while i < len(lines):
+        text = lines[i].rstrip('\r\n')
+        cm = _CASEPROC_CONFIG_RE.match(text)
+        if cm:
+            if after_end and current_ident is not None:
+                region_map[current_ident] = (region_start, i - 1)
+            after_end = False
+            current_ident = None
+            i += 1
+            continue
+        m = _CASEPROC_REGION_RE.match(text)
+        if m:
+            if after_end and current_ident is not None:
+                region_map[current_ident] = (region_start, i - 1)
+            after_end = False
+            current_ident = None
+            selector = m.group(1)
+            parts = selector.split(None, 1)
+            kind = parts[0] if parts else ''
+            if kind == 'element' and len(parts) == 2:
+                current_ident = parts[1].strip()
+                region_start = i
+                region_order.append(current_ident)
+            i += 1
+            while i < len(lines):
+                t = lines[i].rstrip('\r\n')
+                if t.strip() == '<!-- end verocase -->':
+                    if current_ident is not None:
+                        after_end = True
+                        end_line_idx = i
+                    i += 1
+                    break
+                i += 1
+            continue
+        i += 1
+
+    if after_end and current_ident is not None:
+        region_map[current_ident] = (region_start, len(lines) - 1)
+
+    # Get LTAC order
+    ltac_order = [node.identifier for node in _all_nodes_forward(all_roots)
+                  if not node.is_cited and node.identifier
+                  and node.node_type not in ('Link',)]
+    ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
+
+    # Find elements that are in both LTAC and document
+    doc_with_regions = [ident for ident in region_order if ident in registry]
+
+    if not doc_with_regions:
+        return None
+
+    # Find misplaced elements (same LIS algorithm as _analysis_misplaced)
+    ranks = [ltac_pos.get(ident, -1) for ident in doc_with_regions]
+    from bisect import bisect_left
+    tails = []
+    tail_idx = []
+    predecessor = [-1] * len(doc_with_regions)
+
+    for i, r in enumerate(ranks):
+        if r < 0:
+            continue
+        pos = bisect_left(tails, r)
+        if pos == len(tails):
+            tails.append(r)
+            tail_idx.append(i)
+        else:
+            tails[pos] = r
+            tail_idx[pos] = i
+        if pos > 0:
+            predecessor[i] = tail_idx[pos - 1]
+
+    if not tail_idx:
+        lis_indices = set()
+    else:
+        lis_indices = set()
+        idx = tail_idx[-1]
+        while idx >= 0:
+            lis_indices.add(idx)
+            idx = predecessor[idx]
+
+    misplaced = [doc_with_regions[i] for i in range(len(doc_with_regions))
+                 if i not in lis_indices]
+
+    if not misplaced:
+        return None
+
+    # Process moves in LTAC order (forward through LTAC, not document order)
+    # For each misplaced element: remove from current position, insert after predecessor
+    # Work with a mutable list of lines
+    result = list(lines)
+
+    def find_region(lines_list, ident):
+        """Find (start_idx, end_idx) of an element region in lines_list."""
+        i = 0
+        while i < len(lines_list):
+            text = lines_list[i].rstrip('\r\n')
+            m = _CASEPROC_REGION_RE.match(text)
+            if m:
+                selector = m.group(1)
+                parts = selector.split(None, 1)
+                kind = parts[0] if parts else ''
+                if kind == 'element' and len(parts) == 2 and parts[1].strip() == ident:
+                    start = i
+                    i += 1
+                    # Find end verocase
+                    while i < len(lines_list):
+                        t = lines_list[i].rstrip('\r\n')
+                        if t.strip() == '<!-- end verocase -->':
+                            i += 1
+                            break
+                        i += 1
+                    # Consume trailing prose until next verocase marker
+                    while i < len(lines_list):
+                        t = lines_list[i].rstrip('\r\n')
+                        next_m = _CASEPROC_REGION_RE.match(t)
+                        next_cm = _CASEPROC_CONFIG_RE.match(t)
+                        if next_m or next_cm or t.strip() == '<!-- end verocase -->':
+                            break
+                        i += 1
+                    end = i - 1
+                    return start, end
+            i += 1
+        return None, None
+
+    def find_region_end(lines_list, ident):
+        """Find the last line index of the full region for ident."""
+        start, end = find_region(lines_list, ident)
+        return end
+
+    notify(f"Fixing {len(misplaced)} misplaced element region(s) in {path}")
+
+    # Process misplaced elements in LTAC order
+    misplaced_set = set(misplaced)
+    for ltac_ident in ltac_order:
+        if ltac_ident not in misplaced_set:
+            continue
+
+        # Find predecessor (nearest preceding element in LTAC order with a region)
+        ltac_idx = ltac_pos[ltac_ident]
+        pred_ident = None
+        for j in range(ltac_idx - 1, -1, -1):
+            candidate = ltac_order[j]
+            # Check if this candidate has a region in the current result
+            s, e = find_region(result, candidate)
+            if s is not None:
+                pred_ident = candidate
+                break
+
+        # Extract the full region for ltac_ident
+        start, end = find_region(result, ltac_ident)
+        if start is None:
+            continue
+
+        region_lines = result[start:end + 1]
+
+        # Remove the region from its current location
+        # Also remove a leading blank line before the region if present
+        remove_start = start
+        if remove_start > 0 and result[remove_start - 1].strip() == '':
+            remove_start -= 1
+        del result[remove_start:end + 1]
+
+        # Find the new insertion point
+        if pred_ident is not None:
+            insert_after = find_region_end(result, pred_ident)
+            if insert_after is None:
+                insert_after = len(result) - 1
+        else:
+            insert_after = -1  # insert at beginning
+
+        # Insert: blank line separator + region lines
+        insert_pos = insert_after + 1
+        to_insert = [''] + region_lines
+        result[insert_pos:insert_pos] = to_insert
+
+    new_content = '\n'.join(result)
+    if had_trailing:
+        new_content += '\n'
+
+    if new_content == content:
+        return None
+
+    tmp = _make_temp(path, new_content, line_ending)
+    if tmp is None:
+        return None
+    return (tmp, path)
+
+
 def make_backup(pairs: List[Tuple[str, str]], ltac_path: str,
                 config: dict, config_path: Optional[str]) -> None:
     """Create a timestamped backup snapshot of files about to be modified.
@@ -3462,6 +4312,9 @@ def _inline_rewrite_file(
 
     Returns a (tmp_path, final_path) pair if the file needs updating, or None
     if the content is unchanged or an error occurred.
+
+    When add_missing is True, uses smart placement to insert new element stubs
+    near their natural LTAC order position rather than appending at the end.
     """
     global _had_error
     error_before = _had_error
@@ -3474,16 +4327,34 @@ def _inline_rewrite_file(
     line_ending = detect_line_ending(original)
     # Normalise to LF for internal processing; restore on write.
     original_lf = original.replace('\r\n', '\n')
-    buf = io.StringIO()
-    with io.StringIO(original_lf) as src:
-        src.name = path
-        process_document_stream(src, buf, registry, all_roots, config, id_info,
-                                seen_element_ids, detect_doc_format(path),
-                                add_missing=add_missing, strip=strip)
-    if _had_error and not error_before:
-        # Errors occurred while processing this file; leave it untouched.
-        return None
-    new_content = buf.getvalue()
+    doc_format = detect_doc_format(path)
+
+    if add_missing:
+        # Two-pass approach for smart placement:
+        # Pass 1: normal re-render of existing regions (no injection)
+        buf = io.StringIO()
+        with io.StringIO(original_lf) as src:
+            src.name = path
+            process_document_stream(src, buf, registry, all_roots, config, id_info,
+                                    seen_element_ids, doc_format,
+                                    add_missing=False, strip=strip)
+        if _had_error and not error_before:
+            return None
+        rendered = buf.getvalue()
+        # Pass 2: smart insertion of missing elements
+        new_content, _ = _insert_missing_stubs(
+            rendered, all_roots, registry, id_info, config, seen_element_ids, doc_format)
+    else:
+        buf = io.StringIO()
+        with io.StringIO(original_lf) as src:
+            src.name = path
+            process_document_stream(src, buf, registry, all_roots, config, id_info,
+                                    seen_element_ids, doc_format,
+                                    add_missing=False, strip=strip)
+        if _had_error and not error_before:
+            return None
+        new_content = buf.getvalue()
+
     if new_content == original_lf:
         return None  # No change needed.
     tmp = _make_temp(path, new_content, line_ending)
@@ -3545,10 +4416,25 @@ def main() -> None:
     except OSError:
         ltac_line_ending = '\n'
 
-    # LTAC pase complete. Perform validations needing all LTAC data
+    # LTAC parse complete. Perform validations needing all LTAC data
     check_id_info(id_info)
     check_circularities(registry, all_roots)
     check_reachability(all_roots, registry)
+
+    # Detect analysis options early, before any file-modifying operations,
+    # so we can reject illegal combinations before any writes happen.
+    _analysis_flags = ('missing', 'empty', 'orphans', 'misplaced', 'leaves', 'packages')
+    _has_analysis = any(getattr(args, f, False) for f in _analysis_flags)
+    if _has_analysis:
+        _file_modifying_modes = ('fixmissing', 'fixmisplaced', 'start')
+        if any(getattr(args, f, False) for f in _file_modifying_modes):
+            panic("analysis options (--missing, --empty, --orphans, --misplaced, --leaves, --packages) "
+                  "cannot be combined with file-modifying modes (--fixmissing, --fixmisplaced, --start)")
+        if args.update:
+            panic("analysis options cannot be combined with --update (which modifies the LTAC file)")
+        if getattr(args, 'mutations', []):
+            panic("analysis options cannot be combined with --rename/--restate/--detach/--move "
+                  "(which modify the LTAC file)")
 
     if args.update:
         changed = apply_ltac_update(all_roots, registry)
@@ -3598,7 +4484,65 @@ def main() -> None:
         "docs/case.md, docs/case.markdown, docs/case.html"
     )
 
-    if args.select:
+    if _has_analysis:
+        # Analysis-only mode: no document processing, no file modification
+        reports = []
+        if document_files:
+            analysis_doc_files = document_files
+        else:
+            analysis_doc_files = []
+
+        first = True
+        if args.missing:
+            if not first:
+                print()
+            _analysis_missing(all_roots, registry, analysis_doc_files)
+            first = False
+        if args.empty:
+            if not first:
+                print()
+            _analysis_empty(analysis_doc_files, registry)
+            first = False
+        if args.orphans:
+            if not first:
+                print()
+            _analysis_orphans(analysis_doc_files, registry)
+            first = False
+        if args.misplaced:
+            if not first:
+                print()
+            _analysis_misplaced(analysis_doc_files, all_roots, registry)
+            first = False
+        if args.leaves:
+            if not first:
+                print()
+            _analysis_leaves(all_roots)
+            first = False
+        if args.packages:
+            if not first:
+                print()
+            _analysis_packages(all_roots)
+            first = False
+
+        if _had_error:
+            sys.exit(1)
+        return
+
+    if args.info:
+        result = render_selector(f'info {args.info}', registry, all_roots, config, id_info,
+                                 doc_format='markdown')
+        if result:
+            print(result)
+        if ltac_pair:
+            commit_updates([ltac_pair], ltac_path, config, config_path)
+    elif args.descendants:
+        result = render_selector(f'ltac/txt {args.descendants}', registry, all_roots, config, id_info,
+                                 doc_format='markdown')
+        if result:
+            print(result)
+        if ltac_pair:
+            commit_updates([ltac_pair], ltac_path, config, config_path)
+    elif args.select:
         result = render_selector(args.select, registry, all_roots, config, id_info,
                                  doc_format='markdown')
         if result:
@@ -3621,11 +4565,11 @@ def main() -> None:
         _check_element_coverage(registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
-    elif args.missing or args.start:
+    elif args.fixmissing or args.start:
         if not document_files:
             panic(_NO_FILES_MSG)
         seen_element_ids: set = set()
-        # Re-render all files; inject missing element regions into the last file.
+        # Re-render all files; inject missing element regions (smart placement) into the last file.
         pairs = []
         for i, path in enumerate(document_files):
             is_last = (i == len(document_files) - 1)
@@ -3641,6 +4585,28 @@ def main() -> None:
             tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
             if tmp is not None:
                 pairs.append((tmp, ltac_path))
+        if ltac_pair:
+            pairs.append(ltac_pair)
+        if pairs:
+            commit_updates(pairs, ltac_path, config, config_path)
+    elif args.fixmisplaced:
+        if not document_files:
+            panic(_NO_FILES_MSG)
+        seen_element_ids: set = set()
+        # First pass: re-render existing regions to get current state
+        pairs = []
+        for path in document_files:
+            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info,
+                                        seen_element_ids, add_missing=False)
+            if pair:
+                pairs.append(pair)
+        # Second pass: fix misplaced regions
+        # Need to work on the current file content (updated or original)
+        for path in document_files:
+            pair = _fixmisplaced_document(path, all_roots, registry, id_info, config,
+                                          seen_element_ids, detect_doc_format(path))
+            if pair:
+                pairs.append(pair)
         if ltac_pair:
             pairs.append(ltac_pair)
         if pairs:

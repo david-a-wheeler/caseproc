@@ -177,7 +177,7 @@ Options appear in `{...}` near the end of a line and modify the element:
 
 The most useful option for active development is `needssupport`:
 it flags leaves that aren't finished yet.
-`--missing` adds `{needssupport}` automatically to any leaf claims.
+`--fixmissing` adds `{needssupport}` automatically to any leaf claims.
 
 ### Identifiers
 
@@ -219,6 +219,8 @@ Write your narrative *outside* these regions.
 | `<!-- verocase gsn/mermaid * -->` | GSN diagrams for all packages |
 | `<!-- verocase ltac/markdown * -->` | Full LTAC as a Markdown bullet list |
 | `<!-- verocase statement ID -->` | Single-line statement text for ID |
+| `<!-- verocase ltac/txt ID -->` | Raw LTAC source for the element subtree (no generated Markdown) |
+| `<!-- verocase info ID -->` | Full context: package, ancestors, children, citations |
 
 See [reference.md](reference.md) for the full selector table.
 
@@ -258,23 +260,31 @@ The `element` selector generates a stable heading and cross-reference
 links (what supports this element, what it supports, where it's cited).
 Your prose goes immediately after the `<!-- end verocase -->` line.
 
-### Using `--missing` to scaffold element regions
+### Using `--fixmissing` to scaffold element regions
 
 If your LTAC has many elements, adding all the `element` regions by hand
-is tedious. `--missing` does it for you:
+is tedious. `--fixmissing` does it for you:
+
+```sh
+verocase --fixmissing
+```
+
+This re-renders all existing regions *and* inserts a skeleton
+`element` region for every LTAC element that has no region yet.
+New regions are placed near their natural LTAC position (after their
+nearest already-present predecessor in the document), so the resulting
+document is already in roughly the right order.
+It also marks every leaf claim with `{needssupport}` if it lacks one.
+
+To *preview* which elements are missing without modifying any file, use
+the read-only `--missing` analysis option:
 
 ```sh
 verocase --missing
 ```
 
-This re-renders all existing regions *and* appends a skeleton
-`element` region for every LTAC element that has no region yet.
-It also marks every leaf claim with `{needssupport}` if it lacks one.
-
-After running `--missing`, open `case.md` and rearrange the appended
-regions into the order you want. Move them next to the appropriate sections,
-add your narrative after each `<!-- end verocase -->`, and run
-`verocase` to regenerate.
+After running `--fixmissing`, add your narrative after each
+`<!-- end verocase -->` line and run `verocase` to regenerate.
 
 ---
 
@@ -406,6 +416,10 @@ Identifiers with spaces need quoting:
 verocase --rename "Login Safe" LoginSafe
 ```
 
+After renaming, run `verocase --orphans` to confirm no stale regions remain
+in the document, and `verocase --missing` to confirm the renamed element
+now has a region.
+
 ### Updating a statement
 
 To change an element's statement text everywhere, you can edit the
@@ -434,6 +448,91 @@ Without `--update`, a mismatch produces a warning suggesting you run it.
 
 ---
 
+## Analysis options
+
+Analysis options inspect the case without modifying any file.
+They can be freely combined with each other but not with file-modifying modes.
+
+| Option | What it reports |
+|---|---|
+| `--missing` | LTAC elements that have no `element` selector region in any document |
+| `--empty` | Element regions that exist in the document but have no human-written prose |
+| `--orphans` | Document selector regions whose ID is not declared in the LTAC (stale after rename/removal) |
+| `--misplaced` | Elements whose document region is in a different order than their LTAC declaration order |
+| `--leaves` | All leaf elements (no children in the LTAC), grouped by flag |
+| `--packages` | Each package with its element count and the direct children of its root |
+
+You can combine them freely:
+
+```sh
+verocase --missing --empty --orphans --misplaced
+```
+
+Each report is printed in turn, separated by a blank line.
+No files are changed regardless of what is found.
+
+### Typical workflow after structural changes
+
+After renaming or removing an element from the LTAC:
+
+1. `verocase --orphans` — see which old document regions are now stale.
+2. Edit the document to remove (or repurpose) those orphaned regions.
+3. `verocase --missing` — confirm no LTAC elements are now unrepresented.
+4. Run `verocase --fixmissing` if you need to scaffold any new regions.
+5. Run `verocase --misplaced` to check whether new regions need reordering;
+   run `verocase --fixmisplaced` to move them automatically.
+
+---
+
+## Inspecting the LTAC structure
+
+### `ltac/txt` selector and `--descendants`
+
+The `ltac/txt ID` format renders a subtree as raw LTAC source
+rather than as processed Markdown. This is useful when reviewing a
+potential `--detach` target:
+
+```sh
+verocase --select "ltac/txt Requirements" --stdout
+# or equivalently:
+verocase --descendants Requirements
+```
+
+Output is the LTAC declaration of the named element and all its
+descendants, indented as in `case.ltac`, with no generated Markdown
+(no headings, no comment markers, no `[text](url)` link syntax).
+
+### `info` selector and `--info`
+
+The `info ID` selector shows full context for one element in one shot:
+its package, ancestors, children, descendant count, and any
+cross-package citations that reference it:
+
+```sh
+verocase --select "info SpecialAnalysis" --stdout
+# or equivalently:
+verocase --info SpecialAnalysis
+```
+
+Example output:
+
+```
+Element: Claim SpecialAnalysis: Reused components with apparent vulnerabilities are analyzed and safe
+Package: Implementation
+Ancestors (root first):
+  - Claim Implementation: Security in implementation
+  - Strategy CommonVulns: Most vulnerabilities arise from common categories of error
+  - Claim ReuseSec: Reused software is secure
+  - Strategy ReuseStrat: Reuse is often appropriate and can be done securely
+Children:
+  - Claim XXESafe: Nokogiri/libxml2 XXE exception poses no risk in our deployment
+  - Claim ErubisSafe: XSS from erubis via pronto poses no production risk
+Descendants: 8 (including self, all descendants, citations, and links in subtree)
+Citations: 0
+```
+
+---
+
 ## Tips
 
 **Keep the LTAC focused on the argument.**
@@ -457,6 +556,12 @@ Running `verocase --strip --stdout` produces a version of the document that
 omits the bulky generated diagrams and boilerplate, leaving just the
 document structure, your prose, and the LTAC markers.
 This makes it much easier for an AI to understand and reason about your case.
+
+**After `--fixmissing`, use `--fixmisplaced` to sort the document.**
+`--fixmissing` now places new regions near their natural LTAC position,
+so most of the time the document is already in order.
+If it isn't (e.g., after reorganizing the LTAC), run `verocase --misplaced`
+to see what needs moving, then `verocase --fixmisplaced` to fix it.
 
 ---
 

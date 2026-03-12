@@ -222,7 +222,8 @@ by `Justification`, `Assumption`, or `Strategy`
 verocase [--config FILE] [--error] [--update]
          [--rename OLD NEW] [--restate LABEL STATEMENT]
          [--ltac FILENAME]
-         [--validate | --select SELECTOR | --stdout | --selftest | --missing | --start]
+         [--validate | --select SELECTOR | --stdout | --selftest | --fixmissing | --fixmisplaced | --start]
+         [--missing] [--empty] [--orphans] [--misplaced] [--leaves] [--packages]
          [files ...]
 ```
 
@@ -262,39 +263,87 @@ Useful for previewing output or for piping into other tools.
 Runs the built-in doctest suite and exits.
 Exit code is 0 if all tests pass, 1 if any fail.
 
-### --missing
+### --fixmissing
 
 Re-renders all marked regions in the document files (the same way normal
 mode does) and, for every declared LTAC element that has no corresponding
-`element` selector, appends a skeleton
-`<!-- verocase element ID -->…<!-- end verocase -->` region.
-In HTML documents the appended regions are inserted immediately before
-`</body>`; in Markdown documents they are appended at EOF.
+`element` selector, inserts a skeleton
+`<!-- verocase element ID -->…<!-- end verocase -->` region near the
+element's natural position in the document (immediately after its nearest
+predecessor in LTAC depth-first order).  Falls back to appending at EOF
+only when no predecessor has a document region yet (e.g., an empty document).
 
 Also marks every leaf node (no supporting children) that lacks an
 assertion-status option with `{needsSupport}` in the LTAC file.
 
 Rewrites document files and the LTAC file in place.
 
-`--missing` is intended as a one-time scaffolding aid when bringing an
-existing LTAC file into a new document.  After running it, review and
-reorganize the inserted regions as needed.
+`--fixmissing` is intended as a one-time scaffolding aid when bringing an
+existing LTAC file into a new document.  After running it, review the
+inserted regions and run `verocase` (normal mode) to continue.  Because
+stubs are placed in LTAC order, a subsequent `--fixmisplaced` should not
+be needed.
+
+Use `--missing` (without `fix`) to *preview* which elements are missing
+without modifying any file.
+
+### --fixmisplaced
+
+Moves element regions that appear in the wrong document order (relative
+to LTAC depth-first order) to their correct positions.  A "full region"
+is everything from `<!-- verocase element ID -->` through
+`<!-- end verocase -->` and the following prose block (up to but not
+including the next `<!-- verocase element -->` or
+`<!-- verocase-config -->` line).
+
+Processes moves in LTAC order so that each move lands in the right place
+even when multiple elements are misplaced.
+
+Rewrites document files in place.
+
+Use `--misplaced` (without `fix`) to *preview* which elements are
+misplaced without modifying any file.
 
 ### --start
 
 Creates a starter `case.ltac` and `case.md` in the current directory and
-then populates them (equivalent to running `--missing` on the new files).
+then populates them (equivalent to running `--fixmissing` on the new files).
 Panics if any of the following files already exists:
 `case.ltac`, `docs/case.ltac`, `case.md`, `case.markdown`, `case.html`,
 `docs/case.md`, `docs/case.markdown`, `docs/case.html`.
 
 After `--start`:
 - `case.md` has its `warning` and `package *` regions filled in and
-  skeleton `element` regions appended for every node in the LTAC.
+  skeleton `element` regions inserted in LTAC order for every node.
 - `case.ltac` has `{needsSupport}` added to all leaf claims.
 
 `--start` is intended as a quick on-ramp for new projects and tutorials.
 Edit the generated files and run `verocase` (normal mode) to continue.
+
+### Analysis options
+
+Analysis options are **read-only**: they print information to stdout and
+never modify any file.  They may be freely combined with each other but
+cannot be combined with file-modifying modes (`--fixmissing`,
+`--fixmisplaced`, `--start`).
+
+| Option | Description |
+|---|---|
+| `--missing` | List LTAC elements that have no selector region in any document.  Use `--fixmissing` to scaffold them. |
+| `--empty` | List elements whose selector region exists but has no human-written prose after `<!-- end verocase -->`. |
+| `--orphans` | List document selector regions with no matching LTAC declaration (stale regions left after rename or removal). |
+| `--misplaced` | List elements whose selector region appears in the document in a different order than their declaration order in the LTAC.  Use `--fixmisplaced` to fix them. |
+| `--leaves` | List leaf elements (no children in LTAC) with their options and references.  Leads with the `{needssupport}` subset. |
+| `--packages` | List each package with element counts and the direct children of its root element. |
+
+Multiple analysis options may be combined in a single run; each report is
+separated by a blank line and printed in the order shown above.
+
+Example: preview everything before scaffolding:
+
+```sh
+verocase --missing --empty --orphans --misplaced
+```
 
 ### --ltac FILENAME
 
@@ -379,6 +428,8 @@ For selectors that accept `*`, all packages are rendered in order.
 | `ltac [ID\|*]` | optional | LTAC argument list (auto-detects format) |
 | `ltac/markdown [ID\|*]` | optional | LTAC as an indented Markdown bullet list |
 | `ltac/html [ID\|*]` | optional | LTAC as a nested HTML `<ul>` list |
+| `ltac/txt [ID\|*]` | optional | LTAC as raw text (IDs, options, refs; no Markdown or HTML) |
+| `info ID` | required | Full context for one element: ancestors, children, citation parents, counts |
 | `statement ID` | required | Single-line statement: `Statement: …` |
 | `warning` | none | Fixed "do not edit" comment pair |
 
@@ -391,6 +442,13 @@ The shorthand expansions are:
 | `gsn` | `gsn/mermaid/markdown` | `gsn/mermaid/html` |
 | `gsn/mermaid` | `gsn/mermaid/markdown` | `gsn/mermaid/html` |
 | `ltac` | `ltac/markdown` | `ltac/html` |
+
+Two CLI shortcuts exist for the most commonly used inspection selectors:
+
+| Flag | Equivalent |
+|---|---|
+| `--info ID` | `--select "info ID"` |
+| `--descendants ID` | `--select "ltac/txt ID"` |
 
 ---
 
@@ -510,8 +568,9 @@ the assurance case in the document.
 `*` renders all packages in order.
 
 `verocase` warns if a declared LTAC element has no corresponding `element`
-selector in any processed document.  Use `--missing` to scaffold the
-missing regions automatically.
+selector in any processed document.  Use `--missing` (analysis option) to
+*list* which elements are missing without modifying any file, or use
+`--fixmissing` to scaffold them automatically.
 
 ### Per-document configuration
 
