@@ -1,3 +1,4 @@
+# These exclusions must be kept in sync with [tool.flit.sdist] in pyproject.toml.
 tests/results/
 tests/fixtures/.backup/
 __pycache__/

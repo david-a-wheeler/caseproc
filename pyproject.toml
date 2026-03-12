@@ -43,5 +43,6 @@ Issues = "https://github.com/david-a-wheeler/verocase/issues"
 verocase = "verocase:main"
 
 [tool.flit.sdist]
+# These include/exclude lists must be kept in sync with .gitignore.
 include = ["tests/", "docs/"]
-exclude = ["docs/archive", "tests/results", "tests/fixtures/.backup", "tests/**/.backup"]
+exclude = ["docs/archive", "tests/results", "tests/fixtures/.backup"]
