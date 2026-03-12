@@ -6,9 +6,38 @@ build-backend = "flit_core.buildapi"
 name = "verocase"
 dynamic = ["version", "description"]
 readme = "README.md"
-license = {file = "LICENSE.md", text = "MIT"}
+license = {file = "LICENSE.md"}
+# license-expression is PEP 639; flit_core doesn't recognize it yet and warns,
+# but the field is harmless and will be used by tools that support PEP 639.
+license-expression = "MIT"
+keywords = [
+  "assurance-case", "assurance case",
+  "safety-case",
+  "SACM", "GSN", "LTAC", "CAE",
+  "security case", "security justification",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Documentation",
+  "Topic :: Software Development :: Quality Assurance",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
 requires-python = ">=3.8"
 authors = [{name = "David A. Wheeler"}]
+
+[project.urls]
+Homepage = "https://github.com/david-a-wheeler/verocase"
+Source = "https://github.com/david-a-wheeler/verocase"
+Issues = "https://github.com/david-a-wheeler/verocase/issues"
 
 [project.scripts]
 verocase = "verocase:main"
