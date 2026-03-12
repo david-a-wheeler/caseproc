@@ -2508,37 +2508,62 @@ def parse_args() -> argparse.Namespace:
         description='Process assurance case LTAC file and update documentation files (Markdown/HTML)',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""\
-This program normally reads an LTAC file and then updates (modifies)
-document file(s) in Markdown/HTML to update them: their headers that involve
-assurance case elements or packages, their HTML anchors, and all text regions
-inside the markers <!-- verocase SELECTOR --> ... <!-- end verocase -->.
+This program normally reads an LTAC file as input and then updates (modifies)
+corresponding document file(s) in Markdown/HTML within their text regions
+marked by <!-- verocase SELECTOR --> ... <!-- end verocase -->.
 
-The intended normal use is that you simply edit the LTAC file for the
-high-level argument and the document file(s) in Markdown/HTML for all details
-(the "content" in SACM parlance). Then run this program to validate the
-structure and update your document files in Markdown/HTML with graphics,
-hyperlinks, and other material. The document files' marked regions will
-be updated, but *only* those regions.
+The intended normal use is that you simply edit the LTAC file to express
+the high-level assurance case ("why you believe some claim is true") and edit
+the Markdown/HTML for all details (the "content" in SACM parlance).
+At any time you can re-run this program to validate the
+assurance case structure and to update your Markdown/HTML document files.
+Those updates will typically include generated graphics, hyperlinks,
+and other material. The document files' marked regions will
+be updated, but *only* those regions will be updated.
 
-The LTAC input file format contains a series of 1+ packages.
+Quick start: run `verocase --start` to create project starter files
+case.ltac and case.md. From then on, repeatedly edit those files to
+describe your assurance case, run `verocase` to validate and update the
+documents, and review the results.
+
+The LTAC input file format must contain a series of 1+ packages.
 A package begins with an un-indented line defining its top element,
 followed by 0+ lines defining its sub-elements. Each line defines
-an element, indented two spaces/level:
+an element, indented two spaces/level, in this format:
 - TYPE [^][ID]: text [{options}] [(reference)]
 
-Types: Claim (goal/assertion), Strategy (argument pattern), Evidence
-(supporting artifact), Justification (rationale), Context (background
-information), Assumption (accepted-as-true claim), Relation (explicit
-relationship), Link ID (citation of an already-defined element).
-The critical type is "Claim"; its text should be a true/false statement
-that you would like to be true. Packages let you organize groups of
-elements so you aren't trying to deal with "everything at once".
+Types:
+  Claim        goal/assertion; text should be a true/false statement you
+               want to be true (this is the primary building block)
+  Strategy     argument pattern; explains *how* its sub-elements support
+               the parent claim (e.g. "argued by examining X and Y").
+               Not necessary if it's obvious how a claim is justified
+               by its children.
+  Evidence     supporting artifact (leaf only; no children allowed)
+  Justification  rationale for a design decision or argument choice
+  Context      background information (scope, environment, definitions)
+  Assumption   claim accepted as true without proof; implicitly 'assumed'
+  Relation     explicit relationship between two elements
+  Link ID      non-hierarchical cross-reference to element ID; does not
+               affect the argument hierarchy
 
-IDs are optional but strongly recommended; external IDs begin with '^'
-(and must match the sole defining ID without a beginning '^').
-If the ID is omitted, the text is the ID (after stripping ^{}()\\n\\r).
-Options are a comma-separated list (e.g. {needssupport, metaclaim}).
-Reference is a file path, URL, or anchor (e.g. (report.pdf)).
+Packages organize top-level claims so you can focus on one part at a time.
+
+IDs are optional but strongly recommended. A bare ID (no `^` prefix) declares
+the element; use the prefix `^` to cite (cross-reference) an element declared
+elsewhere. If the ID is omitted, the text is the ID (after
+stripping ^{}()\\n\\r).
+
+Key options in the LTAC file (these are comma-separated inside {}):
+  needssupport  leaf element needs supporting evidence (--missing adds these)
+  axiomatic     accepted as foundational; needs no supporting evidence
+  defeated      argument is disproved or no longer valid
+  assumed       claim is treated as an assumption (no support required)
+  metaclaim     claim is about the argument structure itself, not the system
+
+Reference is a file path, URL, or anchor (e.g. (report.pdf)). If you want
+to end a statement with a parenthetical comment, use the empty reference `()`
+after it to clearly indicate that the text is not a reference.
 
 Here's an example of a simple LTAC file's contents:
 
@@ -2552,6 +2577,19 @@ Here's an example of a simple LTAC file's contents:
   - Claim Availability: Availability is maintained
 
 - Claim Design: Security is implemented in design
+
+Document files contain marked regions that verocase manages:
+  <!-- verocase SELECTOR -->
+  ...content regenerated by verocase on every run...
+  <!-- end verocase -->
+
+You write everything *outside* these markers; verocase only rewrites inside
+them. A typical document uses these selectors:
+  <!-- verocase warning -->          placed at top; do-not-edit notice
+  <!-- verocase package MyPkg -->    diagram + index for package MyPkg
+  <!-- verocase element MyElem -->   heading + cross-refs for element MyElem
+
+Use --missing to scaffold element regions for elements not yet in the document.
 
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
@@ -2568,12 +2606,10 @@ All file updates are done carefully. The updated files are generated
 first as temporary files, then a timestamped backup snapshot is created
 under .backups/ next to the LTAC file, and only then are the generated
 files moved to their final destinations. Old snapshots are automatically
-rotated (max_backups in config, default 20). Use --stdout to skip
-in-place updates entirely.
+rotated (max_backups in config, default 20). Use --stdout to prevent
+in-place updates.
 
 Selectors are of format `KIND [ID | *]`, where KIND is:
-  ltac/markdown  ID|*   render as an indented Markdown bullet list
-  ltac/html      ID|*   render as a nested HTML list
   element        ID    heading + cross-references for one element
   package        ID|*  heading + diagram + index for one or all packages
   sacm           ID|*  SACM mermaid diagram (auto-detects markdown/HTML output)
@@ -2616,6 +2652,9 @@ Additional checks when document files are provided:
     use --missing to fix this)
 
 Configuration keys (--config FILE, JSON object):
+  document_files     list of document file paths to process (default: auto-discover)
+  ltac_file          LTAC file path (alternative to --ltac; default: auto-discover)
+  max_backups        number of timestamped backup snapshots to keep (default: 20)
   base_url           base URL for hyperlinks in sacm/gsn mermaid output (default: "")
   markdown_base_url  base URL for hyperlinks in ltac/markdown and ltac/html output (default: "")
   default_renderer   renderer for 'sacm'/'gsn' shorthands: "mermaid" (default)
@@ -2731,8 +2770,9 @@ Configuration keys (--config FILE, JSON object):
     mode.add_argument(
         '--start', action='store_true',
         help='create starter case.ltac and case.md files, then run --missing '
-             'to add missing sections for elements and '
-             'needsSupport markings to the new LTAC file. '
+             'to add missing sections for elements and needsSupport markings '
+             'to the new LTAC file. After --start, edit case.ltac and case.md '
+             'to describe your system, then run verocase normally. '
              '(panics if any case file already exists)',
     )
 
