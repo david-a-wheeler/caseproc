@@ -2540,6 +2540,19 @@ If the ID is omitted, the text is the ID (after stripping ^{}()\\n\\r).
 Options are a comma-separated list (e.g. {needssupport, metaclaim}).
 Reference is a file path, URL, or anchor (e.g. (report.pdf)).
 
+Here's an example of a simple LTAC file's contents:
+
+- Claim Security: The system is adequately secure against moderate threats
+  - Claim ^Requirements
+  - Claim ^Design
+
+- Claim Requirements: Security requirements are identified and met
+  - Claim Confidentiality: Confidentiality is maintained
+  - Claim Integrity: Integrity is maintained
+  - Claim Availability: Availability is maintained
+
+- Claim Design: Security is implemented in design
+
 By default the program treats the LTAC file strictly as an input and
 it will *not* modify the LTAC file. However, the options --update,
 --rename, --restate, --detach, --move, --missing, and --start
