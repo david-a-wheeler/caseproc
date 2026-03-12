@@ -2598,6 +2598,214 @@ class TestFixMisplaced(unittest.TestCase):
             os.unlink(ltac_p)
             os.unlink(doc_p)
 
+    def test_stop_content_not_moved(self):
+        """Content after <!-- verocase stop --> is not moved by --fixmisplaced.
+
+        The stop sentinel and any prose following it are never included in an
+        element's full content.  When an element is moved, the stop+prose stays
+        exactly where it is; it does not travel with the element.
+
+        Scenario: A and B are in correct order; stop+epilogue follow B at the end.
+        After --fixmisplaced (which is a no-op since order is correct) the stop
+        and epilogue must still be at the end and not be considered part of B.
+        """
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        # Correct order (A, B), stop + stable section at the end
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse A.\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse B.\n'
+            '<!-- verocase stop -->\n<!-- end verocase -->\n'
+            'Stable epilogue.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            with open(doc_p, encoding='utf-8') as f:
+                content = f.read()
+            self.assertIn('<!-- verocase stop -->', content)
+            self.assertIn('Stable epilogue.', content)
+            pos_stop = content.index('<!-- verocase stop -->')
+            pos_epilogue = content.index('Stable epilogue.')
+            pos_b = content.index('<!-- verocase element B -->')
+            # stop must still follow B, and epilogue must follow stop
+            self.assertGreater(pos_stop, pos_b, 'stop should remain after B')
+            self.assertGreater(pos_epilogue, pos_stop, 'epilogue should follow stop')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_stop_not_moved_when_preceding_element_moves(self):
+        """stop and its trailing prose stay immovable even when a preceding element moves.
+
+        When B (before stop) is misplaced and moves, the stop+epilogue do NOT
+        travel with B.  They stay put in the document.
+        """
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        # B misplaced before A; stop+epilogue placed after all elements
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse A.\n'
+            '<!-- verocase stop -->\n<!-- end verocase -->\n'
+            'Stable epilogue.\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse B.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            with open(doc_p, encoding='utf-8') as f:
+                content = f.read()
+            # stop and epilogue must still be present
+            self.assertIn('<!-- verocase stop -->', content)
+            self.assertIn('Stable epilogue.', content)
+            # stop and epilogue must be adjacent (epilogue follows stop)
+            pos_stop = content.index('<!-- verocase stop -->')
+            pos_epilogue = content.index('Stable epilogue.')
+            self.assertGreater(pos_epilogue, pos_stop, 'epilogue must follow stop')
+            # A must come before B
+            pos_a = content.index('<!-- verocase element A -->')
+            pos_b = content.index('<!-- verocase element B -->')
+            self.assertLess(pos_a, pos_b, 'A should come before B after fix')
+            # B must NOT appear between stop and epilogue
+            if pos_b > pos_stop:
+                self.assertGreater(pos_b, pos_epilogue,
+                                   'B must not be inserted between stop and epilogue')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_embedded_selector_moves_with_element(self):
+        """Non-element selectors embedded in prose move with the element."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        # B before A (wrong order); B has an embedded info selector in its prose
+        doc = (
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse B.\n'
+            '<!-- verocase info B -->\n<!-- end verocase -->\n'
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse A.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            with open(doc_p, encoding='utf-8') as f:
+                content = f.read()
+            # The info selector must still be present and must follow B
+            self.assertIn('<!-- verocase info B -->', content)
+            pos_b = content.index('<!-- verocase element B -->')
+            pos_info = content.index('<!-- verocase info B -->')
+            pos_a = content.index('<!-- verocase element A -->')
+            self.assertLess(pos_a, pos_b, 'A should come before B after fix')
+            self.assertGreater(pos_info, pos_b, 'info block should follow B')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_stop_selector_renders_notice(self):
+        """<!-- verocase stop --> renders a notice comment inside the region."""
+        ltac = '- Claim A: a\n'
+        doc = '<!-- verocase stop -->\n<!-- end verocase -->\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--stdout', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('not part of any element', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_epilogue_selector_renders_notice(self):
+        """<!-- verocase epilogue --> renders a notice mentioning fixmissing."""
+        ltac = '- Claim A: a\n'
+        doc = '<!-- verocase epilogue -->\n<!-- end verocase -->\n'
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--stdout', doc_p)
+            self.assertEqual(r.returncode, 0)
+            self.assertIn('epilogue', r.stdout)
+            self.assertIn('fixmissing', r.stdout)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_element_after_epilogue_is_error(self):
+        """A <!-- verocase element --> after epilogue triggers an error."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\n'
+            '<!-- verocase epilogue -->\n<!-- end verocase -->\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, doc_p)
+            self.assertNotEqual(r.returncode, 0)
+            self.assertIn('epilogue', r.stderr)
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_fixmissing_inserts_before_epilogue(self):
+        """--fixmissing places stubs before epilogue when no predecessor exists."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        # Document has no element regions, just an epilogue + notes
+        doc = (
+            '<!-- verocase epilogue -->\n<!-- end verocase -->\n'
+            '## Notes\nStable notes.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmissing', doc_p)
+            self.assertEqual(r.returncode, 0)
+            with open(doc_p, encoding='utf-8') as f:
+                content = f.read()
+            self.assertIn('<!-- verocase element A -->', content)
+            self.assertIn('<!-- verocase element B -->', content)
+            # Both elements must appear before the epilogue
+            pos_a = content.index('<!-- verocase element A -->')
+            pos_b = content.index('<!-- verocase element B -->')
+            pos_epilogue = content.index('<!-- verocase epilogue -->')
+            self.assertLess(pos_a, pos_epilogue, 'A must be before epilogue')
+            self.assertLess(pos_b, pos_epilogue, 'B must be before epilogue')
+            # Notes section must still be present after epilogue
+            pos_notes = content.index('Stable notes.')
+            self.assertGreater(pos_notes, pos_epilogue, 'Notes must follow epilogue')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
+    def test_epilogue_terminates_full_content_for_fixmisplaced(self):
+        """epilogue terminates element full content, same as stop."""
+        ltac = '- Claim A: a\n  - Claim B: b\n'
+        # Correct order; epilogue + notes at end
+        doc = (
+            '<!-- verocase element A -->\n<!-- end verocase -->\nProse A.\n'
+            '<!-- verocase element B -->\n<!-- end verocase -->\nProse B.\n'
+            '<!-- verocase epilogue -->\n<!-- end verocase -->\n'
+            'Stable notes.\n'
+        )
+        ltac_p = self._write_ltac(ltac)
+        doc_p = self._write_doc(doc)
+        try:
+            r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
+            self.assertEqual(r.returncode, 0)
+            with open(doc_p, encoding='utf-8') as f:
+                content = f.read()
+            pos_epilogue = content.index('<!-- verocase epilogue -->')
+            pos_notes = content.index('Stable notes.')
+            pos_b = content.index('<!-- verocase element B -->')
+            self.assertGreater(pos_epilogue, pos_b, 'epilogue must follow B')
+            self.assertGreater(pos_notes, pos_epilogue, 'notes must follow epilogue')
+        finally:
+            os.unlink(ltac_p)
+            os.unlink(doc_p)
+
 
 class TestInfoDescendantsShortcuts(unittest.TestCase):
     """Tests for the --info and --descendants shortcut flags."""

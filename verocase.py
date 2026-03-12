@@ -1776,6 +1776,8 @@ _VALID_DISPLAY_TYPES = {
     'element', 'package',
     'info',
     'warning',
+    'stop',
+    'epilogue',
     'config',  # recognized to give a helpful error directing users to verocase-config
     'referenced_by', 'supported_by', 'supports',
     'representation', 'pkg_defines', 'pkg_citing', 'pkg_cited',
@@ -2176,6 +2178,19 @@ def render_selector(
         return ''
     elif display_type == 'warning':
         return render_warning(element_id)
+    elif display_type == 'stop':
+        if element_id is not None:
+            error("'stop' selector takes no parameters")
+            return ''
+        return ('<!-- Content from here is not part of any element\'s full content '
+                'and will not be repositioned by --fixmisplaced. -->')
+    elif display_type == 'epilogue':
+        if element_id is not None:
+            error("'epilogue' selector takes no parameters")
+            return ''
+        return ('<!-- Content from here is epilogue: not part of any element\'s full content, '
+                'will not be repositioned by --fixmisplaced, and new element stubs '
+                'from --fixmissing are inserted before this point. -->')
     elif display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
         return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
     elif display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
@@ -2233,6 +2248,7 @@ class DocState:
     doc_format: str = 'markdown'
     mermaid_injected: bool = False
     seen_element_ids: set = None
+    after_epilogue: bool = False  # True once an 'epilogue' selector has been seen
 
     def __post_init__(self):
         if self.seen_element_ids is None:
@@ -2412,8 +2428,15 @@ def process_document_stream(
         m = _CASEPROC_REGION_RE.match(text)
         if m:
             selector = m.group(1)
+            _sel_parts = selector.split(None, 1)
+            _sel_kind = _sel_parts[0] if _sel_parts else ''
+            if _sel_kind == 'element' and _doc_state.after_epilogue:
+                error(f"'element' selector found after 'epilogue' in {filename}:{lineno}; "
+                      "element selectors must not appear after an epilogue marker")
+            if _sel_kind == 'epilogue':
+                _doc_state.after_epilogue = True
             found_end = _consume_region(line_iter, filename, lineno, selector)
-            if strip and selector.strip() != 'warning':
+            if strip and selector.strip() not in ('warning', 'stop', 'epilogue'):
                 rendered = ''
             else:
                 rendered = render_selector(selector, registry, all_roots, config, id_info,
@@ -2475,6 +2498,15 @@ This is a sample assurance case for you to edit.
 <!-- end verocase -->
 
 ## Elements
+
+<!-- verocase epilogue -->
+<!-- end verocase -->
+
+## Notes
+
+Add notes, conclusions, or any content here that should remain in place
+regardless of how the LTAC is reorganized.  New element stubs added by
+`--fixmissing` are placed before the `epilogue` selector, not after it.
 """
 
 _START_CANDIDATES = (
@@ -2736,6 +2768,12 @@ Selectors are of format `KIND [ID | *]`, where KIND is:
   info           ID    full context: ancestors, children, citation parents, counts
   statement      ID    one-line statement for an element
   warning              fixed "do not edit" warning comment (no ID)
+  stop                 sentinel: ends the preceding element's full content; prose
+                       after this marker is not part of any element and will not
+                       be repositioned by --fixmisplaced (no ID)
+  epilogue             like stop, but also directs --fixmissing to insert new
+                       element stubs before this point rather than at end of
+                       file; element selectors must not appear after epilogue (no ID)
 Use * to render all packages (package/ltac/sacm/gsn selectors).
 
 Shortcuts for common selectors:
@@ -3810,6 +3848,17 @@ def _scan_region_ends(lines):
     return ident_region_end
 
 
+def _find_epilogue_line(lines):
+    """Return the line index of the first <!-- verocase epilogue --> marker, or None."""
+    for i, line in enumerate(lines):
+        m = _CASEPROC_REGION_RE.match(line.rstrip('\r\n'))
+        if m:
+            parts = m.group(1).split(None, 1)
+            if parts and parts[0] == 'epilogue':
+                return i
+    return None
+
+
 def _insert_missing_stubs(content, all_roots, registry, id_info, config,
                           seen_element_ids, doc_format):
     """Insert missing element stubs at their natural positions in the document.
@@ -3866,7 +3915,10 @@ def _insert_missing_stubs(content, all_roots, registry, id_info, config,
         if pred_ident is not None:
             after_line = ident_region_end[pred_ident]
         else:
-            after_line = len(lines) - 1
+            # Fallback: insert before the first epilogue marker if one exists,
+            # otherwise append at the end of the document.
+            epilogue_line = _find_epilogue_line(lines)
+            after_line = (epilogue_line - 1) if epilogue_line is not None else (len(lines) - 1)
 
         # Insert stub_lines immediately after after_line
         lines[after_line + 1:after_line + 1] = stub_lines
@@ -3883,6 +3935,41 @@ def _insert_missing_stubs(content, all_roots, registry, id_info, config,
 # ---------------------------------------------------------------------------
 # --fixmisplaced implementation
 # ---------------------------------------------------------------------------
+
+def _is_element_region_terminator(line: str) -> bool:
+    """Return True if line begins a boundary that ends the current element's full content.
+
+    An element's "full content" runs from its <!-- verocase element ID --> marker
+    through <!-- end verocase --> and then continues through any following prose
+    and embedded non-element selectors (info, ltac/markdown, etc.) until one of
+    these terminators appears:
+
+      - Another element selector:   <!-- verocase element ID -->
+      - A stop sentinel:            <!-- verocase stop -->
+      - An epilogue sentinel:       <!-- verocase epilogue -->
+      - A per-document config line: <!-- verocase-config KEY = VALUE -->
+
+    All other <!-- verocase ... --> selectors (info, package, ltac/markdown, …)
+    are considered part of the preceding element's content and are moved along
+    with it by --fixmisplaced.
+
+    Why: authors often embed supplemental selectors (e.g. <!-- verocase info X -->
+    or <!-- verocase ltac/markdown X -->) immediately after an element's prose.
+    Treating them as terminators would silently sever them from the element they
+    annotate during --fixmisplaced moves.  The 'stop' and 'epilogue' sentinels
+    let authors write stable inter-element or end-of-document sections that
+    should never be repositioned.
+    """
+    if _CASEPROC_CONFIG_RE.match(line):
+        return True
+    m = _CASEPROC_REGION_RE.match(line)
+    if m:
+        sel = m.group(1)
+        parts = sel.split(None, 1)
+        kind = parts[0] if parts else ''
+        return (kind == 'element' and len(parts) == 2) or kind in ('stop', 'epilogue')
+    return False
+
 
 def _fixmisplaced_document(path, all_roots, registry, id_info, config,
                            seen_element_ids, doc_format):
@@ -3921,27 +4008,65 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
 
     while i < len(lines):
         text = lines[i].rstrip('\r\n')
-        cm = _CASEPROC_CONFIG_RE.match(text)
-        if cm:
-            if after_end and current_ident is not None:
+
+        # While in element prose, check whether this line terminates the region
+        # or starts a non-terminating embedded selector to skip over.
+        if after_end and current_ident is not None:
+            if _is_element_region_terminator(text):
+                # Close current element's full region just before this line
                 region_map[current_ident] = (region_start, i - 1)
-            after_end = False
-            current_ident = None
-            i += 1
-            continue
+                after_end = False
+                current_ident = None
+                # If the terminator is 'stop', scan past its <!-- end verocase -->
+                # then continue the outer loop (do not fall through to normal handling)
+                m2 = _CASEPROC_REGION_RE.match(text)
+                if m2 and m2.group(1).split(None, 1)[0] in ('stop', 'epilogue'):
+                    i += 1
+                    while i < len(lines):
+                        t = lines[i].rstrip('\r\n')
+                        if t.strip() == '<!-- end verocase -->':
+                            i += 1
+                            break
+                        i += 1
+                    continue
+                # Fall through: handle this line (may start a new element)
+            else:
+                m = _CASEPROC_REGION_RE.match(text)
+                if m:
+                    # Non-terminating embedded selector in prose: skip over its region
+                    i += 1
+                    while i < len(lines):
+                        t = lines[i].rstrip('\r\n')
+                        if t.strip() == '<!-- end verocase -->':
+                            i += 1
+                            break
+                        i += 1
+                    continue
+                i += 1
+                continue
+
+        # Top-level line (not inside element prose)
         m = _CASEPROC_REGION_RE.match(text)
         if m:
-            if after_end and current_ident is not None:
-                region_map[current_ident] = (region_start, i - 1)
-            after_end = False
-            current_ident = None
             selector = m.group(1)
             parts = selector.split(None, 1)
             kind = parts[0] if parts else ''
+            if kind in ('stop', 'epilogue'):
+                # Scan past the stop/epilogue region without starting any element
+                i += 1
+                while i < len(lines):
+                    t = lines[i].rstrip('\r\n')
+                    if t.strip() == '<!-- end verocase -->':
+                        i += 1
+                        break
+                    i += 1
+                continue
             if kind == 'element' and len(parts) == 2:
                 current_ident = parts[1].strip()
                 region_start = i
                 region_order.append(current_ident)
+            else:
+                current_ident = None
             i += 1
             while i < len(lines):
                 t = lines[i].rstrip('\r\n')
@@ -4030,13 +4155,27 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
                             i += 1
                             break
                         i += 1
-                    # Consume trailing prose until next verocase marker
+                    # Consume trailing prose until the next element/stop/config
+                    # terminator.  Non-terminating embedded selectors (info,
+                    # ltac/markdown, etc.) are skipped over and treated as part
+                    # of this element's full content.
                     while i < len(lines_list):
                         t = lines_list[i].rstrip('\r\n')
-                        next_m = _CASEPROC_REGION_RE.match(t)
-                        next_cm = _CASEPROC_CONFIG_RE.match(t)
-                        if next_m or next_cm or t.strip() == '<!-- end verocase -->':
+                        if _is_element_region_terminator(t):
                             break
+                        inner_m = _CASEPROC_REGION_RE.match(t)
+                        if inner_m:
+                            # Non-terminating selector: skip over its region
+                            i += 1
+                            while i < len(lines_list):
+                                inner = lines_list[i].rstrip('\r\n')
+                                if inner.strip() == '<!-- end verocase -->':
+                                    i += 1
+                                    break
+                                i += 1
+                            continue
+                        if t.strip() == '<!-- end verocase -->':
+                            break  # orphan end marker
                         i += 1
                     end = i - 1
                     return start, end

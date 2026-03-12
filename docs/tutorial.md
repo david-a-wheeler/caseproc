@@ -260,6 +260,84 @@ The `element` selector generates a stable heading and cross-reference
 links (what supports this element, what it supports, where it's cited).
 Your prose goes immediately after the `<!-- end verocase -->` line.
 
+### What belongs to an element: `stop` and `epilogue`
+
+When `--fixmisplaced` moves an element to its correct position, it moves the
+element's **full content**: the `<!-- verocase element ID -->` region, the
+`<!-- end verocase -->` closing marker, and all the following prose lines right
+up to the next element, the next `<!-- verocase-config -->`, or the special
+`<!-- verocase stop -->` sentinel described below.
+
+This means you can safely embed supplemental selectors in an element's prose
+and they will travel with it:
+
+```markdown
+<!-- verocase element AuthnClaim -->
+<!-- end verocase -->
+
+Here is the narrative about authentication…
+
+<!-- verocase info AuthnClaim -->
+<!-- end verocase -->
+
+<!-- verocase ltac/markdown AuthnClaim -->
+<!-- end verocase -->
+```
+
+All of the above (narrative, `info` block, and `ltac/markdown` block) are
+considered part of `AuthnClaim`'s full content and will be moved together.
+
+**The `stop` sentinel** breaks that association.  Any content after a `stop`
+region is not owned by any element and will not be repositioned by
+`--fixmisplaced`:
+
+```markdown
+<!-- verocase element LastClaim -->
+<!-- end verocase -->
+
+Supporting prose for LastClaim…
+
+<!-- verocase stop -->
+<!-- end verocase -->
+
+This transition stays put regardless of LTAC reorganization.
+
+<!-- verocase element NextClaim -->
+<!-- end verocase -->
+```
+
+`stop` can appear anywhere and any number of times.
+
+**The `epilogue` sentinel** is like `stop` but signals end-of-main-content.
+Use it once, after the last element, before stable concluding prose:
+
+```markdown
+<!-- verocase element LastClaim -->
+<!-- end verocase -->
+
+Prose for LastClaim…
+
+<!-- verocase epilogue -->
+<!-- end verocase -->
+
+## Conclusions
+
+This section is stable.  --fixmisplaced will never move it, and
+--fixmissing inserts any new element stubs above this point.
+```
+
+Two extra guarantees come with `epilogue` that `stop` does not provide:
+
+- **`--fixmissing` awareness:** missing element stubs that have no predecessor
+  already in the document are placed *before* the `epilogue`, not appended at
+  the very end of the file.
+- **Error on following element:** if you accidentally place a
+  `<!-- verocase element ID -->` after the `epilogue`, verocase reports an
+  error on every run until you fix it.
+
+The starter document created by `--start` uses `epilogue` before its
+`## Notes` section to illustrate this pattern.
+
 ### Using `--fixmissing` to scaffold element regions
 
 If your LTAC has many elements, adding all the `element` regions by hand
@@ -355,7 +433,7 @@ each in a timestamped subdirectory such as `2026-03-11T142305.07/`.
 Up to 20 snapshots are kept; older ones are automatically deleted to
 keep the directory tidy.  If you ever edit text inside a marked region
 by mistake and verocase overwrites it, look in `.backups/` for the most
-recent snapshot — your text will be there.
+recent snapshot; your text will be there.
 
 You can adjust the number of snapshots kept with the `max_backups` config
 key, or set it to `0` to disable backups entirely.
@@ -475,9 +553,9 @@ No files are changed regardless of what is found.
 
 After renaming or removing an element from the LTAC:
 
-1. `verocase --orphans` — see which old document regions are now stale.
+1. `verocase --orphans`: see which old document regions are now stale.
 2. Edit the document to remove (or repurpose) those orphaned regions.
-3. `verocase --missing` — confirm no LTAC elements are now unrepresented.
+3. `verocase --missing`: confirm no LTAC elements are now unrepresented.
 4. Run `verocase --fixmissing` if you need to scaffold any new regions.
 5. Run `verocase --misplaced` to check whether new regions need reordering;
    run `verocase --fixmisplaced` to move them automatically.

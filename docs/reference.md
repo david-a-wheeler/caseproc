@@ -290,11 +290,7 @@ without modifying any file.
 ### --fixmisplaced
 
 Moves element regions that appear in the wrong document order (relative
-to LTAC depth-first order) to their correct positions.  A "full region"
-is everything from `<!-- verocase element ID -->` through
-`<!-- end verocase -->` and the following prose block (up to but not
-including the next `<!-- verocase element -->` or
-`<!-- verocase-config -->` line).
+to LTAC depth-first order) to their correct positions.
 
 Processes moves in LTAC order so that each move lands in the right place
 even when multiple elements are misplaced.
@@ -303,6 +299,10 @@ Rewrites document files in place.
 
 Use `--misplaced` (without `fix`) to *preview* which elements are
 misplaced without modifying any file.
+
+See [Full element content and the `stop` sentinel](#full-element-content-and-the-stop-sentinel)
+for exactly what constitutes a "full region" and how to write document
+sections that are never repositioned.
 
 ### --start
 
@@ -445,6 +445,8 @@ For selectors that accept `*`, all packages are rendered in order.
 | `info ID` | required | Full context for one element: ancestors, children, citation parents, counts |
 | `statement ID` | required | Single-line statement: `Statement: …` |
 | `warning` | none | Fixed "do not edit" comment pair |
+| `stop` | none | Sentinel: ends the preceding element's full content; see below |
+| `epilogue` | none | Like `stop`, and also causes `--fixmissing` to insert new stubs before this point; element selectors must not follow it; see below |
 
 The shorthand expansions are:
 
@@ -584,6 +586,101 @@ the assurance case in the document.
 selector in any processed document.  Use `--missing` (analysis option) to
 *list* which elements are missing without modifying any file, or use
 `--fixmissing` to scaffold them automatically.
+
+### Full element content, `stop`, and `epilogue`
+
+When `--fixmisplaced` moves an element it moves its **full content**, not just
+the generated region.  Full content begins at `<!-- verocase element ID -->`
+and extends through `<!-- end verocase -->` and then through all following prose
+lines (including any embedded non-element selectors such as
+`<!-- verocase info X -->` or `<!-- verocase ltac/markdown X -->`) until one
+of these **terminators** appears:
+
+| Terminator | Example |
+|---|---|
+| Another element selector | `<!-- verocase element NextID -->` |
+| The `stop` sentinel | `<!-- verocase stop -->` |
+| The `epilogue` sentinel | `<!-- verocase epilogue -->` |
+| A per-document config line | `<!-- verocase-config element_level = 2 -->` |
+
+**Why non-element selectors are included:** authors often place a
+`<!-- verocase info X -->` or `<!-- verocase ltac/markdown X -->` block
+immediately after an element's prose to provide supplemental context.
+If those selectors were treated as terminators, `--fixmisplaced` would
+silently sever them from the element they annotate and leave them stranded
+at the original location.  Treating them as part of the element's full content
+means they travel with it.
+
+**Why `<!-- verocase-config -->` is a terminator:** config directives typically
+set heading levels or other rendering parameters for the *next* element.  They
+belong at the new location of the following element, not the end of the
+preceding one.
+
+#### `stop`: stable inter-element content
+
+`stop` lets you write sections (introductions, transitions, contextual
+asides) anywhere in the document that should never be repositioned.  The
+content after `stop` is not part of any element's full content and will not be
+moved by `--fixmisplaced`.  New stubs from `--fixmissing` may still be appended
+after a `stop` if there is no `epilogue` to act as the fallback boundary.
+
+`stop` can appear any number of times.  Each occurrence independently breaks
+the preceding element's ownership; the next element selector after it begins a
+fresh ownership region.
+
+```markdown
+<!-- verocase element SomeClaim -->
+<!-- end verocase -->
+
+Prose for SomeClaim…
+
+<!-- verocase stop -->
+<!-- end verocase -->
+
+This transition paragraph stays here regardless of reorganization.
+
+<!-- verocase element NextClaim -->
+<!-- end verocase -->
+```
+
+#### `epilogue`: end of main element content
+
+`epilogue` does everything `stop` does, and additionally:
+
+1. **Directs `--fixmissing`:** when scaffolding missing element stubs, any
+   element with no predecessor already in the document is placed *before* the
+   `epilogue` marker rather than at the very end of the file.  Elements whose
+   natural LTAC predecessor already has a region are still placed after that
+   predecessor (smart placement takes priority).
+
+2. **Forbids following element selectors:** verocase reports an error if a
+   `<!-- verocase element ID -->` selector appears anywhere after an `epilogue`
+   in the same document.  This catches accidental confusion between the main
+   body and the epilogue.
+
+Use `epilogue` once, at the point where the main element content ends and
+stable end-of-document prose begins:
+
+```markdown
+<!-- verocase element LastClaim -->
+<!-- end verocase -->
+
+Prose for LastClaim…
+
+<!-- verocase epilogue -->
+<!-- end verocase -->
+
+## Conclusions
+
+This section is stable.  --fixmisplaced will never move it, and
+--fixmissing inserts any new stubs above this point.
+```
+
+The starter document created by `--start` includes an `epilogue` before its
+`## Notes` section to illustrate this pattern.
+
+Both `stop` and `epilogue` take no ID argument.  Their generated content is a
+fixed HTML comment; do not edit it.
 
 ### Per-document configuration
 
