@@ -2245,12 +2245,12 @@ class TestAnalysisOptions(unittest.TestCase):
         ltac_p = self._write_ltac(ltac)
         doc_p = self._write_doc(doc)
         try:
-            original_doc = open(doc_p, encoding='utf-8').read()
-            original_ltac = open(ltac_p, encoding='utf-8').read()
+            original_doc = read_file(doc_p)
+            original_ltac = read_file(ltac_p)
             r = run('--ltac', ltac_p, '--missing', doc_p)
             self.assertEqual(r.returncode, 0)
-            self.assertEqual(open(doc_p, encoding='utf-8').read(), original_doc)
-            self.assertEqual(open(ltac_p, encoding='utf-8').read(), original_ltac)
+            self.assertEqual(read_file(doc_p), original_doc)
+            self.assertEqual(read_file(ltac_p), original_ltac)
         finally:
             os.unlink(ltac_p)
             os.unlink(doc_p)
@@ -2527,7 +2527,7 @@ class TestFixMisplaced(unittest.TestCase):
         try:
             r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
             self.assertEqual(r.returncode, 0)
-            content = normalise(open(doc_p, encoding='utf-8').read())
+            content = read_file(doc_p)
             pos_a = content.index('<!-- verocase element A -->')
             pos_b = content.index('<!-- verocase element B -->')
             pos_c = content.index('<!-- verocase element C -->')
@@ -2549,7 +2549,7 @@ class TestFixMisplaced(unittest.TestCase):
         try:
             r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
             self.assertEqual(r.returncode, 0)
-            content = normalise(open(doc_p, encoding='utf-8').read())
+            content = read_file(doc_p)
             self.assertIn('Prose for A.', content)
             self.assertIn('Prose for B.', content)
         finally:
@@ -2569,7 +2569,7 @@ class TestFixMisplaced(unittest.TestCase):
         try:
             r = run('--ltac', ltac_p, '--fixmisplaced', doc_p)
             self.assertEqual(r.returncode, 0)
-            content = normalise(open(doc_p, encoding='utf-8').read())
+            content = read_file(doc_p)
             # Elements should remain in A, B, C order
             pos_a = content.index('<!-- verocase element A -->')
             pos_b = content.index('<!-- verocase element B -->')
@@ -2590,10 +2590,10 @@ class TestFixMisplaced(unittest.TestCase):
         ltac_p = self._write_ltac(ltac)
         doc_p = self._write_doc(doc)
         try:
-            original = open(doc_p, encoding='utf-8').read()
+            original = read_file(doc_p)
             r = run('--ltac', ltac_p, '--misplaced', doc_p)
             self.assertEqual(r.returncode, 0)
-            self.assertEqual(open(doc_p, encoding='utf-8').read(), original)
+            self.assertEqual(read_file(doc_p), original)
         finally:
             os.unlink(ltac_p)
             os.unlink(doc_p)
