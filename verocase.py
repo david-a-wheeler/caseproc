@@ -18,7 +18,7 @@ import sys
 import tempfile
 from collections import deque
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, TextIO, Tuple
 
 __version__ = '0.1.0'
 
@@ -852,13 +852,16 @@ def _node_url(node: Node, base_url: str, pkg_label: str = DEFAULT_CONFIG['pkg_la
     return _node_anchor_url(node, base_url, pkg_label)
 
 
-def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list,
-                          pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
-    """Append a markdown bullet for node and recurse into its children.
+def _render_markdown_node(node: Node, indent: int, base_url: str,
+                          out: TextIO, pkg_label: str,
+                          first: list) -> None:
+    """Write a markdown bullet for node directly to out, recurse into children.
 
     The full 'Type ID: text' label links to its document anchor.  If the node
     has an ext_ref, it is appended as a separate parenthetical link.
     Link nodes are silently skipped (they are citations, not new bullets).
+    `first` is a one-element list used as a mutable bool: True until the first
+    line is written, then False (so subsequent lines get a leading newline).
     """
     if node.node_type == 'Link':
         return
@@ -873,13 +876,16 @@ def _render_markdown_node(node: Node, indent: int, base_url: str, lines: list,
     main = f'[{display}]({anchor})' if anchor else display
     ref_ext = node.ext_ref or ''
     ref_part = f' ([{escape_markdown(ref_ext)}]({ref_ext}))' if ref_ext else ''
-    lines.append('  ' * indent + f'- {main}{ref_part}')
+    if not first[0]:
+        out.write('\n')
+    out.write('  ' * indent + f'- {main}{ref_part}')
+    first[0] = False
     for child in node.children:
-        _render_markdown_node(child, indent + 1, base_url, lines, pkg_label)
+        _render_markdown_node(child, indent + 1, base_url, out, pkg_label, first)
 
 
-def render_markdown(roots: List[Node], config: dict) -> str:
-    """Render a list of nodes as an indented markdown bullet list with hyperlinks.
+def render_markdown(roots: List[Node], config: dict, out: TextIO) -> bool:
+    """Write a list of nodes as an indented markdown bullet list with hyperlinks.
 
     Each item is '- NodeType ID: text' where ID is a hyperlink when a URL
     is available (from ext_ref, or constructed from base_url + anchor).
@@ -887,10 +893,10 @@ def render_markdown(roots: List[Node], config: dict) -> str:
     """
     base_url = config.get('markdown_base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
-    lines = []
+    first = [True]
     for root in roots:
-        _render_markdown_node(root, 0, base_url, lines, pkg_label)
-    return '\n'.join(lines)
+        _render_markdown_node(root, 0, base_url, out, pkg_label, first)
+    return not first[0]
 
 
 def render_statement(node: Node) -> str:
@@ -898,9 +904,9 @@ def render_statement(node: Node) -> str:
     return f"Statement: {node.text}"
 
 
-def _render_html_node(node: Node, indent: int, base_url: str, lines: list,
+def _render_html_node(node: Node, indent: int, base_url: str, out: TextIO,
                       pkg_label: str = DEFAULT_CONFIG['pkg_label']) -> None:
-    """Append HTML li element for node and recurse into its children.
+    """Write an HTML li element for node directly to out, recurse into children.
 
     The full 'Type ID: text' label links to its document anchor.  If the node
     has an ext_ref, it is appended as a separate parenthetical link.
@@ -922,32 +928,31 @@ def _render_html_node(node: Node, indent: int, base_url: str, lines: list,
     if node.ext_ref:
         main += (f' (<a href="{escape_html(node.ext_ref)}">'
                  f'{escape_html_content(node.ext_ref)}</a>)')
-    content = main
     prefix = '  ' * indent
     visible_children = [c for c in node.children if c.node_type != 'Link']
     if visible_children:
-        lines.append(f'{prefix}<li>{content}')
-        lines.append(f'{prefix}<ul>')
+        out.write(f'\n{prefix}<li>{main}')
+        out.write(f'\n{prefix}<ul>')
         for child in node.children:
-            _render_html_node(child, indent + 1, base_url, lines, pkg_label)
-        lines.append(f'{prefix}</ul>')
-        lines.append(f'{prefix}</li>')
+            _render_html_node(child, indent + 1, base_url, out, pkg_label)
+        out.write(f'\n{prefix}</ul>')
+        out.write(f'\n{prefix}</li>')
     else:
-        lines.append(f'{prefix}<li>{content}</li>')
+        out.write(f'\n{prefix}<li>{main}</li>')
 
 
-def render_html(roots: List[Node], config: dict) -> str:
-    """Render a list of nodes as a nested HTML ul/li list with hyperlinks.
+def render_html(roots: List[Node], config: dict, out: TextIO) -> bool:
+    """Write a list of nodes as a nested HTML ul/li list with hyperlinks.
 
     Link nodes are skipped. Identifiers are hyperlinked when a URL is available.
     """
     base_url = config.get('markdown_base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
-    lines = ['<ul>']
+    out.write('<ul>')
     for root in roots:
-        _render_html_node(root, 1, base_url, lines, pkg_label)
-    lines.append('</ul>')
-    return '\n'.join(lines)
+        _render_html_node(root, 1, base_url, out, pkg_label)
+    out.write('\n</ul>')
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -1313,12 +1318,12 @@ def _sacm_collect_edges(
     node: 'Node',
     dot_counter: list,
     dot_decls: list,
-    edge_lines: list,
+    write_edge,
 ) -> None:
-    """Collect sacmDot declarations and edges for *node* and its subtree.
+    """Write sacmDot declarations and edges for *node* and its subtree.
 
-    Edges are appended in DFS post-order (deepest leaves first, so the last
-    edge written connects to the top-level root).
+    Edges are written (via write_edge) in DFS post-order (deepest leaves first,
+    so the last edge written connects to the top-level root).
 
     Special node-type rules:
     - Connector: children connect to it with '---'; Connector is a source in
@@ -1333,17 +1338,17 @@ def _sacm_collect_edges(
     if node.node_type == 'Connector':
         for child in node.children:
             if child.node_type != 'Link':
-                _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+                _sacm_collect_edges(child, dot_counter, dot_decls, write_edge)
         for child in node.children:
             if child.node_type != 'Link':
-                edge_lines.append(f'    {child.diagram_id} --- {node.diagram_id}')
+                write_edge(f'    {child.diagram_id} --- {node.diagram_id}')
         return
 
     if node.node_type in ('Strategy', 'Relation'):
         # Just recurse; the enclosing Claim handles edge emission for this group.
         for child in node.children:
             if child.node_type != 'Link':
-                _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+                _sacm_collect_edges(child, dot_counter, dot_decls, write_edge)
         return
 
     # --- Build this node's inference group ---
@@ -1394,12 +1399,12 @@ def _sacm_collect_edges(
     # Recurse into all non-Link children first (post-order: deepest edges first).
     for child in node.children:
         if child.node_type != 'Link':
-            _sacm_collect_edges(child, dot_counter, dot_decls, edge_lines)
+            _sacm_collect_edges(child, dot_counter, dot_decls, write_edge)
 
     # Emit inference edges for this node.
     if len(inference_sources) == 1:
         src, is_counter, is_abstract = inference_sources[0]
-        edge_lines.append(_edge_line(
+        write_edge(_edge_line(
             src.diagram_id, node.diagram_id, False, is_counter, is_abstract))
     elif len(inference_sources) >= 2:
         dot_id = f'Dot{dot_counter[0]}'
@@ -1408,23 +1413,23 @@ def _sacm_collect_edges(
         any_abstract = any(a for _, _, a in inference_sources)
         dot_decls.append(f'    {dot_id}(("{_HAIR_SPACE}")):::sacmDot')
         for src, _, is_abstract in inference_sources:
-            edge_lines.append(_sacm_source_edge(src.diagram_id, dot_id, is_abstract))
+            write_edge(_sacm_source_edge(src.diagram_id, dot_id, is_abstract))
         dot_arrow = (
             '-.->|⊖|' if (any_abstract and any_counter) else
             '-.->'     if any_abstract else
             '-->|⊖|'   if any_counter  else '-->'
         )
-        edge_lines.append(f'    {dot_id} {dot_arrow} {node.diagram_id}')
+        write_edge(f'    {dot_id} {dot_arrow} {node.diagram_id}')
 
     # Emit context edges: direct Context children → this node.
     for ctx, is_counter, is_abstract in context_children:
-        edge_lines.append(
+        write_edge(
             _edge_line(ctx.diagram_id, node.diagram_id, True, is_counter, is_abstract))
 
     # Emit context edges: Context children of Strategy children → that Strategy.
     for s in strategy_children:
         for ctx, is_counter, is_abstract in strategy_ctx.get(s.diagram_id, []):
-            edge_lines.append(
+            write_edge(
                 _edge_line(ctx.diagram_id, s.diagram_id, True, is_counter, is_abstract))
 
 
@@ -1440,8 +1445,8 @@ def _sacm_leftmost_leaf(node: 'Node') -> 'Node':
     return node
 
 
-def _sacm_diagram_body(roots: List['Node'], config: dict) -> str:
-    """Return the SACM diagram content without opening/closing fence markers."""
+def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
+    """Write the SACM diagram content without opening/closing fence markers."""
     base_url = config.get('base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
@@ -1449,59 +1454,76 @@ def _sacm_diagram_body(roots: List['Node'], config: dict) -> str:
     syn_counter = [0]
     _apply_sacm_width_transform(roots, config, syn_counter)
 
-    # Node declarations (BFS) and click lines collected in a single pass.
-    node_decl_lines = []
-    click_lines = []
+    body_header = _SACM_HEADER[len('```mermaid\n'):]
+    out.write(body_header)
+
+    # Node declarations (BFS) — write directly.
     for node in _collect_bfs(roots):
         decl = _sacm_node_decl(node)
         if decl:
-            node_decl_lines.append(decl)
+            out.write('\n')
+            out.write(decl)
+
+    # Collect sacmDot declarations via a DFS pass (must precede edge lines in output).
+    dot_counter = [1]
+    dot_decls: list = []
+    for root in roots:
+        _sacm_collect_edges(root, dot_counter, dot_decls, lambda _: None)
+    for decl in dot_decls:
+        out.write('\n')
+        out.write(decl)
+
+    # Click lines (BFS) — write directly.
+    for node in _collect_bfs(roots):
         if node.node_type not in ('Relation', 'Link'):
             url = _node_url(node, base_url, pkg_label)
             if url:
-                click_lines.append(f'    click {node.diagram_id} "{url}"')
+                out.write('\n')
+                out.write(f'    click {node.diagram_id} "{url}"')
 
-    # Collect sacmDot declarations and edges via the inference group algorithm.
-    dot_counter = [1]
-    dot_decls: list = []
-    edge_lines: list = []
-    for root in roots:
-        _sacm_collect_edges(root, dot_counter, dot_decls, edge_lines)
+    # Edges: write blank separator line before the first edge, then
+    # BottomPadding (anchored at the leftmost deepest leaf), then DFS edges.
+    # Both passes use the same starting dot_counter so Dot IDs match declarations.
+    _first_edge = [True]
 
-    # The invisible BottomPadding node prevents GitHub's diagram controls from
-    # obscuring the bottom of the diagram; it must be the first edge line.
-    # Link it to the leftmost bottommost leaf so it sits at the bottom-left.
+    def _write_edge(line: str) -> None:
+        if _first_edge[0]:
+            out.write('\n')  # blank line between declarations and edges
+            _first_edge[0] = False
+        out.write('\n')
+        out.write(line)
+
     if bottom_padding and roots:
         bottom_node = _sacm_leftmost_leaf(roots[0])
-        edge_lines.insert(0, f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
+        _write_edge(f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
 
-    # Build body: header content (minus the opening fence line) + nodes + edges.
-    body_header = _SACM_HEADER[len('```mermaid\n'):]
-    lines = [body_header]
-    lines.extend(node_decl_lines)
-    lines.extend(dot_decls)
-    lines.extend(click_lines)
-    if edge_lines:
-        lines.append('')  # blank line between declarations and edges
-        lines.extend(edge_lines)
-    return '\n'.join(lines)
+    dot_counter2 = [1]
+    dot_decls2: list = []
+    for root in roots:
+        _sacm_collect_edges(root, dot_counter2, dot_decls2, _write_edge)
 
 
-def render_sacm(roots: List['Node'], config: dict) -> str:
-    """Render package roots as a complete SACM/mermaid code block.
+def render_sacm(roots: List['Node'], config: dict, out: TextIO) -> bool:
+    """Write package roots as a complete SACM/mermaid code block to out.
 
-    Returns the full mermaid fenced block (opening ```mermaid … closing ```).
-    The original nodes are not modified; a deep copy is used internally.
     Output structure: header → node declarations (BFS) → sacmDot declarations
     → click lines → blank line → BottomPadding + edges (DFS post-order, deepest first).
+    The original nodes are not modified; a deep copy is used internally.
     """
-    return '```mermaid\n' + _sacm_diagram_body(roots, config) + '\n```'
+    out.write('```mermaid\n')
+    _sacm_diagram_body(roots, config, out)
+    out.write('\n```')
+    return True
 
 
-def render_sacm_html(roots: List['Node'], config: dict) -> str:
-    """Render SACM diagram as a <pre class="mermaid"> block."""
-    body = _sacm_diagram_body(roots, config)
-    return f'<pre class="mermaid">\n{body}\n</pre>'
+def render_sacm_html(roots: List['Node'], config: dict, out: TextIO,
+                     state: 'DocState' = None) -> bool:
+    """Write SACM diagram as a <pre class="mermaid"> block to out."""
+    _maybe_inject_mermaid_js(config, state, out)
+    out.write('<pre class="mermaid">\n')
+    _sacm_diagram_body(roots, config, out)
+    out.write('\n</pre>')
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -1614,27 +1636,32 @@ flowchart TD
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;"""
 
 
-def _gsn_collect_edges(node, edge_lines, leaf_nodes):
-    """Collect GSN edges for *node* and its subtree (DFS pre-order).
+def _gsn_collect_edges(node, write_edge, leaf_nodes):
+    """Write GSN edges for *node* and its subtree (DFS pre-order) via write_edge.
 
-    Appends edge strings to edge_lines.  Nodes with no outgoing edges are
-    appended to leaf_nodes.
+    Nodes with no outgoing edges are appended to leaf_nodes.
     """
     if node.node_type in ('Link', 'Relation'):
         return
-    edges_before = len(edge_lines)
+    edges_before = [0]  # track whether this node emits any edges
+    _had_edge = [False]
+
+    def _we(line: str) -> None:
+        _had_edge[0] = True
+        write_edge(line)
+
     for child in node.children:
         if child.node_type == 'Link':
             if child.link_target is not None:
                 tgt = child.link_target
-                edge_lines.append(_edge_line(
+                _we(_edge_line(
                     node.diagram_id, tgt.diagram_id,
                     _gsn_is_incontextof(tgt),
                     'counter' in child.options, False))
         elif child.node_type == 'Connector':
-            edge_lines.append(_edge_line(node.diagram_id, child.diagram_id,
-                                         False, False, False))
-            _gsn_collect_edges(child, edge_lines, leaf_nodes)
+            _we(_edge_line(node.diagram_id, child.diagram_id,
+                           False, False, False))
+            _gsn_collect_edges(child, write_edge, leaf_nodes)
         elif child.node_type == 'Relation':
             rc = 'counter' in child.options
             ra = 'abstract' in child.options
@@ -1642,26 +1669,26 @@ def _gsn_collect_edges(node, edge_lines, leaf_nodes):
                 if gc.node_type == 'Link':
                     if gc.link_target is not None:
                         tgt = gc.link_target
-                        edge_lines.append(_edge_line(
+                        _we(_edge_line(
                             node.diagram_id, tgt.diagram_id,
                             _gsn_is_incontextof(tgt), rc, ra))
                 else:
-                    edge_lines.append(_edge_line(
+                    _we(_edge_line(
                         node.diagram_id, gc.diagram_id,
                         _gsn_is_incontextof(gc), rc, ra))
-                    _gsn_collect_edges(gc, edge_lines, leaf_nodes)
+                    _gsn_collect_edges(gc, write_edge, leaf_nodes)
         else:
-            edge_lines.append(_edge_line(
+            _we(_edge_line(
                 node.diagram_id, child.diagram_id,
                 _gsn_is_incontextof(child),
                 'counter' in child.options, False))
-            _gsn_collect_edges(child, edge_lines, leaf_nodes)
-    if len(edge_lines) == edges_before:
+            _gsn_collect_edges(child, write_edge, leaf_nodes)
+    if not _had_edge[0]:
         leaf_nodes.append(node)
 
 
-def _gsn_diagram_body(roots: List['Node'], config: dict) -> str:
-    """Return the GSN diagram content without opening/closing fence markers."""
+def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
+    """Write the GSN diagram content without opening/closing fence markers."""
     base_url = config.get('base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
@@ -1669,63 +1696,72 @@ def _gsn_diagram_body(roots: List['Node'], config: dict) -> str:
     syn_counter = [0]
     _apply_gsn_width_transform(roots, config, syn_counter)
 
-    # Node declarations (BFS) and click lines collected in a single pass.
-    node_decl_lines = []
-    click_lines = []
+    body_header = _GSN_HEADER[len('```mermaid\n'):]
+    out.write(body_header)
+
+    # Node declarations (BFS) — write directly.
     for node in _collect_bfs(roots):
         decl = _gsn_node_decl(node)
         if decl:
-            node_decl_lines.append(decl)
+            out.write('\n')
+            out.write(decl)
+
+    # Click lines (BFS) — write directly.
+    for node in _collect_bfs(roots):
         if node.node_type not in ('Relation', 'Link', 'Connector'):
             url = _node_url(node, base_url, pkg_label)
             if url:
-                click_lines.append(f'    click {node.diagram_id} "{url}"')
+                out.write('\n')
+                out.write(f'    click {node.diagram_id} "{url}"')
 
-    # Collect edges via DFS pre-order; track leaf nodes.
-    edge_lines: list = []
+    # Edges (DFS pre-order) — write directly; collect leaf nodes for BottomPadding.
     leaf_nodes: list = []
-    for root in roots:
-        _gsn_collect_edges(root, edge_lines, leaf_nodes)
+    _first_edge = [True]
 
-    # BottomPadding: all leaves link down to it (invisible node prevents
-    # diagram controls from obscuring the bottom).
-    bp_lines: list = []
+    def _write_edge(line: str) -> None:
+        if _first_edge[0]:
+            out.write('\n')  # blank line between declarations and edges
+            _first_edge[0] = False
+        out.write('\n')
+        out.write(line)
+
+    for root in roots:
+        _gsn_collect_edges(root, _write_edge, leaf_nodes)
+
+    # BottomPadding (after edges): all leaves link to an invisible padding node
+    # that prevents GitHub's diagram controls from obscuring the bottom.
     if bottom_padding:
-        first = True
+        first_bp = True
         seen: set = set()
         for leaf in leaf_nodes:
             if leaf.diagram_id not in seen:
                 seen.add(leaf.diagram_id)
-                bp = 'BottomPadding[ ]:::invisible' if first else 'BottomPadding'
-                bp_lines.append(f'    {leaf.diagram_id} ~~~ {bp}')
-                first = False
-    edge_lines = bp_lines + edge_lines
-
-    body_header = _GSN_HEADER[len('```mermaid\n'):]
-    lines = [body_header]
-    lines.extend(node_decl_lines)
-    lines.extend(click_lines)
-    if edge_lines:
-        lines.append('')  # blank line between declarations and edges
-        lines.extend(edge_lines)
-    return '\n'.join(lines)
+                bp = 'BottomPadding[ ]:::invisible' if first_bp else 'BottomPadding'
+                _write_edge(f'    {leaf.diagram_id} ~~~ {bp}')
+                first_bp = False
 
 
-def render_gsn(roots: List['Node'], config: dict) -> str:
-    """Render package roots as a complete GSN/mermaid code block.
+def render_gsn(roots: List['Node'], config: dict, out: TextIO) -> bool:
+    """Write package roots as a complete GSN/mermaid code block to out.
 
-    Returns the full mermaid fenced block (opening ```mermaid … closing ```).
-    The original nodes are not modified; a deep copy is used internally.
     Output structure: header → node declarations (BFS) → click lines
     → blank line → BottomPadding lines + edges (DFS pre-order).
+    The original nodes are not modified; a deep copy is used internally.
     """
-    return '```mermaid\n' + _gsn_diagram_body(roots, config) + '\n```'
+    out.write('```mermaid\n')
+    _gsn_diagram_body(roots, config, out)
+    out.write('\n```')
+    return True
 
 
-def render_gsn_html(roots: List['Node'], config: dict) -> str:
-    """Render GSN diagram as a <pre class="mermaid"> block."""
-    body = _gsn_diagram_body(roots, config)
-    return f'<pre class="mermaid">\n{body}\n</pre>'
+def render_gsn_html(roots: List['Node'], config: dict, out: TextIO,
+                    state: 'DocState' = None) -> bool:
+    """Write GSN diagram as a <pre class="mermaid"> block to out."""
+    _maybe_inject_mermaid_js(config, state, out)
+    out.write('<pre class="mermaid">\n')
+    _gsn_diagram_body(roots, config, out)
+    out.write('\n</pre>')
+    return True
 
 
 def resolve_element(
@@ -1751,8 +1787,9 @@ def resolve_element(
     return list(all_roots)
 
 
-def render_all_packages(all_roots: List[Node], render_fn, config: dict) -> str:
-    """Render every package preceded by a configurable header.
+def render_all_packages(all_roots: List[Node], render_fn, config: dict,
+                        out: TextIO) -> bool:
+    """Write every package preceded by a configurable header to out.
 
     Package blocks are separated by a blank line.
     Header format: {pkg_header_prefix}{pkg_label}{id}{pkg_header_suffix}{content}
@@ -1760,12 +1797,14 @@ def render_all_packages(all_roots: List[Node], render_fn, config: dict) -> str:
     prefix = config.get('pkg_header_prefix', '### ')
     suffix = config.get('pkg_header_suffix', '\n')
     pkg_label = config.get('pkg_label', 'Package ')
-    blocks = []
+    pending_sep = ''
     for root in all_roots:
         label = f"{pkg_label}{root.identifier}" if root.identifier else pkg_label.rstrip()
-        header = f"{prefix}{label}"
-        blocks.append(f"{header}{suffix}{render_fn([root], config)}")
-    return '\n\n'.join(blocks)
+        out.write(pending_sep)
+        out.write(f"{prefix}{label}{suffix}")
+        render_fn([root], config, out)
+        pending_sep = '\n\n'
+    return pending_sep != ''
 
 
 _VALID_DISPLAY_TYPES = {
@@ -1852,12 +1891,15 @@ def _render_or_all(
     registry: Dict[str, Node],
     current_element: Optional[Node],
     config: dict,
-) -> str:
-    """Resolve element_id and render, or render all packages if element_id is '*'."""
+    out: TextIO,
+) -> bool:
+    """Resolve element_id and render to out, or render all packages if element_id is '*'."""
     if element_id == '*':
-        return render_all_packages(all_roots, render_fn, config)
+        return render_all_packages(all_roots, render_fn, config, out)
     nodes = resolve_element(element_id, registry, all_roots, current_element)
-    return render_fn(nodes, config)
+    if not nodes:
+        return False
+    return render_fn(nodes, config, out)
 
 
 # ---------------------------------------------------------------------------
@@ -1901,8 +1943,9 @@ def _find_citation_parents(ident: str, all_roots: List[Node]) -> List[Node]:
 
 
 def render_referenced_by(node: Node, all_roots: List[Node],
-                         id_info: Dict[str, dict], config: dict, fmt: str) -> str:
-    """Render 'Referenced by: ...' line or '' if no packages to list."""
+                         id_info: Dict[str, dict], config: dict, fmt: str,
+                         out: TextIO, sep: str = '') -> bool:
+    """Write 'Referenced by: ...' line to out; return False if no packages to list."""
     ident = node.identifier
     info = id_info.get(ident, {})
     pkg_ids = []
@@ -1912,17 +1955,20 @@ def render_referenced_by(node: Node, all_roots: List[Node],
         if cid not in pkg_ids:
             pkg_ids.append(cid)
     if not pkg_ids:
-        return ''
+        return False
     pairs = [(f'Package {pid}', _pkg_anchor_url(pid, config)) for pid in pkg_ids]
-    return 'Referenced by: ' + _linked_list(pairs, fmt)
+    out.write(sep)
+    out.write('Referenced by: ' + _linked_list(pairs, fmt))
+    return True
 
 
-def render_supported_by(node: Node, config: dict, fmt: str) -> str:
-    """Render 'Supported by: ...' line or '' if no children."""
+def render_supported_by(node: Node, config: dict, fmt: str,
+                        out: TextIO, sep: str = '') -> bool:
+    """Write 'Supported by: ...' line to out; return False if no children."""
     children = [c for c in node.children if c.node_type != 'Link'
                 or c.link_target is not None]
     if not children:
-        return ''
+        return False
     pairs = []
     for child in children:
         target = child.link_target if child.node_type == 'Link' else child
@@ -1931,13 +1977,16 @@ def render_supported_by(node: Node, config: dict, fmt: str) -> str:
         pairs.append((f'{target.node_type} {target.identifier}',
                       _element_anchor_url(target.node_type, target.identifier, config)))
     if not pairs:
-        return ''
-    return 'Supported by: ' + _linked_list(pairs, fmt)
+        return False
+    out.write(sep)
+    out.write('Supported by: ' + _linked_list(pairs, fmt))
+    return True
 
 
 def render_supports(node: Node, all_roots: List[Node],
-                    config: dict, fmt: str) -> str:
-    """Render 'Supports: ...' line or '' if no parents at all."""
+                    config: dict, fmt: str,
+                    out: TextIO, sep: str = '') -> bool:
+    """Write 'Supports: ...' line to out; return False if no parents at all."""
     pairs = []
     has_direct_parent = node.parent is not None
     if has_direct_parent:
@@ -1950,13 +1999,16 @@ def render_supports(node: Node, all_roots: List[Node],
         pairs.append((f'{parent.node_type} {parent.identifier}',
                       _element_anchor_url(parent.node_type, parent.identifier, config)))
     if not pairs:
-        return ''
-    return 'Supports: ' + _linked_list(pairs, fmt, bold_first=has_direct_parent)
+        return False
+    out.write(sep)
+    out.write('Supports: ' + _linked_list(pairs, fmt, bold_first=has_direct_parent))
+    return True
 
 
 def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
-                       config: dict, fmt: str) -> str:
-    """Render 'Defines: ...' list for a package."""
+                       config: dict, fmt: str,
+                       out: TextIO, sep: str = '') -> bool:
+    """Write 'Defines: ...' list for a package to out."""
     pkg_id = pkg_root.identifier
     defined = []
     for node in _all_nodes([pkg_root]):
@@ -1964,32 +2016,38 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
                 and id_info.get(node.identifier, {}).get('decl_pkg_id') == pkg_id):
             defined.append(node)
     if not defined:
-        return ''
+        return False
     pairs = [(f'{node.node_type} {node.identifier}',
               _element_anchor_url(node.node_type, node.identifier, config))
              for node in defined]
-    return 'Defines: ' + _linked_list(pairs, fmt)
+    out.write(sep)
+    out.write('Defines: ' + _linked_list(pairs, fmt))
+    return True
 
 
 def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
-                      config: dict, fmt: str) -> str:
-    """Render 'Citing: ...' list for a package, or '' if none."""
+                      config: dict, fmt: str,
+                      out: TextIO, sep: str = '') -> bool:
+    """Write 'Citing: ...' list for a package to out; return False if none."""
     cited_nodes = [n for n in _all_nodes([pkg_root])
                    if n.is_cited and n.identifier]
     if not cited_nodes:
-        return ''
+        return False
     links = []
     for node in cited_nodes:
         decl_pkg = id_info.get(node.identifier, {}).get('decl_pkg_id', '')
         label = f'{node.node_type} {node.identifier}'
         url = _pkg_anchor_url(decl_pkg, config) if decl_pkg else ''
         links.append(hyperlink(label, url, fmt) if url else label)
-    return 'Citing: ' + ', '.join(links)
+    out.write(sep)
+    out.write('Citing: ' + ', '.join(links))
+    return True
 
 
 def render_pkg_cited(pkg_root: Node, all_roots: List[Node],
-                     id_info: Dict[str, dict], config: dict, fmt: str) -> str:
-    """Render 'Cited by: ...' list for a package, or '' if none."""
+                     id_info: Dict[str, dict], config: dict, fmt: str,
+                     out: TextIO, sep: str = '') -> bool:
+    """Write 'Cited by: ...' list for a package to out; return False if none."""
     pkg_id = pkg_root.identifier
     citing_pkgs = []
     for ident, info in id_info.items():
@@ -1998,32 +2056,41 @@ def render_pkg_cited(pkg_root: Node, all_roots: List[Node],
                 if cpid not in citing_pkgs:
                     citing_pkgs.append(cpid)
     if not citing_pkgs:
-        return ''
+        return False
     pairs = [(f'Package {cpid}', _pkg_anchor_url(cpid, config)) for cpid in citing_pkgs]
-    return 'Cited by: ' + _linked_list(pairs, fmt, bold_first=False)
+    out.write(sep)
+    out.write('Cited by: ' + _linked_list(pairs, fmt, bold_first=False))
+    return True
 
 
 def render_representation(pkg_root: Node, all_roots: List[Node],
-                          config: dict, fmt: str) -> str:
-    """Render the default diagram representation for a package."""
+                          config: dict, fmt: str, out: TextIO,
+                          state: 'DocState' = None, sep: str = '') -> bool:
+    """Write the default diagram representation for a package to out."""
     notation = config.get('default_representation', 'sacm')
     renderer = config.get('default_renderer', 'mermaid')
     selector = f'{notation}/{renderer}/{fmt}'
     if selector in ('sacm/mermaid/markdown', 'sacm/mermaid'):
-        return render_sacm([pkg_root], config)
+        out.write(sep)
+        return render_sacm([pkg_root], config, out)
     elif selector == 'sacm/mermaid/html':
-        return render_sacm_html([pkg_root], config)
+        out.write(sep)
+        return render_sacm_html([pkg_root], config, out, state)
     elif selector in ('gsn/mermaid/markdown', 'gsn/mermaid'):
-        return render_gsn([pkg_root], config)
+        out.write(sep)
+        return render_gsn([pkg_root], config, out)
     elif selector == 'gsn/mermaid/html':
-        return render_gsn_html([pkg_root], config)
+        out.write(sep)
+        return render_gsn_html([pkg_root], config, out, state)
     elif selector == 'ltac/markdown':
-        return render_markdown([pkg_root], config)
+        out.write(sep)
+        return render_markdown([pkg_root], config, out)
     elif selector == 'ltac/html':
-        return render_html([pkg_root], config)
+        out.write(sep)
+        return render_html([pkg_root], config, out)
     else:
         error(f"unsupported representation {selector!r}")
-        return ''
+        return False
 
 
 def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
@@ -2041,31 +2108,35 @@ def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
 
 
 def _apply_selections(selections: List[str], render_map: Dict[str, callable],
-                      config: dict, fmt: str) -> str:
-    """Apply a list of selection names and return their combined output.
+                      config: dict, fmt: str, out: TextIO,
+                      pending_sep: str = '') -> bool:
+    """Apply a list of selection names, writing each to out separated by blank lines.
 
-    Non-empty outputs are joined with blank lines; trailing blank line suppressed.
+    Uses the forward-passed pending_sep pattern: each render function receives
+    the separator to write before its first content.  Returns True if anything
+    was written.
     """
-    parts = []
+    wrote_any = False
     for sel in selections:
         fn = render_map.get(sel)
         if fn is None:
             warn(f"unknown selection name {sel!r}")
             continue
-        out = fn()
-        if out:
-            parts.append(out)
-    return '\n\n'.join(parts)
+        if fn(out, pending_sep):
+            pending_sep = '\n\n'
+            wrote_any = True
+    return wrote_any
 
 
 def render_element_selector(node_id: str, registry: Dict[str, Node],
                              all_roots: List[Node], id_info: Dict[str, dict],
-                             config: dict, state: 'DocState') -> str:
-    """Render heading + sub-selections for a single element."""
+                             config: dict, state: 'DocState',
+                             out: TextIO, sep: str = '') -> bool:
+    """Write heading + sub-selections for a single element to out."""
     node = registry.get(node_id)
     if node is None:
         error(f"element {node_id!r} not found")
-        return ''
+        return False
     state.current_id = node_id
     state.seen_element_ids.add(node_id)
 
@@ -2081,22 +2152,24 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
                  config.get('element_selections', 'referenced_by,supported_by,supports')
                  .split(',') if s.strip()]
     render_map = {
-        'referenced_by': lambda: render_referenced_by(node, all_roots, id_info, config, fmt),
-        'supported_by':  lambda: render_supported_by(node, config, fmt),
-        'supports':      lambda: render_supports(node, all_roots, config, fmt),
+        'referenced_by': lambda o, s: render_referenced_by(node, all_roots, id_info, config, fmt, o, s),
+        'supported_by':  lambda o, s: render_supported_by(node, config, fmt, o, s),
+        'supports':      lambda o, s: render_supports(node, all_roots, config, fmt, o, s),
     }
-    selections_out = _apply_selections(sel_names, render_map, config, fmt)
 
-    parts = [_WARNING_TEXT_SELECTOR, _make_heading(anchor, level, heading_text, fmt)]
-    if selections_out:
-        parts.append(selections_out)
-    return '\n\n'.join(parts)
+    out.write(sep)
+    out.write(_WARNING_TEXT_SELECTOR)
+    out.write('\n\n')
+    out.write(_make_heading(anchor, level, heading_text, fmt))
+    _apply_selections(sel_names, render_map, config, fmt, out, pending_sep='\n\n')
+    return True
 
 
 def _render_single_package(pkg_root: Node, all_roots: List[Node],
                             id_info: Dict[str, dict],
-                            config: dict, state: 'DocState') -> str:
-    """Render one package heading + its package_selections."""
+                            config: dict, state: 'DocState',
+                            out: TextIO, sep: str = '') -> bool:
+    """Write one package heading + its package_selections to out."""
     fmt = state.doc_format
     level = config.get('package_level', 3)
     anchor = _component_anchor_id('Package', pkg_root.identifier)
@@ -2107,41 +2180,44 @@ def _render_single_package(pkg_root: Node, all_roots: List[Node],
 
     sel_names = [s.strip() for s in
                  config.get('package_selections',
-                            'representation,pkg_defines,pkg_citing,pkg_cited')
+                             'representation,pkg_defines,pkg_citing,pkg_cited')
                  .split(',') if s.strip()]
     render_map = {
-        'representation': lambda: render_representation(pkg_root, all_roots, config, fmt),
-        'pkg_defines':    lambda: render_pkg_defines(pkg_root, id_info, config, fmt),
-        'pkg_citing':     lambda: render_pkg_citing(pkg_root, id_info, config, fmt),
-        'pkg_cited':      lambda: render_pkg_cited(pkg_root, all_roots, id_info, config, fmt),
+        'representation': lambda o, s: render_representation(pkg_root, all_roots, config, fmt, o, sep=s),
+        'pkg_defines':    lambda o, s: render_pkg_defines(pkg_root, id_info, config, fmt, o, s),
+        'pkg_citing':     lambda o, s: render_pkg_citing(pkg_root, id_info, config, fmt, o, s),
+        'pkg_cited':      lambda o, s: render_pkg_cited(pkg_root, all_roots, id_info, config, fmt, o, s),
     }
-    selections_out = _apply_selections(sel_names, render_map, config, fmt)
 
-    parts = [_make_heading(anchor, level, heading_text, fmt)]
-    if selections_out:
-        parts.append(selections_out)
-    return '\n\n'.join(parts)
+    out.write(sep)
+    out.write(_make_heading(anchor, level, heading_text, fmt))
+    _apply_selections(sel_names, render_map, config, fmt, out, pending_sep='\n\n')
+    return True
 
 
 def render_package_selector(pkg_id_or_star: str, all_roots: List[Node],
                              registry: Dict[str, Node],
                              id_info: Dict[str, dict],
-                             config: dict, state: 'DocState') -> str:
-    """Render heading + sub-selections for one package, or all packages if '*'."""
+                             config: dict, state: 'DocState',
+                             out: TextIO) -> bool:
+    """Write heading + sub-selections for one package, or all packages if '*', to out."""
     if pkg_id_or_star == '*':
-        blocks = [_WARNING_TEXT_SELECTOR]
+        out.write(_WARNING_TEXT_SELECTOR)
+        pending_sep = '\n\n'
         for root in all_roots:
             state.current_id = root.identifier
-            blocks.append(_render_single_package(root, all_roots, id_info, config, state))
-        return '\n\n'.join(blocks)
+            _render_single_package(root, all_roots, id_info, config, state, out, pending_sep)
+            pending_sep = '\n\n'
+        return True
     pkg_root = registry.get(pkg_id_or_star)
     if pkg_root is None or pkg_root.depth != 0:
         error(f"package {pkg_id_or_star!r} not found or is not a root element")
-        return ''
+        return False
     state.current_id = pkg_id_or_star
-    return '\n\n'.join([_WARNING_TEXT_SELECTOR,
-                        _render_single_package(pkg_root, all_roots, id_info, config, state)])
-
+    out.write(_WARNING_TEXT_SELECTOR)
+    out.write('\n\n')
+    _render_single_package(pkg_root, all_roots, id_info, config, state, out)
+    return True
 
 _WARNING_TEXT = (
     '<!-- WARNING: DO NOT EDIT text within verocase SELECTOR ... end verocase. -->\n'
@@ -2165,80 +2241,90 @@ def render_selector(
     all_roots: List[Node],
     config: dict,
     id_info: Dict[str, dict],
+    out: TextIO,
     current_element: Optional[Node] = None,
     doc_format: str = 'markdown',
     state: 'DocState' = None,
-) -> str:
-    """Parse SELECTOR and return the rendered string.
+) -> bool:
+    """Parse SELECTOR and write the rendered output to out.
 
     Dispatches to the appropriate renderer based on display_type.
-    Returns '' if the display_type is unknown (error already reported).
+    Returns True if anything was written, False otherwise.
     """
     display_type, element_id = parse_selector(selector, doc_format, config)
 
     if display_type == 'config':
         error("use '<!-- verocase-config KEY = VALUE -->' (not '<!-- verocase config ...-->')")
-        return ''
+        return False
     elif display_type == 'warning':
-        return render_warning(element_id)
+        text = render_warning(element_id)
+        if not text:
+            return False
+        out.write(text)
+        return True
     elif display_type == 'stop':
         if element_id is not None:
             error("'stop' selector takes no parameters")
-            return ''
-        return ('<!-- Content from here is not part of any element\'s full content '
-                'and will not be repositioned by --fixmisplaced. -->')
+            return False
+        out.write("<!-- Content from here is not part of any element's full content "
+                  "and will not be repositioned by --fixmisplaced. -->")
+        return True
     elif display_type == 'epilogue':
         if element_id is not None:
             error("'epilogue' selector takes no parameters")
-            return ''
-        return ('<!-- Content from here is epilogue: not part of any element\'s full content, '
-                'will not be repositioned by --fixmisplaced, and new element stubs '
-                'from --fixmissing are inserted before this point. -->')
+            return False
+        out.write("<!-- Content from here is epilogue: not part of any element's full content, "
+                  "will not be repositioned by --fixmisplaced, and new element stubs "
+                  "from --fixmissing are inserted before this point. -->")
+        return True
     elif display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
-        return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config, out)
     elif display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
-        return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config, out)
     elif display_type == 'sacm/mermaid/html':
-        return _render_or_all(element_id, all_roots, render_sacm_html, registry, current_element, config)
+        if state is not None:
+            _maybe_inject_mermaid_js(config, state, out)
+        return _render_or_all(element_id, all_roots, render_sacm_html, registry, current_element, config, out)
     elif display_type == 'gsn/mermaid/html':
-        return _render_or_all(element_id, all_roots, render_gsn_html, registry, current_element, config)
+        if state is not None:
+            _maybe_inject_mermaid_js(config, state, out)
+        return _render_or_all(element_id, all_roots, render_gsn_html, registry, current_element, config, out)
     elif display_type == 'ltac/markdown':
-        return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config, out)
     elif display_type == 'ltac/html':
-        return _render_or_all(element_id, all_roots, render_html, registry, current_element, config)
+        return _render_or_all(element_id, all_roots, render_html, registry, current_element, config, out)
     elif display_type == 'ltac/txt':
         nodes = resolve_element(element_id, registry, all_roots, current_element)
         if not nodes:
-            return ''
-        return render_ltac_txt(nodes, config)
+            return False
+        return render_ltac_txt(nodes, config, out)
     elif display_type == 'info':
         if element_id is None or element_id == '*':
             error("'info' selector requires an explicit element ID")
-            return ''
-        return render_info(element_id, all_roots, registry, id_info)
+            return False
+        return render_info(element_id, all_roots, registry, id_info, out)
     elif display_type == 'element':
         if element_id is None:
             error("'element' selector requires an explicit ID")
-            return ''
+            return False
         _state = state or DocState(doc_format=doc_format)
-        return render_element_selector(element_id, registry, all_roots, id_info, config, _state)
+        return render_element_selector(element_id, registry, all_roots, id_info, config, _state, out)
     elif display_type == 'package':
         _state = state or DocState(doc_format=doc_format)
         pkg_id = element_id if element_id is not None else '*'
-        return render_package_selector(pkg_id, all_roots, registry, id_info, config, _state)
+        return render_package_selector(pkg_id, all_roots, registry, id_info, config, _state, out)
     else:
-        # statement operates on a single node
         if element_id == '*':
             error(f"'*' is not valid with the '{display_type}' selector")
-            return ''
+            return False
         nodes = resolve_element(element_id, registry, all_roots, current_element)
         if not nodes:
-            return ''
+            return False
         node = nodes[0]
         if display_type == 'statement':
-            return render_statement(node)
-        return ''
-
+            out.write(render_statement(node))
+            return True
+        return False
 
 # ---------------------------------------------------------------------------
 # Document processor
@@ -2258,30 +2344,26 @@ class DocState:
             self.seen_element_ids = set()
 
 
-def _maybe_inject_mermaid_js(rendered: str, config: dict, state: 'DocState') -> str:
-    """Prepend the Mermaid JS <script> block to rendered if not yet injected.
+def _maybe_inject_mermaid_js(config: dict, state: 'DocState', out: TextIO) -> None:
+    """Write the Mermaid JS <script> block to out if not yet injected.
 
     Only acts when:
-    - doc_format is 'html'
-    - rendered contains '<pre class="mermaid">'
+    - state is not None and doc_format is 'html'
     - state.mermaid_injected is False
     - mermaid_js_url is non-empty
     """
-    if (state.doc_format != 'html'
-            or state.mermaid_injected
-            or '<pre class="mermaid">' not in rendered):
-        return rendered
+    if state is None or state.doc_format != 'html' or state.mermaid_injected:
+        return
     url = config.get('mermaid_js_url', DEFAULT_CONFIG['mermaid_js_url'])
     if not url:
-        return rendered
-    script = (
+        return
+    out.write(
         f'<script type="module">\n'
         f"  import mermaid from '{url}';\n"
         f'  mermaid.initialize({{ startOnLoad: true }});\n'
         f'</script>\n'
     )
     state.mermaid_injected = True
-    return script + rendered
 
 
 # Matches '<!-- verocase SELECTOR -->' lines (SELECTOR is captured in group 1).
@@ -2371,6 +2453,7 @@ def process_document_stream(
     doc_format: str = 'markdown',
     add_missing: bool = False,
     strip: bool = False,
+    existing_ids: Optional[set] = None,
 ) -> None:
     """Process a document file line by line, replacing ltac selector regions.
 
@@ -2378,10 +2461,18 @@ def process_document_stream(
     LTAC elements rendered via 'element' selectors.  Uses the already-loaded
     registry and all_roots; performs no LTAC parsing.
 
-    When `add_missing` is True, appends skeleton element regions for every
-    declared LTAC element not yet seen via an 'element' selector.  In HTML
-    documents the injection happens immediately before the first `</body>` tag;
-    in Markdown documents (or HTML without `</body>`) it happens at EOF.
+    When `add_missing` is True, uses a single-pass smart-placement algorithm to
+    insert skeleton element regions for every declared LTAC element not yet seen
+    via an 'element' selector.  Each missing element is inserted immediately
+    after its nearest LTAC predecessor that already has a region in the document;
+    remaining elements are emitted before any epilogue/stop marker or at EOF.
+    In HTML documents, any remaining missing stubs are also emitted before the
+    first `</body>` tag.
+
+    `existing_ids` (optional) is the set of element IDs already present in the
+    document (from a pre-scan).  When provided it primes the placement logic so
+    that newly inserted stubs are placed relative to the correct predecessor even
+    when the element has never been seen by this stream pass.
 
     When `strip` is True, generated content is omitted from all selector
     regions except 'warning', leaving the markers in place with empty bodies.
@@ -2391,39 +2482,59 @@ def process_document_stream(
 
     config = dict(config)  # local copy so directives don't affect caller's config
 
-    _injected = False
+    # --- Smart single-pass missing-element placement setup ---
+    if add_missing:
+        _ltac_ordered = [node for node in _all_nodes_forward(all_roots)
+                         if not node.is_cited and node.identifier
+                         and node.node_type != 'Link']
+        _ltac_index: Dict[str, int] = {n.identifier: i for i, n in enumerate(_ltac_ordered)}
+        _doc_ids = existing_ids if existing_ids is not None else set()
+        _missing_set: set = ({n.identifier for n in _ltac_ordered}
+                             - _doc_state.seen_element_ids - _doc_ids)
+        _inj_state = DocState(doc_format=doc_format,
+                              seen_element_ids=_doc_state.seen_element_ids)
+        _last_placed_id: Optional[str] = None
+        _stubs_added = [0]
 
-    def _inject_missing() -> None:
-        nonlocal _injected
-        if _injected:
-            return
-        _injected = True
-        all_ids = [node.identifier for node in _all_nodes(all_roots)
-                   if not node.is_cited and node.identifier]
-        missing = [ident for ident in all_ids if ident not in _doc_state.seen_element_ids]
-        if not missing:
-            return
-        notify(f"Adding {len(missing)} formerly missing element(s) to {filename}")
-        inj_state = DocState(doc_format=doc_format, seen_element_ids=_doc_state.seen_element_ids)
-        out.write('\n')
-        for ident in missing:
-            rendered = render_element_selector(ident, registry, [], id_info, config, inj_state)
-            out.write(f'<!-- verocase element {ident} -->\n')
-            out.write(rendered + '\n')
-            out.write('<!-- end verocase -->\n')
-            out.write('\n')
+        def _write_stub(ident: str) -> None:
+            out.write('\n<!-- verocase element ' + ident + ' -->\n')
+            render_element_selector(ident, registry, [], id_info, config, _inj_state, out)
+            out.write('\n<!-- end verocase -->\n')
+            _stubs_added[0] += 1
+
+        def _emit_stubs_after(placed_id: Optional[str]) -> None:
+            """Emit consecutive missing stubs in LTAC order starting right after placed_id."""
+            if placed_id is None or placed_id not in _ltac_index:
+                return
+            for node in _ltac_ordered[_ltac_index[placed_id] + 1:]:
+                if node.identifier not in _missing_set:
+                    break
+                _write_stub(node.identifier)
+                _missing_set.discard(node.identifier)
+
+        def _emit_all_remaining() -> None:
+            """Emit all remaining missing stubs in LTAC order."""
+            if not _missing_set:
+                return
+            for node in _ltac_ordered:
+                if node.identifier in _missing_set:
+                    _write_stub(node.identifier)
+            _missing_set.clear()
 
     line_iter = enumerate(f, 1)
     for lineno, line in line_iter:
         text = line.rstrip('\r\n')
 
         if add_missing and '</body>' in text.lower():
-            _inject_missing()
+            _emit_all_remaining()
             out.write(text + '\n')
             continue
 
         cm = _CASEPROC_CONFIG_RE.match(text)
         if cm:
+            if add_missing:
+                _emit_stubs_after(_last_placed_id)
+                _last_placed_id = None
             apply_config_directive(cm.group(1), cm.group(2), config, filename, lineno)
             out.write(text + '\n')
             continue
@@ -2438,24 +2549,36 @@ def process_document_stream(
                       "element selectors must not appear after an epilogue marker")
             if _sel_kind == 'epilogue':
                 _doc_state.after_epilogue = True
+            # Smart placement: emit stubs before document structure terminators.
+            if add_missing:
+                if _sel_kind == 'element':
+                    _emit_stubs_after(_last_placed_id)
+                elif _sel_kind in ('stop', 'epilogue', 'verocase-config'):
+                    _emit_all_remaining()
             found_end = _consume_region(line_iter, filename, lineno, selector)
             if strip and selector.strip() not in ('warning', 'stop', 'epilogue'):
-                rendered = ''
+                out.write(text + '\n')
+                if found_end:
+                    out.write('<!-- end verocase -->\n')
             else:
-                rendered = render_selector(selector, registry, all_roots, config, id_info,
-                                           doc_format=doc_format, state=_doc_state)
-                rendered = _maybe_inject_mermaid_js(rendered, config, _doc_state)
-            out.write(text + '\n')
-            if found_end:
-                if rendered:
-                    out.write(rendered + '\n')
-                out.write('<!-- end verocase -->\n')
+                out.write(text + '\n')
+                if found_end:
+                    wrote = render_selector(selector, registry, all_roots, config, id_info, out,
+                                            doc_format=doc_format, state=_doc_state)
+                    if wrote:
+                        out.write('\n')
+                    out.write('<!-- end verocase -->\n')
+            # Track last placed element ID for smart placement.
+            if add_missing and _sel_kind == 'element' and len(_sel_parts) == 2:
+                _last_placed_id = _sel_parts[1]
             continue
 
         out.write(text + '\n')
 
     if add_missing:
-        _inject_missing()
+        _emit_all_remaining()
+        if _stubs_added[0]:
+            notify(f"Added {_stubs_added[0]} missing element(s) to {filename}")
 
 
 # ---------------------------------------------------------------------------
@@ -2595,6 +2718,7 @@ Configuration keys (--config FILE, JSON object):
 class _NullWriter:
     """Write sink that discards all output; equivalent to /dev/null for streams."""
     def write(self, s): pass
+    def writelines(self, lines): pass
     def flush(self): pass
 
 
@@ -3698,47 +3822,52 @@ def _analysis_packages(all_roots):
         print()
 
 
-def render_ltac_txt(node_list, config=None):
-    """Render a list of nodes as raw LTAC text, normalizing indentation to depth 0.
+def render_ltac_txt(node_list, config, out: TextIO, sep: str = '') -> bool:
+    """Write a list of nodes as raw LTAC text to out, normalizing indentation to depth 0.
 
     Each node in node_list is treated as a root; its subtree is rendered
     with the node at depth 0 regardless of its actual tree depth.
+    Returns False if node_list is empty.
     """
-    lines = []
+    if not node_list:
+        return False
+    out.write(sep)
+    first = [True]
     for root in node_list:
-        depth_offset = root.depth
-        _write_ltac_node_normalized(root, lines, depth_offset)
-    return '\n'.join(lines)
+        _write_ltac_node_normalized(root, out, first, root.depth)
+    return True
 
-
-def _write_ltac_node_normalized(node, lines, depth_offset):
-    """Append LTAC lines for node and all its descendants, normalizing depth."""
-    lines.append(_ltac_node_line(node, depth_offset=depth_offset))
+def _write_ltac_node_normalized(node, out: TextIO, first: list, depth_offset: int) -> None:
+    """Write LTAC lines for node and all its descendants to out, normalizing depth."""
+    if not first[0]:
+        out.write('\n')
+    out.write(_ltac_node_line(node, depth_offset=depth_offset))
+    first[0] = False
     for child in node.children:
-        _write_ltac_node_normalized(child, lines, depth_offset)
+        _write_ltac_node_normalized(child, out, first, depth_offset)
 
 
-def render_info(element_id, all_roots, registry, id_info):
-    """Render full context for a single element ID to a string."""
+def render_info(element_id, all_roots, registry, id_info,
+                out: TextIO, sep: str = '') -> bool:
+    """Write full context for a single element ID to out."""
     node = registry.get(element_id)
     if node is None:
         error(f"info: element {element_id!r} not found")
-        return ''
+        return False
 
-    lines = []
+    out.write(sep)
 
     # Element header line
     header = f"{node.node_type} {node.identifier}"
     if node.text:
         header += f": {node.text}"
-    lines.append(f"Element: {header}")
+    out.write(f"Element: {header}")
 
     # Package
     pkg_root = node
     while pkg_root.parent is not None:
         pkg_root = pkg_root.parent
-    pkg_name = pkg_root.identifier or '(unnamed)'
-    lines.append(f"Package: {pkg_name}")
+    out.write(f"\nPackage: {pkg_root.identifier or '(unnamed)'}")
 
     # Ancestors
     ancestors = []
@@ -3749,29 +3878,29 @@ def render_info(element_id, all_roots, registry, id_info):
     ancestors.reverse()  # root first
 
     if not ancestors:
-        lines.append("Ancestors: (package root)")
+        out.write("\nAncestors: (package root)")
     else:
-        lines.append("Ancestors (root first):")
+        out.write("\nAncestors (root first):")
         for anc in ancestors:
-            lines.append("  " + _ltac_node_line(anc, depth_offset=anc.depth))
+            out.write("\n  " + _ltac_node_line(anc, depth_offset=anc.depth))
 
     # Children
     if not node.children:
-        lines.append("Children: (none)")
+        out.write("\nChildren: (none)")
     else:
-        lines.append("Children:")
+        out.write("\nChildren:")
         for child in node.children:
-            lines.append("  " + _ltac_node_line(child, depth_offset=child.depth))
+            out.write("\n  " + _ltac_node_line(child, depth_offset=child.depth))
 
     # Descendants count (including self)
     desc_count = _subtree_count(node)
-    lines.append(f"Descendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
+    out.write(f"\nDescendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
 
     # Citations: how many times this element is cited by others
     info = id_info.get(element_id, {})
     citation_count = info.get('citations', 0)
     citing_pkg_ids = info.get('citing_pkg_ids', [])
-    lines.append(f"Citations: {citation_count}")
+    out.write(f"\nCitations: {citation_count}")
     if citation_count > 0:
         # Find the actual citing nodes
         for citing_pkg_id in citing_pkg_ids:
@@ -3788,151 +3917,10 @@ def render_info(element_id, all_roots, registry, id_info):
                         while citing_pkg_root.parent is not None:
                             citing_pkg_root = citing_pkg_root.parent
                         cp_name = citing_pkg_root.identifier or '(unnamed)'
-                        lines.append(f"  Cited as ^{element_id} by: {parent_desc} (Package {cp_name})")
+                        out.write(f"\n  Cited as ^{element_id} by: {parent_desc} (Package {cp_name})")
                     else:
-                        lines.append(f"  Cited as ^{element_id} (package root)")
-
-    return '\n'.join(lines)
-
-
-# ---------------------------------------------------------------------------
-# Smart missing-element placement
-# ---------------------------------------------------------------------------
-
-def _scan_region_ends(lines):
-    """Scan a list of lines and return a dict mapping element ident -> last line index.
-
-    The 'last line index' is the index of the last line of the element's full
-    region: the <!-- end verocase --> line and all following prose lines up to
-    (but not including) the next verocase marker or end of file.
-    """
-    ident_region_end = {}
-    i = 0
-    current_ident = None
-    after_end = False
-
-    while i < len(lines):
-        text = lines[i].rstrip('\r\n')
-        cm = _CASEPROC_CONFIG_RE.match(text)
-        if cm:
-            if after_end and current_ident is not None:
-                ident_region_end[current_ident] = i - 1
-            after_end = False
-            current_ident = None
-            i += 1
-            continue
-        m = _CASEPROC_REGION_RE.match(text)
-        if m:
-            if after_end and current_ident is not None:
-                ident_region_end[current_ident] = i - 1
-            after_end = False
-            selector = m.group(1)
-            parts = selector.split(None, 1)
-            kind = parts[0] if parts else ''
-            if kind == 'element' and len(parts) == 2:
-                current_ident = parts[1].strip()
-            else:
-                current_ident = None
-            i += 1
-            while i < len(lines):
-                t = lines[i].rstrip('\r\n')
-                if t.strip() == '<!-- end verocase -->':
-                    if current_ident is not None:
-                        after_end = True
-                    i += 1
-                    break
-                i += 1
-            continue
-        i += 1
-
-    if after_end and current_ident is not None:
-        ident_region_end[current_ident] = len(lines) - 1
-
-    return ident_region_end
-
-
-def _find_epilogue_line(lines):
-    """Return the line index of the first <!-- verocase epilogue --> marker, or None."""
-    for i, line in enumerate(lines):
-        m = _CASEPROC_REGION_RE.match(line.rstrip('\r\n'))
-        if m:
-            parts = m.group(1).split(None, 1)
-            if parts and parts[0] == 'epilogue':
-                return i
-    return None
-
-
-def _insert_missing_stubs(content, all_roots, registry, id_info, config,
-                          seen_element_ids, doc_format):
-    """Insert missing element stubs at their natural positions in the document.
-
-    Processes insertions one at a time in LTAC order, updating line positions
-    after each insertion so that subsequent elements can find their correct
-    predecessor.
-
-    content: document content after normal re-rendering (existing regions updated)
-    Returns: (new_content, count_added)
-    """
-    # Get LTAC order: all declared non-cited non-Link elements
-    ltac_ordered = [node for node in _all_nodes_forward(all_roots)
-                    if not node.is_cited and node.identifier
-                    and node.node_type not in ('Link',)]
-
-    missing = [node for node in ltac_ordered
-               if node.identifier not in seen_element_ids]
-    if not missing:
-        return content, 0
-
-    lines = content.split('\n')
-    if lines and lines[-1] == '':
-        lines = lines[:-1]
-        had_trailing_newline = True
-    else:
-        had_trailing_newline = False
-
-    placed_ids = set(seen_element_ids)
-    inj_state = DocState(doc_format=doc_format, seen_element_ids=set(seen_element_ids))
-
-    for node in missing:
-        ident = node.identifier
-        ltac_idx = ltac_ordered.index(node)
-
-        # Re-scan the current lines to get up-to-date positions
-        ident_region_end = _scan_region_ends(lines)
-
-        # Find nearest predecessor in LTAC order that has a region in current lines
-        pred_ident = None
-        for j in range(ltac_idx - 1, -1, -1):
-            candidate = ltac_ordered[j].identifier
-            if candidate in placed_ids and candidate in ident_region_end:
-                pred_ident = candidate
-                break
-
-        # Build the stub content
-        rendered = render_element_selector(ident, registry, [], id_info, config, inj_state)
-        stub_lines = ['', f'<!-- verocase element {ident} -->']
-        stub_lines.extend(rendered.split('\n'))
-        stub_lines.append('<!-- end verocase -->')
-        stub_lines.append('')
-
-        if pred_ident is not None:
-            after_line = ident_region_end[pred_ident]
-        else:
-            # Fallback: insert before the first epilogue marker if one exists,
-            # otherwise append at the end of the document.
-            epilogue_line = _find_epilogue_line(lines)
-            after_line = (epilogue_line - 1) if epilogue_line is not None else (len(lines) - 1)
-
-        # Insert stub_lines immediately after after_line
-        lines[after_line + 1:after_line + 1] = stub_lines
-        placed_ids.add(ident)
-
-    new_content = '\n'.join(lines)
-    if had_trailing_newline:
-        new_content += '\n'
-
-    notify(f"Adding {len(missing)} formerly missing element(s)")
-    return new_content, len(missing)
+                        out.write(f"\n  Cited as ^{element_id} (package root)")
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -4521,6 +4509,22 @@ def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
     return count
 
 
+def _collect_document_element_ids(path: str) -> set:
+    """Fast pre-scan: return the set of element IDs in path's element selector markers."""
+    ids = set()
+    try:
+        with open(path, encoding='utf-8', errors='replace') as f:
+            for line in f:
+                m = _CASEPROC_REGION_RE.match(line.rstrip('\r\n'))
+                if m:
+                    parts = m.group(1).split(None, 1)
+                    if len(parts) == 2 and parts[0] == 'element':
+                        ids.add(parts[1])
+    except OSError:
+        pass
+    return ids
+
+
 def _inline_rewrite_file(
     path: str,
     registry: Dict[str, Node],
@@ -4531,58 +4535,61 @@ def _inline_rewrite_file(
     add_missing: bool = False,
     strip: bool = False,
 ) -> Optional[Tuple[str, str]]:
-    """Process a single document file, writing updated content to a temp file.
+    """Process a single document file, streaming updated content to a temp file.
 
-    Returns a (tmp_path, final_path) pair if the file needs updating, or None
-    if the content is unchanged or an error occurred.
+    Returns a (tmp_path, final_path) pair on success, or None if an error
+    occurred.  Streams directly to a temp file — no whole-document buffer.
 
-    When add_missing is True, uses smart placement to insert new element stubs
-    near their natural LTAC order position rather than appending at the end.
+    When add_missing is True, uses a single-pass smart-placement algorithm to
+    insert new element stubs near their natural LTAC order position.
     """
     global _had_error
     error_before = _had_error
+
+    # Detect line endings by scanning only the first chunk (avoids reading all).
     try:
-        with open(path, newline='') as f:
-            original = f.read()
+        with open(path, 'rb') as bf:
+            first_chunk = bf.read(4096)
     except OSError as e:
         error(f"cannot open {path!r}: {e}")
         return None
-    line_ending = detect_line_ending(original)
-    # Normalise to LF for internal processing; restore on write.
-    original_lf = original.replace('\r\n', '\n')
+    line_ending = '\r\n' if b'\r\n' in first_chunk else '\n'
     doc_format = detect_doc_format(path)
 
-    if add_missing:
-        # Two-pass approach for smart placement:
-        # Pass 1: normal re-render of existing regions (no injection)
-        buf = io.StringIO()
-        with io.StringIO(original_lf) as src:
-            src.name = path
-            process_document_stream(src, buf, registry, all_roots, config, id_info,
-                                    seen_element_ids, doc_format,
-                                    add_missing=False, strip=strip)
-        if _had_error and not error_before:
-            return None
-        rendered = buf.getvalue()
-        # Pass 2: smart insertion of missing elements
-        new_content, _ = _insert_missing_stubs(
-            rendered, all_roots, registry, id_info, config, seen_element_ids, doc_format)
-    else:
-        buf = io.StringIO()
-        with io.StringIO(original_lf) as src:
-            src.name = path
-            process_document_stream(src, buf, registry, all_roots, config, id_info,
-                                    seen_element_ids, doc_format,
-                                    add_missing=False, strip=strip)
-        if _had_error and not error_before:
-            return None
-        new_content = buf.getvalue()
+    # Pre-scan for existing element IDs used by single-pass smart placement.
+    existing_ids = _collect_document_element_ids(path) if add_missing else None
 
-    if new_content == original_lf:
-        return None  # No change needed.
-    tmp = _make_temp(path, new_content, line_ending)
-    if tmp is None:
+    dir_ = os.path.dirname(os.path.abspath(path))
+    try:
+        fd, tmp = tempfile.mkstemp(dir=dir_)
+    except OSError as e:
+        error(f"cannot create temp file for {path!r}: {e}")
         return None
+
+    try:
+        nl = '\r\n' if line_ending == '\r\n' else ''
+        with os.fdopen(fd, 'w', encoding='utf-8', newline=nl) as out_f:
+            with open(path, encoding='utf-8', newline='') as src_f:
+                process_document_stream(
+                    src_f, out_f, registry, all_roots, config, id_info,
+                    seen_element_ids, doc_format,
+                    add_missing=add_missing, strip=strip,
+                    existing_ids=existing_ids)
+    except Exception as e:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        error(f"error processing {path!r}: {e}")
+        return None
+
+    if _had_error and not error_before:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        return None
+
     return (tmp, path)
 
 
@@ -4762,24 +4769,24 @@ def main() -> None:
         return
 
     if args.info:
-        result = render_selector(f'info {args.info}', registry, all_roots, config, id_info,
-                                 doc_format='markdown')
-        if result:
-            print(result)
+        wrote = render_selector(f'info {args.info}', registry, all_roots, config, id_info, sys.stdout,
+                                doc_format='markdown')
+        if wrote:
+            sys.stdout.write('\n')
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.descendants:
-        result = render_selector(f'ltac/txt {args.descendants}', registry, all_roots, config, id_info,
-                                 doc_format='markdown')
-        if result:
-            print(result)
+        wrote = render_selector(f'ltac/txt {args.descendants}', registry, all_roots, config, id_info, sys.stdout,
+                                doc_format='markdown')
+        if wrote:
+            sys.stdout.write('\n')
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.select:
-        result = render_selector(args.select, registry, all_roots, config, id_info,
-                                 doc_format='markdown')
-        if result:
-            print(result)
+        wrote = render_selector(args.select, registry, all_roots, config, id_info, sys.stdout,
+                                doc_format='markdown')
+        if wrote:
+            sys.stdout.write('\n')
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.validate:

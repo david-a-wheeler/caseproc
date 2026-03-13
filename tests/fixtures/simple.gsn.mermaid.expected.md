@@ -28,9 +28,6 @@ flowchart TD
     click C3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/simple.gsn.mermaid.expected.md#claim-c3"
     click E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/hara.pdf"
 
-    E1 ~~~ BottomPadding[ ]:::invisible
-    A1 ~~~ BottomPadding
-    X1 ~~~ BottomPadding
     C1 --> AR1
     AR1 --> C2
     C2 --> E1
@@ -38,4 +35,7 @@ flowchart TD
     C3 --> E1
     C1 --o A1
     C1 --o X1
+    E1 ~~~ BottomPadding[ ]:::invisible
+    A1 ~~~ BottomPadding
+    X1 ~~~ BottomPadding
 ```

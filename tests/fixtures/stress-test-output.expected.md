@@ -4041,59 +4041,6 @@ flowchart TD
     click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
     click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
 
-    Xscope ~~~ BottomPadding[ ]:::invisible
-    Asys ~~~ BottomPadding
-    Esys1 ~~~ BottomPadding
-    L1top ~~~ BottomPadding
-    L2top ~~~ BottomPadding
-    L3top ~~~ BottomPadding
-    L4top ~~~ BottomPadding
-    L5top ~~~ BottomPadding
-    C01top ~~~ BottomPadding
-    C02top ~~~ BottomPadding
-    C03top ~~~ BottomPadding
-    C04top ~~~ BottomPadding
-    C05top ~~~ BottomPadding
-    C06top ~~~ BottomPadding
-    C07top ~~~ BottomPadding
-    C08top ~~~ BottomPadding
-    C09top ~~~ BottomPadding
-    C10top ~~~ BottomPadding
-    C11top ~~~ BottomPadding
-    C12top ~~~ BottomPadding
-    C13top ~~~ BottomPadding
-    C14top ~~~ BottomPadding
-    C15top ~~~ BottomPadding
-    C16top ~~~ BottomPadding
-    C17top ~~~ BottomPadding
-    C18top ~~~ BottomPadding
-    C19top ~~~ BottomPadding
-    C20top ~~~ BottomPadding
-    C21top ~~~ BottomPadding
-    C22top ~~~ BottomPadding
-    C23top ~~~ BottomPadding
-    C24top ~~~ BottomPadding
-    C25top ~~~ BottomPadding
-    C26top ~~~ BottomPadding
-    C27top ~~~ BottomPadding
-    C28top ~~~ BottomPadding
-    C29top ~~~ BottomPadding
-    C30top ~~~ BottomPadding
-    C31top ~~~ BottomPadding
-    C32top ~~~ BottomPadding
-    C33top ~~~ BottomPadding
-    C34top ~~~ BottomPadding
-    C35top ~~~ BottomPadding
-    C36top ~~~ BottomPadding
-    C37top ~~~ BottomPadding
-    C38top ~~~ BottomPadding
-    C39top ~~~ BottomPadding
-    C40top ~~~ BottomPadding
-    C41top ~~~ BottomPadding
-    C42top ~~~ BottomPadding
-    C43top ~~~ BottomPadding
-    C44top ~~~ BottomPadding
-    C45top ~~~ BottomPadding
     G1 --o Xscope
     G1 --o Asys
     G1 --> Esys1
@@ -4156,6 +4103,59 @@ flowchart TD
     Scomps --> C43top
     Scomps --> C44top
     Scomps --> C45top
+    Xscope ~~~ BottomPadding[ ]:::invisible
+    Asys ~~~ BottomPadding
+    Esys1 ~~~ BottomPadding
+    L1top ~~~ BottomPadding
+    L2top ~~~ BottomPadding
+    L3top ~~~ BottomPadding
+    L4top ~~~ BottomPadding
+    L5top ~~~ BottomPadding
+    C01top ~~~ BottomPadding
+    C02top ~~~ BottomPadding
+    C03top ~~~ BottomPadding
+    C04top ~~~ BottomPadding
+    C05top ~~~ BottomPadding
+    C06top ~~~ BottomPadding
+    C07top ~~~ BottomPadding
+    C08top ~~~ BottomPadding
+    C09top ~~~ BottomPadding
+    C10top ~~~ BottomPadding
+    C11top ~~~ BottomPadding
+    C12top ~~~ BottomPadding
+    C13top ~~~ BottomPadding
+    C14top ~~~ BottomPadding
+    C15top ~~~ BottomPadding
+    C16top ~~~ BottomPadding
+    C17top ~~~ BottomPadding
+    C18top ~~~ BottomPadding
+    C19top ~~~ BottomPadding
+    C20top ~~~ BottomPadding
+    C21top ~~~ BottomPadding
+    C22top ~~~ BottomPadding
+    C23top ~~~ BottomPadding
+    C24top ~~~ BottomPadding
+    C25top ~~~ BottomPadding
+    C26top ~~~ BottomPadding
+    C27top ~~~ BottomPadding
+    C28top ~~~ BottomPadding
+    C29top ~~~ BottomPadding
+    C30top ~~~ BottomPadding
+    C31top ~~~ BottomPadding
+    C32top ~~~ BottomPadding
+    C33top ~~~ BottomPadding
+    C34top ~~~ BottomPadding
+    C35top ~~~ BottomPadding
+    C36top ~~~ BottomPadding
+    C37top ~~~ BottomPadding
+    C38top ~~~ BottomPadding
+    C39top ~~~ BottomPadding
+    C40top ~~~ BottomPadding
+    C41top ~~~ BottomPadding
+    C42top ~~~ BottomPadding
+    C43top ~~~ BottomPadding
+    C44top ~~~ BottomPadding
+    C45top ~~~ BottomPadding
 ```
 
 ### Package L1top
@@ -4290,25 +4290,6 @@ flowchart TD
     click L1E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1e2"
     click L1Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
 
-    L1Xctx ~~~ BottomPadding[ ]:::invisible
-    L1Esh1 ~~~ BottomPadding
-    L1Esh2 ~~~ BottomPadding
-    L1Edeep ~~~ BottomPadding
-    L1J1 ~~~ BottomPadding
-    L1E2 ~~~ BottomPadding
-    C08top ~~~ BottomPadding
-    C09top ~~~ BottomPadding
-    C10top ~~~ BottomPadding
-    C11top ~~~ BottomPadding
-    C12top ~~~ BottomPadding
-    L1Ebr1 ~~~ BottomPadding
-    L1Ebr2 ~~~ BottomPadding
-    L1Ebr3 ~~~ BottomPadding
-    L1Ebr4 ~~~ BottomPadding
-    L1Ebr5 ~~~ BottomPadding
-    L1Ebr6 ~~~ BottomPadding
-    L1Ebr7 ~~~ BottomPadding
-    L1Ebr8 ~~~ BottomPadding
     L1top --o L1Xctx
     L1top --> L1Esh1
     L1top --> L1Esh2
@@ -4389,6 +4370,25 @@ flowchart TD
     L1Gbr8a --> L1Esh1
     L1Gbr8 --> L1Gbr8b
     L1Gbr8b --> L1Esh2
+    L1Xctx ~~~ BottomPadding[ ]:::invisible
+    L1Esh1 ~~~ BottomPadding
+    L1Esh2 ~~~ BottomPadding
+    L1Edeep ~~~ BottomPadding
+    L1J1 ~~~ BottomPadding
+    L1E2 ~~~ BottomPadding
+    C08top ~~~ BottomPadding
+    C09top ~~~ BottomPadding
+    C10top ~~~ BottomPadding
+    C11top ~~~ BottomPadding
+    C12top ~~~ BottomPadding
+    L1Ebr1 ~~~ BottomPadding
+    L1Ebr2 ~~~ BottomPadding
+    L1Ebr3 ~~~ BottomPadding
+    L1Ebr4 ~~~ BottomPadding
+    L1Ebr5 ~~~ BottomPadding
+    L1Ebr6 ~~~ BottomPadding
+    L1Ebr7 ~~~ BottomPadding
+    L1Ebr8 ~~~ BottomPadding
 ```
 
 ### Package L2top
@@ -4523,25 +4523,6 @@ flowchart TD
     click L2E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2e2"
     click L2Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
 
-    L2Xctx ~~~ BottomPadding[ ]:::invisible
-    L2Esh1 ~~~ BottomPadding
-    L2Esh2 ~~~ BottomPadding
-    L2Edeep ~~~ BottomPadding
-    L2J1 ~~~ BottomPadding
-    L2E2 ~~~ BottomPadding
-    C15top ~~~ BottomPadding
-    C16top ~~~ BottomPadding
-    C17top ~~~ BottomPadding
-    C18top ~~~ BottomPadding
-    C19top ~~~ BottomPadding
-    L2Ebr1 ~~~ BottomPadding
-    L2Ebr2 ~~~ BottomPadding
-    L2Ebr3 ~~~ BottomPadding
-    L2Ebr4 ~~~ BottomPadding
-    L2Ebr5 ~~~ BottomPadding
-    L2Ebr6 ~~~ BottomPadding
-    L2Ebr7 ~~~ BottomPadding
-    L2Ebr8 ~~~ BottomPadding
     L2top --o L2Xctx
     L2top --> L2Esh1
     L2top --> L2Esh2
@@ -4622,6 +4603,25 @@ flowchart TD
     L2Gbr8a --> L2Esh1
     L2Gbr8 --> L2Gbr8b
     L2Gbr8b --> L2Esh2
+    L2Xctx ~~~ BottomPadding[ ]:::invisible
+    L2Esh1 ~~~ BottomPadding
+    L2Esh2 ~~~ BottomPadding
+    L2Edeep ~~~ BottomPadding
+    L2J1 ~~~ BottomPadding
+    L2E2 ~~~ BottomPadding
+    C15top ~~~ BottomPadding
+    C16top ~~~ BottomPadding
+    C17top ~~~ BottomPadding
+    C18top ~~~ BottomPadding
+    C19top ~~~ BottomPadding
+    L2Ebr1 ~~~ BottomPadding
+    L2Ebr2 ~~~ BottomPadding
+    L2Ebr3 ~~~ BottomPadding
+    L2Ebr4 ~~~ BottomPadding
+    L2Ebr5 ~~~ BottomPadding
+    L2Ebr6 ~~~ BottomPadding
+    L2Ebr7 ~~~ BottomPadding
+    L2Ebr8 ~~~ BottomPadding
 ```
 
 ### Package L3top
@@ -4756,25 +4756,6 @@ flowchart TD
     click L3E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3e2"
     click L3Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
 
-    L3Xctx ~~~ BottomPadding[ ]:::invisible
-    L3Esh1 ~~~ BottomPadding
-    L3Esh2 ~~~ BottomPadding
-    L3Edeep ~~~ BottomPadding
-    L3J1 ~~~ BottomPadding
-    L3E2 ~~~ BottomPadding
-    C22top ~~~ BottomPadding
-    C23top ~~~ BottomPadding
-    C24top ~~~ BottomPadding
-    C25top ~~~ BottomPadding
-    C26top ~~~ BottomPadding
-    L3Ebr1 ~~~ BottomPadding
-    L3Ebr2 ~~~ BottomPadding
-    L3Ebr3 ~~~ BottomPadding
-    L3Ebr4 ~~~ BottomPadding
-    L3Ebr5 ~~~ BottomPadding
-    L3Ebr6 ~~~ BottomPadding
-    L3Ebr7 ~~~ BottomPadding
-    L3Ebr8 ~~~ BottomPadding
     L3top --o L3Xctx
     L3top --> L3Esh1
     L3top --> L3Esh2
@@ -4855,6 +4836,25 @@ flowchart TD
     L3Gbr8a --> L3Esh1
     L3Gbr8 --> L3Gbr8b
     L3Gbr8b --> L3Esh2
+    L3Xctx ~~~ BottomPadding[ ]:::invisible
+    L3Esh1 ~~~ BottomPadding
+    L3Esh2 ~~~ BottomPadding
+    L3Edeep ~~~ BottomPadding
+    L3J1 ~~~ BottomPadding
+    L3E2 ~~~ BottomPadding
+    C22top ~~~ BottomPadding
+    C23top ~~~ BottomPadding
+    C24top ~~~ BottomPadding
+    C25top ~~~ BottomPadding
+    C26top ~~~ BottomPadding
+    L3Ebr1 ~~~ BottomPadding
+    L3Ebr2 ~~~ BottomPadding
+    L3Ebr3 ~~~ BottomPadding
+    L3Ebr4 ~~~ BottomPadding
+    L3Ebr5 ~~~ BottomPadding
+    L3Ebr6 ~~~ BottomPadding
+    L3Ebr7 ~~~ BottomPadding
+    L3Ebr8 ~~~ BottomPadding
 ```
 
 ### Package L4top
@@ -4989,25 +4989,6 @@ flowchart TD
     click L4E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4e2"
     click L4Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
 
-    L4Xctx ~~~ BottomPadding[ ]:::invisible
-    L4Esh1 ~~~ BottomPadding
-    L4Esh2 ~~~ BottomPadding
-    L4Edeep ~~~ BottomPadding
-    L4J1 ~~~ BottomPadding
-    L4E2 ~~~ BottomPadding
-    C29top ~~~ BottomPadding
-    C30top ~~~ BottomPadding
-    C31top ~~~ BottomPadding
-    C32top ~~~ BottomPadding
-    C33top ~~~ BottomPadding
-    L4Ebr1 ~~~ BottomPadding
-    L4Ebr2 ~~~ BottomPadding
-    L4Ebr3 ~~~ BottomPadding
-    L4Ebr4 ~~~ BottomPadding
-    L4Ebr5 ~~~ BottomPadding
-    L4Ebr6 ~~~ BottomPadding
-    L4Ebr7 ~~~ BottomPadding
-    L4Ebr8 ~~~ BottomPadding
     L4top --o L4Xctx
     L4top --> L4Esh1
     L4top --> L4Esh2
@@ -5088,6 +5069,25 @@ flowchart TD
     L4Gbr8a --> L4Esh1
     L4Gbr8 --> L4Gbr8b
     L4Gbr8b --> L4Esh2
+    L4Xctx ~~~ BottomPadding[ ]:::invisible
+    L4Esh1 ~~~ BottomPadding
+    L4Esh2 ~~~ BottomPadding
+    L4Edeep ~~~ BottomPadding
+    L4J1 ~~~ BottomPadding
+    L4E2 ~~~ BottomPadding
+    C29top ~~~ BottomPadding
+    C30top ~~~ BottomPadding
+    C31top ~~~ BottomPadding
+    C32top ~~~ BottomPadding
+    C33top ~~~ BottomPadding
+    L4Ebr1 ~~~ BottomPadding
+    L4Ebr2 ~~~ BottomPadding
+    L4Ebr3 ~~~ BottomPadding
+    L4Ebr4 ~~~ BottomPadding
+    L4Ebr5 ~~~ BottomPadding
+    L4Ebr6 ~~~ BottomPadding
+    L4Ebr7 ~~~ BottomPadding
+    L4Ebr8 ~~~ BottomPadding
 ```
 
 ### Package L5top
@@ -5222,25 +5222,6 @@ flowchart TD
     click L5E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5e2"
     click L5Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
 
-    L5Xctx ~~~ BottomPadding[ ]:::invisible
-    L5Esh1 ~~~ BottomPadding
-    L5Esh2 ~~~ BottomPadding
-    L5Edeep ~~~ BottomPadding
-    L5J1 ~~~ BottomPadding
-    L5E2 ~~~ BottomPadding
-    C36top ~~~ BottomPadding
-    C37top ~~~ BottomPadding
-    C38top ~~~ BottomPadding
-    C39top ~~~ BottomPadding
-    C40top ~~~ BottomPadding
-    L5Ebr1 ~~~ BottomPadding
-    L5Ebr2 ~~~ BottomPadding
-    L5Ebr3 ~~~ BottomPadding
-    L5Ebr4 ~~~ BottomPadding
-    L5Ebr5 ~~~ BottomPadding
-    L5Ebr6 ~~~ BottomPadding
-    L5Ebr7 ~~~ BottomPadding
-    L5Ebr8 ~~~ BottomPadding
     L5top --o L5Xctx
     L5top --> L5Esh1
     L5top --> L5Esh2
@@ -5321,6 +5302,25 @@ flowchart TD
     L5Gbr8a --> L5Esh1
     L5Gbr8 --> L5Gbr8b
     L5Gbr8b --> L5Esh2
+    L5Xctx ~~~ BottomPadding[ ]:::invisible
+    L5Esh1 ~~~ BottomPadding
+    L5Esh2 ~~~ BottomPadding
+    L5Edeep ~~~ BottomPadding
+    L5J1 ~~~ BottomPadding
+    L5E2 ~~~ BottomPadding
+    C36top ~~~ BottomPadding
+    C37top ~~~ BottomPadding
+    C38top ~~~ BottomPadding
+    C39top ~~~ BottomPadding
+    C40top ~~~ BottomPadding
+    L5Ebr1 ~~~ BottomPadding
+    L5Ebr2 ~~~ BottomPadding
+    L5Ebr3 ~~~ BottomPadding
+    L5Ebr4 ~~~ BottomPadding
+    L5Ebr5 ~~~ BottomPadding
+    L5Ebr6 ~~~ BottomPadding
+    L5Ebr7 ~~~ BottomPadding
+    L5Ebr8 ~~~ BottomPadding
 ```
 
 ### Package C01top
@@ -5364,13 +5364,6 @@ flowchart TD
     click C01A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c01a1"
     click C01E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
 
-    C02top ~~~ BottomPadding[ ]:::invisible
-    C01Xctx ~~~ BottomPadding
-    C01Esh ~~~ BottomPadding
-    C01E1 ~~~ BottomPadding
-    C01J1 ~~~ BottomPadding
-    C01A1 ~~~ BottomPadding
-    C01E2 ~~~ BottomPadding
     C01top --> C02top
     C01top --o C01Xctx
     C01top --> C01Esh
@@ -5385,6 +5378,13 @@ flowchart TD
     C01G3 --o C01A1
     C01G3 --> C01E2
     C01G3 --> C01E1
+    C02top ~~~ BottomPadding[ ]:::invisible
+    C01Xctx ~~~ BottomPadding
+    C01Esh ~~~ BottomPadding
+    C01E1 ~~~ BottomPadding
+    C01J1 ~~~ BottomPadding
+    C01A1 ~~~ BottomPadding
+    C01E2 ~~~ BottomPadding
 ```
 
 ### Package C02top
@@ -5428,13 +5428,6 @@ flowchart TD
     click C02A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c02a1"
     click C02E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
 
-    C03top ~~~ BottomPadding[ ]:::invisible
-    C02Xctx ~~~ BottomPadding
-    C02Esh ~~~ BottomPadding
-    C02E1 ~~~ BottomPadding
-    C02J1 ~~~ BottomPadding
-    C02A1 ~~~ BottomPadding
-    C02E2 ~~~ BottomPadding
     C02top --> C03top
     C02top --o C02Xctx
     C02top --> C02Esh
@@ -5449,6 +5442,13 @@ flowchart TD
     C02G3 --o C02A1
     C02G3 --> C02E2
     C02G3 --> C02E1
+    C03top ~~~ BottomPadding[ ]:::invisible
+    C02Xctx ~~~ BottomPadding
+    C02Esh ~~~ BottomPadding
+    C02E1 ~~~ BottomPadding
+    C02J1 ~~~ BottomPadding
+    C02A1 ~~~ BottomPadding
+    C02E2 ~~~ BottomPadding
 ```
 
 ### Package C03top
@@ -5492,13 +5492,6 @@ flowchart TD
     click C03A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c03a1"
     click C03E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
 
-    C04top ~~~ BottomPadding[ ]:::invisible
-    C03Xctx ~~~ BottomPadding
-    C03Esh ~~~ BottomPadding
-    C03E1 ~~~ BottomPadding
-    C03J1 ~~~ BottomPadding
-    C03A1 ~~~ BottomPadding
-    C03E2 ~~~ BottomPadding
     C03top --> C04top
     C03top --o C03Xctx
     C03top --> C03Esh
@@ -5513,6 +5506,13 @@ flowchart TD
     C03G3 --o C03A1
     C03G3 --> C03E2
     C03G3 --> C03E1
+    C04top ~~~ BottomPadding[ ]:::invisible
+    C03Xctx ~~~ BottomPadding
+    C03Esh ~~~ BottomPadding
+    C03E1 ~~~ BottomPadding
+    C03J1 ~~~ BottomPadding
+    C03A1 ~~~ BottomPadding
+    C03E2 ~~~ BottomPadding
 ```
 
 ### Package C04top
@@ -5556,13 +5556,6 @@ flowchart TD
     click C04A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c04a1"
     click C04E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
 
-    C05top ~~~ BottomPadding[ ]:::invisible
-    C04Xctx ~~~ BottomPadding
-    C04Esh ~~~ BottomPadding
-    C04E1 ~~~ BottomPadding
-    C04J1 ~~~ BottomPadding
-    C04A1 ~~~ BottomPadding
-    C04E2 ~~~ BottomPadding
     C04top --> C05top
     C04top --o C04Xctx
     C04top --> C04Esh
@@ -5577,6 +5570,13 @@ flowchart TD
     C04G3 --o C04A1
     C04G3 --> C04E2
     C04G3 --> C04E1
+    C05top ~~~ BottomPadding[ ]:::invisible
+    C04Xctx ~~~ BottomPadding
+    C04Esh ~~~ BottomPadding
+    C04E1 ~~~ BottomPadding
+    C04J1 ~~~ BottomPadding
+    C04A1 ~~~ BottomPadding
+    C04E2 ~~~ BottomPadding
 ```
 
 ### Package C05top
@@ -5620,13 +5620,6 @@ flowchart TD
     click C05A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c05a1"
     click C05E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
 
-    C06top ~~~ BottomPadding[ ]:::invisible
-    C05Xctx ~~~ BottomPadding
-    C05Esh ~~~ BottomPadding
-    C05E1 ~~~ BottomPadding
-    C05J1 ~~~ BottomPadding
-    C05A1 ~~~ BottomPadding
-    C05E2 ~~~ BottomPadding
     C05top --> C06top
     C05top --o C05Xctx
     C05top --> C05Esh
@@ -5641,6 +5634,13 @@ flowchart TD
     C05G3 --o C05A1
     C05G3 --> C05E2
     C05G3 --> C05E1
+    C06top ~~~ BottomPadding[ ]:::invisible
+    C05Xctx ~~~ BottomPadding
+    C05Esh ~~~ BottomPadding
+    C05E1 ~~~ BottomPadding
+    C05J1 ~~~ BottomPadding
+    C05A1 ~~~ BottomPadding
+    C05E2 ~~~ BottomPadding
 ```
 
 ### Package C06top
@@ -5684,13 +5684,6 @@ flowchart TD
     click C06A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c06a1"
     click C06E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
 
-    C07top ~~~ BottomPadding[ ]:::invisible
-    C06Xctx ~~~ BottomPadding
-    C06Esh ~~~ BottomPadding
-    C06E1 ~~~ BottomPadding
-    C06J1 ~~~ BottomPadding
-    C06A1 ~~~ BottomPadding
-    C06E2 ~~~ BottomPadding
     C06top --> C07top
     C06top --o C06Xctx
     C06top --> C06Esh
@@ -5705,6 +5698,13 @@ flowchart TD
     C06G3 --o C06A1
     C06G3 --> C06E2
     C06G3 --> C06E1
+    C07top ~~~ BottomPadding[ ]:::invisible
+    C06Xctx ~~~ BottomPadding
+    C06Esh ~~~ BottomPadding
+    C06E1 ~~~ BottomPadding
+    C06J1 ~~~ BottomPadding
+    C06A1 ~~~ BottomPadding
+    C06E2 ~~~ BottomPadding
 ```
 
 ### Package C07top
@@ -5748,13 +5748,6 @@ flowchart TD
     click C07A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c07a1"
     click C07E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
 
-    C08top ~~~ BottomPadding[ ]:::invisible
-    C07Xctx ~~~ BottomPadding
-    C07Esh ~~~ BottomPadding
-    C07E1 ~~~ BottomPadding
-    C07J1 ~~~ BottomPadding
-    C07A1 ~~~ BottomPadding
-    C07E2 ~~~ BottomPadding
     C07top --> C08top
     C07top --o C07Xctx
     C07top --> C07Esh
@@ -5769,6 +5762,13 @@ flowchart TD
     C07G3 --o C07A1
     C07G3 --> C07E2
     C07G3 --> C07E1
+    C08top ~~~ BottomPadding[ ]:::invisible
+    C07Xctx ~~~ BottomPadding
+    C07Esh ~~~ BottomPadding
+    C07E1 ~~~ BottomPadding
+    C07J1 ~~~ BottomPadding
+    C07A1 ~~~ BottomPadding
+    C07E2 ~~~ BottomPadding
 ```
 
 ### Package C08top
@@ -5812,13 +5812,6 @@ flowchart TD
     click C08A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c08a1"
     click C08E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
 
-    C09top ~~~ BottomPadding[ ]:::invisible
-    C08Xctx ~~~ BottomPadding
-    C08Esh ~~~ BottomPadding
-    C08E1 ~~~ BottomPadding
-    C08J1 ~~~ BottomPadding
-    C08A1 ~~~ BottomPadding
-    C08E2 ~~~ BottomPadding
     C08top --> C09top
     C08top --o C08Xctx
     C08top --> C08Esh
@@ -5833,6 +5826,13 @@ flowchart TD
     C08G3 --o C08A1
     C08G3 --> C08E2
     C08G3 --> C08E1
+    C09top ~~~ BottomPadding[ ]:::invisible
+    C08Xctx ~~~ BottomPadding
+    C08Esh ~~~ BottomPadding
+    C08E1 ~~~ BottomPadding
+    C08J1 ~~~ BottomPadding
+    C08A1 ~~~ BottomPadding
+    C08E2 ~~~ BottomPadding
 ```
 
 ### Package C09top
@@ -5876,13 +5876,6 @@ flowchart TD
     click C09A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c09a1"
     click C09E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
 
-    C10top ~~~ BottomPadding[ ]:::invisible
-    C09Xctx ~~~ BottomPadding
-    C09Esh ~~~ BottomPadding
-    C09E1 ~~~ BottomPadding
-    C09J1 ~~~ BottomPadding
-    C09A1 ~~~ BottomPadding
-    C09E2 ~~~ BottomPadding
     C09top --> C10top
     C09top --o C09Xctx
     C09top --> C09Esh
@@ -5897,6 +5890,13 @@ flowchart TD
     C09G3 --o C09A1
     C09G3 --> C09E2
     C09G3 --> C09E1
+    C10top ~~~ BottomPadding[ ]:::invisible
+    C09Xctx ~~~ BottomPadding
+    C09Esh ~~~ BottomPadding
+    C09E1 ~~~ BottomPadding
+    C09J1 ~~~ BottomPadding
+    C09A1 ~~~ BottomPadding
+    C09E2 ~~~ BottomPadding
 ```
 
 ### Package C10top
@@ -5940,13 +5940,6 @@ flowchart TD
     click C10A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c10a1"
     click C10E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
 
-    C11top ~~~ BottomPadding[ ]:::invisible
-    C10Xctx ~~~ BottomPadding
-    C10Esh ~~~ BottomPadding
-    C10E1 ~~~ BottomPadding
-    C10J1 ~~~ BottomPadding
-    C10A1 ~~~ BottomPadding
-    C10E2 ~~~ BottomPadding
     C10top --> C11top
     C10top --o C10Xctx
     C10top --> C10Esh
@@ -5961,6 +5954,13 @@ flowchart TD
     C10G3 --o C10A1
     C10G3 --> C10E2
     C10G3 --> C10E1
+    C11top ~~~ BottomPadding[ ]:::invisible
+    C10Xctx ~~~ BottomPadding
+    C10Esh ~~~ BottomPadding
+    C10E1 ~~~ BottomPadding
+    C10J1 ~~~ BottomPadding
+    C10A1 ~~~ BottomPadding
+    C10E2 ~~~ BottomPadding
 ```
 
 ### Package C11top
@@ -6002,12 +6002,6 @@ flowchart TD
     click C11A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c11a1"
     click C11E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
 
-    C11Xctx ~~~ BottomPadding[ ]:::invisible
-    C11Esh ~~~ BottomPadding
-    C11E1 ~~~ BottomPadding
-    C11J1 ~~~ BottomPadding
-    C11A1 ~~~ BottomPadding
-    C11E2 ~~~ BottomPadding
     C11top --o C11Xctx
     C11top --> C11Esh
     C11top --> C11Sass
@@ -6021,6 +6015,12 @@ flowchart TD
     C11G3 --o C11A1
     C11G3 --> C11E2
     C11G3 --> C11E1
+    C11Xctx ~~~ BottomPadding[ ]:::invisible
+    C11Esh ~~~ BottomPadding
+    C11E1 ~~~ BottomPadding
+    C11J1 ~~~ BottomPadding
+    C11A1 ~~~ BottomPadding
+    C11E2 ~~~ BottomPadding
 ```
 
 ### Package C12top
@@ -6062,12 +6062,6 @@ flowchart TD
     click C12A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c12a1"
     click C12E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
 
-    C12Xctx ~~~ BottomPadding[ ]:::invisible
-    C12Esh ~~~ BottomPadding
-    C12E1 ~~~ BottomPadding
-    C12J1 ~~~ BottomPadding
-    C12A1 ~~~ BottomPadding
-    C12E2 ~~~ BottomPadding
     C12top --o C12Xctx
     C12top --> C12Esh
     C12top --> C12Sass
@@ -6081,6 +6075,12 @@ flowchart TD
     C12G3 --o C12A1
     C12G3 --> C12E2
     C12G3 --> C12E1
+    C12Xctx ~~~ BottomPadding[ ]:::invisible
+    C12Esh ~~~ BottomPadding
+    C12E1 ~~~ BottomPadding
+    C12J1 ~~~ BottomPadding
+    C12A1 ~~~ BottomPadding
+    C12E2 ~~~ BottomPadding
 ```
 
 ### Package C13top
@@ -6122,12 +6122,6 @@ flowchart TD
     click C13A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c13a1"
     click C13E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
 
-    C13Xctx ~~~ BottomPadding[ ]:::invisible
-    C13Esh ~~~ BottomPadding
-    C13E1 ~~~ BottomPadding
-    C13J1 ~~~ BottomPadding
-    C13A1 ~~~ BottomPadding
-    C13E2 ~~~ BottomPadding
     C13top --o C13Xctx
     C13top --> C13Esh
     C13top --> C13Sass
@@ -6141,6 +6135,12 @@ flowchart TD
     C13G3 --o C13A1
     C13G3 --> C13E2
     C13G3 --> C13E1
+    C13Xctx ~~~ BottomPadding[ ]:::invisible
+    C13Esh ~~~ BottomPadding
+    C13E1 ~~~ BottomPadding
+    C13J1 ~~~ BottomPadding
+    C13A1 ~~~ BottomPadding
+    C13E2 ~~~ BottomPadding
 ```
 
 ### Package C14top
@@ -6182,12 +6182,6 @@ flowchart TD
     click C14A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c14a1"
     click C14E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
 
-    C14Xctx ~~~ BottomPadding[ ]:::invisible
-    C14Esh ~~~ BottomPadding
-    C14E1 ~~~ BottomPadding
-    C14J1 ~~~ BottomPadding
-    C14A1 ~~~ BottomPadding
-    C14E2 ~~~ BottomPadding
     C14top --o C14Xctx
     C14top --> C14Esh
     C14top --> C14Sass
@@ -6201,6 +6195,12 @@ flowchart TD
     C14G3 --o C14A1
     C14G3 --> C14E2
     C14G3 --> C14E1
+    C14Xctx ~~~ BottomPadding[ ]:::invisible
+    C14Esh ~~~ BottomPadding
+    C14E1 ~~~ BottomPadding
+    C14J1 ~~~ BottomPadding
+    C14A1 ~~~ BottomPadding
+    C14E2 ~~~ BottomPadding
 ```
 
 ### Package C15top
@@ -6242,12 +6242,6 @@ flowchart TD
     click C15A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c15a1"
     click C15E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
 
-    C15Xctx ~~~ BottomPadding[ ]:::invisible
-    C15Esh ~~~ BottomPadding
-    C15E1 ~~~ BottomPadding
-    C15J1 ~~~ BottomPadding
-    C15A1 ~~~ BottomPadding
-    C15E2 ~~~ BottomPadding
     C15top --o C15Xctx
     C15top --> C15Esh
     C15top --> C15Sass
@@ -6261,6 +6255,12 @@ flowchart TD
     C15G3 --o C15A1
     C15G3 --> C15E2
     C15G3 --> C15E1
+    C15Xctx ~~~ BottomPadding[ ]:::invisible
+    C15Esh ~~~ BottomPadding
+    C15E1 ~~~ BottomPadding
+    C15J1 ~~~ BottomPadding
+    C15A1 ~~~ BottomPadding
+    C15E2 ~~~ BottomPadding
 ```
 
 ### Package C16top
@@ -6302,12 +6302,6 @@ flowchart TD
     click C16A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c16a1"
     click C16E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
 
-    C16Xctx ~~~ BottomPadding[ ]:::invisible
-    C16Esh ~~~ BottomPadding
-    C16E1 ~~~ BottomPadding
-    C16J1 ~~~ BottomPadding
-    C16A1 ~~~ BottomPadding
-    C16E2 ~~~ BottomPadding
     C16top --o C16Xctx
     C16top --> C16Esh
     C16top --> C16Sass
@@ -6321,6 +6315,12 @@ flowchart TD
     C16G3 --o C16A1
     C16G3 --> C16E2
     C16G3 --> C16E1
+    C16Xctx ~~~ BottomPadding[ ]:::invisible
+    C16Esh ~~~ BottomPadding
+    C16E1 ~~~ BottomPadding
+    C16J1 ~~~ BottomPadding
+    C16A1 ~~~ BottomPadding
+    C16E2 ~~~ BottomPadding
 ```
 
 ### Package C17top
@@ -6362,12 +6362,6 @@ flowchart TD
     click C17A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c17a1"
     click C17E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
 
-    C17Xctx ~~~ BottomPadding[ ]:::invisible
-    C17Esh ~~~ BottomPadding
-    C17E1 ~~~ BottomPadding
-    C17J1 ~~~ BottomPadding
-    C17A1 ~~~ BottomPadding
-    C17E2 ~~~ BottomPadding
     C17top --o C17Xctx
     C17top --> C17Esh
     C17top --> C17Sass
@@ -6381,6 +6375,12 @@ flowchart TD
     C17G3 --o C17A1
     C17G3 --> C17E2
     C17G3 --> C17E1
+    C17Xctx ~~~ BottomPadding[ ]:::invisible
+    C17Esh ~~~ BottomPadding
+    C17E1 ~~~ BottomPadding
+    C17J1 ~~~ BottomPadding
+    C17A1 ~~~ BottomPadding
+    C17E2 ~~~ BottomPadding
 ```
 
 ### Package C18top
@@ -6422,12 +6422,6 @@ flowchart TD
     click C18A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c18a1"
     click C18E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
 
-    C18Xctx ~~~ BottomPadding[ ]:::invisible
-    C18Esh ~~~ BottomPadding
-    C18E1 ~~~ BottomPadding
-    C18J1 ~~~ BottomPadding
-    C18A1 ~~~ BottomPadding
-    C18E2 ~~~ BottomPadding
     C18top --o C18Xctx
     C18top --> C18Esh
     C18top --> C18Sass
@@ -6441,6 +6435,12 @@ flowchart TD
     C18G3 --o C18A1
     C18G3 --> C18E2
     C18G3 --> C18E1
+    C18Xctx ~~~ BottomPadding[ ]:::invisible
+    C18Esh ~~~ BottomPadding
+    C18E1 ~~~ BottomPadding
+    C18J1 ~~~ BottomPadding
+    C18A1 ~~~ BottomPadding
+    C18E2 ~~~ BottomPadding
 ```
 
 ### Package C19top
@@ -6482,12 +6482,6 @@ flowchart TD
     click C19A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c19a1"
     click C19E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
 
-    C19Xctx ~~~ BottomPadding[ ]:::invisible
-    C19Esh ~~~ BottomPadding
-    C19E1 ~~~ BottomPadding
-    C19J1 ~~~ BottomPadding
-    C19A1 ~~~ BottomPadding
-    C19E2 ~~~ BottomPadding
     C19top --o C19Xctx
     C19top --> C19Esh
     C19top --> C19Sass
@@ -6501,6 +6495,12 @@ flowchart TD
     C19G3 --o C19A1
     C19G3 --> C19E2
     C19G3 --> C19E1
+    C19Xctx ~~~ BottomPadding[ ]:::invisible
+    C19Esh ~~~ BottomPadding
+    C19E1 ~~~ BottomPadding
+    C19J1 ~~~ BottomPadding
+    C19A1 ~~~ BottomPadding
+    C19E2 ~~~ BottomPadding
 ```
 
 ### Package C20top
@@ -6542,12 +6542,6 @@ flowchart TD
     click C20A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c20a1"
     click C20E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
 
-    C20Xctx ~~~ BottomPadding[ ]:::invisible
-    C20Esh ~~~ BottomPadding
-    C20E1 ~~~ BottomPadding
-    C20J1 ~~~ BottomPadding
-    C20A1 ~~~ BottomPadding
-    C20E2 ~~~ BottomPadding
     C20top --o C20Xctx
     C20top --> C20Esh
     C20top --> C20Sass
@@ -6561,6 +6555,12 @@ flowchart TD
     C20G3 --o C20A1
     C20G3 --> C20E2
     C20G3 --> C20E1
+    C20Xctx ~~~ BottomPadding[ ]:::invisible
+    C20Esh ~~~ BottomPadding
+    C20E1 ~~~ BottomPadding
+    C20J1 ~~~ BottomPadding
+    C20A1 ~~~ BottomPadding
+    C20E2 ~~~ BottomPadding
 ```
 
 ### Package C21top
@@ -6602,12 +6602,6 @@ flowchart TD
     click C21A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c21a1"
     click C21E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
 
-    C21Xctx ~~~ BottomPadding[ ]:::invisible
-    C21Esh ~~~ BottomPadding
-    C21E1 ~~~ BottomPadding
-    C21J1 ~~~ BottomPadding
-    C21A1 ~~~ BottomPadding
-    C21E2 ~~~ BottomPadding
     C21top --o C21Xctx
     C21top --> C21Esh
     C21top --> C21Sass
@@ -6621,6 +6615,12 @@ flowchart TD
     C21G3 --o C21A1
     C21G3 --> C21E2
     C21G3 --> C21E1
+    C21Xctx ~~~ BottomPadding[ ]:::invisible
+    C21Esh ~~~ BottomPadding
+    C21E1 ~~~ BottomPadding
+    C21J1 ~~~ BottomPadding
+    C21A1 ~~~ BottomPadding
+    C21E2 ~~~ BottomPadding
 ```
 
 ### Package C22top
@@ -6662,12 +6662,6 @@ flowchart TD
     click C22A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c22a1"
     click C22E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
 
-    C22Xctx ~~~ BottomPadding[ ]:::invisible
-    C22Esh ~~~ BottomPadding
-    C22E1 ~~~ BottomPadding
-    C22J1 ~~~ BottomPadding
-    C22A1 ~~~ BottomPadding
-    C22E2 ~~~ BottomPadding
     C22top --o C22Xctx
     C22top --> C22Esh
     C22top --> C22Sass
@@ -6681,6 +6675,12 @@ flowchart TD
     C22G3 --o C22A1
     C22G3 --> C22E2
     C22G3 --> C22E1
+    C22Xctx ~~~ BottomPadding[ ]:::invisible
+    C22Esh ~~~ BottomPadding
+    C22E1 ~~~ BottomPadding
+    C22J1 ~~~ BottomPadding
+    C22A1 ~~~ BottomPadding
+    C22E2 ~~~ BottomPadding
 ```
 
 ### Package C23top
@@ -6722,12 +6722,6 @@ flowchart TD
     click C23A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c23a1"
     click C23E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
 
-    C23Xctx ~~~ BottomPadding[ ]:::invisible
-    C23Esh ~~~ BottomPadding
-    C23E1 ~~~ BottomPadding
-    C23J1 ~~~ BottomPadding
-    C23A1 ~~~ BottomPadding
-    C23E2 ~~~ BottomPadding
     C23top --o C23Xctx
     C23top --> C23Esh
     C23top --> C23Sass
@@ -6741,6 +6735,12 @@ flowchart TD
     C23G3 --o C23A1
     C23G3 --> C23E2
     C23G3 --> C23E1
+    C23Xctx ~~~ BottomPadding[ ]:::invisible
+    C23Esh ~~~ BottomPadding
+    C23E1 ~~~ BottomPadding
+    C23J1 ~~~ BottomPadding
+    C23A1 ~~~ BottomPadding
+    C23E2 ~~~ BottomPadding
 ```
 
 ### Package C24top
@@ -6782,12 +6782,6 @@ flowchart TD
     click C24A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c24a1"
     click C24E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
 
-    C24Xctx ~~~ BottomPadding[ ]:::invisible
-    C24Esh ~~~ BottomPadding
-    C24E1 ~~~ BottomPadding
-    C24J1 ~~~ BottomPadding
-    C24A1 ~~~ BottomPadding
-    C24E2 ~~~ BottomPadding
     C24top --o C24Xctx
     C24top --> C24Esh
     C24top --> C24Sass
@@ -6801,6 +6795,12 @@ flowchart TD
     C24G3 --o C24A1
     C24G3 --> C24E2
     C24G3 --> C24E1
+    C24Xctx ~~~ BottomPadding[ ]:::invisible
+    C24Esh ~~~ BottomPadding
+    C24E1 ~~~ BottomPadding
+    C24J1 ~~~ BottomPadding
+    C24A1 ~~~ BottomPadding
+    C24E2 ~~~ BottomPadding
 ```
 
 ### Package C25top
@@ -6842,12 +6842,6 @@ flowchart TD
     click C25A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c25a1"
     click C25E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
 
-    C25Xctx ~~~ BottomPadding[ ]:::invisible
-    C25Esh ~~~ BottomPadding
-    C25E1 ~~~ BottomPadding
-    C25J1 ~~~ BottomPadding
-    C25A1 ~~~ BottomPadding
-    C25E2 ~~~ BottomPadding
     C25top --o C25Xctx
     C25top --> C25Esh
     C25top --> C25Sass
@@ -6861,6 +6855,12 @@ flowchart TD
     C25G3 --o C25A1
     C25G3 --> C25E2
     C25G3 --> C25E1
+    C25Xctx ~~~ BottomPadding[ ]:::invisible
+    C25Esh ~~~ BottomPadding
+    C25E1 ~~~ BottomPadding
+    C25J1 ~~~ BottomPadding
+    C25A1 ~~~ BottomPadding
+    C25E2 ~~~ BottomPadding
 ```
 
 ### Package C26top
@@ -6902,12 +6902,6 @@ flowchart TD
     click C26A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c26a1"
     click C26E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
 
-    C26Xctx ~~~ BottomPadding[ ]:::invisible
-    C26Esh ~~~ BottomPadding
-    C26E1 ~~~ BottomPadding
-    C26J1 ~~~ BottomPadding
-    C26A1 ~~~ BottomPadding
-    C26E2 ~~~ BottomPadding
     C26top --o C26Xctx
     C26top --> C26Esh
     C26top --> C26Sass
@@ -6921,6 +6915,12 @@ flowchart TD
     C26G3 --o C26A1
     C26G3 --> C26E2
     C26G3 --> C26E1
+    C26Xctx ~~~ BottomPadding[ ]:::invisible
+    C26Esh ~~~ BottomPadding
+    C26E1 ~~~ BottomPadding
+    C26J1 ~~~ BottomPadding
+    C26A1 ~~~ BottomPadding
+    C26E2 ~~~ BottomPadding
 ```
 
 ### Package C27top
@@ -6962,12 +6962,6 @@ flowchart TD
     click C27A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c27a1"
     click C27E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
 
-    C27Xctx ~~~ BottomPadding[ ]:::invisible
-    C27Esh ~~~ BottomPadding
-    C27E1 ~~~ BottomPadding
-    C27J1 ~~~ BottomPadding
-    C27A1 ~~~ BottomPadding
-    C27E2 ~~~ BottomPadding
     C27top --o C27Xctx
     C27top --> C27Esh
     C27top --> C27Sass
@@ -6981,6 +6975,12 @@ flowchart TD
     C27G3 --o C27A1
     C27G3 --> C27E2
     C27G3 --> C27E1
+    C27Xctx ~~~ BottomPadding[ ]:::invisible
+    C27Esh ~~~ BottomPadding
+    C27E1 ~~~ BottomPadding
+    C27J1 ~~~ BottomPadding
+    C27A1 ~~~ BottomPadding
+    C27E2 ~~~ BottomPadding
 ```
 
 ### Package C28top
@@ -7022,12 +7022,6 @@ flowchart TD
     click C28A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c28a1"
     click C28E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
 
-    C28Xctx ~~~ BottomPadding[ ]:::invisible
-    C28Esh ~~~ BottomPadding
-    C28E1 ~~~ BottomPadding
-    C28J1 ~~~ BottomPadding
-    C28A1 ~~~ BottomPadding
-    C28E2 ~~~ BottomPadding
     C28top --o C28Xctx
     C28top --> C28Esh
     C28top --> C28Sass
@@ -7041,6 +7035,12 @@ flowchart TD
     C28G3 --o C28A1
     C28G3 --> C28E2
     C28G3 --> C28E1
+    C28Xctx ~~~ BottomPadding[ ]:::invisible
+    C28Esh ~~~ BottomPadding
+    C28E1 ~~~ BottomPadding
+    C28J1 ~~~ BottomPadding
+    C28A1 ~~~ BottomPadding
+    C28E2 ~~~ BottomPadding
 ```
 
 ### Package C29top
@@ -7082,12 +7082,6 @@ flowchart TD
     click C29A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c29a1"
     click C29E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
 
-    C29Xctx ~~~ BottomPadding[ ]:::invisible
-    C29Esh ~~~ BottomPadding
-    C29E1 ~~~ BottomPadding
-    C29J1 ~~~ BottomPadding
-    C29A1 ~~~ BottomPadding
-    C29E2 ~~~ BottomPadding
     C29top --o C29Xctx
     C29top --> C29Esh
     C29top --> C29Sass
@@ -7101,6 +7095,12 @@ flowchart TD
     C29G3 --o C29A1
     C29G3 --> C29E2
     C29G3 --> C29E1
+    C29Xctx ~~~ BottomPadding[ ]:::invisible
+    C29Esh ~~~ BottomPadding
+    C29E1 ~~~ BottomPadding
+    C29J1 ~~~ BottomPadding
+    C29A1 ~~~ BottomPadding
+    C29E2 ~~~ BottomPadding
 ```
 
 ### Package C30top
@@ -7142,12 +7142,6 @@ flowchart TD
     click C30A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c30a1"
     click C30E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
 
-    C30Xctx ~~~ BottomPadding[ ]:::invisible
-    C30Esh ~~~ BottomPadding
-    C30E1 ~~~ BottomPadding
-    C30J1 ~~~ BottomPadding
-    C30A1 ~~~ BottomPadding
-    C30E2 ~~~ BottomPadding
     C30top --o C30Xctx
     C30top --> C30Esh
     C30top --> C30Sass
@@ -7161,6 +7155,12 @@ flowchart TD
     C30G3 --o C30A1
     C30G3 --> C30E2
     C30G3 --> C30E1
+    C30Xctx ~~~ BottomPadding[ ]:::invisible
+    C30Esh ~~~ BottomPadding
+    C30E1 ~~~ BottomPadding
+    C30J1 ~~~ BottomPadding
+    C30A1 ~~~ BottomPadding
+    C30E2 ~~~ BottomPadding
 ```
 
 ### Package C31top
@@ -7202,12 +7202,6 @@ flowchart TD
     click C31A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c31a1"
     click C31E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
 
-    C31Xctx ~~~ BottomPadding[ ]:::invisible
-    C31Esh ~~~ BottomPadding
-    C31E1 ~~~ BottomPadding
-    C31J1 ~~~ BottomPadding
-    C31A1 ~~~ BottomPadding
-    C31E2 ~~~ BottomPadding
     C31top --o C31Xctx
     C31top --> C31Esh
     C31top --> C31Sass
@@ -7221,6 +7215,12 @@ flowchart TD
     C31G3 --o C31A1
     C31G3 --> C31E2
     C31G3 --> C31E1
+    C31Xctx ~~~ BottomPadding[ ]:::invisible
+    C31Esh ~~~ BottomPadding
+    C31E1 ~~~ BottomPadding
+    C31J1 ~~~ BottomPadding
+    C31A1 ~~~ BottomPadding
+    C31E2 ~~~ BottomPadding
 ```
 
 ### Package C32top
@@ -7262,12 +7262,6 @@ flowchart TD
     click C32A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c32a1"
     click C32E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
 
-    C32Xctx ~~~ BottomPadding[ ]:::invisible
-    C32Esh ~~~ BottomPadding
-    C32E1 ~~~ BottomPadding
-    C32J1 ~~~ BottomPadding
-    C32A1 ~~~ BottomPadding
-    C32E2 ~~~ BottomPadding
     C32top --o C32Xctx
     C32top --> C32Esh
     C32top --> C32Sass
@@ -7281,6 +7275,12 @@ flowchart TD
     C32G3 --o C32A1
     C32G3 --> C32E2
     C32G3 --> C32E1
+    C32Xctx ~~~ BottomPadding[ ]:::invisible
+    C32Esh ~~~ BottomPadding
+    C32E1 ~~~ BottomPadding
+    C32J1 ~~~ BottomPadding
+    C32A1 ~~~ BottomPadding
+    C32E2 ~~~ BottomPadding
 ```
 
 ### Package C33top
@@ -7322,12 +7322,6 @@ flowchart TD
     click C33A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c33a1"
     click C33E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
 
-    C33Xctx ~~~ BottomPadding[ ]:::invisible
-    C33Esh ~~~ BottomPadding
-    C33E1 ~~~ BottomPadding
-    C33J1 ~~~ BottomPadding
-    C33A1 ~~~ BottomPadding
-    C33E2 ~~~ BottomPadding
     C33top --o C33Xctx
     C33top --> C33Esh
     C33top --> C33Sass
@@ -7341,6 +7335,12 @@ flowchart TD
     C33G3 --o C33A1
     C33G3 --> C33E2
     C33G3 --> C33E1
+    C33Xctx ~~~ BottomPadding[ ]:::invisible
+    C33Esh ~~~ BottomPadding
+    C33E1 ~~~ BottomPadding
+    C33J1 ~~~ BottomPadding
+    C33A1 ~~~ BottomPadding
+    C33E2 ~~~ BottomPadding
 ```
 
 ### Package C34top
@@ -7382,12 +7382,6 @@ flowchart TD
     click C34A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c34a1"
     click C34E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
 
-    C34Xctx ~~~ BottomPadding[ ]:::invisible
-    C34Esh ~~~ BottomPadding
-    C34E1 ~~~ BottomPadding
-    C34J1 ~~~ BottomPadding
-    C34A1 ~~~ BottomPadding
-    C34E2 ~~~ BottomPadding
     C34top --o C34Xctx
     C34top --> C34Esh
     C34top --> C34Sass
@@ -7401,6 +7395,12 @@ flowchart TD
     C34G3 --o C34A1
     C34G3 --> C34E2
     C34G3 --> C34E1
+    C34Xctx ~~~ BottomPadding[ ]:::invisible
+    C34Esh ~~~ BottomPadding
+    C34E1 ~~~ BottomPadding
+    C34J1 ~~~ BottomPadding
+    C34A1 ~~~ BottomPadding
+    C34E2 ~~~ BottomPadding
 ```
 
 ### Package C35top
@@ -7442,12 +7442,6 @@ flowchart TD
     click C35A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c35a1"
     click C35E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
 
-    C35Xctx ~~~ BottomPadding[ ]:::invisible
-    C35Esh ~~~ BottomPadding
-    C35E1 ~~~ BottomPadding
-    C35J1 ~~~ BottomPadding
-    C35A1 ~~~ BottomPadding
-    C35E2 ~~~ BottomPadding
     C35top --o C35Xctx
     C35top --> C35Esh
     C35top --> C35Sass
@@ -7461,6 +7455,12 @@ flowchart TD
     C35G3 --o C35A1
     C35G3 --> C35E2
     C35G3 --> C35E1
+    C35Xctx ~~~ BottomPadding[ ]:::invisible
+    C35Esh ~~~ BottomPadding
+    C35E1 ~~~ BottomPadding
+    C35J1 ~~~ BottomPadding
+    C35A1 ~~~ BottomPadding
+    C35E2 ~~~ BottomPadding
 ```
 
 ### Package C36top
@@ -7502,12 +7502,6 @@ flowchart TD
     click C36A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c36a1"
     click C36E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
 
-    C36Xctx ~~~ BottomPadding[ ]:::invisible
-    C36Esh ~~~ BottomPadding
-    C36E1 ~~~ BottomPadding
-    C36J1 ~~~ BottomPadding
-    C36A1 ~~~ BottomPadding
-    C36E2 ~~~ BottomPadding
     C36top --o C36Xctx
     C36top --> C36Esh
     C36top --> C36Sass
@@ -7521,6 +7515,12 @@ flowchart TD
     C36G3 --o C36A1
     C36G3 --> C36E2
     C36G3 --> C36E1
+    C36Xctx ~~~ BottomPadding[ ]:::invisible
+    C36Esh ~~~ BottomPadding
+    C36E1 ~~~ BottomPadding
+    C36J1 ~~~ BottomPadding
+    C36A1 ~~~ BottomPadding
+    C36E2 ~~~ BottomPadding
 ```
 
 ### Package C37top
@@ -7562,12 +7562,6 @@ flowchart TD
     click C37A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c37a1"
     click C37E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
 
-    C37Xctx ~~~ BottomPadding[ ]:::invisible
-    C37Esh ~~~ BottomPadding
-    C37E1 ~~~ BottomPadding
-    C37J1 ~~~ BottomPadding
-    C37A1 ~~~ BottomPadding
-    C37E2 ~~~ BottomPadding
     C37top --o C37Xctx
     C37top --> C37Esh
     C37top --> C37Sass
@@ -7581,6 +7575,12 @@ flowchart TD
     C37G3 --o C37A1
     C37G3 --> C37E2
     C37G3 --> C37E1
+    C37Xctx ~~~ BottomPadding[ ]:::invisible
+    C37Esh ~~~ BottomPadding
+    C37E1 ~~~ BottomPadding
+    C37J1 ~~~ BottomPadding
+    C37A1 ~~~ BottomPadding
+    C37E2 ~~~ BottomPadding
 ```
 
 ### Package C38top
@@ -7622,12 +7622,6 @@ flowchart TD
     click C38A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c38a1"
     click C38E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
 
-    C38Xctx ~~~ BottomPadding[ ]:::invisible
-    C38Esh ~~~ BottomPadding
-    C38E1 ~~~ BottomPadding
-    C38J1 ~~~ BottomPadding
-    C38A1 ~~~ BottomPadding
-    C38E2 ~~~ BottomPadding
     C38top --o C38Xctx
     C38top --> C38Esh
     C38top --> C38Sass
@@ -7641,6 +7635,12 @@ flowchart TD
     C38G3 --o C38A1
     C38G3 --> C38E2
     C38G3 --> C38E1
+    C38Xctx ~~~ BottomPadding[ ]:::invisible
+    C38Esh ~~~ BottomPadding
+    C38E1 ~~~ BottomPadding
+    C38J1 ~~~ BottomPadding
+    C38A1 ~~~ BottomPadding
+    C38E2 ~~~ BottomPadding
 ```
 
 ### Package C39top
@@ -7682,12 +7682,6 @@ flowchart TD
     click C39A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c39a1"
     click C39E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
 
-    C39Xctx ~~~ BottomPadding[ ]:::invisible
-    C39Esh ~~~ BottomPadding
-    C39E1 ~~~ BottomPadding
-    C39J1 ~~~ BottomPadding
-    C39A1 ~~~ BottomPadding
-    C39E2 ~~~ BottomPadding
     C39top --o C39Xctx
     C39top --> C39Esh
     C39top --> C39Sass
@@ -7701,6 +7695,12 @@ flowchart TD
     C39G3 --o C39A1
     C39G3 --> C39E2
     C39G3 --> C39E1
+    C39Xctx ~~~ BottomPadding[ ]:::invisible
+    C39Esh ~~~ BottomPadding
+    C39E1 ~~~ BottomPadding
+    C39J1 ~~~ BottomPadding
+    C39A1 ~~~ BottomPadding
+    C39E2 ~~~ BottomPadding
 ```
 
 ### Package C40top
@@ -7742,12 +7742,6 @@ flowchart TD
     click C40A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c40a1"
     click C40E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
 
-    C40Xctx ~~~ BottomPadding[ ]:::invisible
-    C40Esh ~~~ BottomPadding
-    C40E1 ~~~ BottomPadding
-    C40J1 ~~~ BottomPadding
-    C40A1 ~~~ BottomPadding
-    C40E2 ~~~ BottomPadding
     C40top --o C40Xctx
     C40top --> C40Esh
     C40top --> C40Sass
@@ -7761,6 +7755,12 @@ flowchart TD
     C40G3 --o C40A1
     C40G3 --> C40E2
     C40G3 --> C40E1
+    C40Xctx ~~~ BottomPadding[ ]:::invisible
+    C40Esh ~~~ BottomPadding
+    C40E1 ~~~ BottomPadding
+    C40J1 ~~~ BottomPadding
+    C40A1 ~~~ BottomPadding
+    C40E2 ~~~ BottomPadding
 ```
 
 ### Package C41top
@@ -7802,12 +7802,6 @@ flowchart TD
     click C41A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c41a1"
     click C41E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
 
-    C41Xctx ~~~ BottomPadding[ ]:::invisible
-    C41Esh ~~~ BottomPadding
-    C41E1 ~~~ BottomPadding
-    C41J1 ~~~ BottomPadding
-    C41A1 ~~~ BottomPadding
-    C41E2 ~~~ BottomPadding
     C41top --o C41Xctx
     C41top --> C41Esh
     C41top --> C41Sass
@@ -7821,6 +7815,12 @@ flowchart TD
     C41G3 --o C41A1
     C41G3 --> C41E2
     C41G3 --> C41E1
+    C41Xctx ~~~ BottomPadding[ ]:::invisible
+    C41Esh ~~~ BottomPadding
+    C41E1 ~~~ BottomPadding
+    C41J1 ~~~ BottomPadding
+    C41A1 ~~~ BottomPadding
+    C41E2 ~~~ BottomPadding
 ```
 
 ### Package C42top
@@ -7862,12 +7862,6 @@ flowchart TD
     click C42A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c42a1"
     click C42E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
 
-    C42Xctx ~~~ BottomPadding[ ]:::invisible
-    C42Esh ~~~ BottomPadding
-    C42E1 ~~~ BottomPadding
-    C42J1 ~~~ BottomPadding
-    C42A1 ~~~ BottomPadding
-    C42E2 ~~~ BottomPadding
     C42top --o C42Xctx
     C42top --> C42Esh
     C42top --> C42Sass
@@ -7881,6 +7875,12 @@ flowchart TD
     C42G3 --o C42A1
     C42G3 --> C42E2
     C42G3 --> C42E1
+    C42Xctx ~~~ BottomPadding[ ]:::invisible
+    C42Esh ~~~ BottomPadding
+    C42E1 ~~~ BottomPadding
+    C42J1 ~~~ BottomPadding
+    C42A1 ~~~ BottomPadding
+    C42E2 ~~~ BottomPadding
 ```
 
 ### Package C43top
@@ -7922,12 +7922,6 @@ flowchart TD
     click C43A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c43a1"
     click C43E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
 
-    C43Xctx ~~~ BottomPadding[ ]:::invisible
-    C43Esh ~~~ BottomPadding
-    C43E1 ~~~ BottomPadding
-    C43J1 ~~~ BottomPadding
-    C43A1 ~~~ BottomPadding
-    C43E2 ~~~ BottomPadding
     C43top --o C43Xctx
     C43top --> C43Esh
     C43top --> C43Sass
@@ -7941,6 +7935,12 @@ flowchart TD
     C43G3 --o C43A1
     C43G3 --> C43E2
     C43G3 --> C43E1
+    C43Xctx ~~~ BottomPadding[ ]:::invisible
+    C43Esh ~~~ BottomPadding
+    C43E1 ~~~ BottomPadding
+    C43J1 ~~~ BottomPadding
+    C43A1 ~~~ BottomPadding
+    C43E2 ~~~ BottomPadding
 ```
 
 ### Package C44top
@@ -7982,12 +7982,6 @@ flowchart TD
     click C44A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c44a1"
     click C44E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
 
-    C44Xctx ~~~ BottomPadding[ ]:::invisible
-    C44Esh ~~~ BottomPadding
-    C44E1 ~~~ BottomPadding
-    C44J1 ~~~ BottomPadding
-    C44A1 ~~~ BottomPadding
-    C44E2 ~~~ BottomPadding
     C44top --o C44Xctx
     C44top --> C44Esh
     C44top --> C44Sass
@@ -8001,6 +7995,12 @@ flowchart TD
     C44G3 --o C44A1
     C44G3 --> C44E2
     C44G3 --> C44E1
+    C44Xctx ~~~ BottomPadding[ ]:::invisible
+    C44Esh ~~~ BottomPadding
+    C44E1 ~~~ BottomPadding
+    C44J1 ~~~ BottomPadding
+    C44A1 ~~~ BottomPadding
+    C44E2 ~~~ BottomPadding
 ```
 
 ### Package C45top
@@ -8042,12 +8042,6 @@ flowchart TD
     click C45A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c45a1"
     click C45E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
 
-    C45Xctx ~~~ BottomPadding[ ]:::invisible
-    C45Esh ~~~ BottomPadding
-    C45E1 ~~~ BottomPadding
-    C45J1 ~~~ BottomPadding
-    C45A1 ~~~ BottomPadding
-    C45E2 ~~~ BottomPadding
     C45top --o C45Xctx
     C45top --> C45Esh
     C45top --> C45Sass
@@ -8061,6 +8055,12 @@ flowchart TD
     C45G3 --o C45A1
     C45G3 --> C45E2
     C45G3 --> C45E1
+    C45Xctx ~~~ BottomPadding[ ]:::invisible
+    C45Esh ~~~ BottomPadding
+    C45E1 ~~~ BottomPadding
+    C45J1 ~~~ BottomPadding
+    C45A1 ~~~ BottomPadding
+    C45E2 ~~~ BottomPadding
 ```
 <!-- end verocase -->
 

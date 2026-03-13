@@ -26,11 +26,28 @@ simplify deployment.
 `load_config` rejects unknown keys with a warning, so any new configuration
 option must be added to `DEFAULT_CONFIG` first.
 
-All top-level render functions (`render_markdown`, `render_html`,
-`render_sacm`, `render_gsn`) take `(roots: List[Node], config: dict)` and
-extract whatever they need from `config` internally. Do not add individual
-keyword parameters for config-driven behaviour; add the key to `DEFAULT_CONFIG`
-and read it from `config` inside the function.
+All render functions write to a `TextIO` stream (`out`) rather than returning
+strings, and return `bool` (True if anything was written).  The call
+signatures are:
+
+- Diagram renderers: `render_markdown`, `render_html`, `render_sacm`,
+  `render_sacm_html`, `render_gsn`, `render_gsn_html` →
+  `(roots: List[Node], config: dict, out: TextIO) -> bool`
+- Selection renderers: `render_referenced_by`, `render_supported_by`,
+  `render_supports`, `render_pkg_defines`, `render_pkg_citing`,
+  `render_pkg_cited`, `render_ltac_txt`, `render_info`,
+  `render_representation` → accept `out: TextIO` and `sep: str = ''`
+  (the separator to write before the first byte of content, only if
+  content is produced).
+- Assemblers: `render_element_selector`, `_render_single_package`,
+  `render_package_selector`, `render_selector` → accept `out: TextIO`.
+- `_apply_selections` accepts `out: TextIO` and `pending_sep: str = ''`.
+
+Do not return content as strings from these functions.  Use `io.StringIO()`
+at the call site when a string is genuinely needed (e.g. in `_fixmissing`).
+
+Do not add individual keyword parameters for config-driven behaviour; add
+the key to `DEFAULT_CONFIG` and read it from `config` inside the function.
 
 Changing rendered output requires updating the corresponding golden files in
 `tests/fixtures/`. Run `tests/run_tests.py` to verify. To accept all
