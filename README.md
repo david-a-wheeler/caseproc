@@ -17,8 +17,16 @@ The program can automatically generate graphics
 for both Structured Assurance Case Metamodel (SACM) and
 Goal Structuring Notation (GSN), and it generates many hyperlinks
 to make it easy to navigate an assurance case.
-Because the inputs are simple text files,
-they're easily read and easily modified both by humans and by AI.
+
+Both humans and AI will find it *very* easy to create and edit its inputs.
+The inputs are simple text files, making them easy to read and easy
+to modify. AI systems *really* like recursively indented information
+like LTAC (Python, YAML, and many other formats already do this) and
+they know how to handle Markdown (they've been trained on vast amounts of it).
+
+Processing is lightening-fast. In one real-world assurance case
+with over 200 elements and 370Kib of documentation, processing
+takes less than 0.2 seconds.
 
 An assurance case is "a body of evidence organized into an argument demonstrating that some claim about a system holds (i.e., is assured). An assurance case is needed when it is important to show that a system exhibits some complex
 property, such as safety, security, privacy, or reliability."
@@ -39,11 +47,11 @@ diagrams that flexibly present the information graphically.
 For large assurance cases where maximum flexibility is critical,
 these tools can be quite helpful.
 
-However, these sophisticated tools seem excessive for
-smaller and medium-sized assurance cases.
+However, these sophisticated tools seem excessive for some assurance cases.
 They require installation, learning to use them, and committing to
 storing all data in a database that can only be managed by a complex tool.
-I was looking for an alternative.
+Some assurance cases don't need their sophistication.
+I was looking for a simpler alternative.
 
 An obvious alternative to these sophisticated tools
 is to write an assurance case entirely as a traditional document.
@@ -88,7 +96,7 @@ This tool, `verocase`, takes a completely different approach:
   including fixing headers and inserting/updating graphics
   (default file `case.[md,html]` in `./` or `docs/`).
   Note that it *automatically* generates graphical notation in SACM or
-  GSN notation - you don't need to fiddle with the graphics at all.
+  GSN notation. You don't need to fiddle with the graphics at all.
   It also automatically generates many hypertext links, making it
   easy to navigate the assurance case.
   The expectation is that humans and AIs would edit these documents to
@@ -123,7 +131,7 @@ This tool is designed to easily handle assurance case evolution
 better than a simple document can.
 
 This tool does a number of validation checks;
-see `--help` for the full list.
+see `--help-validations` for the full list.
 If it validates, the tool automatically updates the documents to match
 the LTAC input, e.g., it updates the graphics and the headings.
 
@@ -170,7 +178,7 @@ that a pure document approach does not.
 The big con of this approach is that to make it work, we are intentionally
 imposing various limits:
 
-* We require that the assurance case be organized as a set of packages,
+* We *require* that the assurance case be organized as a set of packages,
   where each package is a hierarchy.
   This restriction is required by our extended LTAC input form.
   This restriction is allowed but not strictly required by widely-used
@@ -183,18 +191,21 @@ imposing various limits:
   This restriction is not a problem in practice, because
   a claim or justification may be *referenced* in any package,
   and "Links" allow references to an element already in use in a package.
-* We generate graphics automatically, and we currently
+* Our inputs are *text* not graphics. I find that entering data as simple
+  text is far more efficient, but if you want to enter data as graphics,
+  this is the wrong tool for you.
+* We generate graphics automatically. In addition, we currently
   use `mermaid` because it's
   directly support by GitHub's built-in markdown processor.
-  Mermaid is limited in what it can do, but this isn't a serious problem if
+  Mermaid is limited in what it can do.
+  In practice, mermaid's limits aren't a serious problem if
   your packages don't have too many elements.
   You can have as many packages as you want, so we suggest
-  limiting the size of each package. Smaller packages are
+  limiting the size of each package (the `--detach` operation will easily
+  break up a package for you). Smaller packages are
   easier for humans to follow, too.
 * This is not a database, it's a way to make it easier to manage documents.
-  If you want a database, this tool
-  isn't it. So if you are managing a large
-  assurance case, this approach is probably less appealing.
+  If you want a database, this tool isn't it.
 
 ## Other information
 

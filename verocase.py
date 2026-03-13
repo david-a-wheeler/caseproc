@@ -2706,15 +2706,15 @@ Validations on the LTAC file (always):
     flagged as possibly dubious (disable with warn_dubious_reference=false in
     the --config file); add a `()` afterwards to escape a closing parenthetical
 
-Additional checks when document files are provided:
+Additional checks when document files are processed:
   - Every declared LTAC element should have a corresponding 'element' selector
     in a document (used to generate the element's heading and cross-references;
-    use --fixmissing to fix this)
+    use --fixmissing to add the missing ones)
   - A '<!-- end verocase -->' that appears outside any '<!-- verocase ... -->'
-    region is a fatal error (panic): the document is not updated
+    region is a fatal error (panic): the document is *not* changed.
   - A '<!-- verocase ...' or '<!-- verocase-config ...' directive found inside
     an open '<!-- verocase ... -->' region is a fatal error (panic): directives
-    cannot be nested and the document is not updated
+    cannot be nested and the document is *not* changed
 """
 
 _HELP_CONFIGURATION = """\
@@ -2854,9 +2854,11 @@ Here's an example of a simple LTAC file's contents:
 - Claim Requirements: Security requirements are identified and met
   - Claim Confidentiality: Confidentiality is maintained
   - Claim Integrity: Integrity is maintained
+    - Claim ChangeAuth: Changes only permitted if authorized
   - Claim Availability: Availability is maintained
 
 - Claim Design: Security is implemented in design
+  - Claim SandS: Saltzer and Schroeder principles met
 
 Document files contain marked regions that verocase manages:
   <!-- verocase SELECTOR -->
