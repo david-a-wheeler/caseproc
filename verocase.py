@@ -2552,7 +2552,7 @@ def process_document_stream(
             if add_missing:
                 if _sel_kind == 'element':
                     _emit_stubs_after(_last_placed_id)
-                elif _sel_kind in ('stop', 'epilogue', 'verocase-config'):
+                elif _sel_kind in ('stop', 'epilogue'):
                     _emit_all_remaining()
             found_end = _consume_region(line_iter, filename, lineno, selector)
             if strip and selector.strip() not in ('warning', 'stop', 'epilogue'):

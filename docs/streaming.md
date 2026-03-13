@@ -157,10 +157,9 @@ lines instead of building a `lines` list.
   LF files).
 - `process_document_stream` writes directly to the temp file — no
   `io.StringIO` buffer.
-- After streaming, `_files_equal` compares the temp file to the original in
-  64 KB chunks to decide whether the file actually changed.  If unchanged, the
-  temp file is deleted and `None` is returned (preserving mtime and suppressing
-  the "Updating" message).
+- After streaming, the temp file is moved into place unconditionally.  No
+  comparison with the original is performed; updating the mtime on every run is
+  acceptable since git (not mtime) determines what actually changed.
 
 The `--fixmissing` two-pass algorithm (`render to StringIO`, then
 `_insert_missing_stubs` with list-of-lines manipulation) was replaced by a
@@ -177,8 +176,10 @@ The `--fixmissing` two-pass algorithm (`render to StringIO`, then
    consecutive missing elements that come immediately after the previously
    placed element in LTAC order.
 4. **Flush** (`_emit_all_remaining`): before any `stop`/`epilogue` marker, any
-   `verocase-config` directive, any HTML `</body>` tag, or at EOF, all
-   remaining missing stubs are emitted in LTAC order.
+   HTML `</body>` tag, or at EOF, all remaining missing stubs are emitted in
+   LTAC order.  A `verocase-config` directive triggers only `_emit_stubs_after`
+   (consecutive stubs), not a full flush, so that the config directive stays
+   with the element that immediately follows it.
 
 This eliminates `_scan_region_ends`, `_find_epilogue_line`, and
 `_insert_missing_stubs`, as well as the `_inject_missing` nested function.
