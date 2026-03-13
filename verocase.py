@@ -2747,7 +2747,9 @@ Configuration keys (--config FILE, JSON object):
   package_selections comma-separated list for package sub-sections (default: representation,pkg_defines,pkg_citing,pkg_cited)
   pkg_label          word used to identify packages in output (default: "Package ")
   warn_dubious_reference  warn when a reference looks like a parenthetical comment (default: true)
-"""
+
+Configuration values that can be changed by verocase-config are:
+""" + ", ".join(sorted(_ALLOWED_CONFIG_VALUES)) + "\n"
 
 
 class _NullWriter:
