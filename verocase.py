@@ -4547,6 +4547,14 @@ def _collect_document_element_ids(path: str) -> set:
     return ids
 
 
+# I/O buffer size for reading and writing document files.
+# 256 KiB is large enough to hold most documents in a single buffer,
+# reducing the number of OS-level read/write calls.
+# This only affects inline rewriting (temp file path); --stdout writes
+# directly to sys.stdout and is not affected.
+_DOC_IO_BUFSIZE = 256 * 1024  # 262144 bytes = 256 KiB
+
+
 def _inline_rewrite_file(
     path: str,
     registry: Dict[str, Node],
@@ -4590,8 +4598,8 @@ def _inline_rewrite_file(
 
     try:
         nl = '\r\n' if line_ending == '\r\n' else ''
-        with os.fdopen(fd, 'w', encoding='utf-8', newline=nl) as out_f:
-            with open(path, encoding='utf-8', newline='') as src_f:
+        with os.fdopen(fd, 'w', encoding='utf-8', newline=nl, buffering=_DOC_IO_BUFSIZE) as out_f:
+            with open(path, encoding='utf-8', newline='', buffering=_DOC_IO_BUFSIZE) as src_f:
                 process_document_stream(
                     src_f, out_f, registry, all_roots, config, id_info,
                     seen_element_ids, doc_format,
