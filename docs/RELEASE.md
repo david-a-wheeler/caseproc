@@ -1,30 +1,29 @@
 # Release Process
 
 This document describes the step-by-step process for publishing a new
-verocase release to PyPI.
+release of `verocase` to PyPI.
+We use the PyPI trusted publisher process, so we don't need to directly handle a
+PyPI API token or password.
 
 ## Prerequisites
 
 - You must have write access to the
   [verocase GitHub repository](https://github.com/david-a-wheeler/verocase).
-- The PyPI trusted publisher must already be configured (see below).
-  No PyPI API token or password is needed.
-
----
 
 ## Step-by-step release
 
 ### 1. Update the version string
 
-Edit `verocase.py` and update `__version__` near the top of the file:
+Edit `verocase.py` and update `__version__` near the top of the file
+to a semantic versioning (SemVar) version identifier:
 
 ```python
 __version__ = '1.2.3'   # use the new version number
 ```
 
 [flit](https://flit.pypa.io/) reads this value directly as the package
-version (via `dynamic = ["version"]` in `pyproject.toml`), so this is the
-single source of truth.
+version (via `dynamic = ["version"]` in `pyproject.toml`), so this location
+is the single source of truth.
 
 Verify the version is correct:
 
@@ -35,8 +34,9 @@ python3 verocase.py --version
 ### 2. Commit the version bump
 
 ```sh
+VERSION=$(python3 verocase.py --version)
 git add verocase.py
-git commit -m "Bump version to 1.2.3"
+git commit -m "Bump version to $VERSION"
 ```
 
 ### 3. Create and push a signed tag
@@ -46,12 +46,9 @@ string to embed:
 
 ```sh
 VERSION=$(python3 verocase.py --version)
-git tag -s "v${VERSION}" -m "Release v${VERSION}"
+git tag -a "v${VERSION}" -m "Release v${VERSION}"
 git push origin main "v${VERSION}"
 ```
-
-If you do not have a GPG signing key configured, use `-a` (annotated) instead
-of `-s` (signed).
 
 ### 4. Create a GitHub Release
 
