@@ -39,7 +39,7 @@ then review the result.
 Give the AI a prompt along these lines:
 
 > Please update `CHANGELOG.md` for a new release of `verocase`.
-> The new version is 1.2.3 and today's date is 2025-03-13 (adjust both).
+> Use $VERSION for the new version ID, and `date` for today's date.
 > Use the git log since the previous release tag to determine what changed.
 > Follow the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format,
 > using these section headings as applicable, in this order, omitting any
