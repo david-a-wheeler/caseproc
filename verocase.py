@@ -4211,24 +4211,9 @@ def ltac_node_line(node: Node, depth_offset: int = 0) -> str:
 
 
 def analysis_leaves(all_roots) -> List['Node']:
-    """Return leaf elements (nodes with no children) in LTAC order.
-
-    Strategy and Context nodes are included only when they carry a problem
-    flag ({needssupport} or {defeated}); bare Strategy/Context leaves are
-    omitted as they are structurally expected to be terminals.
-    """
-    leaves = []
-    for node in all_nodes(all_roots):
-        if node.is_citation or node.node_type in ('Link',):
-            continue
-        if node.node_type in ('Strategy', 'Context'):
-            if not node.children:
-                has_problem = any(o in ('needssupport', 'defeated') for o in node.options)
-                if not has_problem:
-                    continue
-        if not node.children:
-            leaves.append(node)
-    return leaves
+    """Return all definition nodes with no children, in LTAC order."""
+    return [node for node in all_nodes(all_roots)
+            if node.is_definition and not node.children]
 
 
 def needs_support(nodes) -> List['Node']:
