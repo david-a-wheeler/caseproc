@@ -3536,59 +3536,60 @@ def _scan_doc_stats(path: str) -> dict:
     }
 
 
-def _print_stats(ltac_stats: dict, doc_stats: Optional[dict]) -> None:
-    """Print a statistics report to stdout."""
-    print('=== verocase statistics ===')
-    print()
-    print('LTAC structure:')
+def print_stats(ltac_stats: dict, doc_stats: Optional[dict],
+                out: TextIO = sys.stdout) -> None:
+    """Print a statistics report to out (default stdout)."""
+    print('=== verocase statistics ===', file=out)
+    print(file=out)
+    print('LTAC structure:', file=out)
 
     # Packages (sizes include links and citations)
     pkgs = ltac_stats['pkg_sizes_sorted']
     num_packages = ltac_stats['num_packages']
-    print('- Packages (element numbers include links and citations)')
-    print(f'  - Number of packages: {num_packages}')
+    print('- Packages (element numbers include links and citations)', file=out)
+    print(f'  - Number of packages: {num_packages}', file=out)
     if pkgs:
-        print(f'  - Largest package: {pkgs[0][1]} ({pkgs[0][0]} elements)')
+        print(f'  - Largest package: {pkgs[0][1]} ({pkgs[0][0]} elements)', file=out)
         if num_packages >= 2:
-            print(f'  - Second largest package: {pkgs[1][1]} ({pkgs[1][0]} elements)')
+            print(f'  - Second largest package: {pkgs[1][1]} ({pkgs[1][0]} elements)', file=out)
         if num_packages >= 3:
-            print(f'  - Smallest package: {pkgs[-1][1]} ({pkgs[-1][0]} elements)')
-    print(f"  - Average package size: {ltac_stats['avg_per_pkg']:.1f}")
-    print(f"  - Median package size: {ltac_stats['median_per_pkg']:.1f}")
+            print(f'  - Smallest package: {pkgs[-1][1]} ({pkgs[-1][0]} elements)', file=out)
+    print(f"  - Average package size: {ltac_stats['avg_per_pkg']:.1f}", file=out)
+    print(f"  - Median package size: {ltac_stats['median_per_pkg']:.1f}", file=out)
 
     # Elements including links and citations
-    print('- Elements including links and citations:')
-    print(f"  - Total all elements including links and citations: {ltac_stats['total_full']}")
-    print(f"  - Total Citations: {ltac_stats['total_citations']}")
-    print(f"  - Total Links: {ltac_stats['total_links']}")
+    print('- Elements including links and citations:', file=out)
+    print(f"  - Total all elements including links and citations: {ltac_stats['total_full']}", file=out)
+    print(f"  - Total Citations: {ltac_stats['total_citations']}", file=out)
+    print(f"  - Total Links: {ltac_stats['total_links']}", file=out)
 
     # Definitions (excluding links and citations)
-    print('- Definitions (excluding links and citations):')
-    print(f"  - Total definitions: {ltac_stats['total_definitions']}")
+    print('- Definitions (excluding links and citations):', file=out)
+    print(f"  - Total definitions: {ltac_stats['total_definitions']}", file=out)
     def_type_counts = ltac_stats['def_type_counts']
     if def_type_counts:
-        print('  - Definitional elements by type:')
+        print('  - Definitional elements by type:', file=out)
         for node_type, count in sorted(def_type_counts.items()):
-            print(f'    - {node_type}: {count}')
-    print(f"  - Total leaf definitions (no children): {ltac_stats['leaf_definitions']}")
-    print(f"  - Total leaf Claim definitions (no children): {ltac_stats['leaf_claims']}")
-    print(f"  - Total bottommost Claim definitions (no Claim descendants): {ltac_stats['bottommost_claims']}")
+            print(f'    - {node_type}: {count}', file=out)
+    print(f"  - Total leaf definitions (no children): {ltac_stats['leaf_definitions']}", file=out)
+    print(f"  - Total leaf Claim definitions (no children): {ltac_stats['leaf_claims']}", file=out)
+    print(f"  - Total bottommost Claim definitions (no Claim descendants): {ltac_stats['bottommost_claims']}", file=out)
     option_counts = ltac_stats['option_counts']
     if option_counts:
-        print('  - Definitions with each option:')
+        print('  - Definitions with each option:', file=out)
         for opt, count in sorted(option_counts.items()):
-            print(f'    - {opt}: {count}')
+            print(f'    - {opt}: {count}', file=out)
 
     if doc_stats is not None:
-        print()
-        print('Documents:')
+        print(file=out)
+        print('Documents:', file=out)
         pkg_r = doc_stats['pkg_regions']
         typical = '  (typical)' if pkg_r == 1 else ''
-        print(f"  Package regions:         {pkg_r}{typical}")
-        print(f"  Element regions:         {doc_stats['elem_regions']}")
+        print(f"  Package regions:         {pkg_r}{typical}", file=out)
+        print(f"  Element regions:         {doc_stats['elem_regions']}", file=out)
         if doc_stats['config_stmts']:
-            print(f"  Config statements:       {doc_stats['config_stmts']}")
-        print(f"  Elements with no prose:  {doc_stats['empty_elem_regions']}")
+            print(f"  Config statements:       {doc_stats['config_stmts']}", file=out)
+        print(f"  Elements with no prose:  {doc_stats['empty_elem_regions']}", file=out)
 
 
 def _write_ltac_node(node: 'Node', lines: list) -> None:
@@ -3723,61 +3724,60 @@ def _scan_document_elements(paths):
     return ordered_ids, id_info
 
 
-def _analysis_missing(all_roots, registry, document_files):
-    """Print analysis of LTAC elements missing from documents."""
+def _print_analysis_list(header, items, fmt=str) -> None:
+    """Print a labelled analysis list, or '(none)' if empty.
+
+    header  -- label printed before the list
+    items   -- iterable of items to print
+    fmt     -- callable that converts each item to a display string (default: str)
+    """
+    print(header)
+    items = list(items)
+    if not items:
+        print("  (none)")
+    else:
+        for item in items:
+            print(fmt(item))
+
+
+def analysis_missing(all_roots, registry, document_files) -> List['Node']:
+    """Return LTAC elements that have no selector region in the document(s).
+
+    Returns a list of Node objects in LTAC (depth-first) order.
+    """
     ordered_ids, _ = _scan_document_elements(document_files)
     seen = {ident for ident, _, _ in ordered_ids}
     all_ids_ordered = [node for node in _all_nodes_forward(all_roots)
                        if not node.is_cited and node.identifier
                        and node.node_type not in ('Link',)]
-    missing = [node for node in all_ids_ordered if node.identifier not in seen]
-    print("Elements missing a selector region in the document(s):")
-    if not missing:
-        print("  (none)")
-    else:
-        for node in missing:
-            print(f"{node.node_type} {node.identifier}")
+    return [node for node in all_ids_ordered if node.identifier not in seen]
 
 
-def _analysis_empty(document_files, registry):
-    """Print analysis of elements with selector regions but no prose.
+def analysis_empty(document_files, registry) -> List[str]:
+    """Return identifiers of elements whose selector region contains no prose.
 
     Elements that have an ext_ref are not considered empty: their content
     lives in the external reference.
     """
     _, elem_info = _scan_document_elements(document_files)
-    empty = [
-        (ident, info) for ident, info in elem_info.items()
+    return [
+        ident for ident, info in elem_info.items()
         if not info['has_prose']
         and not (registry.get(ident) and registry.get(ident).ext_ref)
     ]
-    print("Elements with no prose in the document(s):")
-    if not empty:
-        print("  (none)")
-    else:
-        for ident, info in empty:
-            node = registry.get(ident)
-            type_str = node.node_type if node else '?'
-            print(f"{type_str} {ident}")
 
 
-def _analysis_orphans(document_files, registry):
-    """Print analysis of document regions not in LTAC."""
-    ordered_ids, elem_info = _scan_document_elements(document_files)
-    orphans = [(ident, info) for ident, info in elem_info.items() if ident not in registry]
-    print("Orphaned selector regions in the document(s) (not in LTAC):")
-    if not orphans:
-        print("  (none)")
-    else:
-        for ident, info in orphans:
-            print(f"element {ident}")
+def analysis_orphans(document_files, registry) -> List[str]:
+    """Return identifiers of document selector regions not present in the LTAC."""
+    _, elem_info = _scan_document_elements(document_files)
+    return [ident for ident in elem_info if ident not in registry]
 
 
-def _analysis_misplaced(document_files, all_roots, registry):
-    """Print analysis of elements whose document order differs from LTAC order.
+def analysis_misplaced(document_files, all_roots, registry):
+    """Return elements whose document order differs from LTAC order.
 
-    Returns a list of (ident, lineno, filepath, expected_predecessor_ident) tuples
-    for misplaced elements.  Prints the analysis report.
+    Returns a list of (ident, lineno, filepath, pred_ident, pred_lineno) tuples,
+    where pred_ident and pred_lineno are None if the element should be first.
     """
     # LTAC order: depth-first forward order, exclude citations and Links
     ltac_order = [node.identifier for node in _all_nodes_forward(all_roots)
@@ -3791,8 +3791,6 @@ def _analysis_misplaced(document_files, all_roots, registry):
                    if ident in registry]
 
     if not doc_entries:
-        print("Misplaced elements (document order differs from LTAC order):")
-        print("  (none)")
         return []
 
     # Find misplaced elements: those not in the LCS of LTAC order within document order.
@@ -3837,9 +3835,7 @@ def _analysis_misplaced(document_files, all_roots, registry):
         if i not in lis_indices:
             misplaced_entries.append((ident, lineno, filepath))
 
-    print("Misplaced elements (document order differs from LTAC order):")
     if not misplaced_entries:
-        print("  (none)")
         return []
 
     # For each misplaced element, find expected predecessor in LTAC order
@@ -3849,21 +3845,14 @@ def _analysis_misplaced(document_files, all_roots, registry):
     for ident, lineno, filepath in misplaced_entries:
         ltac_idx = ltac_pos.get(ident, -1)
         pred_ident = None
+        pred_lineno = None
         for j in range(ltac_idx - 1, -1, -1):
             candidate = ltac_order[j]
             if candidate in doc_id_to_entry:
                 pred_ident = candidate
+                pred_lineno = doc_id_to_entry[candidate][0]
                 break
-        node = registry.get(ident)
-        type_str = node.node_type if node else '?'
-        if pred_ident is not None:
-            pred_lineno, pred_filepath = doc_id_to_entry[pred_ident]
-            pred_node = registry.get(pred_ident)
-            pred_type = pred_node.node_type if pred_node else '?'
-            print(f"{type_str} {ident}: at line {lineno}, expected after {pred_type} {pred_ident} (line {pred_lineno})")
-        else:
-            print(f"{type_str} {ident}: at line {lineno}, expected at start of document")
-        result.append((ident, lineno, filepath, pred_ident))
+        result.append((ident, lineno, filepath, pred_ident, pred_lineno))
     return result
 
 
@@ -3892,35 +3881,30 @@ def _ltac_node_line(node, depth_offset=0):
     return line
 
 
-def _analysis_leaves(all_roots):
-    """Print list of leaf elements."""
+def analysis_leaves(all_roots) -> List['Node']:
+    """Return leaf elements (nodes with no children) in LTAC order.
+
+    Strategy and Context nodes are included only when they carry a problem
+    flag ({needssupport} or {defeated}); bare Strategy/Context leaves are
+    omitted as they are structurally expected to be terminals.
+    """
     leaves = []
     for node in _all_nodes_forward(all_roots):
         if node.is_cited or node.node_type in ('Link',):
             continue
         if node.node_type in ('Strategy', 'Context'):
-            # Omit Strategy/Context leaves unless they carry a problem flag
             if not node.children:
                 has_problem = any(o in ('needssupport', 'defeated') for o in node.options)
                 if not has_problem:
                     continue
         if not node.children:
             leaves.append(node)
+    return leaves
 
-    ns_leaves = [n for n in leaves if 'needssupport' in n.options]
 
-    print("Leaf elements:")
-    if ns_leaves:
-        print("Leaves with {needssupport}:")
-        for n in ns_leaves:
-            print(_ltac_node_line(n, depth_offset=n.depth))
-        print()
-    print("All leaves:")
-    if not leaves:
-        print("  (none)")
-    else:
-        for n in leaves:
-            print(_ltac_node_line(n, depth_offset=n.depth))
+def needs_support(nodes) -> List['Node']:
+    """Return the subset of nodes that carry the {needssupport} option."""
+    return [n for n in nodes if 'needssupport' in n.options]
 
 
 def _subtree_count(node):
@@ -4877,27 +4861,55 @@ def main() -> None:
         if args.missing:
             if not first:
                 print()
-            _analysis_missing(all_roots, registry, analysis_doc_files)
+            _print_analysis_list(
+                "Elements missing a selector region in the document(s):",
+                analysis_missing(all_roots, registry, analysis_doc_files),
+                lambda n: f"{n.node_type} {n.identifier}")
             first = False
         if args.empty:
             if not first:
                 print()
-            _analysis_empty(analysis_doc_files, registry)
+            _print_analysis_list(
+                "Elements with no prose in the document(s):",
+                analysis_empty(analysis_doc_files, registry),
+                lambda i: f"{registry[i].node_type if i in registry else '?'} {i}")
             first = False
         if args.orphans:
             if not first:
                 print()
-            _analysis_orphans(analysis_doc_files, registry)
+            _print_analysis_list(
+                "Orphaned selector regions in the document(s) (not in LTAC):",
+                analysis_orphans(analysis_doc_files, registry),
+                lambda i: f"element {i}")
             first = False
         if args.misplaced:
             if not first:
                 print()
-            _analysis_misplaced(analysis_doc_files, all_roots, registry)
+            misplaced = analysis_misplaced(analysis_doc_files, all_roots, registry)
+            def _fmt_misplaced(t):
+                ntype = registry[t[0]].node_type if t[0] in registry else '?'
+                if t[3]:
+                    ptype = registry[t[3]].node_type if t[3] in registry else '?'
+                    return (f"{ntype} {t[0]}: at line {t[1]},"
+                            f" expected after {ptype} {t[3]} (line {t[4]})")
+                return f"{ntype} {t[0]}: at line {t[1]}, expected at start of document"
+            _print_analysis_list(
+                "Misplaced elements (document order differs from LTAC order):",
+                misplaced, _fmt_misplaced)
             first = False
         if args.leaves:
             if not first:
                 print()
-            _analysis_leaves(all_roots)
+            leaves = analysis_leaves(all_roots)
+            ns_leaves = needs_support(leaves)
+            if ns_leaves:
+                _print_analysis_list(
+                    "Leaves with {needssupport}:", ns_leaves,
+                    lambda n: _ltac_node_line(n, depth_offset=n.depth))
+                print()
+            _print_analysis_list(
+                "All leaves:", leaves,
+                lambda n: _ltac_node_line(n, depth_offset=n.depth))
             first = False
         if args.packages:
             if not first:
@@ -5025,9 +5037,9 @@ def main() -> None:
                 ds = _scan_doc_stats(path)
                 for k in doc_totals:
                     doc_totals[k] += ds.get(k, 0)
-            _print_stats(ltac_stats, doc_totals)
+            print_stats(ltac_stats, doc_totals)
         else:
-            _print_stats(ltac_stats, None)
+            print_stats(ltac_stats, None)
 
     if had_error:
         sys.exit(1)
