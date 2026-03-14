@@ -23,6 +23,57 @@ from typing import Dict, List, Optional, Set, TextIO, Tuple
 
 __version__ = '0.1.0'
 
+__all__ = [
+    # Exceptions and session state
+    'VerocaseError',
+    'had_error',
+    'strict',
+    'reset',
+    # Data types
+    'Node',
+    'DocState',
+    'DEFAULT_CONFIG',
+    # Loading, configuration, and serialization
+    'load_config',
+    'load_ltac_file',
+    'parse_ltac_lines',
+    'find_ltac_file',
+    'write_ltac',
+    'detect_doc_format',
+    # Tree manipulation
+    'copy_forest',
+    # Validation (call after loading; set had_error on problems)
+    'check_id_info',
+    'check_circularities',
+    'check_reachability',
+    # Tree traversal
+    'all_nodes_forward',
+    'all_nodes',
+    'collect_bfs',
+    'subtree_count',
+    'get_pkg_root',
+    'find_citation_parents',
+    'resolve_element',
+    'ltac_node_line',
+    'compute_ltac_stats',
+    # Analysis (return structured data; caller prints)
+    'analysis_missing',
+    'analysis_empty',
+    'analysis_orphans',
+    'analysis_misplaced',
+    'analysis_leaves',
+    'needs_support',
+    'analysis_packages',
+    'print_stats',
+    # Rendering to a stream
+    'render_selector',
+    'render_info',
+    'render_ltac_txt',
+    'render_element_selector',
+    'render_package_selector',
+    'process_document_stream',
+]
+
 # Python version support: we currently support Python 3.8 and later.
 # Python 3.8 reached end-of-life on 2024-10-07, so we will eventually drop it.
 # While supporting 3.8 we must avoid features introduced in later versions:
@@ -88,6 +139,8 @@ def notify(msg: str) -> None:
     print(f"verocase: {msg}", file=sys.stderr)
 
 
+# Default configuration values.  load_config() merges a JSON file over these.
+# Pass to functions that accept a config dict when no config file is needed.
 DEFAULT_CONFIG = {
     'base_url': '',
     'bottom_padding': True,
@@ -384,7 +437,7 @@ def detect_doc_format(path: str) -> str:
     """Return 'html' for .htm/.html files; 'markdown' for everything else.
 
     Stdin path '-' is treated as markdown.
-    Panics for unrecognised extensions.
+    Raises VerocaseError for unrecognised extensions.
 
     >>> detect_doc_format('case.md')
     'markdown'
@@ -410,20 +463,58 @@ def detect_doc_format(path: str) -> str:
 
 @dataclass
 class Node:
-    node_type: str           # Claim|Strategy|Justification|Evidence|
-                             # Context|Assumption|Link|Relation|Connector
-    identifier: str          # e.g. "C1"; empty string if absent
-    text: str                # descriptive text (statement / reasoning)
-    ext_ref: str             # text from trailing (...), empty if absent
-    options: List[str]       # e.g.: needssupport axiomatic defeated
-                             #        counter abstract assumed (lowercased, ordered)
-    children: List['Node']   # child nodes
-    is_cited: bool           # True when identifier had a ^ prefix
-    depth: int               # 0-based indentation level (0 = root)
-    parent: Optional['Node'] # back-reference; None for roots
-    link_target: Optional['Node']  # for Link nodes: referenced node
-    diagram_id: str          # computed valid diagram node id for any renderer
-    id_inferred: bool = False  # True when identifier was inferred from text
+    """A single node in the parsed LTAC tree.
+
+    Nodes form a doubly-linked tree via `children` and `parent`.  Every node
+    in a loaded forest is reachable by walking `all_roots` recursively, or by
+    iterating with `all_nodes_forward`, `all_nodes`, or `collect_bfs`.
+
+    Fields
+    ------
+    node_type : str
+        Element kind: one of Claim, Strategy, Justification, Evidence,
+        Context, Assumption, Link, Relation, Connector.
+    identifier : str
+        Declared identifier (e.g. ``'C1'``); empty string when absent.
+        When ``id_inferred`` is True this was derived from ``text``, not
+        written explicitly in the LTAC file.
+    text : str
+        Descriptive statement or title text; empty string when absent.
+    ext_ref : str
+        Text from a trailing ``(...)`` reference clause; empty when absent.
+    options : List[str]
+        Zero or more option keywords in lower-case, e.g. ``['needssupport']``,
+        ``['axiomatic']``, ``['defeated']``.
+    children : List[Node]
+        Direct child nodes in LTAC written order.
+    is_cited : bool
+        True when the node was introduced with a ``^`` prefix, meaning it
+        is a cross-package citation rather than a declaration.
+    depth : int
+        Zero-based indentation level; 0 for package roots.
+    parent : Optional[Node]
+        Parent node, or None for package roots (depth 0).
+    link_target : Optional[Node]
+        For Link nodes: the node this link points to.  None for all other
+        node types.
+    diagram_id : str
+        A stable identifier suitable for use in Mermaid diagram node IDs.
+    id_inferred : bool
+        True when ``identifier`` was auto-generated from ``text`` rather than
+        declared explicitly.  Defaults to False.
+    """
+    node_type: str
+    identifier: str
+    text: str
+    ext_ref: str
+    options: List[str]
+    children: List['Node']
+    is_cited: bool
+    depth: int
+    parent: Optional['Node']
+    link_target: Optional['Node']
+    diagram_id: str
+    id_inferred: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -734,14 +825,41 @@ class LTACParser:
 
 
 def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
-    """Parse LTAC lines and return (roots, registry, id_info)."""
+    """Parse a list of LTAC text lines and return (all_roots, registry, id_info).
+
+    Lower-level alternative to load_ltac_file() for when the text is already
+    in memory (e.g. from a string, a test fixture, or a network source).
+    Does not raise VerocaseError — I/O is the caller's responsibility.
+
+    Parameters
+    ----------
+    lines : List[str]
+        Raw text lines including newline characters, as returned by
+        file.readlines() or str.splitlines(keepends=True).
+    config : dict, optional
+        Configuration dict (from load_config()).  Uses DEFAULT_CONFIG if None.
+
+    Returns
+    -------
+    all_roots : List[Node]
+        One Node per package root (depth 0), in file order.
+    registry : Dict[str, Node]
+        Maps every declared identifier to its Node.
+    id_info : Dict[str, dict]
+        Cross-reference metadata; see check_id_info() for the schema.
+    """
     parser = LTACParser()
     roots = parser.parse(lines, config=config)
     return roots, parser.registry, parser.id_info
 
 
-def _all_nodes(roots: List[Node]):
-    """Yield every node in the forest in depth-first order."""
+def all_nodes(roots: List[Node]):
+    """Yield every node in the forest in depth-first order (last child first).
+
+    Slightly faster than all_nodes_forward() because children are not
+    reversed.  Use when order does not matter (e.g. building a set of all
+    nodes, computing aggregate counts).
+    """
     stack = list(roots)
     while stack:
         node = stack.pop()
@@ -749,11 +867,12 @@ def _all_nodes(roots: List[Node]):
         stack.extend(node.children)
 
 
-def _all_nodes_forward(roots: List[Node]):
-    """Yield every node in the forest in LTAC (as-written) depth-first order.
+def all_nodes_forward(roots: List[Node]):
+    """Yield every node in the forest in LTAC written order (depth-first, first child first).
 
-    Unlike _all_nodes, this preserves first-child-first order matching the
-    order elements appear in the LTAC file.
+    Nodes appear in the same order as their declarations in the LTAC file.
+    Use this when order matters — e.g. when comparing element position
+    against document order, or when producing ordered reports.
     """
     stack = list(reversed(roots))
     while stack:
@@ -775,9 +894,12 @@ def _recalc_depths(node: 'Node', new_depth: int) -> None:
 
 def load_ltac_file(path: str,
                    config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
-    """Parse an LTAC file and return (all_roots, registry, id_info).
+    """Open and parse an LTAC file; return (all_roots, registry, id_info).
 
-    Raises VerocaseError if the file cannot be opened.
+    Convenience wrapper around parse_ltac_lines() that handles file I/O.
+    Raises VerocaseError (after printing to stderr) if the file cannot be
+    opened.  On success the return values have the same meaning as those of
+    parse_ltac_lines().
     """
     try:
         with open(path) as f:
@@ -960,7 +1082,7 @@ def render_html(roots: List[Node], config: dict, out: TextIO) -> bool:
 # Mermaid diagram shared utilities
 # ---------------------------------------------------------------------------
 
-def _copy_forest(roots: List['Node']) -> List['Node']:
+def copy_forest(roots: List['Node']) -> List['Node']:
     """Return an independent deep copy of the node forest.
 
     Uses copy.deepcopy so all internal back-references (parent, link_target,
@@ -970,8 +1092,13 @@ def _copy_forest(roots: List['Node']) -> List['Node']:
     return copy.deepcopy(roots)
 
 
-def _collect_bfs(roots: List['Node']) -> List['Node']:
-    """Return every node in the forest in BFS order (roots first)."""
+def collect_bfs(roots: List['Node']) -> List['Node']:
+    """Return every node in the forest as a list in breadth-first order.
+
+    Roots appear first, then their children left-to-right, then
+    grandchildren, and so on.  Useful for diagram layout and any algorithm
+    that needs to process ancestors before descendants.
+    """
     result = []
     q = deque(roots)
     while q:
@@ -1451,7 +1578,7 @@ def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     base_url = config.get('base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
-    roots = _copy_forest(roots)
+    roots = copy_forest(roots)
     syn_counter = [0]
     _apply_sacm_width_transform(roots, config, syn_counter)
 
@@ -1459,7 +1586,7 @@ def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     out.write(body_header)
 
     # Node declarations (BFS); write directly.
-    for node in _collect_bfs(roots):
+    for node in collect_bfs(roots):
         decl = _sacm_node_decl(node)
         if decl:
             out.write('\n')
@@ -1481,7 +1608,7 @@ def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     # Link to the element anchor; never directly to ext_ref.
     # When base_url is empty, fragment-only links (#id) are used so that
     # clicks still work on platforms that resolve them within the same page.
-    for node in _collect_bfs(roots):
+    for node in collect_bfs(roots):
         if node.node_type not in ('Relation', 'Link'):
             url = _node_anchor_url(node, base_url, pkg_label)
             if url:
@@ -1695,7 +1822,7 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     base_url = config.get('base_url', '')
     pkg_label = config.get('pkg_label', DEFAULT_CONFIG['pkg_label'])
     bottom_padding = config.get('bottom_padding', DEFAULT_CONFIG['bottom_padding'])
-    roots = _copy_forest(roots)
+    roots = copy_forest(roots)
     syn_counter = [0]
     _apply_gsn_width_transform(roots, config, syn_counter)
 
@@ -1703,7 +1830,7 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     out.write(body_header)
 
     # Node declarations (BFS); write directly.
-    for node in _collect_bfs(roots):
+    for node in collect_bfs(roots):
         decl = _gsn_node_decl(node)
         if decl:
             out.write('\n')
@@ -1713,7 +1840,7 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     # Link to the element anchor; never directly to ext_ref.
     # When base_url is empty, fragment-only links (#id) are used so that
     # clicks still work on platforms that resolve them within the same page.
-    for node in _collect_bfs(roots):
+    for node in collect_bfs(roots):
         if node.node_type not in ('Relation', 'Link', 'Connector'):
             url = _node_anchor_url(node, base_url, pkg_label)
             if url:
@@ -1938,10 +2065,15 @@ def _linked_list(pairs: List[tuple], fmt: str, bold_first: bool = True) -> str:
     return ', '.join(links)
 
 
-def _find_citation_parents(ident: str, all_roots: List[Node]) -> List[Node]:
-    """Return parent nodes of all citations of ident across all packages."""
+def find_citation_parents(ident: str, all_roots: List[Node]) -> List[Node]:
+    """Return all nodes that have a cited child (^ident) anywhere in the forest.
+
+    A "citation parent" is a node whose direct children include a Node with
+    is_cited=True and identifier==ident.  The same parent appears at most
+    once; multiple packages may each contribute a parent.
+    """
     parents = []
-    for node in _all_nodes(all_roots):
+    for node in all_nodes(all_roots):
         if node.identifier == ident and node.is_cited and node.parent is not None:
             if node.parent not in parents:
                 parents.append(node.parent)
@@ -1999,7 +2131,7 @@ def render_supports(node: Node, all_roots: List[Node],
         p = node.parent
         pairs.append((f'{p.node_type} {p.identifier}',
                       _element_anchor_url(p.node_type, p.identifier, config)))
-    for parent in _find_citation_parents(node.identifier, all_roots):
+    for parent in find_citation_parents(node.identifier, all_roots):
         if not parent.identifier:
             continue
         pairs.append((f'{parent.node_type} {parent.identifier}',
@@ -2017,7 +2149,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     """Write 'Defines: ...' list for a package to out."""
     pkg_id = pkg_root.identifier
     defined = []
-    for node in _all_nodes([pkg_root]):
+    for node in all_nodes([pkg_root]):
         if (not node.is_cited and node.identifier
                 and id_info.get(node.identifier, {}).get('decl_pkg_id') == pkg_id):
             defined.append(node)
@@ -2035,7 +2167,7 @@ def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
                       config: dict, fmt: str,
                       out: TextIO, sep: str = '') -> bool:
     """Write 'Citing: ...' list for a package to out; return False if none."""
-    cited_nodes = [n for n in _all_nodes([pkg_root])
+    cited_nodes = [n for n in all_nodes([pkg_root])
                    if n.is_cited and n.identifier]
     if not cited_nodes:
         return False
@@ -2138,7 +2270,13 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
                              all_roots: List[Node], id_info: Dict[str, dict],
                              config: dict, state: 'DocState',
                              out: TextIO, sep: str = '') -> bool:
-    """Write heading + sub-selections for a single element to out."""
+    """Write a full element section (heading + configured sub-selections) to out.
+
+    Renders the element heading and any sub-selections listed in
+    config['element_selections'] (e.g. referenced_by, supported_by, supports).
+    Updates state.current_id and state.seen_element_ids as a side-effect.
+    Returns False and calls error() if node_id is not in registry.
+    """
     node = registry.get(node_id)
     if node is None:
         error(f"element {node_id!r} not found")
@@ -2206,7 +2344,13 @@ def render_package_selector(pkg_id_or_star: str, all_roots: List[Node],
                              id_info: Dict[str, dict],
                              config: dict, state: 'DocState',
                              out: TextIO) -> bool:
-    """Write heading + sub-selections for one package, or all packages if '*', to out."""
+    """Write a full package section (heading + diagram + sub-selections) to out.
+
+    pkg_id_or_star is either a package root identifier or ``'*'`` to render
+    all packages in sequence.  Sub-selections are controlled by
+    config['package_selections'] (e.g. representation, pkg_defines,
+    pkg_citing, pkg_cited).  Returns True if anything was written.
+    """
     if pkg_id_or_star == '*':
         out.write(_WARNING_TEXT_SELECTOR)
         pending_sep = '\n\n'
@@ -2252,10 +2396,22 @@ def render_selector(
     doc_format: str = 'markdown',
     state: 'DocState' = None,
 ) -> bool:
-    """Parse SELECTOR and write the rendered output to out.
+    """Parse selector and write the rendered output to out; return True if anything was written.
 
-    Dispatches to the appropriate renderer based on display_type.
-    Returns True if anything was written, False otherwise.
+    selector is a string of the form ``"DISPLAY_TYPE [ID]"``, for example:
+
+      ``"element MyClaimId"``     — heading + cross-references for one element
+      ``"package MyPkgId"``       — heading + diagram + cross-references for a package
+      ``"package *"``             — all packages
+      ``"ltac/txt MyClaimId"``    — raw LTAC subtree for the element
+      ``"info MyClaimId"``        — ancestry, children, citation info
+      ``"sacm/mermaid MyPkgId"``  — SACM Mermaid diagram block
+      ``"gsn/mermaid MyPkgId"``   — GSN Mermaid diagram block
+
+    doc_format must be ``'markdown'`` or ``'html'``.
+    state carries per-document rendering context; pass a fresh DocState()
+    when rendering standalone (outside process_document_stream).
+    current_element is used to resolve bare selectors inside a document region.
     """
     display_type, element_id = parse_selector(selector, doc_format, config)
 
@@ -2338,7 +2494,29 @@ def render_selector(
 
 @dataclass
 class DocState:
-    """Mutable per-document processing state."""
+    """Mutable rendering state threaded through a single document processing pass.
+
+    Create a fresh instance for each independent rendering pass.  When calling
+    render_selector() outside of process_document_stream(), a default
+    ``DocState()`` is sufficient for most uses.
+
+    Attributes
+    ----------
+    current_id : Optional[str]
+        Identifier of the element region currently being rendered; None
+        between regions.  Used to resolve bare (no-ID) selectors.
+    doc_format : str
+        Output format: ``'markdown'`` (default) or ``'html'``.
+    mermaid_injected : bool
+        True once the Mermaid JS <script> block has been written for this
+        document; prevents duplicate injection.
+    seen_element_ids : set
+        Identifiers of elements rendered via ``element`` selectors so far;
+        updated by render_element_selector() as a side-effect.
+    after_epilogue : bool
+        True once an ``epilogue`` selector has been encountered; subsequent
+        element output is suppressed.
+    """
     current_id: Optional[str] = None
     doc_format: str = 'markdown'
     mermaid_injected: bool = False
@@ -2498,7 +2676,7 @@ def process_document_stream(
 
     # --- Smart single-pass missing-element placement setup ---
     if add_missing:
-        _ltac_ordered = [node for node in _all_nodes_forward(all_roots)
+        _ltac_ordered = [node for node in all_nodes_forward(all_roots)
                          if not node.is_cited and node.identifier
                          and node.node_type != 'Link']
         _ltac_index: Dict[str, int] = {n.identifier: i for i, n in enumerate(_ltac_ordered)}
@@ -3154,10 +3332,11 @@ Run --help-config for the full list of configuration keys.
 
 
 def find_ltac_file(ltac_arg: Optional[str], config: dict) -> str:
-    """Determine the path of the LTAC file to load.
+    """Determine the path of the LTAC file to load and return it.
 
-    Priority: --ltac argument > ltac_file config key > case.ltac > docs/case.ltac.
-    Calls panic() (and exits) if no file can be found.
+    Search order: ltac_arg (explicit path) → config['ltac_file'] →
+    case.ltac → docs/case.ltac.  Raises VerocaseError if no candidate
+    file is found.
     """
     if ltac_arg:
         return ltac_arg
@@ -3389,9 +3568,28 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
     return False
 
 
-def _compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
+def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
                         id_info: Dict[str, dict]) -> dict:
-    """Compute statistics from the loaded LTAC forest."""
+    """Compute and return a statistics dict for the loaded LTAC forest.
+
+    The returned dict contains:
+
+    num_packages      int   — number of package roots
+    pkg_sizes_sorted  list  — [(size, name), ...] sorted largest first,
+                              where size counts all nodes including links
+                              and citations
+    avg_per_pkg       float — mean package size
+    median_per_pkg    float — median package size
+    total_full        int   — total nodes including links and citations
+    total_citations   int   — total citation (^) nodes
+    total_links       int   — total Link nodes
+    total_definitions int   — total non-Link, non-citation nodes
+    def_type_counts   Counter — definition count by node_type
+    leaf_definitions  int   — definitions with no children
+    leaf_claims       int   — Claim definitions with no children
+    bottommost_claims int   — Claims with no Claim descendants
+    option_counts     Counter — definition count by option keyword
+    """
     from collections import Counter
     def_type_counts: Counter = Counter()  # definitions only (no links, no citations)
     option_counts: Counter = Counter()
@@ -3404,7 +3602,7 @@ def _compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
 
     for root in all_roots:
         size_full = 0
-        for node in _all_nodes([root]):
+        for node in all_nodes([root]):
             size_full += 1
             if node.is_cited:
                 total_citations += 1
@@ -3722,7 +3920,7 @@ def analysis_missing(all_roots, registry, document_files) -> List['Node']:
     """
     ordered_ids, _ = _scan_document_elements(document_files)
     seen = {ident for ident, _, _ in ordered_ids}
-    all_ids_ordered = [node for node in _all_nodes_forward(all_roots)
+    all_ids_ordered = [node for node in all_nodes_forward(all_roots)
                        if not node.is_cited and node.identifier
                        and node.node_type not in ('Link',)]
     return [node for node in all_ids_ordered if node.identifier not in seen]
@@ -3755,7 +3953,7 @@ def analysis_misplaced(document_files, all_roots, registry):
     where pred_ident and pred_lineno are None if the element should be first.
     """
     # LTAC order: depth-first forward order, exclude citations and Links
-    ltac_order = [node.identifier for node in _all_nodes_forward(all_roots)
+    ltac_order = [node.identifier for node in all_nodes_forward(all_roots)
                   if not node.is_cited and node.identifier
                   and node.node_type not in ('Link',)]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
@@ -3831,8 +4029,15 @@ def analysis_misplaced(document_files, all_roots, registry):
     return result
 
 
-def _ltac_node_line(node, depth_offset=0):
-    """Format a single LTAC node as a line string, with depth normalized by depth_offset."""
+def ltac_node_line(node: Node, depth_offset: int = 0) -> str:
+    """Format a single Node as an LTAC source line (without trailing newline).
+
+    The indentation is ``node.depth - depth_offset`` levels of two spaces.
+    Pass ``depth_offset=node.depth`` to render the node at column 0 regardless
+    of its actual depth — useful when displaying an element in isolation.
+    Inferred identifiers (id_inferred=True) are suppressed when they match
+    the auto-generated form so the output round-trips cleanly.
+    """
     indent = '  ' * (node.depth - depth_offset)
     line = f'{indent}- {node.node_type}'
     write_id = (node.identifier or node.is_cited) and not (
@@ -3864,7 +4069,7 @@ def analysis_leaves(all_roots) -> List['Node']:
     omitted as they are structurally expected to be terminals.
     """
     leaves = []
-    for node in _all_nodes_forward(all_roots):
+    for node in all_nodes_forward(all_roots):
         if node.is_cited or node.node_type in ('Link',):
             continue
         if node.node_type in ('Strategy', 'Context'):
@@ -3882,8 +4087,8 @@ def needs_support(nodes) -> List['Node']:
     return [n for n in nodes if 'needssupport' in n.options]
 
 
-def _subtree_count(node):
-    """Count node and all its descendants."""
+def subtree_count(node: Node) -> int:
+    """Return the total number of nodes in node's subtree, including node itself."""
     count = 0
     stack = [node]
     while stack:
@@ -3897,13 +4102,13 @@ def analysis_packages(all_roots, out: TextIO = sys.stdout) -> None:
     """Print package structure with element counts to out (default stdout)."""
     print("Packages:", file=out)
     for root in all_roots:
-        pkg_count = _subtree_count(root)
-        root_line = _ltac_node_line(root, depth_offset=0)
+        pkg_count = subtree_count(root)
+        root_line = ltac_node_line(root, depth_offset=0)
         print(f"Package {root.identifier} ({pkg_count} elements)", file=out)
         print(root_line, file=out)
         for child in root.children:
-            child_count = _subtree_count(child)
-            child_line = _ltac_node_line(child, depth_offset=0)
+            child_count = subtree_count(child)
+            child_line = ltac_node_line(child, depth_offset=0)
             print(f"{child_line} ({child_count} elements)", file=out)
         print(file=out)
 
@@ -3927,15 +4132,23 @@ def _write_ltac_node_normalized(node, out: TextIO, first: list, depth_offset: in
     """Write LTAC lines for node and all its descendants to out, normalizing depth."""
     if not first[0]:
         out.write('\n')
-    out.write(_ltac_node_line(node, depth_offset=depth_offset))
+    out.write(ltac_node_line(node, depth_offset=depth_offset))
     first[0] = False
     for child in node.children:
         _write_ltac_node_normalized(child, out, first, depth_offset)
 
 
-def render_info(element_id, all_roots, registry, id_info,
-                out: TextIO, sep: str = '') -> bool:
-    """Write full context for a single element ID to out."""
+def render_info(element_id: str, all_roots: List[Node], registry: Dict[str, Node],
+                id_info: Dict[str, dict], out: TextIO, sep: str = '') -> bool:
+    """Write a human-readable context report for element_id to out.
+
+    The report includes the element's type, identifier, and statement;
+    its ancestry chain; its direct children; descendant count; and
+    citation information (which packages declare and cite it).
+    Returns False and calls error() if element_id is not in registry.
+    sep is written before the report when non-empty (used to insert blank
+    lines between consecutive outputs).
+    """
     node = registry.get(element_id)
     if node is None:
         error(f"info: element {element_id!r} not found")
@@ -3968,7 +4181,7 @@ def render_info(element_id, all_roots, registry, id_info,
     else:
         out.write("\nAncestors (root first):")
         for anc in ancestors:
-            out.write("\n  " + _ltac_node_line(anc, depth_offset=anc.depth))
+            out.write("\n  " + ltac_node_line(anc, depth_offset=anc.depth))
 
     # Children
     if not node.children:
@@ -3976,10 +4189,10 @@ def render_info(element_id, all_roots, registry, id_info,
     else:
         out.write("\nChildren:")
         for child in node.children:
-            out.write("\n  " + _ltac_node_line(child, depth_offset=child.depth))
+            out.write("\n  " + ltac_node_line(child, depth_offset=child.depth))
 
     # Descendants count (including self)
-    desc_count = _subtree_count(node)
+    desc_count = subtree_count(node)
     out.write(f"\nDescendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
 
     # Citations: how many times this element is cited by others
@@ -3994,7 +4207,7 @@ def render_info(element_id, all_roots, registry, id_info,
             if citing_root is None:
                 continue
             # Walk the citing package to find nodes that cite element_id
-            for n in _all_nodes([citing_root]):
+            for n in all_nodes([citing_root]):
                 if n.is_cited and n.identifier == element_id:
                     parent_node = n.parent
                     if parent_node:
@@ -4161,7 +4374,7 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
         region_map[current_ident] = (region_start, len(lines) - 1)
 
     # Get LTAC order
-    ltac_order = [node.identifier for node in _all_nodes_forward(all_roots)
+    ltac_order = [node.identifier for node in all_nodes_forward(all_roots)
                   if not node.is_cited and node.identifier
                   and node.node_type not in ('Link',)]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
@@ -4394,8 +4607,8 @@ def commit_updates(pairs: List[Tuple[str, str]], ltac_path: str,
             panic(f"cannot update {final!r}: {e}")
 
 
-def _get_pkg_root(node: Node) -> Node:
-    """Walk parent links to return the package root of node."""
+def get_pkg_root(node: Node) -> Node:
+    """Return the package root (depth 0) of node by walking parent links."""
     while node.parent is not None:
         node = node.parent
     return node
@@ -4404,7 +4617,7 @@ def _get_pkg_root(node: Node) -> Node:
 def _update_pkg_id_for_subtree(node: Node, old_pkg_id: str, new_pkg_id: str,
                                 id_info: Dict[str, dict]) -> None:
     """Update decl_pkg_id in id_info for node and all its descendants."""
-    for n in _all_nodes([node]):
+    for n in all_nodes([node]):
         if n.identifier and n.identifier in id_info:
             info = id_info[n.identifier]
             if info.get('decl_pkg_id') == old_pkg_id:
@@ -4422,7 +4635,7 @@ def apply_rename(roots: List[Node], registry: Dict[str, Node],
         panic(f"--rename: {old!r} is not a declared identifier")
     if new in registry:
         panic(f"--rename: {new!r} is already declared")
-    for node in _all_nodes(roots):
+    for node in all_nodes(roots):
         if node.identifier == old:
             node.identifier = new
     registry[new] = registry.pop(old)
@@ -4442,7 +4655,7 @@ def apply_restate(roots: List[Node], registry: Dict[str, Node],
     """
     if label not in registry:
         panic(f"--restate: {label!r} is not a declared identifier")
-    for node in _all_nodes(roots):
+    for node in all_nodes(roots):
         if node.identifier == label:
             node.text = stmt
     id_info[label]['statement'] = stmt
@@ -4492,7 +4705,7 @@ def apply_detach(roots: List[Node], registry: Dict[str, Node],
 
     # Record the new citation under the original package.
     id_info[target_id]['citations'] = id_info[target_id].get('citations', 0) + 1
-    citing_pkg = _get_pkg_root(cited).identifier
+    citing_pkg = get_pkg_root(cited).identifier
     if citing_pkg and citing_pkg not in id_info[target_id].get('citing_pkg_ids', []):
         id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
 
@@ -4546,7 +4759,7 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
     _recalc_depths(node, dest.depth + 1)
 
     # Update decl_pkg_id for node and all its descendants.
-    new_pkg_id = _get_pkg_root(dest).identifier
+    new_pkg_id = get_pkg_root(dest).identifier
     _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, id_info)
 
 
@@ -4584,7 +4797,7 @@ def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
     so the authoritative text is always the declaration regardless of parse order.
     """
     count = 0
-    for node in _all_nodes(roots):
+    for node in all_nodes(roots):
         if not node.identifier or not (node.is_cited or node.node_type == 'Link'):
             continue
         decl = registry.get(node.identifier)
@@ -4725,6 +4938,7 @@ def main() -> bool:
         _write_start_stubs()
 
     if args.error:
+        global strict
         strict = True
 
     # Auto-discover config file if --config not given.
@@ -4876,14 +5090,15 @@ def main() -> bool:
                 print()
             leaves = analysis_leaves(all_roots)
             ns_leaves = needs_support(leaves)
+            print("Leaf elements:")
             if ns_leaves:
                 _print_analysis_list(
                     "Leaves with {needssupport}:", ns_leaves,
-                    lambda n: _ltac_node_line(n, depth_offset=n.depth))
+                    lambda n: ltac_node_line(n, depth_offset=n.depth))
                 print()
             _print_analysis_list(
                 "All leaves:", leaves,
-                lambda n: _ltac_node_line(n, depth_offset=n.depth))
+                lambda n: ltac_node_line(n, depth_offset=n.depth))
             first = False
         if args.packages:
             if not first:
@@ -4943,7 +5158,7 @@ def main() -> bool:
             if pair:
                 pairs.append(pair)
         # Mark needsSupport on all leaf elements that lack an assertion status.
-        all_ids_ordered = [node.identifier for node in _all_nodes(all_roots)
+        all_ids_ordered = [node.identifier for node in all_nodes(all_roots)
                            if not node.is_cited and node.identifier]
         changed = _mark_needs_support(all_ids_ordered, registry)
         if changed:
@@ -5001,7 +5216,7 @@ def main() -> bool:
             _check_element_coverage(registry, seen_element_ids)
 
     if args.stats:
-        ltac_stats = _compute_ltac_stats(all_roots, registry, id_info)
+        ltac_stats = compute_ltac_stats(all_roots, registry, id_info)
         if document_files:
             doc_totals: dict = {'pkg_regions': 0, 'elem_regions': 0,
                                 'config_stmts': 0, 'empty_elem_regions': 0}
@@ -5013,7 +5228,7 @@ def main() -> bool:
         else:
             print_stats(ltac_stats, None)
 
-    return had_error
+    return not had_error
 
 
 if __name__ == '__main__':
