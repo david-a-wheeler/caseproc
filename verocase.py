@@ -2949,6 +2949,13 @@ Typical usage:
   verocase.render_info('SomeClaim', all_roots, registry, id_info, buf)
   print(buf.getvalue())
 
+  # Walk the tree to collect statements from nodes that need support:
+  unsupported = [
+      node.text
+      for node in verocase.all_nodes_forward(all_roots)
+      if not node.is_citation and node.node_type == 'Claim' and not node.children
+  ]
+
 Exceptions and session:
   class VerocaseError(Exception)  raised by panic() on fatal errors
   had_error, strict, reset()      (see above)
