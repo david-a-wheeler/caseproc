@@ -41,7 +41,7 @@ __all__ = [
     'write_ltac',
     'detect_doc_format',
     # id_info accessors
-    'decl_pkg_id',
+    'decl_pkg_id_for',
     'statement_for',
     # Tree manipulation
     'copy_forest',
@@ -940,7 +940,7 @@ def load_ltac_file(path: str,
 # id_info accessors
 # ---------------------------------------------------------------------------
 
-def decl_pkg_id(id_info: Dict[str, dict], ident: str) -> Optional[str]:
+def decl_pkg_id_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
     """Return the package root identifier where ident is declared, or None.
 
     Looks up ident in id_info and returns its 'decl_pkg_id' value.  Returns
@@ -948,7 +948,7 @@ def decl_pkg_id(id_info: Dict[str, dict], ident: str) -> Optional[str]:
 
     Example::
 
-        pkg = verocase.decl_pkg_id(id_info, 'SomeClaim')
+        pkg = verocase.decl_pkg_id_for(id_info, 'SomeClaim')
         if pkg:
             print(f'SomeClaim is declared in package {pkg}')
     """
@@ -2212,7 +2212,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     defined = []
     for node in all_nodes_fast([pkg_root]):
         if (node.is_definition and node.identifier
-                and decl_pkg_id(id_info, node.identifier) == pkg_id):
+                and decl_pkg_id_for(id_info, node.identifier) == pkg_id):
             defined.append(node)
     if not defined:
         return False
@@ -2234,7 +2234,7 @@ def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
         return False
     links = []
     for node in cited_nodes:
-        decl_pkg = decl_pkg_id(id_info, node.identifier) or ''
+        decl_pkg = decl_pkg_id_for(id_info, node.identifier) or ''
         label = f'{node.node_type} {node.identifier}'
         url = _pkg_anchor_url(decl_pkg, config) if decl_pkg else ''
         links.append(hyperlink(label, url, fmt) if url else label)
@@ -3038,13 +3038,13 @@ Loading and serialization:
   detect_doc_format(path)      'markdown' or 'html'
 
 id_info accessors (avoid spelling out the double .get() pattern):
-  decl_pkg_id(id_info, ident)  -> Optional[str]; package root ID where ident
-                                  is declared, or None
+  decl_pkg_id_for(id_info, ident)  -> Optional[str]; package root ID where ident
+                                     is declared, or None
   statement_for(id_info, ident) -> Optional[str]; canonical statement text
                                    for ident, or None
 
   Example:
-    pkg = verocase.decl_pkg_id(id_info, 'SomeClaim')
+    pkg = verocase.decl_pkg_id_for(id_info, 'SomeClaim')
     if pkg:
         print(f'SomeClaim declared in package {pkg}')
 
@@ -4884,7 +4884,7 @@ def apply_detach(roots: List[Node], registry: Dict[str, Node],
 
     # Update id_info: the new package root ID for node and all descendants.
     new_pkg_id = node.identifier
-    old_pkg_id = decl_pkg_id(id_info, node.identifier)
+    old_pkg_id = decl_pkg_id_for(id_info, node.identifier)
     _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, id_info)
 
     # Record the new citation under the original package.
@@ -4915,7 +4915,7 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
         panic(f"--move: {dest_id!r} is not defined")
 
     # Remember old decl_pkg_id before detaching.
-    old_pkg_id = decl_pkg_id(id_info, target_id)
+    old_pkg_id = decl_pkg_id_for(id_info, target_id)
 
     # Detach node from its current location (no citation left behind).
     if node.parent is None:
