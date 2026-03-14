@@ -77,6 +77,9 @@ reset()                               # clear had_error and strict
 
 ```python
 @dataclass class Node: ...      # one node in the LTAC tree; see docstring for fields
+  node.is_citation    # True if introduced with ^ (cross-package citation)
+  node.is_definition  # True if neither a citation nor a Link (property)
+                      # Every node is exactly one of: citation, Link, or definition.
 @dataclass class DocState: ...  # per-document rendering state
 DEFAULT_CONFIG: dict            # default configuration values
 ```
@@ -213,9 +216,8 @@ for node in verocase.collect_bfs(all_roots):
 Common filters:
 
 ```python
-# All declared (non-citation), non-Link elements in LTAC order:
-elements = [n for n in all_nodes(all_roots)
-            if not n.is_citation and n.node_type != 'Link']
+# All definition nodes in LTAC order (excludes citations and Links):
+elements = [n for n in all_nodes(all_roots) if n.is_definition]
 
 # Leaf claims:
 leaves = [n for n in elements

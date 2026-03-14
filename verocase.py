@@ -490,6 +490,10 @@ class Node:
     is_citation : bool
         True when the node was introduced with a ``^`` prefix, meaning it
         is a cross-package citation rather than a declaration.
+    is_definition : bool (property)
+        True when the node is neither a citation nor a Link — i.e. it is a
+        substantive declared element.  Equivalent to
+        ``not is_citation and node_type != 'Link'``.
     depth : int
         Zero-based indentation level; 0 for package roots.
     parent : Optional[Node]
@@ -515,6 +519,18 @@ class Node:
     link_target: Optional['Node']
     diagram_id: str
     id_inferred: bool = False
+
+    @property
+    def is_definition(self) -> bool:
+        """True when this node is a substantive declared element.
+
+        A definition is any node that is neither a citation (``^`` prefix) nor
+        a Link.  It is the natural complement to ``is_citation``: every node
+        in the tree is exactly one of citation, Link, or definition.
+        Prefer this over spelling out ``not is_citation and node_type != 'Link'``
+        at every call site.
+        """
+        return not self.is_citation and self.node_type != 'Link'
 
 
 # ---------------------------------------------------------------------------
@@ -2158,7 +2174,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     pkg_id = pkg_root.identifier
     defined = []
     for node in all_nodes_fast([pkg_root]):
-        if (not node.is_citation and node.identifier
+        if (node.is_definition and node.identifier
                 and id_info.get(node.identifier, {}).get('decl_pkg_id') == pkg_id):
             defined.append(node)
     if not defined:
@@ -2685,8 +2701,7 @@ def process_document_stream(
     # --- Smart single-pass missing-element placement setup ---
     if add_missing:
         _ltac_ordered = [node for node in all_nodes(all_roots)
-                         if not node.is_citation and node.identifier
-                         and node.node_type != 'Link']
+                         if node.is_definition and node.identifier]
         _ltac_index: Dict[str, int] = {n.identifier: i for i, n in enumerate(_ltac_ordered)}
         _doc_ids = existing_ids if existing_ids is not None else set()
         _missing_set: set = ({n.identifier for n in _ltac_ordered}
@@ -2961,7 +2976,7 @@ Typical usage:
   unsupported = [
       node.text
       for node in verocase.all_nodes(all_roots)
-      if not node.is_citation and node.node_type == 'Claim' and not node.children
+      if node.is_definition and node.node_type == 'Claim' and not node.children
   ]
 
 Exceptions and session:
@@ -2970,6 +2985,9 @@ Exceptions and session:
 
 Data types:
   @dataclass Node       one node in the LTAC tree (see docstring for fields)
+    node.is_citation    True if introduced with ^ (cross-package citation)
+    node.is_definition  True if neither a citation nor a Link (property)
+                        Every node is exactly one of: citation, Link, or definition.
   @dataclass DocState   per-document rendering state
   DEFAULT_CONFIG: dict  default configuration values
 
@@ -3691,7 +3709,7 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
                     return True  # citation IS a Claim; no need to follow further
                 if _has_claim_descendant(decl, registry, seen):
                     return True
-        elif not child.is_citation and _has_claim_descendant(child, registry, seen):
+        elif child.is_definition and _has_claim_descendant(child, registry, seen):
             return True
     return False
 
@@ -4049,8 +4067,7 @@ def analysis_missing(all_roots, registry, document_files) -> List['Node']:
     ordered_ids, _ = _scan_document_elements(document_files)
     seen = {ident for ident, _, _ in ordered_ids}
     all_ids_ordered = [node for node in all_nodes(all_roots)
-                       if not node.is_citation and node.identifier
-                       and node.node_type not in ('Link',)]
+                       if node.is_definition and node.identifier]
     return [node for node in all_ids_ordered if node.identifier not in seen]
 
 
@@ -4080,10 +4097,9 @@ def analysis_misplaced(document_files, all_roots, registry):
     Returns a list of (ident, lineno, filepath, pred_ident, pred_lineno) tuples,
     where pred_ident and pred_lineno are None if the element should be first.
     """
-    # LTAC order: depth-first forward order, exclude citations and Links
+    # LTAC order: depth-first forward order, definitions only
     ltac_order = [node.identifier for node in all_nodes(all_roots)
-                  if not node.is_citation and node.identifier
-                  and node.node_type not in ('Link',)]
+                  if node.is_definition and node.identifier]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
     # Document order: only elements that are also in the registry
@@ -4503,8 +4519,7 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
 
     # Get LTAC order
     ltac_order = [node.identifier for node in all_nodes(all_roots)
-                  if not node.is_citation and node.identifier
-                  and node.node_type not in ('Link',)]
+                  if node.is_definition and node.identifier]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
     # Find elements that are in both LTAC and document
@@ -4926,7 +4941,7 @@ def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
     """
     count = 0
     for node in all_nodes_fast(roots):
-        if not node.identifier or not (node.is_citation or node.node_type == 'Link'):
+        if not node.identifier or node.is_definition:
             continue
         decl = registry.get(node.identifier)
         canonical = decl.text if decl is not None else None
@@ -5287,7 +5302,7 @@ def main() -> bool:
                 pairs.append(pair)
         # Mark needsSupport on all leaf elements that lack an assertion status.
         all_ids_ordered = [node.identifier for node in all_nodes_fast(all_roots)
-                           if not node.is_citation and node.identifier]
+                           if node.is_definition and node.identifier]
         changed = _mark_needs_support(all_ids_ordered, registry)
         if changed:
             tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
