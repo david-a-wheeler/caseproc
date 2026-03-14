@@ -491,7 +491,7 @@ class Node:
         True when the node was introduced with a ``^`` prefix, meaning it
         is a cross-package citation rather than a declaration.
     is_definition : bool (property)
-        True when the node is neither a citation nor a Link — i.e. it is a
+        True when the node is neither a citation nor a Link; i.e. it is a
         substantive declared element.  Equivalent to
         ``not is_citation and node_type != 'Link'``.
     depth : int
@@ -845,7 +845,7 @@ def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> Tuple[L
 
     Lower-level alternative to load_ltac_file() for when the text is already
     in memory (e.g. from a string, a test fixture, or a network source).
-    Does not raise VerocaseError — I/O is the caller's responsibility.
+    Does not raise VerocaseError; I/O is the caller's responsibility.
 
     Parameters
     ----------
@@ -874,7 +874,7 @@ def all_nodes_fast(roots: List[Node]):
 
     Traversal is DFS with children pushed in forward order, so they are popped
     and visited in reverse order (last child first, recursively).  The order is
-    fully deterministic for a given tree — it is simply not the order a reader
+    fully deterministic for a given tree; it is simply not the order a reader
     would expect from the LTAC source file.
 
     Do not write code that depends on this specific order; a future implementation
@@ -2424,13 +2424,13 @@ def render_selector(
 
     selector is a string of the form ``"DISPLAY_TYPE [ID]"``, for example:
 
-      ``"element MyClaimId"``     — heading + cross-references for one element
-      ``"package MyPkgId"``       — heading + diagram + cross-references for a package
-      ``"package *"``             — all packages
-      ``"ltac/txt MyClaimId"``    — raw LTAC subtree for the element
-      ``"info MyClaimId"``        — ancestry, children, citation info
-      ``"sacm/mermaid MyPkgId"``  — SACM Mermaid diagram block
-      ``"gsn/mermaid MyPkgId"``   — GSN Mermaid diagram block
+      ``"element MyClaimId"``     (heading + cross-references for one element)
+      ``"package MyPkgId"``       (heading + diagram + cross-references for a package)
+      ``"package *"``             (all packages)
+      ``"ltac/txt MyClaimId"``    (raw LTAC subtree for the element)
+      ``"info MyClaimId"``        (ancestry, children, citation info)
+      ``"sacm/mermaid MyPkgId"``  (SACM Mermaid diagram block)
+      ``"gsn/mermaid MyPkgId"``   (GSN Mermaid diagram block)
 
     doc_format must be ``'markdown'`` or ``'html'``.
     state carries per-document rendering context; pass a fresh DocState()
@@ -3006,7 +3006,7 @@ Validation (set had_error on problems):
   check_reachability(all_roots, registry)
 
 Tree traversal:
-  all_nodes(roots)             DFS generator, LTAC written order — prefer this
+  all_nodes(roots)             DFS generator, LTAC written order (prefer this)
   all_nodes_fast(roots)        DFS generator, consistent but not LTAC order;
                                ~2-3x faster; use only when order doesn't matter
   collect_bfs(roots)           BFS, returns list
@@ -3725,21 +3725,21 @@ def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
 
     The returned dict contains:
 
-    num_packages      int   — number of package roots
-    pkg_sizes_sorted  list  — [(size, name), ...] sorted largest first,
-                              where size counts all nodes including links
-                              and citations
-    avg_per_pkg       float — mean package size
-    median_per_pkg    float — median package size
-    total_full        int   — total nodes including links and citations
-    total_citations   int   — total citation (^) nodes
-    total_links       int   — total Link nodes
-    total_definitions int   — total non-Link, non-citation nodes
-    def_type_counts   Counter — definition count by node_type
-    leaf_definitions  int   — definitions with no children
-    leaf_claims       int   — Claim definitions with no children
-    bottommost_claims int   — Claims with no Claim descendants
-    option_counts     Counter — definition count by option keyword
+    num_packages      int     (number of package roots)
+    pkg_sizes_sorted  list    ([(size, name), ...] sorted largest first,
+                               where size counts all nodes including links
+                               and citations)
+    avg_per_pkg       float   (mean package size)
+    median_per_pkg    float   (median package size)
+    total_full        int     (total nodes including links and citations)
+    total_citations   int     (total citation (^) nodes)
+    total_links       int     (total Link nodes)
+    total_definitions int     (total non-Link, non-citation nodes)
+    def_type_counts   Counter (definition count by node_type)
+    leaf_definitions  int     (definitions with no children)
+    leaf_claims       int     (Claim definitions with no children)
+    bottommost_claims int     (Claims with no Claim descendants)
+    option_counts     Counter (definition count by option keyword)
     """
     from collections import Counter
     def_type_counts: Counter = Counter()  # definitions only (no links, no citations)
@@ -4183,7 +4183,7 @@ def ltac_node_line(node: Node, depth_offset: int = 0) -> str:
 
     The indentation is ``node.depth - depth_offset`` levels of two spaces.
     Pass ``depth_offset=node.depth`` to render the node at column 0 regardless
-    of its actual depth — useful when displaying an element in isolation.
+    of its actual depth (useful when displaying an element in isolation).
     Inferred identifiers (id_inferred=True) are suppressed when they match
     the auto-generated form so the output round-trips cleanly.
     """

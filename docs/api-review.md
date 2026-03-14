@@ -107,7 +107,7 @@ check_reachability(all_roots, registry)
 
 ```python
 # Generators (yield Node)
-all_nodes(roots)       # DFS, LTAC written order (first child first) — prefer this
+all_nodes(roots)       # DFS, LTAC written order (first child first; prefer this)
 all_nodes_fast(roots)  # DFS, consistent but not LTAC order; ~2-3x faster;
                        # use only when order doesn't matter; do not depend on
                        # the specific order produced
@@ -195,20 +195,20 @@ python3 -c "import verocase; help(verocase)"
 
 ## Traversing LTAC data
 
-### `all_roots` — the package forest
+### `all_roots` (the package forest)
 
 A `List[Node]` where each entry is a package root (depth 0).
 
 ```python
-# LTAC written order — use for ordered reports and document comparison
+# LTAC written order; use for ordered reports and document comparison
 for node in verocase.all_nodes(all_roots):
     print(node.node_type, node.identifier, node.text)
 
-# Unordered — slightly faster
+# Unordered; slightly faster
 for node in verocase.all_nodes_fast(all_roots):
     ...
 
-# BFS — useful for level-by-level processing (diagrams, etc.)
+# BFS; useful for level-by-level processing (diagrams, etc.)
 for node in verocase.collect_bfs(all_roots):
     ...
 ```
@@ -227,13 +227,13 @@ leaves = [n for n in elements
 needs_support_elems = verocase.needs_support(elements)
 ```
 
-### `registry` — lookup by ID
+### `registry` (lookup by ID)
 
 ```python
 node = registry.get('SomeClaimId')
 ```
 
-### `id_info` — cross-reference metadata
+### `id_info` (cross-reference metadata)
 
 Each entry has:
 
@@ -290,7 +290,7 @@ warnings or errors without patching the module.  Low priority for typical
 single-threaded use: `had_error` indicates whether problems occurred, and
 the stderr output is informational.  If structured diagnostic collection
 is needed, the right fix is a `DiagnosticSink` context object passed to
-every public function — a medium-scope change.
+every public function; a medium-scope change.
 
 ---
 
