@@ -2920,6 +2920,98 @@ Configuration keys (--config FILE, JSON object):
 Configuration values that can be changed by verocase-config are:
 """ + ", ".join(sorted(_ALLOWED_CONFIG_VALUES)) + "\n"
 
+_HELP_API = """\
+verocase.py can be imported as a Python module. All top-level code is
+constant/regex definitions; there are no file I/O, network calls, or
+environment reads at import time. The if __name__ == '__main__': guard
+is in place. __all__ declares the intended public surface.
+
+Session state:
+  had_error: bool   set True by error() on any validation problem
+  strict:    bool   True when warnings escalate to errors (--error flag)
+  reset()           clear had_error and strict; call before each session
+
+Typical usage:
+  import verocase, io, sys
+
+  verocase.reset()
+  config = verocase.load_config(None)           # or path to case.config
+  all_roots, registry, id_info = verocase.load_ltac_file('case.ltac', config=config)
+
+  verocase.check_id_info(id_info)
+  verocase.check_circularities(registry, all_roots)
+  verocase.check_reachability(all_roots, registry)
+
+  if verocase.had_error:
+      sys.exit(1)
+
+  buf = io.StringIO()
+  verocase.render_info('SomeClaim', all_roots, registry, id_info, buf)
+  print(buf.getvalue())
+
+Exceptions and session:
+  class VerocaseError(Exception)  raised by panic() on fatal errors
+  had_error, strict, reset()      (see above)
+
+Data types:
+  @dataclass Node       one node in the LTAC tree (see docstring for fields)
+  @dataclass DocState   per-document rendering state
+  DEFAULT_CONFIG: dict  default configuration values
+
+Loading and serialization:
+  load_config(path_or_None)
+  load_ltac_file(path, config=config)  -> (all_roots, registry, id_info)
+  parse_ltac_lines(lines, config=config)
+  find_ltac_file(ltac_arg, config)
+  write_ltac(all_roots)        serialize forest back to LTAC text
+  detect_doc_format(path)      'markdown' or 'html'
+
+Validation (set had_error on problems):
+  check_id_info(id_info)
+  check_circularities(registry, all_roots)
+  check_reachability(all_roots, registry)
+
+Tree traversal:
+  all_nodes_forward(roots)     DFS generator, LTAC written order
+  all_nodes(roots)             DFS generator, reversed children (faster)
+  collect_bfs(roots)           BFS, returns list
+  subtree_count(node)          -> int
+  get_pkg_root(node)           -> Node
+  find_citation_parents(ident, all_roots)  -> List[Node]
+  resolve_element(element_id, registry, all_roots, current)  -> List[Node]
+  ltac_node_line(node, depth_offset=0)     -> str
+  compute_ltac_stats(all_roots, registry, id_info)  -> dict
+  copy_forest(roots)           deep copy; originals untouched
+
+Analysis (return structured data; caller prints):
+  analysis_missing(all_roots, registry, document_files)   -> List[Node]
+  analysis_empty(document_files, registry)                -> List[str]
+  analysis_orphans(document_files, registry)              -> List[str]
+  analysis_misplaced(document_files, all_roots, registry) -> List[tuple]
+  analysis_leaves(all_roots)                              -> List[Node]
+  needs_support(nodes)                                    -> List[Node]
+  analysis_packages(all_roots, out=sys.stdout)            -> None
+  print_stats(ltac_stats, doc_stats, out=sys.stdout)      -> None
+
+Rendering (write to caller-supplied out: TextIO; return True if written):
+  render_selector(selector, registry, all_roots, config, id_info, out,
+                  current_element=None, doc_format='markdown', state=None)
+  render_info(element_id, all_roots, registry, id_info, out)
+  render_ltac_txt(node_list, config, out)
+  render_element_selector(node_id, registry, all_roots, id_info, config, state, out)
+  render_package_selector(pkg_id_or_star, all_roots, registry, id_info, config, state, out)
+  process_document_stream(src, out, registry, all_roots, config, id_info,
+                          seen_element_ids, doc_format='markdown',
+                          add_missing=False, strip=False)
+
+main():
+  success: bool = main()   # parses sys.argv, runs full CLI pipeline
+  Returns True on clean success, False if errors. Raises VerocaseError
+  on fatal errors. Calls reset() on entry.
+
+Run --help-api-details to display full docstrings for all public names.
+"""
+
 
 class _NullWriter:
     """Write sink that discards all output; equivalent to /dev/null for streams."""
@@ -3123,6 +3215,7 @@ Claim or Justification, and that each identifier must be declared
 
 Run --help-validations for the full list of LTAC and document validations.
 Run --help-config for the full list of configuration keys.
+Run --help-api for the public Python API summary (for library use).
 """,
     )
     parser.add_argument(
@@ -3140,6 +3233,14 @@ Run --help-config for the full list of configuration keys.
     parser.add_argument(
         '--help-config', action=_HelpTopicAction, default=False, dest='help_config',
         help='print full list of configuration keys, then exit',
+    )
+    parser.add_argument(
+        '--help-api', action=_HelpTopicAction, default=False, dest='help_api',
+        help='print public Python API summary for library use, then exit',
+    )
+    parser.add_argument(
+        '--help-api-details', action=_HelpTopicAction, default=False, dest='help_api_details',
+        help='print full Python help() output for all public names, then exit',
     )
     parser.add_argument(
         '--config', type=str, metavar='FILE',
@@ -3310,9 +3411,9 @@ Run --help-config for the full list of configuration keys.
 
     args = parser.parse_args()
 
-    # Handle --help / --help-validations / --help-config.
+    # Handle --help / --help-validations / --help-config / --help-api / --help-api-details.
     # All requested sections are printed together so the flags are freely combinable.
-    if args.help_main or args.help_validations or args.help_config:
+    if args.help_main or args.help_validations or args.help_config or args.help_api or args.help_api_details:
         sep = False
         if args.help_main:
             parser.print_help()
@@ -3326,6 +3427,16 @@ Run --help-config for the full list of configuration keys.
             if sep:
                 print()
             print(_HELP_CONFIGURATION, end='')
+            sep = True
+        if args.help_api:
+            if sep:
+                print()
+            print(_HELP_API, end='')
+            sep = True
+        if args.help_api_details:
+            if sep:
+                print()
+            help(sys.modules[__name__])
         sys.exit(0)
 
     return args
