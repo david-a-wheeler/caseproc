@@ -46,10 +46,15 @@ __version__ = '0.1.0'
 _had_error = False # If true, we saw an error during processing
 _strict = False # If true, turn warnings into errors
 
+
+class VerocaseError(Exception):
+    """Raised by panic() for fatal errors; catch in main() to exit, or handle in library code."""
+
+
 def panic(msg: str) -> None:
-    """Print a fatal error to stderr and exit immediately."""
+    """Print a fatal error to stderr and raise VerocaseError."""
     print(f"verocase: fatal: {msg}", file=sys.stderr)
-    sys.exit(1)
+    raise VerocaseError(msg)
 
 
 def error(msg: str) -> None:
@@ -5018,4 +5023,7 @@ def main() -> None:
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except VerocaseError:
+        sys.exit(1)
