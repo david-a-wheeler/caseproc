@@ -211,7 +211,7 @@ for node in verocase.collect_bfs(all_roots):
 Common filters:
 
 ```python
-# All declared (non-cited), non-Link elements in LTAC order:
+# All declared (non-citation), non-Link elements in LTAC order:
 elements = [n for n in all_nodes_forward(all_roots)
             if not n.is_citation and n.node_type != 'Link']
 
@@ -235,7 +235,7 @@ Each entry has:
 
 ```python
 {
-    'declarations':   int,        # number of non-cited nodes with this ID (should be 1)
+    'declarations':   int,        # number of non-citation nodes with this ID (should be 1)
     'citations':      int,        # number of ^cited nodes with this ID
     'statement':      str|None,   # first text seen for this ID
     'decl_lineno':    int|None,   # line number of first declaration

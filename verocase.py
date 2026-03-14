@@ -560,7 +560,7 @@ class LTACParser:
 
         Returns one root Node per package.
         Also populates self.registry: Dict[str, Node] mapping each
-        non-cited identifier to its Node (for Link resolution), and
+        non-citation identifier to its Node (for Link resolution), and
         self.id_info: Dict[str, dict] tracking per-identifier usage
         stats for post-parse validation.
         """
@@ -568,7 +568,7 @@ class LTACParser:
         self.registry: Dict[str, Node] = {}
         self._anchor_seen: Dict[str, str] = {}  # anchor id -> first label that claimed it
         # id_info[ident] = {
-        #   'declarations': int,       count of non-cited nodes with this ID
+        #   'declarations': int,       count of non-citation nodes with this ID
         #   'citations':    int,       count of cited (^) nodes with this ID
         #   'statement':    str|None,  first non-empty text seen for this ID
         #   'decl_lineno':  int|None,  line of first declaration
@@ -582,7 +582,7 @@ class LTACParser:
         self._id_counter: List[int] = [0]
         self._links: List[Tuple[Node, int]] = []
         # For empty-statement check (item 4): track declarations that usually
-        # carry a statement (non-Link, non-Relation, non-cited) and whether
+        # carry a statement (non-Link, non-Relation, non-citation) and whether
         # any such declaration has a non-empty statement.
         self._empty_decl_ids: List[Tuple[str, int]] = []
         self._has_nonempty_decl: bool = False
@@ -3484,7 +3484,7 @@ def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> Non
     """Panic if any circular dependency exists in the LTAC model.
 
     Performs an iterative DFS over the logical dependency graph.  For each
-    node, its logical successors are its structural children (non-cited,
+    node, its logical successors are its structural children (non-citation,
     non-Link), any cited child's declared node (^ID → registry[ID]), and
     any Link child's link_target.  A node encountered while already on the
     current DFS path (a back-edge) means circular reasoning is possible.
