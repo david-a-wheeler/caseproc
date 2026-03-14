@@ -31,6 +31,7 @@ __all__ = [
     'reset',
     # Data types
     'Node',
+    'Case',
     'DocState',
     'DEFAULT_CONFIG',
     # Loading, configuration, and serialization
@@ -541,6 +542,41 @@ class Node:
         return not self.is_citation and self.node_type != 'Link'
 
 
+@dataclass
+class Case:
+    """A fully loaded LTAC case: the node forest together with its lookup tables.
+
+    Produced by load_ltac_file() or parse_ltac_lines() and passed as a unit to
+    rendering, validation, and analysis functions.
+
+    Fields
+    ------
+    roots    : List[Node]          Package root nodes in file order.
+    registry : Dict[str, Node]     Maps every declared identifier to its Node.
+    id_info  : Dict[str, dict]     Cross-reference metadata per identifier.
+    """
+    roots:    List['Node']
+    registry: Dict[str, 'Node']
+    id_info:  Dict[str, dict]
+
+    def decl_pkg_id_for(self, ident: str) -> Optional[str]:
+        """Return the package root identifier where ident is declared, or None."""
+        return self.id_info.get(ident, _EMPTY).get('decl_pkg_id')
+
+    def statement_for(self, ident: str) -> Optional[str]:
+        """Return the canonical statement text for ident, or None."""
+        return self.id_info.get(ident, _EMPTY).get('statement')
+
+    def find_citation_parents(self, ident: str) -> List['Node']:
+        """Return all nodes that have a cited child (^ident) anywhere in the forest."""
+        parents = []
+        for node in all_nodes_fast(self.roots):
+            if node.identifier == ident and node.is_citation and node.parent is not None:
+                if node.parent not in parents:
+                    parents.append(node.parent)
+        return parents
+
+
 # ---------------------------------------------------------------------------
 # LTAC parser
 # ---------------------------------------------------------------------------
@@ -848,8 +884,8 @@ class LTACParser:
         self._stack = []
 
 
-def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
-    """Parse a list of LTAC text lines and return (all_roots, registry, id_info).
+def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> 'Case':
+    """Parse a list of LTAC text lines and return a Case.
 
     Lower-level alternative to load_ltac_file() for when the text is already
     in memory (e.g. from a string, a test fixture, or a network source).
@@ -865,16 +901,12 @@ def parse_ltac_lines(lines: List[str], config: Optional[dict] = None) -> Tuple[L
 
     Returns
     -------
-    all_roots : List[Node]
-        One Node per package root (depth 0), in file order.
-    registry : Dict[str, Node]
-        Maps every declared identifier to its Node.
-    id_info : Dict[str, dict]
-        Cross-reference metadata; see check_id_info() for the schema.
+    Case
+        Bundled (roots, registry, id_info); see Case for field descriptions.
     """
     parser = LTACParser()
     roots = parser.parse(lines, config=config)
-    return roots, parser.registry, parser.id_info
+    return Case(roots=roots, registry=parser.registry, id_info=parser.id_info)
 
 
 def all_nodes_fast(roots: List[Node]):
@@ -925,13 +957,12 @@ def _recalc_depths(node: 'Node', new_depth: int) -> None:
 # ---------------------------------------------------------------------------
 
 def load_ltac_file(path: str,
-                   config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
-    """Open and parse an LTAC file; return (all_roots, registry, id_info).
+                   config: Optional[dict] = None) -> 'Case':
+    """Open and parse an LTAC file; return a Case.
 
     Convenience wrapper around parse_ltac_lines() that handles file I/O.
     Raises VerocaseError (after printing to stderr) if the file cannot be
-    opened.  On success the return values have the same meaning as those of
-    parse_ltac_lines().
+    opened.
     """
     try:
         with open(path) as f:
@@ -1965,25 +1996,24 @@ def render_gsn_html(roots: List['Node'], config: dict, out: TextIO,
 
 def resolve_element(
     element_id: Optional[str],
-    registry: Dict[str, Node],
-    all_roots: List[Node],
+    case: 'Case',
     current_element: Optional[Node],
 ) -> List[Node]:
     """Return the list of nodes to render for the given element_id.
 
-    If element_id is given: look up in registry; call error() and return []
+    If element_id is given: look up in case.registry; call error() and return []
     if not found.  If element_id is None: use current_element if set, else
-    return all_roots.  ('*' is handled at dispatch time before calling here.)
+    return case.roots.  ('*' is handled at dispatch time before calling here.)
     """
     if element_id is not None:
-        node = registry.get(element_id)
+        node = case.registry.get(element_id)
         if node is None:
             error(f"element {element_id!r} not found in registry")
             return []
         return [node]
     if current_element is not None:
         return [current_element]
-    return list(all_roots)
+    return list(case.roots)
 
 
 def render_all_packages(all_roots: List[Node], render_fn, config: dict,
@@ -2085,17 +2115,16 @@ def parse_selector(selector: str, doc_format: str = 'markdown',
 
 def _render_or_all(
     element_id: Optional[str],
-    all_roots: List[Node],
+    case: 'Case',
     render_fn,
-    registry: Dict[str, Node],
     current_element: Optional[Node],
     config: dict,
     out: TextIO,
 ) -> bool:
     """Resolve element_id and render to out, or render all packages if element_id is '*'."""
     if element_id == '*':
-        return render_all_packages(all_roots, render_fn, config, out)
-    nodes = resolve_element(element_id, registry, all_roots, current_element)
+        return render_all_packages(case.roots, render_fn, config, out)
+    nodes = resolve_element(element_id, case, current_element)
     if not nodes:
         return False
     return render_fn(nodes, config, out)
@@ -2146,12 +2175,12 @@ def find_citation_parents(ident: str, all_roots: List[Node]) -> List[Node]:
     return parents
 
 
-def render_referenced_by(node: Node, all_roots: List[Node],
-                         id_info: Dict[str, dict], config: dict, fmt: str,
+def render_referenced_by(node: Node, case: 'Case',
+                         config: dict, fmt: str,
                          out: TextIO, sep: str = '') -> bool:
     """Write 'Referenced by: ...' line to out; return False if no packages to list."""
     ident = node.identifier
-    info = id_info.get(ident, {})
+    info = case.id_info.get(ident, {})
     pkg_ids = []
     if info.get('decl_pkg_id'):
         pkg_ids.append(info['decl_pkg_id'])
@@ -2187,7 +2216,7 @@ def render_supported_by(node: Node, config: dict, fmt: str,
     return True
 
 
-def render_supports(node: Node, all_roots: List[Node],
+def render_supports(node: Node, case: 'Case',
                     config: dict, fmt: str,
                     out: TextIO, sep: str = '') -> bool:
     """Write 'Supports: ...' line to out; return False if no parents at all."""
@@ -2197,7 +2226,7 @@ def render_supports(node: Node, all_roots: List[Node],
         p = node.parent
         pairs.append((f'{p.node_type} {p.identifier}',
                       _element_anchor_url(p.node_type, p.identifier, config)))
-    for parent in find_citation_parents(node.identifier, all_roots):
+    for parent in case.find_citation_parents(node.identifier):
         if not parent.identifier:
             continue
         pairs.append((f'{parent.node_type} {parent.identifier}',
@@ -2226,16 +2255,16 @@ def render_ext_ref(node: Node, config: dict, fmt: str,
 
 
 # Map selection name -> fn(node, all_roots, id_info, config, fmt, out, sep).
-# render_referenced_by already has that exact signature; the others need adapters.
+# render_referenced_by and render_supports already match (primary, case, config, fmt, out, sep).
 _ELEMENT_RENDER_MAP: Dict[str, callable] = {
     'referenced_by': render_referenced_by,
-    'supported_by':  lambda node, _r, _i, config, fmt, o, s: render_supported_by(node, config, fmt, o, s),
-    'supports':      lambda node, roots, _i, config, fmt, o, s: render_supports(node, roots, config, fmt, o, s),
-    'ext_ref':       lambda node, _r, _i, config, fmt, o, s: render_ext_ref(node, config, fmt, o, s),
+    'supported_by':  lambda node, case, config, fmt, o, s: render_supported_by(node, config, fmt, o, s),
+    'supports':      render_supports,
+    'ext_ref':       lambda node, case, config, fmt, o, s: render_ext_ref(node, config, fmt, o, s),
 }
 
 
-def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
+def render_pkg_defines(pkg_root: Node, case: 'Case',
                        config: dict, fmt: str,
                        out: TextIO, sep: str = '') -> bool:
     """Write 'Defines: ...' list for a package to out."""
@@ -2243,7 +2272,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     defined = []
     for node in all_nodes_fast([pkg_root]):
         if (node.is_definition and node.identifier
-                and decl_pkg_id_for(id_info, node.identifier) == pkg_id):
+                and case.decl_pkg_id_for(node.identifier) == pkg_id):
             defined.append(node)
     if not defined:
         return False
@@ -2255,7 +2284,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     return True
 
 
-def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
+def render_pkg_citing(pkg_root: Node, case: 'Case',
                       config: dict, fmt: str,
                       out: TextIO, sep: str = '') -> bool:
     """Write 'Citing: ...' list for a package to out; return False if none."""
@@ -2265,7 +2294,7 @@ def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
         return False
     links = []
     for node in cited_nodes:
-        decl_pkg = decl_pkg_id_for(id_info, node.identifier) or ''
+        decl_pkg = case.decl_pkg_id_for(node.identifier) or ''
         label = f'{node.node_type} {node.identifier}'
         url = _pkg_anchor_url(decl_pkg, config) if decl_pkg else ''
         links.append(hyperlink(label, url, fmt) if url else label)
@@ -2274,13 +2303,13 @@ def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
     return True
 
 
-def render_pkg_cited(pkg_root: Node, all_roots: List[Node],
-                     id_info: Dict[str, dict], config: dict, fmt: str,
+def render_pkg_cited(pkg_root: Node, case: 'Case',
+                     config: dict, fmt: str,
                      out: TextIO, sep: str = '') -> bool:
     """Write 'Cited by: ...' list for a package to out; return False if none."""
     pkg_id = pkg_root.identifier
     citing_pkgs = []
-    for ident, info in id_info.items():
+    for ident, info in case.id_info.items():
         if info.get('decl_pkg_id') == pkg_id:
             for cpid in info.get('citing_pkg_ids', []):
                 if cpid not in citing_pkgs:
@@ -2323,22 +2352,22 @@ def render_representation(pkg_root: Node, all_roots: List[Node],
         return False
 
 
-# render_pkg_cited already has the exact uniform signature; the others need adapters.
+# render_pkg_defines/citing/cited now match (primary, case, config, fmt, out, sep); representation needs an adapter.
 _PACKAGE_RENDER_MAP: Dict[str, callable] = {
-    'representation': lambda pkg, roots, _i, config, fmt, o, s: render_representation(pkg, roots, config, fmt, o, s),
-    'pkg_defines':    lambda pkg, _r, info, config, fmt, o, s: render_pkg_defines(pkg, info, config, fmt, o, s),
-    'pkg_citing':     lambda pkg, _r, info, config, fmt, o, s: render_pkg_citing(pkg, info, config, fmt, o, s),
+    'representation': lambda pkg, case, config, fmt, o, s: render_representation(pkg, case.roots, config, fmt, o, s),
+    'pkg_defines':    render_pkg_defines,
+    'pkg_citing':     render_pkg_citing,
     'pkg_cited':      render_pkg_cited,
 }
 
 
 def _apply_sel(sel_str: str, render_map: Dict[str, callable],
-               primary: Node, all_roots: List[Node],
-               id_info: Dict[str, dict], config: dict, fmt: str,
+               primary: Node, case: 'Case',
+               config: dict, fmt: str,
                out: TextIO, pending_sep: str = '') -> bool:
     """Apply sub-selections from a comma-separated string, writing each separated by blank lines.
 
-    Each entry in render_map must accept (primary, all_roots, id_info, config, fmt, out, sep).
+    Each entry in render_map must accept (primary, case, config, fmt, out, sep).
     Returns True if anything was written.
     """
     wrote_any = False
@@ -2350,7 +2379,7 @@ def _apply_sel(sel_str: str, render_map: Dict[str, callable],
         if fn is None:
             warn(f"unknown selection name {sel!r}")
             continue
-        if fn(primary, all_roots, id_info, config, fmt, out, pending_sep):
+        if fn(primary, case, config, fmt, out, pending_sep):
             pending_sep = '\n\n'
             wrote_any = True
     return wrote_any
@@ -2371,8 +2400,7 @@ def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
 
 
 
-def render_element_selector(node_id: str, registry: Dict[str, Node],
-                             all_roots: List[Node], id_info: Dict[str, dict],
+def render_element_selector(node_id: str, case: 'Case',
                              config: dict, state: 'DocState',
                              out: TextIO, sep: str = '') -> bool:
     """Write a full element section (heading + configured sub-selections) to out.
@@ -2380,9 +2408,9 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
     Renders the element heading and any sub-selections listed in
     config['element_selections'] (e.g. referenced_by, supported_by, supports, ext_ref).
     Updates state.current_id and state.seen_element_ids as a side-effect.
-    Returns False and calls error() if node_id is not in registry.
+    Returns False and calls error() if node_id is not in case.registry.
     """
-    node = registry.get(node_id)
+    node = case.registry.get(node_id)
     if node is None:
         error(f"element {node_id!r} not found")
         return False
@@ -2391,7 +2419,7 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
 
     level = config.get('element_level', 3)
     anchor = _component_anchor_id(node.node_type, node_id)
-    stmt = statement_for(id_info, node_id) or node.text or ''
+    stmt = case.statement_for(node_id) or node.text or ''
     heading_text = f'{node.node_type} {node_id}'
     if stmt:
         heading_text += f': {stmt}'
@@ -2402,19 +2430,18 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
     out.write('\n\n')
     out.write(_make_heading(anchor, level, heading_text, fmt))
     _apply_sel(config.get('element_selections', _DEFAULT_ELEMENT_SELECTIONS),
-               _ELEMENT_RENDER_MAP, node, all_roots, id_info, config, fmt, out, pending_sep='\n\n')
+               _ELEMENT_RENDER_MAP, node, case, config, fmt, out, pending_sep='\n\n')
     return True
 
 
-def _render_single_package(pkg_root: Node, all_roots: List[Node],
-                            id_info: Dict[str, dict],
+def _render_single_package(pkg_root: Node, case: 'Case',
                             config: dict, state: 'DocState',
                             out: TextIO, sep: str = '') -> bool:
     """Write one package heading + its package_selections to out."""
     fmt = state.doc_format
     level = config.get('package_level', 3)
     anchor = _component_anchor_id('Package', pkg_root.identifier)
-    stmt = statement_for(id_info, pkg_root.identifier) or pkg_root.text or ''
+    stmt = case.statement_for(pkg_root.identifier) or pkg_root.text or ''
     heading_text = f'Package {pkg_root.identifier}'
     if stmt:
         heading_text += f': {stmt}'
@@ -2422,13 +2449,11 @@ def _render_single_package(pkg_root: Node, all_roots: List[Node],
     out.write(sep)
     out.write(_make_heading(anchor, level, heading_text, fmt))
     _apply_sel(config.get('package_selections', _DEFAULT_PACKAGE_SELECTIONS),
-               _PACKAGE_RENDER_MAP, pkg_root, all_roots, id_info, config, fmt, out, pending_sep='\n\n')
+               _PACKAGE_RENDER_MAP, pkg_root, case, config, fmt, out, pending_sep='\n\n')
     return True
 
 
-def render_package_selector(pkg_id_or_star: str, all_roots: List[Node],
-                             registry: Dict[str, Node],
-                             id_info: Dict[str, dict],
+def render_package_selector(pkg_id_or_star: str, case: 'Case',
                              config: dict, state: 'DocState',
                              out: TextIO) -> bool:
     """Write a full package section (heading + diagram + sub-selections) to out.
@@ -2441,19 +2466,19 @@ def render_package_selector(pkg_id_or_star: str, all_roots: List[Node],
     if pkg_id_or_star == '*':
         out.write(_WARNING_TEXT_SELECTOR)
         pending_sep = '\n\n'
-        for root in all_roots:
+        for root in case.roots:
             state.current_id = root.identifier
-            _render_single_package(root, all_roots, id_info, config, state, out, pending_sep)
+            _render_single_package(root, case, config, state, out, pending_sep)
             pending_sep = '\n\n'
         return True
-    pkg_root = registry.get(pkg_id_or_star)
+    pkg_root = case.registry.get(pkg_id_or_star)
     if pkg_root is None or pkg_root.depth != 0:
         error(f"package {pkg_id_or_star!r} not found or is not a root element")
         return False
     state.current_id = pkg_id_or_star
     out.write(_WARNING_TEXT_SELECTOR)
     out.write('\n\n')
-    _render_single_package(pkg_root, all_roots, id_info, config, state, out)
+    _render_single_package(pkg_root, case, config, state, out)
     return True
 
 _WARNING_TEXT = (
@@ -2474,10 +2499,8 @@ def render_warning(element_id: Optional[str]) -> str:
 
 def render_selector(
     selector: str,
-    registry: Dict[str, Node],
-    all_roots: List[Node],
+    case: 'Case',
     config: dict,
-    id_info: Dict[str, dict],
     out: TextIO,
     current_element: Optional[Node] = None,
     doc_format: str = 'markdown',
@@ -2527,23 +2550,23 @@ def render_selector(
                   "from --fixmissing are inserted before this point. -->")
         return True
     elif display_type in ('sacm/mermaid', 'sacm/mermaid/markdown'):
-        return _render_or_all(element_id, all_roots, render_sacm, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_sacm, current_element, config, out)
     elif display_type in ('gsn/mermaid', 'gsn/mermaid/markdown'):
-        return _render_or_all(element_id, all_roots, render_gsn, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_gsn, current_element, config, out)
     elif display_type == 'sacm/mermaid/html':
         if state is not None:
             _maybe_inject_mermaid_js(config, state, out)
-        return _render_or_all(element_id, all_roots, render_sacm_html, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_sacm_html, current_element, config, out)
     elif display_type == 'gsn/mermaid/html':
         if state is not None:
             _maybe_inject_mermaid_js(config, state, out)
-        return _render_or_all(element_id, all_roots, render_gsn_html, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_gsn_html, current_element, config, out)
     elif display_type == 'ltac/markdown':
-        return _render_or_all(element_id, all_roots, render_markdown, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_markdown, current_element, config, out)
     elif display_type == 'ltac/html':
-        return _render_or_all(element_id, all_roots, render_html, registry, current_element, config, out)
+        return _render_or_all(element_id, case, render_html, current_element, config, out)
     elif display_type == 'ltac/txt':
-        nodes = resolve_element(element_id, registry, all_roots, current_element)
+        nodes = resolve_element(element_id, case, current_element)
         if not nodes:
             return False
         return render_ltac_txt(nodes, config, out)
@@ -2551,22 +2574,22 @@ def render_selector(
         if element_id is None or element_id == '*':
             error("'info' selector requires an explicit element ID")
             return False
-        return render_info(element_id, all_roots, registry, id_info, out)
+        return render_info(element_id, case, out)
     elif display_type == 'element':
         if element_id is None:
             error("'element' selector requires an explicit ID")
             return False
         _state = state or DocState(doc_format=doc_format)
-        return render_element_selector(element_id, registry, all_roots, id_info, config, _state, out)
+        return render_element_selector(element_id, case, config, _state, out)
     elif display_type == 'package':
         _state = state or DocState(doc_format=doc_format)
         pkg_id = element_id if element_id is not None else '*'
-        return render_package_selector(pkg_id, all_roots, registry, id_info, config, _state, out)
+        return render_package_selector(pkg_id, case, config, _state, out)
     else:
         if element_id == '*':
             error(f"'*' is not valid with the '{display_type}' selector")
             return False
-        nodes = resolve_element(element_id, registry, all_roots, current_element)
+        nodes = resolve_element(element_id, case, current_element)
         if not nodes:
             return False
         node = nodes[0]
@@ -2724,10 +2747,8 @@ def _consume_region(line_iter, filename: str, start_lineno: int, selector: str) 
 def process_document_stream(
     f,
     out,
-    registry: Dict[str, Node],
-    all_roots: List[Node],
+    case: 'Case',
     config: dict,
-    id_info: Dict[str, dict],
     seen_element_ids: set,
     doc_format: str = 'markdown',
     add_missing: bool = False,
@@ -2737,8 +2758,7 @@ def process_document_stream(
     """Process a document file line by line, replacing ltac selector regions.
 
     Writes all output to `out`.  Updates `seen_element_ids` with identifiers of
-    LTAC elements rendered via 'element' selectors.  Uses the already-loaded
-    registry and all_roots; performs no LTAC parsing.
+    LTAC elements rendered via 'element' selectors.  Uses case; performs no LTAC parsing.
 
     When `add_missing` is True, uses a single-pass smart-placement algorithm to
     insert skeleton element regions for every declared LTAC element not yet seen
@@ -2763,7 +2783,7 @@ def process_document_stream(
 
     # --- Smart single-pass missing-element placement setup ---
     if add_missing:
-        _ltac_ordered = [node for node in all_nodes(all_roots)
+        _ltac_ordered = [node for node in all_nodes(case.roots)
                          if node.is_definition and node.identifier]
         _ltac_index: Dict[str, int] = {n.identifier: i for i, n in enumerate(_ltac_ordered)}
         _doc_ids = existing_ids if existing_ids is not None else set()
@@ -2774,9 +2794,11 @@ def process_document_stream(
         _last_placed_id: Optional[str] = None
         _stubs_added = [0]
 
+        _stub_case = Case(roots=[], registry=case.registry, id_info=case.id_info)
+
         def _write_stub(ident: str) -> None:
             out.write('\n<!-- verocase element ' + ident + ' -->\n')
-            render_element_selector(ident, registry, [], id_info, config, _inj_state, out)
+            render_element_selector(ident, _stub_case, config, _inj_state, out)
             out.write('\n<!-- end verocase -->\n')
             _stubs_added[0] += 1
 
@@ -2841,7 +2863,7 @@ def process_document_stream(
             else:
                 out.write(text + '\n')
                 if found_end:
-                    wrote = render_selector(selector, registry, all_roots, config, id_info, out,
+                    wrote = render_selector(selector, case, config, out,
                                             doc_format=doc_format, state=_doc_state)
                     if wrote:
                         out.write('\n')
@@ -3022,24 +3044,24 @@ Typical usage:
 
   verocase.reset()
   config = verocase.load_config(None)           # or path to case.config
-  all_roots, registry, id_info = verocase.load_ltac_file('case.ltac', config=config)
+  case = verocase.load_ltac_file('case.ltac', config=config)
 
-  verocase.check_id_info(id_info)
-  verocase.check_circularities(registry, all_roots)
-  verocase.check_reachability(all_roots, registry)
+  verocase.check_id_info(case)
+  verocase.check_circularities(case)
+  verocase.check_reachability(case)
 
   if verocase.had_error:
       sys.exit(1)
 
   buf = io.StringIO()
-  verocase.render_info('SomeClaim', all_roots, registry, id_info, buf)
+  verocase.render_info('SomeClaim', case, buf)
   print(buf.getvalue())
 
   # Walk the tree to collect (identifier, statement) tuples for leaf Claims
   # that are definitions (not citations or Links) and have no children:
   unsupported = [
       (node.identifier, node.text)
-      for node in verocase.all_nodes(all_roots)
+      for node in verocase.all_nodes(case.roots)
       if node.is_definition and node.node_type == 'Claim' and not node.children
   ]
 
@@ -3052,35 +3074,42 @@ Data types:
     node.is_citation    True if introduced with ^ (cross-package citation)
     node.is_definition  True if neither a citation nor a Link (property)
                         Every node is exactly one of: citation, Link, or definition.
+  @dataclass Case       bundles roots, registry, id_info with query methods:
+    case.roots          List[Node] (top-level package roots)
+    case.registry       Dict[str, Node] (identifier -> definition node)
+    case.id_info        Dict[str, dict] (per-identifier metadata)
+    case.decl_pkg_id_for(ident)        -> Optional[str]
+    case.statement_for(ident)          -> Optional[str]
+    case.find_citation_parents(ident)  -> List[Node]
   @dataclass DocState   per-document rendering state
   DEFAULT_CONFIG: dict  default configuration values
 
 Loading and serialization:
   load_config(path_or_None)
-  load_ltac_file(path, config=config)  -> (all_roots, registry, id_info)
+  load_ltac_file(path, config=config)  -> Case
   parse_ltac_lines(lines, config=config)
   find_ltac_file(ltac_arg, config)
-  write_ltac(all_roots)        serialize forest back to LTAC text
+  write_ltac(roots)            serialize forest back to LTAC text
   detect_doc_format(path)      'markdown' or 'html'
 
-id_info accessors (avoid spelling out the double .get() pattern):
+id_info accessors (also available as case methods above):
   decl_pkg_id_for(id_info, ident)  -> Optional[str]; package root ID where ident
                                      is declared, or None
-  statement_for(id_info, ident) -> Optional[str]; canonical statement text
-                                   for ident, or None
+  statement_for(id_info, ident)    -> Optional[str]; canonical statement text
+                                     for ident, or None
 
   Example:
-    pkg = verocase.decl_pkg_id_for(id_info, 'SomeClaim')
+    pkg = case.decl_pkg_id_for('SomeClaim')
     if pkg:
         print(f'SomeClaim declared in package {pkg}')
 
-    stmt = verocase.statement_for(id_info, 'SomeClaim') or '(no statement)'
+    stmt = case.statement_for('SomeClaim') or '(no statement)'
     print(f'SomeClaim: {stmt}')
 
 Validation (set had_error on problems):
-  check_id_info(id_info)
-  check_circularities(registry, all_roots)
-  check_reachability(all_roots, registry)
+  check_id_info(case)
+  check_circularities(case)
+  check_reachability(case)
 
 Tree traversal:
   all_nodes(roots)             DFS generator, LTAC written order (prefer this)
@@ -3089,30 +3118,29 @@ Tree traversal:
   collect_bfs(roots)           BFS, returns list
   subtree_count(node)          -> int
   get_pkg_root(node)           -> Node
-  find_citation_parents(ident, all_roots)  -> List[Node]
-  resolve_element(element_id, registry, all_roots, current)  -> List[Node]
-  ltac_node_line(node, depth_offset=0)     -> str
-  compute_ltac_stats(all_roots, registry, id_info)  -> dict
+  resolve_element(element_id, case, current)  -> List[Node]
+  ltac_node_line(node, depth_offset=0)        -> str
+  compute_ltac_stats(case)                    -> dict
   copy_forest(roots)           deep copy; originals untouched
 
 Analysis (return structured data; caller prints):
-  analysis_missing(all_roots, registry, document_files)   -> List[Node]
-  analysis_empty(document_files, registry)                -> List[str]
-  analysis_orphans(document_files, registry)              -> List[str]
-  analysis_misplaced(document_files, all_roots, registry) -> List[tuple]
-  analysis_leaves(all_roots)                              -> List[Node]
-  needs_support(nodes)                                    -> List[Node]
-  analysis_packages(all_roots, out=sys.stdout)            -> None
-  print_stats(ltac_stats, doc_stats, out=sys.stdout)      -> None
+  analysis_missing(case, document_files)   -> List[Node]
+  analysis_empty(document_files, case)     -> List[str]
+  analysis_orphans(document_files, case)   -> List[str]
+  analysis_misplaced(document_files, case) -> List[tuple]
+  analysis_leaves(case)                    -> List[Node]
+  needs_support(nodes)                     -> List[Node]
+  analysis_packages(case, out=sys.stdout)  -> None
+  print_stats(ltac_stats, doc_stats, out=sys.stdout)  -> None
 
 Rendering (write to caller-supplied out: TextIO; return True if written):
-  render_selector(selector, registry, all_roots, config, id_info, out,
+  render_selector(selector, case, config, out,
                   current_element=None, doc_format='markdown', state=None)
-  render_info(element_id, all_roots, registry, id_info, out)
+  render_info(element_id, case, out)
   render_ltac_txt(node_list, config, out)
-  render_element_selector(node_id, registry, all_roots, id_info, config, state, out)
-  render_package_selector(pkg_id_or_star, all_roots, registry, id_info, config, state, out)
-  process_document_stream(src, out, registry, all_roots, config, id_info,
+  render_element_selector(node_id, case, config, state, out)
+  render_package_selector(pkg_id_or_star, case, config, state, out)
+  process_document_stream(src, out, case, config,
                           seen_element_ids, doc_format='markdown',
                           add_missing=False, strip=False)
 
@@ -3584,19 +3612,19 @@ def find_ltac_file(ltac_arg: Optional[str], config: dict) -> str:
 # (^ID) implicitly carries AsCited.
 
 
-def check_id_info(id_info: Dict[str, dict]) -> None:
+def check_id_info(case: 'Case') -> None:
     """Validate identifier usage across the loaded LTAC.
 
     Uses the id_info table built during parsing (see LTACParser) to report:
     - IDs cited (^) but never declared (may indicate a missing package)
     """
-    for ident, info in id_info.items():
+    for ident, info in case.id_info.items():
         if info['citations'] > 0 and info['declarations'] == 0:
             warn(f"{ident}: cited but never declared")
 
 
 
-def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> None:
+def check_circularities(case: 'Case') -> None:
     """Panic if any circular dependency exists in the LTAC model.
 
     Performs an iterative DFS over the logical dependency graph.  For each
@@ -3611,7 +3639,7 @@ def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> Non
     def successors(node: Node):
         for child in node.children:
             if child.is_citation:
-                target = registry.get(child.identifier)
+                target = case.registry.get(child.identifier)
                 if target is not None:
                     yield target
             elif child.node_type == 'Link':
@@ -3645,15 +3673,15 @@ def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> Non
                 visiting.discard(id(node))
                 done.add(id(node))
 
-    for root in all_roots:
+    for root in case.roots:
         if id(root) not in done:
             dfs(root)
-    for node in registry.values():
+    for node in case.registry.values():
         if id(node) not in done:
             dfs(node)
 
 
-def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None:
+def check_reachability(case: 'Case') -> None:
     """Error for any package whose root is unreachable from the first element.
 
     Skipped when there is only one package (everything is trivially reachable).
@@ -3662,11 +3690,11 @@ def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None
     reachable, an unreachable package root implies the whole package is
     unreachable; reporting just the root is sufficient.
     """
-    if len(all_roots) < 2:
+    if len(case.roots) < 2:
         return
 
     reachable: Set[int] = set()
-    stack = [all_roots[0]]
+    stack = [case.roots[0]]
     while stack:
         node = stack.pop()
         if id(node) in reachable:
@@ -3674,7 +3702,7 @@ def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None
         reachable.add(id(node))
         for child in node.children:
             if child.is_citation:
-                target = registry.get(child.identifier)
+                target = case.registry.get(child.identifier)
                 if target is not None:
                     stack.append(target)
             elif child.node_type == 'Link':
@@ -3683,11 +3711,11 @@ def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None
             else:
                 stack.append(child)
 
-    for root in all_roots[1:]:
+    for root in case.roots[1:]:
         if id(root) not in reachable:
             label = f"{root.node_type} {root.identifier}" if root.identifier else root.node_type
-            error(f"{label}: package root is unreachable from {all_roots[0].node_type}"
-                  f" {all_roots[0].identifier}")
+            error(f"{label}: package root is unreachable from {case.roots[0].node_type}"
+                  f" {case.roots[0].identifier}")
 
 
 def _is_dubious_reference(ref: str) -> bool:
@@ -3705,10 +3733,8 @@ def _is_dubious_reference(ref: str) -> bool:
 def _process_files(
     files: List[str],
     out,
-    registry: Dict[str, Node],
-    all_roots: List[Node],
+    case: 'Case',
     config: dict,
-    id_info: Dict[str, dict],
     seen_element_ids: set,
     strip: bool = False,
 ) -> None:
@@ -3717,13 +3743,13 @@ def _process_files(
         for path in files:
             try:
                 with open(path, newline='') as f:
-                    process_document_stream(f, out, registry, all_roots, config, id_info,
+                    process_document_stream(f, out, case, config,
                                             seen_element_ids, detect_doc_format(path),
                                             strip=strip)
             except OSError as e:
                 error(f"cannot open {path!r}: {e}")
     else:
-        process_document_stream(sys.stdin, out, registry, all_roots, config, id_info,
+        process_document_stream(sys.stdin, out, case, config,
                                 seen_element_ids, 'markdown', strip=strip)
 
 
@@ -3796,8 +3822,7 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
     return False
 
 
-def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
-                        id_info: Dict[str, dict]) -> dict:
+def compute_ltac_stats(case: 'Case') -> dict:
     """Compute and return a statistics dict for the loaded LTAC forest.
 
     The returned dict contains:
@@ -3828,7 +3853,7 @@ def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
     bottommost_claims = 0
     pkg_sizes_full = []  # (size_full, name) per package including links and citations
 
-    for root in all_roots:
+    for root in case.roots:
         size_full = 0
         for node in all_nodes_fast([root]):
             size_full += 1
@@ -3846,7 +3871,7 @@ def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
                         leaf_claims += 1
                 if node.node_type == 'Claim':
                     seen = {node.identifier} if node.identifier else set()
-                    if not _has_claim_descendant(node, registry, seen):
+                    if not _has_claim_descendant(node, case.registry, seen):
                         bottommost_claims += 1
         pkg_sizes_full.append((size_full, root.identifier or '(unnamed)'))
 
@@ -4141,19 +4166,19 @@ def _print_analysis_list(header, items, fmt=str) -> None:
             print(fmt(item))
 
 
-def analysis_missing(all_roots, registry, document_files) -> List['Node']:
+def analysis_missing(case, document_files) -> List['Node']:
     """Return LTAC elements that have no selector region in the document(s).
 
     Returns a list of Node objects in LTAC (depth-first) order.
     """
     ordered_ids, _ = _scan_document_elements(document_files)
     seen = {ident for ident, _, _ in ordered_ids}
-    all_ids_ordered = [node for node in all_nodes(all_roots)
+    all_ids_ordered = [node for node in all_nodes(case.roots)
                        if node.is_definition and node.identifier]
     return [node for node in all_ids_ordered if node.identifier not in seen]
 
 
-def analysis_empty(document_files, registry) -> List[str]:
+def analysis_empty(document_files, case) -> List[str]:
     """Return identifiers of elements whose selector region contains no prose.
 
     Elements that have an ext_ref are not considered empty: their content
@@ -4163,31 +4188,31 @@ def analysis_empty(document_files, registry) -> List[str]:
     return [
         ident for ident, info in elem_info.items()
         if not info['has_prose']
-        and not (registry.get(ident) and registry.get(ident).ext_ref)
+        and not (case.registry.get(ident) and case.registry.get(ident).ext_ref)
     ]
 
 
-def analysis_orphans(document_files, registry) -> List[str]:
+def analysis_orphans(document_files, case) -> List[str]:
     """Return identifiers of document selector regions not present in the LTAC."""
     _, elem_info = _scan_document_elements(document_files)
-    return [ident for ident in elem_info if ident not in registry]
+    return [ident for ident in elem_info if ident not in case.registry]
 
 
-def analysis_misplaced(document_files, all_roots, registry):
+def analysis_misplaced(document_files, case):
     """Return elements whose document order differs from LTAC order.
 
     Returns a list of (ident, lineno, filepath, pred_ident, pred_lineno) tuples,
     where pred_ident and pred_lineno are None if the element should be first.
     """
     # LTAC order: depth-first forward order, definitions only
-    ltac_order = [node.identifier for node in all_nodes(all_roots)
+    ltac_order = [node.identifier for node in all_nodes(case.roots)
                   if node.is_definition and node.identifier]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
     # Document order: only elements that are also in the registry
     ordered_ids, elem_info = _scan_document_elements(document_files)
     doc_entries = [(ident, filepath, lineno) for ident, filepath, lineno in ordered_ids
-                   if ident in registry]
+                   if ident in case.registry]
 
     if not doc_entries:
         return []
@@ -4287,9 +4312,9 @@ def ltac_node_line(node: Node, depth_offset: int = 0) -> str:
     return line
 
 
-def analysis_leaves(all_roots) -> List['Node']:
+def analysis_leaves(case) -> List['Node']:
     """Return all definition nodes with no children, in LTAC order."""
-    return [node for node in all_nodes(all_roots)
+    return [node for node in all_nodes(case.roots)
             if node.is_definition and not node.children]
 
 
@@ -4309,10 +4334,10 @@ def subtree_count(node: Node) -> int:
     return count
 
 
-def analysis_packages(all_roots, out: TextIO = sys.stdout) -> None:
+def analysis_packages(case, out: TextIO = sys.stdout) -> None:
     """Print package structure with element counts to out (default stdout)."""
     print("Packages:", file=out)
-    for root in all_roots:
+    for root in case.roots:
         pkg_count = subtree_count(root)
         root_line = ltac_node_line(root, depth_offset=0)
         print(f"Package {root.identifier} ({pkg_count} elements)", file=out)
@@ -4349,8 +4374,8 @@ def _write_ltac_node_normalized(node, out: TextIO, first: list, depth_offset: in
         _write_ltac_node_normalized(child, out, first, depth_offset)
 
 
-def render_info(element_id: str, all_roots: List[Node], registry: Dict[str, Node],
-                id_info: Dict[str, dict], out: TextIO, sep: str = '') -> bool:
+def render_info(element_id: str, case: 'Case',
+                out: TextIO, sep: str = '') -> bool:
     """Write a human-readable context report for element_id to out.
 
     The report includes the element's type, identifier, and statement;
@@ -4360,7 +4385,7 @@ def render_info(element_id: str, all_roots: List[Node], registry: Dict[str, Node
     sep is written before the report when non-empty (used to insert blank
     lines between consecutive outputs).
     """
-    node = registry.get(element_id)
+    node = case.registry.get(element_id)
     if node is None:
         error(f"info: element {element_id!r} not found")
         return False
@@ -4407,14 +4432,14 @@ def render_info(element_id: str, all_roots: List[Node], registry: Dict[str, Node
     out.write(f"\nDescendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
 
     # Citations: how many times this element is cited by others
-    info = id_info.get(element_id, {})
+    info = case.id_info.get(element_id, {})
     citation_count = info.get('citations', 0)
     citing_pkg_ids = info.get('citing_pkg_ids', [])
     out.write(f"\nCitations: {citation_count}")
     if citation_count > 0:
         # Find the actual citing nodes
         for citing_pkg_id in citing_pkg_ids:
-            citing_root = registry.get(citing_pkg_id)
+            citing_root = case.registry.get(citing_pkg_id)
             if citing_root is None:
                 continue
             # Walk the citing package to find nodes that cite element_id
@@ -4472,7 +4497,7 @@ def _is_element_region_terminator(line: str) -> bool:
     return False
 
 
-def _fixmisplaced_document(path, all_roots, registry, id_info, config,
+def _fixmisplaced_document(path, case, config,
                            seen_element_ids, doc_format):
     """Move misplaced element regions to their correct LTAC order positions.
 
@@ -4585,12 +4610,12 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
         region_map[current_ident] = (region_start, len(lines) - 1)
 
     # Get LTAC order
-    ltac_order = [node.identifier for node in all_nodes(all_roots)
+    ltac_order = [node.identifier for node in all_nodes(case.roots)
                   if node.is_definition and node.identifier]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
     # Find elements that are in both LTAC and document
-    doc_with_regions = [ident for ident in region_order if ident in registry]
+    doc_with_regions = [ident for ident in region_order if ident in case.registry]
 
     if not doc_with_regions:
         return None
@@ -4834,51 +4859,48 @@ def _update_pkg_id_for_subtree(node: Node, old_pkg_id: str, new_pkg_id: str,
                 info['decl_pkg_id'] = new_pkg_id
 
 
-def apply_rename(roots: List[Node], registry: Dict[str, Node],
-                 id_info: Dict[str, dict], old: str, new: str) -> None:
+def apply_rename(case, old: str, new: str) -> None:
     """Rename identifier old to new throughout the LTAC forest.
 
     Panics if old is not declared or new is already declared.
     Updates all node identifiers, the registry, id_info, and cross-references.
     """
-    if old not in registry:
+    if old not in case.registry:
         panic(f"--rename: {old!r} is not a declared identifier")
-    if new in registry:
+    if new in case.registry:
         panic(f"--rename: {new!r} is already declared")
-    for node in all_nodes_fast(roots):
+    for node in all_nodes_fast(case.roots):
         if node.identifier == old:
             node.identifier = new
-    registry[new] = registry.pop(old)
-    id_info[new] = id_info.pop(old)
-    for entry in id_info.values():
+    case.registry[new] = case.registry.pop(old)
+    case.id_info[new] = case.id_info.pop(old)
+    for entry in case.id_info.values():
         if entry.get('decl_pkg_id') == old:
             entry['decl_pkg_id'] = new
         entry['citing_pkg_ids'] = [new if x == old else x
                                    for x in entry.get('citing_pkg_ids', [])]
 
 
-def apply_restate(roots: List[Node], registry: Dict[str, Node],
-                  id_info: Dict[str, dict], label: str, stmt: str) -> None:
+def apply_restate(case, label: str, stmt: str) -> None:
     """Update the statement text for label on all nodes and in id_info.
 
     Panics if label is not declared.
     """
-    if label not in registry:
+    if label not in case.registry:
         panic(f"--restate: {label!r} is not a declared identifier")
-    for node in all_nodes_fast(roots):
+    for node in all_nodes_fast(case.roots):
         if node.identifier == label:
             node.text = stmt
-    id_info[label]['statement'] = stmt
+    case.id_info[label]['statement'] = stmt
 
 
-def apply_detach(roots: List[Node], registry: Dict[str, Node],
-                 id_info: Dict[str, dict], target_id: str) -> None:
+def apply_detach(case, target_id: str) -> None:
     """Replace target_id's definition with a citation; promote subtree to new package.
 
     Panics if target_id is not defined, or if its definition is already a
     top-level package root (has no parent).
     """
-    node = registry.get(target_id)
+    node = case.registry.get(target_id)
     if node is None:
         panic(f"--detach: {target_id!r} is not defined")
     if node.parent is None:
@@ -4906,22 +4928,21 @@ def apply_detach(roots: List[Node], registry: Dict[str, Node],
     # Detach the definition node and make it a new package root.
     node.parent = None
     _recalc_depths(node, 0)
-    roots.append(node)
+    case.roots.append(node)
 
     # Update id_info: the new package root ID for node and all descendants.
     new_pkg_id = node.identifier
-    old_pkg_id = decl_pkg_id_for(id_info, node.identifier)
-    _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, id_info)
+    old_pkg_id = decl_pkg_id_for(case.id_info, node.identifier)
+    _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, case.id_info)
 
     # Record the new citation under the original package.
-    id_info[target_id]['citations'] = id_info[target_id].get('citations', 0) + 1
+    case.id_info[target_id]['citations'] = case.id_info[target_id].get('citations', 0) + 1
     citing_pkg = get_pkg_root(cited).identifier
-    if citing_pkg and citing_pkg not in id_info[target_id].get('citing_pkg_ids', []):
-        id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
+    if citing_pkg and citing_pkg not in case.id_info[target_id].get('citing_pkg_ids', []):
+        case.id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
 
 
-def apply_move(roots: List[Node], registry: Dict[str, Node],
-               id_info: Dict[str, dict], target_id: str, dest_id: str) -> None:
+def apply_move(case, target_id: str, dest_id: str) -> None:
     """Move target_id's definition to be a child of dest_id.
 
     ID may be top-level or nested anywhere in the tree. No citation is left
@@ -4933,19 +4954,19 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
 
     Panics if target_id or dest_id is not defined.
     """
-    node = registry.get(target_id)
+    node = case.registry.get(target_id)
     if node is None:
         panic(f"--move: {target_id!r} is not defined")
-    dest = registry.get(dest_id)
+    dest = case.registry.get(dest_id)
     if dest is None:
         panic(f"--move: {dest_id!r} is not defined")
 
     # Remember old decl_pkg_id before detaching.
-    old_pkg_id = decl_pkg_id_for(id_info, target_id)
+    old_pkg_id = decl_pkg_id_for(case.id_info, target_id)
 
     # Detach node from its current location (no citation left behind).
     if node.parent is None:
-        roots.remove(node)
+        case.roots.remove(node)
     else:
         node.parent.children.remove(node)
         node.parent = None
@@ -4960,8 +4981,8 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
     # Insert node under dest.
     if cited_idx is not None:
         dest.children[cited_idx] = node
-        id_info[target_id]['citations'] = max(
-            0, id_info[target_id].get('citations', 1) - 1)
+        case.id_info[target_id]['citations'] = max(
+            0, case.id_info[target_id].get('citations', 1) - 1)
     else:
         dest.children.append(node)
 
@@ -4970,7 +4991,7 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
 
     # Update decl_pkg_id for node and all its descendants.
     new_pkg_id = get_pkg_root(dest).identifier
-    _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, id_info)
+    _update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id, case.id_info)
 
 
 def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str]:
@@ -4998,7 +5019,7 @@ def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str
         return None
 
 
-def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
+def apply_ltac_update(case) -> int:
     """Update cited/Link node text to match the declaration's statement text.
 
     Walks all nodes; for any cited or Link node whose text differs from the
@@ -5007,10 +5028,10 @@ def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
     so the authoritative text is always the declaration regardless of parse order.
     """
     count = 0
-    for node in all_nodes_fast(roots):
+    for node in all_nodes_fast(case.roots):
         if not node.identifier or node.is_definition:
             continue
-        decl = registry.get(node.identifier)
+        decl = case.registry.get(node.identifier)
         canonical = decl.text if decl is not None else None
         if node.text and canonical is not None and node.text != canonical:
             node.text = canonical
@@ -5044,10 +5065,8 @@ _DOC_IO_BUFSIZE = 256 * 1024  # 262144 bytes = 256 KiB
 
 def _inline_rewrite_file(
     path: str,
-    registry: Dict[str, Node],
-    all_roots: List[Node],
+    case: 'Case',
     config: dict,
-    id_info: Dict[str, dict],
     seen_element_ids: set,
     add_missing: bool = False,
     strip: bool = False,
@@ -5088,7 +5107,7 @@ def _inline_rewrite_file(
         with os.fdopen(fd, 'w', encoding='utf-8', newline=nl, buffering=_DOC_IO_BUFSIZE) as out_f:
             with open(path, encoding='utf-8', newline='', buffering=_DOC_IO_BUFSIZE) as src_f:
                 process_document_stream(
-                    src_f, out_f, registry, all_roots, config, id_info,
+                    src_f, out_f, case, config,
                     seen_element_ids, doc_format,
                     add_missing=add_missing, strip=strip,
                     existing_ids=existing_ids)
@@ -5162,7 +5181,7 @@ def main() -> bool:
     config_invariant_checker(config)
 
     ltac_path = find_ltac_file(args.ltac, config)
-    all_roots, registry, id_info = load_ltac_file(ltac_path, config=config)
+    case = load_ltac_file(ltac_path, config=config)
     try:
         with open(ltac_path, newline='') as _f:
             ltac_line_ending = detect_line_ending(_f.read())
@@ -5170,9 +5189,9 @@ def main() -> bool:
         ltac_line_ending = '\n'
 
     # LTAC parse complete. Perform validations needing all LTAC data
-    check_id_info(id_info)
-    check_circularities(registry, all_roots)
-    check_reachability(all_roots, registry)
+    check_id_info(case)
+    check_circularities(case)
+    check_reachability(case)
 
     # Detect analysis options early, before any file-modifying operations,
     # so we can reject illegal combinations before any writes happen.
@@ -5200,9 +5219,9 @@ def main() -> bool:
             panic("--read-only cannot be combined with --rename/--restate/--detach/--move")
 
     if args.update:
-        changed = apply_ltac_update(all_roots, registry)
+        changed = apply_ltac_update(case)
         if changed:
-            tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
+            tmp = _make_temp(ltac_path, write_ltac(case.roots), ltac_line_ending)
             if tmp is None:
                 panic("cannot write updated LTAC file")
             commit_updates([(tmp, ltac_path)], ltac_path, config, config_path)
@@ -5212,20 +5231,20 @@ def main() -> bool:
     if args.mutations:
         for op, a, b in args.mutations:
             if op == 'rename':
-                apply_rename(all_roots, registry, id_info, a, b)
+                apply_rename(case, a, b)
             elif op == 'restate':
-                apply_restate(all_roots, registry, id_info, a, b)
+                apply_restate(case, a, b)
             elif op == 'detach':
-                apply_detach(all_roots, registry, id_info, a)
+                apply_detach(case, a)
             elif op == 'move':
-                apply_move(all_roots, registry, id_info, a, b)
-        check_id_info(id_info)
+                apply_move(case, a, b)
+        check_id_info(case)
 
-        check_circularities(registry, all_roots)
-        check_reachability(all_roots, registry)
+        check_circularities(case)
+        check_reachability(case)
         if had_error:
             panic("LTAC validation failed after mutations; no files updated")
-        tmp = _make_temp(ltac_path, write_ltac(all_roots))
+        tmp = _make_temp(ltac_path, write_ltac(case.roots))
         if tmp is None:
             panic("cannot write updated LTAC file")
         ltac_pair = (tmp, ltac_path)
@@ -5261,7 +5280,7 @@ def main() -> bool:
                 print()
             _print_analysis_list(
                 "Elements missing a selector region in the document(s):",
-                analysis_missing(all_roots, registry, analysis_doc_files),
+                analysis_missing(case, analysis_doc_files),
                 lambda n: f"{n.node_type} {n.identifier}")
             first = False
         if args.empty:
@@ -5269,25 +5288,25 @@ def main() -> bool:
                 print()
             _print_analysis_list(
                 "Elements with no prose in the document(s):",
-                analysis_empty(analysis_doc_files, registry),
-                lambda i: f"{registry[i].node_type if i in registry else '?'} {i}")
+                analysis_empty(analysis_doc_files, case),
+                lambda i: f"{case.registry[i].node_type if i in case.registry else '?'} {i}")
             first = False
         if args.orphans:
             if not first:
                 print()
             _print_analysis_list(
                 "Orphaned selector regions in the document(s) (not in LTAC):",
-                analysis_orphans(analysis_doc_files, registry),
+                analysis_orphans(analysis_doc_files, case),
                 lambda i: f"element {i}")
             first = False
         if args.misplaced:
             if not first:
                 print()
-            misplaced = analysis_misplaced(analysis_doc_files, all_roots, registry)
+            misplaced = analysis_misplaced(analysis_doc_files, case)
             def _fmt_misplaced(t):
-                ntype = registry[t[0]].node_type if t[0] in registry else '?'
+                ntype = case.registry[t[0]].node_type if t[0] in case.registry else '?'
                 if t[3]:
-                    ptype = registry[t[3]].node_type if t[3] in registry else '?'
+                    ptype = case.registry[t[3]].node_type if t[3] in case.registry else '?'
                     return (f"{ntype} {t[0]}: at line {t[1]},"
                             f" expected after {ptype} {t[3]} (line {t[4]})")
                 return f"{ntype} {t[0]}: at line {t[1]}, expected at start of document"
@@ -5298,7 +5317,7 @@ def main() -> bool:
         if args.leaves:
             if not first:
                 print()
-            leaves = analysis_leaves(all_roots)
+            leaves = analysis_leaves(case)
             ns_leaves = needs_support(leaves)
             print("Leaf elements:")
             if ns_leaves:
@@ -5313,27 +5332,27 @@ def main() -> bool:
         if args.packages:
             if not first:
                 print()
-            analysis_packages(all_roots)
+            analysis_packages(case)
             first = False
 
         return not had_error
 
     if args.info:
-        wrote = render_selector(f'info {args.info}', registry, all_roots, config, id_info, sys.stdout,
+        wrote = render_selector(f'info {args.info}', case, config, sys.stdout,
                                 doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.descendants:
-        wrote = render_selector(f'ltac/txt {args.descendants}', registry, all_roots, config, id_info, sys.stdout,
+        wrote = render_selector(f'ltac/txt {args.descendants}', case, config, sys.stdout,
                                 doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.select:
-        wrote = render_selector(args.select, registry, all_roots, config, id_info, sys.stdout,
+        wrote = render_selector(args.select, case, config, sys.stdout,
                                 doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
@@ -5342,17 +5361,17 @@ def main() -> bool:
     elif args.validate:
         if document_files:
             seen_element_ids: set = set()
-            _process_files(document_files, _NullWriter(), registry, all_roots, config, id_info, seen_element_ids, strip=args.strip)
+            _process_files(document_files, _NullWriter(), case, config, seen_element_ids, strip=args.strip)
             # This validation requires that we read all document files
-            _check_element_coverage(registry, seen_element_ids)
+            _check_element_coverage(case.registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.stdout:
         if not document_files:
             panic(_NO_FILES_MSG)
         seen_element_ids: set = set()
-        _process_files(document_files, sys.stdout, registry, all_roots, config, id_info, seen_element_ids, strip=args.strip)
-        _check_element_coverage(registry, seen_element_ids)
+        _process_files(document_files, sys.stdout, case, config, seen_element_ids, strip=args.strip)
+        _check_element_coverage(case.registry, seen_element_ids)
         if ltac_pair:
             commit_updates([ltac_pair], ltac_path, config, config_path)
     elif args.fixmissing or args.start:
@@ -5363,16 +5382,16 @@ def main() -> bool:
         pairs = []
         for i, path in enumerate(document_files):
             is_last = (i == len(document_files) - 1)
-            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info,
+            pair = _inline_rewrite_file(path, case, config,
                                         seen_element_ids, add_missing=is_last)
             if pair:
                 pairs.append(pair)
         # Mark needsSupport on all leaf elements that lack an assertion status.
-        all_ids_ordered = [node.identifier for node in all_nodes_fast(all_roots)
+        all_ids_ordered = [node.identifier for node in all_nodes_fast(case.roots)
                            if node.is_definition and node.identifier]
-        changed = _mark_needs_support(all_ids_ordered, registry)
+        changed = _mark_needs_support(all_ids_ordered, case.registry)
         if changed:
-            tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)
+            tmp = _make_temp(ltac_path, write_ltac(case.roots), ltac_line_ending)
             if tmp is not None:
                 pairs.append((tmp, ltac_path))
         if ltac_pair:
@@ -5386,14 +5405,14 @@ def main() -> bool:
         # First pass: re-render existing regions to get current state
         pairs = []
         for path in document_files:
-            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info,
+            pair = _inline_rewrite_file(path, case, config,
                                         seen_element_ids, add_missing=False)
             if pair:
                 pairs.append(pair)
         # Second pass: fix misplaced regions
         # Need to work on the current file content (updated or original)
         for path in document_files:
-            pair = _fixmisplaced_document(path, all_roots, registry, id_info, config,
+            pair = _fixmisplaced_document(path, case, config,
                                           seen_element_ids, detect_doc_format(path))
             if pair:
                 pairs.append(pair)
@@ -5408,8 +5427,8 @@ def main() -> bool:
         # here; the guard is kept for clarity).
         if document_files:
             seen_element_ids: set = set()
-            _process_files(document_files, _NullWriter(), registry, all_roots, config, id_info, seen_element_ids, strip=args.strip)
-            _check_element_coverage(registry, seen_element_ids)
+            _process_files(document_files, _NullWriter(), case, config, seen_element_ids, strip=args.strip)
+            _check_element_coverage(case.registry, seen_element_ids)
     else:
         # Default mode: rewrite document files in place.
         if not document_files and not ltac_pair:
@@ -5417,16 +5436,16 @@ def main() -> bool:
         seen_element_ids: set = set()
         pairs = ([ltac_pair] if ltac_pair else [])
         for path in document_files:
-            pair = _inline_rewrite_file(path, registry, all_roots, config, id_info, seen_element_ids, strip=args.strip)
+            pair = _inline_rewrite_file(path, case, config, seen_element_ids, strip=args.strip)
             if pair is not None:
                 pairs.append(pair)
         if pairs:
             commit_updates(pairs, ltac_path, config, config_path)
         if document_files:
-            _check_element_coverage(registry, seen_element_ids)
+            _check_element_coverage(case.registry, seen_element_ids)
 
     if args.stats:
-        ltac_stats = compute_ltac_stats(all_roots, registry, id_info)
+        ltac_stats = compute_ltac_stats(case)
         if document_files:
             doc_totals: dict = {'pkg_regions': 0, 'elem_regions': 0,
                                 'config_stmts': 0, 'empty_elem_regions': 0}
