@@ -1,5 +1,14 @@
 # verocase library API Review
 
+> **Archived / obsolete.**  The suggestions in this document have been
+> implemented.  `--help-api` and `--help-api-details` flags were added, and
+> the `(all_roots, registry, id_info)` triple was replaced by the `Case`
+> dataclass.  The remaining open item — redirectable `error()`/`warn()`
+> diagnostics via a `DiagnosticSink` — is still valid but was explicitly
+> noted as low priority.  The API signatures below reflect the **old** API;
+> see `--help-api` or `python3 -c "import verocase; help(verocase)"` for
+> current signatures.
+
 `verocase.py` can be imported as a Python module.  This document describes
 the public API, how to use it, and what remains to be done.
 
