@@ -297,6 +297,7 @@ def make_mermaid_id(identifier: str, counter: list) -> str:
 
 
 _HTML_ESCAPE_TABLE = str.maketrans({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})
+_EMPTY: dict = {}           # shared empty dict for .get(key, _EMPTY).get(...)
 
 
 def escape_html(text: str) -> str:
@@ -952,7 +953,7 @@ def decl_pkg_id_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
         if pkg:
             print(f'SomeClaim is declared in package {pkg}')
     """
-    return id_info.get(ident, {}).get('decl_pkg_id')
+    return id_info.get(ident, _EMPTY).get('decl_pkg_id')
 
 
 def statement_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
@@ -967,7 +968,7 @@ def statement_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
         stmt = verocase.statement_for(id_info, 'SomeClaim') or '(no statement)'
         print(f'SomeClaim: {stmt}')
     """
-    return id_info.get(ident, {}).get('statement')
+    return id_info.get(ident, _EMPTY).get('statement')
 
 
 # ---------------------------------------------------------------------------
