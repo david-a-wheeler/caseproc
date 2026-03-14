@@ -487,7 +487,7 @@ class Node:
         ``['axiomatic']``, ``['defeated']``.
     children : List[Node]
         Direct child nodes in LTAC written order.
-    is_cited : bool
+    is_citation : bool
         True when the node was introduced with a ``^`` prefix, meaning it
         is a cross-package citation rather than a declaration.
     depth : int
@@ -509,7 +509,7 @@ class Node:
     ext_ref: str
     options: List[str]
     children: List['Node']
-    is_cited: bool
+    is_citation: bool
     depth: int
     parent: Optional['Node']
     link_target: Optional['Node']
@@ -633,18 +633,18 @@ class LTACParser:
         """Construct a Node from a successful regex match."""
         depth = len(m.group('indent')) // 2
         nodetype = m.group('nodetype')
-        is_cited = bool(m.group('cited'))
+        is_citation = bool(m.group('cited'))
         identifier = (m.group('identifier') or '').strip()
         has_colon = m.group('text') is not None
         text = (m.group('text') or '').strip()
         ref = (m.group('ref') or '').strip()
         options = parse_options(m.group('options') or '')
 
-        if is_cited and not identifier:
+        if is_citation and not identifier:
             error(f"line {lineno}: citation requires an identifier (e.g. '- {nodetype} ^ID:')")
-        elif not is_cited and nodetype not in ('Link', 'Connector') and not has_colon:
+        elif not is_citation and nodetype not in ('Link', 'Connector') and not has_colon:
             error(f"line {lineno}: element requires ':' after the identifier (e.g. '- {nodetype} ID: text')")
-        elif not is_cited and nodetype not in ('Link', 'Connector') and not identifier and not text:
+        elif not is_citation and nodetype not in ('Link', 'Connector') and not identifier and not text:
             error(f"line {lineno}: {nodetype} element has no identifier and no statement;"
                   f" cannot contribute to the argument")
 
@@ -662,7 +662,7 @@ class LTACParser:
             ext_ref=ref,
             options=options,
             children=[],
-            is_cited=is_cited,
+            is_citation=is_citation,
             depth=depth,
             parent=None,
             link_target=None,
@@ -674,7 +674,7 @@ class LTACParser:
         # Assertion status: SACM spec section 11 requires mutual exclusivity.
         active = _STATUS_OPTIONS.intersection(options)
         if nodetype == 'Assumption': active = active | {'assumed'}
-        if is_cited:                 active = active | {'ascited'}
+        if is_citation:                 active = active | {'ascited'}
         if len(active) >= 2:
             label = identifier or f'(unnamed {nodetype})'
             error(f"line {lineno}: {label}: conflicting assertion status:"
@@ -713,7 +713,7 @@ class LTACParser:
             elif info['node_type'] != node.node_type:
                 error(f"line {lineno}: {node.identifier!r}: type {node.node_type!r}"
                       f" conflicts with earlier use as {info['node_type']!r}")
-            if node.is_cited:
+            if node.is_citation:
                 info['citations'] += 1
                 if pkg_root_id and pkg_root_id not in info['citing_pkg_ids']:
                     info['citing_pkg_ids'].append(pkg_root_id)
@@ -743,7 +743,7 @@ class LTACParser:
                 if info['statement'] is None:
                     info['statement'] = node.text
                 elif node.text != info['statement']:
-                    hint = "; use --update to sync" if (node.is_cited or info['citations'] > 0) else ""
+                    hint = "; use --update to sync" if (node.is_citation or info['citations'] > 0) else ""
                     warn(f"line {lineno}: {node.identifier!r}: statement {node.text!r}"
                          f" differs from earlier statement {info['statement']!r}{hint}")
 
@@ -784,7 +784,7 @@ class LTACParser:
                     if sib.identifier == node.identifier:
                         warn(f"line {lineno}: duplicate sibling identifier"
                              f" {node.identifier!r}{parent_label}")
-            if node.is_cited and node.node_type not in ('Claim', 'Justification'):
+            if node.is_citation and node.node_type not in ('Claim', 'Justification'):
                 warn(f"line {lineno}: external citation ^{node.identifier!r} has type"
                      f" {node.node_type!r}; only Claim and Justification are"
                      f" recommended for cross-package citations")
@@ -927,7 +927,7 @@ def _node_anchor_url(node: Node, base_url: str, pkg_label: str) -> str:
     """
     if not node.identifier:
         return ''
-    if node.is_cited:
+    if node.is_citation:
         heading = f"{pkg_label}{node.identifier}"
     else:
         # No statement text: keeps links stable when statements change.
@@ -1126,7 +1126,7 @@ def _make_syn_connector(children: List['Node'], parent: 'Node',
         ext_ref='',
         options=[],
         children=list(children),
-        is_cited=False,
+        is_citation=False,
         depth=parent.depth + 1,
         parent=parent,
         link_target=None,
@@ -1398,7 +1398,7 @@ def _sacm_node_decl(node: 'Node') -> str:
         inner = _build_inner_label(eid, etxt, suffix)
         if node.node_type == 'Strategy':
             shape = f'[/"{inner}"/]'
-        elif node.is_cited:
+        elif node.is_citation:
             shape = f'[["{inner}"]]'
         else:
             # Claim, Assumption, Justification all use plain rectangle
@@ -1739,7 +1739,7 @@ def _gsn_node_decl(node: 'Node') -> str:
         shape = f'(["{inner}"])'
     elif eff_type == 'Strategy':
         shape = f'[/"{inner}"/]'
-    elif node.is_cited:
+    elif node.is_citation:
         shape = f'[["{inner}"]]'
     else:
         shape = f'["{inner}"]'
@@ -2069,12 +2069,12 @@ def find_citation_parents(ident: str, all_roots: List[Node]) -> List[Node]:
     """Return all nodes that have a cited child (^ident) anywhere in the forest.
 
     A "citation parent" is a node whose direct children include a Node with
-    is_cited=True and identifier==ident.  The same parent appears at most
+    is_citation=True and identifier==ident.  The same parent appears at most
     once; multiple packages may each contribute a parent.
     """
     parents = []
     for node in all_nodes(all_roots):
-        if node.identifier == ident and node.is_cited and node.parent is not None:
+        if node.identifier == ident and node.is_citation and node.parent is not None:
             if node.parent not in parents:
                 parents.append(node.parent)
     return parents
@@ -2150,7 +2150,7 @@ def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
     pkg_id = pkg_root.identifier
     defined = []
     for node in all_nodes([pkg_root]):
-        if (not node.is_cited and node.identifier
+        if (not node.is_citation and node.identifier
                 and id_info.get(node.identifier, {}).get('decl_pkg_id') == pkg_id):
             defined.append(node)
     if not defined:
@@ -2168,7 +2168,7 @@ def render_pkg_citing(pkg_root: Node, id_info: Dict[str, dict],
                       out: TextIO, sep: str = '') -> bool:
     """Write 'Citing: ...' list for a package to out; return False if none."""
     cited_nodes = [n for n in all_nodes([pkg_root])
-                   if n.is_cited and n.identifier]
+                   if n.is_citation and n.identifier]
     if not cited_nodes:
         return False
     links = []
@@ -2677,7 +2677,7 @@ def process_document_stream(
     # --- Smart single-pass missing-element placement setup ---
     if add_missing:
         _ltac_ordered = [node for node in all_nodes_forward(all_roots)
-                         if not node.is_cited and node.identifier
+                         if not node.is_citation and node.identifier
                          and node.node_type != 'Link']
         _ltac_index: Dict[str, int] = {n.identifier: i for i, n in enumerate(_ltac_ordered)}
         _doc_ids = existing_ids if existing_ids is not None else set()
@@ -3494,7 +3494,7 @@ def check_circularities(registry: Dict[str, Node], all_roots: List[Node]) -> Non
 
     def successors(node: Node):
         for child in node.children:
-            if child.is_cited:
+            if child.is_citation:
                 target = registry.get(child.identifier)
                 if target is not None:
                     yield target
@@ -3557,7 +3557,7 @@ def check_reachability(all_roots: List[Node], registry: Dict[str, Node]) -> None
             continue
         reachable.add(id(node))
         for child in node.children:
-            if child.is_cited:
+            if child.is_citation:
                 target = registry.get(child.identifier)
                 if target is not None:
                     stack.append(target)
@@ -3667,7 +3667,7 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
     for child in node.children:
         if child.node_type == 'Claim':
             return True
-        if child.is_cited and child.identifier:
+        if child.is_citation and child.identifier:
             decl = registry.get(child.identifier)
             if decl is not None and child.identifier not in seen:
                 seen.add(child.identifier)
@@ -3675,7 +3675,7 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
                     return True  # citation IS a Claim; no need to follow further
                 if _has_claim_descendant(decl, registry, seen):
                     return True
-        elif not child.is_cited and _has_claim_descendant(child, registry, seen):
+        elif not child.is_citation and _has_claim_descendant(child, registry, seen):
             return True
     return False
 
@@ -3716,7 +3716,7 @@ def compute_ltac_stats(all_roots: List['Node'], registry: Dict[str, 'Node'],
         size_full = 0
         for node in all_nodes([root]):
             size_full += 1
-            if node.is_cited:
+            if node.is_citation:
                 total_citations += 1
             elif node.node_type == 'Link':
                 total_links += 1
@@ -3881,12 +3881,12 @@ def _write_ltac_node(node: 'Node', lines: list) -> None:
     """Append LTAC lines for *node* and all its descendants to *lines*."""
     indent = '  ' * node.depth
     line = f'{indent}- {node.node_type}'
-    write_id = (node.identifier or node.is_cited) and not (
+    write_id = (node.identifier or node.is_citation) and not (
         node.id_inferred and _infer_id(node.text) == node.identifier
     )
     if write_id:
         line += ' '
-        if node.is_cited:
+        if node.is_citation:
             line += '^'
         line += node.identifier
     if node.text:
@@ -4033,7 +4033,7 @@ def analysis_missing(all_roots, registry, document_files) -> List['Node']:
     ordered_ids, _ = _scan_document_elements(document_files)
     seen = {ident for ident, _, _ in ordered_ids}
     all_ids_ordered = [node for node in all_nodes_forward(all_roots)
-                       if not node.is_cited and node.identifier
+                       if not node.is_citation and node.identifier
                        and node.node_type not in ('Link',)]
     return [node for node in all_ids_ordered if node.identifier not in seen]
 
@@ -4066,7 +4066,7 @@ def analysis_misplaced(document_files, all_roots, registry):
     """
     # LTAC order: depth-first forward order, exclude citations and Links
     ltac_order = [node.identifier for node in all_nodes_forward(all_roots)
-                  if not node.is_cited and node.identifier
+                  if not node.is_citation and node.identifier
                   and node.node_type not in ('Link',)]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
@@ -4152,12 +4152,12 @@ def ltac_node_line(node: Node, depth_offset: int = 0) -> str:
     """
     indent = '  ' * (node.depth - depth_offset)
     line = f'{indent}- {node.node_type}'
-    write_id = (node.identifier or node.is_cited) and not (
+    write_id = (node.identifier or node.is_citation) and not (
         node.id_inferred and _infer_id(node.text) == node.identifier
     )
     if write_id:
         line += ' '
-        if node.is_cited:
+        if node.is_citation:
             line += '^'
         line += node.identifier
     if node.text:
@@ -4182,7 +4182,7 @@ def analysis_leaves(all_roots) -> List['Node']:
     """
     leaves = []
     for node in all_nodes_forward(all_roots):
-        if node.is_cited or node.node_type in ('Link',):
+        if node.is_citation or node.node_type in ('Link',):
             continue
         if node.node_type in ('Strategy', 'Context'):
             if not node.children:
@@ -4320,7 +4320,7 @@ def render_info(element_id: str, all_roots: List[Node], registry: Dict[str, Node
                 continue
             # Walk the citing package to find nodes that cite element_id
             for n in all_nodes([citing_root]):
-                if n.is_cited and n.identifier == element_id:
+                if n.is_citation and n.identifier == element_id:
                     parent_node = n.parent
                     if parent_node:
                         parent_desc = f"{parent_node.node_type} {parent_node.identifier}"
@@ -4487,7 +4487,7 @@ def _fixmisplaced_document(path, all_roots, registry, id_info, config,
 
     # Get LTAC order
     ltac_order = [node.identifier for node in all_nodes_forward(all_roots)
-                  if not node.is_cited and node.identifier
+                  if not node.is_citation and node.identifier
                   and node.node_type not in ('Link',)]
     ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
@@ -4797,7 +4797,7 @@ def apply_detach(roots: List[Node], registry: Dict[str, Node],
         ext_ref='',
         options=[],
         children=[],
-        is_cited=True,
+        is_citation=True,
         depth=node.depth,
         parent=parent,
         link_target=None,
@@ -4855,7 +4855,7 @@ def apply_move(roots: List[Node], registry: Dict[str, Node],
     # Find a pre-existing ^ID citation among dest's direct children.
     cited_idx = None
     for i, child in enumerate(dest.children):
-        if child.is_cited and child.identifier == target_id:
+        if child.is_citation and child.identifier == target_id:
             cited_idx = i
             break
 
@@ -4910,7 +4910,7 @@ def apply_ltac_update(roots: List[Node], registry: Dict[str, Node]) -> int:
     """
     count = 0
     for node in all_nodes(roots):
-        if not node.identifier or not (node.is_cited or node.node_type == 'Link'):
+        if not node.identifier or not (node.is_citation or node.node_type == 'Link'):
             continue
         decl = registry.get(node.identifier)
         canonical = decl.text if decl is not None else None
@@ -5271,7 +5271,7 @@ def main() -> bool:
                 pairs.append(pair)
         # Mark needsSupport on all leaf elements that lack an assertion status.
         all_ids_ordered = [node.identifier for node in all_nodes(all_roots)
-                           if not node.is_cited and node.identifier]
+                           if not node.is_citation and node.identifier]
         changed = _mark_needs_support(all_ids_ordered, registry)
         if changed:
             tmp = _make_temp(ltac_path, write_ltac(all_roots), ltac_line_ending)

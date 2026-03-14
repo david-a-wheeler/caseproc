@@ -213,7 +213,7 @@ Common filters:
 ```python
 # All declared (non-cited), non-Link elements in LTAC order:
 elements = [n for n in all_nodes_forward(all_roots)
-            if not n.is_cited and n.node_type != 'Link']
+            if not n.is_citation and n.node_type != 'Link']
 
 # Leaf claims:
 leaves = [n for n in elements
