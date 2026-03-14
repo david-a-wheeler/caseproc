@@ -2926,10 +2926,10 @@ constant/regex definitions; there are no file I/O, network calls, or
 environment reads at import time. The if __name__ == '__main__': guard
 is in place. __all__ declares the intended public surface.
 
-Session state:
+Global session state:
   had_error: bool   set True by error() on any validation problem
-  strict:    bool   True when warnings escalate to errors (--error flag)
-  reset()           clear had_error and strict; call before each session
+  strict:    bool   if True, warnings auto-escalate to errors (--error flag)
+  reset()           clear global session state; call this before each session
 
 Typical usage:
   import verocase, io, sys
@@ -3009,7 +3009,8 @@ main():
   Returns True on clean success, False if errors. Raises VerocaseError
   on fatal errors. Calls reset() on entry.
 
-Run --help-api-details to display full docstrings for all public names.
+Use --help-api-details to display full docstrings for all public names.
+import verocase; help(verocase) will also display those same docstrings.
 """
 
 
