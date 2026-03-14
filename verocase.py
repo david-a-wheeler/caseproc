@@ -143,6 +143,9 @@ def notify(msg: str) -> None:
     print(f"verocase: {msg}", file=sys.stderr)
 
 
+_DEFAULT_ELEMENT_SELECTIONS = 'referenced_by,supported_by,supports,ext_ref'
+_DEFAULT_PACKAGE_SELECTIONS = 'representation,pkg_defines,pkg_citing,pkg_cited'
+
 # Default configuration values.  load_config() merges a JSON file over these.
 # Pass to functions that accept a config dict when no config file is needed.
 DEFAULT_CONFIG = {
@@ -154,12 +157,12 @@ DEFAULT_CONFIG = {
     'default_representation': 'sacm',
     'document_files': [],
     'element_level': 3,
-    'element_selections': 'referenced_by,supported_by,supports,ext_ref',
+    'element_selections': _DEFAULT_ELEMENT_SELECTIONS,
     'ltac_file': '',
     'markdown_base_url': '',
     'mermaid_js_url': 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs',
     'package_level': 3,
-    'package_selections': 'representation,pkg_defines,pkg_citing,pkg_cited',
+    'package_selections': _DEFAULT_PACKAGE_SELECTIONS,
     'pkg_header_prefix': '### ',
     'pkg_header_suffix': '\n',
     'pkg_label': 'Package ',
@@ -2222,6 +2225,16 @@ def render_ext_ref(node: Node, config: dict, fmt: str,
     return True
 
 
+# Map selection name -> fn(node, all_roots, id_info, config, fmt, out, sep).
+# render_referenced_by already has that exact signature; the others need adapters.
+_ELEMENT_RENDER_MAP: Dict[str, callable] = {
+    'referenced_by': render_referenced_by,
+    'supported_by':  lambda node, _r, _i, config, fmt, o, s: render_supported_by(node, config, fmt, o, s),
+    'supports':      lambda node, roots, _i, config, fmt, o, s: render_supports(node, roots, config, fmt, o, s),
+    'ext_ref':       lambda node, _r, _i, config, fmt, o, s: render_ext_ref(node, config, fmt, o, s),
+}
+
+
 def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
                        config: dict, fmt: str,
                        out: TextIO, sep: str = '') -> bool:
@@ -2282,7 +2295,7 @@ def render_pkg_cited(pkg_root: Node, all_roots: List[Node],
 
 def render_representation(pkg_root: Node, all_roots: List[Node],
                           config: dict, fmt: str, out: TextIO,
-                          state: 'DocState' = None, sep: str = '') -> bool:
+                          sep: str = '', state: 'DocState' = None) -> bool:
     """Write the default diagram representation for a package to out."""
     notation = config.get('default_representation', 'sacm')
     renderer = config.get('default_renderer', 'mermaid')
@@ -2310,6 +2323,39 @@ def render_representation(pkg_root: Node, all_roots: List[Node],
         return False
 
 
+# render_pkg_cited already has the exact uniform signature; the others need adapters.
+_PACKAGE_RENDER_MAP: Dict[str, callable] = {
+    'representation': lambda pkg, roots, _i, config, fmt, o, s: render_representation(pkg, roots, config, fmt, o, s),
+    'pkg_defines':    lambda pkg, _r, info, config, fmt, o, s: render_pkg_defines(pkg, info, config, fmt, o, s),
+    'pkg_citing':     lambda pkg, _r, info, config, fmt, o, s: render_pkg_citing(pkg, info, config, fmt, o, s),
+    'pkg_cited':      render_pkg_cited,
+}
+
+
+def _apply_sel(sel_str: str, render_map: Dict[str, callable],
+               primary: Node, all_roots: List[Node],
+               id_info: Dict[str, dict], config: dict, fmt: str,
+               out: TextIO, pending_sep: str = '') -> bool:
+    """Apply sub-selections from a comma-separated string, writing each separated by blank lines.
+
+    Each entry in render_map must accept (primary, all_roots, id_info, config, fmt, out, sep).
+    Returns True if anything was written.
+    """
+    wrote_any = False
+    for sel in sel_str.split(','):
+        sel = sel.strip()
+        if not sel:
+            continue
+        fn = render_map.get(sel)
+        if fn is None:
+            warn(f"unknown selection name {sel!r}")
+            continue
+        if fn(primary, all_roots, id_info, config, fmt, out, pending_sep):
+            pending_sep = '\n\n'
+            wrote_any = True
+    return wrote_any
+
+
 def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
     """Return a format-appropriate heading string with an HTML anchor.
 
@@ -2323,26 +2369,6 @@ def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
     else:
         return f'<h{level} id="{anchor}">{escape_html_content(heading_text)}</h{level}>'
 
-
-def _apply_selections(selections: List[str], render_map: Dict[str, callable],
-                      config: dict, fmt: str, out: TextIO,
-                      pending_sep: str = '') -> bool:
-    """Apply a list of selection names, writing each to out separated by blank lines.
-
-    Uses the forward-passed pending_sep pattern: each render function receives
-    the separator to write before its first content.  Returns True if anything
-    was written.
-    """
-    wrote_any = False
-    for sel in selections:
-        fn = render_map.get(sel)
-        if fn is None:
-            warn(f"unknown selection name {sel!r}")
-            continue
-        if fn(out, pending_sep):
-            pending_sep = '\n\n'
-            wrote_any = True
-    return wrote_any
 
 
 def render_element_selector(node_id: str, registry: Dict[str, Node],
@@ -2371,21 +2397,12 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
         heading_text += f': {stmt}'
     fmt = state.doc_format
 
-    sel_names = [s.strip() for s in
-                 config.get('element_selections', 'referenced_by,supported_by,supports,ext_ref')
-                 .split(',') if s.strip()]
-    render_map = {
-        'referenced_by': lambda o, s: render_referenced_by(node, all_roots, id_info, config, fmt, o, s),
-        'supported_by':  lambda o, s: render_supported_by(node, config, fmt, o, s),
-        'supports':      lambda o, s: render_supports(node, all_roots, config, fmt, o, s),
-        'ext_ref':       lambda o, s: render_ext_ref(node, config, fmt, o, s),
-    }
-
     out.write(sep)
     out.write(_WARNING_TEXT_SELECTOR)
     out.write('\n\n')
     out.write(_make_heading(anchor, level, heading_text, fmt))
-    _apply_selections(sel_names, render_map, config, fmt, out, pending_sep='\n\n')
+    _apply_sel(config.get('element_selections', _DEFAULT_ELEMENT_SELECTIONS),
+               _ELEMENT_RENDER_MAP, node, all_roots, id_info, config, fmt, out, pending_sep='\n\n')
     return True
 
 
@@ -2402,20 +2419,10 @@ def _render_single_package(pkg_root: Node, all_roots: List[Node],
     if stmt:
         heading_text += f': {stmt}'
 
-    sel_names = [s.strip() for s in
-                 config.get('package_selections',
-                             'representation,pkg_defines,pkg_citing,pkg_cited')
-                 .split(',') if s.strip()]
-    render_map = {
-        'representation': lambda o, s: render_representation(pkg_root, all_roots, config, fmt, o, sep=s),
-        'pkg_defines':    lambda o, s: render_pkg_defines(pkg_root, id_info, config, fmt, o, s),
-        'pkg_citing':     lambda o, s: render_pkg_citing(pkg_root, id_info, config, fmt, o, s),
-        'pkg_cited':      lambda o, s: render_pkg_cited(pkg_root, all_roots, id_info, config, fmt, o, s),
-    }
-
     out.write(sep)
     out.write(_make_heading(anchor, level, heading_text, fmt))
-    _apply_selections(sel_names, render_map, config, fmt, out, pending_sep='\n\n')
+    _apply_sel(config.get('package_selections', _DEFAULT_PACKAGE_SELECTIONS),
+               _PACKAGE_RENDER_MAP, pkg_root, all_roots, id_info, config, fmt, out, pending_sep='\n\n')
     return True
 
 
