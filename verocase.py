@@ -3431,8 +3431,8 @@ Run --help-api for the public Python API summary (for library use).
     )
     parser.add_argument(
         '--leaves', action='store_true', default=False,
-        help='[READ-ONLY] list leaf elements (no children in LTAC) with their options '
-             'and references; leads with the {needssupport} subset',
+        help='[READ-ONLY] list all definition nodes with no children (citations and '
+             'Links excluded); leads with the {needssupport} subset',
     )
     parser.add_argument(
         '--packages', action='store_true', default=False,
