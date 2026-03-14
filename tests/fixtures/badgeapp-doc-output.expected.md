@@ -185,6 +185,8 @@ The system design incorporates security from the ground up.
 Referenced by: **[Package Requirements](#package-requirements)**
 
 Supports: **[Claim Requirements](#claim-requirements)**
+
+External Reference: [docs/requirements.md](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/docs/requirements.md)
 <!-- end verocase -->
 
 See the full requirements document for details.
@@ -198,6 +200,8 @@ See the full requirements document for details.
 Referenced by: **[Package Requirements](#package-requirements)**
 
 Supports: **[Claim Requirements](#claim-requirements)**
+
+External Reference: [reports/coverage.html](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/reports/coverage.html)
 <!-- end verocase -->
 
 All security tests pass with full coverage of requirements.
@@ -211,6 +215,8 @@ All security tests pass with full coverage of requirements.
 Referenced by: **[Package Design](#package-design)**
 
 Supports: **[Claim Design](#claim-design)**
+
+External Reference: [docs/security-arch.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/docs/security-arch.pdf)
 <!-- end verocase -->
 
 The architecture has been reviewed by the security team.
@@ -224,6 +230,8 @@ The architecture has been reviewed by the security team.
 Referenced by: **[Package Design](#package-design)**
 
 Supports: **[Claim Design](#claim-design)**
+
+External Reference: [docs/threat-model.md](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/docs/threat-model.md)
 <!-- end verocase -->
 
 Threats are systematically identified and mitigated.

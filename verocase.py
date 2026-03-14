@@ -72,6 +72,7 @@ __all__ = [
     'render_selector',
     'render_info',
     'render_ltac_txt',
+    'render_ext_ref',
     'render_element_selector',
     'render_package_selector',
     'process_document_stream',
@@ -153,7 +154,7 @@ DEFAULT_CONFIG = {
     'default_representation': 'sacm',
     'document_files': [],
     'element_level': 3,
-    'element_selections': 'referenced_by,supported_by,supports',
+    'element_selections': 'referenced_by,supported_by,supports,ext_ref',
     'ltac_file': '',
     'markdown_base_url': '',
     'mermaid_js_url': 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs',
@@ -2205,6 +2206,22 @@ def render_supports(node: Node, all_roots: List[Node],
     return True
 
 
+def render_ext_ref(node: Node, config: dict, fmt: str,
+                   out: TextIO, sep: str = '') -> bool:
+    """Write 'External Reference: <link>' to out; return False if no ext_ref.
+
+    The hyperlink URL is resolved via _resolve_ext_ref (so relative paths are
+    joined with base_url when present); the visible link text is the raw
+    ext_ref value without any base_url prefix.
+    """
+    if not node.ext_ref:
+        return False
+    url = _resolve_ext_ref(node.ext_ref, config.get('base_url', ''))
+    out.write(sep)
+    out.write('External Reference: ' + hyperlink(node.ext_ref, url, fmt))
+    return True
+
+
 def render_pkg_defines(pkg_root: Node, id_info: Dict[str, dict],
                        config: dict, fmt: str,
                        out: TextIO, sep: str = '') -> bool:
@@ -2335,7 +2352,7 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
     """Write a full element section (heading + configured sub-selections) to out.
 
     Renders the element heading and any sub-selections listed in
-    config['element_selections'] (e.g. referenced_by, supported_by, supports).
+    config['element_selections'] (e.g. referenced_by, supported_by, supports, ext_ref).
     Updates state.current_id and state.seen_element_ids as a side-effect.
     Returns False and calls error() if node_id is not in registry.
     """
@@ -2355,12 +2372,13 @@ def render_element_selector(node_id: str, registry: Dict[str, Node],
     fmt = state.doc_format
 
     sel_names = [s.strip() for s in
-                 config.get('element_selections', 'referenced_by,supported_by,supports')
+                 config.get('element_selections', 'referenced_by,supported_by,supports,ext_ref')
                  .split(',') if s.strip()]
     render_map = {
         'referenced_by': lambda o, s: render_referenced_by(node, all_roots, id_info, config, fmt, o, s),
         'supported_by':  lambda o, s: render_supported_by(node, config, fmt, o, s),
         'supports':      lambda o, s: render_supports(node, all_roots, config, fmt, o, s),
+        'ext_ref':       lambda o, s: render_ext_ref(node, config, fmt, o, s),
     }
 
     out.write(sep)
@@ -2969,7 +2987,7 @@ Configuration keys (--config FILE, JSON object):
   default_renderer   renderer for 'sacm'/'gsn' shorthands: "mermaid" (default)
   default_representation  content for 'package' selector: "sacm" (default)
   element_level      heading level (1-6) for 'element' selector (default: 3)
-  element_selections comma-separated list for element sub-sections (default: referenced_by,supported_by,supports)
+  element_selections comma-separated list for element sub-sections (default: referenced_by,supported_by,supports,ext_ref)
   max_mermaid_children      max visual children before width narrowing (default: 8; 0 disables)
   mermaid_js_url     URL for Mermaid JS script in HTML output (default: CDN URL; "" disables)
   narrowed_mermaid_children children kept (left+right) when narrowing (default: 6; must be >=2 and <max)
