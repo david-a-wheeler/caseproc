@@ -18,7 +18,7 @@ import statistics
 import sys
 import tempfile
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Set, TextIO, Tuple
 
 __version__ = '0.1.0'
@@ -773,39 +773,18 @@ def _recalc_depths(node: 'Node', new_depth: int) -> None:
 # LTAC file loader
 # ---------------------------------------------------------------------------
 
-def load_ltac_file(path: str, all_roots: List[Node], registry: Dict[str, Node],
-                   id_info: Dict[str, dict], config: Optional[dict] = None) -> None:
-    """Parse an LTAC file and merge its roots, registry, and id_info into the given collections."""
+def load_ltac_file(path: str,
+                   config: Optional[dict] = None) -> Tuple[List[Node], Dict[str, Node], Dict[str, dict]]:
+    """Parse an LTAC file and return (all_roots, registry, id_info).
+
+    Raises VerocaseError if the file cannot be opened.
+    """
     try:
         with open(path) as f:
             lines = f.readlines()
     except OSError as e:
         panic(f"cannot open {path!r}: {e}")
-    roots, new_registry, new_id_info = parse_ltac_lines(lines, config=config)
-    all_roots.extend(roots)
-    for ident, node in new_registry.items():
-        if ident in registry:
-            warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
-        else:
-            registry[ident] = node
-    for ident, new in new_id_info.items():
-        if ident in id_info:
-            existing = id_info[ident]
-            if new['declarations'] > 0 and existing['declarations'] > 0:
-                warn(f"{path}: duplicate declaration {ident!r} (already declared in a previous file)")
-            existing['declarations'] += new['declarations']
-            existing['citations']    += new['citations']
-            if new['statement'] and existing['statement'] and new['statement'] != existing['statement']:
-                warn(f"{path}: {ident!r}: statement differs from earlier statement")
-            elif new['statement'] and not existing['statement']:
-                existing['statement'] = new['statement']
-            if new['decl_pkg_id'] and not existing['decl_pkg_id']:
-                existing['decl_pkg_id'] = new['decl_pkg_id']
-            for pkg_id in new['citing_pkg_ids']:
-                if pkg_id not in existing['citing_pkg_ids']:
-                    existing['citing_pkg_ids'].append(pkg_id)
-        else:
-            id_info[ident] = new
+    return parse_ltac_lines(lines, config=config)
 
 
 # ---------------------------------------------------------------------------
@@ -2363,12 +2342,8 @@ class DocState:
     current_id: Optional[str] = None
     doc_format: str = 'markdown'
     mermaid_injected: bool = False
-    seen_element_ids: set = None
+    seen_element_ids: set = field(default_factory=set)
     after_epilogue: bool = False  # True once an 'epilogue' selector has been seen
-
-    def __post_init__(self):
-        if self.seen_element_ids is None:
-            self.seen_element_ids = set()
 
 
 def _maybe_inject_mermaid_js(config: dict, state: 'DocState', out: TextIO) -> None:
@@ -3334,7 +3309,7 @@ def _process_files(
     if files:
         for path in files:
             try:
-                with open(path) as f:
+                with open(path, newline='') as f:
                     process_document_stream(f, out, registry, all_roots, config, id_info,
                                             seen_element_ids, detect_doc_format(path),
                                             strip=strip)
@@ -4762,12 +4737,8 @@ def main() -> bool:
     config = load_config(config_path)
     config_invariant_checker(config)
 
-    all_roots: List[Node] = []
-    registry: Dict[str, Node] = {}
-    id_info: Dict[str, dict] = {}
-
     ltac_path = find_ltac_file(args.ltac, config)
-    load_ltac_file(ltac_path, all_roots, registry, id_info, config=config)
+    all_roots, registry, id_info = load_ltac_file(ltac_path, config=config)
     try:
         with open(ltac_path, newline='') as _f:
             ltac_line_ending = detect_line_ending(_f.read())
