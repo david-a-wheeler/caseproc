@@ -3918,19 +3918,19 @@ def _subtree_count(node):
     return count
 
 
-def _analysis_packages(all_roots):
-    """Print package structure with element counts."""
-    print("Packages:")
+def analysis_packages(all_roots, out: TextIO = sys.stdout) -> None:
+    """Print package structure with element counts to out (default stdout)."""
+    print("Packages:", file=out)
     for root in all_roots:
         pkg_count = _subtree_count(root)
         root_line = _ltac_node_line(root, depth_offset=0)
-        print(f"Package {root.identifier} ({pkg_count} elements)")
-        print(root_line)
+        print(f"Package {root.identifier} ({pkg_count} elements)", file=out)
+        print(root_line, file=out)
         for child in root.children:
             child_count = _subtree_count(child)
             child_line = _ltac_node_line(child, depth_offset=0)
-            print(f"{child_line} ({child_count} elements)")
-        print()
+            print(f"{child_line} ({child_count} elements)", file=out)
+        print(file=out)
 
 
 def render_ltac_txt(node_list, config, out: TextIO, sep: str = '') -> bool:
@@ -4914,7 +4914,7 @@ def main() -> None:
         if args.packages:
             if not first:
                 print()
-            _analysis_packages(all_roots)
+            analysis_packages(all_roots)
             first = False
 
         if had_error:
