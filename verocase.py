@@ -2972,9 +2972,10 @@ Typical usage:
   verocase.render_info('SomeClaim', all_roots, registry, id_info, buf)
   print(buf.getvalue())
 
-  # Walk the tree to collect statements from nodes that need support:
+  # Walk the tree to collect (identifier, statement) tuples for leaf Claims
+  # that are definitions (not citations or Links) and have no children:
   unsupported = [
-      node.text
+      (node.identifier, node.text)
       for node in verocase.all_nodes(all_roots)
       if node.is_definition and node.node_type == 'Claim' and not node.children
   ]
