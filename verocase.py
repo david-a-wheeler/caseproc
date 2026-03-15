@@ -803,7 +803,7 @@ class Case:
 
         Returns None when ident is unknown or has duplicate declarations
         (definition_for returns None in both cases).  If you have a Node
-        already, use node.pkg_root directly instead.
+        that's the definition already, use node.pkg_root directly instead.
         """
         node = self.definition_for(ident)
         return node.pkg_root if node is not None else None
@@ -3819,13 +3819,13 @@ Typical usage (simple):
       if node.is_definition and node.node_type == 'Claim' and not node.children
   ]
 
-Usage for explicit control over loading:
+Usage for explicit control over loading (ADVANCED):
   import verocase, io, sys
 
   case = verocase.Case()
-  case.load_config('myconfig.toml')          # or omit to auto-discover
-  case.load_ltac_string(open('my.ltac').read())  # parse from string
-  case.document_files = ['docs/case.md']     # or call case.load() for auto-discovery
+  case.load_config('myconfig.toml') # or omit filename to auto-discover
+  case.load_ltac_string(open('my.ltac').read()) # parse from string
+  case.document_files = ['docs/case.md']
 
   case.validate_ltac()
 
@@ -3835,76 +3835,22 @@ Usage for explicit control over loading:
 Exceptions:
   class VerocaseError(Exception)  raised by panic() on fatal errors
 
-Data types:
-  @dataclass Node       one node in the LTAC tree (see docstring for fields)
+Data types and examples of their methods/properties:
+  @dataclass Node       one node in the LTAC tree. Some operations:
     node.identifier     str: declared identifier, or '' if absent
     node.is_citation    True if introduced with ^ (cross-package citation)
     node.is_definition  True if neither a citation nor a Link (property)
     node.pkg_root       package root Node (property)
     node.subtree_count  total nodes in subtree including self (property)
     node.to_ltac_line(depth_offset=0)  format node as an LTAC source line
-  @dataclass Case       the full assurance case (LTAC + documents):
-    case.roots          List[Node] (top-level package roots)
-    case.registry       Dict[str, Node] (identifier -> definition node)
-    case.id_info        Dict[str, dict] (per-identifier metadata)
+  class Case  the full assurance case (LTAC + documents):
     case.document_files List[str] (set by caller after loading)
     case.config         dict (config used to load; pass to render_selector etc.)
+    case.id_info        Dict[str, dict] (per-identifier metadata)
     # Lookups
-    case.definition_for(ident)          -> Optional[Node]  (None if 0 or >1 declarations)
-    case.definitions_for(ident)         -> List[Node]      (all declarations; handles duplicates)
-    case.declaring_package_for(ident)   -> Optional[Node]
-    case.statement_for(ident)           -> Optional[str]
-    case.find_citation_parents(ident)   -> List[Node]
-    case.nodes_for(eid, current=None)   -> List[Node]
-    # Validation
-    case.check_id_info()
-    case.check_circularities()
-    case.check_reachability()
-    # Forest traversal
-    case.all_nodes()         DFS generator, LTAC order
-    case.all_nodes_fast()    DFS generator, fast (not LTAC order)
-    case.collect_bfs()       BFS list
-    case.copy_forest()       deep copy of forest
-    case.write_ltac(out)     serialize forest to out
-    # Analysis — data-returning
-    case.leaves()            -> List[Node]
-    case.missing()           -> List[Node]  (requires document_files)
-    case.empty()             -> List[str]   (requires document_files)
-    case.orphans()           -> List[str]   (requires document_files)
-    case.misplaced()         -> list        (requires document_files)
-    case.stats()             -> dict
-    # Analysis — output-printing
-    case.render_packages(out=sys.stdout)
-    # Info rendering
-    case.render_info(eid, out, sep='')  -> bool
-    # Mutations
-    case.rename_id(old, new)
-    case.restate_id(label, stmt)
-    case.detach_id(target_id)
-    case.move_id(moving_id, dest_id)
-    case.sync_citations()    -> int
-    # Rendering (use self.config; no need to pass config separately)
-    case.render_selector(selector, out, current_element=None,
-                         doc_format='markdown', state=None)  -> bool
-    case.render_element(node_id, out, *, state=None, sep='')  -> bool
-    case.render_package(pkg_id_or_star, out, *, state=None)   -> bool
-    case.process_document(src, out, doc_format='markdown',
-                          add_missing=False, strip=False,
-                          seen_ids=None)        -> set
-    case.render_ltac_txt(node_list, out, sep='')               -> bool
-  @dataclass DocState   per-document rendering state
-  DEFAULT_CONFIG: dict  default configuration values
-
-Loading and initialization:
-  Case().load(ltac_file=None, config_file=None, document_files=None,
-              strict=False, validate=True) -> Case
-    Recommended entry point.  Auto-discovers config, LTAC, and documents.
-  Case().load_config(filename=None) -> Case
-    Load config from filename, or auto-discover; sets self.config.
-  Case().load_ltac_string(text) -> Case
-    Parse LTAC from a string using self.config; sets self.ltac_path = None.
-  write_ltac(roots, out)   serialize forest to out; use io.StringIO() for a string
-  detect_doc_format(path)  'markdown' or 'html'
+    case.definition_for(ident) -> Optional[Node]  (None if 0 or >1 declarations)
+    case.declaring_package_for(ident) -> Optional[Node]
+    case.statement_for(ident) -> Optional[str]
 
 Standalone helpers:
   all_nodes(roots)         DFS generator, LTAC order (also case.all_nodes())
@@ -3913,17 +3859,6 @@ Standalone helpers:
   copy_forest(roots)       deep copy                  (also case.copy_forest())
   needs_support(nodes)     -> List[Node] (filter by {needssupport} option)
   print_stats(ltac_stats, doc_stats, out=sys.stdout)
-
-Rendering (write to caller-supplied out: TextIO; return True if written):
-  Use case.render_selector(...) etc. for the common case (uses case.config).
-  Free functions below accept an explicit config dict for advanced use:
-  render_selector(selector, case, config, out,
-                  current_element=None, doc_format='markdown', state=None)
-  render_ltac_txt(node_list, config, out, sep='')
-  case.render_element(node_id, out, state=state, sep='')
-  case.render_package(pkg_id_or_star, out, state=state)
-  case.process_document(src, out, doc_format='markdown',
-                        add_missing=False, strip=False, seen_ids=None) -> set
 
 main():
   success: bool = main()   # parses sys.argv, runs full CLI pipeline
