@@ -1044,6 +1044,11 @@ class Case:
         commit_updates([(tmp, target)], target, self.config, self.config_path)
         self.ltac_modified = False
 
+    def save_ltac_if_modified(self) -> None:
+        """Call save_ltac() only if self.ltac_modified is True."""
+        if self.ltac_modified:
+            self.save_ltac()
+
     # ------------------------------------------------------------------
     # Document processing
     # ------------------------------------------------------------------
@@ -5419,36 +5424,31 @@ def main() -> bool:
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if case.ltac_modified:
-            case.save_ltac()
+        case.save_ltac_if_modified()
     elif args.descendants:
         wrote = case.render_selector(f'ltac/txt {args.descendants}', sys.stdout,
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if case.ltac_modified:
-            case.save_ltac()
+        case.save_ltac_if_modified()
     elif args.select:
         wrote = case.render_selector(args.select, sys.stdout,
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if case.ltac_modified:
-            case.save_ltac()
+        case.save_ltac_if_modified()
     elif args.validate:
         if document_files:
             seen_element_ids = case._process_document_files(document_files, _NullWriter(), strip=args.strip)
             # This validation requires that we read all document files
             case.check_element_coverage(seen_element_ids)
-        if case.ltac_modified:
-            case.save_ltac()
+        case.save_ltac_if_modified()
     elif args.stdout:
         if not document_files:
             panic(_NO_FILES_MSG)
         seen_element_ids = case._process_document_files(document_files, sys.stdout, strip=args.strip)
         case.check_element_coverage(seen_element_ids)
-        if case.ltac_modified:
-            case.save_ltac()
+        case.save_ltac_if_modified()
     elif args.fixmissing or args.start:
         if not document_files:
             panic(_NO_FILES_MSG)
