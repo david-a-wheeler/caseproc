@@ -3,46 +3,14 @@
 *2026-03-15. Successor to ,api-improvements.md.*
 
 Items 1–5, 8, 9, 19, 20, 21, 27 are done; 17 and 18 were dropped.
-Items A, O, P are also done (see below).
+Items A, B, H, I, N, O, P are also done or dropped (see below).
+H was implemented as `Case.load_ltac_string()` (a Case method using
+`self.config`).  N is moot: `load_ltac_file` was deleted; `Case.load()`
+validates by default and `load_ltac_string()` intentionally does not.
+B and I dropped: `Union[str, bool]` return type is a maintenance headache;
+callers that need string capture use `io.StringIO()` directly.
 This document covers what remains: the items that still apply, updated
 for the current code (Case class, instance methods, new names).
-
----
-
-## B. `out=None` returns `str` from render methods (was item 7)
-
-**Current state:** All render methods require a `TextIO out`.
-
-**Proposed change:** When `out` is omitted (defaults to None), create an
-internal `StringIO`, fill it, and return `getvalue()`.  When `out` is
-provided, behave as today (return bool).
-
-```python
-# Before:
-buf = io.StringIO(); case.render_info('X', buf); text = buf.getvalue()
-
-# After:
-text = case.render_info('X')
-```
-
-**Applies to:** `render_info`, `render_selector`, `render_element`,
-`render_package`, `render_ltac_txt`, `write_ltac`, `ltac_string` (item D
-below already does this one).
-
-**Notes:**
-- The return type becomes `Union[str, bool]` depending on whether `out` is
-  provided.  Alternatively, always return `str` and drop the bool entirely —
-  callers rarely branch on the bool in practice.
-- A shared helper avoids repetition:
-  ```python
-  def _maybe_str(func, *args, out=None, **kwargs):
-      if out is None:
-          buf = io.StringIO()
-          func(*args, out=buf, **kwargs)
-          return buf.getvalue()
-      return func(*args, out=out, **kwargs)
-  ```
-- Can be done method-by-method; no need to change all at once.
 
 ---
 
@@ -120,40 +88,6 @@ used; current inspection suggests it is not referenced in the body.
 
 ---
 
-## H. Add `parse_ltac_string(text, config=None) -> Case` (was item 15)
-
-**Current state:** `parse_ltac_lines(lines, config)` requires a list.
-
-**Proposed change:** One-liner wrapper in `__all__`:
-
-```python
-def parse_ltac_string(text: str, config=None) -> 'Case':
-    return parse_ltac_lines(text.splitlines(keepends=True), config=config)
-```
-
-Add after `parse_ltac_lines`; add to `__all__` and `--help-api`.
-
----
-
-## I. Add `case.ltac_string() -> str` (was item 16)
-
-**Current state:** Getting LTAC as a string requires `io.StringIO()` boilerplate.
-
-**Proposed change:**
-
-```python
-def ltac_string(self) -> str:
-    buf = io.StringIO()
-    self.write_ltac(buf)
-    return buf.getvalue()
-```
-
-If item B (out=None) is implemented first, `write_ltac` itself gains this
-ability and `ltac_string()` may become redundant — keep it anyway as a
-named convenience.
-
----
-
 ## J. Add `case.needs_support()` Case shim (was item 22)
 
 **Current state:** `needs_support(nodes)` is a public free function; callers
@@ -192,7 +126,7 @@ calls `commit_updates` once.  Returns `not self.had_error`.
 - Consider also returning the `seen` set (like item A) so callers can
   check element coverage.
 - This is the most valuable remaining high-level method: it lets library
-  callers do `load_case()` + `case.update_documents()` to mirror the CLI.
+  callers do `Case().load()` + `case.update_documents()` to mirror the CLI.
 
 ---
 
@@ -241,44 +175,16 @@ in the same atomic backup.  Option A (Case methods only) is sufficient now.
 
 ---
 
-## N. `validate=True` on `load_ltac_file`; align with `load_case` (was item 26)
-
-**Current state:** `load_ltac_file(path, config=None)` performs no validation.
-`load_case(..., validate=True)` validates by default.  `case.validate_ltac()`
-exists (added in the Case refactor).
-
-**Proposed change:**
-
-```python
-def load_ltac_file(path, config=None, validate=True) -> Case:
-```
-
-When `validate=True`, calls `case.validate_ltac()` before returning.
-
-**Notes:**
-- `load_case` calls `load_ltac_file` internally; it must pass `validate=False`
-  and then call `case.validate_ltac()` itself to avoid double-validation.
-- `parse_ltac_lines` keeps `validate=False` default (lowest-level entry point,
-  used in tests with intentionally invalid LTAC).
-- This closes the asymmetry: `load_ltac_file` is now safe by default just
-  like `load_case`.
-
----
-
 ## Summary table
 
 | # | Change | Size | Priority |
 |---|--------|------|----------|
-| B | `out=None` returns `str` from render methods | Medium | Medium |
 | C | `decl_pkg_id_for` → `declaring_package()` returning Node | Small | Medium |
 | D | `find_citation_parents` → `citing_nodes` | Trivial | Low |
 | E | Add `case.node_for(ident)` | Trivial | Medium |
 | F | `collect_bfs` → `nodes_bfs` | Trivial | Low |
 | G | Audit + drop unused `config` param from `render_ltac_txt` | Small | Medium |
-| H | Add `parse_ltac_string(text, config=None)` | Trivial | Medium |
-| I | Add `case.ltac_string()` | Trivial | Medium |
 | J | Add `case.needs_support()` shim | Trivial | Low |
 | K | Add `case.update_documents()` | Medium | High |
 | L | Add `case.update_files()` (LTAC + docs atomic) | Medium | High |
 | M | `SafeWriter` context manager | Large | Defer |
-| N | `validate=True` on `load_ltac_file` | Small | High |
