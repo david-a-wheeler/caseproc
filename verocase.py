@@ -1510,6 +1510,22 @@ class Case:
             'option_counts':     option_counts,
         }
 
+    def doc_files_stats(self) -> Optional[dict]:
+        """Return aggregated document statistics across all self.document_files.
+
+        Reads the files from disk, so the result reflects any transformations
+        already saved.  Returns None if self.document_files is empty.
+        """
+        if not self.document_files:
+            return None
+        totals: dict = {'pkg_regions': 0, 'elem_regions': 0,
+                        'config_stmts': 0, 'empty_elem_regions': 0}
+        for path in self.document_files:
+            ds = _scan_doc_stats(path)
+            for k in totals:
+                totals[k] += ds.get(k, 0)
+        return totals
+
     def missing(self) -> List['Node']:
         """Return LTAC elements that have no selector region in the document(s)."""
         ordered_ids, _ = _scan_document_elements(self.document_files)
@@ -5473,17 +5489,7 @@ def main() -> bool:
         case.update_files(strip=args.strip)
 
     if args.stats:
-        ltac_stats = case.stats()
-        if document_files:
-            doc_totals: dict = {'pkg_regions': 0, 'elem_regions': 0,
-                                'config_stmts': 0, 'empty_elem_regions': 0}
-            for path in document_files:
-                ds = _scan_doc_stats(path)
-                for k in doc_totals:
-                    doc_totals[k] += ds.get(k, 0)
-            print_stats(ltac_stats, doc_totals)
-        else:
-            print_stats(ltac_stats, None)
+        print_stats(case.stats(), case.doc_files_stats())
 
     return not case.had_error
 
