@@ -1144,8 +1144,6 @@ class Case:
                 print(f"{child_line} ({child_count} elements)", file=out)
             print(file=out)
 
-    print_packages = render_packages
-
     # ------------------------------------------------------------------
     # Info rendering
     # ------------------------------------------------------------------
@@ -1480,8 +1478,6 @@ class Case:
                    _ELEMENT_RENDER_MAP, node, self, self.config, fmt, out, pending_sep='\n\n')
         return True
 
-    render_element_selector = render_element
-
     def render_package(self, pkg_id_or_star: str, out: 'TextIO', *,
                        state: 'DocState' = None) -> bool:
         """Write a full package section (heading + diagram + sub-selections) to out.
@@ -1508,8 +1504,6 @@ class Case:
         out.write('\n\n')
         _render_single_package(pkg_root, self, self.config, state, out)
         return True
-
-    render_package_selector = render_package
 
     def process_document(self, f, out, seen_element_ids: set,
                          doc_format: str = 'markdown',
@@ -1639,8 +1633,6 @@ class Case:
             _emit_all_remaining()
             if _stubs_added[0]:
                 self.notify(f"Added {_stubs_added[0]} missing element(s) to {filename}")
-
-    process_document_stream = process_document
 
     def render_ltac_txt(self, node_list, out: 'TextIO', sep: str = '') -> bool:
         """Write node_list as raw LTAC text to out, normalizing indentation to depth 0.
@@ -3488,14 +3480,6 @@ def _make_heading(anchor: str, level: int, heading_text: str, fmt: str) -> str:
         return f'<h{level} id="{anchor}">{escape_html_content(heading_text)}</h{level}>'
 
 
-
-def render_element_selector(node_id: str, case: 'Case',
-                             config: dict, state: 'DocState',
-                             out: TextIO, sep: str = '') -> bool:
-    """Write a full element section (heading + configured sub-selections) to out."""
-    return case.render_element(node_id, out, state=state, sep=sep)
-
-
 def _render_single_package(pkg_root: Node, case: 'Case',
                             config: dict, state: 'DocState',
                             out: TextIO, sep: str = '') -> bool:
@@ -3514,12 +3498,6 @@ def _render_single_package(pkg_root: Node, case: 'Case',
                _PACKAGE_RENDER_MAP, pkg_root, case, config, fmt, out, pending_sep='\n\n')
     return True
 
-
-def render_package_selector(pkg_id_or_star: str, case: 'Case',
-                             config: dict, state: 'DocState',
-                             out: TextIO) -> bool:
-    """Write a full package section (heading + diagram + sub-selections) to out."""
-    return case.render_package(pkg_id_or_star, out, state=state)
 
 _WARNING_TEXT = (
     '<!-- WARNING: DO NOT EDIT text within verocase SELECTOR ... end verocase. -->\n'
@@ -3558,7 +3536,7 @@ class DocState:
     """Mutable rendering state threaded through a single document processing pass.
 
     Create a fresh instance for each independent rendering pass.  When calling
-    render_selector() outside of process_document_stream(), a default
+    render_selector() outside of process_document(), a default
     ``DocState()`` is sufficient for most uses.
 
     Attributes
@@ -3573,7 +3551,7 @@ class DocState:
         document; prevents duplicate injection.
     seen_element_ids : set
         Identifiers of elements rendered via ``element`` selectors so far;
-        updated by render_element_selector() as a side-effect.
+        updated by render_element() as a side-effect.
     after_epilogue : bool
         True once an ``epilogue`` selector has been encountered; subsequent
         element output is suppressed.
@@ -3704,22 +3682,6 @@ def _consume_region(line_iter, filename: str, start_lineno: int, selector: str,
     return False
 
 
-def process_document_stream(
-    f,
-    out,
-    case: 'Case',
-    config: dict,
-    seen_element_ids: set,
-    doc_format: str = 'markdown',
-    add_missing: bool = False,
-    strip: bool = False,
-    existing_ids: Optional[set] = None,
-) -> None:
-    """Process a document file line by line, replacing ltac selector regions."""
-    case.process_document(f, out, seen_element_ids, doc_format,
-                          add_missing, strip, existing_ids)
-
-
 # ---------------------------------------------------------------------------
 # CLI helpers
 # ---------------------------------------------------------------------------
@@ -3779,28 +3741,6 @@ _START_CANDIDATES = (
     'case.md', 'case.markdown', 'case.html',
     'docs/case.md', 'docs/case.markdown', 'docs/case.html',
 )
-
-
-def _check_no_existing_case_files() -> None:
-    """Panic if any well-known case file already exists."""
-    for path in _START_CANDIDATES:
-        if os.path.exists(path):
-            panic(f"--start: {path!r} already exists; remove it before using --start")
-
-
-def _write_start_stubs() -> None:
-    """Write initial case.ltac and case.md stubs for --start."""
-    try:
-        with open('case.ltac', 'w', encoding='utf-8') as f:
-            f.write(_START_LTAC)
-    except OSError as e:
-        panic(f"--start: cannot write case.ltac: {e}")
-    try:
-        with open('case.md', 'w', encoding='utf-8') as f:
-            f.write(_START_DOC)
-    except OSError as e:
-        panic(f"--start: cannot write case.md: {e}")
-    notify("created case.ltac and case.md")
 
 
 _HELP_VALIDATIONS = """\
@@ -3992,12 +3932,10 @@ Rendering (write to caller-supplied out: TextIO; return True if written):
   render_selector(selector, case, config, out,
                   current_element=None, doc_format='markdown', state=None)
   render_ltac_txt(node_list, config, out, sep='')
-  render_element_selector(node_id, case, config, state, out, sep='')
-  render_package_selector(pkg_id_or_star, case, config, state, out)
-  process_document_stream(src, out, case, config,
-                          seen_element_ids, doc_format='markdown',
-                          add_missing=False, strip=False)
-  (New names: render_element, render_package, process_document on Case)
+  case.render_element(node_id, out, state=state, sep='')
+  case.render_package(pkg_id_or_star, out, state=state)
+  case.process_document(src, out, seen_element_ids, doc_format='markdown',
+                        add_missing=False, strip=False)
 
 main():
   success: bool = main()   # parses sys.argv, runs full CLI pipeline
@@ -4599,22 +4537,6 @@ def load_case(
 # (^ID) implicitly carries AsCited.
 
 
-def _check_id_info(case: Case) -> None:
-    """Validate identifier usage across the loaded LTAC."""
-    case.check_id_info()
-
-
-
-def _check_circularities(case: Case) -> None:
-    """Panic if any circular dependency exists in the LTAC model."""
-    case.check_circularities()
-
-
-def _check_reachability(case: Case) -> None:
-    """Error for any package root unreachable from the first package."""
-    case.check_reachability()
-
-
 def _is_dubious_reference(ref: str) -> bool:
     """Return True if ref is non-empty, has no '.' anywhere, and doesn't start with '#'.
 
@@ -4635,7 +4557,7 @@ def _process_files(
     seen_element_ids: set,
     strip: bool = False,
 ) -> None:
-    """Open each file and call process_document_stream; fall back to stdin if none given."""
+    """Open each file and call process_document; fall back to stdin if none given."""
     if files:
         for path in files:
             try:
@@ -4982,39 +4904,9 @@ def _print_analysis_list(header, items, fmt=str) -> None:
             print(fmt(item))
 
 
-def _analysis_missing(case, document_files) -> List['Node']:
-    """Return LTAC elements that have no selector region in the document(s)."""
-    return case.missing()
-
-
-def _analysis_empty(document_files, case) -> List[str]:
-    """Return identifiers of elements whose selector region contains no prose."""
-    return case.empty()
-
-
-def _analysis_orphans(document_files, case) -> List[str]:
-    """Return identifiers of document selector regions not present in the LTAC."""
-    return case.orphans()
-
-
-def _analysis_misplaced(document_files, case):
-    """Return elements whose document order differs from LTAC order."""
-    return case.misplaced()
-
-
-def _analysis_leaves(case) -> List['Node']:
-    """Return all definition nodes with no children, in LTAC order."""
-    return case.leaves()
-
-
 def needs_support(nodes) -> List['Node']:
     """Return the subset of nodes that carry the {needssupport} option."""
     return [n for n in nodes if 'needssupport' in n.options]
-
-
-def _analysis_packages(case, out: TextIO = sys.stdout) -> None:
-    """Print package structure with element counts to out (default stdout)."""
-    case.render_packages(out)
 
 
 def render_ltac_txt(node_list, config, out: TextIO, sep: str = '') -> bool:
@@ -5040,12 +4932,6 @@ def _write_ltac_node_normalized(node, out: TextIO, first: list, depth_offset: in
     first[0] = False
     for child in node.children:
         _write_ltac_node_normalized(child, out, first, depth_offset)
-
-
-def _render_info(element_id: str, case: 'Case',
-                 out: TextIO, sep: str = '') -> bool:
-    """Write a human-readable context report for element_id to out."""
-    return case.render_info(element_id, out, sep)
 
 
 # ---------------------------------------------------------------------------
@@ -5442,26 +5328,6 @@ def _update_pkg_id_for_subtree(node: Node, old_pkg_id: str, new_pkg_id: str,
                 info['decl_pkg_id'] = new_pkg_id
 
 
-def _apply_rename(case, old: str, new: str) -> None:
-    """Rename identifier old to new throughout the LTAC forest."""
-    case.rename_id(old, new)
-
-
-def _apply_restate(case, label: str, stmt: str) -> None:
-    """Update the statement text for label on all nodes and in id_info."""
-    case.restate_id(label, stmt)
-
-
-def _apply_detach(case, target_id: str) -> None:
-    """Replace target_id's definition with a citation; promote subtree to new package."""
-    case.detach_id(target_id)
-
-
-def _apply_move(case, moving_id: str, dest_id: str) -> None:
-    """Move moving_id's definition to be a child of dest_id."""
-    case.move_id(moving_id, dest_id)
-
-
 def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str]:
     """Write content to a temp file in the same directory as path.
 
@@ -5485,11 +5351,6 @@ def _make_temp(path: str, content: str, line_ending: str = '\n') -> Optional[str
     except OSError as e:
         print(f"verocase: error: cannot write temp file for {path!r}: {e}", file=sys.stderr)
         return None
-
-
-def _apply_ltac_update(case) -> int:
-    """Update cited/Link node text to match the declaration's statement text."""
-    return case.sync_citations()
 
 
 def _collect_document_element_ids(path: str) -> set:
