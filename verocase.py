@@ -4866,10 +4866,6 @@ def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> b
     return False
 
 
-def _compute_ltac_stats(case: 'Case') -> dict:
-    """Compute and return a statistics dict for the loaded LTAC forest."""
-    return case.stats()
-
 
 
 def print_stats(ltac_stats: dict, doc_stats: Optional[dict],
