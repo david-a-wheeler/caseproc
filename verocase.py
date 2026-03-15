@@ -532,7 +532,7 @@ class Case:
         self.config:         dict               = dict(DEFAULT_CONFIG)
         self.had_error:      bool               = False
         self.strict:         bool               = False
-        self.modified:       bool               = False
+        self.ltac_modified:  bool               = False
         self.ltac_path:      Optional[str]      = None
         self.config_path:    Optional[str]      = None
         self.stderr:         'TextIO'           = stderr or sys.stderr
@@ -998,7 +998,7 @@ class Case:
         """Write the LTAC forest to disk using the safe backup+atomic-replace mechanism.
 
         If path is given, writes to that path; otherwise writes to self.ltac_path.
-        Panics if no path is available.  On success, clears self.modified.
+        Panics if no path is available.  On success, clears self.ltac_modified.
         """
         target = path or self.ltac_path
         if target is None:
@@ -1009,7 +1009,7 @@ class Case:
         if tmp is None:
             return  # error already reported
         commit_updates([(tmp, target)], target, self.config, self.config_path)
-        self.modified = False
+        self.ltac_modified = False
 
     # ------------------------------------------------------------------
     # Document processing
@@ -1021,14 +1021,15 @@ class Case:
             if ident not in seen_element_ids:
                 self.warn(f"element {ident!r} has no 'element' selector in any processed file")
 
-    def update_documents(self, add_missing: bool = False,
-                         strip: bool = False) -> bool:
-        """Process all document_files in place with backup+atomic-replace.
+    def update_files(self, add_missing: bool = False,
+                     strip: bool = False) -> bool:
+        """Atomically update document_files and LTAC (if modified) in one commit.
 
-        Rewrites each file in self.document_files using the safe temp-file +
-        atomic-replace mechanism, creating a single backup snapshot covering
-        all files.  Warns about any registry element not covered by an element
-        selector.  Returns not self.had_error.
+        Rewrites each file in self.document_files, and if self.ltac_modified is
+        True also serialises the LTAC forest — all written to temp files first,
+        then committed together in a single backup+atomic-replace operation.
+        Clears self.ltac_modified on success.  Warns about any registry element
+        not covered by an element selector.  Returns not self.had_error.
         """
         pairs = []
         seen: set = set()
@@ -1038,8 +1039,15 @@ class Case:
                                               seen_ids=seen)
             if pair is not None:
                 pairs.append(pair)
+        if self.ltac_modified and self.ltac_path:
+            buf = io.StringIO()
+            self.write_ltac(buf)
+            tmp = _make_temp(self.ltac_path, buf.getvalue())
+            if tmp is not None:
+                pairs.append((tmp, self.ltac_path))
         if pairs:
             commit_updates(pairs, self.ltac_path, self.config, self.config_path)
+            self.ltac_modified = False
         if self.document_files:
             self.check_element_coverage(seen)
         return not self.had_error
@@ -1318,7 +1326,7 @@ class Case:
                 entry['decl_pkg_id'] = new
             entry['citing_pkg_ids'] = [new if x == old else x
                                        for x in entry.get('citing_pkg_ids', [])]
-        self.modified = True
+        self.ltac_modified = True
 
     def restate_id(self, label: str, stmt: str) -> None:
         """Update the statement text for label on all nodes and in id_info.
@@ -1331,7 +1339,7 @@ class Case:
             if node.identifier == label:
                 node.text = stmt
         self.id_info[label]['statement'] = stmt
-        self.modified = True
+        self.ltac_modified = True
 
     def detach_id(self, target_id: str) -> None:
         """Replace target_id's definition with a citation; promote subtree to new package.
@@ -1375,7 +1383,7 @@ class Case:
         citing_pkg = cited.pkg_root.identifier
         if citing_pkg and citing_pkg not in self.id_info[target_id].get('citing_pkg_ids', []):
             self.id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
-        self.modified = True
+        self.ltac_modified = True
 
     def move_id(self, moving_id: str, dest_id: str) -> None:
         """Move moving_id's definition to be a child of dest_id.
@@ -1416,7 +1424,7 @@ class Case:
 
         new_pkg_id = dest.pkg_root.identifier
         self._update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id)
-        self.modified = True
+        self.ltac_modified = True
 
     def _update_pkg_id_for_subtree(self, node: 'Node', old_pkg_id: str,
                                    new_pkg_id: str) -> None:
@@ -3851,7 +3859,7 @@ Data types and examples of their methods/properties:
     case.all_nodes()         DFS generator, LTAC order
     case.all_nodes_fast()    DFS generator, fast order (order unspecified)
     # Document processing
-    case.update_documents(add_missing=False, strip=False) -> bool
+    case.update_files(add_missing=False, strip=False) -> bool
     case.check_element_coverage(seen_element_ids)  warn about uncovered elements
 
 Standalone helpers:
@@ -5282,7 +5290,6 @@ def main() -> bool:
             commit_updates([(tmp, ltac_path)], ltac_path, config, config_path)
 
     # Apply ordered mutations (--rename / --restate).
-    ltac_pair: Optional[Tuple[str, str]] = None
     if args.mutations:
         for op, a, b in args.mutations:
             if op == 'rename':
@@ -5298,12 +5305,6 @@ def main() -> bool:
         case.check_reachability()
         if case.had_error:
             panic("LTAC validation failed after mutations; no files updated")
-        buf = io.StringIO()
-        case.write_ltac(buf)
-        tmp = _make_temp(ltac_path, buf.getvalue())
-        if tmp is None:
-            panic("cannot write updated LTAC file")
-        ltac_pair = (tmp, ltac_path)
 
     # Resolve document files: CLI args > config > auto-discover.
     document_files = (
@@ -5394,36 +5395,36 @@ def main() -> bool:
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        if case.ltac_modified:
+            case.save_ltac()
     elif args.descendants:
         wrote = case.render_selector(f'ltac/txt {args.descendants}', sys.stdout,
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        if case.ltac_modified:
+            case.save_ltac()
     elif args.select:
         wrote = case.render_selector(args.select, sys.stdout,
                                      doc_format='markdown')
         if wrote:
             sys.stdout.write('\n')
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        if case.ltac_modified:
+            case.save_ltac()
     elif args.validate:
         if document_files:
             seen_element_ids = _process_files(document_files, _NullWriter(), case, config, strip=args.strip)
             # This validation requires that we read all document files
             case.check_element_coverage(seen_element_ids)
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        if case.ltac_modified:
+            case.save_ltac()
     elif args.stdout:
         if not document_files:
             panic(_NO_FILES_MSG)
         seen_element_ids = _process_files(document_files, sys.stdout, case, config, strip=args.strip)
         case.check_element_coverage(seen_element_ids)
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        if case.ltac_modified:
+            case.save_ltac()
     elif args.fixmissing or args.start:
         if not document_files:
             panic(_NO_FILES_MSG)
@@ -5441,14 +5442,12 @@ def main() -> bool:
         all_ids_ordered = [node.identifier for node in case.all_nodes_fast()
                            if node.is_definition and node.identifier]
         changed = _mark_needs_support(all_ids_ordered, case.registry)
-        if changed:
+        if changed or case.ltac_modified:
             buf = io.StringIO()
             case.write_ltac(buf)
             tmp = _make_temp(ltac_path, buf.getvalue(), ltac_line_ending)
             if tmp is not None:
                 pairs.append((tmp, ltac_path))
-        if ltac_pair:
-            pairs.append(ltac_pair)
         if pairs:
             commit_updates(pairs, ltac_path, config, config_path)
     elif args.fixmisplaced:
@@ -5469,26 +5468,26 @@ def main() -> bool:
             pair = _fixmisplaced_document(path, case, config, detect_doc_format(path))
             if pair:
                 pairs.append(pair)
-        if ltac_pair:
-            pairs.append(ltac_pair)
+        if case.ltac_modified:
+            buf = io.StringIO()
+            case.write_ltac(buf)
+            tmp = _make_temp(ltac_path, buf.getvalue())
+            if tmp is not None:
+                pairs.append((tmp, ltac_path))
         if pairs:
             commit_updates(pairs, ltac_path, config, config_path)
     elif args.read_only:
-        # --read-only: load, validate, and optionally report stats, but do not
-        # rewrite any document files.  Any ltac_pair from mutations is also
-        # suppressed (mutations are already blocked above, so ltac_pair is None
-        # here; the guard is kept for clarity).
+        # --read-only: load, validate, and optionally report stats; no file writes.
+        # Mutations are blocked above, so ltac_modified is always False here.
         if document_files:
             seen_element_ids = _process_files(document_files, _NullWriter(), case, config, strip=args.strip)
             case.check_element_coverage(seen_element_ids)
     else:
-        # Default mode: rewrite document files in place.
-        if not document_files and not ltac_pair:
+        # Default mode: rewrite document files in place (+ LTAC if modified).
+        if not document_files and not case.ltac_modified:
             panic(_NO_FILES_MSG)
         case.document_files = document_files
-        case.update_documents(strip=args.strip)
-        if ltac_pair:
-            commit_updates([ltac_pair], ltac_path, config, config_path)
+        case.update_files(strip=args.strip)
 
     if args.stats:
         ltac_stats = case.stats()

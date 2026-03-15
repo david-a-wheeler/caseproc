@@ -3,7 +3,7 @@
 *2026-03-15. Successor to ,api-improvements.md.*
 
 Items 1–5, 8, 9, 19, 20, 21, 27 are done; 17 and 18 were dropped.
-Items A, B, C, D, E, F, H, I, J, K, N, O, P are also done or dropped (see below).
+Items A, B, C, D, E, F, H, I, J, K, L, N, O, P are also done or dropped (see below).
 H was implemented as `Case.load_ltac_string()` (a Case method using
 `self.config`).  N is moot: `load_ltac_file` was deleted; `Case.load()`
 validates by default and `load_ltac_string()` intentionally does not.
@@ -12,10 +12,13 @@ callers that need string capture use `io.StringIO()` directly.
 F and J done: `collect_bfs`, `copy_forest`, `write_ltac`, `render_ltac_txt`,
 `render_ext_ref` made private; `render_selector` free function deleted;
 `needs_support` removed from public API and added as `case.needs_support()`.
-K done: `case.update_documents(add_missing=False, strip=False)` added to Case;
+K+L done: `case.update_files(add_missing=False, strip=False)` added to Case
+(renamed from `update_documents`); atomically commits document files and the
+LTAC together when `case.ltac_modified` is True; `modified` renamed to
+`ltac_modified` throughout; `ltac_pair` eliminated from main() — all modes
+now use `case.ltac_modified` directly.
 `_check_element_coverage` free function deleted and replaced by
-`case.check_element_coverage(seen_element_ids)` Case method; main()'s
-default mode now delegates to `case.update_documents()`.
+`case.check_element_coverage(seen_element_ids)` Case method.
 D done: `find_citation_parents(ident)` replaced by two methods:
 `case.citations_and_links(node)` (single full-forest walk returning all
 citation and Link nodes referencing `node`) and `case.parents(nodes)`
@@ -41,34 +44,10 @@ used; current inspection suggests it is not referenced in the body.
 
 ---
 
-## L. Add `case.update_files()` — LTAC + documents atomically (was item 24)
-
-**Current state:** No single call serializes a modified LTAC *and* updates
-all documents in one atomic, backed-up operation.
-
-**Proposed change:**
-
-```python
-case.update_files(add_missing=False, strip=False) -> bool
-```
-
-If `case.ltac_path` is set, includes the LTAC in the `(tmp, final)` pairs.
-Includes all `case.document_files`.  Calls `commit_updates` once.
-Clears `case.modified` on success.
-
-**Notes:**
-- Builds on `save_ltac` (now done) and `update_documents` (item K above).
-- The backup snapshot covering LTAC + all docs together is the key value:
-  individual snapshots of each file are internally inconsistent.
-- Pairs naturally with `case.modified`:
-  `if case.modified: case.update_files()`
-
----
-
 ## M. Expose safe file writing for non-Case files (was item 25 option C)
 
 **Current state:** `_make_temp`, `make_backup`, `commit_updates` are private.
-Items K and L expose them indirectly via Case methods.
+`case.update_files()` and `case.save_ltac()` expose them indirectly.
 
 **Recommended future design (when a concrete need arises):** A `SafeWriter`
 context manager:
@@ -91,5 +70,4 @@ in the same atomic backup.  Option A (Case methods only) is sufficient now.
 | # | Change | Size | Priority |
 |---|--------|------|----------|
 | G | Audit + drop unused `config` param from `render_ltac_txt` | Small | Medium |
-| L | Add `case.update_files()` (LTAC + docs atomic) | Medium | High |
 | M | `SafeWriter` context manager | Large | Defer |
