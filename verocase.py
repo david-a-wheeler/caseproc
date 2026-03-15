@@ -435,6 +435,9 @@ class Node:
     id_inferred : bool
         True when ``identifier`` was auto-generated from ``text`` rather than
         declared explicitly.  Defaults to False.
+    pkg_root : Node (property)
+        The package root (depth 0) ancestor of this node, found by walking
+        parent links.  For package root nodes, ``pkg_root is self``.
     """
     node_type: str
     identifier: str
@@ -773,9 +776,37 @@ class Case:
     # Identifier lookups
     # ------------------------------------------------------------------
 
-    def decl_pkg_id_for(self, ident: str) -> Optional[str]:
-        """Return the package root identifier where ident is declared, or None."""
-        return self.id_info.get(ident, _EMPTY).get('decl_pkg_id')
+    def definition_for(self, ident: str) -> Optional['Node']:
+        """Return the definition Node for ident, or None if absent or duplicated.
+
+        Returns None when there are zero declarations (ident unknown) or more
+        than one declaration (broken LTAC).  Callers that need to handle
+        duplicate declarations explicitly should use definitions_for() instead.
+        """
+        if self.id_info.get(ident, _EMPTY).get('declarations', 0) != 1:
+            return None
+        return self.registry.get(ident)
+
+    def definitions_for(self, ident: str) -> List['Node']:
+        """Return all definition Nodes for ident, including duplicates.
+
+        A well-formed LTAC has exactly one definition per identifier; load
+        warnings flag extras.  This method walks the full forest so it can
+        return every declaration node even when the registry only holds the
+        first one.  Returns [] when ident is unknown.
+        """
+        return [n for n in all_nodes_fast(self.roots)
+                if n.identifier == ident and n.is_definition]
+
+    def declaring_package_for(self, ident: str) -> Optional['Node']:
+        """Return the package root Node that declares ident, or None.
+
+        Returns None when ident is unknown or has duplicate declarations
+        (definition_for returns None in both cases).  If you have a Node
+        already, use node.pkg_root directly instead.
+        """
+        node = self.definition_for(ident)
+        return node.pkg_root if node is not None else None
 
     def statement_for(self, ident: str) -> Optional[str]:
         """Return the canonical statement text for ident, or None."""
@@ -826,7 +857,7 @@ class Case:
         def successors(node: Node):
             for child in node.children:
                 if child.is_citation:
-                    target = self.registry.get(child.identifier)
+                    target = self.definition_for(child.identifier)
                     if target is not None:
                         yield target
                 elif child.node_type == 'Link':
@@ -888,7 +919,7 @@ class Case:
             reachable.add(id(node))
             for child in node.children:
                 if child.is_citation:
-                    target = self.registry.get(child.identifier)
+                    target = self.definition_for(child.identifier)
                     if target is not None:
                         stack.append(target)
                 elif child.node_type == 'Link':
@@ -1027,7 +1058,7 @@ class Case:
         return [
             ident for ident, info in elem_info.items()
             if not info['has_prose']
-            and not (self.registry.get(ident) and self.registry.get(ident).ext_ref)
+            and not ((node := self.definition_for(ident)) and node.ext_ref)
         ]
 
     def orphans(self) -> List[str]:
@@ -1140,7 +1171,7 @@ class Case:
         Returns False and calls error() if element_id is not in registry.
         sep is written before the report when non-empty.
         """
-        node = self.registry.get(element_id)
+        node = self.definition_for(element_id)
         if node is None:
             self.error(f"info: element {element_id!r} not found")
             return False
@@ -1152,10 +1183,7 @@ class Case:
             header += f": {node.text}"
         out.write(f"Element: {header}")
 
-        pkg_root = node
-        while pkg_root.parent is not None:
-            pkg_root = pkg_root.parent
-        out.write(f"\nPackage: {pkg_root.identifier or '(unnamed)'}")
+        out.write(f"\nPackage: {node.pkg_root.identifier or '(unnamed)'}")
 
         ancestors = []
         anc = node.parent
@@ -1187,7 +1215,7 @@ class Case:
         out.write(f"\nCitations: {citation_count}")
         if citation_count > 0:
             for citing_pkg_id in citing_pkg_ids:
-                citing_root = self.registry.get(citing_pkg_id)
+                citing_root = self.definition_for(citing_pkg_id)
                 if citing_root is None:
                     continue
                 for n in all_nodes_fast([citing_root]):
@@ -1195,10 +1223,7 @@ class Case:
                         parent_node = n.parent
                         if parent_node:
                             parent_desc = f"{parent_node.node_type} {parent_node.identifier}"
-                            citing_pkg_root = parent_node
-                            while citing_pkg_root.parent is not None:
-                                citing_pkg_root = citing_pkg_root.parent
-                            cp_name = citing_pkg_root.identifier or '(unnamed)'
+                            cp_name = parent_node.pkg_root.identifier or '(unnamed)'
                             out.write(f"\n  Cited as ^{element_id} by: {parent_desc} (Package {cp_name})")
                         else:
                             out.write(f"\n  Cited as ^{element_id} (package root)")
@@ -1249,7 +1274,7 @@ class Case:
         Panics if target_id is not defined, or if its definition is already a
         top-level package root (has no parent).
         """
-        node = self.registry.get(target_id)
+        node = self.definition_for(target_id)
         if node is None:
             self.panic(f"--detach: {target_id!r} is not defined")
         if node.parent is None:
@@ -1293,10 +1318,10 @@ class Case:
         ID may be top-level or nested anywhere in the tree. No citation is left
         at the original location. Panics if moving_id or dest_id is not defined.
         """
-        node = self.registry.get(moving_id)
+        node = self.definition_for(moving_id)
         if node is None:
             self.panic(f"--move: {moving_id!r} is not defined")
-        dest = self.registry.get(dest_id)
+        dest = self.definition_for(dest_id)
         if dest is None:
             self.panic(f"--move: {dest_id!r} is not defined")
 
@@ -1334,7 +1359,7 @@ class Case:
         for node in all_nodes_fast(self.roots):
             if not node.identifier or node.is_definition:
                 continue
-            decl = self.registry.get(node.identifier)
+            decl = self.definition_for(node.identifier)
             canonical = decl.text if decl is not None else None
             if node.text and canonical is not None and node.text != canonical:
                 node.text = canonical
@@ -1441,7 +1466,7 @@ class Case:
         """
         if state is None:
             state = DocState()
-        node = self.registry.get(node_id)
+        node = self.definition_for(node_id)
         if node is None:
             self.error(f"element {node_id!r} not found")
             return False
@@ -1481,7 +1506,7 @@ class Case:
                 _render_single_package(root, self, self.config, state, out, pending_sep)
                 pending_sep = '\n\n'
             return True
-        pkg_root = self.registry.get(pkg_id_or_star)
+        pkg_root = self.definition_for(pkg_id_or_star)
         if pkg_root is None or pkg_root.depth != 0:
             self.error(f"package {pkg_id_or_star!r} not found or is not a root element")
             return False
@@ -2028,13 +2053,14 @@ def _recalc_depths(node: 'Node', new_depth: int) -> None:
 
 
 # ---------------------------------------------------------------------------
-# id_info accessors (private; use Case.decl_pkg_id_for / Case.statement_for)
+# id_info accessors (private; use Case.declaring_package_for / Case.statement_for)
 # ---------------------------------------------------------------------------
 
 def _decl_pkg_id_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
-    """Return the package root identifier where ident is declared, or None.
+    """Return the package root identifier string where ident is declared, or None.
 
-    Internal implementation for Case.decl_pkg_id_for().
+    Private helper used by render functions that need the string ID directly.
+    Public callers should use Case.declaring_package_for() which returns a Node.
     """
     return id_info.get(ident, _EMPTY).get('decl_pkg_id')
 
@@ -3042,14 +3068,14 @@ def _resolve_element(
 ) -> List[Node]:
     """Return the list of nodes to render for the given element_id.
 
-    If element_id is given: look up in case.registry; call error() and return []
+    If element_id is given: look up via definition_for(); call error() and return []
     if not found.  If element_id is None: use current_element if set, else
     return case.roots.  ('*' is handled at dispatch time before calling here.)
     """
     if element_id is not None:
-        node = case.registry.get(element_id)
+        node = case.definition_for(element_id)
         if node is None:
-            case.error(f"element {element_id!r} not found in registry")
+            case.error(f"element {element_id!r} not found")
             return []
         return [node]
     if current_element is not None:
@@ -3313,7 +3339,7 @@ def render_pkg_defines(pkg_root: Node, case: 'Case',
     defined = []
     for node in all_nodes_fast([pkg_root]):
         if (node.is_definition and node.identifier
-                and case.decl_pkg_id_for(node.identifier) == pkg_id):
+                and _decl_pkg_id_for(case.id_info, node.identifier) == pkg_id):
             defined.append(node)
     if not defined:
         return False
@@ -3335,7 +3361,7 @@ def render_pkg_citing(pkg_root: Node, case: 'Case',
         return False
     links = []
     for node in cited_nodes:
-        decl_pkg = case.decl_pkg_id_for(node.identifier) or ''
+        decl_pkg = _decl_pkg_id_for(case.id_info, node.identifier) or ''
         label = f'{node.node_type} {node.identifier}'
         url = _pkg_anchor_url(decl_pkg, config) if decl_pkg else ''
         links.append(hyperlink(label, url, fmt) if url else label)
@@ -3811,6 +3837,7 @@ Exceptions:
 
 Data types:
   @dataclass Node       one node in the LTAC tree (see docstring for fields)
+    node.identifier     str: declared identifier, or '' if absent
     node.is_citation    True if introduced with ^ (cross-package citation)
     node.is_definition  True if neither a citation nor a Link (property)
     node.pkg_root       package root Node (property)
@@ -3823,10 +3850,12 @@ Data types:
     case.document_files List[str] (set by caller after loading)
     case.config         dict (config used to load; pass to render_selector etc.)
     # Lookups
-    case.decl_pkg_id_for(ident)        -> Optional[str]
-    case.statement_for(ident)          -> Optional[str]
-    case.find_citation_parents(ident)  -> List[Node]
-    case.nodes_for(eid, current=None)  -> List[Node]
+    case.definition_for(ident)          -> Optional[Node]  (None if 0 or >1 declarations)
+    case.definitions_for(ident)         -> List[Node]      (all declarations; handles duplicates)
+    case.declaring_package_for(ident)   -> Optional[Node]
+    case.statement_for(ident)           -> Optional[str]
+    case.find_citation_parents(ident)   -> List[Node]
+    case.nodes_for(eid, current=None)   -> List[Node]
     # Validation
     case.check_id_info()
     case.check_circularities()

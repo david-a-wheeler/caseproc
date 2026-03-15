@@ -3,7 +3,7 @@
 *2026-03-15. Successor to ,api-improvements.md.*
 
 Items 1–5, 8, 9, 19, 20, 21, 27 are done; 17 and 18 were dropped.
-Items A, B, H, I, N, O, P are also done or dropped (see below).
+Items A, B, C, E, H, I, N, O, P are also done or dropped (see below).
 H was implemented as `Case.load_ltac_string()` (a Case method using
 `self.config`).  N is moot: `load_ltac_file` was deleted; `Case.load()`
 validates by default and `load_ltac_string()` intentionally does not.
@@ -14,50 +14,12 @@ for the current code (Case class, instance methods, new names).
 
 ---
 
-## C. Rename `decl_pkg_id_for` → `declaring_package()`, return Node (was item 10)
-
-**Current state:** `case.decl_pkg_id_for(ident) -> Optional[str]` returns the
-string ID of the package root.  Most callers immediately do
-`case.registry[case.decl_pkg_id_for(ident)]` to get the Node.
-
-**Proposed change:**
-
-```python
-def declaring_package(self, ident: str) -> Optional['Node']:
-    pkg_id = self.id_info.get(ident, _EMPTY).get('decl_pkg_id')
-    return self.registry.get(pkg_id) if pkg_id else None
-```
-
-Keep `decl_pkg_id_for` as a deprecated alias returning the string.
-
-**Notes:** Grep `decl_pkg_id_for` to find internal callers in render
-functions that can be simplified to `case.declaring_package(ident)`.
-
----
-
 ## D. Rename `find_citation_parents` → `citing_nodes` (was item 11)
 
 **Current state:** `case.find_citation_parents(ident) -> List[Node]`.
 
 **Proposed change:** Rename to `case.citing_nodes(ident)`.
 Keep old name as alias.
-
----
-
-## E. Add `case.node_for(ident)` simple lookup (was item 12)
-
-**Current state:** `case.registry.get(ident)` is the only way.
-
-**Proposed change:**
-
-```python
-def node_for(self, ident: str) -> Optional['Node']:
-    """Return the Node for ident, or None if not found."""
-    return self.registry.get(ident)
-```
-
-One-liner; keeps `registry` internal detail hidden from callers who
-just want a node.
 
 ---
 
@@ -179,9 +141,7 @@ in the same atomic backup.  Option A (Case methods only) is sufficient now.
 
 | # | Change | Size | Priority |
 |---|--------|------|----------|
-| C | `decl_pkg_id_for` → `declaring_package()` returning Node | Small | Medium |
 | D | `find_citation_parents` → `citing_nodes` | Trivial | Low |
-| E | Add `case.node_for(ident)` | Trivial | Medium |
 | F | `collect_bfs` → `nodes_bfs` | Trivial | Low |
 | G | Audit + drop unused `config` param from `render_ltac_txt` | Small | Medium |
 | J | Add `case.needs_support()` shim | Trivial | Low |

@@ -429,7 +429,7 @@ class TestLTACValidation(unittest.TestCase):
         """--select with an element ID absent from the registry always exits non-zero."""
         r = run('--ltac', fixture('simple.ltac'), '--select', 'ltac/markdown BOGUS')
         self.assertNotEqual(r.returncode, 0)
-        self.assertIn('not found in registry', r.stderr)
+        self.assertIn('not found', r.stderr)
 
     def test_unrecognized_syntax_is_error(self):
         """A line that does not match LTAC syntax always exits non-zero."""
