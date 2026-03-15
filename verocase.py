@@ -1948,7 +1948,7 @@ class _LTACParser:
                 if info['statement'] is None:
                     info['statement'] = node.text
                 elif node.text != info['statement']:
-                    hint = "; use --update to sync" if (node.is_citation or info['citations'] > 0) else ""
+                    hint = "; use --sync to sync" if (node.is_citation or info['citations'] > 0) else ""
                     self._case.warn(f"line {lineno}: {node.identifier!r}: statement {node.text!r}"
                                     f" differs from earlier statement {info['statement']!r}{hint}")
 
@@ -2017,7 +2017,7 @@ class _LTACParser:
             canonical = _statement_for(self.id_info, target_id)
             if node.text and canonical is not None and node.text != canonical:
                 self._case.warn(f"line {lineno}: Link {target_id!r}: statement {node.text!r}"
-                                f" differs from declaration; use --update to sync")
+                                f" differs from declaration; use --sync to sync")
         else:
             self._case.warn(f"line {lineno}: Link target {target_id!r} not found")
 
@@ -3705,7 +3705,7 @@ Validations on the LTAC file (always):
     a different package, but this is not required)
   - Element type must be consistent across all uses of the same identifier
   - Statement text must be consistent across all uses of the same identifier
-    (use --update to make LTAC citations consistent with their declaration)
+    (use --sync to make LTAC citations consistent with their declaration)
   - Each element must carry at *most* one assertion status option
     (needsSupport, axiomatic, defeated, assumed); see SACM spec section 11
   - All generated anchor names (e.g., "claim-x-is-secure") must be unique
@@ -3979,14 +3979,14 @@ Read-only options (marked [READ-ONLY] in --help; never modify any stored file):
 
 File-modifying options (modify document files, LTAC, or both):
   default mode, --fixmissing, --fixmisplaced, --start,
-  --update, --rename, --restate, --detach, --move
+  --sync, --rename, --restate, --detach, --move
 
 The read-only analysis options listed above may be freely combined with
 each other.  They cannot be combined with any file-modifying option;
 verocase will exit with an error if you try.
 
 By default the program treats the LTAC file strictly as an input and
-it will *not* modify the LTAC file. However, the options --update,
+it will *not* modify the LTAC file. However, the options --sync,
 --rename, --restate, --detach, --move, --fixmissing, and --start
 *may* modify the LTAC file.
 
@@ -4090,7 +4090,7 @@ Run --help-api for the public Python API summary (for library use).
         ),
     )
     parser.add_argument(
-        '--update', action='store_true',
+        '--sync', action='store_true',
         help='update the LTAC file to synchronize citation statements with their declarations',
     )
     parser.add_argument(
@@ -4188,7 +4188,7 @@ Run --help-api for the public Python API summary (for library use).
     # Analysis options: read-only; never modify any file.
     # May be freely combined with each other and with --stats, --validate, --select,
     # --info, --descendants.  Cannot be combined with any file-modifying option
-    # (--fixmissing, --fixmisplaced, --start, --update, --rename, --restate,
+    # (--fixmissing, --fixmisplaced, --start, --sync, --rename, --restate,
     # --detach, --move).
     parser.add_argument(
         '--missing', action='store_true', default=False,
@@ -4227,7 +4227,7 @@ Run --help-api for the public Python API summary (for library use).
              'Useful for combining with --stats or analysis options without '
              'triggering document rewrites. '
              'Cannot be combined with any file-modifying mode '
-             '(--fixmissing, --fixmisplaced, --start, --update, '
+             '(--fixmissing, --fixmisplaced, --start, --sync, '
              '--rename, --restate, --detach, --move).',
     )
 
@@ -5229,8 +5229,8 @@ def main() -> bool:
         if any(getattr(args, f, False) for f in _file_modifying_modes):
             panic("analysis options (--missing, --empty, --orphans, --misplaced, --leaves, --packages) "
                   "cannot be combined with file-modifying modes (--fixmissing, --fixmisplaced, --start)")
-        if args.update:
-            panic("analysis options cannot be combined with --update (which modifies the LTAC file)")
+        if args.sync:
+            panic("analysis options cannot be combined with --sync (which modifies the LTAC file)")
         if getattr(args, 'mutations', []):
             panic("analysis options cannot be combined with --rename/--restate/--detach/--move "
                   "(which modify the LTAC file)")
@@ -5240,12 +5240,12 @@ def main() -> bool:
         if any(getattr(args, f, False) for f in _file_modifying_modes):
             panic("--read-only cannot be combined with file-modifying modes "
                   "(--fixmissing, --fixmisplaced, --start)")
-        if args.update:
-            panic("--read-only cannot be combined with --update")
+        if args.sync:
+            panic("--read-only cannot be combined with --sync")
         if getattr(args, 'mutations', []):
             panic("--read-only cannot be combined with --rename/--restate/--detach/--move")
 
-    if args.update:
+    if args.sync:
         changed = case.sync_citations()
         if changed:
             buf = io.StringIO()

@@ -846,8 +846,8 @@ class TestIntroduction(unittest.TestCase):
 
 class TestUpdate(unittest.TestCase):
     def test_update_no_changes(self):
-        """--update with no citation mismatches leaves the LTAC untouched and processes content."""
-        r = run('--ltac', fixture('simple.ltac'), '--update',
+        """--sync with no citation mismatches leaves the LTAC untouched and processes content."""
+        r = run('--ltac', fixture('simple.ltac'), '--sync',
                 '--stdout', fixture('update-input.md'))
         self.assertEqual(r.returncode, 0)
         # Header still updates by default (update_headers=True).
@@ -857,20 +857,20 @@ class TestUpdate(unittest.TestCase):
         self.assertNotIn('Updating', r.stderr)
 
     def test_update_warns_mismatch_without_flag(self):
-        """Without --update, a citation with the wrong statement produces a warning with a hint."""
+        """Without --sync, a citation with the wrong statement produces a warning with a hint."""
         r = run('--ltac', fixture('update-citations.ltac'), '--select', 'ltac/markdown')
         self.assertEqual(r.returncode, 0)
         self.assertIn('Wrong statement here', r.stderr)
-        self.assertIn('--update', r.stderr)
+        self.assertIn('--sync', r.stderr)
 
     def test_update_fixes_citation(self):
-        """--update rewrites the LTAC file so citation statements match the declaration."""
+        """--sync rewrites the LTAC file so citation statements match the declaration."""
         import shutil as _shutil
         os.makedirs(RESULTS, exist_ok=True)
         tmp_ltac = os.path.join(RESULTS, 'update-citations.ltac')
         _shutil.copy(fixture('update-citations.ltac'), tmp_ltac)
         try:
-            r = run('--ltac', tmp_ltac, '--update', '--validate')
+            r = run('--ltac', tmp_ltac, '--sync', '--validate')
             self.assertEqual(r.returncode, 0)
             self.assertIn('Updating', r.stderr)
             updated = read_file(tmp_ltac)
@@ -3016,13 +3016,13 @@ class TestReadOnly(unittest.TestCase):
         self.assertIn('cannot be combined', r.stderr)
 
     def test_analysis_blocked_with_update(self):
-        """Analysis options cannot be combined with --update (checked before any write)."""
-        r = run('--ltac', self.ltac_path, '--missing', '--update', self.doc_path)
+        """Analysis options cannot be combined with --sync (checked before any write)."""
+        r = run('--ltac', self.ltac_path, '--missing', '--sync', self.doc_path)
         self.assertNotEqual(r.returncode, 0)
         self.assertIn('cannot be combined', r.stderr)
         with open(self.ltac_path, encoding='utf-8') as f:
             self.assertEqual(f.read(), self.ltac_orig,
-                             '--update must not have run before the error')
+                             '--sync must not have run before the error')
 
     def test_analysis_blocked_with_rename(self):
         """Analysis options cannot be combined with --rename (checked before any write)."""
@@ -3083,8 +3083,8 @@ class TestReadOnly(unittest.TestCase):
         self.assertIn('cannot be combined', r.stderr)
 
     def test_read_only_blocked_with_update(self):
-        """--read-only cannot be combined with --update."""
-        r = run('--ltac', self.ltac_path, '--read-only', '--update', self.doc_path)
+        """--read-only cannot be combined with --sync."""
+        r = run('--ltac', self.ltac_path, '--read-only', '--sync', self.doc_path)
         self.assertNotEqual(r.returncode, 0)
         self.assertIn('cannot be combined', r.stderr)
 
