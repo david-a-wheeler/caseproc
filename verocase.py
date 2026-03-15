@@ -19,7 +19,7 @@ import tempfile
 import types
 from collections import deque
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, TextIO, Tuple, Union
+from typing import Dict, Iterable, List, Optional, Set, TextIO, Tuple, Union
 
 # TOML support: tomllib is in the standard library since Python 3.11.
 # On older Python versions, the third-party 'tomli' package is a drop-in
@@ -815,12 +815,12 @@ class Case:
                 result.append(n)
         return result
 
-    def parents(self, nodes: Union['Node', List['Node']]) -> Union[List['Node'], None]:
+    def parents(self, nodes: Union['Node', Iterable['Node']]) -> Union[List['Node'], None]:
         """Return deduplicated list of parent nodes for the given node(s).
 
         If a single Node is given, returns its parent(s) as a list, or None if
         it has no parent (i.e. it is a root node).
-        If a list of Nodes is given, returns a deduplicated list of their
+        If an iterable of Nodes is given, returns a deduplicated list of their
         parents, excluding any that have no parent.
         """
         if isinstance(nodes, Node):
