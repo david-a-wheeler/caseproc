@@ -533,6 +533,7 @@ class Case:
         self.had_error:      bool               = False
         self.strict:         bool               = False
         self.ltac_modified:  bool               = False
+        self.ltac_line_ending: str             = '\n'
         self.ltac_path:      Optional[str]      = None
         self.config_path:    Optional[str]      = None
         self.stderr:         'TextIO'           = stderr or sys.stderr
@@ -1151,6 +1152,31 @@ class Case:
         if pairs:
             commit_updates(pairs, self.ltac_path, self.config, self.config_path)
             self.ltac_modified = False
+        return not self.had_error
+
+    def fixmissing(self) -> bool:
+        """Re-render all document_files, injecting missing element regions into
+        the last file, then mark needsSupport on leaf elements that lack an
+        assertion status.  All changes (including LTAC if modified) are committed
+        atomically.  Returns not self.had_error.
+        """
+        pairs = []
+        seen_element_ids: set = set()
+        for i, path in enumerate(self.document_files):
+            is_last = (i == len(self.document_files) - 1)
+            pair, seen_element_ids = self._rewrite_document_file(
+                path, add_missing=is_last, seen_ids=seen_element_ids)
+            if pair:
+                pairs.append(pair)
+        all_ids_ordered = [node.identifier for node in self.all_nodes_fast()
+                           if node.is_definition and node.identifier]
+        changed = _mark_needs_support(all_ids_ordered, self.registry)
+        if changed or self.ltac_modified:
+            tmp = self._make_ltac_temp(self.ltac_path, self.ltac_line_ending)
+            if tmp is not None:
+                pairs.append((tmp, self.ltac_path))
+        if pairs:
+            commit_updates(pairs, self.ltac_path, self.config, self.config_path)
         return not self.had_error
 
     def _fix_misplaced_document(self, path: str) -> Optional[Tuple[str, str]]:
@@ -5239,6 +5265,7 @@ def main() -> bool:
             ltac_line_ending = detect_line_ending(_f.read())
     except OSError:
         ltac_line_ending = '\n'
+    case.ltac_line_ending = ltac_line_ending
 
     # LTAC parse complete. Perform validations needing all LTAC data
     case.check_id_info()
@@ -5417,25 +5444,8 @@ def main() -> bool:
     elif args.fixmissing or args.start:
         if not document_files:
             panic(_NO_FILES_MSG)
-        seen_element_ids: set = set()
-        # Re-render all files; inject missing element regions (smart placement) into the last file.
-        pairs = []
-        for i, path in enumerate(document_files):
-            is_last = (i == len(document_files) - 1)
-            pair, seen_element_ids = case._rewrite_document_file(path, add_missing=is_last,
-                                                                  seen_ids=seen_element_ids)
-            if pair:
-                pairs.append(pair)
-        # Mark needsSupport on all leaf elements that lack an assertion status.
-        all_ids_ordered = [node.identifier for node in case.all_nodes_fast()
-                           if node.is_definition and node.identifier]
-        changed = _mark_needs_support(all_ids_ordered, case.registry)
-        if changed or case.ltac_modified:
-            tmp = case._make_ltac_temp(ltac_path, ltac_line_ending)
-            if tmp is not None:
-                pairs.append((tmp, ltac_path))
-        if pairs:
-            commit_updates(pairs, ltac_path, config, config_path)
+        case.document_files = document_files
+        case.fixmissing()
     elif args.fixmisplaced:
         if not document_files:
             panic(_NO_FILES_MSG)
