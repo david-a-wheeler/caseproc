@@ -35,10 +35,13 @@ __all__ = [
     'DocState',
     'DEFAULT_CONFIG',
     # Loading, configuration, and serialization
+    'load_case',
     'load_config',
     'load_ltac_file',
     'parse_ltac_lines',
+    'find_config',
     'find_ltac_file',
+    'find_document_files',
     'write_ltac',
     'detect_doc_format',
     # Tree manipulation
@@ -3181,12 +3184,25 @@ Global session state:
   strict:    bool   if True, warnings auto-escalate to errors (--error flag)
   reset()           clear global session state; call this before each session
 
-Typical usage:
+Typical usage (simple):
+  import verocase, sys
+
+  case = verocase.load_case()   # auto-discovers config, LTAC, and documents
+  if verocase.had_error:
+      sys.exit(1)
+
+  import io; buf = io.StringIO()
+  case.render_info('SomeClaim', buf)
+  print(buf.getvalue())
+
+Typical usage (explicit control):
   import verocase, io, sys
 
   verocase.reset()
-  config = verocase.load_config(None)           # or path to case.config
-  case = verocase.load_ltac_file('case.ltac', config=config)
+  config = verocase.load_config(verocase.find_config())
+  ltac_path = verocase.find_ltac_file(None, config)
+  case = verocase.load_ltac_file(ltac_path, config=config)
+  case.document_files = verocase.find_document_files(config, ltac_path)
 
   case.check_id_info()
   case.check_circularities()
@@ -3258,11 +3274,17 @@ Data types:
   @dataclass DocState   per-document rendering state
   DEFAULT_CONFIG: dict  default configuration values
 
-Loading and serialization:
-  load_config(path_or_None)
-  load_ltac_file(path, config=config)  -> Case  (document_files=[]; set by caller)
-  parse_ltac_lines(lines, config=config)         -> Case
-  find_ltac_file(ltac_arg, config)
+Loading and initialization:
+  load_case(ltac=None, config=None, documents=None, validate=True) -> Case
+    Recommended entry point.  Auto-discovers config, LTAC, and documents;
+    calls reset() and (by default) runs all validation.  Override any
+    parameter to take explicit control.  Check had_error on return.
+  find_config(path=None)       -> Optional[str]  (None if not found)
+  find_ltac_file(ltac_arg, config) -> str        (panics if not found)
+  find_document_files(config=None, ltac_path=None) -> List[str]  ([] if none)
+  load_config(path_or_None)    -> dict
+  load_ltac_file(path, config=config) -> Case    (document_files=[])
+  parse_ltac_lines(lines, config=config)  -> Case
   write_ltac(roots, out)   serialize forest to out; use io.StringIO() for a string
   detect_doc_format(path)  'markdown' or 'html'
 
@@ -3744,6 +3766,150 @@ def find_ltac_file(ltac_arg: Optional[str], config: dict) -> str:
     if os.path.exists('docs/case.ltac'):
         return 'docs/case.ltac'
     panic("no LTAC file found; use --ltac, set ltac_file in config, or create case.ltac. See --help")
+
+
+def find_config(path: Optional[str] = None) -> Optional[str]:
+    """Find the configuration file path to use, returning None if not found.
+
+    Search order: explicit path → case.config → docs/case.config → None.
+    Unlike find_ltac_file(), returns None rather than panicking when no file
+    is found; callers can pass the result directly to load_config(), which
+    returns DEFAULT_CONFIG when given None.
+
+    Parameters
+    ----------
+    path : str, optional
+        Explicit config path.  If given and the file exists, returned as-is.
+        If given and the file does not exist, panics (caller explicitly asked
+        for a file that is not there).
+    """
+    if path is not None:
+        if os.path.exists(path):
+            return path
+        panic(f"config file not found: {path!r}")
+    if os.path.exists('case.config'):
+        return 'case.config'
+    if os.path.exists('docs/case.config'):
+        return 'docs/case.config'
+    return None
+
+
+def find_document_files(
+    config: Optional[dict] = None,
+    ltac_path: Optional[str] = None,
+) -> List[str]:
+    """Find the document files associated with this case, returning a list.
+
+    Search order:
+      1. config['document_files'] if non-empty
+      2. case.md / case.markdown / case.html in the same directory as ltac_path
+         (if ltac_path is given), then in the current directory
+      3. docs/case.md / docs/case.markdown / docs/case.html
+
+    Returns an empty list if no documents are found (no panic).
+
+    Parameters
+    ----------
+    config : dict, optional
+        Configuration dict from load_config().  Uses DEFAULT_CONFIG if None.
+    ltac_path : str, optional
+        Path to the loaded LTAC file.  When given, the directory containing
+        it is searched for document files before falling back to cwd/docs/.
+    """
+    cfg = config or DEFAULT_CONFIG
+    from_config = list(cfg.get('document_files', []))
+    if from_config:
+        return from_config
+
+    candidates: List[str] = []
+    if ltac_path:
+        ltac_dir = os.path.dirname(os.path.abspath(ltac_path))
+        cwd = os.path.abspath('.')
+        if ltac_dir != cwd:
+            for ext in ('md', 'markdown', 'html'):
+                candidates.append(os.path.join(ltac_dir, f'case.{ext}'))
+    for name in ('case.md', 'case.markdown', 'case.html',
+                 'docs/case.md', 'docs/case.markdown', 'docs/case.html'):
+        candidates.append(name)
+
+    for candidate in candidates:
+        if os.path.exists(candidate):
+            return [candidate]
+    return []
+
+
+def load_case(
+    ltac: Optional[str] = None,
+    config: Optional[str] = None,
+    documents: Optional[List[str]] = None,
+    validate: bool = True,
+) -> 'Case':
+    """Load a full assurance case with automatic discovery of all components.
+
+    This is the recommended entry point for library callers.  All parameters
+    are optional; with no arguments it behaves like the CLI with no flags,
+    auto-discovering config, LTAC, and document files from well-known paths.
+
+    Calls reset() before loading so that had_error is clear.  Check
+    verocase.had_error after calling if you need to detect non-fatal problems
+    found during validation.
+
+    Parameters
+    ----------
+    ltac : str, optional
+        Path to the LTAC file.  If None, auto-discovered via find_ltac_file().
+    config : str, optional
+        Path to the JSON config file.  If None, auto-discovered via
+        find_config() (case.config → docs/case.config → defaults).
+    documents : list of str, optional
+        Document file paths.  If None, auto-discovered via
+        find_document_files() (config → adjacent to LTAC → cwd → docs/).
+    validate : bool, default True
+        When True, run check_id_info(), check_circularities(), and
+        check_reachability() before returning.  Errors set had_error but do
+        not raise; check verocase.had_error if needed.  Pass False to skip
+        validation (e.g. to inspect a malformed file).
+
+    Returns
+    -------
+    Case
+        Fully populated Case with document_files set.
+
+    Examples
+    --------
+    Simplest usage — mirrors the CLI with no arguments::
+
+        case = verocase.load_case()
+
+    Explicit LTAC, auto-discover everything else::
+
+        case = verocase.load_case(ltac='my.ltac')
+
+    Full explicit control::
+
+        case = verocase.load_case(
+            ltac='my.ltac',
+            config='my.config',
+            documents=['a.md', 'b.md'],
+        )
+
+    Skip validation to inspect an invalid file::
+
+        case = verocase.load_case(validate=False)
+    """
+    reset()
+    cfg = load_config(find_config(config))
+    ltac_path = find_ltac_file(ltac, cfg)
+    case = load_ltac_file(ltac_path, config=cfg)
+    case.document_files = (
+        documents if documents is not None
+        else find_document_files(cfg, ltac_path)
+    )
+    if validate:
+        case.check_id_info()
+        case.check_circularities()
+        case.check_reachability()
+    return case
 
 
 # SACM spec section 11 defines AssertionStatus as a mutually exclusive
@@ -5248,12 +5414,7 @@ def main() -> bool:
         strict = True
 
     # Auto-discover config file if --config not given.
-    config_path = args.config
-    if config_path is None:
-        if os.path.exists('case.config'):
-            config_path = 'case.config'
-        elif os.path.exists('docs/case.config'):
-            config_path = 'docs/case.config'
+    config_path = find_config(args.config)
     config = load_config(config_path)
     config_invariant_checker(config)
 
@@ -5329,16 +5490,11 @@ def main() -> bool:
             panic("cannot write updated LTAC file")
         ltac_pair = (tmp, ltac_path)
 
-    # Resolve document files: CLI args > config > auto-discover (fallback to [] for now).
-    document_files = list(args.files)
-    if not document_files:
-        document_files = list(config.get('document_files', []))
-    if not document_files:
-        for candidate in ('case.md', 'case.markdown', 'case.html',
-                          'docs/case.md', 'docs/case.markdown', 'docs/case.html'):
-            if os.path.exists(candidate):
-                document_files = [candidate]
-                break
+    # Resolve document files: CLI args > config > auto-discover.
+    document_files = (
+        list(args.files) if args.files
+        else find_document_files(config, ltac_path)
+    )
 
     _NO_FILES_MSG = (
         "no document files found; specify files on the command line, set document_files "
