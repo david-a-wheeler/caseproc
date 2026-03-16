@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""verocase - process assurance case LTAC file and update Markdown/HTML
+"""verocase - process assurance case LTAC file, update Markdown/HTML
 
 (C) Copyright David A. Wheeler and verocase contributors
 
@@ -67,7 +67,10 @@ __all__ = [
 # Module-level error/reporting
 
 class VerocaseError(Exception):
-    """Raised by panic() for fatal errors; catch in main() to exit, or handle in library code."""
+    """Raised by panic() for fatal errors.
+
+    Catch in main() to exit cleanly, or handle in library code.
+    """
 
 
 def panic(msg: str) -> None:
@@ -448,14 +451,15 @@ class Node:
         A definition is any node that is neither a citation (``^`` prefix) nor
         a Link.  It is the natural complement to ``is_citation``: every node
         in the tree is exactly one of citation, Link, or definition.
-        Prefer this over spelling out ``not is_citation and node_type != 'Link'``
-        at every call site.
+        Prefer this over spelling out
+        ``not is_citation and node_type != 'Link'`` at every call site.
         """
         return not self.is_citation and self.node_type != 'Link'
 
     @property
     def pkg_root(self) -> 'Node':
-        """The package root (depth 0) of this node, found by walking parent links."""
+        """The package root (depth 0) of this node, found by walking
+        parent links."""
         node = self
         while node.parent is not None:
             node = node.parent
@@ -483,7 +487,8 @@ class Node:
             child.write_ltac_subtree(out, depth_offset)
 
     def has_claim_descendant(self, case: 'Case', seen: set) -> bool:
-        """Return True if this node has any Claim descendant, following citations.
+        """Return True if this node has any Claim descendant,
+        following citations.
 
         `seen` tracks visited declaration identifiers to avoid re-traversal
         (circularity has already been checked before stats are computed).
@@ -527,7 +532,8 @@ class Node:
 
     @property
     def is_incontextof(self) -> bool:
-        """True if this node attaches via InContextOf (--o), not SupportedBy (-->)."""
+        """True if this node attaches via InContextOf (--o),
+        not SupportedBy (-->)."""
         return self.node_type in ('Context', 'Assumption', 'Justification') or \
                (self.node_type == 'Claim' and 'assumed' in self.options)
 
@@ -563,32 +569,36 @@ class Node:
 
 
 class Case:
-    """A fully loaded LTAC assurance case: the node forest, lookup tables, and documents.
+    """A fully loaded LTAC assurance case: node forest, lookup tables,
+    and documents.
 
     Construct cheaply with Case(), then call load() to read files:
 
-        case = Case().load()                        # auto-discover everything
-        case = Case().load(ltac_file='my.ltac')     # explicit LTAC, auto rest
-        case = Case(stderr=buf).load(validate=False) # redirect errors, skip validation
+        case = Case().load()                    # auto-discover everything
+        case = Case().load(ltac_file='my.ltac') # explicit LTAC, auto rest
+        case = Case(stderr=buf).load(validate=False) # redir, no validate
 
     Attributes set by __init__ (all have safe defaults; no I/O):
-        roots               List[Node]              Package root nodes in file order.
-        all_definitions_for Dict[str,List[Node]]    ID → all defining Nodes (incl. dups).
-        citations           Dict[str,List[Node]]    ID → all citation Nodes for that ID.
-        links               Dict[str,List[Node]]    ID → all Link Nodes targeting that ID.
-        document_files      List[str]               Document paths associated with this case.
-        config              dict                    Active configuration dict.
-        had_error           bool                    True if any error() was called.
-        strict              bool                    True if warnings are escalated to errors.
-        modified            bool                    True if any mutation method was called.
-        ltac_path           Optional[str]           Path of the loaded LTAC file.
-        config_path         Optional[str]           Path of the loaded config file.
-        stderr              TextIO                  Stream for error/warning/notify output.
+        roots               List[Node]  Package root nodes in file order.
+        all_definitions_for Dict[str,List[Node]]
+                            ID → all defining Nodes (incl. dups).
+        citations           Dict[str,List[Node]]
+                            ID → all citation Nodes for that ID.
+        links               Dict[str,List[Node]]
+                            ID → all Link Nodes targeting that ID.
+        document_files      List[str]        Document paths for this case.
+        config              dict             Active configuration dict.
+        had_error           bool             True if any error() was called.
+        strict              bool             True if warnings are errors.
+        modified            bool             True if any mutation performed.
+        ltac_path           Optional[str]    Path of the loaded LTAC file.
+        config_path         Optional[str]    Path of the loaded config file.
+        stderr              TextIO           Errors/warnings/notify stream.
 
-    The maps all_definitions_for, citations, and links are populated by the parser
-    and kept consistent by the mutation methods (rename_id, restate_id, detach_id,
-    move_id).  Direct manipulation of the node forest (node.children, node.parent)
-    may leave these maps stale.
+    The maps all_definitions_for, citations, and links are populated by the
+    parser and kept consistent by the mutation methods (rename_id,
+    restate_id, detach_id, move_id). Direct manipulation of the node forest
+    (node.children, node.parent) may leave these maps stale.
     """
 
     def __init__(self, stderr=None):
@@ -650,9 +660,9 @@ class Case:
         """Parse LTAC from a string, using self.config.
 
         Does not read any files. Parses text, setting self.roots and the lookup
-        maps (all_definitions_for, citations, links). Sets self.ltac_path = None
-        (no backing file). Does not
-        run validation; call validate_ltac() separately if needed.
+        maps (all_definitions_for, citations, links).
+        Sets self.ltac_path = None (no backing file).
+        Does not run validation; call validate_ltac() separately if needed.
         Returns self for chaining.
 
         Call load_config() first if you need non-default configuration::
@@ -863,7 +873,8 @@ class Case:
         return defs[0].text if defs else None
 
     def citations_and_links(self, node: 'Node') -> List['Node']:
-        """Return all nodes in the forest that are citations of node or Link to node.
+        """Return all nodes in the forest that are citations of node
+        or Link to node.
 
         A single full-forest walk collects both:
         - Citation nodes whose identifier matches node.identifier
@@ -977,7 +988,8 @@ class Case:
     # ------------------------------------------------------------------
 
     def check_id_info(self) -> None:
-        """Validate identifier usage; warn about IDs cited but never declared."""
+        """Validate identifier usage; warn about IDs cited but never
+        declared."""
         all_ids = list(dict.fromkeys(list(self.all_definitions_for) + list(self.citations)))
         for ident in all_ids:
             n_decls = len(self.all_definitions_for.get(ident, []))
@@ -1004,13 +1016,15 @@ class Case:
         return ok
 
     def recalculate_cache(self) -> dict:
-        """Recompute all cached derived values from the node forest and return them.
+        """Recompute all cached derived values from the node forest and
+        return them.
 
         Returns a dict with keys matching the stored attribute names:
           'all_definitions_for' : Dict[str, List[Node]]
           'citations'           : Dict[str, List[Node]]
           'links'               : Dict[str, List[Node]]
-          'link_targets'        : Dict[int, Optional[Node]]  id(link_node) -> target
+          'link_targets'        : Dict[int, Optional[Node]]
+                                  id(link_node) -> target
 
         Most of its data is intentionally in LTAC order (via all_nodes).
         In most cases the order doesn't matter, but having a reproducible
@@ -1063,12 +1077,14 @@ class Case:
         }
 
     def doublecheck_cache(self, cache: Optional[dict] = None) -> bool:
-        """Recompute cached values and report any discrepancies against stored values.
+        """Recompute cached values and report any discrepancies against
+        stored values.
 
-        If cache is provided (a dict previously returned by recalculate_cache()),
-        it is used as the reference for correct values.  Otherwise
-        recalculate_cache() is called first.  Compares each result against the
-        corresponding stored value and reports mismatches via error().
+        If cache is provided (a dict previously returned by
+        recalculate_cache()), it is used as the reference for correct
+        values.  Otherwise recalculate_cache() is called first.  Compares
+        each result against the corresponding stored value and reports
+        mismatches via error().
         Returns True if everything matches, False if any discrepancy is found.
         Intended for internal testing via --doublecheck; does not modify any
         stored state.
@@ -1188,12 +1204,14 @@ class Case:
                     dfs(node)
 
     def check_reachability(self) -> None:
-        """Error for any package whose root is unreachable from the first element.
+        """Error for any package whose root is unreachable from the first
+        element.
 
-        Skipped when there is only one package (everything is trivially reachable).
-        Uses iterative DFS following structural children, citation declarations, and
-        Link targets.  Because all structural children of a reachable node are also
-        reachable, an unreachable package root implies the whole package is
+        Skipped when there is only one package (trivially all reachable).
+        Uses iterative DFS following structural children, citation
+        declarations, and Link targets.  Because all structural children
+        of a reachable node are also reachable, an unreachable package root
+        implies the whole package is
         unreachable; reporting just the root is sufficient.
         """
         if len(self.roots) < 2:
@@ -1302,7 +1320,8 @@ class Case:
             root.write_ltac_subtree(out)
 
     def needs_support(self) -> List['Node']:
-        """Return all nodes in the forest that carry the {needssupport} option."""
+        """Return all nodes in the forest that carry the
+        {needssupport} option."""
         return [n for n in self.all_nodes_fast() if 'needssupport' in n.options]
 
     def _make_temp(self, path: str, content: str,
@@ -1382,12 +1401,13 @@ class Case:
             pass
 
     def commit_updates(self, pairs: List[Tuple[str, str]]) -> None:
-        """Atomically update files by backing up originals and moving in new versions.
+        """Atomically update files by backing up originals and moving in
+        new versions.
 
-        *pairs* is a list of (tmp_path, final_path).  A timestamped backup snapshot
-        is first created under .backups/ next to the LTAC file, then the temp files
-        are moved to their final locations.  This minimises the window when files
-        are absent.
+        *pairs* is a list of (tmp_path, final_path).  A timestamped backup
+        snapshot is first created under .backups/ next to the LTAC file,
+        then the temp files are moved to their final locations.  This
+        minimises the window when files are absent.
         """
         notify("Updating " + " ".join(os.path.basename(fp) for _, fp in pairs))
         self._make_backup(pairs)
@@ -1424,9 +1444,11 @@ class Case:
         return tmp
 
     def save_ltac(self, path: Optional[str] = None) -> None:
-        """Write the LTAC forest to disk using the safe backup+atomic-replace mechanism.
+        """Write the LTAC forest to disk using the safe
+        backup+atomic-replace mechanism.
 
-        If path is given, writes to that path; otherwise writes to self.ltac_path.
+        If path is given, writes to that path; otherwise writes to
+        self.ltac_path.
         Panics if no path is available.  On success, clears self.ltac_modified.
         """
         target = path or self.ltac_path
@@ -1448,7 +1470,8 @@ class Case:
     # ------------------------------------------------------------------
 
     def check_element_coverage(self, seen_element_ids: set) -> None:
-        """Warn about every defined element with no corresponding element selector."""
+        """Warn about every defined element with no corresponding
+        element selector."""
         for ident in self.all_definitions_for:
             if ident not in seen_element_ids:
                 self.warn(f"element {ident!r} has no 'element' selector in any processed file")
@@ -1540,7 +1563,8 @@ class Case:
         return (tmp, path), seen
 
     def fix_misplaced_documents(self) -> bool:
-        """Fix misplaced element regions across all document_files in one commit.
+        """Fix misplaced element regions across all document_files in
+        one commit.
 
         For each file in self.document_files, moves element regions to their
         correct LTAC order positions.  All changes (including LTAC if
@@ -1813,7 +1837,8 @@ class Case:
 
     def update_files(self, add_missing: bool = False,
                      strip: bool = False) -> bool:
-        """Atomically update document_files and LTAC (if modified) in one commit.
+        """Atomically update document_files and LTAC (if modified) in
+        one commit.
 
         Rewrites each file in self.document_files, and if self.ltac_modified is
         True also serialises the LTAC forest — all written to temp files first,
@@ -1968,7 +1993,8 @@ class Case:
         }
 
     def doc_files_stats(self) -> Optional[dict]:
-        """Return aggregated document statistics across all self.document_files.
+        """Return aggregated document statistics across all
+        self.document_files.
 
         Reads the files from disk, so the result reflects any transformations
         already saved.  Returns None if self.document_files is empty.
@@ -2063,7 +2089,8 @@ class Case:
         return ordered_ids, id_info
 
     def missing(self) -> List['Node']:
-        """Return LTAC elements that have no selector region in the document(s)."""
+        """Return LTAC elements that have no selector region in the
+        document(s)."""
         ordered_ids, _ = self._scan_document_elements()
         seen = {ident for ident, _, _ in ordered_ids}
         all_ids_ordered = [node for node in self.all_nodes()
@@ -2071,7 +2098,8 @@ class Case:
         return [node for node in all_ids_ordered if node.identifier not in seen]
 
     def empty(self) -> List[str]:
-        """Return identifiers of elements whose selector region contains no prose."""
+        """Return identifiers of elements whose selector region contains
+        no prose."""
         _, elem_info = self._scan_document_elements()
         return [
             ident for ident, info in elem_info.items()
@@ -2080,7 +2108,8 @@ class Case:
         ]
 
     def orphans(self) -> List[str]:
-        """Return identifiers of document selector regions not present in the LTAC."""
+        """Return identifiers of document selector regions not present
+        in the LTAC."""
         _, elem_info = self._scan_document_elements()
         return [ident for ident in elem_info if ident not in self.all_definitions_for]
 
@@ -2285,7 +2314,8 @@ class Case:
         self.ltac_modified = True
 
     def detach_id(self, target_id: str) -> None:
-        """Replace target_id's definition with a citation; promote subtree to new package.
+        """Replace target_id's definition with a citation; promote subtree
+        to new package.
 
         Panics if target_id is not defined, or if its definition is already a
         top-level package root (has no parent).
@@ -2361,7 +2391,8 @@ class Case:
         self.ltac_modified = True
 
     def sync_citations(self) -> int:
-        """Update cited/Link node text to match declaration text; return count changed."""
+        """Update cited/Link node text to match declaration text;
+        return count changed."""
         count = 0
         for node in self.all_nodes_fast():
             if not node.identifier or node.is_definition:
@@ -2660,7 +2691,8 @@ class Case:
         return _doc_state.seen_element_ids
 
     def render_ltac_txt(self, node_list, out: 'TextIO', sep: str = '') -> bool:
-        """Write node_list as raw LTAC text to out, normalizing indentation to depth 0.
+        """Write node_list as raw LTAC text to out, normalizing
+        indentation to depth 0.
 
         Returns False if node_list is empty.
         """
@@ -4897,7 +4929,8 @@ class _MutationAction(argparse.Action):
 
 
 def parse_args(args=None) -> argparse.Namespace:
-    """Build the argument parser, define all flags, and parse args (or sys.argv)."""
+    """Build the argument parser, define all flags, and parse args
+    (or sys.argv)."""
     parser = argparse.ArgumentParser(
         prog='verocase',
         description='Process assurance case LTAC file and update documentation files (Markdown/HTML)',
