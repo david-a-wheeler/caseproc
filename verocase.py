@@ -4777,14 +4777,16 @@ Triggering the full CLI pipeline programmatically:
 Exceptions:
   class VerocaseError(Exception)  raised by panic() on fatal errors
 
-Data types and examples of their methods/properties:
-  @dataclass Node       one node in the LTAC tree. Some operations:
-    node.identifier     str: declared identifier, or '' if absent
-    node.is_citation    True if introduced with ^ (cross-package citation)
-    node.is_definition  True if neither a citation nor a Link (property)
-    node.pkg_root       package root Node (property)
-    node.subtree_count  total nodes in subtree including self (property)
-    node.to_ltac_line(depth_offset=0)  format node as an LTAC source line
+The key data structures are:
+
+* class Case: the full assurance case including configuration, LTAC filename,
+ references to loaded LTAC structure and list of document filenames. 
+ case.roots is the list of Nodes (the roots of the packages) in case.
+ case.definition_for("name") returns the Node for "name".
+* @dataclass Node: one node in the LTAC tree.
+ node.identifier gives the string identifier of node.
+
+Here are more examples of these types and their methods/properties:
   class Case  the full assurance case (LTAC + documents):
     case.had_error      bool: True if any error or warning-as-error occurred
     case.roots          List[Node]: package root nodes in LTAC order
@@ -4830,6 +4832,13 @@ Data types and examples of their methods/properties:
                         rewrites document_files and LTAC (if ltac_modified);
                         works with empty document_files (LTAC-only update)
     case.check_element_coverage(seen_element_ids)  warn about uncovered elements
+  @dataclass Node       one node in the LTAC tree. Some operations:
+    node.identifier     str: declared identifier, or '' if absent
+    node.is_citation    True if introduced with ^ (cross-package citation)
+    node.is_definition  True if neither a citation nor a Link (property)
+    node.pkg_root       package root Node (property)
+    node.subtree_count  total nodes in subtree including self (property)
+    node.to_ltac_line(depth_offset=0)  format node as an LTAC source line
 
 Standalone helpers:
   DEFAULT_CONFIG        dict of built-in configuration defaults
