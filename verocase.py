@@ -470,6 +470,27 @@ class Node:
             stack.extend(n.children)
         return count
 
+    def has_claim_descendant(self, registry: Dict[str, 'Node'], seen: set) -> bool:
+        """Return True if this node has any Claim descendant, following citations.
+
+        `seen` tracks visited declaration identifiers to avoid re-traversal
+        (circularity has already been checked before stats are computed).
+        """
+        for child in self.children:
+            if child.node_type == 'Claim':
+                return True
+            if child.is_citation and child.identifier:
+                decl = registry.get(child.identifier)
+                if decl is not None and child.identifier not in seen:
+                    seen.add(child.identifier)
+                    if decl.node_type == 'Claim':
+                        return True
+                    if decl.has_claim_descendant(registry, seen):
+                        return True
+            elif child.is_definition and child.has_claim_descendant(registry, seen):
+                return True
+        return False
+
     def to_ltac_line(self, depth_offset: int = 0) -> str:
         """Format this node as an LTAC source line (without trailing newline).
 
@@ -1484,7 +1505,7 @@ class Case:
                             leaf_claims += 1
                     if node.node_type == 'Claim':
                         seen = {node.identifier} if node.identifier else set()
-                        if not _has_claim_descendant(node, self.registry, seen):
+                        if not node.has_claim_descendant(self.registry, seen):
                             bottommost_claims += 1
             pkg_sizes_full.append((size_full, root.identifier or '(unnamed)'))
 
@@ -4842,29 +4863,6 @@ def _mark_needs_support(candidate_ids: List[str],
 # ---------------------------------------------------------------------------
 # Statistics
 # ---------------------------------------------------------------------------
-
-def _has_claim_descendant(node: Node, registry: Dict[str, Node], seen: set) -> bool:
-    """Return True if node has any Claim descendant, following citations.
-
-    `seen` tracks visited declaration identifiers to avoid re-traversal
-    (circularity has already been checked before stats are computed).
-    """
-    for child in node.children:
-        if child.node_type == 'Claim':
-            return True
-        if child.is_citation and child.identifier:
-            decl = registry.get(child.identifier)
-            if decl is not None and child.identifier not in seen:
-                seen.add(child.identifier)
-                if decl.node_type == 'Claim':
-                    return True  # citation IS a Claim; no need to follow further
-                if _has_claim_descendant(decl, registry, seen):
-                    return True
-        elif child.is_definition and _has_claim_descendant(child, registry, seen):
-            return True
-    return False
-
-
 
 
 def print_stats(ltac_stats: dict, doc_stats: Optional[dict],
