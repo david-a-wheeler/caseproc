@@ -901,7 +901,71 @@ class Case:
         set, else return all roots.  ('*' is handled at dispatch time before
         calling here.)
         """
-        return _resolve_element(element_id, self, current)
+        return self._resolve_element(element_id, current)
+
+    def _resolve_element(self,
+                         element_id: Optional[str],
+                         current_element: Optional['Node'],
+                         ) -> List['Node']:
+        """Return the list of nodes to render for the given element_id.
+
+        If element_id is given: look up via definition_for(); call error() and
+        return [] if not found.  If element_id is None: use current_element if
+        set, else return case.roots.  ('*' is handled at dispatch time before
+        calling here.)
+        """
+        if element_id is not None:
+            node = self.definition_for(element_id)
+            if node is None:
+                self.error(f"element {element_id!r} not found")
+                return []
+            return [node]
+        if current_element is not None:
+            return [current_element]
+        return list(self.roots)
+
+    def _mark_needs_support(self, candidate_ids: List[str]) -> int:
+        """Add 'needssupport' option to leaf elements with no existing assertion status.
+
+        Only modifies registry nodes that are leaves (no non-Link children), have no
+        existing assertion status, and have no ext_ref (a non-empty reference is treated
+        as providing support).  Assumption nodes implicitly carry 'assumed' and are
+        skipped.  Returns count of elements modified.
+        """
+        count = 0
+        for ident in candidate_ids:
+            node = self.registry.get(ident)
+            if node is None:
+                continue
+            real_children = [c for c in node.children if c.node_type != 'Link']
+            if real_children:
+                continue
+            if node.node_type == 'Assumption':
+                continue
+            if any(o in _ASSERTION_STATUSES for o in node.options):
+                continue
+            if node.ext_ref:
+                continue
+            node.options.append('needssupport')
+            count += 1
+        if count:
+            notify(f"Adding {count} needsSupport marking(s) to leaves in the LTAC file")
+        return count
+
+    def _collect_document_element_ids(self, path: str) -> set:
+        """Fast pre-scan: return the set of element IDs in path's element selector markers."""
+        ids = set()
+        try:
+            with open(path, encoding='utf-8', errors='replace') as f:
+                for line in f:
+                    m = _CASEPROC_REGION_RE.match(line.rstrip('\r\n'))
+                    if m:
+                        parts = m.group(1).split(None, 1)
+                        if len(parts) == 2 and parts[0] == 'element':
+                            ids.add(parts[1])
+        except OSError:
+            pass
+        return ids
 
     # ------------------------------------------------------------------
     # Validation
@@ -1269,7 +1333,7 @@ class Case:
         doc_format = detect_doc_format(path)
 
         # Pre-scan for existing element IDs used by single-pass smart placement.
-        existing_ids = _collect_document_element_ids(path) if add_missing else None
+        existing_ids = self._collect_document_element_ids(path) if add_missing else None
 
         dir_ = os.path.dirname(os.path.abspath(path))
         try:
@@ -1349,7 +1413,7 @@ class Case:
                 pairs.append(pair)
         all_ids_ordered = [node.identifier for node in self.all_nodes_fast()
                            if node.is_definition and node.identifier]
-        changed = _mark_needs_support(all_ids_ordered, self.registry)
+        changed = self._mark_needs_support(all_ids_ordered)
         if changed or self.ltac_modified:
             tmp = self._make_ltac_temp(self.ltac_path, self.ltac_line_ending)
             if tmp is not None:
@@ -2222,7 +2286,7 @@ class Case:
         elif display_type == 'ltac/html':
             return _render_or_all(element_id, self, render_html, current_element, self.config, out)
         elif display_type == 'ltac/txt':
-            nodes = _resolve_element(element_id, self, current_element)
+            nodes = self._resolve_element(element_id, current_element)
             if not nodes:
                 return False
             return self.render_ltac_txt(nodes, out)
@@ -2245,7 +2309,7 @@ class Case:
             if element_id == '*':
                 self.error(f"'*' is not valid with the '{display_type}' selector")
                 return False
-            nodes = _resolve_element(element_id, self, current_element)
+            nodes = self._resolve_element(element_id, current_element)
             if not nodes:
                 return False
             node = nodes[0]
@@ -3794,27 +3858,6 @@ def render_gsn_html(roots: List['Node'], config: dict, out: TextIO,
     return True
 
 
-def _resolve_element(
-    element_id: Optional[str],
-    case: 'Case',
-    current_element: Optional[Node],
-) -> List[Node]:
-    """Return the list of nodes to render for the given element_id.
-
-    If element_id is given: look up via definition_for(); call error() and return []
-    if not found.  If element_id is None: use current_element if set, else
-    return case.roots.  ('*' is handled at dispatch time before calling here.)
-    """
-    if element_id is not None:
-        node = case.definition_for(element_id)
-        if node is None:
-            case.error(f"element {element_id!r} not found")
-            return []
-        return [node]
-    if current_element is not None:
-        return [current_element]
-    return list(case.roots)
-
 
 def render_all_packages(all_roots: List[Node], render_fn, config: dict,
                         out: TextIO) -> bool:
@@ -3924,7 +3967,7 @@ def _render_or_all(
     """Resolve element_id and render to out, or render all packages if element_id is '*'."""
     if element_id == '*':
         return render_all_packages(case.roots, render_fn, config, out)
-    nodes = _resolve_element(element_id, case, current_element)
+    nodes = case._resolve_element(element_id, current_element)
     if not nodes:
         return False
     return render_fn(nodes, config, out)
@@ -5016,37 +5059,6 @@ Run --help-api for the public Python API summary (for library use).
 _ASSERTION_STATUSES = frozenset({'needssupport', 'assumed', 'axiomatic', 'defeated', 'ascited'})
 
 
-def _mark_needs_support(candidate_ids: List[str],
-                        registry: Dict[str, Node]) -> int:
-    """Add 'needssupport' option to leaf elements with no existing assertion status.
-
-    Only modifies registry nodes that are leaves (no non-Link children), have no
-    existing assertion status, and have no ext_ref (a non-empty reference is treated
-    as providing support).  Assumption nodes implicitly carry 'assumed' and are
-    skipped.  Returns count of elements modified.
-    """
-    count = 0
-    for ident in candidate_ids:
-        node = registry.get(ident)
-        if node is None:
-            continue
-        real_children = [c for c in node.children if c.node_type != 'Link']
-        if real_children:
-            continue
-        # Assumption nodes implicitly carry 'assumed'; don't add a conflicting status.
-        if node.node_type == 'Assumption':
-            continue
-        if any(o in _ASSERTION_STATUSES for o in node.options):
-            continue
-        # A non-empty reference (ext_ref) provides support; no needssupport needed.
-        if node.ext_ref:
-            continue
-        node.options.append('needssupport')
-        count += 1
-    if count:
-        notify(f"Adding {count} needsSupport marking(s) to leaves in the LTAC file")
-    return count
-
 
 # ---------------------------------------------------------------------------
 # Statistics
@@ -5170,21 +5182,6 @@ def _is_element_region_terminator(line: str) -> bool:
 
 
 
-
-def _collect_document_element_ids(path: str) -> set:
-    """Fast pre-scan: return the set of element IDs in path's element selector markers."""
-    ids = set()
-    try:
-        with open(path, encoding='utf-8', errors='replace') as f:
-            for line in f:
-                m = _CASEPROC_REGION_RE.match(line.rstrip('\r\n'))
-                if m:
-                    parts = m.group(1).split(None, 1)
-                    if len(parts) == 2 and parts[0] == 'element':
-                        ids.add(parts[1])
-    except OSError:
-        pass
-    return ids
 
 
 # I/O buffer size for reading and writing document files.
