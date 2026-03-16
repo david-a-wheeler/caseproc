@@ -4794,22 +4794,26 @@ Data types and examples of their methods/properties:
     case.ltac_modified  bool: set True by any mutation method; checked by
                         save_ltac_if_modified() and update_files() to decide
                         whether to rewrite the LTAC file. Set it True manually
-                        if you modify the tree directly (and call reset_cache()).
+                        if you modify the tree directly (and call
+                        reset_cache()).
     case.all_definitions_for  Dict[str, List[Node]] (ID → all defining Nodes)
     case.citations            Dict[str, List[Node]] (ID → all citation Nodes)
-    case.links                Dict[str, List[Node]] (ID → all Link Nodes targeting it)
+    case.links          Dict[str, List[Node]] (ID → all Link Nodes targeting it)
     # Tree traversal
     case.all_nodes()         DFS generator, LTAC order
     case.all_nodes_fast()    DFS generator, deterministic but not LTAC order
     # Lookups
-    case.definition_for(ident) -> Optional[Node]  (None if unknown; first if duplicated)
+    case.definition_for(ident) -> Optional[Node]
+                        (None if unknown; first if duplicated)
     case.declaring_package_for(ident) -> Optional[Node]
     case.statement_for(ident) -> Optional[str]
-    case.citations_and_links(node) -> List[Node]  (citation + Link nodes referencing node)
+    case.citations_and_links(node) -> List[Node]
+                        (citation + Link nodes referencing node)
     case.parents(nodes) -> List[Node]  (deduplicated parents of given nodes)
     case.needs_support() -> List[Node]  (nodes with {needssupport} option)
     # Validation
-    case.validate_ltac() -> bool  (circularities, reachability, identifier rules)
+    case.validate_ltac() -> bool
+                        (circularities, reachability, identifier rules)
     # Mutations — each sets ltac_modified = True
     case.rename_id(old, new)
     case.restate_id(ident, new_text)
