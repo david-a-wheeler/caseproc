@@ -985,6 +985,47 @@ class Case:
             if n_cites > 0 and n_decls == 0:
                 self.warn(f"{ident}: cited but never declared")
 
+    def reindex(self) -> None:
+        """Rebuild all_definitions_for, citations, and links from the current node forest.
+
+        Call after directly manipulating node.children or node.parent to bring
+        the index maps back in sync with the tree.
+        """
+        self.all_definitions_for = {}
+        self.citations = {}
+        self.links = {}
+
+        # Pass 1: collect definitions and citations.
+        for node in self.all_nodes():
+            if not node.identifier:
+                continue
+            if node.is_citation:
+                self.citations.setdefault(node.identifier, []).append(node)
+            elif node.node_type != 'Link':
+                self.all_definitions_for.setdefault(node.identifier, []).append(node)
+
+        # Pass 2: resolve link_target on all Link nodes.
+        for node in self.all_nodes():
+            if node.node_type != 'Link' or not node.identifier:
+                continue
+            node.link_target = None
+            target_id = node.identifier
+            if node.is_citation:
+                # Link ^Foo: target is the ^Foo citation in the same package.
+                pkg = node.pkg_root
+                cite_node = next(
+                    (c for c in self.citations.get(target_id, []) if c.pkg_root is pkg),
+                    None)
+                if cite_node is not None:
+                    node.link_target = cite_node
+                    self.links.setdefault(target_id, []).append(node)
+            else:
+                # Link Foo: target is the definition.
+                defs = self.all_definitions_for.get(target_id, [])
+                if defs:
+                    node.link_target = defs[0]
+                    self.links.setdefault(target_id, []).append(node)
+
     def check_circularities(self) -> None:
         """Panic if any circular dependency exists in the LTAC model.
 
@@ -1005,7 +1046,14 @@ class Case:
                         yield target
                 elif child.node_type == 'Link':
                     if child.link_target is not None:
-                        yield child.link_target
+                        link_dest = child.link_target
+                        if link_dest.is_citation:
+                            # Link ^Foo: citation is a local alias; follow to definition.
+                            defn = self.definition_for(link_dest.identifier)
+                            if defn is not None:
+                                yield defn
+                        else:
+                            yield link_dest
                 else:
                     yield child
 
@@ -1068,7 +1116,14 @@ class Case:
                         stack.append(target)
                 elif child.node_type == 'Link':
                     if child.link_target is not None:
-                        stack.append(child.link_target)
+                        link_dest = child.link_target
+                        if link_dest.is_citation:
+                            # Link ^Foo: citation is a local alias; follow to definition.
+                            target = self.definition_for(link_dest.identifier)
+                            if target is not None:
+                                stack.append(target)
+                        else:
+                            stack.append(link_dest)
                 else:
                     stack.append(child)
 
@@ -2623,10 +2678,15 @@ class _LTACParser:
         if self._stack or self._current_pkg:
             self._finalize_package()
 
-        # Warn about any Link nodes whose targets were never declared.
+        # Warn about any Link nodes whose targets were never found.
         for target_id, pending in self._pending_links.items():
             for link_node in pending:
-                self._case.warn(f"line {link_node.lineno}: Link target {target_id!r} not found")
+                if link_node.is_citation:
+                    self._case.warn(f"line {link_node.lineno}: Link ^{target_id!r}:"
+                                    f" citation not found in package")
+                else:
+                    self._case.warn(f"line {link_node.lineno}: Link {target_id!r}:"
+                                    f" definition not found")
 
         # Warn about declarations with no statement when some declarations do
         # have statements (i.e. the mix is inconsistent; pure-ID demos are ok).
@@ -2728,15 +2788,34 @@ class _LTACParser:
         """Register the node's identifier, attach it to the tree, and push it onto the stack."""
         if node.node_type == 'Link':
             target_id = node.identifier
-            if target_id in self.all_definitions_for:
-                node.link_target = self.all_definitions_for[target_id][0]
-                canonical = self._first_statements.get(target_id)
-                if node.text and canonical is not None and node.text != canonical:
-                    self._case.warn(f"line {lineno}: Link {target_id!r}: statement {node.text!r}"
-                                    f" differs from declaration; use --sync to sync")
-                self.links.setdefault(target_id, []).append(node)
+            if node.is_citation:
+                # Link ^Foo: target is the ^Foo citation in the same package.
+                pkg_root_node = self._stack[0][1] if self._stack else None
+                cite_node = next(
+                    (c for c in self.citations.get(target_id, [])
+                     if pkg_root_node is not None and c.pkg_root is pkg_root_node),
+                    None)
+                if cite_node is not None:
+                    node.link_target = cite_node
+                    if node.text and cite_node.text and node.text != cite_node.text:
+                        self._case.warn(f"line {lineno}: Link ^{target_id!r}: statement"
+                                        f" {node.text!r} differs from citation;"
+                                        f" use --sync to sync")
+                    self.links.setdefault(target_id, []).append(node)
+                else:
+                    self._pending_links.setdefault(target_id, []).append(node)
             else:
-                self._pending_links.setdefault(target_id, []).append(node)
+                # Link Foo: target is the definition.
+                if target_id in self.all_definitions_for:
+                    node.link_target = self.all_definitions_for[target_id][0]
+                    canonical = self._first_statements.get(target_id)
+                    if node.text and canonical is not None and node.text != canonical:
+                        self._case.warn(f"line {lineno}: Link {target_id!r}: statement"
+                                        f" {node.text!r} differs from declaration;"
+                                        f" use --sync to sync")
+                    self.links.setdefault(target_id, []).append(node)
+                else:
+                    self._pending_links.setdefault(target_id, []).append(node)
         elif node.identifier:
             ident = node.identifier
             # Type must be consistent across all uses of an ID.
@@ -2780,16 +2859,46 @@ class _LTACParser:
             # Populate maps (after statement tracking so _first_statements is set).
             if node.is_citation:
                 self.citations.setdefault(ident, []).append(node)
+                # Resolve any pending Link ^Foo nodes in the same package.
+                pending = self._pending_links.get(ident)
+                if pending:
+                    current_pkg = self._stack[0][1] if self._stack else None
+                    still_pending = []
+                    for link_node in pending:
+                        if (link_node.is_citation
+                                and current_pkg is not None
+                                and link_node.pkg_root is current_pkg):
+                            link_node.link_target = node
+                            if link_node.text and node.text and link_node.text != node.text:
+                                self._case.warn(f"line {link_node.lineno}: Link ^{ident!r}:"
+                                                f" statement {link_node.text!r} differs from"
+                                                f" citation; use --sync to sync")
+                            self.links.setdefault(ident, []).append(link_node)
+                        else:
+                            still_pending.append(link_node)
+                    if still_pending:
+                        self._pending_links[ident] = still_pending
+                    else:
+                        del self._pending_links[ident]
             else:
                 self.all_definitions_for.setdefault(ident, []).append(node)
                 canonical = self._first_statements.get(ident)
-                for link_node in self._pending_links.pop(ident, []):
-                    link_node.link_target = node
-                    if link_node.text and canonical is not None and link_node.text != canonical:
-                        self._case.warn(f"line {link_node.lineno}: Link {ident!r}:"
-                                        f" statement {link_node.text!r} differs from declaration;"
-                                        f" use --sync to sync")
-                    self.links.setdefault(ident, []).append(link_node)
+                # Only resolve Link Foo (not Link ^Foo) from pending; the latter is
+                # resolved when its citation is encountered.
+                all_pending = self._pending_links.pop(ident, [])
+                still_pending = []
+                for link_node in all_pending:
+                    if link_node.is_citation:
+                        still_pending.append(link_node)
+                    else:
+                        link_node.link_target = node
+                        if link_node.text and canonical is not None and link_node.text != canonical:
+                            self._case.warn(f"line {link_node.lineno}: Link {ident!r}:"
+                                            f" statement {link_node.text!r} differs from"
+                                            f" declaration; use --sync to sync")
+                        self.links.setdefault(ident, []).append(link_node)
+                if still_pending:
+                    self._pending_links[ident] = still_pending
 
         # Pop stack until top's depth < current depth
         while self._stack and self._stack[-1][0] >= node.depth:
@@ -2807,6 +2916,12 @@ class _LTACParser:
 
         if self._stack:
             parent_node = self._stack[-1][1]
+            # Citations and Links are leaf nodes; children are never allowed.
+            if parent_node.is_citation or parent_node.node_type == 'Link':
+                kind = 'citation' if parent_node.is_citation else 'Link'
+                self._case.error(f"line {lineno}: {node.node_type} cannot be a child of"
+                                 f" {kind} {parent_node.identifier!r}")
+                return
             if (node.node_type in ('Claim', 'Strategy')
                     and parent_node.node_type in _NON_INFERENTIAL_TYPES):
                 self._case.warn(f"line {lineno}: {node.node_type} should not be"
