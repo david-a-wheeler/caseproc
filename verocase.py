@@ -5285,9 +5285,7 @@ def run(args: argparse.Namespace) -> bool:
     case.ltac_line_ending = ltac_line_ending
 
     # LTAC parse complete. Perform validations needing all LTAC data
-    case.check_id_info()
-    case.check_circularities()
-    case.check_reachability()
+    case.validate_ltac()
 
     # Detect analysis options early, before any file-modifying operations,
     # so we can reject illegal combinations before any writes happen.
@@ -5333,10 +5331,7 @@ def run(args: argparse.Namespace) -> bool:
                 case.detach_id(a)
             elif op == 'move':
                 case.move_id(a, b)
-        case.check_id_info()
-        case.check_circularities()
-        case.check_reachability()
-        if case.had_error:
+        if not case.validate_ltac():
             panic("LTAC validation failed after mutations; no files updated")
 
     _NO_FILES_MSG = (
