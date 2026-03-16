@@ -208,7 +208,7 @@ def make_mermaid_id(identifier: str, counter: list) -> str:
 
 
 _HTML_ESCAPE_TABLE = str.maketrans({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})
-_EMPTY: dict = {}           # shared empty dict for .get(key, _EMPTY).get(...)
+
 
 
 def escape_html(text: str) -> str:
@@ -421,6 +421,9 @@ class Node:
     id_inferred : bool
         True when ``identifier`` was auto-generated from ``text`` rather than
         declared explicitly.  Defaults to False.
+    lineno : Optional[int]
+        1-based source line number of this node in the LTAC file, or None if
+        not set.
     pkg_root : Node (property)
         The package root (depth 0) ancestor of this node, found by walking
         parent links.  For package root nodes, ``pkg_root is self``.
@@ -437,6 +440,7 @@ class Node:
     link_target: Optional['Node']
     diagram_id: str
     id_inferred: bool = False
+    lineno: Optional[int] = None
 
     @property
     def is_definition(self) -> bool:
@@ -479,7 +483,7 @@ class Node:
         for child in self.children:
             child.write_ltac_subtree(out, depth_offset)
 
-    def has_claim_descendant(self, registry: Dict[str, 'Node'], seen: set) -> bool:
+    def has_claim_descendant(self, case: 'Case', seen: set) -> bool:
         """Return True if this node has any Claim descendant, following citations.
 
         `seen` tracks visited declaration identifiers to avoid re-traversal
@@ -489,14 +493,14 @@ class Node:
             if child.node_type == 'Claim':
                 return True
             if child.is_citation and child.identifier:
-                decl = registry.get(child.identifier)
+                decl = case.definition_for(child.identifier)
                 if decl is not None and child.identifier not in seen:
                     seen.add(child.identifier)
                     if decl.node_type == 'Claim':
                         return True
-                    if decl.has_claim_descendant(registry, seen):
+                    if decl.has_claim_descendant(case, seen):
                         return True
-            elif child.is_definition and child.has_claim_descendant(registry, seen):
+            elif child.is_definition and child.has_claim_descendant(case, seen):
                 return True
         return False
 
@@ -569,24 +573,31 @@ class Case:
         case = Case(stderr=buf).load(validate=False) # redirect errors, skip validation
 
     Attributes set by __init__ (all have safe defaults; no I/O):
-        roots          List[Node]       Package root nodes in file order.
-        registry       Dict[str,Node]   Maps every declared identifier to its Node.
-        id_info        Dict[str,dict]   Cross-reference metadata per identifier.
-        document_files List[str]        Document paths associated with this case.
-        config         dict             Active configuration dict.
-        had_error      bool             True if any error() was called.
-        strict         bool             True if warnings are escalated to errors.
-        modified       bool             True if any mutation method was called.
-        ltac_path      Optional[str]    Path of the loaded LTAC file.
-        config_path    Optional[str]    Path of the loaded config file.
-        stderr         TextIO           Stream for error/warning/notify output.
+        roots               List[Node]              Package root nodes in file order.
+        all_definitions_for Dict[str,List[Node]]    ID → all defining Nodes (incl. dups).
+        citations           Dict[str,List[Node]]    ID → all citation Nodes for that ID.
+        links               Dict[str,List[Node]]    ID → all Link Nodes targeting that ID.
+        document_files      List[str]               Document paths associated with this case.
+        config              dict                    Active configuration dict.
+        had_error           bool                    True if any error() was called.
+        strict              bool                    True if warnings are escalated to errors.
+        modified            bool                    True if any mutation method was called.
+        ltac_path           Optional[str]           Path of the loaded LTAC file.
+        config_path         Optional[str]           Path of the loaded config file.
+        stderr              TextIO                  Stream for error/warning/notify output.
+
+    The maps all_definitions_for, citations, and links are populated by the parser
+    and kept consistent by the mutation methods (rename_id, restate_id, detach_id,
+    move_id).  Direct manipulation of the node forest (node.children, node.parent)
+    may leave these maps stale.
     """
 
     def __init__(self, stderr=None):
-        self.roots:          List['Node']       = []
-        self.registry:       Dict[str, 'Node']  = {}
-        self.id_info:        Dict[str, dict]    = {}
-        self.document_files: List[str]          = []
+        self.roots:               List['Node']            = []
+        self.all_definitions_for: Dict[str, List['Node']] = {}
+        self.citations:        Dict[str, List['Node']] = {}
+        self.links:            Dict[str, List['Node']] = {}
+        self.document_files:   List[str]               = []
         self.config:         dict               = dict(DEFAULT_CONFIG)
         self.had_error:      bool               = False
         self.strict:         bool               = False
@@ -639,8 +650,9 @@ class Case:
     def load_ltac_string(self, text: str) -> 'Case':
         """Parse LTAC from a string, using self.config.
 
-        Does not read any files. Parses text, setting self.roots, self.registry,
-        and self.id_info. Sets self.ltac_path = None (no backing file). Does not
+        Does not read any files. Parses text, setting self.roots and the lookup
+        maps (all_definitions_for, citations, links). Sets self.ltac_path = None
+        (no backing file). Does not
         run validation; call validate_ltac() separately if needed.
         Returns self for chaining.
 
@@ -826,23 +838,15 @@ class Case:
         """Return the definition Node for ident, or None if absent or duplicated.
 
         Returns None when there are zero declarations (ident unknown) or more
-        than one declaration (broken LTAC).  Callers that need to handle
-        duplicate declarations explicitly should use definitions_for() instead.
+        than one declaration (broken LTAC).  Callers that need all declarations
+        including duplicates should access self.all_definitions_for[ident] directly.
         """
-        if self.id_info.get(ident, _EMPTY).get('declarations', 0) != 1:
-            return None
-        return self.registry.get(ident)
-
-    def definitions_for(self, ident: str) -> List['Node']:
-        """Return all definition Nodes for ident, including duplicates.
-
-        A well-formed LTAC has exactly one definition per identifier; load
-        warnings flag extras.  This method walks the full forest so it can
-        return every declaration node even when the registry only holds the
-        first one.  Returns [] when ident is unknown.
-        """
-        return [n for n in self.all_nodes_fast()
-                if n.identifier == ident and n.is_definition]
+        defs = self.all_definitions_for.get(ident, [])
+        if len(defs) == 1:
+            return defs[0]
+        if len(defs) > 1:
+            self.error(f"{ident!r}: multiple declarations")
+        return None
 
     def declaring_package_for(self, ident: str) -> Optional['Node']:
         """Return the package root Node that declares ident, or None.
@@ -856,7 +860,8 @@ class Case:
 
     def statement_for(self, ident: str) -> Optional[str]:
         """Return the canonical statement text for ident, or None."""
-        return self.id_info.get(ident, _EMPTY).get('statement')
+        defs = self.all_definitions_for.get(ident, [])
+        return defs[0].text if defs else None
 
     def citations_and_links(self, node: 'Node') -> List['Node']:
         """Return all nodes in the forest that are citations of node or Link to node.
@@ -896,7 +901,7 @@ class Case:
                   current: Optional['Node'] = None) -> List['Node']:
         """Return the node(s) for element_id, with fallback to current or all roots.
 
-        If element_id is given, look it up in the registry (error and return []
+        If element_id is given, look it up via definition_for (error and return []
         if not found).  If element_id is None, return [current] when current is
         set, else return all roots.  ('*' is handled at dispatch time before
         calling here.)
@@ -927,14 +932,14 @@ class Case:
     def _mark_needs_support(self, candidate_ids: List[str]) -> int:
         """Add 'needssupport' option to leaf elements with no existing assertion status.
 
-        Only modifies registry nodes that are leaves (no non-Link children), have no
+        Only modifies defined nodes that are leaves (no non-Link children), have no
         existing assertion status, and have no ext_ref (a non-empty reference is treated
         as providing support).  Assumption nodes implicitly carry 'assumed' and are
         skipped.  Returns count of elements modified.
         """
         count = 0
         for ident in candidate_ids:
-            node = self.registry.get(ident)
+            node = self.definition_for(ident)
             if node is None:
                 continue
             real_children = [c for c in node.children if c.node_type != 'Link']
@@ -973,8 +978,11 @@ class Case:
 
     def check_id_info(self) -> None:
         """Validate identifier usage; warn about IDs cited but never declared."""
-        for ident, info in self.id_info.items():
-            if info['citations'] > 0 and info['declarations'] == 0:
+        all_ids = set(self.all_definitions_for) | set(self.citations)
+        for ident in all_ids:
+            n_decls = len(self.all_definitions_for.get(ident, []))
+            n_cites = len(self.citations.get(ident, []))
+            if n_cites > 0 and n_decls == 0:
                 self.warn(f"{ident}: cited but never declared")
 
     def check_circularities(self) -> None:
@@ -982,7 +990,7 @@ class Case:
 
         Performs an iterative DFS over the logical dependency graph.  For each
         node, its logical successors are its structural children (non-citation,
-        non-Link), any cited child's declared node (^ID → registry[ID]), and
+        non-Link), any cited child's defined node (^ID → definition_for(ID)), and
         any Link child's link_target.  A node encountered while already on the
         current DFS path (a back-edge) means circular reasoning is possible.
         """
@@ -1029,9 +1037,10 @@ class Case:
         for root in self.roots:
             if id(root) not in done:
                 dfs(root)
-        for node in self.registry.values():
-            if id(node) not in done:
-                dfs(node)
+        for defs in self.all_definitions_for.values():
+            for node in defs:
+                if id(node) not in done:
+                    dfs(node)
 
     def check_reachability(self) -> None:
         """Error for any package whose root is unreachable from the first element.
@@ -1284,8 +1293,8 @@ class Case:
     # ------------------------------------------------------------------
 
     def check_element_coverage(self, seen_element_ids: set) -> None:
-        """Warn about every registry element with no corresponding element selector."""
-        for ident in self.registry:
+        """Warn about every defined element with no corresponding element selector."""
+        for ident in self.all_definitions_for:
             if ident not in seen_element_ids:
                 self.warn(f"element {ident!r} has no 'element' selector in any processed file")
 
@@ -1527,7 +1536,7 @@ class Case:
                       if node.is_definition and node.identifier]
         ltac_pos = {ident: i for i, ident in enumerate(ltac_order)}
 
-        doc_with_regions = [ident for ident in region_order if ident in self.registry]
+        doc_with_regions = [ident for ident in region_order if ident in self.all_definitions_for]
         if not doc_with_regions:
             return None
 
@@ -1654,7 +1663,7 @@ class Case:
         Rewrites each file in self.document_files, and if self.ltac_modified is
         True also serialises the LTAC forest — all written to temp files first,
         then committed together in a single backup+atomic-replace operation.
-        Clears self.ltac_modified on success.  Warns about any registry element
+        Clears self.ltac_modified on success.  Warns about any defined element
         not covered by an element selector.  Returns not self.had_error.
         """
         pairs = []
@@ -1714,7 +1723,7 @@ class Case:
                             leaf_claims += 1
                     if node.node_type == 'Claim':
                         seen = {node.identifier} if node.identifier else set()
-                        if not node.has_claim_descendant(self.registry, seen):
+                        if not node.has_claim_descendant(self, seen):
                             bottommost_claims += 1
             pkg_sizes_full.append((size_full, root.identifier or '(unnamed)'))
 
@@ -1918,7 +1927,7 @@ class Case:
     def orphans(self) -> List[str]:
         """Return identifiers of document selector regions not present in the LTAC."""
         _, elem_info = self._scan_document_elements()
-        return [ident for ident in elem_info if ident not in self.registry]
+        return [ident for ident in elem_info if ident not in self.all_definitions_for]
 
     def misplaced(self) -> list:
         """Return elements whose document order differs from LTAC order."""
@@ -1928,7 +1937,7 @@ class Case:
 
         ordered_ids, elem_info = self._scan_document_elements()
         doc_entries = [(ident, filepath, lineno) for ident, filepath, lineno in ordered_ids
-                       if ident in self.registry]
+                       if ident in self.all_definitions_for]
 
         if not doc_entries:
             return []
@@ -2022,7 +2031,7 @@ class Case:
     def render_info(self, element_id: str, out: 'TextIO', sep: str = '') -> bool:
         """Write a human-readable context report for element_id to out.
 
-        Returns False and calls error() if element_id is not in registry.
+        Returns False and calls error() if element_id is not defined.
         sep is written before the report when non-empty.
         """
         node = self.definition_for(element_id)
@@ -2063,9 +2072,10 @@ class Case:
         desc_count = node.subtree_count
         out.write(f"\nDescendants: {desc_count} (including self, all descendants, citations, and links in subtree)")
 
-        info = self.id_info.get(element_id, {})
-        citation_count = info.get('citations', 0)
-        citing_pkg_ids = info.get('citing_pkg_ids', [])
+        citation_nodes = self.citations.get(element_id, [])
+        citation_count = len(citation_nodes)
+        citing_pkg_ids = list(dict.fromkeys(
+            n.pkg_root.identifier for n in citation_nodes if n.pkg_root.identifier))
         out.write(f"\nCitations: {citation_count}")
         if citation_count > 0:
             for citing_pkg_id in citing_pkg_ids:
@@ -2091,35 +2101,32 @@ class Case:
         """Rename identifier old to new throughout the LTAC forest.
 
         Panics if old is not declared or new is already declared.
-        Updates all node identifiers, the registry, id_info, and cross-references.
+        Updates all node identifiers and the lookup maps.
         """
-        if old not in self.registry:
+        if old not in self.all_definitions_for:
             self.panic(f"--rename: {old!r} is not a declared identifier")
-        if new in self.registry:
+        if new in self.all_definitions_for:
             self.panic(f"--rename: {new!r} is already declared")
         for node in self.all_nodes_fast():
             if node.identifier == old:
                 node.identifier = new
-        self.registry[new] = self.registry.pop(old)
-        self.id_info[new] = self.id_info.pop(old)
-        for entry in self.id_info.values():
-            if entry.get('decl_pkg_id') == old:
-                entry['decl_pkg_id'] = new
-            entry['citing_pkg_ids'] = [new if x == old else x
-                                       for x in entry.get('citing_pkg_ids', [])]
+        self.all_definitions_for[new] = self.all_definitions_for.pop(old)
+        if old in self.citations:
+            self.citations[new] = self.citations.pop(old)
+        if old in self.links:
+            self.links[new] = self.links.pop(old)
         self.ltac_modified = True
 
     def restate_id(self, label: str, stmt: str) -> None:
-        """Update the statement text for label on all nodes and in id_info.
+        """Update the statement text for label on all nodes.
 
         Panics if label is not declared.
         """
-        if label not in self.registry:
+        if label not in self.all_definitions_for:
             self.panic(f"--restate: {label!r} is not a declared identifier")
         for node in self.all_nodes_fast():
             if node.identifier == label:
                 node.text = stmt
-        self.id_info[label]['statement'] = stmt
         self.ltac_modified = True
 
     def detach_id(self, target_id: str) -> None:
@@ -2156,14 +2163,7 @@ class Case:
         node.recalc_depths(0)
         self.roots.append(node)
 
-        new_pkg_id = node.identifier
-        old_pkg_id = _decl_pkg_id_for(self.id_info, node.identifier)
-        self._update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id)
-
-        self.id_info[target_id]['citations'] = self.id_info[target_id].get('citations', 0) + 1
-        citing_pkg = cited.pkg_root.identifier
-        if citing_pkg and citing_pkg not in self.id_info[target_id].get('citing_pkg_ids', []):
-            self.id_info[target_id].setdefault('citing_pkg_ids', []).append(citing_pkg)
+        self.citations.setdefault(target_id, []).append(cited)
         self.ltac_modified = True
 
     def move_id(self, moving_id: str, dest_id: str) -> None:
@@ -2179,8 +2179,6 @@ class Case:
         if dest is None:
             self.panic(f"--move: {dest_id!r} is not defined")
 
-        old_pkg_id = _decl_pkg_id_for(self.id_info, moving_id)
-
         if node.parent is None:
             self.roots.remove(node)
         else:
@@ -2188,33 +2186,24 @@ class Case:
             node.parent = None
 
         cited_idx = None
+        cited_node = None
         for i, child in enumerate(dest.children):
             if child.is_citation and child.identifier == moving_id:
                 cited_idx = i
+                cited_node = child
                 break
 
         if cited_idx is not None:
             dest.children[cited_idx] = node
-            self.id_info[moving_id]['citations'] = max(
-                0, self.id_info[moving_id].get('citations', 1) - 1)
+            if cited_node in self.citations.get(moving_id, []):
+                self.citations[moving_id].remove(cited_node)
         else:
             dest.children.append(node)
 
         node.parent = dest
         node.recalc_depths(dest.depth + 1)
 
-        new_pkg_id = dest.pkg_root.identifier
-        self._update_pkg_id_for_subtree(node, old_pkg_id, new_pkg_id)
         self.ltac_modified = True
-
-    def _update_pkg_id_for_subtree(self, node: 'Node', old_pkg_id: str,
-                                   new_pkg_id: str) -> None:
-        """Update decl_pkg_id in id_info for node and all its descendants."""
-        for n in self.all_nodes_fast(node):
-            if n.identifier and n.identifier in self.id_info:
-                info = self.id_info[n.identifier]
-                if info.get('decl_pkg_id') == old_pkg_id:
-                    info['decl_pkg_id'] = new_pkg_id
 
     def sync_citations(self) -> int:
         """Update cited/Link node text to match declaration text; return count changed."""
@@ -2325,7 +2314,7 @@ class Case:
         Renders the element heading and any sub-selections listed in
         config['element_selections']. Updates state.current_id and
         state.seen_element_ids as a side-effect.
-        Returns False and calls error() if node_id is not in registry.
+        Returns False and calls error() if node_id is not defined.
         """
         if state is None:
             state = DocState()
@@ -2416,8 +2405,9 @@ class Case:
             _stubs_added = [0]
 
             _stub_case = Case()
-            _stub_case.registry = self.registry
-            _stub_case.id_info = self.id_info
+            _stub_case.all_definitions_for = self.all_definitions_for
+            _stub_case.citations = self.citations
+            _stub_case.links = self.links
             _stub_case.config = config
 
             def _write_stub(ident: str) -> None:
@@ -2603,26 +2593,23 @@ class _LTACParser:
     def parse(self, lines: List[str], config: Optional[dict] = None) -> None:
         """Parse LTAC lines and populate the Case passed to __init__.
 
-        Populates self._case.roots, self._case.registry, self._case.id_info.
-        Also sets self.registry and self.id_info for internal use during parsing.
+        Populates self._case.roots, self._case.all_definitions_for,
+        self._case.citations, and self._case.links.
         """
         self._warn_dubious_reference: bool = (config or {}).get('warn_dubious_reference', True)
-        self.registry: Dict[str, Node] = {}
-        self._anchor_seen: Dict[str, str] = {}  # anchor id -> first label that claimed it
-        # id_info[ident] = {
-        #   'declarations': int,       count of non-citation nodes with this ID
-        #   'citations':    int,       count of cited (^) nodes with this ID
-        #   'statement':    str|None,  first non-empty text seen for this ID
-        #   'decl_lineno':  int|None,  line of first declaration
-        # }
-        self.id_info: Dict[str, dict] = {}
+        self._anchor_seen:    Dict[str, str]       = {}  # anchor id -> first label that claimed it
+        self._node_types:     Dict[str, str]       = {}  # ident -> node_type on first use
+        self._first_statements: Dict[str, str]     = {}  # ident -> first non-empty text seen
+        self.all_definitions_for: Dict[str, List[Node]] = {}
+        self.citations:       Dict[str, List[Node]] = {}
+        self.links:           Dict[str, List[Node]] = {}
+        self._pending_links:  Dict[str, List[Node]] = {}
         self.results: List[Node] = []
         self.node_count: int = 0
         self._stack: List[Tuple[int, Node]] = []
         self._current_pkg: List[Node] = []
         self._pkg_root_lineno: Optional[int] = None
         self._id_counter: List[int] = [0]
-        self._links: List[Tuple[Node, int]] = []
         # For empty-statement check (item 4): track declarations that usually
         # carry a statement (non-Link, non-Relation, non-citation) and whether
         # any such declaration has a non-empty statement.
@@ -2636,9 +2623,10 @@ class _LTACParser:
         if self._stack or self._current_pkg:
             self._finalize_package()
 
-        # Resolve Link targets (done after full parse so forward refs work)
-        for node, lineno in self._links:
-            self._resolve_link(node, lineno)
+        # Warn about any Link nodes whose targets were never declared.
+        for target_id, pending in self._pending_links.items():
+            for link_node in pending:
+                self._case.warn(f"line {link_node.lineno}: Link target {target_id!r} not found")
 
         # Warn about declarations with no statement when some declarations do
         # have statements (i.e. the mix is inconsistent; pure-ID demos are ok).
@@ -2648,8 +2636,9 @@ class _LTACParser:
                                 f" (other declarations do)")
 
         self._case.roots = self.results
-        self._case.registry = self.registry
-        self._case.id_info = self.id_info
+        self._case.all_definitions_for = self.all_definitions_for
+        self._case.citations       = self.citations
+        self._case.links           = self.links
 
     def _parse_line(self, lineno: int, line: str) -> None:
         """Process a single LTAC source line, updating parser state."""
@@ -2712,6 +2701,7 @@ class _LTACParser:
             link_target=None,
             diagram_id=diagram_id,
             id_inferred=id_inferred,
+            lineno=lineno,
         )
         self.node_count += 1
 
@@ -2737,59 +2727,69 @@ class _LTACParser:
     def _attach_node(self, node: Node, lineno: int) -> None:
         """Register the node's identifier, attach it to the tree, and push it onto the stack."""
         if node.node_type == 'Link':
-            self._links.append((node, lineno))
-        elif node.identifier:
-            # Package root id: stack[0] is the root if the stack is non-empty;
-            # if empty, the current node is (or will become) the package root.
-            pkg_root_id = self._stack[0][1].identifier if self._stack else node.identifier
-            info = self.id_info.setdefault(node.identifier, {
-                'declarations':  0,
-                'citations':     0,
-                'statement':     None,
-                'decl_lineno':   None,
-                'decl_pkg_id':   None,   # pkg root id of the declaration
-                'citing_pkg_ids': [],    # pkg root ids that cite this id, in order
-                'node_type':     None,   # type on first use (declaration or citation)
-            })
-            # Type must be consistent across all uses of an ID.
-            if info['node_type'] is None:
-                info['node_type'] = node.node_type
-            elif info['node_type'] != node.node_type:
-                self._case.error(f"line {lineno}: {node.identifier!r}: type {node.node_type!r}"
-                                 f" conflicts with earlier use as {info['node_type']!r}")
-            if node.is_citation:
-                info['citations'] += 1
-                if pkg_root_id and pkg_root_id not in info['citing_pkg_ids']:
-                    info['citing_pkg_ids'].append(pkg_root_id)
+            target_id = node.identifier
+            if target_id in self.all_definitions_for:
+                node.link_target = self.all_definitions_for[target_id][0]
+                canonical = self._first_statements.get(target_id)
+                if node.text and canonical is not None and node.text != canonical:
+                    self._case.warn(f"line {lineno}: Link {target_id!r}: statement {node.text!r}"
+                                    f" differs from declaration; use --sync to sync")
+                self.links.setdefault(target_id, []).append(node)
             else:
-                if info['declarations'] > 0:
-                    self._case.warn(f"line {lineno}: duplicate declaration {node.identifier!r}")
+                self._pending_links.setdefault(target_id, []).append(node)
+        elif node.identifier:
+            ident = node.identifier
+            # Type must be consistent across all uses of an ID.
+            known_type = self._node_types.get(ident)
+            if known_type is None:
+                self._node_types[ident] = node.node_type
+            elif known_type != node.node_type:
+                self._case.error(f"line {lineno}: {ident!r}: type {node.node_type!r}"
+                                 f" conflicts with earlier use as {known_type!r}")
+            if node.is_citation:
+                pass  # Citation — tree attachment handled below
+            else:
+                prev_defs = self.all_definitions_for.get(ident, [])
+                if prev_defs:
+                    self._case.warn(f"line {lineno}: duplicate declaration {ident!r}")
                 else:
-                    info['decl_lineno'] = lineno
-                    info['decl_pkg_id'] = pkg_root_id
-                    self.registry[node.identifier] = node
-                    anchor = _component_anchor_id(node.node_type, node.identifier)
-                    label = f"{node.node_type} {node.identifier}"
+                    anchor = _component_anchor_id(node.node_type, ident)
+                    label = f"{node.node_type} {ident}"
                     if anchor in self._anchor_seen:
                         self._case.error(f"line {lineno}: anchor id collision on {anchor!r}:"
                                          f" {self._anchor_seen[anchor]!r} and {label!r}")
                     else:
                         self._anchor_seen[anchor] = label
-                info['declarations'] += 1
                 # Track empty/non-empty statements for declarations that
                 # normally carry a statement (not Relation, not Link).
                 if node.node_type != 'Relation':
                     if node.text:
                         self._has_nonempty_decl = True
                     else:
-                        self._empty_decl_ids.append((node.identifier, lineno))
+                        self._empty_decl_ids.append((ident, lineno))
+            # Statement consistency check.
             if node.text:
-                if info['statement'] is None:
-                    info['statement'] = node.text
-                elif node.text != info['statement']:
-                    hint = "; use --sync to sync" if (node.is_citation or info['citations'] > 0) else ""
-                    self._case.warn(f"line {lineno}: {node.identifier!r}: statement {node.text!r}"
-                                    f" differs from earlier statement {info['statement']!r}{hint}")
+                first_stmt = self._first_statements.get(ident)
+                if first_stmt is None:
+                    self._first_statements[ident] = node.text
+                elif node.text != first_stmt:
+                    has_cites = bool(self.citations.get(ident))
+                    hint = "; use --sync to sync" if (node.is_citation or has_cites) else ""
+                    self._case.warn(f"line {lineno}: {ident!r}: statement {node.text!r}"
+                                    f" differs from earlier statement {first_stmt!r}{hint}")
+            # Populate maps (after statement tracking so _first_statements is set).
+            if node.is_citation:
+                self.citations.setdefault(ident, []).append(node)
+            else:
+                self.all_definitions_for.setdefault(ident, []).append(node)
+                canonical = self._first_statements.get(ident)
+                for link_node in self._pending_links.pop(ident, []):
+                    link_node.link_target = node
+                    if link_node.text and canonical is not None and link_node.text != canonical:
+                        self._case.warn(f"line {link_node.lineno}: Link {ident!r}:"
+                                        f" statement {link_node.text!r} differs from declaration;"
+                                        f" use --sync to sync")
+                    self.links.setdefault(ident, []).append(link_node)
 
         # Pop stack until top's depth < current depth
         while self._stack and self._stack[-1][0] >= node.depth:
@@ -2848,18 +2848,6 @@ class _LTACParser:
 
         self._stack.append((node.depth, node))
 
-    def _resolve_link(self, node: Node, lineno: int) -> None:
-        """Set link_target on a Link node, warning if the target is unknown."""
-        target_id = node.identifier
-        if target_id in self.registry:
-            node.link_target = self.registry[target_id]
-            canonical = _statement_for(self.id_info, target_id)
-            if node.text and canonical is not None and node.text != canonical:
-                self._case.warn(f"line {lineno}: Link {target_id!r}: statement {node.text!r}"
-                                f" differs from declaration; use --sync to sync")
-        else:
-            self._case.warn(f"line {lineno}: Link target {target_id!r} not found")
-
     def _finalize_package(self) -> None:
         """Flush the current package's root into results and reset package state."""
         self.results.extend(self._current_pkg)
@@ -2867,27 +2855,6 @@ class _LTACParser:
         self._pkg_root_lineno = None
         self._stack = []
 
-
-
-# ---------------------------------------------------------------------------
-# id_info accessors (private; use Case.declaring_package_for / Case.statement_for)
-# ---------------------------------------------------------------------------
-
-def _decl_pkg_id_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
-    """Return the package root identifier string where ident is declared, or None.
-
-    Private helper used by render functions that need the string ID directly.
-    Public callers should use Case.declaring_package_for() which returns a Node.
-    """
-    return id_info.get(ident, _EMPTY).get('decl_pkg_id')
-
-
-def _statement_for(id_info: Dict[str, dict], ident: str) -> Optional[str]:
-    """Return the canonical statement text for ident, or None.
-
-    Internal implementation for Case.statement_for().
-    """
-    return id_info.get(ident, _EMPTY).get('statement')
 
 
 # ---------------------------------------------------------------------------
@@ -4008,13 +3975,14 @@ def render_referenced_by(node: Node, case: 'Case',
                          out: TextIO, sep: str = '') -> bool:
     """Write 'Referenced by: ...' line to out; return False if no packages to list."""
     ident = node.identifier
-    info = case.id_info.get(ident, {})
     pkg_ids = []
-    if info.get('decl_pkg_id'):
-        pkg_ids.append(info['decl_pkg_id'])
-    for cid in info.get('citing_pkg_ids', []):
-        if cid not in pkg_ids:
-            pkg_ids.append(cid)
+    defs = case.all_definitions_for.get(ident, [])
+    if defs and defs[0].pkg_root.identifier:
+        pkg_ids.append(defs[0].pkg_root.identifier)
+    for cite_node in case.citations.get(ident, []):
+        cpid = cite_node.pkg_root.identifier
+        if cpid and cpid not in pkg_ids:
+            pkg_ids.append(cpid)
     if not pkg_ids:
         return False
     pairs = [(f'Package {pid}', _pkg_anchor_url(pid, config)) for pid in pkg_ids]
@@ -4100,7 +4068,7 @@ def render_pkg_defines(pkg_root: Node, case: 'Case',
     defined = []
     for node in case.all_nodes_fast(pkg_root):
         if (node.is_definition and node.identifier
-                and _decl_pkg_id_for(case.id_info, node.identifier) == pkg_id):
+                and node.pkg_root.identifier == pkg_id):
             defined.append(node)
     if not defined:
         return False
@@ -4122,7 +4090,8 @@ def render_pkg_citing(pkg_root: Node, case: 'Case',
         return False
     links = []
     for node in cited_nodes:
-        decl_pkg = _decl_pkg_id_for(case.id_info, node.identifier) or ''
+        defs = case.all_definitions_for.get(node.identifier, [])
+        decl_pkg = defs[0].pkg_root.identifier if defs else ''
         label = f'{node.node_type} {node.identifier}'
         url = _pkg_anchor_url(decl_pkg, config) if decl_pkg else ''
         links.append(hyperlink(label, url, fmt) if url else label)
@@ -4137,10 +4106,11 @@ def render_pkg_cited(pkg_root: Node, case: 'Case',
     """Write 'Cited by: ...' list for a package to out; return False if none."""
     pkg_id = pkg_root.identifier
     citing_pkgs = []
-    for ident, info in case.id_info.items():
-        if info.get('decl_pkg_id') == pkg_id:
-            for cpid in info.get('citing_pkg_ids', []):
-                if cpid not in citing_pkgs:
+    for ident, defs in case.all_definitions_for.items():
+        if defs and defs[0].pkg_root.identifier == pkg_id:
+            for cite_node in case.citations.get(ident, []):
+                cpid = cite_node.pkg_root.identifier
+                if cpid and cpid not in citing_pkgs:
                     citing_pkgs.append(cpid)
     if not citing_pkgs:
         return False
@@ -4595,7 +4565,9 @@ Data types and examples of their methods/properties:
   class Case  the full assurance case (LTAC + documents):
     case.document_files List[str] (set by caller after loading)
     case.config         dict (config used to load)
-    case.id_info        Dict[str, dict] (per-identifier metadata)
+    case.all_definitions_for  Dict[str, List[Node]] (ID → all defining Nodes)
+    case.citations            Dict[str, List[Node]] (ID → all citation Nodes)
+    case.links                Dict[str, List[Node]] (ID → all Link Nodes targeting it)
     # Lookups
     case.definition_for(ident) -> Optional[Node]  (None if 0 or >1 declarations)
     case.declaring_package_for(ident) -> Optional[Node]
@@ -5313,7 +5285,7 @@ def run(args: argparse.Namespace) -> bool:
             _print_analysis_list(
                 "Elements with no prose in the document(s):",
                 case.empty(),
-                lambda i: f"{case.registry[i].node_type if i in case.registry else '?'} {i}")
+                lambda i: f"{n.node_type if (n := case.definition_for(i)) else '?'} {i}")
             first = False
         if args.orphans:
             if not first:
@@ -5328,9 +5300,9 @@ def run(args: argparse.Namespace) -> bool:
                 print()
             misplaced = case.misplaced()
             def _fmt_misplaced(t):
-                ntype = case.registry[t[0]].node_type if t[0] in case.registry else '?'
+                ntype = n.node_type if (n := case.definition_for(t[0])) else '?'
                 if t[3]:
-                    ptype = case.registry[t[3]].node_type if t[3] in case.registry else '?'
+                    ptype = p.node_type if (p := case.definition_for(t[3])) else '?'
                     return (f"{ntype} {t[0]}: at line {t[1]},"
                             f" expected after {ptype} {t[3]} (line {t[4]})")
                 return f"{ntype} {t[0]}: at line {t[1]}, expected at start of document"
