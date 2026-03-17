@@ -3095,7 +3095,6 @@ class _LTACParser:
         self._stack = []
 
 
-
 # ---------------------------------------------------------------------------
 # Renderers
 # ---------------------------------------------------------------------------
@@ -3207,7 +3206,6 @@ def render_markdown(roots: List[Node], config: dict, out: TextIO) -> bool:
     for root in roots:
         _render_markdown_node(root, 0, base_url, out, pkg_label, first)
     return not first[0]
-
 
 
 def _render_html_node(node: Node, indent: int, base_url: str, out: TextIO,
@@ -3738,7 +3736,6 @@ def _sacm_collect_edges(
                 _edge_line(ctx.diagram_id, s.diagram_id, True, is_counter, is_abstract))
 
 
-
 def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
     """Write the SACM diagram content without opening/closing fence markers."""
     base_url = config['base_url']
@@ -4056,7 +4053,6 @@ def render_gsn_html(roots: List['Node'], config: dict, out: TextIO,
     return True
 
 
-
 def render_all_packages(all_roots: List[Node], render_fn, config: dict,
                         out: TextIO) -> bool:
     """Write every package preceded by a configurable header to out.
@@ -4132,8 +4128,6 @@ def expand_selector(raw: str, doc_format: str, config: dict) -> str:
             return f'ltac/{doc_format}'
         return raw  # explicit two-part, pass through
     return raw
-
-
 
 
 def _render_or_all(
@@ -5299,7 +5293,6 @@ Run --help-api for the public Python API summary (for library use).
     return args
 
 
-
 # ---------------------------------------------------------------------------
 # Statistics
 # ---------------------------------------------------------------------------
@@ -5419,9 +5412,6 @@ def _is_element_region_terminator(line: str) -> bool:
         kind = parts[0] if parts else ''
         return (kind == 'element' and len(parts) == 2) or kind in ('stop', 'epilogue')
     return False
-
-
-
 
 
 # I/O buffer size for reading and writing document files.
