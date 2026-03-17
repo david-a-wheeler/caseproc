@@ -126,6 +126,11 @@ def _component_anchor_id(type_str: str, ident: str) -> str:
     return to_github_fragment(f"{type_str} {ident}")
 
 
+_GH_FRAGMENT_STRIP_RE   = re.compile(r'[^\w\s-]')
+_GH_FRAGMENT_SPACES_RE  = re.compile(r'\s+')
+_GH_FRAGMENT_HYPHENS_RE = re.compile(r'-+')
+
+
 def to_github_fragment(text: str) -> str:
     """Convert heading text to a GitHub anchor fragment id.
 
@@ -147,9 +152,9 @@ def to_github_fragment(text: str) -> str:
     'well-formed'
     """
     text = text.lower()
-    text = re.sub(r'[^\w\s-]', '', text)
-    text = re.sub(r'\s+', '-', text)
-    text = re.sub(r'-+', '-', text)
+    text = _GH_FRAGMENT_STRIP_RE.sub('', text)
+    text = _GH_FRAGMENT_SPACES_RE.sub('-', text)
+    text = _GH_FRAGMENT_HYPHENS_RE.sub('-', text)
     return text.strip('-')
 
 
@@ -161,6 +166,9 @@ def to_github_fragment(text: str) -> str:
 # Sources:
 #   https://github.com/mermaid-js/mermaid/blob/develop/packages/mermaid/src/diagrams/flowchart/parser/flow.jison
 #   https://mermaid.js.org/syntax/flowchart.html
+
+_MERMAID_ID_SPACES_RE  = re.compile(r'\s')
+_MERMAID_ID_SYNTAX_RE  = re.compile(r'[()\[\]{}<>]')
 
 _HTML_ESCAPE_TABLE = str.maketrans({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})
 
@@ -429,8 +437,8 @@ class Node:
         lineno, so their diagram_id equals their identifier directly.
         """
         if self.identifier:
-            result = re.sub(r'\s', '_', self.identifier)
-            result = re.sub(r'[()\[\]{}<>]', '', result)
+            result = _MERMAID_ID_SPACES_RE.sub('_', self.identifier)
+            result = _MERMAID_ID_SYNTAX_RE.sub('', result)
             if result:
                 if result[0].isdigit():
                     result = '_' + result
