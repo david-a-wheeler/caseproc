@@ -2,38 +2,34 @@
 
 `verocase` is an open source software (OSS) tool
 that makes it *easy* and *efficient*
-to create and maintain an assurance case,
-e.g., for justifying why a system is secure against attack.
+to create and maintain an assurance case.
 The name verocase is derived from the Latin *vero*
 (meaning "in truth" or "truly") and *case*,
 (representing the tool's purpose to manage an assurance case).
+See [background](#background) for more information on what an assurance case
+is and various approaches for managing one.
 
-The `verocase` program reads a file written in our extended version of the
+The `verocase` tool takes a very different approach from other
+tools for managing an assurance case. This tool
+reads a file written in our extended version of the
 [Lightweight Text Assurance Case (LTAC) format](docs/ltac-extended.txt),
 which provides a basic outline of *why* some claim is true,
 and then updates all related markdown or HTML documentation.
-The result is an easily read and easily modified assurance case.
-The program can automatically generate graphics
+The tool can automatically generate graphics
 for both Structured Assurance Case Metamodel (SACM) and
-Goal Structuring Notation (GSN), and it generates many hyperlinks
-to make it easy to navigate an assurance case.
+Goal Structuring Notation (GSN). It can also generate many hyperlinks
+to make navigation easy.
 
-Both humans and AI will find it *very* easy to create and edit its inputs.
+Both humans and AI should find it *very* easy to create and edit an
+assurance case this way.
 The inputs are simple text files, making them easy to read and easy
 to modify. AI systems *really* like recursively indented information
 like LTAC (Python, YAML, and many other formats already do this) and
 they know how to handle Markdown (they've been trained on vast amounts of it).
 
-Processing is lightening-fast. In one real-world assurance case
+Processing is lightening-fast, too. In one real-world assurance case
 with over 200 elements and 370Kib of documentation, processing
 takes less than 0.2 seconds.
-
-An assurance case is "a body of evidence organized into an argument
-demonstrating that some claim about a system holds (i.e., is assured). An
-assurance case is needed when it is important to show that a system
-exhibits some complex property, such as safety, security, privacy,
-or reliability."
-([NIST Special Publication 800-53A Revision 5](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53Ar5.pdf)).
 
 The [tutorial](docs/tutorial.md) explains how to use the tool.
 It's *really* easy to get started.
@@ -42,6 +38,13 @@ The [reference manual](docs/reference.md) explains the tool capabilities
 in detail.
 
 ## Background
+
+An assurance case is "a body of evidence organized into an argument
+demonstrating that some claim about a system holds (i.e., is assured). An
+assurance case is needed when it is important to show that a system
+exhibits some complex property, such as safety, security, privacy,
+or reliability."
+([NIST Special Publication 800-53A Revision 5](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53Ar5.pdf)).
 
 In *principle* maintaining an assurance case is easy.
 You start with the claim you're trying to make, and repeatedly subdivide
@@ -110,9 +113,9 @@ storing all data in a database that can only be managed by a complex tool.
 I was looking for a simpler alternative, one where it would be much
 easier to edit the assurance case and manage the result with git.
 
-## Our approach as an alternative
+### Our approach as an alternative
 
-This tool, `verocase`, takes a completely different approach:
+As noted above, this tool `verocase` takes a completely different approach:
 
 * As input, it reads a simple text file (default file `case.ltac`
   in `./` or `docs/`). This file is written in our
@@ -243,6 +246,12 @@ imposing various limits:
   easier for humans to follow, too.
 * This is not a database, it's a way to make it easier to manage documents.
   If you want a database, this tool isn't it.
+
+This is primarily focused on small to medium-sized assurance cases.
+That's not because it has a size limit; it should be able to handle
+millions of elements without an issue.
+However, it requires that the assurance case be organized as a set of
+trees (aka a "forest"), and that may be too restrictive for some.
 
 ## Other information
 
