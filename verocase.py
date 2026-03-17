@@ -1749,10 +1749,8 @@ class Case:
             if pos > 0:
                 predecessor[i] = tail_idx[pos - 1]
 
-        if not tail_idx:
-            lis_indices = set()
-        else:
-            lis_indices = set()
+        lis_indices = set()
+        if tail_idx:
             idx = tail_idx[-1]
             while idx >= 0:
                 lis_indices.add(idx)
@@ -2161,10 +2159,8 @@ class Case:
             if pos > 0:
                 predecessor[i] = tail_idx[pos - 1]
 
-        if not tail_idx:
-            lis_indices = set()
-        else:
-            lis_indices = set()
+        lis_indices = set()
+        if tail_idx:
             idx = tail_idx[-1]
             while idx >= 0:
                 lis_indices.add(idx)
