@@ -7,6 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-03-17
+
+### Added
+
+- `--help-api` and `--help-api-details` options document the public Python API,
+  including a tree-walk example, so you can use `verocase` as a library from
+  your own scripts.
+- `--help-validations` and `--help-config` options provide extended help on
+  available validations and configuration keys without cluttering `--help`.
+- `--read-only` flag: load and validate without rewriting any document files.
+- `stop` and `epilogue` selectors: control where `--fixmissing` inserts stubs
+  and where main element content ends.
+- `render_ext_ref` sub-selection for `element` selector regions.
+- `base_url` can now be set via a per-document
+  `<!-- verocase-config base_url = VALUE -->` directive.
+- Mermaid click links are now always generated; when no `base_url` is
+  configured, links use `#fragment`-only anchors for same-page navigation.
+- Multiple timestamped snapshots are kept under `.backups/` so you can
+  recover any previous state, not just the most recent one.
+- Public Python API (`__all__`, full docstrings, `Case` class with instance
+  methods, `load_case()`, `find_config()`, `find_document_files()`) enabling
+  programmatic use of `verocase` without shelling out.
+
+### Changed
+
+- `--update` is renamed to `--sync` (syncs citation statement text from their
+  declarations); the old name no longer exists.
+- Configuration format changed from JSON to TOML: rename `case.config` to
+  `verocase.toml` and update syntax accordingly. TOML is more readable and
+  avoids quoting surprises.
+- `--stats` output is restructured; new fields are now shown including
+  document region counts and empty-region counts.
+- Mermaid node IDs are simplified and guaranteed unique, producing cleaner
+  diagram source.
+- GSN diagrams now use `curve:basis` for smoother connector rendering.
+- `VerocaseError` is now raised (instead of `sys.exit()`) when `verocase` is
+  used as a library, so callers can catch and handle errors programmatically.
+- `analysis_leaves` (`--leaves`) simplified: reports all definition nodes
+  that have no children, regardless of citation status.
+
+### Fixed
+
+- Mermaid click links now correctly point to element anchors rather than
+  external references.
+- `Link ^Foo` cross-package citation resolution corrected.
+
+### Removed
+
+- All pre-1.0 backward-compatibility aliases and shims have been dropped;
+  update any direct API calls to use the current names.
+  We'll be more fussy about backwards incompatibility once we hit 1.0,
+  but now is the time to make big changes.
+
 ## [0.1.0] - 2026-03-11
 
 Initial release.
@@ -139,5 +192,6 @@ Initial release.
 - Distributed as a single dependency-free Python script (`verocase.py`) and
   as a PyPI package installable with `pip install verocase`.
 
-[Unreleased]: https://github.com/david-a-wheeler/verocase/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/david-a-wheeler/verocase/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/david-a-wheeler/verocase/compare/v0.1.0...v0.7.0
 [0.1.0]: https://github.com/david-a-wheeler/verocase/releases/tag/v0.1.0

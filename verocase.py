@@ -34,7 +34,7 @@ except ImportError:
     except ImportError:
         tomllib = None  # type: ignore[assignment]
 
-__version__ = '0.1.0'
+__version__ = '0.7.0'
 
 __all__ = [
     # Exceptions
