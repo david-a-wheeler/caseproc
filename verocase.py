@@ -25,7 +25,7 @@ from typing import Dict, Iterable, List, Optional, Set, TextIO, Tuple, Union
 # TOML support: tomllib is in the standard library since Python 3.11.
 # On older Python versions, the third-party 'tomli' package is a drop-in
 # replacement.  If neither is available, config files cannot be loaded, but
-# the module still works fine when no config file is present.
+# our module still works fine when no config file is present.
 try:
     import tomllib
 except ImportError:
@@ -62,7 +62,8 @@ __all__ = [
 # - Per-line in _parse_line when reading LTAC file (e.g., valid indentation)
 # - Per-node, in _build_node and _attach_node (e.g., parent compatibility)
 # - After the LTAC is fully read (e.g., cycle detection)
-# - After the documents are processed (e.g., to report uncovered elements)
+# - Per-line in document processing (e.g., "end verocase" when one isn't open)
+# - After all documents are processed (e.g., to report uncovered elements)
 # We want to report problems as soon as we can detect them.
 
 # Module-level error/reporting
@@ -97,7 +98,8 @@ DEFAULT_CONFIG = types.MappingProxyType({
     'element_selections': _DEFAULT_ELEMENT_SELECTIONS,
     'ltac_file': '',
     'markdown_base_url': '',
-    'mermaid_js_url': 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs',
+    'mermaid_js_url':
+        'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs',
     'package_level': 3,
     'package_selections': _DEFAULT_PACKAGE_SELECTIONS,
     'pkg_header_prefix': '### ',
@@ -114,10 +116,10 @@ DEFAULT_CONFIG = types.MappingProxyType({
 # ---------------------------------------------------------------------------
 
 def _component_anchor_id(type_str: str, ident: str) -> str:
-    """Return the stable GitHub anchor id for an assurance case component header.
+    """Return stable GitHub anchor id for assurance case component header.
 
-    Uses only type and identifier (no statement text) so links remain valid
-    even when the statement changes.
+    Uses only type and identifier (no statement text), so links remain
+    valid even if the statement changes (unless id is derived from it).
 
     >>> _component_anchor_id("Claim", "C1")
     'claim-c1'
