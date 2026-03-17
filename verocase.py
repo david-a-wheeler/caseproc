@@ -383,8 +383,8 @@ class Node:
     """A single node in the parsed LTAC tree.
 
     Nodes form a doubly-linked tree via `children` and `parent`.  Every node
-    in a loaded forest is reachable by walking `all_roots` recursively, or by
-    iterating with `case.all_nodes()` or `case.all_nodes_fast()`.
+    in a loaded forest is reachable by walking `all_roots` recursively,
+    or by iterating with `case.all_nodes()` or `case.all_nodes_fast()`.
 
     Fields
     ------
@@ -400,8 +400,8 @@ class Node:
     ext_ref : str
         Text from a trailing ``(...)`` reference clause; empty when absent.
     options : List[str]
-        Zero or more option keywords in lower-case, e.g. ``['needssupport']``,
-        ``['axiomatic']``, ``['defeated']``.
+        Zero or more option keywords in lower-case, e.g.
+        ``['needssupport']``, ``['axiomatic']``, ``['defeated']``.
     children : List[Node]
         Direct child nodes in LTAC written order.
     is_citation : bool
@@ -421,8 +421,8 @@ class Node:
     diagram_id : str
         A stable identifier suitable for use in Mermaid diagram node IDs.
     id_inferred : bool
-        True when ``identifier`` was auto-generated from ``text`` rather than
-        declared explicitly.  Defaults to False.
+        True when ``identifier`` was auto-generated from ``text``
+        rather than declared explicitly.  Defaults to False.
     lineno : Optional[int]
         1-based source line number of this node in the LTAC file, or None if
         not set.
@@ -448,9 +448,10 @@ class Node:
     def is_definition(self) -> bool:
         """True when this node is a substantive declared element.
 
-        A definition is any node that is neither a citation (``^`` prefix) nor
-        a Link.  It is the natural complement to ``is_citation``: every node
-        in the tree is exactly one of citation, Link, or definition.
+        A definition is any node that is neither a citation
+        (``^`` prefix) nor a Link.  It is the natural complement to
+        ``is_citation``: every node in the tree is exactly one of
+        citation, Link, or definition.
         Prefer this over spelling out
         ``not is_citation and node_type != 'Link'`` at every call site.
         """
@@ -467,7 +468,8 @@ class Node:
 
     @property
     def subtree_count(self) -> int:
-        """Total number of nodes in this node's subtree, including itself."""
+        """Total number of nodes in this node's subtree,
+        including itself."""
         count = 0
         stack = [self]
         while stack:
@@ -522,8 +524,9 @@ class Node:
     def leftmost_leaf(self) -> 'Node':
         """Return the leftmost deepest rendered leaf in the subtree.
 
-        Follows the first non-Link child recursively, so that the result is the
-        node that appears at the bottom-left of the BT diagram.
+        Follows the first non-Link child recursively, so that the
+        result is the node that appears at the bottom-left of the BT
+        diagram.
         """
         for child in self.children:
             if child.node_type != 'Link':
@@ -538,12 +541,14 @@ class Node:
                (self.node_type == 'Claim' and 'assumed' in self.options)
 
     def to_ltac_line(self, depth_offset: int = 0) -> str:
-        """Format this node as an LTAC source line (without trailing newline).
+        """Format this node as an LTAC source line (without trailing
+        newline).
 
-        The indentation is ``self.depth - depth_offset`` levels of two spaces.
-        Pass ``depth_offset=self.depth`` to render at column 0 regardless of
-        actual depth.  Inferred identifiers are suppressed when they match the
-        auto-generated form so the output round-trips cleanly.
+        The indentation is ``self.depth - depth_offset`` levels of two
+        spaces. Pass ``depth_offset=self.depth`` to render at column 0
+        regardless of actual depth.  Inferred identifiers are
+        suppressed when they match the auto-generated form so the
+        output round-trips cleanly.
         """
         indent = '  ' * (self.depth - depth_offset)
         line = f'{indent}- {self.node_type}'
@@ -648,8 +653,9 @@ class Case:
     def load_config(self, filename: Optional[str] = None) -> 'Case':
         """Load configuration from filename, or auto-discover verocase.toml.
 
-        If filename is given, load it (panic if not found). If None, search for
-        verocase.toml / docs/verocase.toml; keep defaults if not found.
+        If filename is given, load it (panic if not found). If None,
+        search for verocase.toml / docs/verocase.toml; keep defaults
+        if not found.
         Sets self.config and self.config_path. Returns self for chaining.
         """
         self.config_path = self._find_config(filename)
@@ -659,15 +665,16 @@ class Case:
     def load_ltac_string(self, text: str) -> 'Case':
         """Parse LTAC from a string, using self.config.
 
-        Does not read any files. Parses text, setting self.roots and the lookup
-        maps (all_definitions_for, citations, links).
+        Does not read any files. Parses text, setting self.roots and
+        the lookup maps (all_definitions_for, citations, links).
         Sets self.ltac_path = None (no backing file).
         Does not run validation; call validate_ltac() separately if needed.
         Returns self for chaining.
 
         Call load_config() first if you need non-default configuration::
 
-            case = Case().load_config('myconfig.toml').load_ltac_string(ltac_text)
+        case = Case().load_config('myconfig.toml'
+                      ).load_ltac_string(ltac_text)
         """
         self.ltac_path = None
         _LTACParser(self).parse(text.splitlines(keepends=True), config=self.config)
@@ -827,12 +834,14 @@ class Case:
         _LTACParser(self).parse(lines, config=self.config)
 
     def validate_ltac(self) -> bool:
-        """Run all LTAC structural validation checks; return True if no errors.
+        """Run all LTAC structural validation checks; return True if
+        no errors.
 
-        Covers: identifier usage (check_id_info), circular dependencies
-        (check_circularities), and package reachability (check_reachability).
-        Document-level checks (missing(), orphans(), etc.) are separate and
-        require document_files to be set.
+        Covers: identifier usage (check_id_info), circular
+        dependencies (check_circularities), and package reachability
+        (check_reachability). Document-level checks (missing(),
+        orphans(), etc.) are separate and require document_files to
+        be set.
         """
         self.check_id_info()
         self.check_circularities()
@@ -847,11 +856,11 @@ class Case:
         """Return the definition Node for ident, or None if absent.
 
         Returns None only when there are zero declarations (ident unknown).
-        When there are multiple declarations (broken LTAC), returns the first
-        one to simplify managing erroneous cases; the duplicate is already
-        reported as a warning at parse time.  Callers that need all
-        declarations including duplicates should access
-        self.all_definitions_for[ident] directly.
+        When there are multiple declarations (broken LTAC), returns
+        the first one to simplify managing erroneous cases; the
+        duplicate is already reported as a warning at parse time.
+        Callers that need all declarations including duplicates
+        should access self.all_definitions_for[ident] directly.
         """
         defs = self.all_definitions_for.get(ident, [])
         return defs[0] if defs else None
@@ -891,10 +900,10 @@ class Case:
     def parents(self, nodes: Union['Node', Iterable['Node']]) -> Union[List['Node'], None]:
         """Return deduplicated list of parent nodes for the given node(s).
 
-        If a single Node is given, returns its parent(s) as a list, or None if
-        it has no parent (i.e. it is a root node).
-        If an iterable of Nodes is given, returns a deduplicated list of their
-        parents, excluding any that have no parent.
+        If a single Node is given, returns its parent(s) as a list,
+        or None if it has no parent (i.e. it is a root node).
+        If an iterable of Nodes is given, returns a deduplicated
+        list of their parents, excluding any that have no parent.
         """
         if isinstance(nodes, Node):
             if nodes.parent is None:
@@ -909,13 +918,14 @@ class Case:
 
     def nodes_for(self, element_id: Optional[str],
                   current: Optional['Node'] = None) -> List['Node']:
-        """Return the node(s) for element_id, with fallback to current or all roots.
+        """Return the node(s) for element_id, with fallback to
+        current or all roots.
 
         If element_id is given, look it up via definition_for
         (error and return [] if not found).
         If element_id is None, return [current] when current is
-        set, else return all roots.  ('*' is handled at dispatch time before
-        calling here.)
+        set, else return all roots.  ('*' is handled at dispatch
+        time before calling here.)
         """
         return self._resolve_element(element_id, current)
 
@@ -1085,7 +1095,8 @@ class Case:
         values.  Otherwise recalculate_cache() is called first.  Compares
         each result against the corresponding stored value and reports
         mismatches via error().
-        Returns True if everything matches, False if any discrepancy is found.
+        Returns True if everything matches, False if any discrepancy
+        is found.
         Intended for internal testing via --doublecheck; does not modify any
         stored state.
         """
@@ -1141,12 +1152,12 @@ class Case:
     def check_circularities(self) -> None:
         """Panic if any circular dependency exists in the LTAC model.
 
-        Performs an iterative DFS over the logical dependency graph.  For each
-        node, its logical successors are its structural children (non-citation,
-        non-Link), any cited child's defined node (^ID → definition_for(ID)),
-        and any Link child's link_target.
-        A node encountered while already on the
-        current DFS path (a back-edge) means circular reasoning is possible.
+        Performs an iterative DFS over the logical dependency graph.
+        For each node, its logical successors are its structural
+        children (non-citation, non-Link), any cited child's defined
+        node (^ID → definition_for(ID)), and any Link child's
+        link_target. A node encountered while already on the current
+        DFS path (a back-edge) means circular reasoning is possible.
         """
         visiting: Set[int] = set()  # id(node) of nodes on the current DFS path
         done: Set[int] = set()      # id(node) of fully-explored nodes
@@ -1278,8 +1289,8 @@ class Case:
         (self.roots).
 
         **Why faster than all_nodes():** all_nodes() calls
-        ``stack.extend(reversed(node.children))``, which creates a Python-level
-        iterator that extend() consumes element-by-element.
+        ``stack.extend(reversed(node.children))``, which creates a
+        Python-level iterator that extend() consumes element-by-element.
         By contrast, this method all_nodes_fast() calls
         ``stack.extend(node.children)``, a C-level bulk copy which is
         roughly 2-3x faster. Storing children in reverse order or
@@ -1302,8 +1313,9 @@ class Case:
     def write_ltac(self, out: 'TextIO') -> None:
         """Serialize the full forest to LTAC text, writing to out.
 
-        Packages are separated by blank lines; the result ends with a newline.
-        To collect the result as a string, pass an io.StringIO() instance.
+        Packages are separated by blank lines; the result ends with a
+        newline. To collect the result as a string, pass an
+        io.StringIO() instance.
 
         >>> import io
         >>> case = Case()
@@ -1449,7 +1461,8 @@ class Case:
 
         If path is given, writes to that path; otherwise writes to
         self.ltac_path.
-        Panics if no path is available.  On success, clears self.ltac_modified.
+        Panics if no path is available.  On success, clears
+        self.ltac_modified.
         """
         target = path or self.ltac_path
         if target is None:
@@ -1586,10 +1599,11 @@ class Case:
         return not self.had_error
 
     def fixmissing(self) -> bool:
-        """Re-render all document_files, injecting missing element regions into
-        the last file, then mark needsSupport on leaf elements that lack an
-        assertion status.  All changes (including LTAC if modified) are committed
-        atomically.  Returns not self.had_error.
+        """Re-render all document_files, injecting missing element
+        regions into the last file, then mark needsSupport on leaf
+        elements that lack an assertion status.  All changes
+        (including LTAC if modified) are committed atomically.
+        Returns not self.had_error.
         """
         pairs = []
         seen_element_ids: set = set()
@@ -1840,11 +1854,13 @@ class Case:
         """Atomically update document_files and LTAC (if modified) in
         one commit.
 
-        Rewrites each file in self.document_files, and if self.ltac_modified is
-        True also serialises the LTAC forest — all written to temp files first,
-        then committed together in a single backup+atomic-replace operation.
-        Clears self.ltac_modified on success.  Warns about any defined element
-        not covered by an element selector.  Returns not self.had_error.
+        Rewrites each file in self.document_files, and if
+        self.ltac_modified is True also serialises the LTAC forest —
+        all written to temp files first, then committed together in a
+        single backup+atomic-replace operation.  Clears
+        self.ltac_modified on success.  Warns about any defined
+        element not covered by an element selector.  Returns
+        not self.had_error.
         """
         pairs = []
         seen: set = set()
@@ -1874,7 +1890,8 @@ class Case:
                 if node.is_definition and not node.children]
 
     def stats(self) -> dict:
-        """Compute and return a statistics dict for the loaded LTAC forest."""
+        """Compute and return a statistics dict for the loaded LTAC
+        forest."""
         from collections import Counter
         def_type_counts: Counter = Counter()
         option_counts: Counter = Counter()
@@ -1996,8 +2013,9 @@ class Case:
         """Return aggregated document statistics across all
         self.document_files.
 
-        Reads the files from disk, so the result reflects any transformations
-        already saved.  Returns None if self.document_files is empty.
+        Reads the files from disk, so the result reflects any
+        transformations already saved.  Returns None if
+        self.document_files is empty.
         """
         if not self.document_files:
             return None
@@ -2317,8 +2335,8 @@ class Case:
         """Replace target_id's definition with a citation; promote subtree
         to new package.
 
-        Panics if target_id is not defined, or if its definition is already a
-        top-level package root (has no parent).
+        Panics if target_id is not defined, or if its definition is
+        already a top-level package root (has no parent).
         """
         node = self.definition_for(target_id)
         if node is None:
@@ -2354,8 +2372,9 @@ class Case:
     def move_id(self, moving_id: str, dest_id: str) -> None:
         """Move moving_id's definition to be a child of dest_id.
 
-        ID may be top-level or nested anywhere in the tree. No citation is left
-        at the original location. Panics if moving_id or dest_id is not defined.
+        ID may be top-level or nested anywhere in the tree. No
+        citation is left at the original location. Panics if
+        moving_id or dest_id is not defined.
         """
         node = self.definition_for(moving_id)
         if node is None:
@@ -2412,7 +2431,8 @@ class Case:
                         current_element: Optional['Node'] = None,
                         doc_format: str = 'markdown',
                         state: 'DocState' = None) -> bool:
-        """Parse selector and write the rendered output to out; return True if anything written.
+        """Parse selector and write the rendered output to out;
+        return True if anything written.
 
         selector is a string of the form ``"DISPLAY_TYPE [ID]"``.
         doc_format must be ``'markdown'`` or ``'html'``.
@@ -2495,7 +2515,8 @@ class Case:
 
     def render_element(self, node_id: str, out: 'TextIO', *,
                        state: 'DocState' = None, sep: str = '') -> bool:
-        """Write a full element section (heading + configured sub-selections) to out.
+        """Write a full element section (heading + configured
+        sub-selections) to out.
 
         Renders the element heading and any sub-selections listed in
         config['element_selections']. Updates state.current_id and
@@ -2529,10 +2550,12 @@ class Case:
 
     def render_package(self, pkg_id_or_star: str, out: 'TextIO', *,
                        state: 'DocState' = None) -> bool:
-        """Write a full package section (heading + diagram + sub-selections) to out.
+        """Write a full package section (heading + diagram +
+        sub-selections) to out.
 
-        pkg_id_or_star is either a package root identifier or ``'*'`` to render
-        all packages in sequence. Returns True if anything was written.
+        pkg_id_or_star is either a package root identifier or
+        ``'*'`` to render all packages in sequence.
+        Returns True if anything was written.
         """
         if state is None:
             state = DocState()
@@ -2560,18 +2583,20 @@ class Case:
                          strip: bool = False,
                          existing_ids: Optional[set] = None,
                          seen_ids: Optional[set] = None) -> set:
-        """Process a document file line by line, replacing LTAC selector regions.
+        """Process a document file line by line, replacing LTAC
+        selector regions.
 
         Writes all output to `out`. Performs no LTAC parsing.
 
-        Returns the set of element identifiers rendered via 'element' selectors
-        during this call, seeded from `seen_ids` if provided (useful for
-        accumulating across multiple documents).
+        Returns the set of element identifiers rendered via 'element'
+        selectors during this call, seeded from `seen_ids` if
+        provided (useful for accumulating across multiple documents).
 
-        When `add_missing` is True, inserts skeleton element regions for every
-        declared LTAC element not yet seen via an 'element' selector.
-        When `strip` is True, generated content is omitted from all selector
-        regions except 'warning', leaving the markers in place with empty bodies.
+        When `add_missing` is True, inserts skeleton element regions
+        for every declared LTAC element not yet seen via an 'element'
+        selector. When `strip` is True, generated content is omitted
+        from all selector regions except 'warning', leaving the
+        markers in place with empty bodies.
         """
         _doc_state = DocState(doc_format=doc_format, seen_element_ids=set(seen_ids) if seen_ids is not None else set())
         filename = getattr(f, 'name', '<stream>')
