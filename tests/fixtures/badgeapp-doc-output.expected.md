@@ -23,44 +23,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    Security["<b>Security</b><br>The system is adequately secure against moderate threats"]
-    Processes[/"<b>Processes</b><br>Security is argued by examining lifecycle processes"/]
-    Technical["<b>Technical</b><br>Technical lifecycle processes implement security"]
-    NonTechnical[["<b>NonTechnical</b><br>Non-technical lifecycle processes implement security"]]
-    Controls[["<b>Controls</b><br>Certifications &amp; controls provide confidence in operating results"]]
-    Requirements[["<b>Requirements</b>"]]
-    Design[["<b>Design</b><br>The security design is documented and reviewed"]]
-    Implementation[["<b>Implementation</b><br>The implementation process maintains security"]]
-    Verification[["<b>Verification</b><br>Integration &amp; verification confirm security"]]
-    Deployment[["<b>Deployment</b><br>Deployment maintains security"]]
-    Maintenance[["<b>Maintenance</b><br>The maintenance process maintains security"]]
+    Security_L1["<b>Security</b><br>The system is adequately secure against moderate threats"]
+    Processes_L2[/"<b>Processes</b><br>Security is argued by examining lifecycle processes"/]
+    Technical_L3["<b>Technical</b><br>Technical lifecycle processes implement security"]
+    NonTechnical_L10[["<b>NonTechnical</b><br>Non-technical lifecycle processes implement security"]]
+    Controls_L11[["<b>Controls</b><br>Certifications &amp; controls provide confidence in operating results"]]
+    Requirements_L4[["<b>Requirements</b>"]]
+    Design_L5[["<b>Design</b><br>The security design is documented and reviewed"]]
+    Implementation_L6[["<b>Implementation</b><br>The implementation process maintains security"]]
+    Verification_L7[["<b>Verification</b><br>Integration &amp; verification confirm security"]]
+    Deployment_L8[["<b>Deployment</b><br>Deployment maintains security"]]
+    Maintenance_L9[["<b>Maintenance</b><br>The maintenance process maintains security"]]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click Security "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-security"
-    click Processes "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#strategy-processes"
-    click Technical "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-technical"
-    click NonTechnical "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-nontechnical"
-    click Controls "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-controls"
-    click Requirements "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-requirements"
-    click Design "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-design"
-    click Implementation "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-implementation"
-    click Verification "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-verification"
-    click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-deployment"
-    click Maintenance "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-maintenance"
+    click Security_L1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-security"
+    click Processes_L2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#strategy-processes"
+    click Technical_L3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-technical"
+    click NonTechnical_L10 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-nontechnical"
+    click Controls_L11 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-controls"
+    click Requirements_L4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-requirements"
+    click Design_L5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-design"
+    click Implementation_L6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-implementation"
+    click Verification_L7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-verification"
+    click Deployment_L8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-deployment"
+    click Maintenance_L9 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-maintenance"
 
-    BottomPadding[ ]:::invisible ~~~ Requirements
-    Requirements --- Dot1
-    Design --- Dot1
-    Implementation --- Dot1
-    Verification --- Dot1
-    Deployment --- Dot1
-    Maintenance --- Dot1
-    Dot1 --> Technical
-    Technical --- Dot2
-    NonTechnical --- Dot2
-    Controls --- Dot2
-    Processes --- Dot2
-    Dot2 --> Security
+    BottomPadding[ ]:::invisible ~~~ Requirements_L4
+    Requirements_L4 --- Dot1
+    Design_L5 --- Dot1
+    Implementation_L6 --- Dot1
+    Verification_L7 --- Dot1
+    Deployment_L8 --- Dot1
+    Maintenance_L9 --- Dot1
+    Dot1 --> Technical_L3
+    Technical_L3 --- Dot2
+    NonTechnical_L10 --- Dot2
+    Controls_L11 --- Dot2
+    Processes_L2 --- Dot2
+    Dot2 --> Security_L1
 ```
 
 ### Package Requirements
@@ -80,21 +80,21 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    Requirements["<b>Requirements</b><br>Security requirements are identified and met"]
-    ReqSpec[("<b>ReqSpec</b>&nbsp;↗<br>Requirements specification")]
-    TestCoverage[("<b>TestCoverage</b>&nbsp;↗<br>Test coverage report")]
-    ReqScope[("<b>ReqScope</b>&nbsp;↗<br>Applies to all user-facing features")]
+    Requirements_L13["<b>Requirements</b><br>Security requirements are identified and met"]
+    ReqSpec_L14[("<b>ReqSpec</b>&nbsp;↗<br>Requirements specification")]
+    TestCoverage_L15[("<b>TestCoverage</b>&nbsp;↗<br>Test coverage report")]
+    ReqScope_L16[("<b>ReqScope</b>&nbsp;↗<br>Applies to all user-facing features")]
     Dot1((" ")):::sacmDot
-    click Requirements "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-requirements"
-    click ReqSpec "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-reqspec"
-    click TestCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-testcoverage"
-    click ReqScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#context-reqscope"
+    click Requirements_L13 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-requirements"
+    click ReqSpec_L14 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-reqspec"
+    click TestCoverage_L15 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-testcoverage"
+    click ReqScope_L16 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#context-reqscope"
 
-    BottomPadding[ ]:::invisible ~~~ ReqSpec
-    ReqSpec --- Dot1
-    TestCoverage --- Dot1
-    Dot1 --> Requirements
-    ReqScope --o Requirements
+    BottomPadding[ ]:::invisible ~~~ ReqSpec_L14
+    ReqSpec_L14 --- Dot1
+    TestCoverage_L15 --- Dot1
+    Dot1 --> Requirements_L13
+    ReqScope_L16 --o Requirements_L13
 ```
 
 ### Package Design
@@ -114,18 +114,18 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    Design["<b>Design</b><br>The security design is documented and reviewed"]
-    DesignDoc[("<b>DesignDoc</b>&nbsp;↗<br>Security architecture document")]
-    ThreatModel[("<b>ThreatModel</b>&nbsp;↗<br>Threat model")]
+    Design_L18["<b>Design</b><br>The security design is documented and reviewed"]
+    DesignDoc_L19[("<b>DesignDoc</b>&nbsp;↗<br>Security architecture document")]
+    ThreatModel_L20[("<b>ThreatModel</b>&nbsp;↗<br>Threat model")]
     Dot1((" ")):::sacmDot
-    click Design "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-design"
-    click DesignDoc "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-designdoc"
-    click ThreatModel "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-threatmodel"
+    click Design_L18 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#claim-design"
+    click DesignDoc_L19 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-designdoc"
+    click ThreatModel_L20 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-threatmodel"
 
-    BottomPadding[ ]:::invisible ~~~ DesignDoc
-    DesignDoc --- Dot1
-    ThreatModel --- Dot1
-    Dot1 --> Design
+    BottomPadding[ ]:::invisible ~~~ DesignDoc_L19
+    DesignDoc_L19 --- Dot1
+    ThreatModel_L20 --- Dot1
+    Dot1 --> Design_L18
 ```
 <!-- end verocase -->
 

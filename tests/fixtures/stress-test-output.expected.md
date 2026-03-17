@@ -22,193 +22,202 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    G1["<b>G1</b><br>Statement of G1"]
-    Xscope[("<b>Xscope</b>&nbsp;↗<br>Scope of Sys")]
-    Asys["<b>Asys</b><br>Assumption of Sys<br>ASSUMED"]
-    Esys1[("<b>Esys1</b>&nbsp;↗<br>System-level evidence")]
-    SynConnect_00000001((" ")):::connector
-    Scomps[/"<b>Scomps</b><br>Argue by component"/]
-    Sdecomp[/"<b>Sdecomp</b><br>Decompose by large area"/]
-    SynConnect_00000002((" ")):::connector
-    C44top[["<b>C44top</b><br>Statement of C44top"]]
-    C45top[["<b>C45top</b><br>Statement of C45top"]]
-    L1top[["<b>L1top</b><br>Statement of L1top"]]
-    SynConnect_00000000((" ")):::connector
-    C01top[["<b>C01top</b><br>Statement of C01top"]]
-    C02top[["<b>C02top</b><br>Statement of C02top"]]
-    C03top[["<b>C03top</b><br>Statement of C03top"]]
-    SynConnect_00000003((" ")):::connector
-    C41top[["<b>C41top</b><br>Statement of C41top"]]
-    C42top[["<b>C42top</b><br>Statement of C42top"]]
-    C43top[["<b>C43top</b><br>Statement of C43top"]]
-    L2top[["<b>L2top</b><br>Statement of L2top"]]
-    L3top[["<b>L3top</b><br>Statement of L3top"]]
-    L4top[["<b>L4top</b><br>Statement of L4top"]]
-    L5top[["<b>L5top</b><br>Statement of L5top"]]
-    C04top[["<b>C04top</b><br>Statement of C04top"]]
-    C05top[["<b>C05top</b><br>Statement of C05top"]]
-    C06top[["<b>C06top</b><br>Statement of C06top"]]
-    SynConnect_00000004((" ")):::connector
-    C38top[["<b>C38top</b><br>Statement of C38top"]]
-    C39top[["<b>C39top</b><br>Statement of C39top"]]
-    C40top[["<b>C40top</b><br>Statement of C40top"]]
-    C07top[["<b>C07top</b><br>Statement of C07top"]]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    SynConnect_00000005((" ")):::connector
-    C35top[["<b>C35top</b><br>Statement of C35top"]]
-    C36top[["<b>C36top</b><br>Statement of C36top"]]
-    C37top[["<b>C37top</b><br>Statement of C37top"]]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C12top[["<b>C12top</b><br>Statement of C12top"]]
-    SynConnect_00000006((" ")):::connector
-    C32top[["<b>C32top</b><br>Statement of C32top"]]
-    C33top[["<b>C33top</b><br>Statement of C33top"]]
-    C34top[["<b>C34top</b><br>Statement of C34top"]]
-    C13top[["<b>C13top</b><br>Statement of C13top"]]
-    C14top[["<b>C14top</b><br>Statement of C14top"]]
-    C15top[["<b>C15top</b><br>Statement of C15top"]]
-    SynConnect_00000007((" ")):::connector
-    C29top[["<b>C29top</b><br>Statement of C29top"]]
-    C30top[["<b>C30top</b><br>Statement of C30top"]]
-    C31top[["<b>C31top</b><br>Statement of C31top"]]
-    C16top[["<b>C16top</b><br>Statement of C16top"]]
-    C17top[["<b>C17top</b><br>Statement of C17top"]]
-    C18top[["<b>C18top</b><br>Statement of C18top"]]
-    SynConnect_00000008((" ")):::connector
-    C26top[["<b>C26top</b><br>Statement of C26top"]]
-    C27top[["<b>C27top</b><br>Statement of C27top"]]
-    C28top[["<b>C28top</b><br>Statement of C28top"]]
-    C19top[["<b>C19top</b><br>Statement of C19top"]]
-    C20top[["<b>C20top</b><br>Statement of C20top"]]
-    C21top[["<b>C21top</b><br>Statement of C21top"]]
-    C22top[["<b>C22top</b><br>Statement of C22top"]]
-    C23top[["<b>C23top</b><br>Statement of C23top"]]
-    C24top[["<b>C24top</b><br>Statement of C24top"]]
-    C25top[["<b>C25top</b><br>Statement of C25top"]]
+    G1_L1["<b>G1</b><br>Statement of G1"]
+    Xscope_L2[("<b>Xscope</b>&nbsp;↗<br>Scope of Sys")]
+    Asys_L3["<b>Asys</b><br>Assumption of Sys<br>ASSUMED"]
+    Esys1_L4[("<b>Esys1</b>&nbsp;↗<br>System-level evidence")]
+    _Connector_00000001((" ")):::connector
+    Scomps_L11[/"<b>Scomps</b><br>Argue by component"/]
+    Sdecomp_L5[/"<b>Sdecomp</b><br>Decompose by large area"/]
+    _Connector_00000002((" ")):::connector
+    C44top_L55[["<b>C44top</b><br>Statement of C44top"]]
+    C45top_L56[["<b>C45top</b><br>Statement of C45top"]]
+    L1top_L6[["<b>L1top</b><br>Statement of L1top"]]
+    _Connector_00000000((" ")):::connector
+    C01top_L12[["<b>C01top</b><br>Statement of C01top"]]
+    C02top_L13[["<b>C02top</b><br>Statement of C02top"]]
+    C03top_L14[["<b>C03top</b><br>Statement of C03top"]]
+    _Connector_00000003((" ")):::connector
+    C41top_L52[["<b>C41top</b><br>Statement of C41top"]]
+    C42top_L53[["<b>C42top</b><br>Statement of C42top"]]
+    C43top_L54[["<b>C43top</b><br>Statement of C43top"]]
+    L2top_L7[["<b>L2top</b><br>Statement of L2top"]]
+    L3top_L8[["<b>L3top</b><br>Statement of L3top"]]
+    L4top_L9[["<b>L4top</b><br>Statement of L4top"]]
+    L5top_L10[["<b>L5top</b><br>Statement of L5top"]]
+    C04top_L15[["<b>C04top</b><br>Statement of C04top"]]
+    C05top_L16[["<b>C05top</b><br>Statement of C05top"]]
+    C06top_L17[["<b>C06top</b><br>Statement of C06top"]]
+    _Connector_00000004((" ")):::connector
+    C38top_L49[["<b>C38top</b><br>Statement of C38top"]]
+    C39top_L50[["<b>C39top</b><br>Statement of C39top"]]
+    C40top_L51[["<b>C40top</b><br>Statement of C40top"]]
+    C07top_L18[["<b>C07top</b><br>Statement of C07top"]]
+    C08top_L19[["<b>C08top</b><br>Statement of C08top"]]
+    C09top_L20[["<b>C09top</b><br>Statement of C09top"]]
+    _Connector_00000005((" ")):::connector
+    C35top_L46[["<b>C35top</b><br>Statement of C35top"]]
+    C36top_L47[["<b>C36top</b><br>Statement of C36top"]]
+    C37top_L48[["<b>C37top</b><br>Statement of C37top"]]
+    C10top_L21[["<b>C10top</b><br>Statement of C10top"]]
+    C11top_L22[["<b>C11top</b><br>Statement of C11top"]]
+    C12top_L23[["<b>C12top</b><br>Statement of C12top"]]
+    _Connector_00000006((" ")):::connector
+    C32top_L43[["<b>C32top</b><br>Statement of C32top"]]
+    C33top_L44[["<b>C33top</b><br>Statement of C33top"]]
+    C34top_L45[["<b>C34top</b><br>Statement of C34top"]]
+    C13top_L24[["<b>C13top</b><br>Statement of C13top"]]
+    C14top_L25[["<b>C14top</b><br>Statement of C14top"]]
+    C15top_L26[["<b>C15top</b><br>Statement of C15top"]]
+    _Connector_00000007((" ")):::connector
+    C29top_L40[["<b>C29top</b><br>Statement of C29top"]]
+    C30top_L41[["<b>C30top</b><br>Statement of C30top"]]
+    C31top_L42[["<b>C31top</b><br>Statement of C31top"]]
+    C16top_L27[["<b>C16top</b><br>Statement of C16top"]]
+    C17top_L28[["<b>C17top</b><br>Statement of C17top"]]
+    C18top_L29[["<b>C18top</b><br>Statement of C18top"]]
+    _Connector_00000008((" ")):::connector
+    C26top_L37[["<b>C26top</b><br>Statement of C26top"]]
+    C27top_L38[["<b>C27top</b><br>Statement of C27top"]]
+    C28top_L39[["<b>C28top</b><br>Statement of C28top"]]
+    C19top_L30[["<b>C19top</b><br>Statement of C19top"]]
+    C20top_L31[["<b>C20top</b><br>Statement of C20top"]]
+    C21top_L32[["<b>C21top</b><br>Statement of C21top"]]
+    C22top_L33[["<b>C22top</b><br>Statement of C22top"]]
+    C23top_L34[["<b>C23top</b><br>Statement of C23top"]]
+    C24top_L35[["<b>C24top</b><br>Statement of C24top"]]
+    C25top_L36[["<b>C25top</b><br>Statement of C25top"]]
     Dot1((" ")):::sacmDot
-    click G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-g1"
-    click Xscope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-xscope"
-    click Asys "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-asys"
-    click Esys1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-esys1"
-    click Scomps "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-scomps"
-    click Sdecomp "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-sdecomp"
-    click C44top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c44top"
-    click C45top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c45top"
-    click L1top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l1top"
-    click C01top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c01top"
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
-    click C41top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c41top"
-    click C42top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c42top"
-    click C43top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c43top"
-    click L2top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l2top"
-    click L3top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l3top"
-    click L4top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l4top"
-    click L5top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l5top"
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click C35top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c35top"
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
-    click C34top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c34top"
-    click C13top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c13top"
-    click C14top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c14top"
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
-    click C27top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c27top"
-    click C28top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c28top"
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
-    click C20top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c20top"
-    click C21top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c21top"
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
+    click G1_L1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-g1"
+    click Xscope_L2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-xscope"
+    click Asys_L3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-asys"
+    click Esys1_L4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-esys1"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click Scomps_L11 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-scomps"
+    click Sdecomp_L5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-sdecomp"
+    click _Connector_00000002 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000002"
+    click C44top_L55 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c44top"
+    click C45top_L56 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c45top"
+    click L1top_L6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l1top"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click C01top_L12 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c01top"
+    click C02top_L13 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
+    click C03top_L14 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
+    click _Connector_00000003 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000003"
+    click C41top_L52 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c41top"
+    click C42top_L53 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c42top"
+    click C43top_L54 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c43top"
+    click L2top_L7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l2top"
+    click L3top_L8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l3top"
+    click L4top_L9 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l4top"
+    click L5top_L10 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l5top"
+    click C04top_L15 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
+    click C05top_L16 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
+    click C06top_L17 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
+    click _Connector_00000004 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000004"
+    click C38top_L49 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
+    click C39top_L50 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
+    click C40top_L51 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
+    click C07top_L18 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
+    click C08top_L19 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C09top_L20 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click _Connector_00000005 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000005"
+    click C35top_L46 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c35top"
+    click C36top_L47 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
+    click C37top_L48 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
+    click C10top_L21 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click C11top_L22 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C12top_L23 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
+    click _Connector_00000006 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000006"
+    click C32top_L43 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
+    click C33top_L44 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
+    click C34top_L45 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c34top"
+    click C13top_L24 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c13top"
+    click C14top_L25 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c14top"
+    click C15top_L26 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
+    click _Connector_00000007 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000007"
+    click C29top_L40 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
+    click C30top_L41 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
+    click C31top_L42 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
+    click C16top_L27 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
+    click C17top_L28 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
+    click C18top_L29 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
+    click _Connector_00000008 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000008"
+    click C26top_L37 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
+    click C27top_L38 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c27top"
+    click C28top_L39 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c28top"
+    click C19top_L30 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
+    click C20top_L31 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c20top"
+    click C21top_L32 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c21top"
+    click C22top_L33 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
+    click C23top_L34 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
+    click C24top_L35 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
+    click C25top_L36 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
 
-    BottomPadding[ ]:::invisible ~~~ Xscope
-    L2top --- SynConnect_00000000
-    L3top --- SynConnect_00000000
-    L4top --- SynConnect_00000000
-    L5top --- SynConnect_00000000
-    Sdecomp --- SynConnect_00000001
-    C19top --- SynConnect_00000008
-    C20top --- SynConnect_00000008
-    C21top --- SynConnect_00000008
-    C22top --- SynConnect_00000008
-    C23top --- SynConnect_00000008
-    C24top --- SynConnect_00000008
-    C25top --- SynConnect_00000008
-    C16top --- SynConnect_00000007
-    C17top --- SynConnect_00000007
-    C18top --- SynConnect_00000007
-    SynConnect_00000008 --- SynConnect_00000007
-    C26top --- SynConnect_00000007
-    C27top --- SynConnect_00000007
-    C28top --- SynConnect_00000007
-    C13top --- SynConnect_00000006
-    C14top --- SynConnect_00000006
-    C15top --- SynConnect_00000006
-    SynConnect_00000007 --- SynConnect_00000006
-    C29top --- SynConnect_00000006
-    C30top --- SynConnect_00000006
-    C31top --- SynConnect_00000006
-    C10top --- SynConnect_00000005
-    C11top --- SynConnect_00000005
-    C12top --- SynConnect_00000005
-    SynConnect_00000006 --- SynConnect_00000005
-    C32top --- SynConnect_00000005
-    C33top --- SynConnect_00000005
-    C34top --- SynConnect_00000005
-    C07top --- SynConnect_00000004
-    C08top --- SynConnect_00000004
-    C09top --- SynConnect_00000004
-    SynConnect_00000005 --- SynConnect_00000004
-    C35top --- SynConnect_00000004
-    C36top --- SynConnect_00000004
-    C37top --- SynConnect_00000004
-    C04top --- SynConnect_00000003
-    C05top --- SynConnect_00000003
-    C06top --- SynConnect_00000003
-    SynConnect_00000004 --- SynConnect_00000003
-    C38top --- SynConnect_00000003
-    C39top --- SynConnect_00000003
-    C40top --- SynConnect_00000003
-    C01top --- SynConnect_00000002
-    C02top --- SynConnect_00000002
-    C03top --- SynConnect_00000002
-    SynConnect_00000003 --- SynConnect_00000002
-    C41top --- SynConnect_00000002
-    C42top --- SynConnect_00000002
-    C43top --- SynConnect_00000002
-    Asys --- Dot1
-    Esys1 --- Dot1
-    SynConnect_00000001 --- Dot1
-    SynConnect_00000002 --- Dot1
-    C44top --- Dot1
-    C45top --- Dot1
-    Scomps --- Dot1
-    Dot1 --> G1
-    Xscope --o G1
+    BottomPadding[ ]:::invisible ~~~ Xscope_L2
+    L2top_L7 --- _Connector_00000000
+    L3top_L8 --- _Connector_00000000
+    L4top_L9 --- _Connector_00000000
+    L5top_L10 --- _Connector_00000000
+    Sdecomp_L5 --- _Connector_00000001
+    C19top_L30 --- _Connector_00000008
+    C20top_L31 --- _Connector_00000008
+    C21top_L32 --- _Connector_00000008
+    C22top_L33 --- _Connector_00000008
+    C23top_L34 --- _Connector_00000008
+    C24top_L35 --- _Connector_00000008
+    C25top_L36 --- _Connector_00000008
+    C16top_L27 --- _Connector_00000007
+    C17top_L28 --- _Connector_00000007
+    C18top_L29 --- _Connector_00000007
+    _Connector_00000008 --- _Connector_00000007
+    C26top_L37 --- _Connector_00000007
+    C27top_L38 --- _Connector_00000007
+    C28top_L39 --- _Connector_00000007
+    C13top_L24 --- _Connector_00000006
+    C14top_L25 --- _Connector_00000006
+    C15top_L26 --- _Connector_00000006
+    _Connector_00000007 --- _Connector_00000006
+    C29top_L40 --- _Connector_00000006
+    C30top_L41 --- _Connector_00000006
+    C31top_L42 --- _Connector_00000006
+    C10top_L21 --- _Connector_00000005
+    C11top_L22 --- _Connector_00000005
+    C12top_L23 --- _Connector_00000005
+    _Connector_00000006 --- _Connector_00000005
+    C32top_L43 --- _Connector_00000005
+    C33top_L44 --- _Connector_00000005
+    C34top_L45 --- _Connector_00000005
+    C07top_L18 --- _Connector_00000004
+    C08top_L19 --- _Connector_00000004
+    C09top_L20 --- _Connector_00000004
+    _Connector_00000005 --- _Connector_00000004
+    C35top_L46 --- _Connector_00000004
+    C36top_L47 --- _Connector_00000004
+    C37top_L48 --- _Connector_00000004
+    C04top_L15 --- _Connector_00000003
+    C05top_L16 --- _Connector_00000003
+    C06top_L17 --- _Connector_00000003
+    _Connector_00000004 --- _Connector_00000003
+    C38top_L49 --- _Connector_00000003
+    C39top_L50 --- _Connector_00000003
+    C40top_L51 --- _Connector_00000003
+    C01top_L12 --- _Connector_00000002
+    C02top_L13 --- _Connector_00000002
+    C03top_L14 --- _Connector_00000002
+    _Connector_00000003 --- _Connector_00000002
+    C41top_L52 --- _Connector_00000002
+    C42top_L53 --- _Connector_00000002
+    C43top_L54 --- _Connector_00000002
+    Asys_L3 --- Dot1
+    Esys1_L4 --- Dot1
+    _Connector_00000001 --- Dot1
+    _Connector_00000002 --- Dot1
+    C44top_L55 --- Dot1
+    C45top_L56 --- Dot1
+    Scomps_L11 --- Dot1
+    Dot1 --> G1_L1
+    Xscope_L2 --o G1_L1
 ```
 
 ### Package L1top
@@ -228,65 +237,65 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    L1top["<b>L1top</b><br>Statement of L1top"]
-    L1Xctx[("<b>L1Xctx</b>&nbsp;↗<br>Context of L1Xctx")]
-    L1Esh1[("<b>L1Esh1</b>&nbsp;↗<br>Shared evidence A of L1")]
-    L1Esh2[("<b>L1Esh2</b>&nbsp;↗<br>Shared evidence B of L1")]
-    L1Smain[/"<b>L1Smain</b><br>Main strategy of L1"/]
-    L1G2["<b>L1G2</b><br>Level-2 claim of L1"]
-    SynConnect_00000000((" ")):::connector
-    L1Gbr7["<b>L1Gbr7</b><br>Breadth claim 7 of L1"]
-    L1Gbr8["<b>L1Gbr8</b><br>Breadth claim 8 of L1"]
-    L1S2[/"<b>L1S2</b><br>Level-3 strategy of L1"/]
-    L1G2b["<b>L1G2b</b><br>Level-3 alt claim of L1"]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    SynConnect_00000001((" ")):::connector
-    L1Gbr4["<b>L1Gbr4</b><br>Breadth claim 4 of L1"]
-    L1Gbr5["<b>L1Gbr5</b><br>Breadth claim 5 of L1"]
-    L1Gbr6["<b>L1Gbr6</b><br>Breadth claim 6 of L1"]
-    L1Gbr7a["<b>L1Gbr7a</b><br>Sub-claim 7a of L1"]
-    L1Gbr7b["<b>L1Gbr7b</b><br>Sub-claim 7b of L1"]
-    L1Gbr8a["<b>L1Gbr8a</b><br>Sub-claim 8a of L1"]
-    L1Gbr8b["<b>L1Gbr8b</b><br>Sub-claim 8b of L1"]
-    L1G3["<b>L1G3</b><br>Level-4 claim of L1"]
-    L1G3c["<b>L1G3c</b><br>Level-4 alt claim of L1"]
-    L1S2b[/"<b>L1S2b</b><br>Level-4 alt strategy of L1"/]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C12top[["<b>C12top</b><br>Statement of C12top"]]
-    L1Gbr1["<b>L1Gbr1</b><br>Breadth claim 1 of L1"]
-    L1Gbr2["<b>L1Gbr2</b><br>Breadth claim 2 of L1"]
-    L1Gbr3["<b>L1Gbr3</b><br>Breadth claim 3 of L1"]
-    L1Gbr4a["<b>L1Gbr4a</b><br>Sub-claim 4a of L1"]
-    L1Gbr4b["<b>L1Gbr4b</b><br>Sub-claim 4b of L1"]
-    L1Gbr5a["<b>L1Gbr5a</b><br>Sub-claim 5a of L1"]
-    L1Gbr5b["<b>L1Gbr5b</b><br>Sub-claim 5b of L1"]
-    L1Gbr6a["<b>L1Gbr6a</b><br>Sub-claim 6a of L1"]
-    L1Gbr6b["<b>L1Gbr6b</b><br>Sub-claim 6b of L1"]
-    L1Ebr7[("<b>L1Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L1")]
-    L1Ebr8[("<b>L1Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L1")]
-    L1S3[/"<b>L1S3</b><br>Level-5 strategy of L1"/]
-    L1G3b["<b>L1G3b</b><br>Level-5 alt claim of L1"]
-    L1J1["<b>L1J1</b><br>Justification of L1"]
-    L1G3d["<b>L1G3d</b><br>Level-5 claim D of L1"]
-    L1G3e["<b>L1G3e</b><br>Level-5 claim E of L1"]
-    L1Gbr1a["<b>L1Gbr1a</b><br>Sub-claim 1a of L1"]
-    L1Gbr1b["<b>L1Gbr1b</b><br>Sub-claim 1b of L1"]
-    L1Gbr2a["<b>L1Gbr2a</b><br>Sub-claim 2a of L1"]
-    L1Gbr2b["<b>L1Gbr2b</b><br>Sub-claim 2b of L1"]
-    L1Gbr3a["<b>L1Gbr3a</b><br>Sub-claim 3a of L1"]
-    L1Gbr3b["<b>L1Gbr3b</b><br>Sub-claim 3b of L1"]
-    L1Ebr4[("<b>L1Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L1")]
-    L1Ebr5[("<b>L1Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L1")]
-    L1Ebr6[("<b>L1Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L1")]
-    L1G4["<b>L1G4</b><br>Level-6 claim of L1"]
-    L1G4b["<b>L1G4b</b><br>Level-6 alt claim of L1"]
-    L1E2[("<b>L1E2</b>&nbsp;↗<br>Extra evidence of L1")]
-    L1Ebr1[("<b>L1Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L1")]
-    L1Ebr2[("<b>L1Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L1")]
-    L1Ebr3[("<b>L1Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L1")]
-    L1Edeep[("<b>L1Edeep</b>&nbsp;↗<br>Deep evidence of L1")]
+    L1top_L58["<b>L1top</b><br>Statement of L1top"]
+    L1Xctx_L59[("<b>L1Xctx</b>&nbsp;↗<br>Context of L1Xctx")]
+    L1Esh1_L60[("<b>L1Esh1</b>&nbsp;↗<br>Shared evidence A of L1")]
+    L1Esh2_L61[("<b>L1Esh2</b>&nbsp;↗<br>Shared evidence B of L1")]
+    L1Smain_L62[/"<b>L1Smain</b><br>Main strategy of L1"/]
+    L1G2_L63["<b>L1G2</b><br>Level-2 claim of L1"]
+    _Connector_00000000((" ")):::connector
+    L1Gbr7_L126["<b>L1Gbr7</b><br>Breadth claim 7 of L1"]
+    L1Gbr8_L132["<b>L1Gbr8</b><br>Breadth claim 8 of L1"]
+    L1S2_L64[/"<b>L1S2</b><br>Level-3 strategy of L1"/]
+    L1G2b_L78["<b>L1G2b</b><br>Level-3 alt claim of L1"]
+    C08top_L85[["<b>C08top</b><br>Statement of C08top"]]
+    C09top_L86[["<b>C09top</b><br>Statement of C09top"]]
+    C10top_L87[["<b>C10top</b><br>Statement of C10top"]]
+    _Connector_00000001((" ")):::connector
+    L1Gbr4_L108["<b>L1Gbr4</b><br>Breadth claim 4 of L1"]
+    L1Gbr5_L114["<b>L1Gbr5</b><br>Breadth claim 5 of L1"]
+    L1Gbr6_L120["<b>L1Gbr6</b><br>Breadth claim 6 of L1"]
+    L1Gbr7a_L127["<b>L1Gbr7a</b><br>Sub-claim 7a of L1"]
+    L1Gbr7b_L130["<b>L1Gbr7b</b><br>Sub-claim 7b of L1"]
+    L1Gbr8a_L133["<b>L1Gbr8a</b><br>Sub-claim 8a of L1"]
+    L1Gbr8b_L136["<b>L1Gbr8b</b><br>Sub-claim 8b of L1"]
+    L1G3_L65["<b>L1G3</b><br>Level-4 claim of L1"]
+    L1G3c_L75["<b>L1G3c</b><br>Level-4 alt claim of L1"]
+    L1S2b_L79[/"<b>L1S2b</b><br>Level-4 alt strategy of L1"/]
+    C11top_L88[["<b>C11top</b><br>Statement of C11top"]]
+    C12top_L89[["<b>C12top</b><br>Statement of C12top"]]
+    L1Gbr1_L90["<b>L1Gbr1</b><br>Breadth claim 1 of L1"]
+    L1Gbr2_L96["<b>L1Gbr2</b><br>Breadth claim 2 of L1"]
+    L1Gbr3_L102["<b>L1Gbr3</b><br>Breadth claim 3 of L1"]
+    L1Gbr4a_L109["<b>L1Gbr4a</b><br>Sub-claim 4a of L1"]
+    L1Gbr4b_L112["<b>L1Gbr4b</b><br>Sub-claim 4b of L1"]
+    L1Gbr5a_L115["<b>L1Gbr5a</b><br>Sub-claim 5a of L1"]
+    L1Gbr5b_L118["<b>L1Gbr5b</b><br>Sub-claim 5b of L1"]
+    L1Gbr6a_L121["<b>L1Gbr6a</b><br>Sub-claim 6a of L1"]
+    L1Gbr6b_L124["<b>L1Gbr6b</b><br>Sub-claim 6b of L1"]
+    L1Ebr7_L128[("<b>L1Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L1")]
+    L1Ebr8_L134[("<b>L1Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L1")]
+    L1S3_L66[/"<b>L1S3</b><br>Level-5 strategy of L1"/]
+    L1G3b_L73["<b>L1G3b</b><br>Level-5 alt claim of L1"]
+    L1J1_L76["<b>L1J1</b><br>Justification of L1"]
+    L1G3d_L80["<b>L1G3d</b><br>Level-5 claim D of L1"]
+    L1G3e_L83["<b>L1G3e</b><br>Level-5 claim E of L1"]
+    L1Gbr1a_L91["<b>L1Gbr1a</b><br>Sub-claim 1a of L1"]
+    L1Gbr1b_L94["<b>L1Gbr1b</b><br>Sub-claim 1b of L1"]
+    L1Gbr2a_L97["<b>L1Gbr2a</b><br>Sub-claim 2a of L1"]
+    L1Gbr2b_L100["<b>L1Gbr2b</b><br>Sub-claim 2b of L1"]
+    L1Gbr3a_L103["<b>L1Gbr3a</b><br>Sub-claim 3a of L1"]
+    L1Gbr3b_L106["<b>L1Gbr3b</b><br>Sub-claim 3b of L1"]
+    L1Ebr4_L110[("<b>L1Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L1")]
+    L1Ebr5_L116[("<b>L1Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L1")]
+    L1Ebr6_L122[("<b>L1Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L1")]
+    L1G4_L67["<b>L1G4</b><br>Level-6 claim of L1"]
+    L1G4b_L70["<b>L1G4b</b><br>Level-6 alt claim of L1"]
+    L1E2_L84[("<b>L1E2</b>&nbsp;↗<br>Extra evidence of L1")]
+    L1Ebr1_L92[("<b>L1Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L1")]
+    L1Ebr2_L98[("<b>L1Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L1")]
+    L1Ebr3_L104[("<b>L1Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L1")]
+    L1Edeep_L68[("<b>L1Edeep</b>&nbsp;↗<br>Deep evidence of L1")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
     Dot3((" ")):::sacmDot
@@ -299,135 +308,137 @@ flowchart BT
     Dot10((" ")):::sacmDot
     Dot11((" ")):::sacmDot
     Dot12((" ")):::sacmDot
-    click L1top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1top"
-    click L1Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l1xctx"
-    click L1Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh1"
-    click L1Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh2"
-    click L1Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1smain"
-    click L1G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2"
-    click L1Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7"
-    click L1Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8"
-    click L1S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2"
-    click L1G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2b"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click L1Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4"
-    click L1Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5"
-    click L1Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6"
-    click L1Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7a"
-    click L1Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7b"
-    click L1Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8a"
-    click L1Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8b"
-    click L1G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3"
-    click L1G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3c"
-    click L1S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2b"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
-    click L1Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1"
-    click L1Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2"
-    click L1Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3"
-    click L1Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4a"
-    click L1Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4b"
-    click L1Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5a"
-    click L1Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5b"
-    click L1Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6a"
-    click L1Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6b"
-    click L1Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr7"
-    click L1Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr8"
-    click L1S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s3"
-    click L1G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3b"
-    click L1J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l1j1"
-    click L1G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3d"
-    click L1G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3e"
-    click L1Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1a"
-    click L1Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1b"
-    click L1Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2a"
-    click L1Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2b"
-    click L1Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3a"
-    click L1Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3b"
-    click L1Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr4"
-    click L1Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr5"
-    click L1Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr6"
-    click L1G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4"
-    click L1G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4b"
-    click L1E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1e2"
-    click L1Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr1"
-    click L1Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr2"
-    click L1Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr3"
-    click L1Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
+    click L1top_L58 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1top"
+    click L1Xctx_L59 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l1xctx"
+    click L1Esh1_L60 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh1"
+    click L1Esh2_L61 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh2"
+    click L1Smain_L62 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1smain"
+    click L1G2_L63 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click L1Gbr7_L126 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7"
+    click L1Gbr8_L132 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8"
+    click L1S2_L64 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2"
+    click L1G2b_L78 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2b"
+    click C08top_L85 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C09top_L86 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click C10top_L87 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click L1Gbr4_L108 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4"
+    click L1Gbr5_L114 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5"
+    click L1Gbr6_L120 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6"
+    click L1Gbr7a_L127 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7a"
+    click L1Gbr7b_L130 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7b"
+    click L1Gbr8a_L133 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8a"
+    click L1Gbr8b_L136 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8b"
+    click L1G3_L65 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3"
+    click L1G3c_L75 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3c"
+    click L1S2b_L79 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2b"
+    click C11top_L88 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C12top_L89 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
+    click L1Gbr1_L90 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1"
+    click L1Gbr2_L96 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2"
+    click L1Gbr3_L102 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3"
+    click L1Gbr4a_L109 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4a"
+    click L1Gbr4b_L112 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4b"
+    click L1Gbr5a_L115 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5a"
+    click L1Gbr5b_L118 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5b"
+    click L1Gbr6a_L121 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6a"
+    click L1Gbr6b_L124 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6b"
+    click L1Ebr7_L128 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr7"
+    click L1Ebr8_L134 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr8"
+    click L1S3_L66 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s3"
+    click L1G3b_L73 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3b"
+    click L1J1_L76 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l1j1"
+    click L1G3d_L80 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3d"
+    click L1G3e_L83 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3e"
+    click L1Gbr1a_L91 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1a"
+    click L1Gbr1b_L94 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1b"
+    click L1Gbr2a_L97 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2a"
+    click L1Gbr2b_L100 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2b"
+    click L1Gbr3a_L103 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3a"
+    click L1Gbr3b_L106 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3b"
+    click L1Ebr4_L110 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr4"
+    click L1Ebr5_L116 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr5"
+    click L1Ebr6_L122 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr6"
+    click L1G4_L67 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4"
+    click L1G4b_L70 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4b"
+    click L1E2_L84 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1e2"
+    click L1Ebr1_L92 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr1"
+    click L1Ebr2_L98 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr2"
+    click L1Ebr3_L104 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr3"
+    click L1Edeep_L68 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
 
-    BottomPadding[ ]:::invisible ~~~ L1Xctx
-    L1Edeep --> L1G4
-    L1G4 --- Dot1
-    L1G4b --- Dot1
-    L1S3 --- Dot1
-    L1G3b --- Dot1
-    Dot1 --> L1G3
-    L1J1 --> L1G3c
-    L1E2 --> L1G3e
-    L1G3d --- Dot2
-    L1G3e --- Dot2
-    L1S2b --- Dot2
-    Dot2 --> L1G2b
-    L1G3 --- Dot3
-    L1G3c --- Dot3
-    L1S2 --- Dot3
-    L1G2b --- Dot3
-    Dot3 --> L1G2
-    L1Ebr1 --> L1Gbr1a
-    L1Gbr1a --- Dot4
-    L1Gbr1b --- Dot4
-    Dot4 --> L1Gbr1
-    L1Ebr2 --> L1Gbr2a
-    L1Gbr2a --- Dot5
-    L1Gbr2b --- Dot5
-    Dot5 --> L1Gbr2
-    L1Ebr3 --> L1Gbr3a
-    L1Gbr3a --- Dot6
-    L1Gbr3b --- Dot6
-    Dot6 --> L1Gbr3
-    C11top --- SynConnect_00000001
-    C12top --- SynConnect_00000001
-    L1Gbr1 --- SynConnect_00000001
-    L1Gbr2 --- SynConnect_00000001
-    L1Gbr3 --- SynConnect_00000001
-    L1Ebr4 --> L1Gbr4a
-    L1Gbr4a --- Dot7
-    L1Gbr4b --- Dot7
-    Dot7 --> L1Gbr4
-    L1Ebr5 --> L1Gbr5a
-    L1Gbr5a --- Dot8
-    L1Gbr5b --- Dot8
-    Dot8 --> L1Gbr5
-    L1Ebr6 --> L1Gbr6a
-    L1Gbr6a --- Dot9
-    L1Gbr6b --- Dot9
-    Dot9 --> L1Gbr6
-    C08top --- SynConnect_00000000
-    C09top --- SynConnect_00000000
-    C10top --- SynConnect_00000000
-    SynConnect_00000001 --- SynConnect_00000000
-    L1Gbr4 --- SynConnect_00000000
-    L1Gbr5 --- SynConnect_00000000
-    L1Gbr6 --- SynConnect_00000000
-    L1Ebr7 --> L1Gbr7a
-    L1Gbr7a --- Dot10
-    L1Gbr7b --- Dot10
-    Dot10 --> L1Gbr7
-    L1Ebr8 --> L1Gbr8a
-    L1Gbr8a --- Dot11
-    L1Gbr8b --- Dot11
-    Dot11 --> L1Gbr8
-    L1Esh1 --- Dot12
-    L1Esh2 --- Dot12
-    L1G2 --- Dot12
-    SynConnect_00000000 --- Dot12
-    L1Gbr7 --- Dot12
-    L1Gbr8 --- Dot12
-    L1Smain --- Dot12
-    Dot12 --> L1top
-    L1Xctx --o L1top
+    BottomPadding[ ]:::invisible ~~~ L1Xctx_L59
+    L1Edeep_L68 --> L1G4_L67
+    L1G4_L67 --- Dot1
+    L1G4b_L70 --- Dot1
+    L1S3_L66 --- Dot1
+    L1G3b_L73 --- Dot1
+    Dot1 --> L1G3_L65
+    L1J1_L76 --> L1G3c_L75
+    L1E2_L84 --> L1G3e_L83
+    L1G3d_L80 --- Dot2
+    L1G3e_L83 --- Dot2
+    L1S2b_L79 --- Dot2
+    Dot2 --> L1G2b_L78
+    L1G3_L65 --- Dot3
+    L1G3c_L75 --- Dot3
+    L1S2_L64 --- Dot3
+    L1G2b_L78 --- Dot3
+    Dot3 --> L1G2_L63
+    L1Ebr1_L92 --> L1Gbr1a_L91
+    L1Gbr1a_L91 --- Dot4
+    L1Gbr1b_L94 --- Dot4
+    Dot4 --> L1Gbr1_L90
+    L1Ebr2_L98 --> L1Gbr2a_L97
+    L1Gbr2a_L97 --- Dot5
+    L1Gbr2b_L100 --- Dot5
+    Dot5 --> L1Gbr2_L96
+    L1Ebr3_L104 --> L1Gbr3a_L103
+    L1Gbr3a_L103 --- Dot6
+    L1Gbr3b_L106 --- Dot6
+    Dot6 --> L1Gbr3_L102
+    C11top_L88 --- _Connector_00000001
+    C12top_L89 --- _Connector_00000001
+    L1Gbr1_L90 --- _Connector_00000001
+    L1Gbr2_L96 --- _Connector_00000001
+    L1Gbr3_L102 --- _Connector_00000001
+    L1Ebr4_L110 --> L1Gbr4a_L109
+    L1Gbr4a_L109 --- Dot7
+    L1Gbr4b_L112 --- Dot7
+    Dot7 --> L1Gbr4_L108
+    L1Ebr5_L116 --> L1Gbr5a_L115
+    L1Gbr5a_L115 --- Dot8
+    L1Gbr5b_L118 --- Dot8
+    Dot8 --> L1Gbr5_L114
+    L1Ebr6_L122 --> L1Gbr6a_L121
+    L1Gbr6a_L121 --- Dot9
+    L1Gbr6b_L124 --- Dot9
+    Dot9 --> L1Gbr6_L120
+    C08top_L85 --- _Connector_00000000
+    C09top_L86 --- _Connector_00000000
+    C10top_L87 --- _Connector_00000000
+    _Connector_00000001 --- _Connector_00000000
+    L1Gbr4_L108 --- _Connector_00000000
+    L1Gbr5_L114 --- _Connector_00000000
+    L1Gbr6_L120 --- _Connector_00000000
+    L1Ebr7_L128 --> L1Gbr7a_L127
+    L1Gbr7a_L127 --- Dot10
+    L1Gbr7b_L130 --- Dot10
+    Dot10 --> L1Gbr7_L126
+    L1Ebr8_L134 --> L1Gbr8a_L133
+    L1Gbr8a_L133 --- Dot11
+    L1Gbr8b_L136 --- Dot11
+    Dot11 --> L1Gbr8_L132
+    L1Esh1_L60 --- Dot12
+    L1Esh2_L61 --- Dot12
+    L1G2_L63 --- Dot12
+    _Connector_00000000 --- Dot12
+    L1Gbr7_L126 --- Dot12
+    L1Gbr8_L132 --- Dot12
+    L1Smain_L62 --- Dot12
+    Dot12 --> L1top_L58
+    L1Xctx_L59 --o L1top_L58
 ```
 
 ### Package L2top
@@ -447,65 +458,65 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    L2top["<b>L2top</b><br>Statement of L2top"]
-    L2Xctx[("<b>L2Xctx</b>&nbsp;↗<br>Context of L2Xctx")]
-    L2Esh1[("<b>L2Esh1</b>&nbsp;↗<br>Shared evidence A of L2")]
-    L2Esh2[("<b>L2Esh2</b>&nbsp;↗<br>Shared evidence B of L2")]
-    L2Smain[/"<b>L2Smain</b><br>Main strategy of L2"/]
-    L2G2["<b>L2G2</b><br>Level-2 claim of L2"]
-    SynConnect_00000000((" ")):::connector
-    L2Gbr7["<b>L2Gbr7</b><br>Breadth claim 7 of L2"]
-    L2Gbr8["<b>L2Gbr8</b><br>Breadth claim 8 of L2"]
-    L2S2[/"<b>L2S2</b><br>Level-3 strategy of L2"/]
-    L2G2b["<b>L2G2b</b><br>Level-3 alt claim of L2"]
-    C15top[["<b>C15top</b><br>Statement of C15top"]]
-    C16top[["<b>C16top</b><br>Statement of C16top"]]
-    C17top[["<b>C17top</b><br>Statement of C17top"]]
-    SynConnect_00000001((" ")):::connector
-    L2Gbr4["<b>L2Gbr4</b><br>Breadth claim 4 of L2"]
-    L2Gbr5["<b>L2Gbr5</b><br>Breadth claim 5 of L2"]
-    L2Gbr6["<b>L2Gbr6</b><br>Breadth claim 6 of L2"]
-    L2Gbr7a["<b>L2Gbr7a</b><br>Sub-claim 7a of L2"]
-    L2Gbr7b["<b>L2Gbr7b</b><br>Sub-claim 7b of L2"]
-    L2Gbr8a["<b>L2Gbr8a</b><br>Sub-claim 8a of L2"]
-    L2Gbr8b["<b>L2Gbr8b</b><br>Sub-claim 8b of L2"]
-    L2G3["<b>L2G3</b><br>Level-4 claim of L2"]
-    L2G3c["<b>L2G3c</b><br>Level-4 alt claim of L2"]
-    L2S2b[/"<b>L2S2b</b><br>Level-4 alt strategy of L2"/]
-    C18top[["<b>C18top</b><br>Statement of C18top"]]
-    C19top[["<b>C19top</b><br>Statement of C19top"]]
-    L2Gbr1["<b>L2Gbr1</b><br>Breadth claim 1 of L2"]
-    L2Gbr2["<b>L2Gbr2</b><br>Breadth claim 2 of L2"]
-    L2Gbr3["<b>L2Gbr3</b><br>Breadth claim 3 of L2"]
-    L2Gbr4a["<b>L2Gbr4a</b><br>Sub-claim 4a of L2"]
-    L2Gbr4b["<b>L2Gbr4b</b><br>Sub-claim 4b of L2"]
-    L2Gbr5a["<b>L2Gbr5a</b><br>Sub-claim 5a of L2"]
-    L2Gbr5b["<b>L2Gbr5b</b><br>Sub-claim 5b of L2"]
-    L2Gbr6a["<b>L2Gbr6a</b><br>Sub-claim 6a of L2"]
-    L2Gbr6b["<b>L2Gbr6b</b><br>Sub-claim 6b of L2"]
-    L2Ebr7[("<b>L2Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L2")]
-    L2Ebr8[("<b>L2Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L2")]
-    L2S3[/"<b>L2S3</b><br>Level-5 strategy of L2"/]
-    L2G3b["<b>L2G3b</b><br>Level-5 alt claim of L2"]
-    L2J1["<b>L2J1</b><br>Justification of L2"]
-    L2G3d["<b>L2G3d</b><br>Level-5 claim D of L2"]
-    L2G3e["<b>L2G3e</b><br>Level-5 claim E of L2"]
-    L2Gbr1a["<b>L2Gbr1a</b><br>Sub-claim 1a of L2"]
-    L2Gbr1b["<b>L2Gbr1b</b><br>Sub-claim 1b of L2"]
-    L2Gbr2a["<b>L2Gbr2a</b><br>Sub-claim 2a of L2"]
-    L2Gbr2b["<b>L2Gbr2b</b><br>Sub-claim 2b of L2"]
-    L2Gbr3a["<b>L2Gbr3a</b><br>Sub-claim 3a of L2"]
-    L2Gbr3b["<b>L2Gbr3b</b><br>Sub-claim 3b of L2"]
-    L2Ebr4[("<b>L2Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L2")]
-    L2Ebr5[("<b>L2Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L2")]
-    L2Ebr6[("<b>L2Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L2")]
-    L2G4["<b>L2G4</b><br>Level-6 claim of L2"]
-    L2G4b["<b>L2G4b</b><br>Level-6 alt claim of L2"]
-    L2E2[("<b>L2E2</b>&nbsp;↗<br>Extra evidence of L2")]
-    L2Ebr1[("<b>L2Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L2")]
-    L2Ebr2[("<b>L2Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L2")]
-    L2Ebr3[("<b>L2Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L2")]
-    L2Edeep[("<b>L2Edeep</b>&nbsp;↗<br>Deep evidence of L2")]
+    L2top_L139["<b>L2top</b><br>Statement of L2top"]
+    L2Xctx_L140[("<b>L2Xctx</b>&nbsp;↗<br>Context of L2Xctx")]
+    L2Esh1_L141[("<b>L2Esh1</b>&nbsp;↗<br>Shared evidence A of L2")]
+    L2Esh2_L142[("<b>L2Esh2</b>&nbsp;↗<br>Shared evidence B of L2")]
+    L2Smain_L143[/"<b>L2Smain</b><br>Main strategy of L2"/]
+    L2G2_L144["<b>L2G2</b><br>Level-2 claim of L2"]
+    _Connector_00000000((" ")):::connector
+    L2Gbr7_L207["<b>L2Gbr7</b><br>Breadth claim 7 of L2"]
+    L2Gbr8_L213["<b>L2Gbr8</b><br>Breadth claim 8 of L2"]
+    L2S2_L145[/"<b>L2S2</b><br>Level-3 strategy of L2"/]
+    L2G2b_L159["<b>L2G2b</b><br>Level-3 alt claim of L2"]
+    C15top_L166[["<b>C15top</b><br>Statement of C15top"]]
+    C16top_L167[["<b>C16top</b><br>Statement of C16top"]]
+    C17top_L168[["<b>C17top</b><br>Statement of C17top"]]
+    _Connector_00000001((" ")):::connector
+    L2Gbr4_L189["<b>L2Gbr4</b><br>Breadth claim 4 of L2"]
+    L2Gbr5_L195["<b>L2Gbr5</b><br>Breadth claim 5 of L2"]
+    L2Gbr6_L201["<b>L2Gbr6</b><br>Breadth claim 6 of L2"]
+    L2Gbr7a_L208["<b>L2Gbr7a</b><br>Sub-claim 7a of L2"]
+    L2Gbr7b_L211["<b>L2Gbr7b</b><br>Sub-claim 7b of L2"]
+    L2Gbr8a_L214["<b>L2Gbr8a</b><br>Sub-claim 8a of L2"]
+    L2Gbr8b_L217["<b>L2Gbr8b</b><br>Sub-claim 8b of L2"]
+    L2G3_L146["<b>L2G3</b><br>Level-4 claim of L2"]
+    L2G3c_L156["<b>L2G3c</b><br>Level-4 alt claim of L2"]
+    L2S2b_L160[/"<b>L2S2b</b><br>Level-4 alt strategy of L2"/]
+    C18top_L169[["<b>C18top</b><br>Statement of C18top"]]
+    C19top_L170[["<b>C19top</b><br>Statement of C19top"]]
+    L2Gbr1_L171["<b>L2Gbr1</b><br>Breadth claim 1 of L2"]
+    L2Gbr2_L177["<b>L2Gbr2</b><br>Breadth claim 2 of L2"]
+    L2Gbr3_L183["<b>L2Gbr3</b><br>Breadth claim 3 of L2"]
+    L2Gbr4a_L190["<b>L2Gbr4a</b><br>Sub-claim 4a of L2"]
+    L2Gbr4b_L193["<b>L2Gbr4b</b><br>Sub-claim 4b of L2"]
+    L2Gbr5a_L196["<b>L2Gbr5a</b><br>Sub-claim 5a of L2"]
+    L2Gbr5b_L199["<b>L2Gbr5b</b><br>Sub-claim 5b of L2"]
+    L2Gbr6a_L202["<b>L2Gbr6a</b><br>Sub-claim 6a of L2"]
+    L2Gbr6b_L205["<b>L2Gbr6b</b><br>Sub-claim 6b of L2"]
+    L2Ebr7_L209[("<b>L2Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L2")]
+    L2Ebr8_L215[("<b>L2Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L2")]
+    L2S3_L147[/"<b>L2S3</b><br>Level-5 strategy of L2"/]
+    L2G3b_L154["<b>L2G3b</b><br>Level-5 alt claim of L2"]
+    L2J1_L157["<b>L2J1</b><br>Justification of L2"]
+    L2G3d_L161["<b>L2G3d</b><br>Level-5 claim D of L2"]
+    L2G3e_L164["<b>L2G3e</b><br>Level-5 claim E of L2"]
+    L2Gbr1a_L172["<b>L2Gbr1a</b><br>Sub-claim 1a of L2"]
+    L2Gbr1b_L175["<b>L2Gbr1b</b><br>Sub-claim 1b of L2"]
+    L2Gbr2a_L178["<b>L2Gbr2a</b><br>Sub-claim 2a of L2"]
+    L2Gbr2b_L181["<b>L2Gbr2b</b><br>Sub-claim 2b of L2"]
+    L2Gbr3a_L184["<b>L2Gbr3a</b><br>Sub-claim 3a of L2"]
+    L2Gbr3b_L187["<b>L2Gbr3b</b><br>Sub-claim 3b of L2"]
+    L2Ebr4_L191[("<b>L2Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L2")]
+    L2Ebr5_L197[("<b>L2Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L2")]
+    L2Ebr6_L203[("<b>L2Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L2")]
+    L2G4_L148["<b>L2G4</b><br>Level-6 claim of L2"]
+    L2G4b_L151["<b>L2G4b</b><br>Level-6 alt claim of L2"]
+    L2E2_L165[("<b>L2E2</b>&nbsp;↗<br>Extra evidence of L2")]
+    L2Ebr1_L173[("<b>L2Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L2")]
+    L2Ebr2_L179[("<b>L2Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L2")]
+    L2Ebr3_L185[("<b>L2Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L2")]
+    L2Edeep_L149[("<b>L2Edeep</b>&nbsp;↗<br>Deep evidence of L2")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
     Dot3((" ")):::sacmDot
@@ -518,135 +529,137 @@ flowchart BT
     Dot10((" ")):::sacmDot
     Dot11((" ")):::sacmDot
     Dot12((" ")):::sacmDot
-    click L2top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2top"
-    click L2Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l2xctx"
-    click L2Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh1"
-    click L2Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh2"
-    click L2Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2smain"
-    click L2G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2"
-    click L2Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7"
-    click L2Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8"
-    click L2S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2"
-    click L2G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2b"
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
-    click L2Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4"
-    click L2Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5"
-    click L2Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6"
-    click L2Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7a"
-    click L2Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7b"
-    click L2Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8a"
-    click L2Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8b"
-    click L2G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3"
-    click L2G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3c"
-    click L2S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2b"
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
-    click L2Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1"
-    click L2Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2"
-    click L2Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3"
-    click L2Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4a"
-    click L2Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4b"
-    click L2Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5a"
-    click L2Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5b"
-    click L2Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6a"
-    click L2Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6b"
-    click L2Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr7"
-    click L2Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr8"
-    click L2S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s3"
-    click L2G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3b"
-    click L2J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l2j1"
-    click L2G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3d"
-    click L2G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3e"
-    click L2Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1a"
-    click L2Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1b"
-    click L2Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2a"
-    click L2Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2b"
-    click L2Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3a"
-    click L2Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3b"
-    click L2Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr4"
-    click L2Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr5"
-    click L2Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr6"
-    click L2G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4"
-    click L2G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4b"
-    click L2E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2e2"
-    click L2Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr1"
-    click L2Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr2"
-    click L2Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr3"
-    click L2Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
+    click L2top_L139 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2top"
+    click L2Xctx_L140 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l2xctx"
+    click L2Esh1_L141 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh1"
+    click L2Esh2_L142 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh2"
+    click L2Smain_L143 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2smain"
+    click L2G2_L144 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click L2Gbr7_L207 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7"
+    click L2Gbr8_L213 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8"
+    click L2S2_L145 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2"
+    click L2G2b_L159 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2b"
+    click C15top_L166 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
+    click C16top_L167 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
+    click C17top_L168 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click L2Gbr4_L189 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4"
+    click L2Gbr5_L195 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5"
+    click L2Gbr6_L201 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6"
+    click L2Gbr7a_L208 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7a"
+    click L2Gbr7b_L211 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7b"
+    click L2Gbr8a_L214 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8a"
+    click L2Gbr8b_L217 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8b"
+    click L2G3_L146 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3"
+    click L2G3c_L156 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3c"
+    click L2S2b_L160 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2b"
+    click C18top_L169 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
+    click C19top_L170 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
+    click L2Gbr1_L171 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1"
+    click L2Gbr2_L177 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2"
+    click L2Gbr3_L183 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3"
+    click L2Gbr4a_L190 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4a"
+    click L2Gbr4b_L193 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4b"
+    click L2Gbr5a_L196 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5a"
+    click L2Gbr5b_L199 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5b"
+    click L2Gbr6a_L202 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6a"
+    click L2Gbr6b_L205 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6b"
+    click L2Ebr7_L209 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr7"
+    click L2Ebr8_L215 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr8"
+    click L2S3_L147 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s3"
+    click L2G3b_L154 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3b"
+    click L2J1_L157 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l2j1"
+    click L2G3d_L161 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3d"
+    click L2G3e_L164 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3e"
+    click L2Gbr1a_L172 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1a"
+    click L2Gbr1b_L175 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1b"
+    click L2Gbr2a_L178 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2a"
+    click L2Gbr2b_L181 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2b"
+    click L2Gbr3a_L184 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3a"
+    click L2Gbr3b_L187 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3b"
+    click L2Ebr4_L191 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr4"
+    click L2Ebr5_L197 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr5"
+    click L2Ebr6_L203 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr6"
+    click L2G4_L148 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4"
+    click L2G4b_L151 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4b"
+    click L2E2_L165 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2e2"
+    click L2Ebr1_L173 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr1"
+    click L2Ebr2_L179 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr2"
+    click L2Ebr3_L185 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr3"
+    click L2Edeep_L149 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
 
-    BottomPadding[ ]:::invisible ~~~ L2Xctx
-    L2Edeep --> L2G4
-    L2G4 --- Dot1
-    L2G4b --- Dot1
-    L2S3 --- Dot1
-    L2G3b --- Dot1
-    Dot1 --> L2G3
-    L2J1 --> L2G3c
-    L2E2 --> L2G3e
-    L2G3d --- Dot2
-    L2G3e --- Dot2
-    L2S2b --- Dot2
-    Dot2 --> L2G2b
-    L2G3 --- Dot3
-    L2G3c --- Dot3
-    L2S2 --- Dot3
-    L2G2b --- Dot3
-    Dot3 --> L2G2
-    L2Ebr1 --> L2Gbr1a
-    L2Gbr1a --- Dot4
-    L2Gbr1b --- Dot4
-    Dot4 --> L2Gbr1
-    L2Ebr2 --> L2Gbr2a
-    L2Gbr2a --- Dot5
-    L2Gbr2b --- Dot5
-    Dot5 --> L2Gbr2
-    L2Ebr3 --> L2Gbr3a
-    L2Gbr3a --- Dot6
-    L2Gbr3b --- Dot6
-    Dot6 --> L2Gbr3
-    C18top --- SynConnect_00000001
-    C19top --- SynConnect_00000001
-    L2Gbr1 --- SynConnect_00000001
-    L2Gbr2 --- SynConnect_00000001
-    L2Gbr3 --- SynConnect_00000001
-    L2Ebr4 --> L2Gbr4a
-    L2Gbr4a --- Dot7
-    L2Gbr4b --- Dot7
-    Dot7 --> L2Gbr4
-    L2Ebr5 --> L2Gbr5a
-    L2Gbr5a --- Dot8
-    L2Gbr5b --- Dot8
-    Dot8 --> L2Gbr5
-    L2Ebr6 --> L2Gbr6a
-    L2Gbr6a --- Dot9
-    L2Gbr6b --- Dot9
-    Dot9 --> L2Gbr6
-    C15top --- SynConnect_00000000
-    C16top --- SynConnect_00000000
-    C17top --- SynConnect_00000000
-    SynConnect_00000001 --- SynConnect_00000000
-    L2Gbr4 --- SynConnect_00000000
-    L2Gbr5 --- SynConnect_00000000
-    L2Gbr6 --- SynConnect_00000000
-    L2Ebr7 --> L2Gbr7a
-    L2Gbr7a --- Dot10
-    L2Gbr7b --- Dot10
-    Dot10 --> L2Gbr7
-    L2Ebr8 --> L2Gbr8a
-    L2Gbr8a --- Dot11
-    L2Gbr8b --- Dot11
-    Dot11 --> L2Gbr8
-    L2Esh1 --- Dot12
-    L2Esh2 --- Dot12
-    L2G2 --- Dot12
-    SynConnect_00000000 --- Dot12
-    L2Gbr7 --- Dot12
-    L2Gbr8 --- Dot12
-    L2Smain --- Dot12
-    Dot12 --> L2top
-    L2Xctx --o L2top
+    BottomPadding[ ]:::invisible ~~~ L2Xctx_L140
+    L2Edeep_L149 --> L2G4_L148
+    L2G4_L148 --- Dot1
+    L2G4b_L151 --- Dot1
+    L2S3_L147 --- Dot1
+    L2G3b_L154 --- Dot1
+    Dot1 --> L2G3_L146
+    L2J1_L157 --> L2G3c_L156
+    L2E2_L165 --> L2G3e_L164
+    L2G3d_L161 --- Dot2
+    L2G3e_L164 --- Dot2
+    L2S2b_L160 --- Dot2
+    Dot2 --> L2G2b_L159
+    L2G3_L146 --- Dot3
+    L2G3c_L156 --- Dot3
+    L2S2_L145 --- Dot3
+    L2G2b_L159 --- Dot3
+    Dot3 --> L2G2_L144
+    L2Ebr1_L173 --> L2Gbr1a_L172
+    L2Gbr1a_L172 --- Dot4
+    L2Gbr1b_L175 --- Dot4
+    Dot4 --> L2Gbr1_L171
+    L2Ebr2_L179 --> L2Gbr2a_L178
+    L2Gbr2a_L178 --- Dot5
+    L2Gbr2b_L181 --- Dot5
+    Dot5 --> L2Gbr2_L177
+    L2Ebr3_L185 --> L2Gbr3a_L184
+    L2Gbr3a_L184 --- Dot6
+    L2Gbr3b_L187 --- Dot6
+    Dot6 --> L2Gbr3_L183
+    C18top_L169 --- _Connector_00000001
+    C19top_L170 --- _Connector_00000001
+    L2Gbr1_L171 --- _Connector_00000001
+    L2Gbr2_L177 --- _Connector_00000001
+    L2Gbr3_L183 --- _Connector_00000001
+    L2Ebr4_L191 --> L2Gbr4a_L190
+    L2Gbr4a_L190 --- Dot7
+    L2Gbr4b_L193 --- Dot7
+    Dot7 --> L2Gbr4_L189
+    L2Ebr5_L197 --> L2Gbr5a_L196
+    L2Gbr5a_L196 --- Dot8
+    L2Gbr5b_L199 --- Dot8
+    Dot8 --> L2Gbr5_L195
+    L2Ebr6_L203 --> L2Gbr6a_L202
+    L2Gbr6a_L202 --- Dot9
+    L2Gbr6b_L205 --- Dot9
+    Dot9 --> L2Gbr6_L201
+    C15top_L166 --- _Connector_00000000
+    C16top_L167 --- _Connector_00000000
+    C17top_L168 --- _Connector_00000000
+    _Connector_00000001 --- _Connector_00000000
+    L2Gbr4_L189 --- _Connector_00000000
+    L2Gbr5_L195 --- _Connector_00000000
+    L2Gbr6_L201 --- _Connector_00000000
+    L2Ebr7_L209 --> L2Gbr7a_L208
+    L2Gbr7a_L208 --- Dot10
+    L2Gbr7b_L211 --- Dot10
+    Dot10 --> L2Gbr7_L207
+    L2Ebr8_L215 --> L2Gbr8a_L214
+    L2Gbr8a_L214 --- Dot11
+    L2Gbr8b_L217 --- Dot11
+    Dot11 --> L2Gbr8_L213
+    L2Esh1_L141 --- Dot12
+    L2Esh2_L142 --- Dot12
+    L2G2_L144 --- Dot12
+    _Connector_00000000 --- Dot12
+    L2Gbr7_L207 --- Dot12
+    L2Gbr8_L213 --- Dot12
+    L2Smain_L143 --- Dot12
+    Dot12 --> L2top_L139
+    L2Xctx_L140 --o L2top_L139
 ```
 
 ### Package L3top
@@ -666,65 +679,65 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    L3top["<b>L3top</b><br>Statement of L3top"]
-    L3Xctx[("<b>L3Xctx</b>&nbsp;↗<br>Context of L3Xctx")]
-    L3Esh1[("<b>L3Esh1</b>&nbsp;↗<br>Shared evidence A of L3")]
-    L3Esh2[("<b>L3Esh2</b>&nbsp;↗<br>Shared evidence B of L3")]
-    L3Smain[/"<b>L3Smain</b><br>Main strategy of L3"/]
-    L3G2["<b>L3G2</b><br>Level-2 claim of L3"]
-    SynConnect_00000000((" ")):::connector
-    L3Gbr7["<b>L3Gbr7</b><br>Breadth claim 7 of L3"]
-    L3Gbr8["<b>L3Gbr8</b><br>Breadth claim 8 of L3"]
-    L3S2[/"<b>L3S2</b><br>Level-3 strategy of L3"/]
-    L3G2b["<b>L3G2b</b><br>Level-3 alt claim of L3"]
-    C22top[["<b>C22top</b><br>Statement of C22top"]]
-    C23top[["<b>C23top</b><br>Statement of C23top"]]
-    C24top[["<b>C24top</b><br>Statement of C24top"]]
-    SynConnect_00000001((" ")):::connector
-    L3Gbr4["<b>L3Gbr4</b><br>Breadth claim 4 of L3"]
-    L3Gbr5["<b>L3Gbr5</b><br>Breadth claim 5 of L3"]
-    L3Gbr6["<b>L3Gbr6</b><br>Breadth claim 6 of L3"]
-    L3Gbr7a["<b>L3Gbr7a</b><br>Sub-claim 7a of L3"]
-    L3Gbr7b["<b>L3Gbr7b</b><br>Sub-claim 7b of L3"]
-    L3Gbr8a["<b>L3Gbr8a</b><br>Sub-claim 8a of L3"]
-    L3Gbr8b["<b>L3Gbr8b</b><br>Sub-claim 8b of L3"]
-    L3G3["<b>L3G3</b><br>Level-4 claim of L3"]
-    L3G3c["<b>L3G3c</b><br>Level-4 alt claim of L3"]
-    L3S2b[/"<b>L3S2b</b><br>Level-4 alt strategy of L3"/]
-    C25top[["<b>C25top</b><br>Statement of C25top"]]
-    C26top[["<b>C26top</b><br>Statement of C26top"]]
-    L3Gbr1["<b>L3Gbr1</b><br>Breadth claim 1 of L3"]
-    L3Gbr2["<b>L3Gbr2</b><br>Breadth claim 2 of L3"]
-    L3Gbr3["<b>L3Gbr3</b><br>Breadth claim 3 of L3"]
-    L3Gbr4a["<b>L3Gbr4a</b><br>Sub-claim 4a of L3"]
-    L3Gbr4b["<b>L3Gbr4b</b><br>Sub-claim 4b of L3"]
-    L3Gbr5a["<b>L3Gbr5a</b><br>Sub-claim 5a of L3"]
-    L3Gbr5b["<b>L3Gbr5b</b><br>Sub-claim 5b of L3"]
-    L3Gbr6a["<b>L3Gbr6a</b><br>Sub-claim 6a of L3"]
-    L3Gbr6b["<b>L3Gbr6b</b><br>Sub-claim 6b of L3"]
-    L3Ebr7[("<b>L3Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L3")]
-    L3Ebr8[("<b>L3Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L3")]
-    L3S3[/"<b>L3S3</b><br>Level-5 strategy of L3"/]
-    L3G3b["<b>L3G3b</b><br>Level-5 alt claim of L3"]
-    L3J1["<b>L3J1</b><br>Justification of L3"]
-    L3G3d["<b>L3G3d</b><br>Level-5 claim D of L3"]
-    L3G3e["<b>L3G3e</b><br>Level-5 claim E of L3"]
-    L3Gbr1a["<b>L3Gbr1a</b><br>Sub-claim 1a of L3"]
-    L3Gbr1b["<b>L3Gbr1b</b><br>Sub-claim 1b of L3"]
-    L3Gbr2a["<b>L3Gbr2a</b><br>Sub-claim 2a of L3"]
-    L3Gbr2b["<b>L3Gbr2b</b><br>Sub-claim 2b of L3"]
-    L3Gbr3a["<b>L3Gbr3a</b><br>Sub-claim 3a of L3"]
-    L3Gbr3b["<b>L3Gbr3b</b><br>Sub-claim 3b of L3"]
-    L3Ebr4[("<b>L3Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L3")]
-    L3Ebr5[("<b>L3Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L3")]
-    L3Ebr6[("<b>L3Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L3")]
-    L3G4["<b>L3G4</b><br>Level-6 claim of L3"]
-    L3G4b["<b>L3G4b</b><br>Level-6 alt claim of L3"]
-    L3E2[("<b>L3E2</b>&nbsp;↗<br>Extra evidence of L3")]
-    L3Ebr1[("<b>L3Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L3")]
-    L3Ebr2[("<b>L3Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L3")]
-    L3Ebr3[("<b>L3Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L3")]
-    L3Edeep[("<b>L3Edeep</b>&nbsp;↗<br>Deep evidence of L3")]
+    L3top_L220["<b>L3top</b><br>Statement of L3top"]
+    L3Xctx_L221[("<b>L3Xctx</b>&nbsp;↗<br>Context of L3Xctx")]
+    L3Esh1_L222[("<b>L3Esh1</b>&nbsp;↗<br>Shared evidence A of L3")]
+    L3Esh2_L223[("<b>L3Esh2</b>&nbsp;↗<br>Shared evidence B of L3")]
+    L3Smain_L224[/"<b>L3Smain</b><br>Main strategy of L3"/]
+    L3G2_L225["<b>L3G2</b><br>Level-2 claim of L3"]
+    _Connector_00000000((" ")):::connector
+    L3Gbr7_L288["<b>L3Gbr7</b><br>Breadth claim 7 of L3"]
+    L3Gbr8_L294["<b>L3Gbr8</b><br>Breadth claim 8 of L3"]
+    L3S2_L226[/"<b>L3S2</b><br>Level-3 strategy of L3"/]
+    L3G2b_L240["<b>L3G2b</b><br>Level-3 alt claim of L3"]
+    C22top_L247[["<b>C22top</b><br>Statement of C22top"]]
+    C23top_L248[["<b>C23top</b><br>Statement of C23top"]]
+    C24top_L249[["<b>C24top</b><br>Statement of C24top"]]
+    _Connector_00000001((" ")):::connector
+    L3Gbr4_L270["<b>L3Gbr4</b><br>Breadth claim 4 of L3"]
+    L3Gbr5_L276["<b>L3Gbr5</b><br>Breadth claim 5 of L3"]
+    L3Gbr6_L282["<b>L3Gbr6</b><br>Breadth claim 6 of L3"]
+    L3Gbr7a_L289["<b>L3Gbr7a</b><br>Sub-claim 7a of L3"]
+    L3Gbr7b_L292["<b>L3Gbr7b</b><br>Sub-claim 7b of L3"]
+    L3Gbr8a_L295["<b>L3Gbr8a</b><br>Sub-claim 8a of L3"]
+    L3Gbr8b_L298["<b>L3Gbr8b</b><br>Sub-claim 8b of L3"]
+    L3G3_L227["<b>L3G3</b><br>Level-4 claim of L3"]
+    L3G3c_L237["<b>L3G3c</b><br>Level-4 alt claim of L3"]
+    L3S2b_L241[/"<b>L3S2b</b><br>Level-4 alt strategy of L3"/]
+    C25top_L250[["<b>C25top</b><br>Statement of C25top"]]
+    C26top_L251[["<b>C26top</b><br>Statement of C26top"]]
+    L3Gbr1_L252["<b>L3Gbr1</b><br>Breadth claim 1 of L3"]
+    L3Gbr2_L258["<b>L3Gbr2</b><br>Breadth claim 2 of L3"]
+    L3Gbr3_L264["<b>L3Gbr3</b><br>Breadth claim 3 of L3"]
+    L3Gbr4a_L271["<b>L3Gbr4a</b><br>Sub-claim 4a of L3"]
+    L3Gbr4b_L274["<b>L3Gbr4b</b><br>Sub-claim 4b of L3"]
+    L3Gbr5a_L277["<b>L3Gbr5a</b><br>Sub-claim 5a of L3"]
+    L3Gbr5b_L280["<b>L3Gbr5b</b><br>Sub-claim 5b of L3"]
+    L3Gbr6a_L283["<b>L3Gbr6a</b><br>Sub-claim 6a of L3"]
+    L3Gbr6b_L286["<b>L3Gbr6b</b><br>Sub-claim 6b of L3"]
+    L3Ebr7_L290[("<b>L3Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L3")]
+    L3Ebr8_L296[("<b>L3Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L3")]
+    L3S3_L228[/"<b>L3S3</b><br>Level-5 strategy of L3"/]
+    L3G3b_L235["<b>L3G3b</b><br>Level-5 alt claim of L3"]
+    L3J1_L238["<b>L3J1</b><br>Justification of L3"]
+    L3G3d_L242["<b>L3G3d</b><br>Level-5 claim D of L3"]
+    L3G3e_L245["<b>L3G3e</b><br>Level-5 claim E of L3"]
+    L3Gbr1a_L253["<b>L3Gbr1a</b><br>Sub-claim 1a of L3"]
+    L3Gbr1b_L256["<b>L3Gbr1b</b><br>Sub-claim 1b of L3"]
+    L3Gbr2a_L259["<b>L3Gbr2a</b><br>Sub-claim 2a of L3"]
+    L3Gbr2b_L262["<b>L3Gbr2b</b><br>Sub-claim 2b of L3"]
+    L3Gbr3a_L265["<b>L3Gbr3a</b><br>Sub-claim 3a of L3"]
+    L3Gbr3b_L268["<b>L3Gbr3b</b><br>Sub-claim 3b of L3"]
+    L3Ebr4_L272[("<b>L3Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L3")]
+    L3Ebr5_L278[("<b>L3Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L3")]
+    L3Ebr6_L284[("<b>L3Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L3")]
+    L3G4_L229["<b>L3G4</b><br>Level-6 claim of L3"]
+    L3G4b_L232["<b>L3G4b</b><br>Level-6 alt claim of L3"]
+    L3E2_L246[("<b>L3E2</b>&nbsp;↗<br>Extra evidence of L3")]
+    L3Ebr1_L254[("<b>L3Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L3")]
+    L3Ebr2_L260[("<b>L3Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L3")]
+    L3Ebr3_L266[("<b>L3Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L3")]
+    L3Edeep_L230[("<b>L3Edeep</b>&nbsp;↗<br>Deep evidence of L3")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
     Dot3((" ")):::sacmDot
@@ -737,135 +750,137 @@ flowchart BT
     Dot10((" ")):::sacmDot
     Dot11((" ")):::sacmDot
     Dot12((" ")):::sacmDot
-    click L3top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3top"
-    click L3Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l3xctx"
-    click L3Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh1"
-    click L3Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh2"
-    click L3Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3smain"
-    click L3G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2"
-    click L3Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7"
-    click L3Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8"
-    click L3S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2"
-    click L3G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2b"
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
-    click L3Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4"
-    click L3Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5"
-    click L3Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6"
-    click L3Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7a"
-    click L3Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7b"
-    click L3Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8a"
-    click L3Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8b"
-    click L3G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3"
-    click L3G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3c"
-    click L3S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2b"
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
-    click L3Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1"
-    click L3Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2"
-    click L3Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3"
-    click L3Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4a"
-    click L3Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4b"
-    click L3Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5a"
-    click L3Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5b"
-    click L3Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6a"
-    click L3Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6b"
-    click L3Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr7"
-    click L3Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr8"
-    click L3S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s3"
-    click L3G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3b"
-    click L3J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l3j1"
-    click L3G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3d"
-    click L3G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3e"
-    click L3Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1a"
-    click L3Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1b"
-    click L3Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2a"
-    click L3Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2b"
-    click L3Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3a"
-    click L3Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3b"
-    click L3Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr4"
-    click L3Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr5"
-    click L3Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr6"
-    click L3G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4"
-    click L3G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4b"
-    click L3E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3e2"
-    click L3Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr1"
-    click L3Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr2"
-    click L3Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr3"
-    click L3Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
+    click L3top_L220 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3top"
+    click L3Xctx_L221 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l3xctx"
+    click L3Esh1_L222 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh1"
+    click L3Esh2_L223 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh2"
+    click L3Smain_L224 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3smain"
+    click L3G2_L225 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click L3Gbr7_L288 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7"
+    click L3Gbr8_L294 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8"
+    click L3S2_L226 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2"
+    click L3G2b_L240 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2b"
+    click C22top_L247 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
+    click C23top_L248 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
+    click C24top_L249 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click L3Gbr4_L270 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4"
+    click L3Gbr5_L276 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5"
+    click L3Gbr6_L282 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6"
+    click L3Gbr7a_L289 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7a"
+    click L3Gbr7b_L292 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7b"
+    click L3Gbr8a_L295 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8a"
+    click L3Gbr8b_L298 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8b"
+    click L3G3_L227 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3"
+    click L3G3c_L237 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3c"
+    click L3S2b_L241 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2b"
+    click C25top_L250 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
+    click C26top_L251 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
+    click L3Gbr1_L252 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1"
+    click L3Gbr2_L258 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2"
+    click L3Gbr3_L264 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3"
+    click L3Gbr4a_L271 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4a"
+    click L3Gbr4b_L274 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4b"
+    click L3Gbr5a_L277 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5a"
+    click L3Gbr5b_L280 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5b"
+    click L3Gbr6a_L283 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6a"
+    click L3Gbr6b_L286 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6b"
+    click L3Ebr7_L290 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr7"
+    click L3Ebr8_L296 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr8"
+    click L3S3_L228 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s3"
+    click L3G3b_L235 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3b"
+    click L3J1_L238 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l3j1"
+    click L3G3d_L242 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3d"
+    click L3G3e_L245 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3e"
+    click L3Gbr1a_L253 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1a"
+    click L3Gbr1b_L256 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1b"
+    click L3Gbr2a_L259 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2a"
+    click L3Gbr2b_L262 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2b"
+    click L3Gbr3a_L265 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3a"
+    click L3Gbr3b_L268 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3b"
+    click L3Ebr4_L272 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr4"
+    click L3Ebr5_L278 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr5"
+    click L3Ebr6_L284 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr6"
+    click L3G4_L229 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4"
+    click L3G4b_L232 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4b"
+    click L3E2_L246 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3e2"
+    click L3Ebr1_L254 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr1"
+    click L3Ebr2_L260 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr2"
+    click L3Ebr3_L266 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr3"
+    click L3Edeep_L230 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
 
-    BottomPadding[ ]:::invisible ~~~ L3Xctx
-    L3Edeep --> L3G4
-    L3G4 --- Dot1
-    L3G4b --- Dot1
-    L3S3 --- Dot1
-    L3G3b --- Dot1
-    Dot1 --> L3G3
-    L3J1 --> L3G3c
-    L3E2 --> L3G3e
-    L3G3d --- Dot2
-    L3G3e --- Dot2
-    L3S2b --- Dot2
-    Dot2 --> L3G2b
-    L3G3 --- Dot3
-    L3G3c --- Dot3
-    L3S2 --- Dot3
-    L3G2b --- Dot3
-    Dot3 --> L3G2
-    L3Ebr1 --> L3Gbr1a
-    L3Gbr1a --- Dot4
-    L3Gbr1b --- Dot4
-    Dot4 --> L3Gbr1
-    L3Ebr2 --> L3Gbr2a
-    L3Gbr2a --- Dot5
-    L3Gbr2b --- Dot5
-    Dot5 --> L3Gbr2
-    L3Ebr3 --> L3Gbr3a
-    L3Gbr3a --- Dot6
-    L3Gbr3b --- Dot6
-    Dot6 --> L3Gbr3
-    C25top --- SynConnect_00000001
-    C26top --- SynConnect_00000001
-    L3Gbr1 --- SynConnect_00000001
-    L3Gbr2 --- SynConnect_00000001
-    L3Gbr3 --- SynConnect_00000001
-    L3Ebr4 --> L3Gbr4a
-    L3Gbr4a --- Dot7
-    L3Gbr4b --- Dot7
-    Dot7 --> L3Gbr4
-    L3Ebr5 --> L3Gbr5a
-    L3Gbr5a --- Dot8
-    L3Gbr5b --- Dot8
-    Dot8 --> L3Gbr5
-    L3Ebr6 --> L3Gbr6a
-    L3Gbr6a --- Dot9
-    L3Gbr6b --- Dot9
-    Dot9 --> L3Gbr6
-    C22top --- SynConnect_00000000
-    C23top --- SynConnect_00000000
-    C24top --- SynConnect_00000000
-    SynConnect_00000001 --- SynConnect_00000000
-    L3Gbr4 --- SynConnect_00000000
-    L3Gbr5 --- SynConnect_00000000
-    L3Gbr6 --- SynConnect_00000000
-    L3Ebr7 --> L3Gbr7a
-    L3Gbr7a --- Dot10
-    L3Gbr7b --- Dot10
-    Dot10 --> L3Gbr7
-    L3Ebr8 --> L3Gbr8a
-    L3Gbr8a --- Dot11
-    L3Gbr8b --- Dot11
-    Dot11 --> L3Gbr8
-    L3Esh1 --- Dot12
-    L3Esh2 --- Dot12
-    L3G2 --- Dot12
-    SynConnect_00000000 --- Dot12
-    L3Gbr7 --- Dot12
-    L3Gbr8 --- Dot12
-    L3Smain --- Dot12
-    Dot12 --> L3top
-    L3Xctx --o L3top
+    BottomPadding[ ]:::invisible ~~~ L3Xctx_L221
+    L3Edeep_L230 --> L3G4_L229
+    L3G4_L229 --- Dot1
+    L3G4b_L232 --- Dot1
+    L3S3_L228 --- Dot1
+    L3G3b_L235 --- Dot1
+    Dot1 --> L3G3_L227
+    L3J1_L238 --> L3G3c_L237
+    L3E2_L246 --> L3G3e_L245
+    L3G3d_L242 --- Dot2
+    L3G3e_L245 --- Dot2
+    L3S2b_L241 --- Dot2
+    Dot2 --> L3G2b_L240
+    L3G3_L227 --- Dot3
+    L3G3c_L237 --- Dot3
+    L3S2_L226 --- Dot3
+    L3G2b_L240 --- Dot3
+    Dot3 --> L3G2_L225
+    L3Ebr1_L254 --> L3Gbr1a_L253
+    L3Gbr1a_L253 --- Dot4
+    L3Gbr1b_L256 --- Dot4
+    Dot4 --> L3Gbr1_L252
+    L3Ebr2_L260 --> L3Gbr2a_L259
+    L3Gbr2a_L259 --- Dot5
+    L3Gbr2b_L262 --- Dot5
+    Dot5 --> L3Gbr2_L258
+    L3Ebr3_L266 --> L3Gbr3a_L265
+    L3Gbr3a_L265 --- Dot6
+    L3Gbr3b_L268 --- Dot6
+    Dot6 --> L3Gbr3_L264
+    C25top_L250 --- _Connector_00000001
+    C26top_L251 --- _Connector_00000001
+    L3Gbr1_L252 --- _Connector_00000001
+    L3Gbr2_L258 --- _Connector_00000001
+    L3Gbr3_L264 --- _Connector_00000001
+    L3Ebr4_L272 --> L3Gbr4a_L271
+    L3Gbr4a_L271 --- Dot7
+    L3Gbr4b_L274 --- Dot7
+    Dot7 --> L3Gbr4_L270
+    L3Ebr5_L278 --> L3Gbr5a_L277
+    L3Gbr5a_L277 --- Dot8
+    L3Gbr5b_L280 --- Dot8
+    Dot8 --> L3Gbr5_L276
+    L3Ebr6_L284 --> L3Gbr6a_L283
+    L3Gbr6a_L283 --- Dot9
+    L3Gbr6b_L286 --- Dot9
+    Dot9 --> L3Gbr6_L282
+    C22top_L247 --- _Connector_00000000
+    C23top_L248 --- _Connector_00000000
+    C24top_L249 --- _Connector_00000000
+    _Connector_00000001 --- _Connector_00000000
+    L3Gbr4_L270 --- _Connector_00000000
+    L3Gbr5_L276 --- _Connector_00000000
+    L3Gbr6_L282 --- _Connector_00000000
+    L3Ebr7_L290 --> L3Gbr7a_L289
+    L3Gbr7a_L289 --- Dot10
+    L3Gbr7b_L292 --- Dot10
+    Dot10 --> L3Gbr7_L288
+    L3Ebr8_L296 --> L3Gbr8a_L295
+    L3Gbr8a_L295 --- Dot11
+    L3Gbr8b_L298 --- Dot11
+    Dot11 --> L3Gbr8_L294
+    L3Esh1_L222 --- Dot12
+    L3Esh2_L223 --- Dot12
+    L3G2_L225 --- Dot12
+    _Connector_00000000 --- Dot12
+    L3Gbr7_L288 --- Dot12
+    L3Gbr8_L294 --- Dot12
+    L3Smain_L224 --- Dot12
+    Dot12 --> L3top_L220
+    L3Xctx_L221 --o L3top_L220
 ```
 
 ### Package L4top
@@ -885,65 +900,65 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    L4top["<b>L4top</b><br>Statement of L4top"]
-    L4Xctx[("<b>L4Xctx</b>&nbsp;↗<br>Context of L4Xctx")]
-    L4Esh1[("<b>L4Esh1</b>&nbsp;↗<br>Shared evidence A of L4")]
-    L4Esh2[("<b>L4Esh2</b>&nbsp;↗<br>Shared evidence B of L4")]
-    L4Smain[/"<b>L4Smain</b><br>Main strategy of L4"/]
-    L4G2["<b>L4G2</b><br>Level-2 claim of L4"]
-    SynConnect_00000000((" ")):::connector
-    L4Gbr7["<b>L4Gbr7</b><br>Breadth claim 7 of L4"]
-    L4Gbr8["<b>L4Gbr8</b><br>Breadth claim 8 of L4"]
-    L4S2[/"<b>L4S2</b><br>Level-3 strategy of L4"/]
-    L4G2b["<b>L4G2b</b><br>Level-3 alt claim of L4"]
-    C29top[["<b>C29top</b><br>Statement of C29top"]]
-    C30top[["<b>C30top</b><br>Statement of C30top"]]
-    C31top[["<b>C31top</b><br>Statement of C31top"]]
-    SynConnect_00000001((" ")):::connector
-    L4Gbr4["<b>L4Gbr4</b><br>Breadth claim 4 of L4"]
-    L4Gbr5["<b>L4Gbr5</b><br>Breadth claim 5 of L4"]
-    L4Gbr6["<b>L4Gbr6</b><br>Breadth claim 6 of L4"]
-    L4Gbr7a["<b>L4Gbr7a</b><br>Sub-claim 7a of L4"]
-    L4Gbr7b["<b>L4Gbr7b</b><br>Sub-claim 7b of L4"]
-    L4Gbr8a["<b>L4Gbr8a</b><br>Sub-claim 8a of L4"]
-    L4Gbr8b["<b>L4Gbr8b</b><br>Sub-claim 8b of L4"]
-    L4G3["<b>L4G3</b><br>Level-4 claim of L4"]
-    L4G3c["<b>L4G3c</b><br>Level-4 alt claim of L4"]
-    L4S2b[/"<b>L4S2b</b><br>Level-4 alt strategy of L4"/]
-    C32top[["<b>C32top</b><br>Statement of C32top"]]
-    C33top[["<b>C33top</b><br>Statement of C33top"]]
-    L4Gbr1["<b>L4Gbr1</b><br>Breadth claim 1 of L4"]
-    L4Gbr2["<b>L4Gbr2</b><br>Breadth claim 2 of L4"]
-    L4Gbr3["<b>L4Gbr3</b><br>Breadth claim 3 of L4"]
-    L4Gbr4a["<b>L4Gbr4a</b><br>Sub-claim 4a of L4"]
-    L4Gbr4b["<b>L4Gbr4b</b><br>Sub-claim 4b of L4"]
-    L4Gbr5a["<b>L4Gbr5a</b><br>Sub-claim 5a of L4"]
-    L4Gbr5b["<b>L4Gbr5b</b><br>Sub-claim 5b of L4"]
-    L4Gbr6a["<b>L4Gbr6a</b><br>Sub-claim 6a of L4"]
-    L4Gbr6b["<b>L4Gbr6b</b><br>Sub-claim 6b of L4"]
-    L4Ebr7[("<b>L4Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L4")]
-    L4Ebr8[("<b>L4Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L4")]
-    L4S3[/"<b>L4S3</b><br>Level-5 strategy of L4"/]
-    L4G3b["<b>L4G3b</b><br>Level-5 alt claim of L4"]
-    L4J1["<b>L4J1</b><br>Justification of L4"]
-    L4G3d["<b>L4G3d</b><br>Level-5 claim D of L4"]
-    L4G3e["<b>L4G3e</b><br>Level-5 claim E of L4"]
-    L4Gbr1a["<b>L4Gbr1a</b><br>Sub-claim 1a of L4"]
-    L4Gbr1b["<b>L4Gbr1b</b><br>Sub-claim 1b of L4"]
-    L4Gbr2a["<b>L4Gbr2a</b><br>Sub-claim 2a of L4"]
-    L4Gbr2b["<b>L4Gbr2b</b><br>Sub-claim 2b of L4"]
-    L4Gbr3a["<b>L4Gbr3a</b><br>Sub-claim 3a of L4"]
-    L4Gbr3b["<b>L4Gbr3b</b><br>Sub-claim 3b of L4"]
-    L4Ebr4[("<b>L4Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L4")]
-    L4Ebr5[("<b>L4Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L4")]
-    L4Ebr6[("<b>L4Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L4")]
-    L4G4["<b>L4G4</b><br>Level-6 claim of L4"]
-    L4G4b["<b>L4G4b</b><br>Level-6 alt claim of L4"]
-    L4E2[("<b>L4E2</b>&nbsp;↗<br>Extra evidence of L4")]
-    L4Ebr1[("<b>L4Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L4")]
-    L4Ebr2[("<b>L4Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L4")]
-    L4Ebr3[("<b>L4Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L4")]
-    L4Edeep[("<b>L4Edeep</b>&nbsp;↗<br>Deep evidence of L4")]
+    L4top_L301["<b>L4top</b><br>Statement of L4top"]
+    L4Xctx_L302[("<b>L4Xctx</b>&nbsp;↗<br>Context of L4Xctx")]
+    L4Esh1_L303[("<b>L4Esh1</b>&nbsp;↗<br>Shared evidence A of L4")]
+    L4Esh2_L304[("<b>L4Esh2</b>&nbsp;↗<br>Shared evidence B of L4")]
+    L4Smain_L305[/"<b>L4Smain</b><br>Main strategy of L4"/]
+    L4G2_L306["<b>L4G2</b><br>Level-2 claim of L4"]
+    _Connector_00000000((" ")):::connector
+    L4Gbr7_L369["<b>L4Gbr7</b><br>Breadth claim 7 of L4"]
+    L4Gbr8_L375["<b>L4Gbr8</b><br>Breadth claim 8 of L4"]
+    L4S2_L307[/"<b>L4S2</b><br>Level-3 strategy of L4"/]
+    L4G2b_L321["<b>L4G2b</b><br>Level-3 alt claim of L4"]
+    C29top_L328[["<b>C29top</b><br>Statement of C29top"]]
+    C30top_L329[["<b>C30top</b><br>Statement of C30top"]]
+    C31top_L330[["<b>C31top</b><br>Statement of C31top"]]
+    _Connector_00000001((" ")):::connector
+    L4Gbr4_L351["<b>L4Gbr4</b><br>Breadth claim 4 of L4"]
+    L4Gbr5_L357["<b>L4Gbr5</b><br>Breadth claim 5 of L4"]
+    L4Gbr6_L363["<b>L4Gbr6</b><br>Breadth claim 6 of L4"]
+    L4Gbr7a_L370["<b>L4Gbr7a</b><br>Sub-claim 7a of L4"]
+    L4Gbr7b_L373["<b>L4Gbr7b</b><br>Sub-claim 7b of L4"]
+    L4Gbr8a_L376["<b>L4Gbr8a</b><br>Sub-claim 8a of L4"]
+    L4Gbr8b_L379["<b>L4Gbr8b</b><br>Sub-claim 8b of L4"]
+    L4G3_L308["<b>L4G3</b><br>Level-4 claim of L4"]
+    L4G3c_L318["<b>L4G3c</b><br>Level-4 alt claim of L4"]
+    L4S2b_L322[/"<b>L4S2b</b><br>Level-4 alt strategy of L4"/]
+    C32top_L331[["<b>C32top</b><br>Statement of C32top"]]
+    C33top_L332[["<b>C33top</b><br>Statement of C33top"]]
+    L4Gbr1_L333["<b>L4Gbr1</b><br>Breadth claim 1 of L4"]
+    L4Gbr2_L339["<b>L4Gbr2</b><br>Breadth claim 2 of L4"]
+    L4Gbr3_L345["<b>L4Gbr3</b><br>Breadth claim 3 of L4"]
+    L4Gbr4a_L352["<b>L4Gbr4a</b><br>Sub-claim 4a of L4"]
+    L4Gbr4b_L355["<b>L4Gbr4b</b><br>Sub-claim 4b of L4"]
+    L4Gbr5a_L358["<b>L4Gbr5a</b><br>Sub-claim 5a of L4"]
+    L4Gbr5b_L361["<b>L4Gbr5b</b><br>Sub-claim 5b of L4"]
+    L4Gbr6a_L364["<b>L4Gbr6a</b><br>Sub-claim 6a of L4"]
+    L4Gbr6b_L367["<b>L4Gbr6b</b><br>Sub-claim 6b of L4"]
+    L4Ebr7_L371[("<b>L4Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L4")]
+    L4Ebr8_L377[("<b>L4Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L4")]
+    L4S3_L309[/"<b>L4S3</b><br>Level-5 strategy of L4"/]
+    L4G3b_L316["<b>L4G3b</b><br>Level-5 alt claim of L4"]
+    L4J1_L319["<b>L4J1</b><br>Justification of L4"]
+    L4G3d_L323["<b>L4G3d</b><br>Level-5 claim D of L4"]
+    L4G3e_L326["<b>L4G3e</b><br>Level-5 claim E of L4"]
+    L4Gbr1a_L334["<b>L4Gbr1a</b><br>Sub-claim 1a of L4"]
+    L4Gbr1b_L337["<b>L4Gbr1b</b><br>Sub-claim 1b of L4"]
+    L4Gbr2a_L340["<b>L4Gbr2a</b><br>Sub-claim 2a of L4"]
+    L4Gbr2b_L343["<b>L4Gbr2b</b><br>Sub-claim 2b of L4"]
+    L4Gbr3a_L346["<b>L4Gbr3a</b><br>Sub-claim 3a of L4"]
+    L4Gbr3b_L349["<b>L4Gbr3b</b><br>Sub-claim 3b of L4"]
+    L4Ebr4_L353[("<b>L4Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L4")]
+    L4Ebr5_L359[("<b>L4Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L4")]
+    L4Ebr6_L365[("<b>L4Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L4")]
+    L4G4_L310["<b>L4G4</b><br>Level-6 claim of L4"]
+    L4G4b_L313["<b>L4G4b</b><br>Level-6 alt claim of L4"]
+    L4E2_L327[("<b>L4E2</b>&nbsp;↗<br>Extra evidence of L4")]
+    L4Ebr1_L335[("<b>L4Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L4")]
+    L4Ebr2_L341[("<b>L4Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L4")]
+    L4Ebr3_L347[("<b>L4Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L4")]
+    L4Edeep_L311[("<b>L4Edeep</b>&nbsp;↗<br>Deep evidence of L4")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
     Dot3((" ")):::sacmDot
@@ -956,135 +971,137 @@ flowchart BT
     Dot10((" ")):::sacmDot
     Dot11((" ")):::sacmDot
     Dot12((" ")):::sacmDot
-    click L4top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4top"
-    click L4Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l4xctx"
-    click L4Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh1"
-    click L4Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh2"
-    click L4Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4smain"
-    click L4G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2"
-    click L4Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7"
-    click L4Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8"
-    click L4S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2"
-    click L4G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2b"
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
-    click L4Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4"
-    click L4Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5"
-    click L4Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6"
-    click L4Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7a"
-    click L4Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7b"
-    click L4Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8a"
-    click L4Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8b"
-    click L4G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3"
-    click L4G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3c"
-    click L4S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2b"
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
-    click L4Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1"
-    click L4Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2"
-    click L4Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3"
-    click L4Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4a"
-    click L4Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4b"
-    click L4Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5a"
-    click L4Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5b"
-    click L4Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6a"
-    click L4Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6b"
-    click L4Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr7"
-    click L4Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr8"
-    click L4S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s3"
-    click L4G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3b"
-    click L4J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l4j1"
-    click L4G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3d"
-    click L4G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3e"
-    click L4Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1a"
-    click L4Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1b"
-    click L4Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2a"
-    click L4Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2b"
-    click L4Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3a"
-    click L4Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3b"
-    click L4Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr4"
-    click L4Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr5"
-    click L4Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr6"
-    click L4G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4"
-    click L4G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4b"
-    click L4E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4e2"
-    click L4Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr1"
-    click L4Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr2"
-    click L4Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr3"
-    click L4Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
+    click L4top_L301 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4top"
+    click L4Xctx_L302 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l4xctx"
+    click L4Esh1_L303 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh1"
+    click L4Esh2_L304 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh2"
+    click L4Smain_L305 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4smain"
+    click L4G2_L306 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click L4Gbr7_L369 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7"
+    click L4Gbr8_L375 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8"
+    click L4S2_L307 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2"
+    click L4G2b_L321 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2b"
+    click C29top_L328 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
+    click C30top_L329 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
+    click C31top_L330 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click L4Gbr4_L351 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4"
+    click L4Gbr5_L357 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5"
+    click L4Gbr6_L363 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6"
+    click L4Gbr7a_L370 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7a"
+    click L4Gbr7b_L373 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7b"
+    click L4Gbr8a_L376 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8a"
+    click L4Gbr8b_L379 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8b"
+    click L4G3_L308 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3"
+    click L4G3c_L318 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3c"
+    click L4S2b_L322 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2b"
+    click C32top_L331 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
+    click C33top_L332 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
+    click L4Gbr1_L333 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1"
+    click L4Gbr2_L339 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2"
+    click L4Gbr3_L345 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3"
+    click L4Gbr4a_L352 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4a"
+    click L4Gbr4b_L355 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4b"
+    click L4Gbr5a_L358 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5a"
+    click L4Gbr5b_L361 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5b"
+    click L4Gbr6a_L364 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6a"
+    click L4Gbr6b_L367 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6b"
+    click L4Ebr7_L371 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr7"
+    click L4Ebr8_L377 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr8"
+    click L4S3_L309 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s3"
+    click L4G3b_L316 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3b"
+    click L4J1_L319 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l4j1"
+    click L4G3d_L323 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3d"
+    click L4G3e_L326 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3e"
+    click L4Gbr1a_L334 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1a"
+    click L4Gbr1b_L337 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1b"
+    click L4Gbr2a_L340 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2a"
+    click L4Gbr2b_L343 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2b"
+    click L4Gbr3a_L346 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3a"
+    click L4Gbr3b_L349 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3b"
+    click L4Ebr4_L353 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr4"
+    click L4Ebr5_L359 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr5"
+    click L4Ebr6_L365 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr6"
+    click L4G4_L310 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4"
+    click L4G4b_L313 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4b"
+    click L4E2_L327 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4e2"
+    click L4Ebr1_L335 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr1"
+    click L4Ebr2_L341 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr2"
+    click L4Ebr3_L347 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr3"
+    click L4Edeep_L311 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
 
-    BottomPadding[ ]:::invisible ~~~ L4Xctx
-    L4Edeep --> L4G4
-    L4G4 --- Dot1
-    L4G4b --- Dot1
-    L4S3 --- Dot1
-    L4G3b --- Dot1
-    Dot1 --> L4G3
-    L4J1 --> L4G3c
-    L4E2 --> L4G3e
-    L4G3d --- Dot2
-    L4G3e --- Dot2
-    L4S2b --- Dot2
-    Dot2 --> L4G2b
-    L4G3 --- Dot3
-    L4G3c --- Dot3
-    L4S2 --- Dot3
-    L4G2b --- Dot3
-    Dot3 --> L4G2
-    L4Ebr1 --> L4Gbr1a
-    L4Gbr1a --- Dot4
-    L4Gbr1b --- Dot4
-    Dot4 --> L4Gbr1
-    L4Ebr2 --> L4Gbr2a
-    L4Gbr2a --- Dot5
-    L4Gbr2b --- Dot5
-    Dot5 --> L4Gbr2
-    L4Ebr3 --> L4Gbr3a
-    L4Gbr3a --- Dot6
-    L4Gbr3b --- Dot6
-    Dot6 --> L4Gbr3
-    C32top --- SynConnect_00000001
-    C33top --- SynConnect_00000001
-    L4Gbr1 --- SynConnect_00000001
-    L4Gbr2 --- SynConnect_00000001
-    L4Gbr3 --- SynConnect_00000001
-    L4Ebr4 --> L4Gbr4a
-    L4Gbr4a --- Dot7
-    L4Gbr4b --- Dot7
-    Dot7 --> L4Gbr4
-    L4Ebr5 --> L4Gbr5a
-    L4Gbr5a --- Dot8
-    L4Gbr5b --- Dot8
-    Dot8 --> L4Gbr5
-    L4Ebr6 --> L4Gbr6a
-    L4Gbr6a --- Dot9
-    L4Gbr6b --- Dot9
-    Dot9 --> L4Gbr6
-    C29top --- SynConnect_00000000
-    C30top --- SynConnect_00000000
-    C31top --- SynConnect_00000000
-    SynConnect_00000001 --- SynConnect_00000000
-    L4Gbr4 --- SynConnect_00000000
-    L4Gbr5 --- SynConnect_00000000
-    L4Gbr6 --- SynConnect_00000000
-    L4Ebr7 --> L4Gbr7a
-    L4Gbr7a --- Dot10
-    L4Gbr7b --- Dot10
-    Dot10 --> L4Gbr7
-    L4Ebr8 --> L4Gbr8a
-    L4Gbr8a --- Dot11
-    L4Gbr8b --- Dot11
-    Dot11 --> L4Gbr8
-    L4Esh1 --- Dot12
-    L4Esh2 --- Dot12
-    L4G2 --- Dot12
-    SynConnect_00000000 --- Dot12
-    L4Gbr7 --- Dot12
-    L4Gbr8 --- Dot12
-    L4Smain --- Dot12
-    Dot12 --> L4top
-    L4Xctx --o L4top
+    BottomPadding[ ]:::invisible ~~~ L4Xctx_L302
+    L4Edeep_L311 --> L4G4_L310
+    L4G4_L310 --- Dot1
+    L4G4b_L313 --- Dot1
+    L4S3_L309 --- Dot1
+    L4G3b_L316 --- Dot1
+    Dot1 --> L4G3_L308
+    L4J1_L319 --> L4G3c_L318
+    L4E2_L327 --> L4G3e_L326
+    L4G3d_L323 --- Dot2
+    L4G3e_L326 --- Dot2
+    L4S2b_L322 --- Dot2
+    Dot2 --> L4G2b_L321
+    L4G3_L308 --- Dot3
+    L4G3c_L318 --- Dot3
+    L4S2_L307 --- Dot3
+    L4G2b_L321 --- Dot3
+    Dot3 --> L4G2_L306
+    L4Ebr1_L335 --> L4Gbr1a_L334
+    L4Gbr1a_L334 --- Dot4
+    L4Gbr1b_L337 --- Dot4
+    Dot4 --> L4Gbr1_L333
+    L4Ebr2_L341 --> L4Gbr2a_L340
+    L4Gbr2a_L340 --- Dot5
+    L4Gbr2b_L343 --- Dot5
+    Dot5 --> L4Gbr2_L339
+    L4Ebr3_L347 --> L4Gbr3a_L346
+    L4Gbr3a_L346 --- Dot6
+    L4Gbr3b_L349 --- Dot6
+    Dot6 --> L4Gbr3_L345
+    C32top_L331 --- _Connector_00000001
+    C33top_L332 --- _Connector_00000001
+    L4Gbr1_L333 --- _Connector_00000001
+    L4Gbr2_L339 --- _Connector_00000001
+    L4Gbr3_L345 --- _Connector_00000001
+    L4Ebr4_L353 --> L4Gbr4a_L352
+    L4Gbr4a_L352 --- Dot7
+    L4Gbr4b_L355 --- Dot7
+    Dot7 --> L4Gbr4_L351
+    L4Ebr5_L359 --> L4Gbr5a_L358
+    L4Gbr5a_L358 --- Dot8
+    L4Gbr5b_L361 --- Dot8
+    Dot8 --> L4Gbr5_L357
+    L4Ebr6_L365 --> L4Gbr6a_L364
+    L4Gbr6a_L364 --- Dot9
+    L4Gbr6b_L367 --- Dot9
+    Dot9 --> L4Gbr6_L363
+    C29top_L328 --- _Connector_00000000
+    C30top_L329 --- _Connector_00000000
+    C31top_L330 --- _Connector_00000000
+    _Connector_00000001 --- _Connector_00000000
+    L4Gbr4_L351 --- _Connector_00000000
+    L4Gbr5_L357 --- _Connector_00000000
+    L4Gbr6_L363 --- _Connector_00000000
+    L4Ebr7_L371 --> L4Gbr7a_L370
+    L4Gbr7a_L370 --- Dot10
+    L4Gbr7b_L373 --- Dot10
+    Dot10 --> L4Gbr7_L369
+    L4Ebr8_L377 --> L4Gbr8a_L376
+    L4Gbr8a_L376 --- Dot11
+    L4Gbr8b_L379 --- Dot11
+    Dot11 --> L4Gbr8_L375
+    L4Esh1_L303 --- Dot12
+    L4Esh2_L304 --- Dot12
+    L4G2_L306 --- Dot12
+    _Connector_00000000 --- Dot12
+    L4Gbr7_L369 --- Dot12
+    L4Gbr8_L375 --- Dot12
+    L4Smain_L305 --- Dot12
+    Dot12 --> L4top_L301
+    L4Xctx_L302 --o L4top_L301
 ```
 
 ### Package L5top
@@ -1104,65 +1121,65 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    L5top["<b>L5top</b><br>Statement of L5top"]
-    L5Xctx[("<b>L5Xctx</b>&nbsp;↗<br>Context of L5Xctx")]
-    L5Esh1[("<b>L5Esh1</b>&nbsp;↗<br>Shared evidence A of L5")]
-    L5Esh2[("<b>L5Esh2</b>&nbsp;↗<br>Shared evidence B of L5")]
-    L5Smain[/"<b>L5Smain</b><br>Main strategy of L5"/]
-    L5G2["<b>L5G2</b><br>Level-2 claim of L5"]
-    SynConnect_00000000((" ")):::connector
-    L5Gbr7["<b>L5Gbr7</b><br>Breadth claim 7 of L5"]
-    L5Gbr8["<b>L5Gbr8</b><br>Breadth claim 8 of L5"]
-    L5S2[/"<b>L5S2</b><br>Level-3 strategy of L5"/]
-    L5G2b["<b>L5G2b</b><br>Level-3 alt claim of L5"]
-    C36top[["<b>C36top</b><br>Statement of C36top"]]
-    C37top[["<b>C37top</b><br>Statement of C37top"]]
-    C38top[["<b>C38top</b><br>Statement of C38top"]]
-    SynConnect_00000001((" ")):::connector
-    L5Gbr4["<b>L5Gbr4</b><br>Breadth claim 4 of L5"]
-    L5Gbr5["<b>L5Gbr5</b><br>Breadth claim 5 of L5"]
-    L5Gbr6["<b>L5Gbr6</b><br>Breadth claim 6 of L5"]
-    L5Gbr7a["<b>L5Gbr7a</b><br>Sub-claim 7a of L5"]
-    L5Gbr7b["<b>L5Gbr7b</b><br>Sub-claim 7b of L5"]
-    L5Gbr8a["<b>L5Gbr8a</b><br>Sub-claim 8a of L5"]
-    L5Gbr8b["<b>L5Gbr8b</b><br>Sub-claim 8b of L5"]
-    L5G3["<b>L5G3</b><br>Level-4 claim of L5"]
-    L5G3c["<b>L5G3c</b><br>Level-4 alt claim of L5"]
-    L5S2b[/"<b>L5S2b</b><br>Level-4 alt strategy of L5"/]
-    C39top[["<b>C39top</b><br>Statement of C39top"]]
-    C40top[["<b>C40top</b><br>Statement of C40top"]]
-    L5Gbr1["<b>L5Gbr1</b><br>Breadth claim 1 of L5"]
-    L5Gbr2["<b>L5Gbr2</b><br>Breadth claim 2 of L5"]
-    L5Gbr3["<b>L5Gbr3</b><br>Breadth claim 3 of L5"]
-    L5Gbr4a["<b>L5Gbr4a</b><br>Sub-claim 4a of L5"]
-    L5Gbr4b["<b>L5Gbr4b</b><br>Sub-claim 4b of L5"]
-    L5Gbr5a["<b>L5Gbr5a</b><br>Sub-claim 5a of L5"]
-    L5Gbr5b["<b>L5Gbr5b</b><br>Sub-claim 5b of L5"]
-    L5Gbr6a["<b>L5Gbr6a</b><br>Sub-claim 6a of L5"]
-    L5Gbr6b["<b>L5Gbr6b</b><br>Sub-claim 6b of L5"]
-    L5Ebr7[("<b>L5Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L5")]
-    L5Ebr8[("<b>L5Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L5")]
-    L5S3[/"<b>L5S3</b><br>Level-5 strategy of L5"/]
-    L5G3b["<b>L5G3b</b><br>Level-5 alt claim of L5"]
-    L5J1["<b>L5J1</b><br>Justification of L5"]
-    L5G3d["<b>L5G3d</b><br>Level-5 claim D of L5"]
-    L5G3e["<b>L5G3e</b><br>Level-5 claim E of L5"]
-    L5Gbr1a["<b>L5Gbr1a</b><br>Sub-claim 1a of L5"]
-    L5Gbr1b["<b>L5Gbr1b</b><br>Sub-claim 1b of L5"]
-    L5Gbr2a["<b>L5Gbr2a</b><br>Sub-claim 2a of L5"]
-    L5Gbr2b["<b>L5Gbr2b</b><br>Sub-claim 2b of L5"]
-    L5Gbr3a["<b>L5Gbr3a</b><br>Sub-claim 3a of L5"]
-    L5Gbr3b["<b>L5Gbr3b</b><br>Sub-claim 3b of L5"]
-    L5Ebr4[("<b>L5Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L5")]
-    L5Ebr5[("<b>L5Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L5")]
-    L5Ebr6[("<b>L5Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L5")]
-    L5G4["<b>L5G4</b><br>Level-6 claim of L5"]
-    L5G4b["<b>L5G4b</b><br>Level-6 alt claim of L5"]
-    L5E2[("<b>L5E2</b>&nbsp;↗<br>Extra evidence of L5")]
-    L5Ebr1[("<b>L5Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L5")]
-    L5Ebr2[("<b>L5Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L5")]
-    L5Ebr3[("<b>L5Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L5")]
-    L5Edeep[("<b>L5Edeep</b>&nbsp;↗<br>Deep evidence of L5")]
+    L5top_L382["<b>L5top</b><br>Statement of L5top"]
+    L5Xctx_L383[("<b>L5Xctx</b>&nbsp;↗<br>Context of L5Xctx")]
+    L5Esh1_L384[("<b>L5Esh1</b>&nbsp;↗<br>Shared evidence A of L5")]
+    L5Esh2_L385[("<b>L5Esh2</b>&nbsp;↗<br>Shared evidence B of L5")]
+    L5Smain_L386[/"<b>L5Smain</b><br>Main strategy of L5"/]
+    L5G2_L387["<b>L5G2</b><br>Level-2 claim of L5"]
+    _Connector_00000000((" ")):::connector
+    L5Gbr7_L450["<b>L5Gbr7</b><br>Breadth claim 7 of L5"]
+    L5Gbr8_L456["<b>L5Gbr8</b><br>Breadth claim 8 of L5"]
+    L5S2_L388[/"<b>L5S2</b><br>Level-3 strategy of L5"/]
+    L5G2b_L402["<b>L5G2b</b><br>Level-3 alt claim of L5"]
+    C36top_L409[["<b>C36top</b><br>Statement of C36top"]]
+    C37top_L410[["<b>C37top</b><br>Statement of C37top"]]
+    C38top_L411[["<b>C38top</b><br>Statement of C38top"]]
+    _Connector_00000001((" ")):::connector
+    L5Gbr4_L432["<b>L5Gbr4</b><br>Breadth claim 4 of L5"]
+    L5Gbr5_L438["<b>L5Gbr5</b><br>Breadth claim 5 of L5"]
+    L5Gbr6_L444["<b>L5Gbr6</b><br>Breadth claim 6 of L5"]
+    L5Gbr7a_L451["<b>L5Gbr7a</b><br>Sub-claim 7a of L5"]
+    L5Gbr7b_L454["<b>L5Gbr7b</b><br>Sub-claim 7b of L5"]
+    L5Gbr8a_L457["<b>L5Gbr8a</b><br>Sub-claim 8a of L5"]
+    L5Gbr8b_L460["<b>L5Gbr8b</b><br>Sub-claim 8b of L5"]
+    L5G3_L389["<b>L5G3</b><br>Level-4 claim of L5"]
+    L5G3c_L399["<b>L5G3c</b><br>Level-4 alt claim of L5"]
+    L5S2b_L403[/"<b>L5S2b</b><br>Level-4 alt strategy of L5"/]
+    C39top_L412[["<b>C39top</b><br>Statement of C39top"]]
+    C40top_L413[["<b>C40top</b><br>Statement of C40top"]]
+    L5Gbr1_L414["<b>L5Gbr1</b><br>Breadth claim 1 of L5"]
+    L5Gbr2_L420["<b>L5Gbr2</b><br>Breadth claim 2 of L5"]
+    L5Gbr3_L426["<b>L5Gbr3</b><br>Breadth claim 3 of L5"]
+    L5Gbr4a_L433["<b>L5Gbr4a</b><br>Sub-claim 4a of L5"]
+    L5Gbr4b_L436["<b>L5Gbr4b</b><br>Sub-claim 4b of L5"]
+    L5Gbr5a_L439["<b>L5Gbr5a</b><br>Sub-claim 5a of L5"]
+    L5Gbr5b_L442["<b>L5Gbr5b</b><br>Sub-claim 5b of L5"]
+    L5Gbr6a_L445["<b>L5Gbr6a</b><br>Sub-claim 6a of L5"]
+    L5Gbr6b_L448["<b>L5Gbr6b</b><br>Sub-claim 6b of L5"]
+    L5Ebr7_L452[("<b>L5Ebr7</b>&nbsp;↗<br>Evidence for breadth 7 of L5")]
+    L5Ebr8_L458[("<b>L5Ebr8</b>&nbsp;↗<br>Evidence for breadth 8 of L5")]
+    L5S3_L390[/"<b>L5S3</b><br>Level-5 strategy of L5"/]
+    L5G3b_L397["<b>L5G3b</b><br>Level-5 alt claim of L5"]
+    L5J1_L400["<b>L5J1</b><br>Justification of L5"]
+    L5G3d_L404["<b>L5G3d</b><br>Level-5 claim D of L5"]
+    L5G3e_L407["<b>L5G3e</b><br>Level-5 claim E of L5"]
+    L5Gbr1a_L415["<b>L5Gbr1a</b><br>Sub-claim 1a of L5"]
+    L5Gbr1b_L418["<b>L5Gbr1b</b><br>Sub-claim 1b of L5"]
+    L5Gbr2a_L421["<b>L5Gbr2a</b><br>Sub-claim 2a of L5"]
+    L5Gbr2b_L424["<b>L5Gbr2b</b><br>Sub-claim 2b of L5"]
+    L5Gbr3a_L427["<b>L5Gbr3a</b><br>Sub-claim 3a of L5"]
+    L5Gbr3b_L430["<b>L5Gbr3b</b><br>Sub-claim 3b of L5"]
+    L5Ebr4_L434[("<b>L5Ebr4</b>&nbsp;↗<br>Evidence for breadth 4 of L5")]
+    L5Ebr5_L440[("<b>L5Ebr5</b>&nbsp;↗<br>Evidence for breadth 5 of L5")]
+    L5Ebr6_L446[("<b>L5Ebr6</b>&nbsp;↗<br>Evidence for breadth 6 of L5")]
+    L5G4_L391["<b>L5G4</b><br>Level-6 claim of L5"]
+    L5G4b_L394["<b>L5G4b</b><br>Level-6 alt claim of L5"]
+    L5E2_L408[("<b>L5E2</b>&nbsp;↗<br>Extra evidence of L5")]
+    L5Ebr1_L416[("<b>L5Ebr1</b>&nbsp;↗<br>Evidence for breadth 1 of L5")]
+    L5Ebr2_L422[("<b>L5Ebr2</b>&nbsp;↗<br>Evidence for breadth 2 of L5")]
+    L5Ebr3_L428[("<b>L5Ebr3</b>&nbsp;↗<br>Evidence for breadth 3 of L5")]
+    L5Edeep_L392[("<b>L5Edeep</b>&nbsp;↗<br>Deep evidence of L5")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
     Dot3((" ")):::sacmDot
@@ -1175,135 +1192,137 @@ flowchart BT
     Dot10((" ")):::sacmDot
     Dot11((" ")):::sacmDot
     Dot12((" ")):::sacmDot
-    click L5top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5top"
-    click L5Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l5xctx"
-    click L5Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh1"
-    click L5Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh2"
-    click L5Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5smain"
-    click L5G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2"
-    click L5Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7"
-    click L5Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8"
-    click L5S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2"
-    click L5G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2b"
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
-    click L5Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4"
-    click L5Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5"
-    click L5Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6"
-    click L5Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7a"
-    click L5Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7b"
-    click L5Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8a"
-    click L5Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8b"
-    click L5G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3"
-    click L5G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3c"
-    click L5S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2b"
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
-    click L5Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1"
-    click L5Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2"
-    click L5Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3"
-    click L5Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4a"
-    click L5Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4b"
-    click L5Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5a"
-    click L5Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5b"
-    click L5Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6a"
-    click L5Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6b"
-    click L5Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr7"
-    click L5Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr8"
-    click L5S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s3"
-    click L5G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3b"
-    click L5J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l5j1"
-    click L5G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3d"
-    click L5G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3e"
-    click L5Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1a"
-    click L5Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1b"
-    click L5Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2a"
-    click L5Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2b"
-    click L5Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3a"
-    click L5Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3b"
-    click L5Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr4"
-    click L5Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr5"
-    click L5Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr6"
-    click L5G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4"
-    click L5G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4b"
-    click L5E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5e2"
-    click L5Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr1"
-    click L5Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr2"
-    click L5Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr3"
-    click L5Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
+    click L5top_L382 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5top"
+    click L5Xctx_L383 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l5xctx"
+    click L5Esh1_L384 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh1"
+    click L5Esh2_L385 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh2"
+    click L5Smain_L386 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5smain"
+    click L5G2_L387 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2"
+    click _Connector_00000000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000000"
+    click L5Gbr7_L450 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7"
+    click L5Gbr8_L456 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8"
+    click L5S2_L388 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2"
+    click L5G2b_L402 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2b"
+    click C36top_L409 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
+    click C37top_L410 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
+    click C38top_L411 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
+    click _Connector_00000001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#connector-_connector_00000001"
+    click L5Gbr4_L432 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4"
+    click L5Gbr5_L438 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5"
+    click L5Gbr6_L444 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6"
+    click L5Gbr7a_L451 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7a"
+    click L5Gbr7b_L454 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7b"
+    click L5Gbr8a_L457 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8a"
+    click L5Gbr8b_L460 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8b"
+    click L5G3_L389 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3"
+    click L5G3c_L399 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3c"
+    click L5S2b_L403 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2b"
+    click C39top_L412 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
+    click C40top_L413 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
+    click L5Gbr1_L414 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1"
+    click L5Gbr2_L420 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2"
+    click L5Gbr3_L426 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3"
+    click L5Gbr4a_L433 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4a"
+    click L5Gbr4b_L436 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4b"
+    click L5Gbr5a_L439 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5a"
+    click L5Gbr5b_L442 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5b"
+    click L5Gbr6a_L445 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6a"
+    click L5Gbr6b_L448 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6b"
+    click L5Ebr7_L452 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr7"
+    click L5Ebr8_L458 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr8"
+    click L5S3_L390 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s3"
+    click L5G3b_L397 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3b"
+    click L5J1_L400 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l5j1"
+    click L5G3d_L404 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3d"
+    click L5G3e_L407 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3e"
+    click L5Gbr1a_L415 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1a"
+    click L5Gbr1b_L418 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1b"
+    click L5Gbr2a_L421 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2a"
+    click L5Gbr2b_L424 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2b"
+    click L5Gbr3a_L427 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3a"
+    click L5Gbr3b_L430 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3b"
+    click L5Ebr4_L434 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr4"
+    click L5Ebr5_L440 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr5"
+    click L5Ebr6_L446 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr6"
+    click L5G4_L391 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4"
+    click L5G4b_L394 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4b"
+    click L5E2_L408 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5e2"
+    click L5Ebr1_L416 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr1"
+    click L5Ebr2_L422 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr2"
+    click L5Ebr3_L428 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr3"
+    click L5Edeep_L392 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
 
-    BottomPadding[ ]:::invisible ~~~ L5Xctx
-    L5Edeep --> L5G4
-    L5G4 --- Dot1
-    L5G4b --- Dot1
-    L5S3 --- Dot1
-    L5G3b --- Dot1
-    Dot1 --> L5G3
-    L5J1 --> L5G3c
-    L5E2 --> L5G3e
-    L5G3d --- Dot2
-    L5G3e --- Dot2
-    L5S2b --- Dot2
-    Dot2 --> L5G2b
-    L5G3 --- Dot3
-    L5G3c --- Dot3
-    L5S2 --- Dot3
-    L5G2b --- Dot3
-    Dot3 --> L5G2
-    L5Ebr1 --> L5Gbr1a
-    L5Gbr1a --- Dot4
-    L5Gbr1b --- Dot4
-    Dot4 --> L5Gbr1
-    L5Ebr2 --> L5Gbr2a
-    L5Gbr2a --- Dot5
-    L5Gbr2b --- Dot5
-    Dot5 --> L5Gbr2
-    L5Ebr3 --> L5Gbr3a
-    L5Gbr3a --- Dot6
-    L5Gbr3b --- Dot6
-    Dot6 --> L5Gbr3
-    C39top --- SynConnect_00000001
-    C40top --- SynConnect_00000001
-    L5Gbr1 --- SynConnect_00000001
-    L5Gbr2 --- SynConnect_00000001
-    L5Gbr3 --- SynConnect_00000001
-    L5Ebr4 --> L5Gbr4a
-    L5Gbr4a --- Dot7
-    L5Gbr4b --- Dot7
-    Dot7 --> L5Gbr4
-    L5Ebr5 --> L5Gbr5a
-    L5Gbr5a --- Dot8
-    L5Gbr5b --- Dot8
-    Dot8 --> L5Gbr5
-    L5Ebr6 --> L5Gbr6a
-    L5Gbr6a --- Dot9
-    L5Gbr6b --- Dot9
-    Dot9 --> L5Gbr6
-    C36top --- SynConnect_00000000
-    C37top --- SynConnect_00000000
-    C38top --- SynConnect_00000000
-    SynConnect_00000001 --- SynConnect_00000000
-    L5Gbr4 --- SynConnect_00000000
-    L5Gbr5 --- SynConnect_00000000
-    L5Gbr6 --- SynConnect_00000000
-    L5Ebr7 --> L5Gbr7a
-    L5Gbr7a --- Dot10
-    L5Gbr7b --- Dot10
-    Dot10 --> L5Gbr7
-    L5Ebr8 --> L5Gbr8a
-    L5Gbr8a --- Dot11
-    L5Gbr8b --- Dot11
-    Dot11 --> L5Gbr8
-    L5Esh1 --- Dot12
-    L5Esh2 --- Dot12
-    L5G2 --- Dot12
-    SynConnect_00000000 --- Dot12
-    L5Gbr7 --- Dot12
-    L5Gbr8 --- Dot12
-    L5Smain --- Dot12
-    Dot12 --> L5top
-    L5Xctx --o L5top
+    BottomPadding[ ]:::invisible ~~~ L5Xctx_L383
+    L5Edeep_L392 --> L5G4_L391
+    L5G4_L391 --- Dot1
+    L5G4b_L394 --- Dot1
+    L5S3_L390 --- Dot1
+    L5G3b_L397 --- Dot1
+    Dot1 --> L5G3_L389
+    L5J1_L400 --> L5G3c_L399
+    L5E2_L408 --> L5G3e_L407
+    L5G3d_L404 --- Dot2
+    L5G3e_L407 --- Dot2
+    L5S2b_L403 --- Dot2
+    Dot2 --> L5G2b_L402
+    L5G3_L389 --- Dot3
+    L5G3c_L399 --- Dot3
+    L5S2_L388 --- Dot3
+    L5G2b_L402 --- Dot3
+    Dot3 --> L5G2_L387
+    L5Ebr1_L416 --> L5Gbr1a_L415
+    L5Gbr1a_L415 --- Dot4
+    L5Gbr1b_L418 --- Dot4
+    Dot4 --> L5Gbr1_L414
+    L5Ebr2_L422 --> L5Gbr2a_L421
+    L5Gbr2a_L421 --- Dot5
+    L5Gbr2b_L424 --- Dot5
+    Dot5 --> L5Gbr2_L420
+    L5Ebr3_L428 --> L5Gbr3a_L427
+    L5Gbr3a_L427 --- Dot6
+    L5Gbr3b_L430 --- Dot6
+    Dot6 --> L5Gbr3_L426
+    C39top_L412 --- _Connector_00000001
+    C40top_L413 --- _Connector_00000001
+    L5Gbr1_L414 --- _Connector_00000001
+    L5Gbr2_L420 --- _Connector_00000001
+    L5Gbr3_L426 --- _Connector_00000001
+    L5Ebr4_L434 --> L5Gbr4a_L433
+    L5Gbr4a_L433 --- Dot7
+    L5Gbr4b_L436 --- Dot7
+    Dot7 --> L5Gbr4_L432
+    L5Ebr5_L440 --> L5Gbr5a_L439
+    L5Gbr5a_L439 --- Dot8
+    L5Gbr5b_L442 --- Dot8
+    Dot8 --> L5Gbr5_L438
+    L5Ebr6_L446 --> L5Gbr6a_L445
+    L5Gbr6a_L445 --- Dot9
+    L5Gbr6b_L448 --- Dot9
+    Dot9 --> L5Gbr6_L444
+    C36top_L409 --- _Connector_00000000
+    C37top_L410 --- _Connector_00000000
+    C38top_L411 --- _Connector_00000000
+    _Connector_00000001 --- _Connector_00000000
+    L5Gbr4_L432 --- _Connector_00000000
+    L5Gbr5_L438 --- _Connector_00000000
+    L5Gbr6_L444 --- _Connector_00000000
+    L5Ebr7_L452 --> L5Gbr7a_L451
+    L5Gbr7a_L451 --- Dot10
+    L5Gbr7b_L454 --- Dot10
+    Dot10 --> L5Gbr7_L450
+    L5Ebr8_L458 --> L5Gbr8a_L457
+    L5Gbr8a_L457 --- Dot11
+    L5Gbr8b_L460 --- Dot11
+    Dot11 --> L5Gbr8_L456
+    L5Esh1_L384 --- Dot12
+    L5Esh2_L385 --- Dot12
+    L5G2_L387 --- Dot12
+    _Connector_00000000 --- Dot12
+    L5Gbr7_L450 --- Dot12
+    L5Gbr8_L456 --- Dot12
+    L5Smain_L386 --- Dot12
+    Dot12 --> L5top_L382
+    L5Xctx_L383 --o L5top_L382
 ```
 
 ### Package C01top
@@ -1323,47 +1342,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C01top["<b>C01top</b><br>Statement of C01top"]
-    C02top[["<b>C02top</b><br>Statement of C02top"]]
-    C01Xctx[("<b>C01Xctx</b>&nbsp;↗<br>Context of C01Xctx")]
-    C01Esh[("<b>C01Esh</b>&nbsp;↗<br>Shared evidence of C01")]
-    C01Sass[/"<b>C01Sass</b><br>Assertion strategy of C01"/]
-    C01G1["<b>C01G1</b><br>Sub-claim 1 of C01"]
-    C01G2["<b>C01G2</b><br>Sub-claim 2 of C01"]
-    C01G3["<b>C01G3</b><br>Sub-claim 3 of C01"]
-    C01E1[("<b>C01E1</b>&nbsp;↗<br>Evidence 1 of C01")]
-    C01J1["<b>C01J1</b><br>Justification of C01"]
-    C01A1["<b>C01A1</b><br>Assumption of C01<br>ASSUMED"]
-    C01E2[("<b>C01E2</b>&nbsp;↗<br>Evidence 2 of C01")]
+    C01top_L463["<b>C01top</b><br>Statement of C01top"]
+    C02top_L464[["<b>C02top</b><br>Statement of C02top"]]
+    C01Xctx_L465[("<b>C01Xctx</b>&nbsp;↗<br>Context of C01Xctx")]
+    C01Esh_L466[("<b>C01Esh</b>&nbsp;↗<br>Shared evidence of C01")]
+    C01Sass_L467[/"<b>C01Sass</b><br>Assertion strategy of C01"/]
+    C01G1_L468["<b>C01G1</b><br>Sub-claim 1 of C01"]
+    C01G2_L471["<b>C01G2</b><br>Sub-claim 2 of C01"]
+    C01G3_L474["<b>C01G3</b><br>Sub-claim 3 of C01"]
+    C01E1_L469[("<b>C01E1</b>&nbsp;↗<br>Evidence 1 of C01")]
+    C01J1_L472["<b>C01J1</b><br>Justification of C01"]
+    C01A1_L475["<b>C01A1</b><br>Assumption of C01<br>ASSUMED"]
+    C01E2_L476[("<b>C01E2</b>&nbsp;↗<br>Evidence 2 of C01")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C01top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01top"
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
-    click C01Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c01xctx"
-    click C01Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01esh"
-    click C01Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c01sass"
-    click C01G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g1"
-    click C01G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g2"
-    click C01G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g3"
-    click C01E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e1"
-    click C01J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c01j1"
-    click C01A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c01a1"
-    click C01E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
+    click C01top_L463 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01top"
+    click C02top_L464 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
+    click C01Xctx_L465 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c01xctx"
+    click C01Esh_L466 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01esh"
+    click C01Sass_L467 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c01sass"
+    click C01G1_L468 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g1"
+    click C01G2_L471 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g2"
+    click C01G3_L474 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g3"
+    click C01E1_L469 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e1"
+    click C01J1_L472 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c01j1"
+    click C01A1_L475 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c01a1"
+    click C01E2_L476 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
 
-    BottomPadding[ ]:::invisible ~~~ C02top
-    C01E1 --> C01G1
-    C01J1 --> C01G2
-    C01A1 --- Dot1
-    C01E2 --- Dot1
-    Dot1 --> C01G3
-    C02top --- Dot2
-    C01Esh --- Dot2
-    C01G1 --- Dot2
-    C01G2 --- Dot2
-    C01G3 --- Dot2
-    C01Sass --- Dot2
-    Dot2 --> C01top
-    C01Xctx --o C01top
+    BottomPadding[ ]:::invisible ~~~ C02top_L464
+    C01E1_L469 --> C01G1_L468
+    C01J1_L472 --> C01G2_L471
+    C01A1_L475 --- Dot1
+    C01E2_L476 --- Dot1
+    Dot1 --> C01G3_L474
+    C02top_L464 --- Dot2
+    C01Esh_L466 --- Dot2
+    C01G1_L468 --- Dot2
+    C01G2_L471 --- Dot2
+    C01G3_L474 --- Dot2
+    C01Sass_L467 --- Dot2
+    Dot2 --> C01top_L463
+    C01Xctx_L465 --o C01top_L463
 ```
 
 ### Package C02top
@@ -1383,47 +1402,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C02top["<b>C02top</b><br>Statement of C02top"]
-    C03top[["<b>C03top</b><br>Statement of C03top"]]
-    C02Xctx[("<b>C02Xctx</b>&nbsp;↗<br>Context of C02Xctx")]
-    C02Esh[("<b>C02Esh</b>&nbsp;↗<br>Shared evidence of C02")]
-    C02Sass[/"<b>C02Sass</b><br>Assertion strategy of C02"/]
-    C02G1["<b>C02G1</b><br>Sub-claim 1 of C02"]
-    C02G2["<b>C02G2</b><br>Sub-claim 2 of C02"]
-    C02G3["<b>C02G3</b><br>Sub-claim 3 of C02"]
-    C02E1[("<b>C02E1</b>&nbsp;↗<br>Evidence 1 of C02")]
-    C02J1["<b>C02J1</b><br>Justification of C02"]
-    C02A1["<b>C02A1</b><br>Assumption of C02<br>ASSUMED"]
-    C02E2[("<b>C02E2</b>&nbsp;↗<br>Evidence 2 of C02")]
+    C02top_L479["<b>C02top</b><br>Statement of C02top"]
+    C03top_L480[["<b>C03top</b><br>Statement of C03top"]]
+    C02Xctx_L481[("<b>C02Xctx</b>&nbsp;↗<br>Context of C02Xctx")]
+    C02Esh_L482[("<b>C02Esh</b>&nbsp;↗<br>Shared evidence of C02")]
+    C02Sass_L483[/"<b>C02Sass</b><br>Assertion strategy of C02"/]
+    C02G1_L484["<b>C02G1</b><br>Sub-claim 1 of C02"]
+    C02G2_L487["<b>C02G2</b><br>Sub-claim 2 of C02"]
+    C02G3_L490["<b>C02G3</b><br>Sub-claim 3 of C02"]
+    C02E1_L485[("<b>C02E1</b>&nbsp;↗<br>Evidence 1 of C02")]
+    C02J1_L488["<b>C02J1</b><br>Justification of C02"]
+    C02A1_L491["<b>C02A1</b><br>Assumption of C02<br>ASSUMED"]
+    C02E2_L492[("<b>C02E2</b>&nbsp;↗<br>Evidence 2 of C02")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02top"
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
-    click C02Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c02xctx"
-    click C02Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02esh"
-    click C02Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c02sass"
-    click C02G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g1"
-    click C02G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g2"
-    click C02G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g3"
-    click C02E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e1"
-    click C02J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c02j1"
-    click C02A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c02a1"
-    click C02E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
+    click C02top_L479 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02top"
+    click C03top_L480 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
+    click C02Xctx_L481 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c02xctx"
+    click C02Esh_L482 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02esh"
+    click C02Sass_L483 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c02sass"
+    click C02G1_L484 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g1"
+    click C02G2_L487 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g2"
+    click C02G3_L490 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g3"
+    click C02E1_L485 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e1"
+    click C02J1_L488 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c02j1"
+    click C02A1_L491 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c02a1"
+    click C02E2_L492 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
 
-    BottomPadding[ ]:::invisible ~~~ C03top
-    C02E1 --> C02G1
-    C02J1 --> C02G2
-    C02A1 --- Dot1
-    C02E2 --- Dot1
-    Dot1 --> C02G3
-    C03top --- Dot2
-    C02Esh --- Dot2
-    C02G1 --- Dot2
-    C02G2 --- Dot2
-    C02G3 --- Dot2
-    C02Sass --- Dot2
-    Dot2 --> C02top
-    C02Xctx --o C02top
+    BottomPadding[ ]:::invisible ~~~ C03top_L480
+    C02E1_L485 --> C02G1_L484
+    C02J1_L488 --> C02G2_L487
+    C02A1_L491 --- Dot1
+    C02E2_L492 --- Dot1
+    Dot1 --> C02G3_L490
+    C03top_L480 --- Dot2
+    C02Esh_L482 --- Dot2
+    C02G1_L484 --- Dot2
+    C02G2_L487 --- Dot2
+    C02G3_L490 --- Dot2
+    C02Sass_L483 --- Dot2
+    Dot2 --> C02top_L479
+    C02Xctx_L481 --o C02top_L479
 ```
 
 ### Package C03top
@@ -1443,47 +1462,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C03top["<b>C03top</b><br>Statement of C03top"]
-    C04top[["<b>C04top</b><br>Statement of C04top"]]
-    C03Xctx[("<b>C03Xctx</b>&nbsp;↗<br>Context of C03Xctx")]
-    C03Esh[("<b>C03Esh</b>&nbsp;↗<br>Shared evidence of C03")]
-    C03Sass[/"<b>C03Sass</b><br>Assertion strategy of C03"/]
-    C03G1["<b>C03G1</b><br>Sub-claim 1 of C03"]
-    C03G2["<b>C03G2</b><br>Sub-claim 2 of C03"]
-    C03G3["<b>C03G3</b><br>Sub-claim 3 of C03"]
-    C03E1[("<b>C03E1</b>&nbsp;↗<br>Evidence 1 of C03")]
-    C03J1["<b>C03J1</b><br>Justification of C03"]
-    C03A1["<b>C03A1</b><br>Assumption of C03<br>ASSUMED"]
-    C03E2[("<b>C03E2</b>&nbsp;↗<br>Evidence 2 of C03")]
+    C03top_L495["<b>C03top</b><br>Statement of C03top"]
+    C04top_L496[["<b>C04top</b><br>Statement of C04top"]]
+    C03Xctx_L497[("<b>C03Xctx</b>&nbsp;↗<br>Context of C03Xctx")]
+    C03Esh_L498[("<b>C03Esh</b>&nbsp;↗<br>Shared evidence of C03")]
+    C03Sass_L499[/"<b>C03Sass</b><br>Assertion strategy of C03"/]
+    C03G1_L500["<b>C03G1</b><br>Sub-claim 1 of C03"]
+    C03G2_L503["<b>C03G2</b><br>Sub-claim 2 of C03"]
+    C03G3_L506["<b>C03G3</b><br>Sub-claim 3 of C03"]
+    C03E1_L501[("<b>C03E1</b>&nbsp;↗<br>Evidence 1 of C03")]
+    C03J1_L504["<b>C03J1</b><br>Justification of C03"]
+    C03A1_L507["<b>C03A1</b><br>Assumption of C03<br>ASSUMED"]
+    C03E2_L508[("<b>C03E2</b>&nbsp;↗<br>Evidence 2 of C03")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03top"
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
-    click C03Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c03xctx"
-    click C03Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03esh"
-    click C03Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c03sass"
-    click C03G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g1"
-    click C03G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g2"
-    click C03G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g3"
-    click C03E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e1"
-    click C03J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c03j1"
-    click C03A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c03a1"
-    click C03E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
+    click C03top_L495 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03top"
+    click C04top_L496 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
+    click C03Xctx_L497 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c03xctx"
+    click C03Esh_L498 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03esh"
+    click C03Sass_L499 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c03sass"
+    click C03G1_L500 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g1"
+    click C03G2_L503 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g2"
+    click C03G3_L506 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g3"
+    click C03E1_L501 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e1"
+    click C03J1_L504 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c03j1"
+    click C03A1_L507 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c03a1"
+    click C03E2_L508 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
 
-    BottomPadding[ ]:::invisible ~~~ C04top
-    C03E1 --> C03G1
-    C03J1 --> C03G2
-    C03A1 --- Dot1
-    C03E2 --- Dot1
-    Dot1 --> C03G3
-    C04top --- Dot2
-    C03Esh --- Dot2
-    C03G1 --- Dot2
-    C03G2 --- Dot2
-    C03G3 --- Dot2
-    C03Sass --- Dot2
-    Dot2 --> C03top
-    C03Xctx --o C03top
+    BottomPadding[ ]:::invisible ~~~ C04top_L496
+    C03E1_L501 --> C03G1_L500
+    C03J1_L504 --> C03G2_L503
+    C03A1_L507 --- Dot1
+    C03E2_L508 --- Dot1
+    Dot1 --> C03G3_L506
+    C04top_L496 --- Dot2
+    C03Esh_L498 --- Dot2
+    C03G1_L500 --- Dot2
+    C03G2_L503 --- Dot2
+    C03G3_L506 --- Dot2
+    C03Sass_L499 --- Dot2
+    Dot2 --> C03top_L495
+    C03Xctx_L497 --o C03top_L495
 ```
 
 ### Package C04top
@@ -1503,47 +1522,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C04top["<b>C04top</b><br>Statement of C04top"]
-    C05top[["<b>C05top</b><br>Statement of C05top"]]
-    C04Xctx[("<b>C04Xctx</b>&nbsp;↗<br>Context of C04Xctx")]
-    C04Esh[("<b>C04Esh</b>&nbsp;↗<br>Shared evidence of C04")]
-    C04Sass[/"<b>C04Sass</b><br>Assertion strategy of C04"/]
-    C04G1["<b>C04G1</b><br>Sub-claim 1 of C04"]
-    C04G2["<b>C04G2</b><br>Sub-claim 2 of C04"]
-    C04G3["<b>C04G3</b><br>Sub-claim 3 of C04"]
-    C04E1[("<b>C04E1</b>&nbsp;↗<br>Evidence 1 of C04")]
-    C04J1["<b>C04J1</b><br>Justification of C04"]
-    C04A1["<b>C04A1</b><br>Assumption of C04<br>ASSUMED"]
-    C04E2[("<b>C04E2</b>&nbsp;↗<br>Evidence 2 of C04")]
+    C04top_L511["<b>C04top</b><br>Statement of C04top"]
+    C05top_L512[["<b>C05top</b><br>Statement of C05top"]]
+    C04Xctx_L513[("<b>C04Xctx</b>&nbsp;↗<br>Context of C04Xctx")]
+    C04Esh_L514[("<b>C04Esh</b>&nbsp;↗<br>Shared evidence of C04")]
+    C04Sass_L515[/"<b>C04Sass</b><br>Assertion strategy of C04"/]
+    C04G1_L516["<b>C04G1</b><br>Sub-claim 1 of C04"]
+    C04G2_L519["<b>C04G2</b><br>Sub-claim 2 of C04"]
+    C04G3_L522["<b>C04G3</b><br>Sub-claim 3 of C04"]
+    C04E1_L517[("<b>C04E1</b>&nbsp;↗<br>Evidence 1 of C04")]
+    C04J1_L520["<b>C04J1</b><br>Justification of C04"]
+    C04A1_L523["<b>C04A1</b><br>Assumption of C04<br>ASSUMED"]
+    C04E2_L524[("<b>C04E2</b>&nbsp;↗<br>Evidence 2 of C04")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04top"
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
-    click C04Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c04xctx"
-    click C04Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04esh"
-    click C04Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c04sass"
-    click C04G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g1"
-    click C04G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g2"
-    click C04G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g3"
-    click C04E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e1"
-    click C04J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c04j1"
-    click C04A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c04a1"
-    click C04E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
+    click C04top_L511 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04top"
+    click C05top_L512 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
+    click C04Xctx_L513 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c04xctx"
+    click C04Esh_L514 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04esh"
+    click C04Sass_L515 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c04sass"
+    click C04G1_L516 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g1"
+    click C04G2_L519 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g2"
+    click C04G3_L522 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g3"
+    click C04E1_L517 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e1"
+    click C04J1_L520 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c04j1"
+    click C04A1_L523 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c04a1"
+    click C04E2_L524 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
 
-    BottomPadding[ ]:::invisible ~~~ C05top
-    C04E1 --> C04G1
-    C04J1 --> C04G2
-    C04A1 --- Dot1
-    C04E2 --- Dot1
-    Dot1 --> C04G3
-    C05top --- Dot2
-    C04Esh --- Dot2
-    C04G1 --- Dot2
-    C04G2 --- Dot2
-    C04G3 --- Dot2
-    C04Sass --- Dot2
-    Dot2 --> C04top
-    C04Xctx --o C04top
+    BottomPadding[ ]:::invisible ~~~ C05top_L512
+    C04E1_L517 --> C04G1_L516
+    C04J1_L520 --> C04G2_L519
+    C04A1_L523 --- Dot1
+    C04E2_L524 --- Dot1
+    Dot1 --> C04G3_L522
+    C05top_L512 --- Dot2
+    C04Esh_L514 --- Dot2
+    C04G1_L516 --- Dot2
+    C04G2_L519 --- Dot2
+    C04G3_L522 --- Dot2
+    C04Sass_L515 --- Dot2
+    Dot2 --> C04top_L511
+    C04Xctx_L513 --o C04top_L511
 ```
 
 ### Package C05top
@@ -1563,47 +1582,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C05top["<b>C05top</b><br>Statement of C05top"]
-    C06top[["<b>C06top</b><br>Statement of C06top"]]
-    C05Xctx[("<b>C05Xctx</b>&nbsp;↗<br>Context of C05Xctx")]
-    C05Esh[("<b>C05Esh</b>&nbsp;↗<br>Shared evidence of C05")]
-    C05Sass[/"<b>C05Sass</b><br>Assertion strategy of C05"/]
-    C05G1["<b>C05G1</b><br>Sub-claim 1 of C05"]
-    C05G2["<b>C05G2</b><br>Sub-claim 2 of C05"]
-    C05G3["<b>C05G3</b><br>Sub-claim 3 of C05"]
-    C05E1[("<b>C05E1</b>&nbsp;↗<br>Evidence 1 of C05")]
-    C05J1["<b>C05J1</b><br>Justification of C05"]
-    C05A1["<b>C05A1</b><br>Assumption of C05<br>ASSUMED"]
-    C05E2[("<b>C05E2</b>&nbsp;↗<br>Evidence 2 of C05")]
+    C05top_L527["<b>C05top</b><br>Statement of C05top"]
+    C06top_L528[["<b>C06top</b><br>Statement of C06top"]]
+    C05Xctx_L529[("<b>C05Xctx</b>&nbsp;↗<br>Context of C05Xctx")]
+    C05Esh_L530[("<b>C05Esh</b>&nbsp;↗<br>Shared evidence of C05")]
+    C05Sass_L531[/"<b>C05Sass</b><br>Assertion strategy of C05"/]
+    C05G1_L532["<b>C05G1</b><br>Sub-claim 1 of C05"]
+    C05G2_L535["<b>C05G2</b><br>Sub-claim 2 of C05"]
+    C05G3_L538["<b>C05G3</b><br>Sub-claim 3 of C05"]
+    C05E1_L533[("<b>C05E1</b>&nbsp;↗<br>Evidence 1 of C05")]
+    C05J1_L536["<b>C05J1</b><br>Justification of C05"]
+    C05A1_L539["<b>C05A1</b><br>Assumption of C05<br>ASSUMED"]
+    C05E2_L540[("<b>C05E2</b>&nbsp;↗<br>Evidence 2 of C05")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05top"
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
-    click C05Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c05xctx"
-    click C05Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05esh"
-    click C05Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c05sass"
-    click C05G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g1"
-    click C05G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g2"
-    click C05G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g3"
-    click C05E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e1"
-    click C05J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c05j1"
-    click C05A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c05a1"
-    click C05E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
+    click C05top_L527 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05top"
+    click C06top_L528 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
+    click C05Xctx_L529 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c05xctx"
+    click C05Esh_L530 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05esh"
+    click C05Sass_L531 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c05sass"
+    click C05G1_L532 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g1"
+    click C05G2_L535 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g2"
+    click C05G3_L538 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g3"
+    click C05E1_L533 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e1"
+    click C05J1_L536 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c05j1"
+    click C05A1_L539 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c05a1"
+    click C05E2_L540 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
 
-    BottomPadding[ ]:::invisible ~~~ C06top
-    C05E1 --> C05G1
-    C05J1 --> C05G2
-    C05A1 --- Dot1
-    C05E2 --- Dot1
-    Dot1 --> C05G3
-    C06top --- Dot2
-    C05Esh --- Dot2
-    C05G1 --- Dot2
-    C05G2 --- Dot2
-    C05G3 --- Dot2
-    C05Sass --- Dot2
-    Dot2 --> C05top
-    C05Xctx --o C05top
+    BottomPadding[ ]:::invisible ~~~ C06top_L528
+    C05E1_L533 --> C05G1_L532
+    C05J1_L536 --> C05G2_L535
+    C05A1_L539 --- Dot1
+    C05E2_L540 --- Dot1
+    Dot1 --> C05G3_L538
+    C06top_L528 --- Dot2
+    C05Esh_L530 --- Dot2
+    C05G1_L532 --- Dot2
+    C05G2_L535 --- Dot2
+    C05G3_L538 --- Dot2
+    C05Sass_L531 --- Dot2
+    Dot2 --> C05top_L527
+    C05Xctx_L529 --o C05top_L527
 ```
 
 ### Package C06top
@@ -1623,47 +1642,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C06top["<b>C06top</b><br>Statement of C06top"]
-    C07top[["<b>C07top</b><br>Statement of C07top"]]
-    C06Xctx[("<b>C06Xctx</b>&nbsp;↗<br>Context of C06Xctx")]
-    C06Esh[("<b>C06Esh</b>&nbsp;↗<br>Shared evidence of C06")]
-    C06Sass[/"<b>C06Sass</b><br>Assertion strategy of C06"/]
-    C06G1["<b>C06G1</b><br>Sub-claim 1 of C06"]
-    C06G2["<b>C06G2</b><br>Sub-claim 2 of C06"]
-    C06G3["<b>C06G3</b><br>Sub-claim 3 of C06"]
-    C06E1[("<b>C06E1</b>&nbsp;↗<br>Evidence 1 of C06")]
-    C06J1["<b>C06J1</b><br>Justification of C06"]
-    C06A1["<b>C06A1</b><br>Assumption of C06<br>ASSUMED"]
-    C06E2[("<b>C06E2</b>&nbsp;↗<br>Evidence 2 of C06")]
+    C06top_L543["<b>C06top</b><br>Statement of C06top"]
+    C07top_L544[["<b>C07top</b><br>Statement of C07top"]]
+    C06Xctx_L545[("<b>C06Xctx</b>&nbsp;↗<br>Context of C06Xctx")]
+    C06Esh_L546[("<b>C06Esh</b>&nbsp;↗<br>Shared evidence of C06")]
+    C06Sass_L547[/"<b>C06Sass</b><br>Assertion strategy of C06"/]
+    C06G1_L548["<b>C06G1</b><br>Sub-claim 1 of C06"]
+    C06G2_L551["<b>C06G2</b><br>Sub-claim 2 of C06"]
+    C06G3_L554["<b>C06G3</b><br>Sub-claim 3 of C06"]
+    C06E1_L549[("<b>C06E1</b>&nbsp;↗<br>Evidence 1 of C06")]
+    C06J1_L552["<b>C06J1</b><br>Justification of C06"]
+    C06A1_L555["<b>C06A1</b><br>Assumption of C06<br>ASSUMED"]
+    C06E2_L556[("<b>C06E2</b>&nbsp;↗<br>Evidence 2 of C06")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06top"
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
-    click C06Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c06xctx"
-    click C06Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06esh"
-    click C06Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c06sass"
-    click C06G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g1"
-    click C06G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g2"
-    click C06G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g3"
-    click C06E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e1"
-    click C06J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c06j1"
-    click C06A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c06a1"
-    click C06E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
+    click C06top_L543 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06top"
+    click C07top_L544 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
+    click C06Xctx_L545 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c06xctx"
+    click C06Esh_L546 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06esh"
+    click C06Sass_L547 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c06sass"
+    click C06G1_L548 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g1"
+    click C06G2_L551 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g2"
+    click C06G3_L554 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g3"
+    click C06E1_L549 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e1"
+    click C06J1_L552 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c06j1"
+    click C06A1_L555 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c06a1"
+    click C06E2_L556 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
 
-    BottomPadding[ ]:::invisible ~~~ C07top
-    C06E1 --> C06G1
-    C06J1 --> C06G2
-    C06A1 --- Dot1
-    C06E2 --- Dot1
-    Dot1 --> C06G3
-    C07top --- Dot2
-    C06Esh --- Dot2
-    C06G1 --- Dot2
-    C06G2 --- Dot2
-    C06G3 --- Dot2
-    C06Sass --- Dot2
-    Dot2 --> C06top
-    C06Xctx --o C06top
+    BottomPadding[ ]:::invisible ~~~ C07top_L544
+    C06E1_L549 --> C06G1_L548
+    C06J1_L552 --> C06G2_L551
+    C06A1_L555 --- Dot1
+    C06E2_L556 --- Dot1
+    Dot1 --> C06G3_L554
+    C07top_L544 --- Dot2
+    C06Esh_L546 --- Dot2
+    C06G1_L548 --- Dot2
+    C06G2_L551 --- Dot2
+    C06G3_L554 --- Dot2
+    C06Sass_L547 --- Dot2
+    Dot2 --> C06top_L543
+    C06Xctx_L545 --o C06top_L543
 ```
 
 ### Package C07top
@@ -1683,47 +1702,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C07top["<b>C07top</b><br>Statement of C07top"]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C07Xctx[("<b>C07Xctx</b>&nbsp;↗<br>Context of C07Xctx")]
-    C07Esh[("<b>C07Esh</b>&nbsp;↗<br>Shared evidence of C07")]
-    C07Sass[/"<b>C07Sass</b><br>Assertion strategy of C07"/]
-    C07G1["<b>C07G1</b><br>Sub-claim 1 of C07"]
-    C07G2["<b>C07G2</b><br>Sub-claim 2 of C07"]
-    C07G3["<b>C07G3</b><br>Sub-claim 3 of C07"]
-    C07E1[("<b>C07E1</b>&nbsp;↗<br>Evidence 1 of C07")]
-    C07J1["<b>C07J1</b><br>Justification of C07"]
-    C07A1["<b>C07A1</b><br>Assumption of C07<br>ASSUMED"]
-    C07E2[("<b>C07E2</b>&nbsp;↗<br>Evidence 2 of C07")]
+    C07top_L559["<b>C07top</b><br>Statement of C07top"]
+    C08top_L560[["<b>C08top</b><br>Statement of C08top"]]
+    C07Xctx_L561[("<b>C07Xctx</b>&nbsp;↗<br>Context of C07Xctx")]
+    C07Esh_L562[("<b>C07Esh</b>&nbsp;↗<br>Shared evidence of C07")]
+    C07Sass_L563[/"<b>C07Sass</b><br>Assertion strategy of C07"/]
+    C07G1_L564["<b>C07G1</b><br>Sub-claim 1 of C07"]
+    C07G2_L567["<b>C07G2</b><br>Sub-claim 2 of C07"]
+    C07G3_L570["<b>C07G3</b><br>Sub-claim 3 of C07"]
+    C07E1_L565[("<b>C07E1</b>&nbsp;↗<br>Evidence 1 of C07")]
+    C07J1_L568["<b>C07J1</b><br>Justification of C07"]
+    C07A1_L571["<b>C07A1</b><br>Assumption of C07<br>ASSUMED"]
+    C07E2_L572[("<b>C07E2</b>&nbsp;↗<br>Evidence 2 of C07")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07top"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C07Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c07xctx"
-    click C07Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07esh"
-    click C07Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c07sass"
-    click C07G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g1"
-    click C07G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g2"
-    click C07G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g3"
-    click C07E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e1"
-    click C07J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c07j1"
-    click C07A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c07a1"
-    click C07E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
+    click C07top_L559 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07top"
+    click C08top_L560 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C07Xctx_L561 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c07xctx"
+    click C07Esh_L562 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07esh"
+    click C07Sass_L563 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c07sass"
+    click C07G1_L564 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g1"
+    click C07G2_L567 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g2"
+    click C07G3_L570 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g3"
+    click C07E1_L565 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e1"
+    click C07J1_L568 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c07j1"
+    click C07A1_L571 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c07a1"
+    click C07E2_L572 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
 
-    BottomPadding[ ]:::invisible ~~~ C08top
-    C07E1 --> C07G1
-    C07J1 --> C07G2
-    C07A1 --- Dot1
-    C07E2 --- Dot1
-    Dot1 --> C07G3
-    C08top --- Dot2
-    C07Esh --- Dot2
-    C07G1 --- Dot2
-    C07G2 --- Dot2
-    C07G3 --- Dot2
-    C07Sass --- Dot2
-    Dot2 --> C07top
-    C07Xctx --o C07top
+    BottomPadding[ ]:::invisible ~~~ C08top_L560
+    C07E1_L565 --> C07G1_L564
+    C07J1_L568 --> C07G2_L567
+    C07A1_L571 --- Dot1
+    C07E2_L572 --- Dot1
+    Dot1 --> C07G3_L570
+    C08top_L560 --- Dot2
+    C07Esh_L562 --- Dot2
+    C07G1_L564 --- Dot2
+    C07G2_L567 --- Dot2
+    C07G3_L570 --- Dot2
+    C07Sass_L563 --- Dot2
+    Dot2 --> C07top_L559
+    C07Xctx_L561 --o C07top_L559
 ```
 
 ### Package C08top
@@ -1743,47 +1762,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C08top["<b>C08top</b><br>Statement of C08top"]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    C08Xctx[("<b>C08Xctx</b>&nbsp;↗<br>Context of C08Xctx")]
-    C08Esh[("<b>C08Esh</b>&nbsp;↗<br>Shared evidence of C08")]
-    C08Sass[/"<b>C08Sass</b><br>Assertion strategy of C08"/]
-    C08G1["<b>C08G1</b><br>Sub-claim 1 of C08"]
-    C08G2["<b>C08G2</b><br>Sub-claim 2 of C08"]
-    C08G3["<b>C08G3</b><br>Sub-claim 3 of C08"]
-    C08E1[("<b>C08E1</b>&nbsp;↗<br>Evidence 1 of C08")]
-    C08J1["<b>C08J1</b><br>Justification of C08"]
-    C08A1["<b>C08A1</b><br>Assumption of C08<br>ASSUMED"]
-    C08E2[("<b>C08E2</b>&nbsp;↗<br>Evidence 2 of C08")]
+    C08top_L575["<b>C08top</b><br>Statement of C08top"]
+    C09top_L576[["<b>C09top</b><br>Statement of C09top"]]
+    C08Xctx_L577[("<b>C08Xctx</b>&nbsp;↗<br>Context of C08Xctx")]
+    C08Esh_L578[("<b>C08Esh</b>&nbsp;↗<br>Shared evidence of C08")]
+    C08Sass_L579[/"<b>C08Sass</b><br>Assertion strategy of C08"/]
+    C08G1_L580["<b>C08G1</b><br>Sub-claim 1 of C08"]
+    C08G2_L583["<b>C08G2</b><br>Sub-claim 2 of C08"]
+    C08G3_L586["<b>C08G3</b><br>Sub-claim 3 of C08"]
+    C08E1_L581[("<b>C08E1</b>&nbsp;↗<br>Evidence 1 of C08")]
+    C08J1_L584["<b>C08J1</b><br>Justification of C08"]
+    C08A1_L587["<b>C08A1</b><br>Assumption of C08<br>ASSUMED"]
+    C08E2_L588[("<b>C08E2</b>&nbsp;↗<br>Evidence 2 of C08")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click C08Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c08xctx"
-    click C08Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08esh"
-    click C08Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c08sass"
-    click C08G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g1"
-    click C08G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g2"
-    click C08G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g3"
-    click C08E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e1"
-    click C08J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c08j1"
-    click C08A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c08a1"
-    click C08E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
+    click C08top_L575 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08top"
+    click C09top_L576 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click C08Xctx_L577 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c08xctx"
+    click C08Esh_L578 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08esh"
+    click C08Sass_L579 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c08sass"
+    click C08G1_L580 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g1"
+    click C08G2_L583 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g2"
+    click C08G3_L586 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g3"
+    click C08E1_L581 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e1"
+    click C08J1_L584 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c08j1"
+    click C08A1_L587 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c08a1"
+    click C08E2_L588 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
 
-    BottomPadding[ ]:::invisible ~~~ C09top
-    C08E1 --> C08G1
-    C08J1 --> C08G2
-    C08A1 --- Dot1
-    C08E2 --- Dot1
-    Dot1 --> C08G3
-    C09top --- Dot2
-    C08Esh --- Dot2
-    C08G1 --- Dot2
-    C08G2 --- Dot2
-    C08G3 --- Dot2
-    C08Sass --- Dot2
-    Dot2 --> C08top
-    C08Xctx --o C08top
+    BottomPadding[ ]:::invisible ~~~ C09top_L576
+    C08E1_L581 --> C08G1_L580
+    C08J1_L584 --> C08G2_L583
+    C08A1_L587 --- Dot1
+    C08E2_L588 --- Dot1
+    Dot1 --> C08G3_L586
+    C09top_L576 --- Dot2
+    C08Esh_L578 --- Dot2
+    C08G1_L580 --- Dot2
+    C08G2_L583 --- Dot2
+    C08G3_L586 --- Dot2
+    C08Sass_L579 --- Dot2
+    Dot2 --> C08top_L575
+    C08Xctx_L577 --o C08top_L575
 ```
 
 ### Package C09top
@@ -1803,47 +1822,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C09top["<b>C09top</b><br>Statement of C09top"]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    C09Xctx[("<b>C09Xctx</b>&nbsp;↗<br>Context of C09Xctx")]
-    C09Esh[("<b>C09Esh</b>&nbsp;↗<br>Shared evidence of C09")]
-    C09Sass[/"<b>C09Sass</b><br>Assertion strategy of C09"/]
-    C09G1["<b>C09G1</b><br>Sub-claim 1 of C09"]
-    C09G2["<b>C09G2</b><br>Sub-claim 2 of C09"]
-    C09G3["<b>C09G3</b><br>Sub-claim 3 of C09"]
-    C09E1[("<b>C09E1</b>&nbsp;↗<br>Evidence 1 of C09")]
-    C09J1["<b>C09J1</b><br>Justification of C09"]
-    C09A1["<b>C09A1</b><br>Assumption of C09<br>ASSUMED"]
-    C09E2[("<b>C09E2</b>&nbsp;↗<br>Evidence 2 of C09")]
+    C09top_L591["<b>C09top</b><br>Statement of C09top"]
+    C10top_L592[["<b>C10top</b><br>Statement of C10top"]]
+    C09Xctx_L593[("<b>C09Xctx</b>&nbsp;↗<br>Context of C09Xctx")]
+    C09Esh_L594[("<b>C09Esh</b>&nbsp;↗<br>Shared evidence of C09")]
+    C09Sass_L595[/"<b>C09Sass</b><br>Assertion strategy of C09"/]
+    C09G1_L596["<b>C09G1</b><br>Sub-claim 1 of C09"]
+    C09G2_L599["<b>C09G2</b><br>Sub-claim 2 of C09"]
+    C09G3_L602["<b>C09G3</b><br>Sub-claim 3 of C09"]
+    C09E1_L597[("<b>C09E1</b>&nbsp;↗<br>Evidence 1 of C09")]
+    C09J1_L600["<b>C09J1</b><br>Justification of C09"]
+    C09A1_L603["<b>C09A1</b><br>Assumption of C09<br>ASSUMED"]
+    C09E2_L604[("<b>C09E2</b>&nbsp;↗<br>Evidence 2 of C09")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09top"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click C09Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c09xctx"
-    click C09Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09esh"
-    click C09Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c09sass"
-    click C09G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g1"
-    click C09G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g2"
-    click C09G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g3"
-    click C09E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e1"
-    click C09J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c09j1"
-    click C09A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c09a1"
-    click C09E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
+    click C09top_L591 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09top"
+    click C10top_L592 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click C09Xctx_L593 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c09xctx"
+    click C09Esh_L594 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09esh"
+    click C09Sass_L595 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c09sass"
+    click C09G1_L596 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g1"
+    click C09G2_L599 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g2"
+    click C09G3_L602 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g3"
+    click C09E1_L597 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e1"
+    click C09J1_L600 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c09j1"
+    click C09A1_L603 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c09a1"
+    click C09E2_L604 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
 
-    BottomPadding[ ]:::invisible ~~~ C10top
-    C09E1 --> C09G1
-    C09J1 --> C09G2
-    C09A1 --- Dot1
-    C09E2 --- Dot1
-    Dot1 --> C09G3
-    C10top --- Dot2
-    C09Esh --- Dot2
-    C09G1 --- Dot2
-    C09G2 --- Dot2
-    C09G3 --- Dot2
-    C09Sass --- Dot2
-    Dot2 --> C09top
-    C09Xctx --o C09top
+    BottomPadding[ ]:::invisible ~~~ C10top_L592
+    C09E1_L597 --> C09G1_L596
+    C09J1_L600 --> C09G2_L599
+    C09A1_L603 --- Dot1
+    C09E2_L604 --- Dot1
+    Dot1 --> C09G3_L602
+    C10top_L592 --- Dot2
+    C09Esh_L594 --- Dot2
+    C09G1_L596 --- Dot2
+    C09G2_L599 --- Dot2
+    C09G3_L602 --- Dot2
+    C09Sass_L595 --- Dot2
+    Dot2 --> C09top_L591
+    C09Xctx_L593 --o C09top_L591
 ```
 
 ### Package C10top
@@ -1863,47 +1882,47 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C10top["<b>C10top</b><br>Statement of C10top"]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C10Xctx[("<b>C10Xctx</b>&nbsp;↗<br>Context of C10Xctx")]
-    C10Esh[("<b>C10Esh</b>&nbsp;↗<br>Shared evidence of C10")]
-    C10Sass[/"<b>C10Sass</b><br>Assertion strategy of C10"/]
-    C10G1["<b>C10G1</b><br>Sub-claim 1 of C10"]
-    C10G2["<b>C10G2</b><br>Sub-claim 2 of C10"]
-    C10G3["<b>C10G3</b><br>Sub-claim 3 of C10"]
-    C10E1[("<b>C10E1</b>&nbsp;↗<br>Evidence 1 of C10")]
-    C10J1["<b>C10J1</b><br>Justification of C10"]
-    C10A1["<b>C10A1</b><br>Assumption of C10<br>ASSUMED"]
-    C10E2[("<b>C10E2</b>&nbsp;↗<br>Evidence 2 of C10")]
+    C10top_L607["<b>C10top</b><br>Statement of C10top"]
+    C11top_L608[["<b>C11top</b><br>Statement of C11top"]]
+    C10Xctx_L609[("<b>C10Xctx</b>&nbsp;↗<br>Context of C10Xctx")]
+    C10Esh_L610[("<b>C10Esh</b>&nbsp;↗<br>Shared evidence of C10")]
+    C10Sass_L611[/"<b>C10Sass</b><br>Assertion strategy of C10"/]
+    C10G1_L612["<b>C10G1</b><br>Sub-claim 1 of C10"]
+    C10G2_L615["<b>C10G2</b><br>Sub-claim 2 of C10"]
+    C10G3_L618["<b>C10G3</b><br>Sub-claim 3 of C10"]
+    C10E1_L613[("<b>C10E1</b>&nbsp;↗<br>Evidence 1 of C10")]
+    C10J1_L616["<b>C10J1</b><br>Justification of C10"]
+    C10A1_L619["<b>C10A1</b><br>Assumption of C10<br>ASSUMED"]
+    C10E2_L620[("<b>C10E2</b>&nbsp;↗<br>Evidence 2 of C10")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10top"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C10Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c10xctx"
-    click C10Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10esh"
-    click C10Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c10sass"
-    click C10G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g1"
-    click C10G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g2"
-    click C10G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g3"
-    click C10E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e1"
-    click C10J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c10j1"
-    click C10A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c10a1"
-    click C10E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
+    click C10top_L607 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10top"
+    click C11top_L608 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C10Xctx_L609 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c10xctx"
+    click C10Esh_L610 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10esh"
+    click C10Sass_L611 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c10sass"
+    click C10G1_L612 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g1"
+    click C10G2_L615 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g2"
+    click C10G3_L618 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g3"
+    click C10E1_L613 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e1"
+    click C10J1_L616 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c10j1"
+    click C10A1_L619 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c10a1"
+    click C10E2_L620 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
 
-    BottomPadding[ ]:::invisible ~~~ C11top
-    C10E1 --> C10G1
-    C10J1 --> C10G2
-    C10A1 --- Dot1
-    C10E2 --- Dot1
-    Dot1 --> C10G3
-    C11top --- Dot2
-    C10Esh --- Dot2
-    C10G1 --- Dot2
-    C10G2 --- Dot2
-    C10G3 --- Dot2
-    C10Sass --- Dot2
-    Dot2 --> C10top
-    C10Xctx --o C10top
+    BottomPadding[ ]:::invisible ~~~ C11top_L608
+    C10E1_L613 --> C10G1_L612
+    C10J1_L616 --> C10G2_L615
+    C10A1_L619 --- Dot1
+    C10E2_L620 --- Dot1
+    Dot1 --> C10G3_L618
+    C11top_L608 --- Dot2
+    C10Esh_L610 --- Dot2
+    C10G1_L612 --- Dot2
+    C10G2_L615 --- Dot2
+    C10G3_L618 --- Dot2
+    C10Sass_L611 --- Dot2
+    Dot2 --> C10top_L607
+    C10Xctx_L609 --o C10top_L607
 ```
 
 ### Package C11top
@@ -1923,44 +1942,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C11top["<b>C11top</b><br>Statement of C11top"]
-    C11Xctx[("<b>C11Xctx</b>&nbsp;↗<br>Context of C11Xctx")]
-    C11Esh[("<b>C11Esh</b>&nbsp;↗<br>Shared evidence of C11")]
-    C11Sass[/"<b>C11Sass</b><br>Assertion strategy of C11"/]
-    C11G1["<b>C11G1</b><br>Sub-claim 1 of C11"]
-    C11G2["<b>C11G2</b><br>Sub-claim 2 of C11"]
-    C11G3["<b>C11G3</b><br>Sub-claim 3 of C11"]
-    C11E1[("<b>C11E1</b>&nbsp;↗<br>Evidence 1 of C11")]
-    C11J1["<b>C11J1</b><br>Justification of C11"]
-    C11A1["<b>C11A1</b><br>Assumption of C11<br>ASSUMED"]
-    C11E2[("<b>C11E2</b>&nbsp;↗<br>Evidence 2 of C11")]
+    C11top_L623["<b>C11top</b><br>Statement of C11top"]
+    C11Xctx_L624[("<b>C11Xctx</b>&nbsp;↗<br>Context of C11Xctx")]
+    C11Esh_L625[("<b>C11Esh</b>&nbsp;↗<br>Shared evidence of C11")]
+    C11Sass_L626[/"<b>C11Sass</b><br>Assertion strategy of C11"/]
+    C11G1_L627["<b>C11G1</b><br>Sub-claim 1 of C11"]
+    C11G2_L630["<b>C11G2</b><br>Sub-claim 2 of C11"]
+    C11G3_L633["<b>C11G3</b><br>Sub-claim 3 of C11"]
+    C11E1_L628[("<b>C11E1</b>&nbsp;↗<br>Evidence 1 of C11")]
+    C11J1_L631["<b>C11J1</b><br>Justification of C11"]
+    C11A1_L634["<b>C11A1</b><br>Assumption of C11<br>ASSUMED"]
+    C11E2_L635[("<b>C11E2</b>&nbsp;↗<br>Evidence 2 of C11")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11top"
-    click C11Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c11xctx"
-    click C11Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11esh"
-    click C11Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c11sass"
-    click C11G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g1"
-    click C11G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g2"
-    click C11G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g3"
-    click C11E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e1"
-    click C11J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c11j1"
-    click C11A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c11a1"
-    click C11E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
+    click C11top_L623 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11top"
+    click C11Xctx_L624 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c11xctx"
+    click C11Esh_L625 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11esh"
+    click C11Sass_L626 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c11sass"
+    click C11G1_L627 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g1"
+    click C11G2_L630 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g2"
+    click C11G3_L633 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g3"
+    click C11E1_L628 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e1"
+    click C11J1_L631 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c11j1"
+    click C11A1_L634 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c11a1"
+    click C11E2_L635 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
 
-    BottomPadding[ ]:::invisible ~~~ C11Xctx
-    C11E1 --> C11G1
-    C11J1 --> C11G2
-    C11A1 --- Dot1
-    C11E2 --- Dot1
-    Dot1 --> C11G3
-    C11Esh --- Dot2
-    C11G1 --- Dot2
-    C11G2 --- Dot2
-    C11G3 --- Dot2
-    C11Sass --- Dot2
-    Dot2 --> C11top
-    C11Xctx --o C11top
+    BottomPadding[ ]:::invisible ~~~ C11Xctx_L624
+    C11E1_L628 --> C11G1_L627
+    C11J1_L631 --> C11G2_L630
+    C11A1_L634 --- Dot1
+    C11E2_L635 --- Dot1
+    Dot1 --> C11G3_L633
+    C11Esh_L625 --- Dot2
+    C11G1_L627 --- Dot2
+    C11G2_L630 --- Dot2
+    C11G3_L633 --- Dot2
+    C11Sass_L626 --- Dot2
+    Dot2 --> C11top_L623
+    C11Xctx_L624 --o C11top_L623
 ```
 
 ### Package C12top
@@ -1980,44 +1999,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C12top["<b>C12top</b><br>Statement of C12top"]
-    C12Xctx[("<b>C12Xctx</b>&nbsp;↗<br>Context of C12Xctx")]
-    C12Esh[("<b>C12Esh</b>&nbsp;↗<br>Shared evidence of C12")]
-    C12Sass[/"<b>C12Sass</b><br>Assertion strategy of C12"/]
-    C12G1["<b>C12G1</b><br>Sub-claim 1 of C12"]
-    C12G2["<b>C12G2</b><br>Sub-claim 2 of C12"]
-    C12G3["<b>C12G3</b><br>Sub-claim 3 of C12"]
-    C12E1[("<b>C12E1</b>&nbsp;↗<br>Evidence 1 of C12")]
-    C12J1["<b>C12J1</b><br>Justification of C12"]
-    C12A1["<b>C12A1</b><br>Assumption of C12<br>ASSUMED"]
-    C12E2[("<b>C12E2</b>&nbsp;↗<br>Evidence 2 of C12")]
+    C12top_L638["<b>C12top</b><br>Statement of C12top"]
+    C12Xctx_L639[("<b>C12Xctx</b>&nbsp;↗<br>Context of C12Xctx")]
+    C12Esh_L640[("<b>C12Esh</b>&nbsp;↗<br>Shared evidence of C12")]
+    C12Sass_L641[/"<b>C12Sass</b><br>Assertion strategy of C12"/]
+    C12G1_L642["<b>C12G1</b><br>Sub-claim 1 of C12"]
+    C12G2_L645["<b>C12G2</b><br>Sub-claim 2 of C12"]
+    C12G3_L648["<b>C12G3</b><br>Sub-claim 3 of C12"]
+    C12E1_L643[("<b>C12E1</b>&nbsp;↗<br>Evidence 1 of C12")]
+    C12J1_L646["<b>C12J1</b><br>Justification of C12"]
+    C12A1_L649["<b>C12A1</b><br>Assumption of C12<br>ASSUMED"]
+    C12E2_L650[("<b>C12E2</b>&nbsp;↗<br>Evidence 2 of C12")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12top"
-    click C12Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c12xctx"
-    click C12Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12esh"
-    click C12Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c12sass"
-    click C12G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g1"
-    click C12G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g2"
-    click C12G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g3"
-    click C12E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e1"
-    click C12J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c12j1"
-    click C12A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c12a1"
-    click C12E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
+    click C12top_L638 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12top"
+    click C12Xctx_L639 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c12xctx"
+    click C12Esh_L640 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12esh"
+    click C12Sass_L641 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c12sass"
+    click C12G1_L642 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g1"
+    click C12G2_L645 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g2"
+    click C12G3_L648 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g3"
+    click C12E1_L643 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e1"
+    click C12J1_L646 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c12j1"
+    click C12A1_L649 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c12a1"
+    click C12E2_L650 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
 
-    BottomPadding[ ]:::invisible ~~~ C12Xctx
-    C12E1 --> C12G1
-    C12J1 --> C12G2
-    C12A1 --- Dot1
-    C12E2 --- Dot1
-    Dot1 --> C12G3
-    C12Esh --- Dot2
-    C12G1 --- Dot2
-    C12G2 --- Dot2
-    C12G3 --- Dot2
-    C12Sass --- Dot2
-    Dot2 --> C12top
-    C12Xctx --o C12top
+    BottomPadding[ ]:::invisible ~~~ C12Xctx_L639
+    C12E1_L643 --> C12G1_L642
+    C12J1_L646 --> C12G2_L645
+    C12A1_L649 --- Dot1
+    C12E2_L650 --- Dot1
+    Dot1 --> C12G3_L648
+    C12Esh_L640 --- Dot2
+    C12G1_L642 --- Dot2
+    C12G2_L645 --- Dot2
+    C12G3_L648 --- Dot2
+    C12Sass_L641 --- Dot2
+    Dot2 --> C12top_L638
+    C12Xctx_L639 --o C12top_L638
 ```
 
 ### Package C13top
@@ -2037,44 +2056,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C13top["<b>C13top</b><br>Statement of C13top"]
-    C13Xctx[("<b>C13Xctx</b>&nbsp;↗<br>Context of C13Xctx")]
-    C13Esh[("<b>C13Esh</b>&nbsp;↗<br>Shared evidence of C13")]
-    C13Sass[/"<b>C13Sass</b><br>Assertion strategy of C13"/]
-    C13G1["<b>C13G1</b><br>Sub-claim 1 of C13"]
-    C13G2["<b>C13G2</b><br>Sub-claim 2 of C13"]
-    C13G3["<b>C13G3</b><br>Sub-claim 3 of C13"]
-    C13E1[("<b>C13E1</b>&nbsp;↗<br>Evidence 1 of C13")]
-    C13J1["<b>C13J1</b><br>Justification of C13"]
-    C13A1["<b>C13A1</b><br>Assumption of C13<br>ASSUMED"]
-    C13E2[("<b>C13E2</b>&nbsp;↗<br>Evidence 2 of C13")]
+    C13top_L653["<b>C13top</b><br>Statement of C13top"]
+    C13Xctx_L654[("<b>C13Xctx</b>&nbsp;↗<br>Context of C13Xctx")]
+    C13Esh_L655[("<b>C13Esh</b>&nbsp;↗<br>Shared evidence of C13")]
+    C13Sass_L656[/"<b>C13Sass</b><br>Assertion strategy of C13"/]
+    C13G1_L657["<b>C13G1</b><br>Sub-claim 1 of C13"]
+    C13G2_L660["<b>C13G2</b><br>Sub-claim 2 of C13"]
+    C13G3_L663["<b>C13G3</b><br>Sub-claim 3 of C13"]
+    C13E1_L658[("<b>C13E1</b>&nbsp;↗<br>Evidence 1 of C13")]
+    C13J1_L661["<b>C13J1</b><br>Justification of C13"]
+    C13A1_L664["<b>C13A1</b><br>Assumption of C13<br>ASSUMED"]
+    C13E2_L665[("<b>C13E2</b>&nbsp;↗<br>Evidence 2 of C13")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C13top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13top"
-    click C13Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c13xctx"
-    click C13Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13esh"
-    click C13Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c13sass"
-    click C13G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g1"
-    click C13G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g2"
-    click C13G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g3"
-    click C13E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e1"
-    click C13J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c13j1"
-    click C13A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c13a1"
-    click C13E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
+    click C13top_L653 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13top"
+    click C13Xctx_L654 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c13xctx"
+    click C13Esh_L655 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13esh"
+    click C13Sass_L656 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c13sass"
+    click C13G1_L657 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g1"
+    click C13G2_L660 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g2"
+    click C13G3_L663 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g3"
+    click C13E1_L658 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e1"
+    click C13J1_L661 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c13j1"
+    click C13A1_L664 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c13a1"
+    click C13E2_L665 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
 
-    BottomPadding[ ]:::invisible ~~~ C13Xctx
-    C13E1 --> C13G1
-    C13J1 --> C13G2
-    C13A1 --- Dot1
-    C13E2 --- Dot1
-    Dot1 --> C13G3
-    C13Esh --- Dot2
-    C13G1 --- Dot2
-    C13G2 --- Dot2
-    C13G3 --- Dot2
-    C13Sass --- Dot2
-    Dot2 --> C13top
-    C13Xctx --o C13top
+    BottomPadding[ ]:::invisible ~~~ C13Xctx_L654
+    C13E1_L658 --> C13G1_L657
+    C13J1_L661 --> C13G2_L660
+    C13A1_L664 --- Dot1
+    C13E2_L665 --- Dot1
+    Dot1 --> C13G3_L663
+    C13Esh_L655 --- Dot2
+    C13G1_L657 --- Dot2
+    C13G2_L660 --- Dot2
+    C13G3_L663 --- Dot2
+    C13Sass_L656 --- Dot2
+    Dot2 --> C13top_L653
+    C13Xctx_L654 --o C13top_L653
 ```
 
 ### Package C14top
@@ -2094,44 +2113,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C14top["<b>C14top</b><br>Statement of C14top"]
-    C14Xctx[("<b>C14Xctx</b>&nbsp;↗<br>Context of C14Xctx")]
-    C14Esh[("<b>C14Esh</b>&nbsp;↗<br>Shared evidence of C14")]
-    C14Sass[/"<b>C14Sass</b><br>Assertion strategy of C14"/]
-    C14G1["<b>C14G1</b><br>Sub-claim 1 of C14"]
-    C14G2["<b>C14G2</b><br>Sub-claim 2 of C14"]
-    C14G3["<b>C14G3</b><br>Sub-claim 3 of C14"]
-    C14E1[("<b>C14E1</b>&nbsp;↗<br>Evidence 1 of C14")]
-    C14J1["<b>C14J1</b><br>Justification of C14"]
-    C14A1["<b>C14A1</b><br>Assumption of C14<br>ASSUMED"]
-    C14E2[("<b>C14E2</b>&nbsp;↗<br>Evidence 2 of C14")]
+    C14top_L668["<b>C14top</b><br>Statement of C14top"]
+    C14Xctx_L669[("<b>C14Xctx</b>&nbsp;↗<br>Context of C14Xctx")]
+    C14Esh_L670[("<b>C14Esh</b>&nbsp;↗<br>Shared evidence of C14")]
+    C14Sass_L671[/"<b>C14Sass</b><br>Assertion strategy of C14"/]
+    C14G1_L672["<b>C14G1</b><br>Sub-claim 1 of C14"]
+    C14G2_L675["<b>C14G2</b><br>Sub-claim 2 of C14"]
+    C14G3_L678["<b>C14G3</b><br>Sub-claim 3 of C14"]
+    C14E1_L673[("<b>C14E1</b>&nbsp;↗<br>Evidence 1 of C14")]
+    C14J1_L676["<b>C14J1</b><br>Justification of C14"]
+    C14A1_L679["<b>C14A1</b><br>Assumption of C14<br>ASSUMED"]
+    C14E2_L680[("<b>C14E2</b>&nbsp;↗<br>Evidence 2 of C14")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C14top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14top"
-    click C14Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c14xctx"
-    click C14Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14esh"
-    click C14Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c14sass"
-    click C14G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g1"
-    click C14G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g2"
-    click C14G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g3"
-    click C14E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e1"
-    click C14J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c14j1"
-    click C14A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c14a1"
-    click C14E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
+    click C14top_L668 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14top"
+    click C14Xctx_L669 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c14xctx"
+    click C14Esh_L670 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14esh"
+    click C14Sass_L671 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c14sass"
+    click C14G1_L672 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g1"
+    click C14G2_L675 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g2"
+    click C14G3_L678 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g3"
+    click C14E1_L673 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e1"
+    click C14J1_L676 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c14j1"
+    click C14A1_L679 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c14a1"
+    click C14E2_L680 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
 
-    BottomPadding[ ]:::invisible ~~~ C14Xctx
-    C14E1 --> C14G1
-    C14J1 --> C14G2
-    C14A1 --- Dot1
-    C14E2 --- Dot1
-    Dot1 --> C14G3
-    C14Esh --- Dot2
-    C14G1 --- Dot2
-    C14G2 --- Dot2
-    C14G3 --- Dot2
-    C14Sass --- Dot2
-    Dot2 --> C14top
-    C14Xctx --o C14top
+    BottomPadding[ ]:::invisible ~~~ C14Xctx_L669
+    C14E1_L673 --> C14G1_L672
+    C14J1_L676 --> C14G2_L675
+    C14A1_L679 --- Dot1
+    C14E2_L680 --- Dot1
+    Dot1 --> C14G3_L678
+    C14Esh_L670 --- Dot2
+    C14G1_L672 --- Dot2
+    C14G2_L675 --- Dot2
+    C14G3_L678 --- Dot2
+    C14Sass_L671 --- Dot2
+    Dot2 --> C14top_L668
+    C14Xctx_L669 --o C14top_L668
 ```
 
 ### Package C15top
@@ -2151,44 +2170,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C15top["<b>C15top</b><br>Statement of C15top"]
-    C15Xctx[("<b>C15Xctx</b>&nbsp;↗<br>Context of C15Xctx")]
-    C15Esh[("<b>C15Esh</b>&nbsp;↗<br>Shared evidence of C15")]
-    C15Sass[/"<b>C15Sass</b><br>Assertion strategy of C15"/]
-    C15G1["<b>C15G1</b><br>Sub-claim 1 of C15"]
-    C15G2["<b>C15G2</b><br>Sub-claim 2 of C15"]
-    C15G3["<b>C15G3</b><br>Sub-claim 3 of C15"]
-    C15E1[("<b>C15E1</b>&nbsp;↗<br>Evidence 1 of C15")]
-    C15J1["<b>C15J1</b><br>Justification of C15"]
-    C15A1["<b>C15A1</b><br>Assumption of C15<br>ASSUMED"]
-    C15E2[("<b>C15E2</b>&nbsp;↗<br>Evidence 2 of C15")]
+    C15top_L683["<b>C15top</b><br>Statement of C15top"]
+    C15Xctx_L684[("<b>C15Xctx</b>&nbsp;↗<br>Context of C15Xctx")]
+    C15Esh_L685[("<b>C15Esh</b>&nbsp;↗<br>Shared evidence of C15")]
+    C15Sass_L686[/"<b>C15Sass</b><br>Assertion strategy of C15"/]
+    C15G1_L687["<b>C15G1</b><br>Sub-claim 1 of C15"]
+    C15G2_L690["<b>C15G2</b><br>Sub-claim 2 of C15"]
+    C15G3_L693["<b>C15G3</b><br>Sub-claim 3 of C15"]
+    C15E1_L688[("<b>C15E1</b>&nbsp;↗<br>Evidence 1 of C15")]
+    C15J1_L691["<b>C15J1</b><br>Justification of C15"]
+    C15A1_L694["<b>C15A1</b><br>Assumption of C15<br>ASSUMED"]
+    C15E2_L695[("<b>C15E2</b>&nbsp;↗<br>Evidence 2 of C15")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15top"
-    click C15Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c15xctx"
-    click C15Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15esh"
-    click C15Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c15sass"
-    click C15G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g1"
-    click C15G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g2"
-    click C15G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g3"
-    click C15E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e1"
-    click C15J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c15j1"
-    click C15A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c15a1"
-    click C15E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
+    click C15top_L683 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15top"
+    click C15Xctx_L684 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c15xctx"
+    click C15Esh_L685 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15esh"
+    click C15Sass_L686 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c15sass"
+    click C15G1_L687 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g1"
+    click C15G2_L690 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g2"
+    click C15G3_L693 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g3"
+    click C15E1_L688 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e1"
+    click C15J1_L691 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c15j1"
+    click C15A1_L694 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c15a1"
+    click C15E2_L695 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
 
-    BottomPadding[ ]:::invisible ~~~ C15Xctx
-    C15E1 --> C15G1
-    C15J1 --> C15G2
-    C15A1 --- Dot1
-    C15E2 --- Dot1
-    Dot1 --> C15G3
-    C15Esh --- Dot2
-    C15G1 --- Dot2
-    C15G2 --- Dot2
-    C15G3 --- Dot2
-    C15Sass --- Dot2
-    Dot2 --> C15top
-    C15Xctx --o C15top
+    BottomPadding[ ]:::invisible ~~~ C15Xctx_L684
+    C15E1_L688 --> C15G1_L687
+    C15J1_L691 --> C15G2_L690
+    C15A1_L694 --- Dot1
+    C15E2_L695 --- Dot1
+    Dot1 --> C15G3_L693
+    C15Esh_L685 --- Dot2
+    C15G1_L687 --- Dot2
+    C15G2_L690 --- Dot2
+    C15G3_L693 --- Dot2
+    C15Sass_L686 --- Dot2
+    Dot2 --> C15top_L683
+    C15Xctx_L684 --o C15top_L683
 ```
 
 ### Package C16top
@@ -2208,44 +2227,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C16top["<b>C16top</b><br>Statement of C16top"]
-    C16Xctx[("<b>C16Xctx</b>&nbsp;↗<br>Context of C16Xctx")]
-    C16Esh[("<b>C16Esh</b>&nbsp;↗<br>Shared evidence of C16")]
-    C16Sass[/"<b>C16Sass</b><br>Assertion strategy of C16"/]
-    C16G1["<b>C16G1</b><br>Sub-claim 1 of C16"]
-    C16G2["<b>C16G2</b><br>Sub-claim 2 of C16"]
-    C16G3["<b>C16G3</b><br>Sub-claim 3 of C16"]
-    C16E1[("<b>C16E1</b>&nbsp;↗<br>Evidence 1 of C16")]
-    C16J1["<b>C16J1</b><br>Justification of C16"]
-    C16A1["<b>C16A1</b><br>Assumption of C16<br>ASSUMED"]
-    C16E2[("<b>C16E2</b>&nbsp;↗<br>Evidence 2 of C16")]
+    C16top_L698["<b>C16top</b><br>Statement of C16top"]
+    C16Xctx_L699[("<b>C16Xctx</b>&nbsp;↗<br>Context of C16Xctx")]
+    C16Esh_L700[("<b>C16Esh</b>&nbsp;↗<br>Shared evidence of C16")]
+    C16Sass_L701[/"<b>C16Sass</b><br>Assertion strategy of C16"/]
+    C16G1_L702["<b>C16G1</b><br>Sub-claim 1 of C16"]
+    C16G2_L705["<b>C16G2</b><br>Sub-claim 2 of C16"]
+    C16G3_L708["<b>C16G3</b><br>Sub-claim 3 of C16"]
+    C16E1_L703[("<b>C16E1</b>&nbsp;↗<br>Evidence 1 of C16")]
+    C16J1_L706["<b>C16J1</b><br>Justification of C16"]
+    C16A1_L709["<b>C16A1</b><br>Assumption of C16<br>ASSUMED"]
+    C16E2_L710[("<b>C16E2</b>&nbsp;↗<br>Evidence 2 of C16")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16top"
-    click C16Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c16xctx"
-    click C16Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16esh"
-    click C16Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c16sass"
-    click C16G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g1"
-    click C16G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g2"
-    click C16G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g3"
-    click C16E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e1"
-    click C16J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c16j1"
-    click C16A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c16a1"
-    click C16E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
+    click C16top_L698 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16top"
+    click C16Xctx_L699 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c16xctx"
+    click C16Esh_L700 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16esh"
+    click C16Sass_L701 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c16sass"
+    click C16G1_L702 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g1"
+    click C16G2_L705 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g2"
+    click C16G3_L708 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g3"
+    click C16E1_L703 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e1"
+    click C16J1_L706 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c16j1"
+    click C16A1_L709 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c16a1"
+    click C16E2_L710 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
 
-    BottomPadding[ ]:::invisible ~~~ C16Xctx
-    C16E1 --> C16G1
-    C16J1 --> C16G2
-    C16A1 --- Dot1
-    C16E2 --- Dot1
-    Dot1 --> C16G3
-    C16Esh --- Dot2
-    C16G1 --- Dot2
-    C16G2 --- Dot2
-    C16G3 --- Dot2
-    C16Sass --- Dot2
-    Dot2 --> C16top
-    C16Xctx --o C16top
+    BottomPadding[ ]:::invisible ~~~ C16Xctx_L699
+    C16E1_L703 --> C16G1_L702
+    C16J1_L706 --> C16G2_L705
+    C16A1_L709 --- Dot1
+    C16E2_L710 --- Dot1
+    Dot1 --> C16G3_L708
+    C16Esh_L700 --- Dot2
+    C16G1_L702 --- Dot2
+    C16G2_L705 --- Dot2
+    C16G3_L708 --- Dot2
+    C16Sass_L701 --- Dot2
+    Dot2 --> C16top_L698
+    C16Xctx_L699 --o C16top_L698
 ```
 
 ### Package C17top
@@ -2265,44 +2284,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C17top["<b>C17top</b><br>Statement of C17top"]
-    C17Xctx[("<b>C17Xctx</b>&nbsp;↗<br>Context of C17Xctx")]
-    C17Esh[("<b>C17Esh</b>&nbsp;↗<br>Shared evidence of C17")]
-    C17Sass[/"<b>C17Sass</b><br>Assertion strategy of C17"/]
-    C17G1["<b>C17G1</b><br>Sub-claim 1 of C17"]
-    C17G2["<b>C17G2</b><br>Sub-claim 2 of C17"]
-    C17G3["<b>C17G3</b><br>Sub-claim 3 of C17"]
-    C17E1[("<b>C17E1</b>&nbsp;↗<br>Evidence 1 of C17")]
-    C17J1["<b>C17J1</b><br>Justification of C17"]
-    C17A1["<b>C17A1</b><br>Assumption of C17<br>ASSUMED"]
-    C17E2[("<b>C17E2</b>&nbsp;↗<br>Evidence 2 of C17")]
+    C17top_L713["<b>C17top</b><br>Statement of C17top"]
+    C17Xctx_L714[("<b>C17Xctx</b>&nbsp;↗<br>Context of C17Xctx")]
+    C17Esh_L715[("<b>C17Esh</b>&nbsp;↗<br>Shared evidence of C17")]
+    C17Sass_L716[/"<b>C17Sass</b><br>Assertion strategy of C17"/]
+    C17G1_L717["<b>C17G1</b><br>Sub-claim 1 of C17"]
+    C17G2_L720["<b>C17G2</b><br>Sub-claim 2 of C17"]
+    C17G3_L723["<b>C17G3</b><br>Sub-claim 3 of C17"]
+    C17E1_L718[("<b>C17E1</b>&nbsp;↗<br>Evidence 1 of C17")]
+    C17J1_L721["<b>C17J1</b><br>Justification of C17"]
+    C17A1_L724["<b>C17A1</b><br>Assumption of C17<br>ASSUMED"]
+    C17E2_L725[("<b>C17E2</b>&nbsp;↗<br>Evidence 2 of C17")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17top"
-    click C17Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c17xctx"
-    click C17Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17esh"
-    click C17Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c17sass"
-    click C17G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g1"
-    click C17G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g2"
-    click C17G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g3"
-    click C17E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e1"
-    click C17J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c17j1"
-    click C17A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c17a1"
-    click C17E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
+    click C17top_L713 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17top"
+    click C17Xctx_L714 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c17xctx"
+    click C17Esh_L715 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17esh"
+    click C17Sass_L716 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c17sass"
+    click C17G1_L717 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g1"
+    click C17G2_L720 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g2"
+    click C17G3_L723 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g3"
+    click C17E1_L718 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e1"
+    click C17J1_L721 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c17j1"
+    click C17A1_L724 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c17a1"
+    click C17E2_L725 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
 
-    BottomPadding[ ]:::invisible ~~~ C17Xctx
-    C17E1 --> C17G1
-    C17J1 --> C17G2
-    C17A1 --- Dot1
-    C17E2 --- Dot1
-    Dot1 --> C17G3
-    C17Esh --- Dot2
-    C17G1 --- Dot2
-    C17G2 --- Dot2
-    C17G3 --- Dot2
-    C17Sass --- Dot2
-    Dot2 --> C17top
-    C17Xctx --o C17top
+    BottomPadding[ ]:::invisible ~~~ C17Xctx_L714
+    C17E1_L718 --> C17G1_L717
+    C17J1_L721 --> C17G2_L720
+    C17A1_L724 --- Dot1
+    C17E2_L725 --- Dot1
+    Dot1 --> C17G3_L723
+    C17Esh_L715 --- Dot2
+    C17G1_L717 --- Dot2
+    C17G2_L720 --- Dot2
+    C17G3_L723 --- Dot2
+    C17Sass_L716 --- Dot2
+    Dot2 --> C17top_L713
+    C17Xctx_L714 --o C17top_L713
 ```
 
 ### Package C18top
@@ -2322,44 +2341,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C18top["<b>C18top</b><br>Statement of C18top"]
-    C18Xctx[("<b>C18Xctx</b>&nbsp;↗<br>Context of C18Xctx")]
-    C18Esh[("<b>C18Esh</b>&nbsp;↗<br>Shared evidence of C18")]
-    C18Sass[/"<b>C18Sass</b><br>Assertion strategy of C18"/]
-    C18G1["<b>C18G1</b><br>Sub-claim 1 of C18"]
-    C18G2["<b>C18G2</b><br>Sub-claim 2 of C18"]
-    C18G3["<b>C18G3</b><br>Sub-claim 3 of C18"]
-    C18E1[("<b>C18E1</b>&nbsp;↗<br>Evidence 1 of C18")]
-    C18J1["<b>C18J1</b><br>Justification of C18"]
-    C18A1["<b>C18A1</b><br>Assumption of C18<br>ASSUMED"]
-    C18E2[("<b>C18E2</b>&nbsp;↗<br>Evidence 2 of C18")]
+    C18top_L728["<b>C18top</b><br>Statement of C18top"]
+    C18Xctx_L729[("<b>C18Xctx</b>&nbsp;↗<br>Context of C18Xctx")]
+    C18Esh_L730[("<b>C18Esh</b>&nbsp;↗<br>Shared evidence of C18")]
+    C18Sass_L731[/"<b>C18Sass</b><br>Assertion strategy of C18"/]
+    C18G1_L732["<b>C18G1</b><br>Sub-claim 1 of C18"]
+    C18G2_L735["<b>C18G2</b><br>Sub-claim 2 of C18"]
+    C18G3_L738["<b>C18G3</b><br>Sub-claim 3 of C18"]
+    C18E1_L733[("<b>C18E1</b>&nbsp;↗<br>Evidence 1 of C18")]
+    C18J1_L736["<b>C18J1</b><br>Justification of C18"]
+    C18A1_L739["<b>C18A1</b><br>Assumption of C18<br>ASSUMED"]
+    C18E2_L740[("<b>C18E2</b>&nbsp;↗<br>Evidence 2 of C18")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18top"
-    click C18Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c18xctx"
-    click C18Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18esh"
-    click C18Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c18sass"
-    click C18G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g1"
-    click C18G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g2"
-    click C18G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g3"
-    click C18E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e1"
-    click C18J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c18j1"
-    click C18A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c18a1"
-    click C18E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
+    click C18top_L728 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18top"
+    click C18Xctx_L729 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c18xctx"
+    click C18Esh_L730 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18esh"
+    click C18Sass_L731 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c18sass"
+    click C18G1_L732 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g1"
+    click C18G2_L735 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g2"
+    click C18G3_L738 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g3"
+    click C18E1_L733 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e1"
+    click C18J1_L736 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c18j1"
+    click C18A1_L739 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c18a1"
+    click C18E2_L740 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
 
-    BottomPadding[ ]:::invisible ~~~ C18Xctx
-    C18E1 --> C18G1
-    C18J1 --> C18G2
-    C18A1 --- Dot1
-    C18E2 --- Dot1
-    Dot1 --> C18G3
-    C18Esh --- Dot2
-    C18G1 --- Dot2
-    C18G2 --- Dot2
-    C18G3 --- Dot2
-    C18Sass --- Dot2
-    Dot2 --> C18top
-    C18Xctx --o C18top
+    BottomPadding[ ]:::invisible ~~~ C18Xctx_L729
+    C18E1_L733 --> C18G1_L732
+    C18J1_L736 --> C18G2_L735
+    C18A1_L739 --- Dot1
+    C18E2_L740 --- Dot1
+    Dot1 --> C18G3_L738
+    C18Esh_L730 --- Dot2
+    C18G1_L732 --- Dot2
+    C18G2_L735 --- Dot2
+    C18G3_L738 --- Dot2
+    C18Sass_L731 --- Dot2
+    Dot2 --> C18top_L728
+    C18Xctx_L729 --o C18top_L728
 ```
 
 ### Package C19top
@@ -2379,44 +2398,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C19top["<b>C19top</b><br>Statement of C19top"]
-    C19Xctx[("<b>C19Xctx</b>&nbsp;↗<br>Context of C19Xctx")]
-    C19Esh[("<b>C19Esh</b>&nbsp;↗<br>Shared evidence of C19")]
-    C19Sass[/"<b>C19Sass</b><br>Assertion strategy of C19"/]
-    C19G1["<b>C19G1</b><br>Sub-claim 1 of C19"]
-    C19G2["<b>C19G2</b><br>Sub-claim 2 of C19"]
-    C19G3["<b>C19G3</b><br>Sub-claim 3 of C19"]
-    C19E1[("<b>C19E1</b>&nbsp;↗<br>Evidence 1 of C19")]
-    C19J1["<b>C19J1</b><br>Justification of C19"]
-    C19A1["<b>C19A1</b><br>Assumption of C19<br>ASSUMED"]
-    C19E2[("<b>C19E2</b>&nbsp;↗<br>Evidence 2 of C19")]
+    C19top_L743["<b>C19top</b><br>Statement of C19top"]
+    C19Xctx_L744[("<b>C19Xctx</b>&nbsp;↗<br>Context of C19Xctx")]
+    C19Esh_L745[("<b>C19Esh</b>&nbsp;↗<br>Shared evidence of C19")]
+    C19Sass_L746[/"<b>C19Sass</b><br>Assertion strategy of C19"/]
+    C19G1_L747["<b>C19G1</b><br>Sub-claim 1 of C19"]
+    C19G2_L750["<b>C19G2</b><br>Sub-claim 2 of C19"]
+    C19G3_L753["<b>C19G3</b><br>Sub-claim 3 of C19"]
+    C19E1_L748[("<b>C19E1</b>&nbsp;↗<br>Evidence 1 of C19")]
+    C19J1_L751["<b>C19J1</b><br>Justification of C19"]
+    C19A1_L754["<b>C19A1</b><br>Assumption of C19<br>ASSUMED"]
+    C19E2_L755[("<b>C19E2</b>&nbsp;↗<br>Evidence 2 of C19")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19top"
-    click C19Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c19xctx"
-    click C19Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19esh"
-    click C19Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c19sass"
-    click C19G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g1"
-    click C19G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g2"
-    click C19G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g3"
-    click C19E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e1"
-    click C19J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c19j1"
-    click C19A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c19a1"
-    click C19E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
+    click C19top_L743 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19top"
+    click C19Xctx_L744 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c19xctx"
+    click C19Esh_L745 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19esh"
+    click C19Sass_L746 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c19sass"
+    click C19G1_L747 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g1"
+    click C19G2_L750 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g2"
+    click C19G3_L753 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g3"
+    click C19E1_L748 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e1"
+    click C19J1_L751 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c19j1"
+    click C19A1_L754 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c19a1"
+    click C19E2_L755 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
 
-    BottomPadding[ ]:::invisible ~~~ C19Xctx
-    C19E1 --> C19G1
-    C19J1 --> C19G2
-    C19A1 --- Dot1
-    C19E2 --- Dot1
-    Dot1 --> C19G3
-    C19Esh --- Dot2
-    C19G1 --- Dot2
-    C19G2 --- Dot2
-    C19G3 --- Dot2
-    C19Sass --- Dot2
-    Dot2 --> C19top
-    C19Xctx --o C19top
+    BottomPadding[ ]:::invisible ~~~ C19Xctx_L744
+    C19E1_L748 --> C19G1_L747
+    C19J1_L751 --> C19G2_L750
+    C19A1_L754 --- Dot1
+    C19E2_L755 --- Dot1
+    Dot1 --> C19G3_L753
+    C19Esh_L745 --- Dot2
+    C19G1_L747 --- Dot2
+    C19G2_L750 --- Dot2
+    C19G3_L753 --- Dot2
+    C19Sass_L746 --- Dot2
+    Dot2 --> C19top_L743
+    C19Xctx_L744 --o C19top_L743
 ```
 
 ### Package C20top
@@ -2436,44 +2455,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C20top["<b>C20top</b><br>Statement of C20top"]
-    C20Xctx[("<b>C20Xctx</b>&nbsp;↗<br>Context of C20Xctx")]
-    C20Esh[("<b>C20Esh</b>&nbsp;↗<br>Shared evidence of C20")]
-    C20Sass[/"<b>C20Sass</b><br>Assertion strategy of C20"/]
-    C20G1["<b>C20G1</b><br>Sub-claim 1 of C20"]
-    C20G2["<b>C20G2</b><br>Sub-claim 2 of C20"]
-    C20G3["<b>C20G3</b><br>Sub-claim 3 of C20"]
-    C20E1[("<b>C20E1</b>&nbsp;↗<br>Evidence 1 of C20")]
-    C20J1["<b>C20J1</b><br>Justification of C20"]
-    C20A1["<b>C20A1</b><br>Assumption of C20<br>ASSUMED"]
-    C20E2[("<b>C20E2</b>&nbsp;↗<br>Evidence 2 of C20")]
+    C20top_L758["<b>C20top</b><br>Statement of C20top"]
+    C20Xctx_L759[("<b>C20Xctx</b>&nbsp;↗<br>Context of C20Xctx")]
+    C20Esh_L760[("<b>C20Esh</b>&nbsp;↗<br>Shared evidence of C20")]
+    C20Sass_L761[/"<b>C20Sass</b><br>Assertion strategy of C20"/]
+    C20G1_L762["<b>C20G1</b><br>Sub-claim 1 of C20"]
+    C20G2_L765["<b>C20G2</b><br>Sub-claim 2 of C20"]
+    C20G3_L768["<b>C20G3</b><br>Sub-claim 3 of C20"]
+    C20E1_L763[("<b>C20E1</b>&nbsp;↗<br>Evidence 1 of C20")]
+    C20J1_L766["<b>C20J1</b><br>Justification of C20"]
+    C20A1_L769["<b>C20A1</b><br>Assumption of C20<br>ASSUMED"]
+    C20E2_L770[("<b>C20E2</b>&nbsp;↗<br>Evidence 2 of C20")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C20top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20top"
-    click C20Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c20xctx"
-    click C20Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20esh"
-    click C20Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c20sass"
-    click C20G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g1"
-    click C20G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g2"
-    click C20G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g3"
-    click C20E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e1"
-    click C20J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c20j1"
-    click C20A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c20a1"
-    click C20E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
+    click C20top_L758 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20top"
+    click C20Xctx_L759 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c20xctx"
+    click C20Esh_L760 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20esh"
+    click C20Sass_L761 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c20sass"
+    click C20G1_L762 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g1"
+    click C20G2_L765 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g2"
+    click C20G3_L768 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g3"
+    click C20E1_L763 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e1"
+    click C20J1_L766 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c20j1"
+    click C20A1_L769 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c20a1"
+    click C20E2_L770 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
 
-    BottomPadding[ ]:::invisible ~~~ C20Xctx
-    C20E1 --> C20G1
-    C20J1 --> C20G2
-    C20A1 --- Dot1
-    C20E2 --- Dot1
-    Dot1 --> C20G3
-    C20Esh --- Dot2
-    C20G1 --- Dot2
-    C20G2 --- Dot2
-    C20G3 --- Dot2
-    C20Sass --- Dot2
-    Dot2 --> C20top
-    C20Xctx --o C20top
+    BottomPadding[ ]:::invisible ~~~ C20Xctx_L759
+    C20E1_L763 --> C20G1_L762
+    C20J1_L766 --> C20G2_L765
+    C20A1_L769 --- Dot1
+    C20E2_L770 --- Dot1
+    Dot1 --> C20G3_L768
+    C20Esh_L760 --- Dot2
+    C20G1_L762 --- Dot2
+    C20G2_L765 --- Dot2
+    C20G3_L768 --- Dot2
+    C20Sass_L761 --- Dot2
+    Dot2 --> C20top_L758
+    C20Xctx_L759 --o C20top_L758
 ```
 
 ### Package C21top
@@ -2493,44 +2512,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C21top["<b>C21top</b><br>Statement of C21top"]
-    C21Xctx[("<b>C21Xctx</b>&nbsp;↗<br>Context of C21Xctx")]
-    C21Esh[("<b>C21Esh</b>&nbsp;↗<br>Shared evidence of C21")]
-    C21Sass[/"<b>C21Sass</b><br>Assertion strategy of C21"/]
-    C21G1["<b>C21G1</b><br>Sub-claim 1 of C21"]
-    C21G2["<b>C21G2</b><br>Sub-claim 2 of C21"]
-    C21G3["<b>C21G3</b><br>Sub-claim 3 of C21"]
-    C21E1[("<b>C21E1</b>&nbsp;↗<br>Evidence 1 of C21")]
-    C21J1["<b>C21J1</b><br>Justification of C21"]
-    C21A1["<b>C21A1</b><br>Assumption of C21<br>ASSUMED"]
-    C21E2[("<b>C21E2</b>&nbsp;↗<br>Evidence 2 of C21")]
+    C21top_L773["<b>C21top</b><br>Statement of C21top"]
+    C21Xctx_L774[("<b>C21Xctx</b>&nbsp;↗<br>Context of C21Xctx")]
+    C21Esh_L775[("<b>C21Esh</b>&nbsp;↗<br>Shared evidence of C21")]
+    C21Sass_L776[/"<b>C21Sass</b><br>Assertion strategy of C21"/]
+    C21G1_L777["<b>C21G1</b><br>Sub-claim 1 of C21"]
+    C21G2_L780["<b>C21G2</b><br>Sub-claim 2 of C21"]
+    C21G3_L783["<b>C21G3</b><br>Sub-claim 3 of C21"]
+    C21E1_L778[("<b>C21E1</b>&nbsp;↗<br>Evidence 1 of C21")]
+    C21J1_L781["<b>C21J1</b><br>Justification of C21"]
+    C21A1_L784["<b>C21A1</b><br>Assumption of C21<br>ASSUMED"]
+    C21E2_L785[("<b>C21E2</b>&nbsp;↗<br>Evidence 2 of C21")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C21top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21top"
-    click C21Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c21xctx"
-    click C21Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21esh"
-    click C21Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c21sass"
-    click C21G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g1"
-    click C21G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g2"
-    click C21G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g3"
-    click C21E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e1"
-    click C21J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c21j1"
-    click C21A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c21a1"
-    click C21E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
+    click C21top_L773 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21top"
+    click C21Xctx_L774 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c21xctx"
+    click C21Esh_L775 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21esh"
+    click C21Sass_L776 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c21sass"
+    click C21G1_L777 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g1"
+    click C21G2_L780 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g2"
+    click C21G3_L783 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g3"
+    click C21E1_L778 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e1"
+    click C21J1_L781 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c21j1"
+    click C21A1_L784 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c21a1"
+    click C21E2_L785 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
 
-    BottomPadding[ ]:::invisible ~~~ C21Xctx
-    C21E1 --> C21G1
-    C21J1 --> C21G2
-    C21A1 --- Dot1
-    C21E2 --- Dot1
-    Dot1 --> C21G3
-    C21Esh --- Dot2
-    C21G1 --- Dot2
-    C21G2 --- Dot2
-    C21G3 --- Dot2
-    C21Sass --- Dot2
-    Dot2 --> C21top
-    C21Xctx --o C21top
+    BottomPadding[ ]:::invisible ~~~ C21Xctx_L774
+    C21E1_L778 --> C21G1_L777
+    C21J1_L781 --> C21G2_L780
+    C21A1_L784 --- Dot1
+    C21E2_L785 --- Dot1
+    Dot1 --> C21G3_L783
+    C21Esh_L775 --- Dot2
+    C21G1_L777 --- Dot2
+    C21G2_L780 --- Dot2
+    C21G3_L783 --- Dot2
+    C21Sass_L776 --- Dot2
+    Dot2 --> C21top_L773
+    C21Xctx_L774 --o C21top_L773
 ```
 
 ### Package C22top
@@ -2550,44 +2569,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C22top["<b>C22top</b><br>Statement of C22top"]
-    C22Xctx[("<b>C22Xctx</b>&nbsp;↗<br>Context of C22Xctx")]
-    C22Esh[("<b>C22Esh</b>&nbsp;↗<br>Shared evidence of C22")]
-    C22Sass[/"<b>C22Sass</b><br>Assertion strategy of C22"/]
-    C22G1["<b>C22G1</b><br>Sub-claim 1 of C22"]
-    C22G2["<b>C22G2</b><br>Sub-claim 2 of C22"]
-    C22G3["<b>C22G3</b><br>Sub-claim 3 of C22"]
-    C22E1[("<b>C22E1</b>&nbsp;↗<br>Evidence 1 of C22")]
-    C22J1["<b>C22J1</b><br>Justification of C22"]
-    C22A1["<b>C22A1</b><br>Assumption of C22<br>ASSUMED"]
-    C22E2[("<b>C22E2</b>&nbsp;↗<br>Evidence 2 of C22")]
+    C22top_L788["<b>C22top</b><br>Statement of C22top"]
+    C22Xctx_L789[("<b>C22Xctx</b>&nbsp;↗<br>Context of C22Xctx")]
+    C22Esh_L790[("<b>C22Esh</b>&nbsp;↗<br>Shared evidence of C22")]
+    C22Sass_L791[/"<b>C22Sass</b><br>Assertion strategy of C22"/]
+    C22G1_L792["<b>C22G1</b><br>Sub-claim 1 of C22"]
+    C22G2_L795["<b>C22G2</b><br>Sub-claim 2 of C22"]
+    C22G3_L798["<b>C22G3</b><br>Sub-claim 3 of C22"]
+    C22E1_L793[("<b>C22E1</b>&nbsp;↗<br>Evidence 1 of C22")]
+    C22J1_L796["<b>C22J1</b><br>Justification of C22"]
+    C22A1_L799["<b>C22A1</b><br>Assumption of C22<br>ASSUMED"]
+    C22E2_L800[("<b>C22E2</b>&nbsp;↗<br>Evidence 2 of C22")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22top"
-    click C22Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c22xctx"
-    click C22Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22esh"
-    click C22Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c22sass"
-    click C22G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g1"
-    click C22G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g2"
-    click C22G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g3"
-    click C22E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e1"
-    click C22J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c22j1"
-    click C22A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c22a1"
-    click C22E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
+    click C22top_L788 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22top"
+    click C22Xctx_L789 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c22xctx"
+    click C22Esh_L790 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22esh"
+    click C22Sass_L791 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c22sass"
+    click C22G1_L792 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g1"
+    click C22G2_L795 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g2"
+    click C22G3_L798 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g3"
+    click C22E1_L793 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e1"
+    click C22J1_L796 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c22j1"
+    click C22A1_L799 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c22a1"
+    click C22E2_L800 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
 
-    BottomPadding[ ]:::invisible ~~~ C22Xctx
-    C22E1 --> C22G1
-    C22J1 --> C22G2
-    C22A1 --- Dot1
-    C22E2 --- Dot1
-    Dot1 --> C22G3
-    C22Esh --- Dot2
-    C22G1 --- Dot2
-    C22G2 --- Dot2
-    C22G3 --- Dot2
-    C22Sass --- Dot2
-    Dot2 --> C22top
-    C22Xctx --o C22top
+    BottomPadding[ ]:::invisible ~~~ C22Xctx_L789
+    C22E1_L793 --> C22G1_L792
+    C22J1_L796 --> C22G2_L795
+    C22A1_L799 --- Dot1
+    C22E2_L800 --- Dot1
+    Dot1 --> C22G3_L798
+    C22Esh_L790 --- Dot2
+    C22G1_L792 --- Dot2
+    C22G2_L795 --- Dot2
+    C22G3_L798 --- Dot2
+    C22Sass_L791 --- Dot2
+    Dot2 --> C22top_L788
+    C22Xctx_L789 --o C22top_L788
 ```
 
 ### Package C23top
@@ -2607,44 +2626,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C23top["<b>C23top</b><br>Statement of C23top"]
-    C23Xctx[("<b>C23Xctx</b>&nbsp;↗<br>Context of C23Xctx")]
-    C23Esh[("<b>C23Esh</b>&nbsp;↗<br>Shared evidence of C23")]
-    C23Sass[/"<b>C23Sass</b><br>Assertion strategy of C23"/]
-    C23G1["<b>C23G1</b><br>Sub-claim 1 of C23"]
-    C23G2["<b>C23G2</b><br>Sub-claim 2 of C23"]
-    C23G3["<b>C23G3</b><br>Sub-claim 3 of C23"]
-    C23E1[("<b>C23E1</b>&nbsp;↗<br>Evidence 1 of C23")]
-    C23J1["<b>C23J1</b><br>Justification of C23"]
-    C23A1["<b>C23A1</b><br>Assumption of C23<br>ASSUMED"]
-    C23E2[("<b>C23E2</b>&nbsp;↗<br>Evidence 2 of C23")]
+    C23top_L803["<b>C23top</b><br>Statement of C23top"]
+    C23Xctx_L804[("<b>C23Xctx</b>&nbsp;↗<br>Context of C23Xctx")]
+    C23Esh_L805[("<b>C23Esh</b>&nbsp;↗<br>Shared evidence of C23")]
+    C23Sass_L806[/"<b>C23Sass</b><br>Assertion strategy of C23"/]
+    C23G1_L807["<b>C23G1</b><br>Sub-claim 1 of C23"]
+    C23G2_L810["<b>C23G2</b><br>Sub-claim 2 of C23"]
+    C23G3_L813["<b>C23G3</b><br>Sub-claim 3 of C23"]
+    C23E1_L808[("<b>C23E1</b>&nbsp;↗<br>Evidence 1 of C23")]
+    C23J1_L811["<b>C23J1</b><br>Justification of C23"]
+    C23A1_L814["<b>C23A1</b><br>Assumption of C23<br>ASSUMED"]
+    C23E2_L815[("<b>C23E2</b>&nbsp;↗<br>Evidence 2 of C23")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23top"
-    click C23Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c23xctx"
-    click C23Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23esh"
-    click C23Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c23sass"
-    click C23G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g1"
-    click C23G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g2"
-    click C23G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g3"
-    click C23E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e1"
-    click C23J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c23j1"
-    click C23A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c23a1"
-    click C23E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
+    click C23top_L803 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23top"
+    click C23Xctx_L804 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c23xctx"
+    click C23Esh_L805 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23esh"
+    click C23Sass_L806 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c23sass"
+    click C23G1_L807 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g1"
+    click C23G2_L810 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g2"
+    click C23G3_L813 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g3"
+    click C23E1_L808 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e1"
+    click C23J1_L811 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c23j1"
+    click C23A1_L814 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c23a1"
+    click C23E2_L815 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
 
-    BottomPadding[ ]:::invisible ~~~ C23Xctx
-    C23E1 --> C23G1
-    C23J1 --> C23G2
-    C23A1 --- Dot1
-    C23E2 --- Dot1
-    Dot1 --> C23G3
-    C23Esh --- Dot2
-    C23G1 --- Dot2
-    C23G2 --- Dot2
-    C23G3 --- Dot2
-    C23Sass --- Dot2
-    Dot2 --> C23top
-    C23Xctx --o C23top
+    BottomPadding[ ]:::invisible ~~~ C23Xctx_L804
+    C23E1_L808 --> C23G1_L807
+    C23J1_L811 --> C23G2_L810
+    C23A1_L814 --- Dot1
+    C23E2_L815 --- Dot1
+    Dot1 --> C23G3_L813
+    C23Esh_L805 --- Dot2
+    C23G1_L807 --- Dot2
+    C23G2_L810 --- Dot2
+    C23G3_L813 --- Dot2
+    C23Sass_L806 --- Dot2
+    Dot2 --> C23top_L803
+    C23Xctx_L804 --o C23top_L803
 ```
 
 ### Package C24top
@@ -2664,44 +2683,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C24top["<b>C24top</b><br>Statement of C24top"]
-    C24Xctx[("<b>C24Xctx</b>&nbsp;↗<br>Context of C24Xctx")]
-    C24Esh[("<b>C24Esh</b>&nbsp;↗<br>Shared evidence of C24")]
-    C24Sass[/"<b>C24Sass</b><br>Assertion strategy of C24"/]
-    C24G1["<b>C24G1</b><br>Sub-claim 1 of C24"]
-    C24G2["<b>C24G2</b><br>Sub-claim 2 of C24"]
-    C24G3["<b>C24G3</b><br>Sub-claim 3 of C24"]
-    C24E1[("<b>C24E1</b>&nbsp;↗<br>Evidence 1 of C24")]
-    C24J1["<b>C24J1</b><br>Justification of C24"]
-    C24A1["<b>C24A1</b><br>Assumption of C24<br>ASSUMED"]
-    C24E2[("<b>C24E2</b>&nbsp;↗<br>Evidence 2 of C24")]
+    C24top_L818["<b>C24top</b><br>Statement of C24top"]
+    C24Xctx_L819[("<b>C24Xctx</b>&nbsp;↗<br>Context of C24Xctx")]
+    C24Esh_L820[("<b>C24Esh</b>&nbsp;↗<br>Shared evidence of C24")]
+    C24Sass_L821[/"<b>C24Sass</b><br>Assertion strategy of C24"/]
+    C24G1_L822["<b>C24G1</b><br>Sub-claim 1 of C24"]
+    C24G2_L825["<b>C24G2</b><br>Sub-claim 2 of C24"]
+    C24G3_L828["<b>C24G3</b><br>Sub-claim 3 of C24"]
+    C24E1_L823[("<b>C24E1</b>&nbsp;↗<br>Evidence 1 of C24")]
+    C24J1_L826["<b>C24J1</b><br>Justification of C24"]
+    C24A1_L829["<b>C24A1</b><br>Assumption of C24<br>ASSUMED"]
+    C24E2_L830[("<b>C24E2</b>&nbsp;↗<br>Evidence 2 of C24")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24top"
-    click C24Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c24xctx"
-    click C24Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24esh"
-    click C24Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c24sass"
-    click C24G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g1"
-    click C24G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g2"
-    click C24G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g3"
-    click C24E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e1"
-    click C24J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c24j1"
-    click C24A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c24a1"
-    click C24E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
+    click C24top_L818 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24top"
+    click C24Xctx_L819 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c24xctx"
+    click C24Esh_L820 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24esh"
+    click C24Sass_L821 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c24sass"
+    click C24G1_L822 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g1"
+    click C24G2_L825 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g2"
+    click C24G3_L828 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g3"
+    click C24E1_L823 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e1"
+    click C24J1_L826 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c24j1"
+    click C24A1_L829 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c24a1"
+    click C24E2_L830 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
 
-    BottomPadding[ ]:::invisible ~~~ C24Xctx
-    C24E1 --> C24G1
-    C24J1 --> C24G2
-    C24A1 --- Dot1
-    C24E2 --- Dot1
-    Dot1 --> C24G3
-    C24Esh --- Dot2
-    C24G1 --- Dot2
-    C24G2 --- Dot2
-    C24G3 --- Dot2
-    C24Sass --- Dot2
-    Dot2 --> C24top
-    C24Xctx --o C24top
+    BottomPadding[ ]:::invisible ~~~ C24Xctx_L819
+    C24E1_L823 --> C24G1_L822
+    C24J1_L826 --> C24G2_L825
+    C24A1_L829 --- Dot1
+    C24E2_L830 --- Dot1
+    Dot1 --> C24G3_L828
+    C24Esh_L820 --- Dot2
+    C24G1_L822 --- Dot2
+    C24G2_L825 --- Dot2
+    C24G3_L828 --- Dot2
+    C24Sass_L821 --- Dot2
+    Dot2 --> C24top_L818
+    C24Xctx_L819 --o C24top_L818
 ```
 
 ### Package C25top
@@ -2721,44 +2740,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C25top["<b>C25top</b><br>Statement of C25top"]
-    C25Xctx[("<b>C25Xctx</b>&nbsp;↗<br>Context of C25Xctx")]
-    C25Esh[("<b>C25Esh</b>&nbsp;↗<br>Shared evidence of C25")]
-    C25Sass[/"<b>C25Sass</b><br>Assertion strategy of C25"/]
-    C25G1["<b>C25G1</b><br>Sub-claim 1 of C25"]
-    C25G2["<b>C25G2</b><br>Sub-claim 2 of C25"]
-    C25G3["<b>C25G3</b><br>Sub-claim 3 of C25"]
-    C25E1[("<b>C25E1</b>&nbsp;↗<br>Evidence 1 of C25")]
-    C25J1["<b>C25J1</b><br>Justification of C25"]
-    C25A1["<b>C25A1</b><br>Assumption of C25<br>ASSUMED"]
-    C25E2[("<b>C25E2</b>&nbsp;↗<br>Evidence 2 of C25")]
+    C25top_L833["<b>C25top</b><br>Statement of C25top"]
+    C25Xctx_L834[("<b>C25Xctx</b>&nbsp;↗<br>Context of C25Xctx")]
+    C25Esh_L835[("<b>C25Esh</b>&nbsp;↗<br>Shared evidence of C25")]
+    C25Sass_L836[/"<b>C25Sass</b><br>Assertion strategy of C25"/]
+    C25G1_L837["<b>C25G1</b><br>Sub-claim 1 of C25"]
+    C25G2_L840["<b>C25G2</b><br>Sub-claim 2 of C25"]
+    C25G3_L843["<b>C25G3</b><br>Sub-claim 3 of C25"]
+    C25E1_L838[("<b>C25E1</b>&nbsp;↗<br>Evidence 1 of C25")]
+    C25J1_L841["<b>C25J1</b><br>Justification of C25"]
+    C25A1_L844["<b>C25A1</b><br>Assumption of C25<br>ASSUMED"]
+    C25E2_L845[("<b>C25E2</b>&nbsp;↗<br>Evidence 2 of C25")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25top"
-    click C25Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c25xctx"
-    click C25Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25esh"
-    click C25Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c25sass"
-    click C25G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g1"
-    click C25G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g2"
-    click C25G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g3"
-    click C25E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e1"
-    click C25J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c25j1"
-    click C25A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c25a1"
-    click C25E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
+    click C25top_L833 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25top"
+    click C25Xctx_L834 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c25xctx"
+    click C25Esh_L835 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25esh"
+    click C25Sass_L836 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c25sass"
+    click C25G1_L837 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g1"
+    click C25G2_L840 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g2"
+    click C25G3_L843 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g3"
+    click C25E1_L838 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e1"
+    click C25J1_L841 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c25j1"
+    click C25A1_L844 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c25a1"
+    click C25E2_L845 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
 
-    BottomPadding[ ]:::invisible ~~~ C25Xctx
-    C25E1 --> C25G1
-    C25J1 --> C25G2
-    C25A1 --- Dot1
-    C25E2 --- Dot1
-    Dot1 --> C25G3
-    C25Esh --- Dot2
-    C25G1 --- Dot2
-    C25G2 --- Dot2
-    C25G3 --- Dot2
-    C25Sass --- Dot2
-    Dot2 --> C25top
-    C25Xctx --o C25top
+    BottomPadding[ ]:::invisible ~~~ C25Xctx_L834
+    C25E1_L838 --> C25G1_L837
+    C25J1_L841 --> C25G2_L840
+    C25A1_L844 --- Dot1
+    C25E2_L845 --- Dot1
+    Dot1 --> C25G3_L843
+    C25Esh_L835 --- Dot2
+    C25G1_L837 --- Dot2
+    C25G2_L840 --- Dot2
+    C25G3_L843 --- Dot2
+    C25Sass_L836 --- Dot2
+    Dot2 --> C25top_L833
+    C25Xctx_L834 --o C25top_L833
 ```
 
 ### Package C26top
@@ -2778,44 +2797,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C26top["<b>C26top</b><br>Statement of C26top"]
-    C26Xctx[("<b>C26Xctx</b>&nbsp;↗<br>Context of C26Xctx")]
-    C26Esh[("<b>C26Esh</b>&nbsp;↗<br>Shared evidence of C26")]
-    C26Sass[/"<b>C26Sass</b><br>Assertion strategy of C26"/]
-    C26G1["<b>C26G1</b><br>Sub-claim 1 of C26"]
-    C26G2["<b>C26G2</b><br>Sub-claim 2 of C26"]
-    C26G3["<b>C26G3</b><br>Sub-claim 3 of C26"]
-    C26E1[("<b>C26E1</b>&nbsp;↗<br>Evidence 1 of C26")]
-    C26J1["<b>C26J1</b><br>Justification of C26"]
-    C26A1["<b>C26A1</b><br>Assumption of C26<br>ASSUMED"]
-    C26E2[("<b>C26E2</b>&nbsp;↗<br>Evidence 2 of C26")]
+    C26top_L848["<b>C26top</b><br>Statement of C26top"]
+    C26Xctx_L849[("<b>C26Xctx</b>&nbsp;↗<br>Context of C26Xctx")]
+    C26Esh_L850[("<b>C26Esh</b>&nbsp;↗<br>Shared evidence of C26")]
+    C26Sass_L851[/"<b>C26Sass</b><br>Assertion strategy of C26"/]
+    C26G1_L852["<b>C26G1</b><br>Sub-claim 1 of C26"]
+    C26G2_L855["<b>C26G2</b><br>Sub-claim 2 of C26"]
+    C26G3_L858["<b>C26G3</b><br>Sub-claim 3 of C26"]
+    C26E1_L853[("<b>C26E1</b>&nbsp;↗<br>Evidence 1 of C26")]
+    C26J1_L856["<b>C26J1</b><br>Justification of C26"]
+    C26A1_L859["<b>C26A1</b><br>Assumption of C26<br>ASSUMED"]
+    C26E2_L860[("<b>C26E2</b>&nbsp;↗<br>Evidence 2 of C26")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26top"
-    click C26Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c26xctx"
-    click C26Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26esh"
-    click C26Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c26sass"
-    click C26G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g1"
-    click C26G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g2"
-    click C26G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g3"
-    click C26E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e1"
-    click C26J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c26j1"
-    click C26A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c26a1"
-    click C26E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
+    click C26top_L848 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26top"
+    click C26Xctx_L849 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c26xctx"
+    click C26Esh_L850 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26esh"
+    click C26Sass_L851 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c26sass"
+    click C26G1_L852 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g1"
+    click C26G2_L855 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g2"
+    click C26G3_L858 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g3"
+    click C26E1_L853 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e1"
+    click C26J1_L856 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c26j1"
+    click C26A1_L859 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c26a1"
+    click C26E2_L860 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
 
-    BottomPadding[ ]:::invisible ~~~ C26Xctx
-    C26E1 --> C26G1
-    C26J1 --> C26G2
-    C26A1 --- Dot1
-    C26E2 --- Dot1
-    Dot1 --> C26G3
-    C26Esh --- Dot2
-    C26G1 --- Dot2
-    C26G2 --- Dot2
-    C26G3 --- Dot2
-    C26Sass --- Dot2
-    Dot2 --> C26top
-    C26Xctx --o C26top
+    BottomPadding[ ]:::invisible ~~~ C26Xctx_L849
+    C26E1_L853 --> C26G1_L852
+    C26J1_L856 --> C26G2_L855
+    C26A1_L859 --- Dot1
+    C26E2_L860 --- Dot1
+    Dot1 --> C26G3_L858
+    C26Esh_L850 --- Dot2
+    C26G1_L852 --- Dot2
+    C26G2_L855 --- Dot2
+    C26G3_L858 --- Dot2
+    C26Sass_L851 --- Dot2
+    Dot2 --> C26top_L848
+    C26Xctx_L849 --o C26top_L848
 ```
 
 ### Package C27top
@@ -2835,44 +2854,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C27top["<b>C27top</b><br>Statement of C27top"]
-    C27Xctx[("<b>C27Xctx</b>&nbsp;↗<br>Context of C27Xctx")]
-    C27Esh[("<b>C27Esh</b>&nbsp;↗<br>Shared evidence of C27")]
-    C27Sass[/"<b>C27Sass</b><br>Assertion strategy of C27"/]
-    C27G1["<b>C27G1</b><br>Sub-claim 1 of C27"]
-    C27G2["<b>C27G2</b><br>Sub-claim 2 of C27"]
-    C27G3["<b>C27G3</b><br>Sub-claim 3 of C27"]
-    C27E1[("<b>C27E1</b>&nbsp;↗<br>Evidence 1 of C27")]
-    C27J1["<b>C27J1</b><br>Justification of C27"]
-    C27A1["<b>C27A1</b><br>Assumption of C27<br>ASSUMED"]
-    C27E2[("<b>C27E2</b>&nbsp;↗<br>Evidence 2 of C27")]
+    C27top_L863["<b>C27top</b><br>Statement of C27top"]
+    C27Xctx_L864[("<b>C27Xctx</b>&nbsp;↗<br>Context of C27Xctx")]
+    C27Esh_L865[("<b>C27Esh</b>&nbsp;↗<br>Shared evidence of C27")]
+    C27Sass_L866[/"<b>C27Sass</b><br>Assertion strategy of C27"/]
+    C27G1_L867["<b>C27G1</b><br>Sub-claim 1 of C27"]
+    C27G2_L870["<b>C27G2</b><br>Sub-claim 2 of C27"]
+    C27G3_L873["<b>C27G3</b><br>Sub-claim 3 of C27"]
+    C27E1_L868[("<b>C27E1</b>&nbsp;↗<br>Evidence 1 of C27")]
+    C27J1_L871["<b>C27J1</b><br>Justification of C27"]
+    C27A1_L874["<b>C27A1</b><br>Assumption of C27<br>ASSUMED"]
+    C27E2_L875[("<b>C27E2</b>&nbsp;↗<br>Evidence 2 of C27")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C27top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27top"
-    click C27Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c27xctx"
-    click C27Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27esh"
-    click C27Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c27sass"
-    click C27G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g1"
-    click C27G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g2"
-    click C27G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g3"
-    click C27E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e1"
-    click C27J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c27j1"
-    click C27A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c27a1"
-    click C27E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
+    click C27top_L863 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27top"
+    click C27Xctx_L864 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c27xctx"
+    click C27Esh_L865 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27esh"
+    click C27Sass_L866 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c27sass"
+    click C27G1_L867 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g1"
+    click C27G2_L870 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g2"
+    click C27G3_L873 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g3"
+    click C27E1_L868 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e1"
+    click C27J1_L871 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c27j1"
+    click C27A1_L874 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c27a1"
+    click C27E2_L875 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
 
-    BottomPadding[ ]:::invisible ~~~ C27Xctx
-    C27E1 --> C27G1
-    C27J1 --> C27G2
-    C27A1 --- Dot1
-    C27E2 --- Dot1
-    Dot1 --> C27G3
-    C27Esh --- Dot2
-    C27G1 --- Dot2
-    C27G2 --- Dot2
-    C27G3 --- Dot2
-    C27Sass --- Dot2
-    Dot2 --> C27top
-    C27Xctx --o C27top
+    BottomPadding[ ]:::invisible ~~~ C27Xctx_L864
+    C27E1_L868 --> C27G1_L867
+    C27J1_L871 --> C27G2_L870
+    C27A1_L874 --- Dot1
+    C27E2_L875 --- Dot1
+    Dot1 --> C27G3_L873
+    C27Esh_L865 --- Dot2
+    C27G1_L867 --- Dot2
+    C27G2_L870 --- Dot2
+    C27G3_L873 --- Dot2
+    C27Sass_L866 --- Dot2
+    Dot2 --> C27top_L863
+    C27Xctx_L864 --o C27top_L863
 ```
 
 ### Package C28top
@@ -2892,44 +2911,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C28top["<b>C28top</b><br>Statement of C28top"]
-    C28Xctx[("<b>C28Xctx</b>&nbsp;↗<br>Context of C28Xctx")]
-    C28Esh[("<b>C28Esh</b>&nbsp;↗<br>Shared evidence of C28")]
-    C28Sass[/"<b>C28Sass</b><br>Assertion strategy of C28"/]
-    C28G1["<b>C28G1</b><br>Sub-claim 1 of C28"]
-    C28G2["<b>C28G2</b><br>Sub-claim 2 of C28"]
-    C28G3["<b>C28G3</b><br>Sub-claim 3 of C28"]
-    C28E1[("<b>C28E1</b>&nbsp;↗<br>Evidence 1 of C28")]
-    C28J1["<b>C28J1</b><br>Justification of C28"]
-    C28A1["<b>C28A1</b><br>Assumption of C28<br>ASSUMED"]
-    C28E2[("<b>C28E2</b>&nbsp;↗<br>Evidence 2 of C28")]
+    C28top_L878["<b>C28top</b><br>Statement of C28top"]
+    C28Xctx_L879[("<b>C28Xctx</b>&nbsp;↗<br>Context of C28Xctx")]
+    C28Esh_L880[("<b>C28Esh</b>&nbsp;↗<br>Shared evidence of C28")]
+    C28Sass_L881[/"<b>C28Sass</b><br>Assertion strategy of C28"/]
+    C28G1_L882["<b>C28G1</b><br>Sub-claim 1 of C28"]
+    C28G2_L885["<b>C28G2</b><br>Sub-claim 2 of C28"]
+    C28G3_L888["<b>C28G3</b><br>Sub-claim 3 of C28"]
+    C28E1_L883[("<b>C28E1</b>&nbsp;↗<br>Evidence 1 of C28")]
+    C28J1_L886["<b>C28J1</b><br>Justification of C28"]
+    C28A1_L889["<b>C28A1</b><br>Assumption of C28<br>ASSUMED"]
+    C28E2_L890[("<b>C28E2</b>&nbsp;↗<br>Evidence 2 of C28")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C28top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28top"
-    click C28Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c28xctx"
-    click C28Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28esh"
-    click C28Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c28sass"
-    click C28G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g1"
-    click C28G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g2"
-    click C28G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g3"
-    click C28E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e1"
-    click C28J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c28j1"
-    click C28A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c28a1"
-    click C28E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
+    click C28top_L878 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28top"
+    click C28Xctx_L879 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c28xctx"
+    click C28Esh_L880 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28esh"
+    click C28Sass_L881 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c28sass"
+    click C28G1_L882 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g1"
+    click C28G2_L885 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g2"
+    click C28G3_L888 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g3"
+    click C28E1_L883 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e1"
+    click C28J1_L886 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c28j1"
+    click C28A1_L889 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c28a1"
+    click C28E2_L890 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
 
-    BottomPadding[ ]:::invisible ~~~ C28Xctx
-    C28E1 --> C28G1
-    C28J1 --> C28G2
-    C28A1 --- Dot1
-    C28E2 --- Dot1
-    Dot1 --> C28G3
-    C28Esh --- Dot2
-    C28G1 --- Dot2
-    C28G2 --- Dot2
-    C28G3 --- Dot2
-    C28Sass --- Dot2
-    Dot2 --> C28top
-    C28Xctx --o C28top
+    BottomPadding[ ]:::invisible ~~~ C28Xctx_L879
+    C28E1_L883 --> C28G1_L882
+    C28J1_L886 --> C28G2_L885
+    C28A1_L889 --- Dot1
+    C28E2_L890 --- Dot1
+    Dot1 --> C28G3_L888
+    C28Esh_L880 --- Dot2
+    C28G1_L882 --- Dot2
+    C28G2_L885 --- Dot2
+    C28G3_L888 --- Dot2
+    C28Sass_L881 --- Dot2
+    Dot2 --> C28top_L878
+    C28Xctx_L879 --o C28top_L878
 ```
 
 ### Package C29top
@@ -2949,44 +2968,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C29top["<b>C29top</b><br>Statement of C29top"]
-    C29Xctx[("<b>C29Xctx</b>&nbsp;↗<br>Context of C29Xctx")]
-    C29Esh[("<b>C29Esh</b>&nbsp;↗<br>Shared evidence of C29")]
-    C29Sass[/"<b>C29Sass</b><br>Assertion strategy of C29"/]
-    C29G1["<b>C29G1</b><br>Sub-claim 1 of C29"]
-    C29G2["<b>C29G2</b><br>Sub-claim 2 of C29"]
-    C29G3["<b>C29G3</b><br>Sub-claim 3 of C29"]
-    C29E1[("<b>C29E1</b>&nbsp;↗<br>Evidence 1 of C29")]
-    C29J1["<b>C29J1</b><br>Justification of C29"]
-    C29A1["<b>C29A1</b><br>Assumption of C29<br>ASSUMED"]
-    C29E2[("<b>C29E2</b>&nbsp;↗<br>Evidence 2 of C29")]
+    C29top_L893["<b>C29top</b><br>Statement of C29top"]
+    C29Xctx_L894[("<b>C29Xctx</b>&nbsp;↗<br>Context of C29Xctx")]
+    C29Esh_L895[("<b>C29Esh</b>&nbsp;↗<br>Shared evidence of C29")]
+    C29Sass_L896[/"<b>C29Sass</b><br>Assertion strategy of C29"/]
+    C29G1_L897["<b>C29G1</b><br>Sub-claim 1 of C29"]
+    C29G2_L900["<b>C29G2</b><br>Sub-claim 2 of C29"]
+    C29G3_L903["<b>C29G3</b><br>Sub-claim 3 of C29"]
+    C29E1_L898[("<b>C29E1</b>&nbsp;↗<br>Evidence 1 of C29")]
+    C29J1_L901["<b>C29J1</b><br>Justification of C29"]
+    C29A1_L904["<b>C29A1</b><br>Assumption of C29<br>ASSUMED"]
+    C29E2_L905[("<b>C29E2</b>&nbsp;↗<br>Evidence 2 of C29")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29top"
-    click C29Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c29xctx"
-    click C29Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29esh"
-    click C29Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c29sass"
-    click C29G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g1"
-    click C29G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g2"
-    click C29G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g3"
-    click C29E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e1"
-    click C29J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c29j1"
-    click C29A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c29a1"
-    click C29E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
+    click C29top_L893 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29top"
+    click C29Xctx_L894 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c29xctx"
+    click C29Esh_L895 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29esh"
+    click C29Sass_L896 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c29sass"
+    click C29G1_L897 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g1"
+    click C29G2_L900 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g2"
+    click C29G3_L903 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g3"
+    click C29E1_L898 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e1"
+    click C29J1_L901 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c29j1"
+    click C29A1_L904 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c29a1"
+    click C29E2_L905 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
 
-    BottomPadding[ ]:::invisible ~~~ C29Xctx
-    C29E1 --> C29G1
-    C29J1 --> C29G2
-    C29A1 --- Dot1
-    C29E2 --- Dot1
-    Dot1 --> C29G3
-    C29Esh --- Dot2
-    C29G1 --- Dot2
-    C29G2 --- Dot2
-    C29G3 --- Dot2
-    C29Sass --- Dot2
-    Dot2 --> C29top
-    C29Xctx --o C29top
+    BottomPadding[ ]:::invisible ~~~ C29Xctx_L894
+    C29E1_L898 --> C29G1_L897
+    C29J1_L901 --> C29G2_L900
+    C29A1_L904 --- Dot1
+    C29E2_L905 --- Dot1
+    Dot1 --> C29G3_L903
+    C29Esh_L895 --- Dot2
+    C29G1_L897 --- Dot2
+    C29G2_L900 --- Dot2
+    C29G3_L903 --- Dot2
+    C29Sass_L896 --- Dot2
+    Dot2 --> C29top_L893
+    C29Xctx_L894 --o C29top_L893
 ```
 
 ### Package C30top
@@ -3006,44 +3025,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C30top["<b>C30top</b><br>Statement of C30top"]
-    C30Xctx[("<b>C30Xctx</b>&nbsp;↗<br>Context of C30Xctx")]
-    C30Esh[("<b>C30Esh</b>&nbsp;↗<br>Shared evidence of C30")]
-    C30Sass[/"<b>C30Sass</b><br>Assertion strategy of C30"/]
-    C30G1["<b>C30G1</b><br>Sub-claim 1 of C30"]
-    C30G2["<b>C30G2</b><br>Sub-claim 2 of C30"]
-    C30G3["<b>C30G3</b><br>Sub-claim 3 of C30"]
-    C30E1[("<b>C30E1</b>&nbsp;↗<br>Evidence 1 of C30")]
-    C30J1["<b>C30J1</b><br>Justification of C30"]
-    C30A1["<b>C30A1</b><br>Assumption of C30<br>ASSUMED"]
-    C30E2[("<b>C30E2</b>&nbsp;↗<br>Evidence 2 of C30")]
+    C30top_L908["<b>C30top</b><br>Statement of C30top"]
+    C30Xctx_L909[("<b>C30Xctx</b>&nbsp;↗<br>Context of C30Xctx")]
+    C30Esh_L910[("<b>C30Esh</b>&nbsp;↗<br>Shared evidence of C30")]
+    C30Sass_L911[/"<b>C30Sass</b><br>Assertion strategy of C30"/]
+    C30G1_L912["<b>C30G1</b><br>Sub-claim 1 of C30"]
+    C30G2_L915["<b>C30G2</b><br>Sub-claim 2 of C30"]
+    C30G3_L918["<b>C30G3</b><br>Sub-claim 3 of C30"]
+    C30E1_L913[("<b>C30E1</b>&nbsp;↗<br>Evidence 1 of C30")]
+    C30J1_L916["<b>C30J1</b><br>Justification of C30"]
+    C30A1_L919["<b>C30A1</b><br>Assumption of C30<br>ASSUMED"]
+    C30E2_L920[("<b>C30E2</b>&nbsp;↗<br>Evidence 2 of C30")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30top"
-    click C30Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c30xctx"
-    click C30Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30esh"
-    click C30Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c30sass"
-    click C30G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g1"
-    click C30G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g2"
-    click C30G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g3"
-    click C30E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e1"
-    click C30J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c30j1"
-    click C30A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c30a1"
-    click C30E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
+    click C30top_L908 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30top"
+    click C30Xctx_L909 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c30xctx"
+    click C30Esh_L910 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30esh"
+    click C30Sass_L911 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c30sass"
+    click C30G1_L912 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g1"
+    click C30G2_L915 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g2"
+    click C30G3_L918 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g3"
+    click C30E1_L913 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e1"
+    click C30J1_L916 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c30j1"
+    click C30A1_L919 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c30a1"
+    click C30E2_L920 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
 
-    BottomPadding[ ]:::invisible ~~~ C30Xctx
-    C30E1 --> C30G1
-    C30J1 --> C30G2
-    C30A1 --- Dot1
-    C30E2 --- Dot1
-    Dot1 --> C30G3
-    C30Esh --- Dot2
-    C30G1 --- Dot2
-    C30G2 --- Dot2
-    C30G3 --- Dot2
-    C30Sass --- Dot2
-    Dot2 --> C30top
-    C30Xctx --o C30top
+    BottomPadding[ ]:::invisible ~~~ C30Xctx_L909
+    C30E1_L913 --> C30G1_L912
+    C30J1_L916 --> C30G2_L915
+    C30A1_L919 --- Dot1
+    C30E2_L920 --- Dot1
+    Dot1 --> C30G3_L918
+    C30Esh_L910 --- Dot2
+    C30G1_L912 --- Dot2
+    C30G2_L915 --- Dot2
+    C30G3_L918 --- Dot2
+    C30Sass_L911 --- Dot2
+    Dot2 --> C30top_L908
+    C30Xctx_L909 --o C30top_L908
 ```
 
 ### Package C31top
@@ -3063,44 +3082,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C31top["<b>C31top</b><br>Statement of C31top"]
-    C31Xctx[("<b>C31Xctx</b>&nbsp;↗<br>Context of C31Xctx")]
-    C31Esh[("<b>C31Esh</b>&nbsp;↗<br>Shared evidence of C31")]
-    C31Sass[/"<b>C31Sass</b><br>Assertion strategy of C31"/]
-    C31G1["<b>C31G1</b><br>Sub-claim 1 of C31"]
-    C31G2["<b>C31G2</b><br>Sub-claim 2 of C31"]
-    C31G3["<b>C31G3</b><br>Sub-claim 3 of C31"]
-    C31E1[("<b>C31E1</b>&nbsp;↗<br>Evidence 1 of C31")]
-    C31J1["<b>C31J1</b><br>Justification of C31"]
-    C31A1["<b>C31A1</b><br>Assumption of C31<br>ASSUMED"]
-    C31E2[("<b>C31E2</b>&nbsp;↗<br>Evidence 2 of C31")]
+    C31top_L923["<b>C31top</b><br>Statement of C31top"]
+    C31Xctx_L924[("<b>C31Xctx</b>&nbsp;↗<br>Context of C31Xctx")]
+    C31Esh_L925[("<b>C31Esh</b>&nbsp;↗<br>Shared evidence of C31")]
+    C31Sass_L926[/"<b>C31Sass</b><br>Assertion strategy of C31"/]
+    C31G1_L927["<b>C31G1</b><br>Sub-claim 1 of C31"]
+    C31G2_L930["<b>C31G2</b><br>Sub-claim 2 of C31"]
+    C31G3_L933["<b>C31G3</b><br>Sub-claim 3 of C31"]
+    C31E1_L928[("<b>C31E1</b>&nbsp;↗<br>Evidence 1 of C31")]
+    C31J1_L931["<b>C31J1</b><br>Justification of C31"]
+    C31A1_L934["<b>C31A1</b><br>Assumption of C31<br>ASSUMED"]
+    C31E2_L935[("<b>C31E2</b>&nbsp;↗<br>Evidence 2 of C31")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31top"
-    click C31Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c31xctx"
-    click C31Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31esh"
-    click C31Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c31sass"
-    click C31G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g1"
-    click C31G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g2"
-    click C31G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g3"
-    click C31E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e1"
-    click C31J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c31j1"
-    click C31A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c31a1"
-    click C31E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
+    click C31top_L923 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31top"
+    click C31Xctx_L924 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c31xctx"
+    click C31Esh_L925 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31esh"
+    click C31Sass_L926 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c31sass"
+    click C31G1_L927 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g1"
+    click C31G2_L930 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g2"
+    click C31G3_L933 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g3"
+    click C31E1_L928 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e1"
+    click C31J1_L931 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c31j1"
+    click C31A1_L934 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c31a1"
+    click C31E2_L935 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
 
-    BottomPadding[ ]:::invisible ~~~ C31Xctx
-    C31E1 --> C31G1
-    C31J1 --> C31G2
-    C31A1 --- Dot1
-    C31E2 --- Dot1
-    Dot1 --> C31G3
-    C31Esh --- Dot2
-    C31G1 --- Dot2
-    C31G2 --- Dot2
-    C31G3 --- Dot2
-    C31Sass --- Dot2
-    Dot2 --> C31top
-    C31Xctx --o C31top
+    BottomPadding[ ]:::invisible ~~~ C31Xctx_L924
+    C31E1_L928 --> C31G1_L927
+    C31J1_L931 --> C31G2_L930
+    C31A1_L934 --- Dot1
+    C31E2_L935 --- Dot1
+    Dot1 --> C31G3_L933
+    C31Esh_L925 --- Dot2
+    C31G1_L927 --- Dot2
+    C31G2_L930 --- Dot2
+    C31G3_L933 --- Dot2
+    C31Sass_L926 --- Dot2
+    Dot2 --> C31top_L923
+    C31Xctx_L924 --o C31top_L923
 ```
 
 ### Package C32top
@@ -3120,44 +3139,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C32top["<b>C32top</b><br>Statement of C32top"]
-    C32Xctx[("<b>C32Xctx</b>&nbsp;↗<br>Context of C32Xctx")]
-    C32Esh[("<b>C32Esh</b>&nbsp;↗<br>Shared evidence of C32")]
-    C32Sass[/"<b>C32Sass</b><br>Assertion strategy of C32"/]
-    C32G1["<b>C32G1</b><br>Sub-claim 1 of C32"]
-    C32G2["<b>C32G2</b><br>Sub-claim 2 of C32"]
-    C32G3["<b>C32G3</b><br>Sub-claim 3 of C32"]
-    C32E1[("<b>C32E1</b>&nbsp;↗<br>Evidence 1 of C32")]
-    C32J1["<b>C32J1</b><br>Justification of C32"]
-    C32A1["<b>C32A1</b><br>Assumption of C32<br>ASSUMED"]
-    C32E2[("<b>C32E2</b>&nbsp;↗<br>Evidence 2 of C32")]
+    C32top_L938["<b>C32top</b><br>Statement of C32top"]
+    C32Xctx_L939[("<b>C32Xctx</b>&nbsp;↗<br>Context of C32Xctx")]
+    C32Esh_L940[("<b>C32Esh</b>&nbsp;↗<br>Shared evidence of C32")]
+    C32Sass_L941[/"<b>C32Sass</b><br>Assertion strategy of C32"/]
+    C32G1_L942["<b>C32G1</b><br>Sub-claim 1 of C32"]
+    C32G2_L945["<b>C32G2</b><br>Sub-claim 2 of C32"]
+    C32G3_L948["<b>C32G3</b><br>Sub-claim 3 of C32"]
+    C32E1_L943[("<b>C32E1</b>&nbsp;↗<br>Evidence 1 of C32")]
+    C32J1_L946["<b>C32J1</b><br>Justification of C32"]
+    C32A1_L949["<b>C32A1</b><br>Assumption of C32<br>ASSUMED"]
+    C32E2_L950[("<b>C32E2</b>&nbsp;↗<br>Evidence 2 of C32")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32top"
-    click C32Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c32xctx"
-    click C32Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32esh"
-    click C32Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c32sass"
-    click C32G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g1"
-    click C32G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g2"
-    click C32G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g3"
-    click C32E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e1"
-    click C32J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c32j1"
-    click C32A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c32a1"
-    click C32E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
+    click C32top_L938 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32top"
+    click C32Xctx_L939 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c32xctx"
+    click C32Esh_L940 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32esh"
+    click C32Sass_L941 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c32sass"
+    click C32G1_L942 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g1"
+    click C32G2_L945 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g2"
+    click C32G3_L948 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g3"
+    click C32E1_L943 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e1"
+    click C32J1_L946 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c32j1"
+    click C32A1_L949 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c32a1"
+    click C32E2_L950 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
 
-    BottomPadding[ ]:::invisible ~~~ C32Xctx
-    C32E1 --> C32G1
-    C32J1 --> C32G2
-    C32A1 --- Dot1
-    C32E2 --- Dot1
-    Dot1 --> C32G3
-    C32Esh --- Dot2
-    C32G1 --- Dot2
-    C32G2 --- Dot2
-    C32G3 --- Dot2
-    C32Sass --- Dot2
-    Dot2 --> C32top
-    C32Xctx --o C32top
+    BottomPadding[ ]:::invisible ~~~ C32Xctx_L939
+    C32E1_L943 --> C32G1_L942
+    C32J1_L946 --> C32G2_L945
+    C32A1_L949 --- Dot1
+    C32E2_L950 --- Dot1
+    Dot1 --> C32G3_L948
+    C32Esh_L940 --- Dot2
+    C32G1_L942 --- Dot2
+    C32G2_L945 --- Dot2
+    C32G3_L948 --- Dot2
+    C32Sass_L941 --- Dot2
+    Dot2 --> C32top_L938
+    C32Xctx_L939 --o C32top_L938
 ```
 
 ### Package C33top
@@ -3177,44 +3196,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C33top["<b>C33top</b><br>Statement of C33top"]
-    C33Xctx[("<b>C33Xctx</b>&nbsp;↗<br>Context of C33Xctx")]
-    C33Esh[("<b>C33Esh</b>&nbsp;↗<br>Shared evidence of C33")]
-    C33Sass[/"<b>C33Sass</b><br>Assertion strategy of C33"/]
-    C33G1["<b>C33G1</b><br>Sub-claim 1 of C33"]
-    C33G2["<b>C33G2</b><br>Sub-claim 2 of C33"]
-    C33G3["<b>C33G3</b><br>Sub-claim 3 of C33"]
-    C33E1[("<b>C33E1</b>&nbsp;↗<br>Evidence 1 of C33")]
-    C33J1["<b>C33J1</b><br>Justification of C33"]
-    C33A1["<b>C33A1</b><br>Assumption of C33<br>ASSUMED"]
-    C33E2[("<b>C33E2</b>&nbsp;↗<br>Evidence 2 of C33")]
+    C33top_L953["<b>C33top</b><br>Statement of C33top"]
+    C33Xctx_L954[("<b>C33Xctx</b>&nbsp;↗<br>Context of C33Xctx")]
+    C33Esh_L955[("<b>C33Esh</b>&nbsp;↗<br>Shared evidence of C33")]
+    C33Sass_L956[/"<b>C33Sass</b><br>Assertion strategy of C33"/]
+    C33G1_L957["<b>C33G1</b><br>Sub-claim 1 of C33"]
+    C33G2_L960["<b>C33G2</b><br>Sub-claim 2 of C33"]
+    C33G3_L963["<b>C33G3</b><br>Sub-claim 3 of C33"]
+    C33E1_L958[("<b>C33E1</b>&nbsp;↗<br>Evidence 1 of C33")]
+    C33J1_L961["<b>C33J1</b><br>Justification of C33"]
+    C33A1_L964["<b>C33A1</b><br>Assumption of C33<br>ASSUMED"]
+    C33E2_L965[("<b>C33E2</b>&nbsp;↗<br>Evidence 2 of C33")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33top"
-    click C33Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c33xctx"
-    click C33Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33esh"
-    click C33Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c33sass"
-    click C33G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g1"
-    click C33G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g2"
-    click C33G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g3"
-    click C33E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e1"
-    click C33J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c33j1"
-    click C33A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c33a1"
-    click C33E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
+    click C33top_L953 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33top"
+    click C33Xctx_L954 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c33xctx"
+    click C33Esh_L955 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33esh"
+    click C33Sass_L956 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c33sass"
+    click C33G1_L957 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g1"
+    click C33G2_L960 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g2"
+    click C33G3_L963 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g3"
+    click C33E1_L958 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e1"
+    click C33J1_L961 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c33j1"
+    click C33A1_L964 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c33a1"
+    click C33E2_L965 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
 
-    BottomPadding[ ]:::invisible ~~~ C33Xctx
-    C33E1 --> C33G1
-    C33J1 --> C33G2
-    C33A1 --- Dot1
-    C33E2 --- Dot1
-    Dot1 --> C33G3
-    C33Esh --- Dot2
-    C33G1 --- Dot2
-    C33G2 --- Dot2
-    C33G3 --- Dot2
-    C33Sass --- Dot2
-    Dot2 --> C33top
-    C33Xctx --o C33top
+    BottomPadding[ ]:::invisible ~~~ C33Xctx_L954
+    C33E1_L958 --> C33G1_L957
+    C33J1_L961 --> C33G2_L960
+    C33A1_L964 --- Dot1
+    C33E2_L965 --- Dot1
+    Dot1 --> C33G3_L963
+    C33Esh_L955 --- Dot2
+    C33G1_L957 --- Dot2
+    C33G2_L960 --- Dot2
+    C33G3_L963 --- Dot2
+    C33Sass_L956 --- Dot2
+    Dot2 --> C33top_L953
+    C33Xctx_L954 --o C33top_L953
 ```
 
 ### Package C34top
@@ -3234,44 +3253,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C34top["<b>C34top</b><br>Statement of C34top"]
-    C34Xctx[("<b>C34Xctx</b>&nbsp;↗<br>Context of C34Xctx")]
-    C34Esh[("<b>C34Esh</b>&nbsp;↗<br>Shared evidence of C34")]
-    C34Sass[/"<b>C34Sass</b><br>Assertion strategy of C34"/]
-    C34G1["<b>C34G1</b><br>Sub-claim 1 of C34"]
-    C34G2["<b>C34G2</b><br>Sub-claim 2 of C34"]
-    C34G3["<b>C34G3</b><br>Sub-claim 3 of C34"]
-    C34E1[("<b>C34E1</b>&nbsp;↗<br>Evidence 1 of C34")]
-    C34J1["<b>C34J1</b><br>Justification of C34"]
-    C34A1["<b>C34A1</b><br>Assumption of C34<br>ASSUMED"]
-    C34E2[("<b>C34E2</b>&nbsp;↗<br>Evidence 2 of C34")]
+    C34top_L968["<b>C34top</b><br>Statement of C34top"]
+    C34Xctx_L969[("<b>C34Xctx</b>&nbsp;↗<br>Context of C34Xctx")]
+    C34Esh_L970[("<b>C34Esh</b>&nbsp;↗<br>Shared evidence of C34")]
+    C34Sass_L971[/"<b>C34Sass</b><br>Assertion strategy of C34"/]
+    C34G1_L972["<b>C34G1</b><br>Sub-claim 1 of C34"]
+    C34G2_L975["<b>C34G2</b><br>Sub-claim 2 of C34"]
+    C34G3_L978["<b>C34G3</b><br>Sub-claim 3 of C34"]
+    C34E1_L973[("<b>C34E1</b>&nbsp;↗<br>Evidence 1 of C34")]
+    C34J1_L976["<b>C34J1</b><br>Justification of C34"]
+    C34A1_L979["<b>C34A1</b><br>Assumption of C34<br>ASSUMED"]
+    C34E2_L980[("<b>C34E2</b>&nbsp;↗<br>Evidence 2 of C34")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C34top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34top"
-    click C34Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c34xctx"
-    click C34Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34esh"
-    click C34Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c34sass"
-    click C34G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g1"
-    click C34G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g2"
-    click C34G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g3"
-    click C34E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e1"
-    click C34J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c34j1"
-    click C34A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c34a1"
-    click C34E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
+    click C34top_L968 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34top"
+    click C34Xctx_L969 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c34xctx"
+    click C34Esh_L970 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34esh"
+    click C34Sass_L971 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c34sass"
+    click C34G1_L972 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g1"
+    click C34G2_L975 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g2"
+    click C34G3_L978 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g3"
+    click C34E1_L973 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e1"
+    click C34J1_L976 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c34j1"
+    click C34A1_L979 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c34a1"
+    click C34E2_L980 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
 
-    BottomPadding[ ]:::invisible ~~~ C34Xctx
-    C34E1 --> C34G1
-    C34J1 --> C34G2
-    C34A1 --- Dot1
-    C34E2 --- Dot1
-    Dot1 --> C34G3
-    C34Esh --- Dot2
-    C34G1 --- Dot2
-    C34G2 --- Dot2
-    C34G3 --- Dot2
-    C34Sass --- Dot2
-    Dot2 --> C34top
-    C34Xctx --o C34top
+    BottomPadding[ ]:::invisible ~~~ C34Xctx_L969
+    C34E1_L973 --> C34G1_L972
+    C34J1_L976 --> C34G2_L975
+    C34A1_L979 --- Dot1
+    C34E2_L980 --- Dot1
+    Dot1 --> C34G3_L978
+    C34Esh_L970 --- Dot2
+    C34G1_L972 --- Dot2
+    C34G2_L975 --- Dot2
+    C34G3_L978 --- Dot2
+    C34Sass_L971 --- Dot2
+    Dot2 --> C34top_L968
+    C34Xctx_L969 --o C34top_L968
 ```
 
 ### Package C35top
@@ -3291,44 +3310,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C35top["<b>C35top</b><br>Statement of C35top"]
-    C35Xctx[("<b>C35Xctx</b>&nbsp;↗<br>Context of C35Xctx")]
-    C35Esh[("<b>C35Esh</b>&nbsp;↗<br>Shared evidence of C35")]
-    C35Sass[/"<b>C35Sass</b><br>Assertion strategy of C35"/]
-    C35G1["<b>C35G1</b><br>Sub-claim 1 of C35"]
-    C35G2["<b>C35G2</b><br>Sub-claim 2 of C35"]
-    C35G3["<b>C35G3</b><br>Sub-claim 3 of C35"]
-    C35E1[("<b>C35E1</b>&nbsp;↗<br>Evidence 1 of C35")]
-    C35J1["<b>C35J1</b><br>Justification of C35"]
-    C35A1["<b>C35A1</b><br>Assumption of C35<br>ASSUMED"]
-    C35E2[("<b>C35E2</b>&nbsp;↗<br>Evidence 2 of C35")]
+    C35top_L983["<b>C35top</b><br>Statement of C35top"]
+    C35Xctx_L984[("<b>C35Xctx</b>&nbsp;↗<br>Context of C35Xctx")]
+    C35Esh_L985[("<b>C35Esh</b>&nbsp;↗<br>Shared evidence of C35")]
+    C35Sass_L986[/"<b>C35Sass</b><br>Assertion strategy of C35"/]
+    C35G1_L987["<b>C35G1</b><br>Sub-claim 1 of C35"]
+    C35G2_L990["<b>C35G2</b><br>Sub-claim 2 of C35"]
+    C35G3_L993["<b>C35G3</b><br>Sub-claim 3 of C35"]
+    C35E1_L988[("<b>C35E1</b>&nbsp;↗<br>Evidence 1 of C35")]
+    C35J1_L991["<b>C35J1</b><br>Justification of C35"]
+    C35A1_L994["<b>C35A1</b><br>Assumption of C35<br>ASSUMED"]
+    C35E2_L995[("<b>C35E2</b>&nbsp;↗<br>Evidence 2 of C35")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C35top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35top"
-    click C35Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c35xctx"
-    click C35Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35esh"
-    click C35Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c35sass"
-    click C35G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g1"
-    click C35G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g2"
-    click C35G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g3"
-    click C35E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e1"
-    click C35J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c35j1"
-    click C35A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c35a1"
-    click C35E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
+    click C35top_L983 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35top"
+    click C35Xctx_L984 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c35xctx"
+    click C35Esh_L985 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35esh"
+    click C35Sass_L986 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c35sass"
+    click C35G1_L987 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g1"
+    click C35G2_L990 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g2"
+    click C35G3_L993 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g3"
+    click C35E1_L988 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e1"
+    click C35J1_L991 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c35j1"
+    click C35A1_L994 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c35a1"
+    click C35E2_L995 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
 
-    BottomPadding[ ]:::invisible ~~~ C35Xctx
-    C35E1 --> C35G1
-    C35J1 --> C35G2
-    C35A1 --- Dot1
-    C35E2 --- Dot1
-    Dot1 --> C35G3
-    C35Esh --- Dot2
-    C35G1 --- Dot2
-    C35G2 --- Dot2
-    C35G3 --- Dot2
-    C35Sass --- Dot2
-    Dot2 --> C35top
-    C35Xctx --o C35top
+    BottomPadding[ ]:::invisible ~~~ C35Xctx_L984
+    C35E1_L988 --> C35G1_L987
+    C35J1_L991 --> C35G2_L990
+    C35A1_L994 --- Dot1
+    C35E2_L995 --- Dot1
+    Dot1 --> C35G3_L993
+    C35Esh_L985 --- Dot2
+    C35G1_L987 --- Dot2
+    C35G2_L990 --- Dot2
+    C35G3_L993 --- Dot2
+    C35Sass_L986 --- Dot2
+    Dot2 --> C35top_L983
+    C35Xctx_L984 --o C35top_L983
 ```
 
 ### Package C36top
@@ -3348,44 +3367,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C36top["<b>C36top</b><br>Statement of C36top"]
-    C36Xctx[("<b>C36Xctx</b>&nbsp;↗<br>Context of C36Xctx")]
-    C36Esh[("<b>C36Esh</b>&nbsp;↗<br>Shared evidence of C36")]
-    C36Sass[/"<b>C36Sass</b><br>Assertion strategy of C36"/]
-    C36G1["<b>C36G1</b><br>Sub-claim 1 of C36"]
-    C36G2["<b>C36G2</b><br>Sub-claim 2 of C36"]
-    C36G3["<b>C36G3</b><br>Sub-claim 3 of C36"]
-    C36E1[("<b>C36E1</b>&nbsp;↗<br>Evidence 1 of C36")]
-    C36J1["<b>C36J1</b><br>Justification of C36"]
-    C36A1["<b>C36A1</b><br>Assumption of C36<br>ASSUMED"]
-    C36E2[("<b>C36E2</b>&nbsp;↗<br>Evidence 2 of C36")]
+    C36top_L998["<b>C36top</b><br>Statement of C36top"]
+    C36Xctx_L999[("<b>C36Xctx</b>&nbsp;↗<br>Context of C36Xctx")]
+    C36Esh_L1000[("<b>C36Esh</b>&nbsp;↗<br>Shared evidence of C36")]
+    C36Sass_L1001[/"<b>C36Sass</b><br>Assertion strategy of C36"/]
+    C36G1_L1002["<b>C36G1</b><br>Sub-claim 1 of C36"]
+    C36G2_L1005["<b>C36G2</b><br>Sub-claim 2 of C36"]
+    C36G3_L1008["<b>C36G3</b><br>Sub-claim 3 of C36"]
+    C36E1_L1003[("<b>C36E1</b>&nbsp;↗<br>Evidence 1 of C36")]
+    C36J1_L1006["<b>C36J1</b><br>Justification of C36"]
+    C36A1_L1009["<b>C36A1</b><br>Assumption of C36<br>ASSUMED"]
+    C36E2_L1010[("<b>C36E2</b>&nbsp;↗<br>Evidence 2 of C36")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36top"
-    click C36Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c36xctx"
-    click C36Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36esh"
-    click C36Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c36sass"
-    click C36G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g1"
-    click C36G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g2"
-    click C36G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g3"
-    click C36E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e1"
-    click C36J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c36j1"
-    click C36A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c36a1"
-    click C36E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
+    click C36top_L998 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36top"
+    click C36Xctx_L999 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c36xctx"
+    click C36Esh_L1000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36esh"
+    click C36Sass_L1001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c36sass"
+    click C36G1_L1002 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g1"
+    click C36G2_L1005 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g2"
+    click C36G3_L1008 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g3"
+    click C36E1_L1003 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e1"
+    click C36J1_L1006 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c36j1"
+    click C36A1_L1009 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c36a1"
+    click C36E2_L1010 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
 
-    BottomPadding[ ]:::invisible ~~~ C36Xctx
-    C36E1 --> C36G1
-    C36J1 --> C36G2
-    C36A1 --- Dot1
-    C36E2 --- Dot1
-    Dot1 --> C36G3
-    C36Esh --- Dot2
-    C36G1 --- Dot2
-    C36G2 --- Dot2
-    C36G3 --- Dot2
-    C36Sass --- Dot2
-    Dot2 --> C36top
-    C36Xctx --o C36top
+    BottomPadding[ ]:::invisible ~~~ C36Xctx_L999
+    C36E1_L1003 --> C36G1_L1002
+    C36J1_L1006 --> C36G2_L1005
+    C36A1_L1009 --- Dot1
+    C36E2_L1010 --- Dot1
+    Dot1 --> C36G3_L1008
+    C36Esh_L1000 --- Dot2
+    C36G1_L1002 --- Dot2
+    C36G2_L1005 --- Dot2
+    C36G3_L1008 --- Dot2
+    C36Sass_L1001 --- Dot2
+    Dot2 --> C36top_L998
+    C36Xctx_L999 --o C36top_L998
 ```
 
 ### Package C37top
@@ -3405,44 +3424,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C37top["<b>C37top</b><br>Statement of C37top"]
-    C37Xctx[("<b>C37Xctx</b>&nbsp;↗<br>Context of C37Xctx")]
-    C37Esh[("<b>C37Esh</b>&nbsp;↗<br>Shared evidence of C37")]
-    C37Sass[/"<b>C37Sass</b><br>Assertion strategy of C37"/]
-    C37G1["<b>C37G1</b><br>Sub-claim 1 of C37"]
-    C37G2["<b>C37G2</b><br>Sub-claim 2 of C37"]
-    C37G3["<b>C37G3</b><br>Sub-claim 3 of C37"]
-    C37E1[("<b>C37E1</b>&nbsp;↗<br>Evidence 1 of C37")]
-    C37J1["<b>C37J1</b><br>Justification of C37"]
-    C37A1["<b>C37A1</b><br>Assumption of C37<br>ASSUMED"]
-    C37E2[("<b>C37E2</b>&nbsp;↗<br>Evidence 2 of C37")]
+    C37top_L1013["<b>C37top</b><br>Statement of C37top"]
+    C37Xctx_L1014[("<b>C37Xctx</b>&nbsp;↗<br>Context of C37Xctx")]
+    C37Esh_L1015[("<b>C37Esh</b>&nbsp;↗<br>Shared evidence of C37")]
+    C37Sass_L1016[/"<b>C37Sass</b><br>Assertion strategy of C37"/]
+    C37G1_L1017["<b>C37G1</b><br>Sub-claim 1 of C37"]
+    C37G2_L1020["<b>C37G2</b><br>Sub-claim 2 of C37"]
+    C37G3_L1023["<b>C37G3</b><br>Sub-claim 3 of C37"]
+    C37E1_L1018[("<b>C37E1</b>&nbsp;↗<br>Evidence 1 of C37")]
+    C37J1_L1021["<b>C37J1</b><br>Justification of C37"]
+    C37A1_L1024["<b>C37A1</b><br>Assumption of C37<br>ASSUMED"]
+    C37E2_L1025[("<b>C37E2</b>&nbsp;↗<br>Evidence 2 of C37")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37top"
-    click C37Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c37xctx"
-    click C37Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37esh"
-    click C37Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c37sass"
-    click C37G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g1"
-    click C37G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g2"
-    click C37G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g3"
-    click C37E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e1"
-    click C37J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c37j1"
-    click C37A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c37a1"
-    click C37E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
+    click C37top_L1013 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37top"
+    click C37Xctx_L1014 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c37xctx"
+    click C37Esh_L1015 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37esh"
+    click C37Sass_L1016 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c37sass"
+    click C37G1_L1017 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g1"
+    click C37G2_L1020 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g2"
+    click C37G3_L1023 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g3"
+    click C37E1_L1018 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e1"
+    click C37J1_L1021 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c37j1"
+    click C37A1_L1024 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c37a1"
+    click C37E2_L1025 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
 
-    BottomPadding[ ]:::invisible ~~~ C37Xctx
-    C37E1 --> C37G1
-    C37J1 --> C37G2
-    C37A1 --- Dot1
-    C37E2 --- Dot1
-    Dot1 --> C37G3
-    C37Esh --- Dot2
-    C37G1 --- Dot2
-    C37G2 --- Dot2
-    C37G3 --- Dot2
-    C37Sass --- Dot2
-    Dot2 --> C37top
-    C37Xctx --o C37top
+    BottomPadding[ ]:::invisible ~~~ C37Xctx_L1014
+    C37E1_L1018 --> C37G1_L1017
+    C37J1_L1021 --> C37G2_L1020
+    C37A1_L1024 --- Dot1
+    C37E2_L1025 --- Dot1
+    Dot1 --> C37G3_L1023
+    C37Esh_L1015 --- Dot2
+    C37G1_L1017 --- Dot2
+    C37G2_L1020 --- Dot2
+    C37G3_L1023 --- Dot2
+    C37Sass_L1016 --- Dot2
+    Dot2 --> C37top_L1013
+    C37Xctx_L1014 --o C37top_L1013
 ```
 
 ### Package C38top
@@ -3462,44 +3481,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C38top["<b>C38top</b><br>Statement of C38top"]
-    C38Xctx[("<b>C38Xctx</b>&nbsp;↗<br>Context of C38Xctx")]
-    C38Esh[("<b>C38Esh</b>&nbsp;↗<br>Shared evidence of C38")]
-    C38Sass[/"<b>C38Sass</b><br>Assertion strategy of C38"/]
-    C38G1["<b>C38G1</b><br>Sub-claim 1 of C38"]
-    C38G2["<b>C38G2</b><br>Sub-claim 2 of C38"]
-    C38G3["<b>C38G3</b><br>Sub-claim 3 of C38"]
-    C38E1[("<b>C38E1</b>&nbsp;↗<br>Evidence 1 of C38")]
-    C38J1["<b>C38J1</b><br>Justification of C38"]
-    C38A1["<b>C38A1</b><br>Assumption of C38<br>ASSUMED"]
-    C38E2[("<b>C38E2</b>&nbsp;↗<br>Evidence 2 of C38")]
+    C38top_L1028["<b>C38top</b><br>Statement of C38top"]
+    C38Xctx_L1029[("<b>C38Xctx</b>&nbsp;↗<br>Context of C38Xctx")]
+    C38Esh_L1030[("<b>C38Esh</b>&nbsp;↗<br>Shared evidence of C38")]
+    C38Sass_L1031[/"<b>C38Sass</b><br>Assertion strategy of C38"/]
+    C38G1_L1032["<b>C38G1</b><br>Sub-claim 1 of C38"]
+    C38G2_L1035["<b>C38G2</b><br>Sub-claim 2 of C38"]
+    C38G3_L1038["<b>C38G3</b><br>Sub-claim 3 of C38"]
+    C38E1_L1033[("<b>C38E1</b>&nbsp;↗<br>Evidence 1 of C38")]
+    C38J1_L1036["<b>C38J1</b><br>Justification of C38"]
+    C38A1_L1039["<b>C38A1</b><br>Assumption of C38<br>ASSUMED"]
+    C38E2_L1040[("<b>C38E2</b>&nbsp;↗<br>Evidence 2 of C38")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38top"
-    click C38Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c38xctx"
-    click C38Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38esh"
-    click C38Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c38sass"
-    click C38G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g1"
-    click C38G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g2"
-    click C38G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g3"
-    click C38E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e1"
-    click C38J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c38j1"
-    click C38A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c38a1"
-    click C38E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
+    click C38top_L1028 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38top"
+    click C38Xctx_L1029 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c38xctx"
+    click C38Esh_L1030 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38esh"
+    click C38Sass_L1031 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c38sass"
+    click C38G1_L1032 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g1"
+    click C38G2_L1035 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g2"
+    click C38G3_L1038 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g3"
+    click C38E1_L1033 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e1"
+    click C38J1_L1036 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c38j1"
+    click C38A1_L1039 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c38a1"
+    click C38E2_L1040 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
 
-    BottomPadding[ ]:::invisible ~~~ C38Xctx
-    C38E1 --> C38G1
-    C38J1 --> C38G2
-    C38A1 --- Dot1
-    C38E2 --- Dot1
-    Dot1 --> C38G3
-    C38Esh --- Dot2
-    C38G1 --- Dot2
-    C38G2 --- Dot2
-    C38G3 --- Dot2
-    C38Sass --- Dot2
-    Dot2 --> C38top
-    C38Xctx --o C38top
+    BottomPadding[ ]:::invisible ~~~ C38Xctx_L1029
+    C38E1_L1033 --> C38G1_L1032
+    C38J1_L1036 --> C38G2_L1035
+    C38A1_L1039 --- Dot1
+    C38E2_L1040 --- Dot1
+    Dot1 --> C38G3_L1038
+    C38Esh_L1030 --- Dot2
+    C38G1_L1032 --- Dot2
+    C38G2_L1035 --- Dot2
+    C38G3_L1038 --- Dot2
+    C38Sass_L1031 --- Dot2
+    Dot2 --> C38top_L1028
+    C38Xctx_L1029 --o C38top_L1028
 ```
 
 ### Package C39top
@@ -3519,44 +3538,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C39top["<b>C39top</b><br>Statement of C39top"]
-    C39Xctx[("<b>C39Xctx</b>&nbsp;↗<br>Context of C39Xctx")]
-    C39Esh[("<b>C39Esh</b>&nbsp;↗<br>Shared evidence of C39")]
-    C39Sass[/"<b>C39Sass</b><br>Assertion strategy of C39"/]
-    C39G1["<b>C39G1</b><br>Sub-claim 1 of C39"]
-    C39G2["<b>C39G2</b><br>Sub-claim 2 of C39"]
-    C39G3["<b>C39G3</b><br>Sub-claim 3 of C39"]
-    C39E1[("<b>C39E1</b>&nbsp;↗<br>Evidence 1 of C39")]
-    C39J1["<b>C39J1</b><br>Justification of C39"]
-    C39A1["<b>C39A1</b><br>Assumption of C39<br>ASSUMED"]
-    C39E2[("<b>C39E2</b>&nbsp;↗<br>Evidence 2 of C39")]
+    C39top_L1043["<b>C39top</b><br>Statement of C39top"]
+    C39Xctx_L1044[("<b>C39Xctx</b>&nbsp;↗<br>Context of C39Xctx")]
+    C39Esh_L1045[("<b>C39Esh</b>&nbsp;↗<br>Shared evidence of C39")]
+    C39Sass_L1046[/"<b>C39Sass</b><br>Assertion strategy of C39"/]
+    C39G1_L1047["<b>C39G1</b><br>Sub-claim 1 of C39"]
+    C39G2_L1050["<b>C39G2</b><br>Sub-claim 2 of C39"]
+    C39G3_L1053["<b>C39G3</b><br>Sub-claim 3 of C39"]
+    C39E1_L1048[("<b>C39E1</b>&nbsp;↗<br>Evidence 1 of C39")]
+    C39J1_L1051["<b>C39J1</b><br>Justification of C39"]
+    C39A1_L1054["<b>C39A1</b><br>Assumption of C39<br>ASSUMED"]
+    C39E2_L1055[("<b>C39E2</b>&nbsp;↗<br>Evidence 2 of C39")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39top"
-    click C39Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c39xctx"
-    click C39Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39esh"
-    click C39Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c39sass"
-    click C39G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g1"
-    click C39G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g2"
-    click C39G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g3"
-    click C39E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e1"
-    click C39J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c39j1"
-    click C39A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c39a1"
-    click C39E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
+    click C39top_L1043 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39top"
+    click C39Xctx_L1044 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c39xctx"
+    click C39Esh_L1045 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39esh"
+    click C39Sass_L1046 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c39sass"
+    click C39G1_L1047 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g1"
+    click C39G2_L1050 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g2"
+    click C39G3_L1053 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g3"
+    click C39E1_L1048 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e1"
+    click C39J1_L1051 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c39j1"
+    click C39A1_L1054 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c39a1"
+    click C39E2_L1055 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
 
-    BottomPadding[ ]:::invisible ~~~ C39Xctx
-    C39E1 --> C39G1
-    C39J1 --> C39G2
-    C39A1 --- Dot1
-    C39E2 --- Dot1
-    Dot1 --> C39G3
-    C39Esh --- Dot2
-    C39G1 --- Dot2
-    C39G2 --- Dot2
-    C39G3 --- Dot2
-    C39Sass --- Dot2
-    Dot2 --> C39top
-    C39Xctx --o C39top
+    BottomPadding[ ]:::invisible ~~~ C39Xctx_L1044
+    C39E1_L1048 --> C39G1_L1047
+    C39J1_L1051 --> C39G2_L1050
+    C39A1_L1054 --- Dot1
+    C39E2_L1055 --- Dot1
+    Dot1 --> C39G3_L1053
+    C39Esh_L1045 --- Dot2
+    C39G1_L1047 --- Dot2
+    C39G2_L1050 --- Dot2
+    C39G3_L1053 --- Dot2
+    C39Sass_L1046 --- Dot2
+    Dot2 --> C39top_L1043
+    C39Xctx_L1044 --o C39top_L1043
 ```
 
 ### Package C40top
@@ -3576,44 +3595,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C40top["<b>C40top</b><br>Statement of C40top"]
-    C40Xctx[("<b>C40Xctx</b>&nbsp;↗<br>Context of C40Xctx")]
-    C40Esh[("<b>C40Esh</b>&nbsp;↗<br>Shared evidence of C40")]
-    C40Sass[/"<b>C40Sass</b><br>Assertion strategy of C40"/]
-    C40G1["<b>C40G1</b><br>Sub-claim 1 of C40"]
-    C40G2["<b>C40G2</b><br>Sub-claim 2 of C40"]
-    C40G3["<b>C40G3</b><br>Sub-claim 3 of C40"]
-    C40E1[("<b>C40E1</b>&nbsp;↗<br>Evidence 1 of C40")]
-    C40J1["<b>C40J1</b><br>Justification of C40"]
-    C40A1["<b>C40A1</b><br>Assumption of C40<br>ASSUMED"]
-    C40E2[("<b>C40E2</b>&nbsp;↗<br>Evidence 2 of C40")]
+    C40top_L1058["<b>C40top</b><br>Statement of C40top"]
+    C40Xctx_L1059[("<b>C40Xctx</b>&nbsp;↗<br>Context of C40Xctx")]
+    C40Esh_L1060[("<b>C40Esh</b>&nbsp;↗<br>Shared evidence of C40")]
+    C40Sass_L1061[/"<b>C40Sass</b><br>Assertion strategy of C40"/]
+    C40G1_L1062["<b>C40G1</b><br>Sub-claim 1 of C40"]
+    C40G2_L1065["<b>C40G2</b><br>Sub-claim 2 of C40"]
+    C40G3_L1068["<b>C40G3</b><br>Sub-claim 3 of C40"]
+    C40E1_L1063[("<b>C40E1</b>&nbsp;↗<br>Evidence 1 of C40")]
+    C40J1_L1066["<b>C40J1</b><br>Justification of C40"]
+    C40A1_L1069["<b>C40A1</b><br>Assumption of C40<br>ASSUMED"]
+    C40E2_L1070[("<b>C40E2</b>&nbsp;↗<br>Evidence 2 of C40")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40top"
-    click C40Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c40xctx"
-    click C40Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40esh"
-    click C40Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c40sass"
-    click C40G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g1"
-    click C40G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g2"
-    click C40G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g3"
-    click C40E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e1"
-    click C40J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c40j1"
-    click C40A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c40a1"
-    click C40E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
+    click C40top_L1058 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40top"
+    click C40Xctx_L1059 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c40xctx"
+    click C40Esh_L1060 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40esh"
+    click C40Sass_L1061 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c40sass"
+    click C40G1_L1062 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g1"
+    click C40G2_L1065 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g2"
+    click C40G3_L1068 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g3"
+    click C40E1_L1063 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e1"
+    click C40J1_L1066 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c40j1"
+    click C40A1_L1069 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c40a1"
+    click C40E2_L1070 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
 
-    BottomPadding[ ]:::invisible ~~~ C40Xctx
-    C40E1 --> C40G1
-    C40J1 --> C40G2
-    C40A1 --- Dot1
-    C40E2 --- Dot1
-    Dot1 --> C40G3
-    C40Esh --- Dot2
-    C40G1 --- Dot2
-    C40G2 --- Dot2
-    C40G3 --- Dot2
-    C40Sass --- Dot2
-    Dot2 --> C40top
-    C40Xctx --o C40top
+    BottomPadding[ ]:::invisible ~~~ C40Xctx_L1059
+    C40E1_L1063 --> C40G1_L1062
+    C40J1_L1066 --> C40G2_L1065
+    C40A1_L1069 --- Dot1
+    C40E2_L1070 --- Dot1
+    Dot1 --> C40G3_L1068
+    C40Esh_L1060 --- Dot2
+    C40G1_L1062 --- Dot2
+    C40G2_L1065 --- Dot2
+    C40G3_L1068 --- Dot2
+    C40Sass_L1061 --- Dot2
+    Dot2 --> C40top_L1058
+    C40Xctx_L1059 --o C40top_L1058
 ```
 
 ### Package C41top
@@ -3633,44 +3652,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C41top["<b>C41top</b><br>Statement of C41top"]
-    C41Xctx[("<b>C41Xctx</b>&nbsp;↗<br>Context of C41Xctx")]
-    C41Esh[("<b>C41Esh</b>&nbsp;↗<br>Shared evidence of C41")]
-    C41Sass[/"<b>C41Sass</b><br>Assertion strategy of C41"/]
-    C41G1["<b>C41G1</b><br>Sub-claim 1 of C41"]
-    C41G2["<b>C41G2</b><br>Sub-claim 2 of C41"]
-    C41G3["<b>C41G3</b><br>Sub-claim 3 of C41"]
-    C41E1[("<b>C41E1</b>&nbsp;↗<br>Evidence 1 of C41")]
-    C41J1["<b>C41J1</b><br>Justification of C41"]
-    C41A1["<b>C41A1</b><br>Assumption of C41<br>ASSUMED"]
-    C41E2[("<b>C41E2</b>&nbsp;↗<br>Evidence 2 of C41")]
+    C41top_L1073["<b>C41top</b><br>Statement of C41top"]
+    C41Xctx_L1074[("<b>C41Xctx</b>&nbsp;↗<br>Context of C41Xctx")]
+    C41Esh_L1075[("<b>C41Esh</b>&nbsp;↗<br>Shared evidence of C41")]
+    C41Sass_L1076[/"<b>C41Sass</b><br>Assertion strategy of C41"/]
+    C41G1_L1077["<b>C41G1</b><br>Sub-claim 1 of C41"]
+    C41G2_L1080["<b>C41G2</b><br>Sub-claim 2 of C41"]
+    C41G3_L1083["<b>C41G3</b><br>Sub-claim 3 of C41"]
+    C41E1_L1078[("<b>C41E1</b>&nbsp;↗<br>Evidence 1 of C41")]
+    C41J1_L1081["<b>C41J1</b><br>Justification of C41"]
+    C41A1_L1084["<b>C41A1</b><br>Assumption of C41<br>ASSUMED"]
+    C41E2_L1085[("<b>C41E2</b>&nbsp;↗<br>Evidence 2 of C41")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C41top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41top"
-    click C41Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c41xctx"
-    click C41Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41esh"
-    click C41Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c41sass"
-    click C41G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g1"
-    click C41G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g2"
-    click C41G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g3"
-    click C41E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e1"
-    click C41J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c41j1"
-    click C41A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c41a1"
-    click C41E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
+    click C41top_L1073 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41top"
+    click C41Xctx_L1074 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c41xctx"
+    click C41Esh_L1075 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41esh"
+    click C41Sass_L1076 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c41sass"
+    click C41G1_L1077 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g1"
+    click C41G2_L1080 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g2"
+    click C41G3_L1083 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g3"
+    click C41E1_L1078 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e1"
+    click C41J1_L1081 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c41j1"
+    click C41A1_L1084 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c41a1"
+    click C41E2_L1085 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
 
-    BottomPadding[ ]:::invisible ~~~ C41Xctx
-    C41E1 --> C41G1
-    C41J1 --> C41G2
-    C41A1 --- Dot1
-    C41E2 --- Dot1
-    Dot1 --> C41G3
-    C41Esh --- Dot2
-    C41G1 --- Dot2
-    C41G2 --- Dot2
-    C41G3 --- Dot2
-    C41Sass --- Dot2
-    Dot2 --> C41top
-    C41Xctx --o C41top
+    BottomPadding[ ]:::invisible ~~~ C41Xctx_L1074
+    C41E1_L1078 --> C41G1_L1077
+    C41J1_L1081 --> C41G2_L1080
+    C41A1_L1084 --- Dot1
+    C41E2_L1085 --- Dot1
+    Dot1 --> C41G3_L1083
+    C41Esh_L1075 --- Dot2
+    C41G1_L1077 --- Dot2
+    C41G2_L1080 --- Dot2
+    C41G3_L1083 --- Dot2
+    C41Sass_L1076 --- Dot2
+    Dot2 --> C41top_L1073
+    C41Xctx_L1074 --o C41top_L1073
 ```
 
 ### Package C42top
@@ -3690,44 +3709,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C42top["<b>C42top</b><br>Statement of C42top"]
-    C42Xctx[("<b>C42Xctx</b>&nbsp;↗<br>Context of C42Xctx")]
-    C42Esh[("<b>C42Esh</b>&nbsp;↗<br>Shared evidence of C42")]
-    C42Sass[/"<b>C42Sass</b><br>Assertion strategy of C42"/]
-    C42G1["<b>C42G1</b><br>Sub-claim 1 of C42"]
-    C42G2["<b>C42G2</b><br>Sub-claim 2 of C42"]
-    C42G3["<b>C42G3</b><br>Sub-claim 3 of C42"]
-    C42E1[("<b>C42E1</b>&nbsp;↗<br>Evidence 1 of C42")]
-    C42J1["<b>C42J1</b><br>Justification of C42"]
-    C42A1["<b>C42A1</b><br>Assumption of C42<br>ASSUMED"]
-    C42E2[("<b>C42E2</b>&nbsp;↗<br>Evidence 2 of C42")]
+    C42top_L1088["<b>C42top</b><br>Statement of C42top"]
+    C42Xctx_L1089[("<b>C42Xctx</b>&nbsp;↗<br>Context of C42Xctx")]
+    C42Esh_L1090[("<b>C42Esh</b>&nbsp;↗<br>Shared evidence of C42")]
+    C42Sass_L1091[/"<b>C42Sass</b><br>Assertion strategy of C42"/]
+    C42G1_L1092["<b>C42G1</b><br>Sub-claim 1 of C42"]
+    C42G2_L1095["<b>C42G2</b><br>Sub-claim 2 of C42"]
+    C42G3_L1098["<b>C42G3</b><br>Sub-claim 3 of C42"]
+    C42E1_L1093[("<b>C42E1</b>&nbsp;↗<br>Evidence 1 of C42")]
+    C42J1_L1096["<b>C42J1</b><br>Justification of C42"]
+    C42A1_L1099["<b>C42A1</b><br>Assumption of C42<br>ASSUMED"]
+    C42E2_L1100[("<b>C42E2</b>&nbsp;↗<br>Evidence 2 of C42")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C42top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42top"
-    click C42Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c42xctx"
-    click C42Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42esh"
-    click C42Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c42sass"
-    click C42G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g1"
-    click C42G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g2"
-    click C42G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g3"
-    click C42E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e1"
-    click C42J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c42j1"
-    click C42A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c42a1"
-    click C42E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
+    click C42top_L1088 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42top"
+    click C42Xctx_L1089 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c42xctx"
+    click C42Esh_L1090 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42esh"
+    click C42Sass_L1091 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c42sass"
+    click C42G1_L1092 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g1"
+    click C42G2_L1095 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g2"
+    click C42G3_L1098 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g3"
+    click C42E1_L1093 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e1"
+    click C42J1_L1096 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c42j1"
+    click C42A1_L1099 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c42a1"
+    click C42E2_L1100 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
 
-    BottomPadding[ ]:::invisible ~~~ C42Xctx
-    C42E1 --> C42G1
-    C42J1 --> C42G2
-    C42A1 --- Dot1
-    C42E2 --- Dot1
-    Dot1 --> C42G3
-    C42Esh --- Dot2
-    C42G1 --- Dot2
-    C42G2 --- Dot2
-    C42G3 --- Dot2
-    C42Sass --- Dot2
-    Dot2 --> C42top
-    C42Xctx --o C42top
+    BottomPadding[ ]:::invisible ~~~ C42Xctx_L1089
+    C42E1_L1093 --> C42G1_L1092
+    C42J1_L1096 --> C42G2_L1095
+    C42A1_L1099 --- Dot1
+    C42E2_L1100 --- Dot1
+    Dot1 --> C42G3_L1098
+    C42Esh_L1090 --- Dot2
+    C42G1_L1092 --- Dot2
+    C42G2_L1095 --- Dot2
+    C42G3_L1098 --- Dot2
+    C42Sass_L1091 --- Dot2
+    Dot2 --> C42top_L1088
+    C42Xctx_L1089 --o C42top_L1088
 ```
 
 ### Package C43top
@@ -3747,44 +3766,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C43top["<b>C43top</b><br>Statement of C43top"]
-    C43Xctx[("<b>C43Xctx</b>&nbsp;↗<br>Context of C43Xctx")]
-    C43Esh[("<b>C43Esh</b>&nbsp;↗<br>Shared evidence of C43")]
-    C43Sass[/"<b>C43Sass</b><br>Assertion strategy of C43"/]
-    C43G1["<b>C43G1</b><br>Sub-claim 1 of C43"]
-    C43G2["<b>C43G2</b><br>Sub-claim 2 of C43"]
-    C43G3["<b>C43G3</b><br>Sub-claim 3 of C43"]
-    C43E1[("<b>C43E1</b>&nbsp;↗<br>Evidence 1 of C43")]
-    C43J1["<b>C43J1</b><br>Justification of C43"]
-    C43A1["<b>C43A1</b><br>Assumption of C43<br>ASSUMED"]
-    C43E2[("<b>C43E2</b>&nbsp;↗<br>Evidence 2 of C43")]
+    C43top_L1103["<b>C43top</b><br>Statement of C43top"]
+    C43Xctx_L1104[("<b>C43Xctx</b>&nbsp;↗<br>Context of C43Xctx")]
+    C43Esh_L1105[("<b>C43Esh</b>&nbsp;↗<br>Shared evidence of C43")]
+    C43Sass_L1106[/"<b>C43Sass</b><br>Assertion strategy of C43"/]
+    C43G1_L1107["<b>C43G1</b><br>Sub-claim 1 of C43"]
+    C43G2_L1110["<b>C43G2</b><br>Sub-claim 2 of C43"]
+    C43G3_L1113["<b>C43G3</b><br>Sub-claim 3 of C43"]
+    C43E1_L1108[("<b>C43E1</b>&nbsp;↗<br>Evidence 1 of C43")]
+    C43J1_L1111["<b>C43J1</b><br>Justification of C43"]
+    C43A1_L1114["<b>C43A1</b><br>Assumption of C43<br>ASSUMED"]
+    C43E2_L1115[("<b>C43E2</b>&nbsp;↗<br>Evidence 2 of C43")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C43top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43top"
-    click C43Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c43xctx"
-    click C43Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43esh"
-    click C43Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c43sass"
-    click C43G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g1"
-    click C43G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g2"
-    click C43G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g3"
-    click C43E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e1"
-    click C43J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c43j1"
-    click C43A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c43a1"
-    click C43E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
+    click C43top_L1103 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43top"
+    click C43Xctx_L1104 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c43xctx"
+    click C43Esh_L1105 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43esh"
+    click C43Sass_L1106 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c43sass"
+    click C43G1_L1107 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g1"
+    click C43G2_L1110 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g2"
+    click C43G3_L1113 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g3"
+    click C43E1_L1108 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e1"
+    click C43J1_L1111 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c43j1"
+    click C43A1_L1114 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c43a1"
+    click C43E2_L1115 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
 
-    BottomPadding[ ]:::invisible ~~~ C43Xctx
-    C43E1 --> C43G1
-    C43J1 --> C43G2
-    C43A1 --- Dot1
-    C43E2 --- Dot1
-    Dot1 --> C43G3
-    C43Esh --- Dot2
-    C43G1 --- Dot2
-    C43G2 --- Dot2
-    C43G3 --- Dot2
-    C43Sass --- Dot2
-    Dot2 --> C43top
-    C43Xctx --o C43top
+    BottomPadding[ ]:::invisible ~~~ C43Xctx_L1104
+    C43E1_L1108 --> C43G1_L1107
+    C43J1_L1111 --> C43G2_L1110
+    C43A1_L1114 --- Dot1
+    C43E2_L1115 --- Dot1
+    Dot1 --> C43G3_L1113
+    C43Esh_L1105 --- Dot2
+    C43G1_L1107 --- Dot2
+    C43G2_L1110 --- Dot2
+    C43G3_L1113 --- Dot2
+    C43Sass_L1106 --- Dot2
+    Dot2 --> C43top_L1103
+    C43Xctx_L1104 --o C43top_L1103
 ```
 
 ### Package C44top
@@ -3804,44 +3823,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C44top["<b>C44top</b><br>Statement of C44top"]
-    C44Xctx[("<b>C44Xctx</b>&nbsp;↗<br>Context of C44Xctx")]
-    C44Esh[("<b>C44Esh</b>&nbsp;↗<br>Shared evidence of C44")]
-    C44Sass[/"<b>C44Sass</b><br>Assertion strategy of C44"/]
-    C44G1["<b>C44G1</b><br>Sub-claim 1 of C44"]
-    C44G2["<b>C44G2</b><br>Sub-claim 2 of C44"]
-    C44G3["<b>C44G3</b><br>Sub-claim 3 of C44"]
-    C44E1[("<b>C44E1</b>&nbsp;↗<br>Evidence 1 of C44")]
-    C44J1["<b>C44J1</b><br>Justification of C44"]
-    C44A1["<b>C44A1</b><br>Assumption of C44<br>ASSUMED"]
-    C44E2[("<b>C44E2</b>&nbsp;↗<br>Evidence 2 of C44")]
+    C44top_L1118["<b>C44top</b><br>Statement of C44top"]
+    C44Xctx_L1119[("<b>C44Xctx</b>&nbsp;↗<br>Context of C44Xctx")]
+    C44Esh_L1120[("<b>C44Esh</b>&nbsp;↗<br>Shared evidence of C44")]
+    C44Sass_L1121[/"<b>C44Sass</b><br>Assertion strategy of C44"/]
+    C44G1_L1122["<b>C44G1</b><br>Sub-claim 1 of C44"]
+    C44G2_L1125["<b>C44G2</b><br>Sub-claim 2 of C44"]
+    C44G3_L1128["<b>C44G3</b><br>Sub-claim 3 of C44"]
+    C44E1_L1123[("<b>C44E1</b>&nbsp;↗<br>Evidence 1 of C44")]
+    C44J1_L1126["<b>C44J1</b><br>Justification of C44"]
+    C44A1_L1129["<b>C44A1</b><br>Assumption of C44<br>ASSUMED"]
+    C44E2_L1130[("<b>C44E2</b>&nbsp;↗<br>Evidence 2 of C44")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C44top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44top"
-    click C44Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c44xctx"
-    click C44Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44esh"
-    click C44Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c44sass"
-    click C44G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g1"
-    click C44G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g2"
-    click C44G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g3"
-    click C44E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e1"
-    click C44J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c44j1"
-    click C44A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c44a1"
-    click C44E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
+    click C44top_L1118 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44top"
+    click C44Xctx_L1119 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c44xctx"
+    click C44Esh_L1120 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44esh"
+    click C44Sass_L1121 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c44sass"
+    click C44G1_L1122 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g1"
+    click C44G2_L1125 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g2"
+    click C44G3_L1128 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g3"
+    click C44E1_L1123 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e1"
+    click C44J1_L1126 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c44j1"
+    click C44A1_L1129 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c44a1"
+    click C44E2_L1130 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
 
-    BottomPadding[ ]:::invisible ~~~ C44Xctx
-    C44E1 --> C44G1
-    C44J1 --> C44G2
-    C44A1 --- Dot1
-    C44E2 --- Dot1
-    Dot1 --> C44G3
-    C44Esh --- Dot2
-    C44G1 --- Dot2
-    C44G2 --- Dot2
-    C44G3 --- Dot2
-    C44Sass --- Dot2
-    Dot2 --> C44top
-    C44Xctx --o C44top
+    BottomPadding[ ]:::invisible ~~~ C44Xctx_L1119
+    C44E1_L1123 --> C44G1_L1122
+    C44J1_L1126 --> C44G2_L1125
+    C44A1_L1129 --- Dot1
+    C44E2_L1130 --- Dot1
+    Dot1 --> C44G3_L1128
+    C44Esh_L1120 --- Dot2
+    C44G1_L1122 --- Dot2
+    C44G2_L1125 --- Dot2
+    C44G3_L1128 --- Dot2
+    C44Sass_L1121 --- Dot2
+    Dot2 --> C44top_L1118
+    C44Xctx_L1119 --o C44top_L1118
 ```
 
 ### Package C45top
@@ -3861,44 +3880,44 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C45top["<b>C45top</b><br>Statement of C45top"]
-    C45Xctx[("<b>C45Xctx</b>&nbsp;↗<br>Context of C45Xctx")]
-    C45Esh[("<b>C45Esh</b>&nbsp;↗<br>Shared evidence of C45")]
-    C45Sass[/"<b>C45Sass</b><br>Assertion strategy of C45"/]
-    C45G1["<b>C45G1</b><br>Sub-claim 1 of C45"]
-    C45G2["<b>C45G2</b><br>Sub-claim 2 of C45"]
-    C45G3["<b>C45G3</b><br>Sub-claim 3 of C45"]
-    C45E1[("<b>C45E1</b>&nbsp;↗<br>Evidence 1 of C45")]
-    C45J1["<b>C45J1</b><br>Justification of C45"]
-    C45A1["<b>C45A1</b><br>Assumption of C45<br>ASSUMED"]
-    C45E2[("<b>C45E2</b>&nbsp;↗<br>Evidence 2 of C45")]
+    C45top_L1133["<b>C45top</b><br>Statement of C45top"]
+    C45Xctx_L1134[("<b>C45Xctx</b>&nbsp;↗<br>Context of C45Xctx")]
+    C45Esh_L1135[("<b>C45Esh</b>&nbsp;↗<br>Shared evidence of C45")]
+    C45Sass_L1136[/"<b>C45Sass</b><br>Assertion strategy of C45"/]
+    C45G1_L1137["<b>C45G1</b><br>Sub-claim 1 of C45"]
+    C45G2_L1140["<b>C45G2</b><br>Sub-claim 2 of C45"]
+    C45G3_L1143["<b>C45G3</b><br>Sub-claim 3 of C45"]
+    C45E1_L1138[("<b>C45E1</b>&nbsp;↗<br>Evidence 1 of C45")]
+    C45J1_L1141["<b>C45J1</b><br>Justification of C45"]
+    C45A1_L1144["<b>C45A1</b><br>Assumption of C45<br>ASSUMED"]
+    C45E2_L1145[("<b>C45E2</b>&nbsp;↗<br>Evidence 2 of C45")]
     Dot1((" ")):::sacmDot
     Dot2((" ")):::sacmDot
-    click C45top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45top"
-    click C45Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c45xctx"
-    click C45Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45esh"
-    click C45Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c45sass"
-    click C45G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g1"
-    click C45G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g2"
-    click C45G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g3"
-    click C45E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e1"
-    click C45J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c45j1"
-    click C45A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c45a1"
-    click C45E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
+    click C45top_L1133 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45top"
+    click C45Xctx_L1134 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c45xctx"
+    click C45Esh_L1135 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45esh"
+    click C45Sass_L1136 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c45sass"
+    click C45G1_L1137 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g1"
+    click C45G2_L1140 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g2"
+    click C45G3_L1143 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g3"
+    click C45E1_L1138 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e1"
+    click C45J1_L1141 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c45j1"
+    click C45A1_L1144 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c45a1"
+    click C45E2_L1145 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
 
-    BottomPadding[ ]:::invisible ~~~ C45Xctx
-    C45E1 --> C45G1
-    C45J1 --> C45G2
-    C45A1 --- Dot1
-    C45E2 --- Dot1
-    Dot1 --> C45G3
-    C45Esh --- Dot2
-    C45G1 --- Dot2
-    C45G2 --- Dot2
-    C45G3 --- Dot2
-    C45Sass --- Dot2
-    Dot2 --> C45top
-    C45Xctx --o C45top
+    BottomPadding[ ]:::invisible ~~~ C45Xctx_L1134
+    C45E1_L1138 --> C45G1_L1137
+    C45J1_L1141 --> C45G2_L1140
+    C45A1_L1144 --- Dot1
+    C45E2_L1145 --- Dot1
+    Dot1 --> C45G3_L1143
+    C45Esh_L1135 --- Dot2
+    C45G1_L1137 --- Dot2
+    C45G2_L1140 --- Dot2
+    C45G3_L1143 --- Dot2
+    C45Sass_L1136 --- Dot2
+    Dot2 --> C45top_L1133
+    C45Xctx_L1134 --o C45top_L1133
 ```
 <!-- end verocase -->
 
@@ -3921,241 +3940,241 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    G1["<b>G1</b><br>Statement of G1"]
-    Xscope(["<b>Xscope</b><br>Scope of Sys"])
-    Asys("<b>Asys</b>&nbsp;Ⓐ<br>Assumption of Sys")
-    Esys1(("<b>Esys1</b><br>System-level evidence"))
-    Sdecomp[/"<b>Sdecomp</b><br>Decompose by large area"/]
-    Scomps[/"<b>Scomps</b><br>Argue by component"/]
-    L1top[["<b>L1top</b><br>Statement of L1top"]]
-    L2top[["<b>L2top</b><br>Statement of L2top"]]
-    L3top[["<b>L3top</b><br>Statement of L3top"]]
-    L4top[["<b>L4top</b><br>Statement of L4top"]]
-    L5top[["<b>L5top</b><br>Statement of L5top"]]
-    C01top[["<b>C01top</b><br>Statement of C01top"]]
-    C02top[["<b>C02top</b><br>Statement of C02top"]]
-    C03top[["<b>C03top</b><br>Statement of C03top"]]
-    SynConnect_00000000((" ")):::connector
-    C43top[["<b>C43top</b><br>Statement of C43top"]]
-    C44top[["<b>C44top</b><br>Statement of C44top"]]
-    C45top[["<b>C45top</b><br>Statement of C45top"]]
-    C04top[["<b>C04top</b><br>Statement of C04top"]]
-    C05top[["<b>C05top</b><br>Statement of C05top"]]
-    C06top[["<b>C06top</b><br>Statement of C06top"]]
-    SynConnect_00000001((" ")):::connector
-    C40top[["<b>C40top</b><br>Statement of C40top"]]
-    C41top[["<b>C41top</b><br>Statement of C41top"]]
-    C42top[["<b>C42top</b><br>Statement of C42top"]]
-    C07top[["<b>C07top</b><br>Statement of C07top"]]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    SynConnect_00000002((" ")):::connector
-    C37top[["<b>C37top</b><br>Statement of C37top"]]
-    C38top[["<b>C38top</b><br>Statement of C38top"]]
-    C39top[["<b>C39top</b><br>Statement of C39top"]]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C12top[["<b>C12top</b><br>Statement of C12top"]]
-    SynConnect_00000003((" ")):::connector
-    C34top[["<b>C34top</b><br>Statement of C34top"]]
-    C35top[["<b>C35top</b><br>Statement of C35top"]]
-    C36top[["<b>C36top</b><br>Statement of C36top"]]
-    C13top[["<b>C13top</b><br>Statement of C13top"]]
-    C14top[["<b>C14top</b><br>Statement of C14top"]]
-    C15top[["<b>C15top</b><br>Statement of C15top"]]
-    SynConnect_00000004((" ")):::connector
-    C31top[["<b>C31top</b><br>Statement of C31top"]]
-    C32top[["<b>C32top</b><br>Statement of C32top"]]
-    C33top[["<b>C33top</b><br>Statement of C33top"]]
-    C16top[["<b>C16top</b><br>Statement of C16top"]]
-    C17top[["<b>C17top</b><br>Statement of C17top"]]
-    C18top[["<b>C18top</b><br>Statement of C18top"]]
-    SynConnect_00000005((" ")):::connector
-    C28top[["<b>C28top</b><br>Statement of C28top"]]
-    C29top[["<b>C29top</b><br>Statement of C29top"]]
-    C30top[["<b>C30top</b><br>Statement of C30top"]]
-    C19top[["<b>C19top</b><br>Statement of C19top"]]
-    C20top[["<b>C20top</b><br>Statement of C20top"]]
-    C21top[["<b>C21top</b><br>Statement of C21top"]]
-    SynConnect_00000006((" ")):::connector
-    C25top[["<b>C25top</b><br>Statement of C25top"]]
-    C26top[["<b>C26top</b><br>Statement of C26top"]]
-    C27top[["<b>C27top</b><br>Statement of C27top"]]
-    C22top[["<b>C22top</b><br>Statement of C22top"]]
-    C23top[["<b>C23top</b><br>Statement of C23top"]]
-    C24top[["<b>C24top</b><br>Statement of C24top"]]
-    click G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-g1"
-    click Xscope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-xscope"
-    click Asys "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-asys"
-    click Esys1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-esys1"
-    click Sdecomp "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-sdecomp"
-    click Scomps "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-scomps"
-    click L1top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l1top"
-    click L2top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l2top"
-    click L3top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l3top"
-    click L4top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l4top"
-    click L5top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l5top"
-    click C01top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c01top"
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
-    click C43top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c43top"
-    click C44top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c44top"
-    click C45top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c45top"
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
-    click C41top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c41top"
-    click C42top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c42top"
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
-    click C34top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c34top"
-    click C35top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c35top"
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
-    click C13top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c13top"
-    click C14top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c14top"
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
-    click C28top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c28top"
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
-    click C20top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c20top"
-    click C21top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c21top"
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
-    click C27top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c27top"
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
+    G1_L1["<b>G1</b><br>Statement of G1"]
+    Xscope_L2(["<b>Xscope</b><br>Scope of Sys"])
+    Asys_L3("<b>Asys</b>&nbsp;Ⓐ<br>Assumption of Sys")
+    Esys1_L4(("<b>Esys1</b><br>System-level evidence"))
+    Sdecomp_L5[/"<b>Sdecomp</b><br>Decompose by large area"/]
+    Scomps_L11[/"<b>Scomps</b><br>Argue by component"/]
+    L1top_L6[["<b>L1top</b><br>Statement of L1top"]]
+    L2top_L7[["<b>L2top</b><br>Statement of L2top"]]
+    L3top_L8[["<b>L3top</b><br>Statement of L3top"]]
+    L4top_L9[["<b>L4top</b><br>Statement of L4top"]]
+    L5top_L10[["<b>L5top</b><br>Statement of L5top"]]
+    C01top_L12[["<b>C01top</b><br>Statement of C01top"]]
+    C02top_L13[["<b>C02top</b><br>Statement of C02top"]]
+    C03top_L14[["<b>C03top</b><br>Statement of C03top"]]
+    _Connector_00000000((" ")):::connector
+    C43top_L54[["<b>C43top</b><br>Statement of C43top"]]
+    C44top_L55[["<b>C44top</b><br>Statement of C44top"]]
+    C45top_L56[["<b>C45top</b><br>Statement of C45top"]]
+    C04top_L15[["<b>C04top</b><br>Statement of C04top"]]
+    C05top_L16[["<b>C05top</b><br>Statement of C05top"]]
+    C06top_L17[["<b>C06top</b><br>Statement of C06top"]]
+    _Connector_00000001((" ")):::connector
+    C40top_L51[["<b>C40top</b><br>Statement of C40top"]]
+    C41top_L52[["<b>C41top</b><br>Statement of C41top"]]
+    C42top_L53[["<b>C42top</b><br>Statement of C42top"]]
+    C07top_L18[["<b>C07top</b><br>Statement of C07top"]]
+    C08top_L19[["<b>C08top</b><br>Statement of C08top"]]
+    C09top_L20[["<b>C09top</b><br>Statement of C09top"]]
+    _Connector_00000002((" ")):::connector
+    C37top_L48[["<b>C37top</b><br>Statement of C37top"]]
+    C38top_L49[["<b>C38top</b><br>Statement of C38top"]]
+    C39top_L50[["<b>C39top</b><br>Statement of C39top"]]
+    C10top_L21[["<b>C10top</b><br>Statement of C10top"]]
+    C11top_L22[["<b>C11top</b><br>Statement of C11top"]]
+    C12top_L23[["<b>C12top</b><br>Statement of C12top"]]
+    _Connector_00000003((" ")):::connector
+    C34top_L45[["<b>C34top</b><br>Statement of C34top"]]
+    C35top_L46[["<b>C35top</b><br>Statement of C35top"]]
+    C36top_L47[["<b>C36top</b><br>Statement of C36top"]]
+    C13top_L24[["<b>C13top</b><br>Statement of C13top"]]
+    C14top_L25[["<b>C14top</b><br>Statement of C14top"]]
+    C15top_L26[["<b>C15top</b><br>Statement of C15top"]]
+    _Connector_00000004((" ")):::connector
+    C31top_L42[["<b>C31top</b><br>Statement of C31top"]]
+    C32top_L43[["<b>C32top</b><br>Statement of C32top"]]
+    C33top_L44[["<b>C33top</b><br>Statement of C33top"]]
+    C16top_L27[["<b>C16top</b><br>Statement of C16top"]]
+    C17top_L28[["<b>C17top</b><br>Statement of C17top"]]
+    C18top_L29[["<b>C18top</b><br>Statement of C18top"]]
+    _Connector_00000005((" ")):::connector
+    C28top_L39[["<b>C28top</b><br>Statement of C28top"]]
+    C29top_L40[["<b>C29top</b><br>Statement of C29top"]]
+    C30top_L41[["<b>C30top</b><br>Statement of C30top"]]
+    C19top_L30[["<b>C19top</b><br>Statement of C19top"]]
+    C20top_L31[["<b>C20top</b><br>Statement of C20top"]]
+    C21top_L32[["<b>C21top</b><br>Statement of C21top"]]
+    _Connector_00000006((" ")):::connector
+    C25top_L36[["<b>C25top</b><br>Statement of C25top"]]
+    C26top_L37[["<b>C26top</b><br>Statement of C26top"]]
+    C27top_L38[["<b>C27top</b><br>Statement of C27top"]]
+    C22top_L33[["<b>C22top</b><br>Statement of C22top"]]
+    C23top_L34[["<b>C23top</b><br>Statement of C23top"]]
+    C24top_L35[["<b>C24top</b><br>Statement of C24top"]]
+    click G1_L1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-g1"
+    click Xscope_L2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-xscope"
+    click Asys_L3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-asys"
+    click Esys1_L4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-esys1"
+    click Sdecomp_L5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-sdecomp"
+    click Scomps_L11 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-scomps"
+    click L1top_L6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l1top"
+    click L2top_L7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l2top"
+    click L3top_L8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l3top"
+    click L4top_L9 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l4top"
+    click L5top_L10 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-l5top"
+    click C01top_L12 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c01top"
+    click C02top_L13 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
+    click C03top_L14 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
+    click C43top_L54 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c43top"
+    click C44top_L55 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c44top"
+    click C45top_L56 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c45top"
+    click C04top_L15 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
+    click C05top_L16 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
+    click C06top_L17 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
+    click C40top_L51 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
+    click C41top_L52 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c41top"
+    click C42top_L53 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c42top"
+    click C07top_L18 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
+    click C08top_L19 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C09top_L20 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click C37top_L48 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
+    click C38top_L49 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
+    click C39top_L50 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
+    click C10top_L21 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click C11top_L22 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C12top_L23 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
+    click C34top_L45 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c34top"
+    click C35top_L46 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c35top"
+    click C36top_L47 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
+    click C13top_L24 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c13top"
+    click C14top_L25 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c14top"
+    click C15top_L26 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
+    click C31top_L42 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
+    click C32top_L43 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
+    click C33top_L44 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
+    click C16top_L27 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
+    click C17top_L28 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
+    click C18top_L29 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
+    click C28top_L39 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c28top"
+    click C29top_L40 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
+    click C30top_L41 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
+    click C19top_L30 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
+    click C20top_L31 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c20top"
+    click C21top_L32 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c21top"
+    click C25top_L36 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
+    click C26top_L37 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
+    click C27top_L38 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c27top"
+    click C22top_L33 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
+    click C23top_L34 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
+    click C24top_L35 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
 
-    G1 --o Xscope
-    G1 --o Asys
-    G1 --> Esys1
-    G1 --> Sdecomp
-    Sdecomp --> L1top
-    Sdecomp --> L2top
-    Sdecomp --> L3top
-    Sdecomp --> L4top
-    Sdecomp --> L5top
-    G1 --> Scomps
-    Scomps --> C01top
-    Scomps --> C02top
-    Scomps --> C03top
-    Scomps --> SynConnect_00000000
-    SynConnect_00000000 --> C04top
-    SynConnect_00000000 --> C05top
-    SynConnect_00000000 --> C06top
-    SynConnect_00000000 --> SynConnect_00000001
-    SynConnect_00000001 --> C07top
-    SynConnect_00000001 --> C08top
-    SynConnect_00000001 --> C09top
-    SynConnect_00000001 --> SynConnect_00000002
-    SynConnect_00000002 --> C10top
-    SynConnect_00000002 --> C11top
-    SynConnect_00000002 --> C12top
-    SynConnect_00000002 --> SynConnect_00000003
-    SynConnect_00000003 --> C13top
-    SynConnect_00000003 --> C14top
-    SynConnect_00000003 --> C15top
-    SynConnect_00000003 --> SynConnect_00000004
-    SynConnect_00000004 --> C16top
-    SynConnect_00000004 --> C17top
-    SynConnect_00000004 --> C18top
-    SynConnect_00000004 --> SynConnect_00000005
-    SynConnect_00000005 --> C19top
-    SynConnect_00000005 --> C20top
-    SynConnect_00000005 --> C21top
-    SynConnect_00000005 --> SynConnect_00000006
-    SynConnect_00000006 --> C22top
-    SynConnect_00000006 --> C23top
-    SynConnect_00000006 --> C24top
-    SynConnect_00000005 --> C25top
-    SynConnect_00000005 --> C26top
-    SynConnect_00000005 --> C27top
-    SynConnect_00000004 --> C28top
-    SynConnect_00000004 --> C29top
-    SynConnect_00000004 --> C30top
-    SynConnect_00000003 --> C31top
-    SynConnect_00000003 --> C32top
-    SynConnect_00000003 --> C33top
-    SynConnect_00000002 --> C34top
-    SynConnect_00000002 --> C35top
-    SynConnect_00000002 --> C36top
-    SynConnect_00000001 --> C37top
-    SynConnect_00000001 --> C38top
-    SynConnect_00000001 --> C39top
-    SynConnect_00000000 --> C40top
-    SynConnect_00000000 --> C41top
-    SynConnect_00000000 --> C42top
-    Scomps --> C43top
-    Scomps --> C44top
-    Scomps --> C45top
-    Xscope ~~~ BottomPadding[ ]:::invisible
-    Asys ~~~ BottomPadding
-    Esys1 ~~~ BottomPadding
-    L1top ~~~ BottomPadding
-    L2top ~~~ BottomPadding
-    L3top ~~~ BottomPadding
-    L4top ~~~ BottomPadding
-    L5top ~~~ BottomPadding
-    C01top ~~~ BottomPadding
-    C02top ~~~ BottomPadding
-    C03top ~~~ BottomPadding
-    C04top ~~~ BottomPadding
-    C05top ~~~ BottomPadding
-    C06top ~~~ BottomPadding
-    C07top ~~~ BottomPadding
-    C08top ~~~ BottomPadding
-    C09top ~~~ BottomPadding
-    C10top ~~~ BottomPadding
-    C11top ~~~ BottomPadding
-    C12top ~~~ BottomPadding
-    C13top ~~~ BottomPadding
-    C14top ~~~ BottomPadding
-    C15top ~~~ BottomPadding
-    C16top ~~~ BottomPadding
-    C17top ~~~ BottomPadding
-    C18top ~~~ BottomPadding
-    C19top ~~~ BottomPadding
-    C20top ~~~ BottomPadding
-    C21top ~~~ BottomPadding
-    C22top ~~~ BottomPadding
-    C23top ~~~ BottomPadding
-    C24top ~~~ BottomPadding
-    C25top ~~~ BottomPadding
-    C26top ~~~ BottomPadding
-    C27top ~~~ BottomPadding
-    C28top ~~~ BottomPadding
-    C29top ~~~ BottomPadding
-    C30top ~~~ BottomPadding
-    C31top ~~~ BottomPadding
-    C32top ~~~ BottomPadding
-    C33top ~~~ BottomPadding
-    C34top ~~~ BottomPadding
-    C35top ~~~ BottomPadding
-    C36top ~~~ BottomPadding
-    C37top ~~~ BottomPadding
-    C38top ~~~ BottomPadding
-    C39top ~~~ BottomPadding
-    C40top ~~~ BottomPadding
-    C41top ~~~ BottomPadding
-    C42top ~~~ BottomPadding
-    C43top ~~~ BottomPadding
-    C44top ~~~ BottomPadding
-    C45top ~~~ BottomPadding
+    G1_L1 --o Xscope_L2
+    G1_L1 --o Asys_L3
+    G1_L1 --> Esys1_L4
+    G1_L1 --> Sdecomp_L5
+    Sdecomp_L5 --> L1top_L6
+    Sdecomp_L5 --> L2top_L7
+    Sdecomp_L5 --> L3top_L8
+    Sdecomp_L5 --> L4top_L9
+    Sdecomp_L5 --> L5top_L10
+    G1_L1 --> Scomps_L11
+    Scomps_L11 --> C01top_L12
+    Scomps_L11 --> C02top_L13
+    Scomps_L11 --> C03top_L14
+    Scomps_L11 --> _Connector_00000000
+    _Connector_00000000 --> C04top_L15
+    _Connector_00000000 --> C05top_L16
+    _Connector_00000000 --> C06top_L17
+    _Connector_00000000 --> _Connector_00000001
+    _Connector_00000001 --> C07top_L18
+    _Connector_00000001 --> C08top_L19
+    _Connector_00000001 --> C09top_L20
+    _Connector_00000001 --> _Connector_00000002
+    _Connector_00000002 --> C10top_L21
+    _Connector_00000002 --> C11top_L22
+    _Connector_00000002 --> C12top_L23
+    _Connector_00000002 --> _Connector_00000003
+    _Connector_00000003 --> C13top_L24
+    _Connector_00000003 --> C14top_L25
+    _Connector_00000003 --> C15top_L26
+    _Connector_00000003 --> _Connector_00000004
+    _Connector_00000004 --> C16top_L27
+    _Connector_00000004 --> C17top_L28
+    _Connector_00000004 --> C18top_L29
+    _Connector_00000004 --> _Connector_00000005
+    _Connector_00000005 --> C19top_L30
+    _Connector_00000005 --> C20top_L31
+    _Connector_00000005 --> C21top_L32
+    _Connector_00000005 --> _Connector_00000006
+    _Connector_00000006 --> C22top_L33
+    _Connector_00000006 --> C23top_L34
+    _Connector_00000006 --> C24top_L35
+    _Connector_00000005 --> C25top_L36
+    _Connector_00000005 --> C26top_L37
+    _Connector_00000005 --> C27top_L38
+    _Connector_00000004 --> C28top_L39
+    _Connector_00000004 --> C29top_L40
+    _Connector_00000004 --> C30top_L41
+    _Connector_00000003 --> C31top_L42
+    _Connector_00000003 --> C32top_L43
+    _Connector_00000003 --> C33top_L44
+    _Connector_00000002 --> C34top_L45
+    _Connector_00000002 --> C35top_L46
+    _Connector_00000002 --> C36top_L47
+    _Connector_00000001 --> C37top_L48
+    _Connector_00000001 --> C38top_L49
+    _Connector_00000001 --> C39top_L50
+    _Connector_00000000 --> C40top_L51
+    _Connector_00000000 --> C41top_L52
+    _Connector_00000000 --> C42top_L53
+    Scomps_L11 --> C43top_L54
+    Scomps_L11 --> C44top_L55
+    Scomps_L11 --> C45top_L56
+    Xscope_L2 ~~~ BottomPadding[ ]:::invisible
+    Asys_L3 ~~~ BottomPadding
+    Esys1_L4 ~~~ BottomPadding
+    L1top_L6 ~~~ BottomPadding
+    L2top_L7 ~~~ BottomPadding
+    L3top_L8 ~~~ BottomPadding
+    L4top_L9 ~~~ BottomPadding
+    L5top_L10 ~~~ BottomPadding
+    C01top_L12 ~~~ BottomPadding
+    C02top_L13 ~~~ BottomPadding
+    C03top_L14 ~~~ BottomPadding
+    C04top_L15 ~~~ BottomPadding
+    C05top_L16 ~~~ BottomPadding
+    C06top_L17 ~~~ BottomPadding
+    C07top_L18 ~~~ BottomPadding
+    C08top_L19 ~~~ BottomPadding
+    C09top_L20 ~~~ BottomPadding
+    C10top_L21 ~~~ BottomPadding
+    C11top_L22 ~~~ BottomPadding
+    C12top_L23 ~~~ BottomPadding
+    C13top_L24 ~~~ BottomPadding
+    C14top_L25 ~~~ BottomPadding
+    C15top_L26 ~~~ BottomPadding
+    C16top_L27 ~~~ BottomPadding
+    C17top_L28 ~~~ BottomPadding
+    C18top_L29 ~~~ BottomPadding
+    C19top_L30 ~~~ BottomPadding
+    C20top_L31 ~~~ BottomPadding
+    C21top_L32 ~~~ BottomPadding
+    C22top_L33 ~~~ BottomPadding
+    C23top_L34 ~~~ BottomPadding
+    C24top_L35 ~~~ BottomPadding
+    C25top_L36 ~~~ BottomPadding
+    C26top_L37 ~~~ BottomPadding
+    C27top_L38 ~~~ BottomPadding
+    C28top_L39 ~~~ BottomPadding
+    C29top_L40 ~~~ BottomPadding
+    C30top_L41 ~~~ BottomPadding
+    C31top_L42 ~~~ BottomPadding
+    C32top_L43 ~~~ BottomPadding
+    C33top_L44 ~~~ BottomPadding
+    C34top_L45 ~~~ BottomPadding
+    C35top_L46 ~~~ BottomPadding
+    C36top_L47 ~~~ BottomPadding
+    C37top_L48 ~~~ BottomPadding
+    C38top_L49 ~~~ BottomPadding
+    C39top_L50 ~~~ BottomPadding
+    C40top_L51 ~~~ BottomPadding
+    C41top_L52 ~~~ BottomPadding
+    C42top_L53 ~~~ BottomPadding
+    C43top_L54 ~~~ BottomPadding
+    C44top_L55 ~~~ BottomPadding
+    C45top_L56 ~~~ BottomPadding
 ```
 
 ### Package L1top
@@ -4174,221 +4193,221 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    L1top["<b>L1top</b><br>Statement of L1top"]
-    L1Xctx(["<b>L1Xctx</b><br>Context of L1Xctx"])
-    L1Esh1(("<b>L1Esh1</b><br>Shared evidence A of L1"))
-    L1Esh2(("<b>L1Esh2</b><br>Shared evidence B of L1"))
-    L1Smain[/"<b>L1Smain</b><br>Main strategy of L1"/]
-    L1G2["<b>L1G2</b><br>Level-2 claim of L1"]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    SynConnect_00000000((" ")):::connector
-    L1Gbr6["<b>L1Gbr6</b><br>Breadth claim 6 of L1"]
-    L1Gbr7["<b>L1Gbr7</b><br>Breadth claim 7 of L1"]
-    L1Gbr8["<b>L1Gbr8</b><br>Breadth claim 8 of L1"]
-    L1S2[/"<b>L1S2</b><br>Level-3 strategy of L1"/]
-    L1G2b["<b>L1G2b</b><br>Level-3 alt claim of L1"]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C12top[["<b>C12top</b><br>Statement of C12top"]]
-    L1Gbr1["<b>L1Gbr1</b><br>Breadth claim 1 of L1"]
-    L1Gbr2["<b>L1Gbr2</b><br>Breadth claim 2 of L1"]
-    L1Gbr3["<b>L1Gbr3</b><br>Breadth claim 3 of L1"]
-    L1Gbr4["<b>L1Gbr4</b><br>Breadth claim 4 of L1"]
-    L1Gbr5["<b>L1Gbr5</b><br>Breadth claim 5 of L1"]
-    L1Gbr6a["<b>L1Gbr6a</b><br>Sub-claim 6a of L1"]
-    L1Gbr6b["<b>L1Gbr6b</b><br>Sub-claim 6b of L1"]
-    L1Gbr7a["<b>L1Gbr7a</b><br>Sub-claim 7a of L1"]
-    L1Gbr7b["<b>L1Gbr7b</b><br>Sub-claim 7b of L1"]
-    L1Gbr8a["<b>L1Gbr8a</b><br>Sub-claim 8a of L1"]
-    L1Gbr8b["<b>L1Gbr8b</b><br>Sub-claim 8b of L1"]
-    L1G3["<b>L1G3</b><br>Level-4 claim of L1"]
-    L1G3c["<b>L1G3c</b><br>Level-4 alt claim of L1"]
-    L1S2b[/"<b>L1S2b</b><br>Level-4 alt strategy of L1"/]
-    L1Gbr1a["<b>L1Gbr1a</b><br>Sub-claim 1a of L1"]
-    L1Gbr1b["<b>L1Gbr1b</b><br>Sub-claim 1b of L1"]
-    L1Gbr2a["<b>L1Gbr2a</b><br>Sub-claim 2a of L1"]
-    L1Gbr2b["<b>L1Gbr2b</b><br>Sub-claim 2b of L1"]
-    L1Gbr3a["<b>L1Gbr3a</b><br>Sub-claim 3a of L1"]
-    L1Gbr3b["<b>L1Gbr3b</b><br>Sub-claim 3b of L1"]
-    L1Gbr4a["<b>L1Gbr4a</b><br>Sub-claim 4a of L1"]
-    L1Gbr4b["<b>L1Gbr4b</b><br>Sub-claim 4b of L1"]
-    L1Gbr5a["<b>L1Gbr5a</b><br>Sub-claim 5a of L1"]
-    L1Gbr5b["<b>L1Gbr5b</b><br>Sub-claim 5b of L1"]
-    L1Ebr6(("<b>L1Ebr6</b><br>Evidence for breadth 6 of L1"))
-    L1Ebr7(("<b>L1Ebr7</b><br>Evidence for breadth 7 of L1"))
-    L1Ebr8(("<b>L1Ebr8</b><br>Evidence for breadth 8 of L1"))
-    L1S3[/"<b>L1S3</b><br>Level-5 strategy of L1"/]
-    L1G3b["<b>L1G3b</b><br>Level-5 alt claim of L1"]
-    L1J1("<b>L1J1</b>&nbsp;Ⓙ<br>Justification of L1")
-    L1G3d["<b>L1G3d</b><br>Level-5 claim D of L1"]
-    L1G3e["<b>L1G3e</b><br>Level-5 claim E of L1"]
-    L1Ebr1(("<b>L1Ebr1</b><br>Evidence for breadth 1 of L1"))
-    L1Ebr2(("<b>L1Ebr2</b><br>Evidence for breadth 2 of L1"))
-    L1Ebr3(("<b>L1Ebr3</b><br>Evidence for breadth 3 of L1"))
-    L1Ebr4(("<b>L1Ebr4</b><br>Evidence for breadth 4 of L1"))
-    L1Ebr5(("<b>L1Ebr5</b><br>Evidence for breadth 5 of L1"))
-    L1G4["<b>L1G4</b><br>Level-6 claim of L1"]
-    L1G4b["<b>L1G4b</b><br>Level-6 alt claim of L1"]
-    L1E2(("<b>L1E2</b><br>Extra evidence of L1"))
-    L1Edeep(("<b>L1Edeep</b><br>Deep evidence of L1"))
-    click L1top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1top"
-    click L1Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l1xctx"
-    click L1Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh1"
-    click L1Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh2"
-    click L1Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1smain"
-    click L1G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click L1Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6"
-    click L1Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7"
-    click L1Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8"
-    click L1S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2"
-    click L1G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2b"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
-    click L1Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1"
-    click L1Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2"
-    click L1Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3"
-    click L1Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4"
-    click L1Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5"
-    click L1Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6a"
-    click L1Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6b"
-    click L1Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7a"
-    click L1Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7b"
-    click L1Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8a"
-    click L1Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8b"
-    click L1G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3"
-    click L1G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3c"
-    click L1S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2b"
-    click L1Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1a"
-    click L1Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1b"
-    click L1Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2a"
-    click L1Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2b"
-    click L1Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3a"
-    click L1Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3b"
-    click L1Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4a"
-    click L1Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4b"
-    click L1Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5a"
-    click L1Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5b"
-    click L1Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr6"
-    click L1Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr7"
-    click L1Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr8"
-    click L1S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s3"
-    click L1G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3b"
-    click L1J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l1j1"
-    click L1G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3d"
-    click L1G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3e"
-    click L1Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr1"
-    click L1Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr2"
-    click L1Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr3"
-    click L1Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr4"
-    click L1Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr5"
-    click L1G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4"
-    click L1G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4b"
-    click L1E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1e2"
-    click L1Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
+    L1top_L58["<b>L1top</b><br>Statement of L1top"]
+    L1Xctx_L59(["<b>L1Xctx</b><br>Context of L1Xctx"])
+    L1Esh1_L60(("<b>L1Esh1</b><br>Shared evidence A of L1"))
+    L1Esh2_L61(("<b>L1Esh2</b><br>Shared evidence B of L1"))
+    L1Smain_L62[/"<b>L1Smain</b><br>Main strategy of L1"/]
+    L1G2_L63["<b>L1G2</b><br>Level-2 claim of L1"]
+    C08top_L85[["<b>C08top</b><br>Statement of C08top"]]
+    C09top_L86[["<b>C09top</b><br>Statement of C09top"]]
+    _Connector_00000000((" ")):::connector
+    L1Gbr6_L120["<b>L1Gbr6</b><br>Breadth claim 6 of L1"]
+    L1Gbr7_L126["<b>L1Gbr7</b><br>Breadth claim 7 of L1"]
+    L1Gbr8_L132["<b>L1Gbr8</b><br>Breadth claim 8 of L1"]
+    L1S2_L64[/"<b>L1S2</b><br>Level-3 strategy of L1"/]
+    L1G2b_L78["<b>L1G2b</b><br>Level-3 alt claim of L1"]
+    C10top_L87[["<b>C10top</b><br>Statement of C10top"]]
+    C11top_L88[["<b>C11top</b><br>Statement of C11top"]]
+    C12top_L89[["<b>C12top</b><br>Statement of C12top"]]
+    L1Gbr1_L90["<b>L1Gbr1</b><br>Breadth claim 1 of L1"]
+    L1Gbr2_L96["<b>L1Gbr2</b><br>Breadth claim 2 of L1"]
+    L1Gbr3_L102["<b>L1Gbr3</b><br>Breadth claim 3 of L1"]
+    L1Gbr4_L108["<b>L1Gbr4</b><br>Breadth claim 4 of L1"]
+    L1Gbr5_L114["<b>L1Gbr5</b><br>Breadth claim 5 of L1"]
+    L1Gbr6a_L121["<b>L1Gbr6a</b><br>Sub-claim 6a of L1"]
+    L1Gbr6b_L124["<b>L1Gbr6b</b><br>Sub-claim 6b of L1"]
+    L1Gbr7a_L127["<b>L1Gbr7a</b><br>Sub-claim 7a of L1"]
+    L1Gbr7b_L130["<b>L1Gbr7b</b><br>Sub-claim 7b of L1"]
+    L1Gbr8a_L133["<b>L1Gbr8a</b><br>Sub-claim 8a of L1"]
+    L1Gbr8b_L136["<b>L1Gbr8b</b><br>Sub-claim 8b of L1"]
+    L1G3_L65["<b>L1G3</b><br>Level-4 claim of L1"]
+    L1G3c_L75["<b>L1G3c</b><br>Level-4 alt claim of L1"]
+    L1S2b_L79[/"<b>L1S2b</b><br>Level-4 alt strategy of L1"/]
+    L1Gbr1a_L91["<b>L1Gbr1a</b><br>Sub-claim 1a of L1"]
+    L1Gbr1b_L94["<b>L1Gbr1b</b><br>Sub-claim 1b of L1"]
+    L1Gbr2a_L97["<b>L1Gbr2a</b><br>Sub-claim 2a of L1"]
+    L1Gbr2b_L100["<b>L1Gbr2b</b><br>Sub-claim 2b of L1"]
+    L1Gbr3a_L103["<b>L1Gbr3a</b><br>Sub-claim 3a of L1"]
+    L1Gbr3b_L106["<b>L1Gbr3b</b><br>Sub-claim 3b of L1"]
+    L1Gbr4a_L109["<b>L1Gbr4a</b><br>Sub-claim 4a of L1"]
+    L1Gbr4b_L112["<b>L1Gbr4b</b><br>Sub-claim 4b of L1"]
+    L1Gbr5a_L115["<b>L1Gbr5a</b><br>Sub-claim 5a of L1"]
+    L1Gbr5b_L118["<b>L1Gbr5b</b><br>Sub-claim 5b of L1"]
+    L1Ebr6_L122(("<b>L1Ebr6</b><br>Evidence for breadth 6 of L1"))
+    L1Ebr7_L128(("<b>L1Ebr7</b><br>Evidence for breadth 7 of L1"))
+    L1Ebr8_L134(("<b>L1Ebr8</b><br>Evidence for breadth 8 of L1"))
+    L1S3_L66[/"<b>L1S3</b><br>Level-5 strategy of L1"/]
+    L1G3b_L73["<b>L1G3b</b><br>Level-5 alt claim of L1"]
+    L1J1_L76("<b>L1J1</b>&nbsp;Ⓙ<br>Justification of L1")
+    L1G3d_L80["<b>L1G3d</b><br>Level-5 claim D of L1"]
+    L1G3e_L83["<b>L1G3e</b><br>Level-5 claim E of L1"]
+    L1Ebr1_L92(("<b>L1Ebr1</b><br>Evidence for breadth 1 of L1"))
+    L1Ebr2_L98(("<b>L1Ebr2</b><br>Evidence for breadth 2 of L1"))
+    L1Ebr3_L104(("<b>L1Ebr3</b><br>Evidence for breadth 3 of L1"))
+    L1Ebr4_L110(("<b>L1Ebr4</b><br>Evidence for breadth 4 of L1"))
+    L1Ebr5_L116(("<b>L1Ebr5</b><br>Evidence for breadth 5 of L1"))
+    L1G4_L67["<b>L1G4</b><br>Level-6 claim of L1"]
+    L1G4b_L70["<b>L1G4b</b><br>Level-6 alt claim of L1"]
+    L1E2_L84(("<b>L1E2</b><br>Extra evidence of L1"))
+    L1Edeep_L68(("<b>L1Edeep</b><br>Deep evidence of L1"))
+    click L1top_L58 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1top"
+    click L1Xctx_L59 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l1xctx"
+    click L1Esh1_L60 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh1"
+    click L1Esh2_L61 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1esh2"
+    click L1Smain_L62 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1smain"
+    click L1G2_L63 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2"
+    click C08top_L85 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C09top_L86 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click L1Gbr6_L120 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6"
+    click L1Gbr7_L126 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7"
+    click L1Gbr8_L132 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8"
+    click L1S2_L64 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2"
+    click L1G2b_L78 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g2b"
+    click C10top_L87 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click C11top_L88 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C12top_L89 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c12top"
+    click L1Gbr1_L90 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1"
+    click L1Gbr2_L96 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2"
+    click L1Gbr3_L102 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3"
+    click L1Gbr4_L108 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4"
+    click L1Gbr5_L114 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5"
+    click L1Gbr6a_L121 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6a"
+    click L1Gbr6b_L124 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr6b"
+    click L1Gbr7a_L127 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7a"
+    click L1Gbr7b_L130 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr7b"
+    click L1Gbr8a_L133 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8a"
+    click L1Gbr8b_L136 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr8b"
+    click L1G3_L65 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3"
+    click L1G3c_L75 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3c"
+    click L1S2b_L79 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s2b"
+    click L1Gbr1a_L91 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1a"
+    click L1Gbr1b_L94 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr1b"
+    click L1Gbr2a_L97 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2a"
+    click L1Gbr2b_L100 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr2b"
+    click L1Gbr3a_L103 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3a"
+    click L1Gbr3b_L106 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr3b"
+    click L1Gbr4a_L109 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4a"
+    click L1Gbr4b_L112 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr4b"
+    click L1Gbr5a_L115 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5a"
+    click L1Gbr5b_L118 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1gbr5b"
+    click L1Ebr6_L122 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr6"
+    click L1Ebr7_L128 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr7"
+    click L1Ebr8_L134 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr8"
+    click L1S3_L66 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l1s3"
+    click L1G3b_L73 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3b"
+    click L1J1_L76 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l1j1"
+    click L1G3d_L80 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3d"
+    click L1G3e_L83 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g3e"
+    click L1Ebr1_L92 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr1"
+    click L1Ebr2_L98 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr2"
+    click L1Ebr3_L104 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr3"
+    click L1Ebr4_L110 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr4"
+    click L1Ebr5_L116 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1ebr5"
+    click L1G4_L67 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4"
+    click L1G4b_L70 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l1g4b"
+    click L1E2_L84 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1e2"
+    click L1Edeep_L68 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
 
-    L1top --o L1Xctx
-    L1top --> L1Esh1
-    L1top --> L1Esh2
-    L1top --> L1Smain
-    L1Smain --> L1G2
-    L1G2 --> L1S2
-    L1S2 --> L1G3
-    L1G3 --> L1S3
-    L1S3 --> L1G4
-    L1G4 --> L1Edeep
-    L1G4 --> L1Esh1
-    L1S3 --> L1G4b
-    L1G4b --> L1Esh2
-    L1G4b --> L1Esh1
-    L1G3 --> L1G3b
-    L1G3b --> L1Esh1
-    L1S2 --> L1G3c
-    L1G3c --o L1J1
-    L1G3c --> L1Esh2
-    L1G2 --> L1G2b
-    L1G2b --> L1S2b
-    L1S2b --> L1G3d
-    L1G3d --> L1Esh1
-    L1G3d --> L1Esh2
-    L1S2b --> L1G3e
-    L1G3e --> L1E2
-    L1Smain --> C08top
-    L1Smain --> C09top
-    L1Smain --> SynConnect_00000000
-    SynConnect_00000000 --> C10top
-    SynConnect_00000000 --> C11top
-    SynConnect_00000000 --> C12top
-    SynConnect_00000000 --> L1Gbr1
-    L1Gbr1 --> L1Gbr1a
-    L1Gbr1a --> L1Ebr1
-    L1Gbr1a --> L1Esh1
-    L1Gbr1 --> L1Gbr1b
-    L1Gbr1b --> L1Esh2
-    SynConnect_00000000 --> L1Gbr2
-    L1Gbr2 --> L1Gbr2a
-    L1Gbr2a --> L1Ebr2
-    L1Gbr2a --> L1Esh1
-    L1Gbr2 --> L1Gbr2b
-    L1Gbr2b --> L1Esh2
-    SynConnect_00000000 --> L1Gbr3
-    L1Gbr3 --> L1Gbr3a
-    L1Gbr3a --> L1Ebr3
-    L1Gbr3a --> L1Esh1
-    L1Gbr3 --> L1Gbr3b
-    L1Gbr3b --> L1Esh2
-    SynConnect_00000000 --> L1Gbr4
-    L1Gbr4 --> L1Gbr4a
-    L1Gbr4a --> L1Ebr4
-    L1Gbr4a --> L1Esh1
-    L1Gbr4 --> L1Gbr4b
-    L1Gbr4b --> L1Esh2
-    SynConnect_00000000 --> L1Gbr5
-    L1Gbr5 --> L1Gbr5a
-    L1Gbr5a --> L1Ebr5
-    L1Gbr5a --> L1Esh1
-    L1Gbr5 --> L1Gbr5b
-    L1Gbr5b --> L1Esh2
-    L1Smain --> L1Gbr6
-    L1Gbr6 --> L1Gbr6a
-    L1Gbr6a --> L1Ebr6
-    L1Gbr6a --> L1Esh1
-    L1Gbr6 --> L1Gbr6b
-    L1Gbr6b --> L1Esh2
-    L1Smain --> L1Gbr7
-    L1Gbr7 --> L1Gbr7a
-    L1Gbr7a --> L1Ebr7
-    L1Gbr7a --> L1Esh1
-    L1Gbr7 --> L1Gbr7b
-    L1Gbr7b --> L1Esh2
-    L1Smain --> L1Gbr8
-    L1Gbr8 --> L1Gbr8a
-    L1Gbr8a --> L1Ebr8
-    L1Gbr8a --> L1Esh1
-    L1Gbr8 --> L1Gbr8b
-    L1Gbr8b --> L1Esh2
-    L1Xctx ~~~ BottomPadding[ ]:::invisible
-    L1Esh1 ~~~ BottomPadding
-    L1Esh2 ~~~ BottomPadding
-    L1Edeep ~~~ BottomPadding
-    L1J1 ~~~ BottomPadding
-    L1E2 ~~~ BottomPadding
-    C08top ~~~ BottomPadding
-    C09top ~~~ BottomPadding
-    C10top ~~~ BottomPadding
-    C11top ~~~ BottomPadding
-    C12top ~~~ BottomPadding
-    L1Ebr1 ~~~ BottomPadding
-    L1Ebr2 ~~~ BottomPadding
-    L1Ebr3 ~~~ BottomPadding
-    L1Ebr4 ~~~ BottomPadding
-    L1Ebr5 ~~~ BottomPadding
-    L1Ebr6 ~~~ BottomPadding
-    L1Ebr7 ~~~ BottomPadding
-    L1Ebr8 ~~~ BottomPadding
+    L1top_L58 --o L1Xctx_L59
+    L1top_L58 --> L1Esh1_L60
+    L1top_L58 --> L1Esh2_L61
+    L1top_L58 --> L1Smain_L62
+    L1Smain_L62 --> L1G2_L63
+    L1G2_L63 --> L1S2_L64
+    L1S2_L64 --> L1G3_L65
+    L1G3_L65 --> L1S3_L66
+    L1S3_L66 --> L1G4_L67
+    L1G4_L67 --> L1Edeep_L68
+    L1G4_L67 --> L1Esh1_L60
+    L1S3_L66 --> L1G4b_L70
+    L1G4b_L70 --> L1Esh2_L61
+    L1G4b_L70 --> L1Esh1_L60
+    L1G3_L65 --> L1G3b_L73
+    L1G3b_L73 --> L1Esh1_L60
+    L1S2_L64 --> L1G3c_L75
+    L1G3c_L75 --o L1J1_L76
+    L1G3c_L75 --> L1Esh2_L61
+    L1G2_L63 --> L1G2b_L78
+    L1G2b_L78 --> L1S2b_L79
+    L1S2b_L79 --> L1G3d_L80
+    L1G3d_L80 --> L1Esh1_L60
+    L1G3d_L80 --> L1Esh2_L61
+    L1S2b_L79 --> L1G3e_L83
+    L1G3e_L83 --> L1E2_L84
+    L1Smain_L62 --> C08top_L85
+    L1Smain_L62 --> C09top_L86
+    L1Smain_L62 --> _Connector_00000000
+    _Connector_00000000 --> C10top_L87
+    _Connector_00000000 --> C11top_L88
+    _Connector_00000000 --> C12top_L89
+    _Connector_00000000 --> L1Gbr1_L90
+    L1Gbr1_L90 --> L1Gbr1a_L91
+    L1Gbr1a_L91 --> L1Ebr1_L92
+    L1Gbr1a_L91 --> L1Esh1_L60
+    L1Gbr1_L90 --> L1Gbr1b_L94
+    L1Gbr1b_L94 --> L1Esh2_L61
+    _Connector_00000000 --> L1Gbr2_L96
+    L1Gbr2_L96 --> L1Gbr2a_L97
+    L1Gbr2a_L97 --> L1Ebr2_L98
+    L1Gbr2a_L97 --> L1Esh1_L60
+    L1Gbr2_L96 --> L1Gbr2b_L100
+    L1Gbr2b_L100 --> L1Esh2_L61
+    _Connector_00000000 --> L1Gbr3_L102
+    L1Gbr3_L102 --> L1Gbr3a_L103
+    L1Gbr3a_L103 --> L1Ebr3_L104
+    L1Gbr3a_L103 --> L1Esh1_L60
+    L1Gbr3_L102 --> L1Gbr3b_L106
+    L1Gbr3b_L106 --> L1Esh2_L61
+    _Connector_00000000 --> L1Gbr4_L108
+    L1Gbr4_L108 --> L1Gbr4a_L109
+    L1Gbr4a_L109 --> L1Ebr4_L110
+    L1Gbr4a_L109 --> L1Esh1_L60
+    L1Gbr4_L108 --> L1Gbr4b_L112
+    L1Gbr4b_L112 --> L1Esh2_L61
+    _Connector_00000000 --> L1Gbr5_L114
+    L1Gbr5_L114 --> L1Gbr5a_L115
+    L1Gbr5a_L115 --> L1Ebr5_L116
+    L1Gbr5a_L115 --> L1Esh1_L60
+    L1Gbr5_L114 --> L1Gbr5b_L118
+    L1Gbr5b_L118 --> L1Esh2_L61
+    L1Smain_L62 --> L1Gbr6_L120
+    L1Gbr6_L120 --> L1Gbr6a_L121
+    L1Gbr6a_L121 --> L1Ebr6_L122
+    L1Gbr6a_L121 --> L1Esh1_L60
+    L1Gbr6_L120 --> L1Gbr6b_L124
+    L1Gbr6b_L124 --> L1Esh2_L61
+    L1Smain_L62 --> L1Gbr7_L126
+    L1Gbr7_L126 --> L1Gbr7a_L127
+    L1Gbr7a_L127 --> L1Ebr7_L128
+    L1Gbr7a_L127 --> L1Esh1_L60
+    L1Gbr7_L126 --> L1Gbr7b_L130
+    L1Gbr7b_L130 --> L1Esh2_L61
+    L1Smain_L62 --> L1Gbr8_L132
+    L1Gbr8_L132 --> L1Gbr8a_L133
+    L1Gbr8a_L133 --> L1Ebr8_L134
+    L1Gbr8a_L133 --> L1Esh1_L60
+    L1Gbr8_L132 --> L1Gbr8b_L136
+    L1Gbr8b_L136 --> L1Esh2_L61
+    L1Xctx_L59 ~~~ BottomPadding[ ]:::invisible
+    L1Esh1_L60 ~~~ BottomPadding
+    L1Esh2_L61 ~~~ BottomPadding
+    L1Edeep_L68 ~~~ BottomPadding
+    L1J1_L76 ~~~ BottomPadding
+    L1E2_L84 ~~~ BottomPadding
+    C08top_L85 ~~~ BottomPadding
+    C09top_L86 ~~~ BottomPadding
+    C10top_L87 ~~~ BottomPadding
+    C11top_L88 ~~~ BottomPadding
+    C12top_L89 ~~~ BottomPadding
+    L1Ebr1_L92 ~~~ BottomPadding
+    L1Ebr2_L98 ~~~ BottomPadding
+    L1Ebr3_L104 ~~~ BottomPadding
+    L1Ebr4_L110 ~~~ BottomPadding
+    L1Ebr5_L116 ~~~ BottomPadding
+    L1Ebr6_L122 ~~~ BottomPadding
+    L1Ebr7_L128 ~~~ BottomPadding
+    L1Ebr8_L134 ~~~ BottomPadding
 ```
 
 ### Package L2top
@@ -4407,221 +4426,221 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    L2top["<b>L2top</b><br>Statement of L2top"]
-    L2Xctx(["<b>L2Xctx</b><br>Context of L2Xctx"])
-    L2Esh1(("<b>L2Esh1</b><br>Shared evidence A of L2"))
-    L2Esh2(("<b>L2Esh2</b><br>Shared evidence B of L2"))
-    L2Smain[/"<b>L2Smain</b><br>Main strategy of L2"/]
-    L2G2["<b>L2G2</b><br>Level-2 claim of L2"]
-    C15top[["<b>C15top</b><br>Statement of C15top"]]
-    C16top[["<b>C16top</b><br>Statement of C16top"]]
-    SynConnect_00000000((" ")):::connector
-    L2Gbr6["<b>L2Gbr6</b><br>Breadth claim 6 of L2"]
-    L2Gbr7["<b>L2Gbr7</b><br>Breadth claim 7 of L2"]
-    L2Gbr8["<b>L2Gbr8</b><br>Breadth claim 8 of L2"]
-    L2S2[/"<b>L2S2</b><br>Level-3 strategy of L2"/]
-    L2G2b["<b>L2G2b</b><br>Level-3 alt claim of L2"]
-    C17top[["<b>C17top</b><br>Statement of C17top"]]
-    C18top[["<b>C18top</b><br>Statement of C18top"]]
-    C19top[["<b>C19top</b><br>Statement of C19top"]]
-    L2Gbr1["<b>L2Gbr1</b><br>Breadth claim 1 of L2"]
-    L2Gbr2["<b>L2Gbr2</b><br>Breadth claim 2 of L2"]
-    L2Gbr3["<b>L2Gbr3</b><br>Breadth claim 3 of L2"]
-    L2Gbr4["<b>L2Gbr4</b><br>Breadth claim 4 of L2"]
-    L2Gbr5["<b>L2Gbr5</b><br>Breadth claim 5 of L2"]
-    L2Gbr6a["<b>L2Gbr6a</b><br>Sub-claim 6a of L2"]
-    L2Gbr6b["<b>L2Gbr6b</b><br>Sub-claim 6b of L2"]
-    L2Gbr7a["<b>L2Gbr7a</b><br>Sub-claim 7a of L2"]
-    L2Gbr7b["<b>L2Gbr7b</b><br>Sub-claim 7b of L2"]
-    L2Gbr8a["<b>L2Gbr8a</b><br>Sub-claim 8a of L2"]
-    L2Gbr8b["<b>L2Gbr8b</b><br>Sub-claim 8b of L2"]
-    L2G3["<b>L2G3</b><br>Level-4 claim of L2"]
-    L2G3c["<b>L2G3c</b><br>Level-4 alt claim of L2"]
-    L2S2b[/"<b>L2S2b</b><br>Level-4 alt strategy of L2"/]
-    L2Gbr1a["<b>L2Gbr1a</b><br>Sub-claim 1a of L2"]
-    L2Gbr1b["<b>L2Gbr1b</b><br>Sub-claim 1b of L2"]
-    L2Gbr2a["<b>L2Gbr2a</b><br>Sub-claim 2a of L2"]
-    L2Gbr2b["<b>L2Gbr2b</b><br>Sub-claim 2b of L2"]
-    L2Gbr3a["<b>L2Gbr3a</b><br>Sub-claim 3a of L2"]
-    L2Gbr3b["<b>L2Gbr3b</b><br>Sub-claim 3b of L2"]
-    L2Gbr4a["<b>L2Gbr4a</b><br>Sub-claim 4a of L2"]
-    L2Gbr4b["<b>L2Gbr4b</b><br>Sub-claim 4b of L2"]
-    L2Gbr5a["<b>L2Gbr5a</b><br>Sub-claim 5a of L2"]
-    L2Gbr5b["<b>L2Gbr5b</b><br>Sub-claim 5b of L2"]
-    L2Ebr6(("<b>L2Ebr6</b><br>Evidence for breadth 6 of L2"))
-    L2Ebr7(("<b>L2Ebr7</b><br>Evidence for breadth 7 of L2"))
-    L2Ebr8(("<b>L2Ebr8</b><br>Evidence for breadth 8 of L2"))
-    L2S3[/"<b>L2S3</b><br>Level-5 strategy of L2"/]
-    L2G3b["<b>L2G3b</b><br>Level-5 alt claim of L2"]
-    L2J1("<b>L2J1</b>&nbsp;Ⓙ<br>Justification of L2")
-    L2G3d["<b>L2G3d</b><br>Level-5 claim D of L2"]
-    L2G3e["<b>L2G3e</b><br>Level-5 claim E of L2"]
-    L2Ebr1(("<b>L2Ebr1</b><br>Evidence for breadth 1 of L2"))
-    L2Ebr2(("<b>L2Ebr2</b><br>Evidence for breadth 2 of L2"))
-    L2Ebr3(("<b>L2Ebr3</b><br>Evidence for breadth 3 of L2"))
-    L2Ebr4(("<b>L2Ebr4</b><br>Evidence for breadth 4 of L2"))
-    L2Ebr5(("<b>L2Ebr5</b><br>Evidence for breadth 5 of L2"))
-    L2G4["<b>L2G4</b><br>Level-6 claim of L2"]
-    L2G4b["<b>L2G4b</b><br>Level-6 alt claim of L2"]
-    L2E2(("<b>L2E2</b><br>Extra evidence of L2"))
-    L2Edeep(("<b>L2Edeep</b><br>Deep evidence of L2"))
-    click L2top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2top"
-    click L2Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l2xctx"
-    click L2Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh1"
-    click L2Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh2"
-    click L2Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2smain"
-    click L2G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2"
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
-    click L2Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6"
-    click L2Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7"
-    click L2Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8"
-    click L2S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2"
-    click L2G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2b"
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
-    click L2Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1"
-    click L2Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2"
-    click L2Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3"
-    click L2Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4"
-    click L2Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5"
-    click L2Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6a"
-    click L2Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6b"
-    click L2Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7a"
-    click L2Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7b"
-    click L2Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8a"
-    click L2Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8b"
-    click L2G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3"
-    click L2G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3c"
-    click L2S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2b"
-    click L2Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1a"
-    click L2Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1b"
-    click L2Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2a"
-    click L2Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2b"
-    click L2Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3a"
-    click L2Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3b"
-    click L2Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4a"
-    click L2Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4b"
-    click L2Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5a"
-    click L2Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5b"
-    click L2Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr6"
-    click L2Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr7"
-    click L2Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr8"
-    click L2S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s3"
-    click L2G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3b"
-    click L2J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l2j1"
-    click L2G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3d"
-    click L2G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3e"
-    click L2Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr1"
-    click L2Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr2"
-    click L2Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr3"
-    click L2Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr4"
-    click L2Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr5"
-    click L2G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4"
-    click L2G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4b"
-    click L2E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2e2"
-    click L2Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
+    L2top_L139["<b>L2top</b><br>Statement of L2top"]
+    L2Xctx_L140(["<b>L2Xctx</b><br>Context of L2Xctx"])
+    L2Esh1_L141(("<b>L2Esh1</b><br>Shared evidence A of L2"))
+    L2Esh2_L142(("<b>L2Esh2</b><br>Shared evidence B of L2"))
+    L2Smain_L143[/"<b>L2Smain</b><br>Main strategy of L2"/]
+    L2G2_L144["<b>L2G2</b><br>Level-2 claim of L2"]
+    C15top_L166[["<b>C15top</b><br>Statement of C15top"]]
+    C16top_L167[["<b>C16top</b><br>Statement of C16top"]]
+    _Connector_00000000((" ")):::connector
+    L2Gbr6_L201["<b>L2Gbr6</b><br>Breadth claim 6 of L2"]
+    L2Gbr7_L207["<b>L2Gbr7</b><br>Breadth claim 7 of L2"]
+    L2Gbr8_L213["<b>L2Gbr8</b><br>Breadth claim 8 of L2"]
+    L2S2_L145[/"<b>L2S2</b><br>Level-3 strategy of L2"/]
+    L2G2b_L159["<b>L2G2b</b><br>Level-3 alt claim of L2"]
+    C17top_L168[["<b>C17top</b><br>Statement of C17top"]]
+    C18top_L169[["<b>C18top</b><br>Statement of C18top"]]
+    C19top_L170[["<b>C19top</b><br>Statement of C19top"]]
+    L2Gbr1_L171["<b>L2Gbr1</b><br>Breadth claim 1 of L2"]
+    L2Gbr2_L177["<b>L2Gbr2</b><br>Breadth claim 2 of L2"]
+    L2Gbr3_L183["<b>L2Gbr3</b><br>Breadth claim 3 of L2"]
+    L2Gbr4_L189["<b>L2Gbr4</b><br>Breadth claim 4 of L2"]
+    L2Gbr5_L195["<b>L2Gbr5</b><br>Breadth claim 5 of L2"]
+    L2Gbr6a_L202["<b>L2Gbr6a</b><br>Sub-claim 6a of L2"]
+    L2Gbr6b_L205["<b>L2Gbr6b</b><br>Sub-claim 6b of L2"]
+    L2Gbr7a_L208["<b>L2Gbr7a</b><br>Sub-claim 7a of L2"]
+    L2Gbr7b_L211["<b>L2Gbr7b</b><br>Sub-claim 7b of L2"]
+    L2Gbr8a_L214["<b>L2Gbr8a</b><br>Sub-claim 8a of L2"]
+    L2Gbr8b_L217["<b>L2Gbr8b</b><br>Sub-claim 8b of L2"]
+    L2G3_L146["<b>L2G3</b><br>Level-4 claim of L2"]
+    L2G3c_L156["<b>L2G3c</b><br>Level-4 alt claim of L2"]
+    L2S2b_L160[/"<b>L2S2b</b><br>Level-4 alt strategy of L2"/]
+    L2Gbr1a_L172["<b>L2Gbr1a</b><br>Sub-claim 1a of L2"]
+    L2Gbr1b_L175["<b>L2Gbr1b</b><br>Sub-claim 1b of L2"]
+    L2Gbr2a_L178["<b>L2Gbr2a</b><br>Sub-claim 2a of L2"]
+    L2Gbr2b_L181["<b>L2Gbr2b</b><br>Sub-claim 2b of L2"]
+    L2Gbr3a_L184["<b>L2Gbr3a</b><br>Sub-claim 3a of L2"]
+    L2Gbr3b_L187["<b>L2Gbr3b</b><br>Sub-claim 3b of L2"]
+    L2Gbr4a_L190["<b>L2Gbr4a</b><br>Sub-claim 4a of L2"]
+    L2Gbr4b_L193["<b>L2Gbr4b</b><br>Sub-claim 4b of L2"]
+    L2Gbr5a_L196["<b>L2Gbr5a</b><br>Sub-claim 5a of L2"]
+    L2Gbr5b_L199["<b>L2Gbr5b</b><br>Sub-claim 5b of L2"]
+    L2Ebr6_L203(("<b>L2Ebr6</b><br>Evidence for breadth 6 of L2"))
+    L2Ebr7_L209(("<b>L2Ebr7</b><br>Evidence for breadth 7 of L2"))
+    L2Ebr8_L215(("<b>L2Ebr8</b><br>Evidence for breadth 8 of L2"))
+    L2S3_L147[/"<b>L2S3</b><br>Level-5 strategy of L2"/]
+    L2G3b_L154["<b>L2G3b</b><br>Level-5 alt claim of L2"]
+    L2J1_L157("<b>L2J1</b>&nbsp;Ⓙ<br>Justification of L2")
+    L2G3d_L161["<b>L2G3d</b><br>Level-5 claim D of L2"]
+    L2G3e_L164["<b>L2G3e</b><br>Level-5 claim E of L2"]
+    L2Ebr1_L173(("<b>L2Ebr1</b><br>Evidence for breadth 1 of L2"))
+    L2Ebr2_L179(("<b>L2Ebr2</b><br>Evidence for breadth 2 of L2"))
+    L2Ebr3_L185(("<b>L2Ebr3</b><br>Evidence for breadth 3 of L2"))
+    L2Ebr4_L191(("<b>L2Ebr4</b><br>Evidence for breadth 4 of L2"))
+    L2Ebr5_L197(("<b>L2Ebr5</b><br>Evidence for breadth 5 of L2"))
+    L2G4_L148["<b>L2G4</b><br>Level-6 claim of L2"]
+    L2G4b_L151["<b>L2G4b</b><br>Level-6 alt claim of L2"]
+    L2E2_L165(("<b>L2E2</b><br>Extra evidence of L2"))
+    L2Edeep_L149(("<b>L2Edeep</b><br>Deep evidence of L2"))
+    click L2top_L139 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2top"
+    click L2Xctx_L140 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l2xctx"
+    click L2Esh1_L141 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh1"
+    click L2Esh2_L142 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2esh2"
+    click L2Smain_L143 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2smain"
+    click L2G2_L144 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2"
+    click C15top_L166 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c15top"
+    click C16top_L167 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c16top"
+    click L2Gbr6_L201 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6"
+    click L2Gbr7_L207 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7"
+    click L2Gbr8_L213 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8"
+    click L2S2_L145 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2"
+    click L2G2b_L159 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g2b"
+    click C17top_L168 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c17top"
+    click C18top_L169 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c18top"
+    click C19top_L170 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c19top"
+    click L2Gbr1_L171 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1"
+    click L2Gbr2_L177 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2"
+    click L2Gbr3_L183 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3"
+    click L2Gbr4_L189 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4"
+    click L2Gbr5_L195 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5"
+    click L2Gbr6a_L202 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6a"
+    click L2Gbr6b_L205 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr6b"
+    click L2Gbr7a_L208 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7a"
+    click L2Gbr7b_L211 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr7b"
+    click L2Gbr8a_L214 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8a"
+    click L2Gbr8b_L217 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr8b"
+    click L2G3_L146 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3"
+    click L2G3c_L156 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3c"
+    click L2S2b_L160 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s2b"
+    click L2Gbr1a_L172 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1a"
+    click L2Gbr1b_L175 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr1b"
+    click L2Gbr2a_L178 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2a"
+    click L2Gbr2b_L181 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr2b"
+    click L2Gbr3a_L184 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3a"
+    click L2Gbr3b_L187 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr3b"
+    click L2Gbr4a_L190 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4a"
+    click L2Gbr4b_L193 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr4b"
+    click L2Gbr5a_L196 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5a"
+    click L2Gbr5b_L199 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2gbr5b"
+    click L2Ebr6_L203 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr6"
+    click L2Ebr7_L209 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr7"
+    click L2Ebr8_L215 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr8"
+    click L2S3_L147 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l2s3"
+    click L2G3b_L154 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3b"
+    click L2J1_L157 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l2j1"
+    click L2G3d_L161 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3d"
+    click L2G3e_L164 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g3e"
+    click L2Ebr1_L173 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr1"
+    click L2Ebr2_L179 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr2"
+    click L2Ebr3_L185 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr3"
+    click L2Ebr4_L191 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr4"
+    click L2Ebr5_L197 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2ebr5"
+    click L2G4_L148 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4"
+    click L2G4b_L151 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l2g4b"
+    click L2E2_L165 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2e2"
+    click L2Edeep_L149 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
 
-    L2top --o L2Xctx
-    L2top --> L2Esh1
-    L2top --> L2Esh2
-    L2top --> L2Smain
-    L2Smain --> L2G2
-    L2G2 --> L2S2
-    L2S2 --> L2G3
-    L2G3 --> L2S3
-    L2S3 --> L2G4
-    L2G4 --> L2Edeep
-    L2G4 --> L2Esh1
-    L2S3 --> L2G4b
-    L2G4b --> L2Esh2
-    L2G4b --> L2Esh1
-    L2G3 --> L2G3b
-    L2G3b --> L2Esh1
-    L2S2 --> L2G3c
-    L2G3c --o L2J1
-    L2G3c --> L2Esh2
-    L2G2 --> L2G2b
-    L2G2b --> L2S2b
-    L2S2b --> L2G3d
-    L2G3d --> L2Esh1
-    L2G3d --> L2Esh2
-    L2S2b --> L2G3e
-    L2G3e --> L2E2
-    L2Smain --> C15top
-    L2Smain --> C16top
-    L2Smain --> SynConnect_00000000
-    SynConnect_00000000 --> C17top
-    SynConnect_00000000 --> C18top
-    SynConnect_00000000 --> C19top
-    SynConnect_00000000 --> L2Gbr1
-    L2Gbr1 --> L2Gbr1a
-    L2Gbr1a --> L2Ebr1
-    L2Gbr1a --> L2Esh1
-    L2Gbr1 --> L2Gbr1b
-    L2Gbr1b --> L2Esh2
-    SynConnect_00000000 --> L2Gbr2
-    L2Gbr2 --> L2Gbr2a
-    L2Gbr2a --> L2Ebr2
-    L2Gbr2a --> L2Esh1
-    L2Gbr2 --> L2Gbr2b
-    L2Gbr2b --> L2Esh2
-    SynConnect_00000000 --> L2Gbr3
-    L2Gbr3 --> L2Gbr3a
-    L2Gbr3a --> L2Ebr3
-    L2Gbr3a --> L2Esh1
-    L2Gbr3 --> L2Gbr3b
-    L2Gbr3b --> L2Esh2
-    SynConnect_00000000 --> L2Gbr4
-    L2Gbr4 --> L2Gbr4a
-    L2Gbr4a --> L2Ebr4
-    L2Gbr4a --> L2Esh1
-    L2Gbr4 --> L2Gbr4b
-    L2Gbr4b --> L2Esh2
-    SynConnect_00000000 --> L2Gbr5
-    L2Gbr5 --> L2Gbr5a
-    L2Gbr5a --> L2Ebr5
-    L2Gbr5a --> L2Esh1
-    L2Gbr5 --> L2Gbr5b
-    L2Gbr5b --> L2Esh2
-    L2Smain --> L2Gbr6
-    L2Gbr6 --> L2Gbr6a
-    L2Gbr6a --> L2Ebr6
-    L2Gbr6a --> L2Esh1
-    L2Gbr6 --> L2Gbr6b
-    L2Gbr6b --> L2Esh2
-    L2Smain --> L2Gbr7
-    L2Gbr7 --> L2Gbr7a
-    L2Gbr7a --> L2Ebr7
-    L2Gbr7a --> L2Esh1
-    L2Gbr7 --> L2Gbr7b
-    L2Gbr7b --> L2Esh2
-    L2Smain --> L2Gbr8
-    L2Gbr8 --> L2Gbr8a
-    L2Gbr8a --> L2Ebr8
-    L2Gbr8a --> L2Esh1
-    L2Gbr8 --> L2Gbr8b
-    L2Gbr8b --> L2Esh2
-    L2Xctx ~~~ BottomPadding[ ]:::invisible
-    L2Esh1 ~~~ BottomPadding
-    L2Esh2 ~~~ BottomPadding
-    L2Edeep ~~~ BottomPadding
-    L2J1 ~~~ BottomPadding
-    L2E2 ~~~ BottomPadding
-    C15top ~~~ BottomPadding
-    C16top ~~~ BottomPadding
-    C17top ~~~ BottomPadding
-    C18top ~~~ BottomPadding
-    C19top ~~~ BottomPadding
-    L2Ebr1 ~~~ BottomPadding
-    L2Ebr2 ~~~ BottomPadding
-    L2Ebr3 ~~~ BottomPadding
-    L2Ebr4 ~~~ BottomPadding
-    L2Ebr5 ~~~ BottomPadding
-    L2Ebr6 ~~~ BottomPadding
-    L2Ebr7 ~~~ BottomPadding
-    L2Ebr8 ~~~ BottomPadding
+    L2top_L139 --o L2Xctx_L140
+    L2top_L139 --> L2Esh1_L141
+    L2top_L139 --> L2Esh2_L142
+    L2top_L139 --> L2Smain_L143
+    L2Smain_L143 --> L2G2_L144
+    L2G2_L144 --> L2S2_L145
+    L2S2_L145 --> L2G3_L146
+    L2G3_L146 --> L2S3_L147
+    L2S3_L147 --> L2G4_L148
+    L2G4_L148 --> L2Edeep_L149
+    L2G4_L148 --> L2Esh1_L141
+    L2S3_L147 --> L2G4b_L151
+    L2G4b_L151 --> L2Esh2_L142
+    L2G4b_L151 --> L2Esh1_L141
+    L2G3_L146 --> L2G3b_L154
+    L2G3b_L154 --> L2Esh1_L141
+    L2S2_L145 --> L2G3c_L156
+    L2G3c_L156 --o L2J1_L157
+    L2G3c_L156 --> L2Esh2_L142
+    L2G2_L144 --> L2G2b_L159
+    L2G2b_L159 --> L2S2b_L160
+    L2S2b_L160 --> L2G3d_L161
+    L2G3d_L161 --> L2Esh1_L141
+    L2G3d_L161 --> L2Esh2_L142
+    L2S2b_L160 --> L2G3e_L164
+    L2G3e_L164 --> L2E2_L165
+    L2Smain_L143 --> C15top_L166
+    L2Smain_L143 --> C16top_L167
+    L2Smain_L143 --> _Connector_00000000
+    _Connector_00000000 --> C17top_L168
+    _Connector_00000000 --> C18top_L169
+    _Connector_00000000 --> C19top_L170
+    _Connector_00000000 --> L2Gbr1_L171
+    L2Gbr1_L171 --> L2Gbr1a_L172
+    L2Gbr1a_L172 --> L2Ebr1_L173
+    L2Gbr1a_L172 --> L2Esh1_L141
+    L2Gbr1_L171 --> L2Gbr1b_L175
+    L2Gbr1b_L175 --> L2Esh2_L142
+    _Connector_00000000 --> L2Gbr2_L177
+    L2Gbr2_L177 --> L2Gbr2a_L178
+    L2Gbr2a_L178 --> L2Ebr2_L179
+    L2Gbr2a_L178 --> L2Esh1_L141
+    L2Gbr2_L177 --> L2Gbr2b_L181
+    L2Gbr2b_L181 --> L2Esh2_L142
+    _Connector_00000000 --> L2Gbr3_L183
+    L2Gbr3_L183 --> L2Gbr3a_L184
+    L2Gbr3a_L184 --> L2Ebr3_L185
+    L2Gbr3a_L184 --> L2Esh1_L141
+    L2Gbr3_L183 --> L2Gbr3b_L187
+    L2Gbr3b_L187 --> L2Esh2_L142
+    _Connector_00000000 --> L2Gbr4_L189
+    L2Gbr4_L189 --> L2Gbr4a_L190
+    L2Gbr4a_L190 --> L2Ebr4_L191
+    L2Gbr4a_L190 --> L2Esh1_L141
+    L2Gbr4_L189 --> L2Gbr4b_L193
+    L2Gbr4b_L193 --> L2Esh2_L142
+    _Connector_00000000 --> L2Gbr5_L195
+    L2Gbr5_L195 --> L2Gbr5a_L196
+    L2Gbr5a_L196 --> L2Ebr5_L197
+    L2Gbr5a_L196 --> L2Esh1_L141
+    L2Gbr5_L195 --> L2Gbr5b_L199
+    L2Gbr5b_L199 --> L2Esh2_L142
+    L2Smain_L143 --> L2Gbr6_L201
+    L2Gbr6_L201 --> L2Gbr6a_L202
+    L2Gbr6a_L202 --> L2Ebr6_L203
+    L2Gbr6a_L202 --> L2Esh1_L141
+    L2Gbr6_L201 --> L2Gbr6b_L205
+    L2Gbr6b_L205 --> L2Esh2_L142
+    L2Smain_L143 --> L2Gbr7_L207
+    L2Gbr7_L207 --> L2Gbr7a_L208
+    L2Gbr7a_L208 --> L2Ebr7_L209
+    L2Gbr7a_L208 --> L2Esh1_L141
+    L2Gbr7_L207 --> L2Gbr7b_L211
+    L2Gbr7b_L211 --> L2Esh2_L142
+    L2Smain_L143 --> L2Gbr8_L213
+    L2Gbr8_L213 --> L2Gbr8a_L214
+    L2Gbr8a_L214 --> L2Ebr8_L215
+    L2Gbr8a_L214 --> L2Esh1_L141
+    L2Gbr8_L213 --> L2Gbr8b_L217
+    L2Gbr8b_L217 --> L2Esh2_L142
+    L2Xctx_L140 ~~~ BottomPadding[ ]:::invisible
+    L2Esh1_L141 ~~~ BottomPadding
+    L2Esh2_L142 ~~~ BottomPadding
+    L2Edeep_L149 ~~~ BottomPadding
+    L2J1_L157 ~~~ BottomPadding
+    L2E2_L165 ~~~ BottomPadding
+    C15top_L166 ~~~ BottomPadding
+    C16top_L167 ~~~ BottomPadding
+    C17top_L168 ~~~ BottomPadding
+    C18top_L169 ~~~ BottomPadding
+    C19top_L170 ~~~ BottomPadding
+    L2Ebr1_L173 ~~~ BottomPadding
+    L2Ebr2_L179 ~~~ BottomPadding
+    L2Ebr3_L185 ~~~ BottomPadding
+    L2Ebr4_L191 ~~~ BottomPadding
+    L2Ebr5_L197 ~~~ BottomPadding
+    L2Ebr6_L203 ~~~ BottomPadding
+    L2Ebr7_L209 ~~~ BottomPadding
+    L2Ebr8_L215 ~~~ BottomPadding
 ```
 
 ### Package L3top
@@ -4640,221 +4659,221 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    L3top["<b>L3top</b><br>Statement of L3top"]
-    L3Xctx(["<b>L3Xctx</b><br>Context of L3Xctx"])
-    L3Esh1(("<b>L3Esh1</b><br>Shared evidence A of L3"))
-    L3Esh2(("<b>L3Esh2</b><br>Shared evidence B of L3"))
-    L3Smain[/"<b>L3Smain</b><br>Main strategy of L3"/]
-    L3G2["<b>L3G2</b><br>Level-2 claim of L3"]
-    C22top[["<b>C22top</b><br>Statement of C22top"]]
-    C23top[["<b>C23top</b><br>Statement of C23top"]]
-    SynConnect_00000000((" ")):::connector
-    L3Gbr6["<b>L3Gbr6</b><br>Breadth claim 6 of L3"]
-    L3Gbr7["<b>L3Gbr7</b><br>Breadth claim 7 of L3"]
-    L3Gbr8["<b>L3Gbr8</b><br>Breadth claim 8 of L3"]
-    L3S2[/"<b>L3S2</b><br>Level-3 strategy of L3"/]
-    L3G2b["<b>L3G2b</b><br>Level-3 alt claim of L3"]
-    C24top[["<b>C24top</b><br>Statement of C24top"]]
-    C25top[["<b>C25top</b><br>Statement of C25top"]]
-    C26top[["<b>C26top</b><br>Statement of C26top"]]
-    L3Gbr1["<b>L3Gbr1</b><br>Breadth claim 1 of L3"]
-    L3Gbr2["<b>L3Gbr2</b><br>Breadth claim 2 of L3"]
-    L3Gbr3["<b>L3Gbr3</b><br>Breadth claim 3 of L3"]
-    L3Gbr4["<b>L3Gbr4</b><br>Breadth claim 4 of L3"]
-    L3Gbr5["<b>L3Gbr5</b><br>Breadth claim 5 of L3"]
-    L3Gbr6a["<b>L3Gbr6a</b><br>Sub-claim 6a of L3"]
-    L3Gbr6b["<b>L3Gbr6b</b><br>Sub-claim 6b of L3"]
-    L3Gbr7a["<b>L3Gbr7a</b><br>Sub-claim 7a of L3"]
-    L3Gbr7b["<b>L3Gbr7b</b><br>Sub-claim 7b of L3"]
-    L3Gbr8a["<b>L3Gbr8a</b><br>Sub-claim 8a of L3"]
-    L3Gbr8b["<b>L3Gbr8b</b><br>Sub-claim 8b of L3"]
-    L3G3["<b>L3G3</b><br>Level-4 claim of L3"]
-    L3G3c["<b>L3G3c</b><br>Level-4 alt claim of L3"]
-    L3S2b[/"<b>L3S2b</b><br>Level-4 alt strategy of L3"/]
-    L3Gbr1a["<b>L3Gbr1a</b><br>Sub-claim 1a of L3"]
-    L3Gbr1b["<b>L3Gbr1b</b><br>Sub-claim 1b of L3"]
-    L3Gbr2a["<b>L3Gbr2a</b><br>Sub-claim 2a of L3"]
-    L3Gbr2b["<b>L3Gbr2b</b><br>Sub-claim 2b of L3"]
-    L3Gbr3a["<b>L3Gbr3a</b><br>Sub-claim 3a of L3"]
-    L3Gbr3b["<b>L3Gbr3b</b><br>Sub-claim 3b of L3"]
-    L3Gbr4a["<b>L3Gbr4a</b><br>Sub-claim 4a of L3"]
-    L3Gbr4b["<b>L3Gbr4b</b><br>Sub-claim 4b of L3"]
-    L3Gbr5a["<b>L3Gbr5a</b><br>Sub-claim 5a of L3"]
-    L3Gbr5b["<b>L3Gbr5b</b><br>Sub-claim 5b of L3"]
-    L3Ebr6(("<b>L3Ebr6</b><br>Evidence for breadth 6 of L3"))
-    L3Ebr7(("<b>L3Ebr7</b><br>Evidence for breadth 7 of L3"))
-    L3Ebr8(("<b>L3Ebr8</b><br>Evidence for breadth 8 of L3"))
-    L3S3[/"<b>L3S3</b><br>Level-5 strategy of L3"/]
-    L3G3b["<b>L3G3b</b><br>Level-5 alt claim of L3"]
-    L3J1("<b>L3J1</b>&nbsp;Ⓙ<br>Justification of L3")
-    L3G3d["<b>L3G3d</b><br>Level-5 claim D of L3"]
-    L3G3e["<b>L3G3e</b><br>Level-5 claim E of L3"]
-    L3Ebr1(("<b>L3Ebr1</b><br>Evidence for breadth 1 of L3"))
-    L3Ebr2(("<b>L3Ebr2</b><br>Evidence for breadth 2 of L3"))
-    L3Ebr3(("<b>L3Ebr3</b><br>Evidence for breadth 3 of L3"))
-    L3Ebr4(("<b>L3Ebr4</b><br>Evidence for breadth 4 of L3"))
-    L3Ebr5(("<b>L3Ebr5</b><br>Evidence for breadth 5 of L3"))
-    L3G4["<b>L3G4</b><br>Level-6 claim of L3"]
-    L3G4b["<b>L3G4b</b><br>Level-6 alt claim of L3"]
-    L3E2(("<b>L3E2</b><br>Extra evidence of L3"))
-    L3Edeep(("<b>L3Edeep</b><br>Deep evidence of L3"))
-    click L3top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3top"
-    click L3Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l3xctx"
-    click L3Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh1"
-    click L3Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh2"
-    click L3Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3smain"
-    click L3G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2"
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
-    click L3Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6"
-    click L3Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7"
-    click L3Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8"
-    click L3S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2"
-    click L3G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2b"
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
-    click L3Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1"
-    click L3Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2"
-    click L3Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3"
-    click L3Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4"
-    click L3Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5"
-    click L3Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6a"
-    click L3Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6b"
-    click L3Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7a"
-    click L3Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7b"
-    click L3Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8a"
-    click L3Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8b"
-    click L3G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3"
-    click L3G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3c"
-    click L3S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2b"
-    click L3Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1a"
-    click L3Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1b"
-    click L3Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2a"
-    click L3Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2b"
-    click L3Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3a"
-    click L3Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3b"
-    click L3Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4a"
-    click L3Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4b"
-    click L3Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5a"
-    click L3Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5b"
-    click L3Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr6"
-    click L3Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr7"
-    click L3Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr8"
-    click L3S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s3"
-    click L3G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3b"
-    click L3J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l3j1"
-    click L3G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3d"
-    click L3G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3e"
-    click L3Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr1"
-    click L3Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr2"
-    click L3Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr3"
-    click L3Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr4"
-    click L3Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr5"
-    click L3G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4"
-    click L3G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4b"
-    click L3E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3e2"
-    click L3Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
+    L3top_L220["<b>L3top</b><br>Statement of L3top"]
+    L3Xctx_L221(["<b>L3Xctx</b><br>Context of L3Xctx"])
+    L3Esh1_L222(("<b>L3Esh1</b><br>Shared evidence A of L3"))
+    L3Esh2_L223(("<b>L3Esh2</b><br>Shared evidence B of L3"))
+    L3Smain_L224[/"<b>L3Smain</b><br>Main strategy of L3"/]
+    L3G2_L225["<b>L3G2</b><br>Level-2 claim of L3"]
+    C22top_L247[["<b>C22top</b><br>Statement of C22top"]]
+    C23top_L248[["<b>C23top</b><br>Statement of C23top"]]
+    _Connector_00000000((" ")):::connector
+    L3Gbr6_L282["<b>L3Gbr6</b><br>Breadth claim 6 of L3"]
+    L3Gbr7_L288["<b>L3Gbr7</b><br>Breadth claim 7 of L3"]
+    L3Gbr8_L294["<b>L3Gbr8</b><br>Breadth claim 8 of L3"]
+    L3S2_L226[/"<b>L3S2</b><br>Level-3 strategy of L3"/]
+    L3G2b_L240["<b>L3G2b</b><br>Level-3 alt claim of L3"]
+    C24top_L249[["<b>C24top</b><br>Statement of C24top"]]
+    C25top_L250[["<b>C25top</b><br>Statement of C25top"]]
+    C26top_L251[["<b>C26top</b><br>Statement of C26top"]]
+    L3Gbr1_L252["<b>L3Gbr1</b><br>Breadth claim 1 of L3"]
+    L3Gbr2_L258["<b>L3Gbr2</b><br>Breadth claim 2 of L3"]
+    L3Gbr3_L264["<b>L3Gbr3</b><br>Breadth claim 3 of L3"]
+    L3Gbr4_L270["<b>L3Gbr4</b><br>Breadth claim 4 of L3"]
+    L3Gbr5_L276["<b>L3Gbr5</b><br>Breadth claim 5 of L3"]
+    L3Gbr6a_L283["<b>L3Gbr6a</b><br>Sub-claim 6a of L3"]
+    L3Gbr6b_L286["<b>L3Gbr6b</b><br>Sub-claim 6b of L3"]
+    L3Gbr7a_L289["<b>L3Gbr7a</b><br>Sub-claim 7a of L3"]
+    L3Gbr7b_L292["<b>L3Gbr7b</b><br>Sub-claim 7b of L3"]
+    L3Gbr8a_L295["<b>L3Gbr8a</b><br>Sub-claim 8a of L3"]
+    L3Gbr8b_L298["<b>L3Gbr8b</b><br>Sub-claim 8b of L3"]
+    L3G3_L227["<b>L3G3</b><br>Level-4 claim of L3"]
+    L3G3c_L237["<b>L3G3c</b><br>Level-4 alt claim of L3"]
+    L3S2b_L241[/"<b>L3S2b</b><br>Level-4 alt strategy of L3"/]
+    L3Gbr1a_L253["<b>L3Gbr1a</b><br>Sub-claim 1a of L3"]
+    L3Gbr1b_L256["<b>L3Gbr1b</b><br>Sub-claim 1b of L3"]
+    L3Gbr2a_L259["<b>L3Gbr2a</b><br>Sub-claim 2a of L3"]
+    L3Gbr2b_L262["<b>L3Gbr2b</b><br>Sub-claim 2b of L3"]
+    L3Gbr3a_L265["<b>L3Gbr3a</b><br>Sub-claim 3a of L3"]
+    L3Gbr3b_L268["<b>L3Gbr3b</b><br>Sub-claim 3b of L3"]
+    L3Gbr4a_L271["<b>L3Gbr4a</b><br>Sub-claim 4a of L3"]
+    L3Gbr4b_L274["<b>L3Gbr4b</b><br>Sub-claim 4b of L3"]
+    L3Gbr5a_L277["<b>L3Gbr5a</b><br>Sub-claim 5a of L3"]
+    L3Gbr5b_L280["<b>L3Gbr5b</b><br>Sub-claim 5b of L3"]
+    L3Ebr6_L284(("<b>L3Ebr6</b><br>Evidence for breadth 6 of L3"))
+    L3Ebr7_L290(("<b>L3Ebr7</b><br>Evidence for breadth 7 of L3"))
+    L3Ebr8_L296(("<b>L3Ebr8</b><br>Evidence for breadth 8 of L3"))
+    L3S3_L228[/"<b>L3S3</b><br>Level-5 strategy of L3"/]
+    L3G3b_L235["<b>L3G3b</b><br>Level-5 alt claim of L3"]
+    L3J1_L238("<b>L3J1</b>&nbsp;Ⓙ<br>Justification of L3")
+    L3G3d_L242["<b>L3G3d</b><br>Level-5 claim D of L3"]
+    L3G3e_L245["<b>L3G3e</b><br>Level-5 claim E of L3"]
+    L3Ebr1_L254(("<b>L3Ebr1</b><br>Evidence for breadth 1 of L3"))
+    L3Ebr2_L260(("<b>L3Ebr2</b><br>Evidence for breadth 2 of L3"))
+    L3Ebr3_L266(("<b>L3Ebr3</b><br>Evidence for breadth 3 of L3"))
+    L3Ebr4_L272(("<b>L3Ebr4</b><br>Evidence for breadth 4 of L3"))
+    L3Ebr5_L278(("<b>L3Ebr5</b><br>Evidence for breadth 5 of L3"))
+    L3G4_L229["<b>L3G4</b><br>Level-6 claim of L3"]
+    L3G4b_L232["<b>L3G4b</b><br>Level-6 alt claim of L3"]
+    L3E2_L246(("<b>L3E2</b><br>Extra evidence of L3"))
+    L3Edeep_L230(("<b>L3Edeep</b><br>Deep evidence of L3"))
+    click L3top_L220 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3top"
+    click L3Xctx_L221 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l3xctx"
+    click L3Esh1_L222 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh1"
+    click L3Esh2_L223 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3esh2"
+    click L3Smain_L224 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3smain"
+    click L3G2_L225 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2"
+    click C22top_L247 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c22top"
+    click C23top_L248 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c23top"
+    click L3Gbr6_L282 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6"
+    click L3Gbr7_L288 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7"
+    click L3Gbr8_L294 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8"
+    click L3S2_L226 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2"
+    click L3G2b_L240 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g2b"
+    click C24top_L249 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c24top"
+    click C25top_L250 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
+    click C26top_L251 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c26top"
+    click L3Gbr1_L252 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1"
+    click L3Gbr2_L258 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2"
+    click L3Gbr3_L264 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3"
+    click L3Gbr4_L270 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4"
+    click L3Gbr5_L276 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5"
+    click L3Gbr6a_L283 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6a"
+    click L3Gbr6b_L286 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr6b"
+    click L3Gbr7a_L289 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7a"
+    click L3Gbr7b_L292 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr7b"
+    click L3Gbr8a_L295 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8a"
+    click L3Gbr8b_L298 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr8b"
+    click L3G3_L227 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3"
+    click L3G3c_L237 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3c"
+    click L3S2b_L241 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s2b"
+    click L3Gbr1a_L253 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1a"
+    click L3Gbr1b_L256 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr1b"
+    click L3Gbr2a_L259 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2a"
+    click L3Gbr2b_L262 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr2b"
+    click L3Gbr3a_L265 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3a"
+    click L3Gbr3b_L268 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr3b"
+    click L3Gbr4a_L271 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4a"
+    click L3Gbr4b_L274 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr4b"
+    click L3Gbr5a_L277 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5a"
+    click L3Gbr5b_L280 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3gbr5b"
+    click L3Ebr6_L284 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr6"
+    click L3Ebr7_L290 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr7"
+    click L3Ebr8_L296 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr8"
+    click L3S3_L228 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l3s3"
+    click L3G3b_L235 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3b"
+    click L3J1_L238 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l3j1"
+    click L3G3d_L242 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3d"
+    click L3G3e_L245 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g3e"
+    click L3Ebr1_L254 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr1"
+    click L3Ebr2_L260 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr2"
+    click L3Ebr3_L266 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr3"
+    click L3Ebr4_L272 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr4"
+    click L3Ebr5_L278 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3ebr5"
+    click L3G4_L229 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4"
+    click L3G4b_L232 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l3g4b"
+    click L3E2_L246 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3e2"
+    click L3Edeep_L230 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
 
-    L3top --o L3Xctx
-    L3top --> L3Esh1
-    L3top --> L3Esh2
-    L3top --> L3Smain
-    L3Smain --> L3G2
-    L3G2 --> L3S2
-    L3S2 --> L3G3
-    L3G3 --> L3S3
-    L3S3 --> L3G4
-    L3G4 --> L3Edeep
-    L3G4 --> L3Esh1
-    L3S3 --> L3G4b
-    L3G4b --> L3Esh2
-    L3G4b --> L3Esh1
-    L3G3 --> L3G3b
-    L3G3b --> L3Esh1
-    L3S2 --> L3G3c
-    L3G3c --o L3J1
-    L3G3c --> L3Esh2
-    L3G2 --> L3G2b
-    L3G2b --> L3S2b
-    L3S2b --> L3G3d
-    L3G3d --> L3Esh1
-    L3G3d --> L3Esh2
-    L3S2b --> L3G3e
-    L3G3e --> L3E2
-    L3Smain --> C22top
-    L3Smain --> C23top
-    L3Smain --> SynConnect_00000000
-    SynConnect_00000000 --> C24top
-    SynConnect_00000000 --> C25top
-    SynConnect_00000000 --> C26top
-    SynConnect_00000000 --> L3Gbr1
-    L3Gbr1 --> L3Gbr1a
-    L3Gbr1a --> L3Ebr1
-    L3Gbr1a --> L3Esh1
-    L3Gbr1 --> L3Gbr1b
-    L3Gbr1b --> L3Esh2
-    SynConnect_00000000 --> L3Gbr2
-    L3Gbr2 --> L3Gbr2a
-    L3Gbr2a --> L3Ebr2
-    L3Gbr2a --> L3Esh1
-    L3Gbr2 --> L3Gbr2b
-    L3Gbr2b --> L3Esh2
-    SynConnect_00000000 --> L3Gbr3
-    L3Gbr3 --> L3Gbr3a
-    L3Gbr3a --> L3Ebr3
-    L3Gbr3a --> L3Esh1
-    L3Gbr3 --> L3Gbr3b
-    L3Gbr3b --> L3Esh2
-    SynConnect_00000000 --> L3Gbr4
-    L3Gbr4 --> L3Gbr4a
-    L3Gbr4a --> L3Ebr4
-    L3Gbr4a --> L3Esh1
-    L3Gbr4 --> L3Gbr4b
-    L3Gbr4b --> L3Esh2
-    SynConnect_00000000 --> L3Gbr5
-    L3Gbr5 --> L3Gbr5a
-    L3Gbr5a --> L3Ebr5
-    L3Gbr5a --> L3Esh1
-    L3Gbr5 --> L3Gbr5b
-    L3Gbr5b --> L3Esh2
-    L3Smain --> L3Gbr6
-    L3Gbr6 --> L3Gbr6a
-    L3Gbr6a --> L3Ebr6
-    L3Gbr6a --> L3Esh1
-    L3Gbr6 --> L3Gbr6b
-    L3Gbr6b --> L3Esh2
-    L3Smain --> L3Gbr7
-    L3Gbr7 --> L3Gbr7a
-    L3Gbr7a --> L3Ebr7
-    L3Gbr7a --> L3Esh1
-    L3Gbr7 --> L3Gbr7b
-    L3Gbr7b --> L3Esh2
-    L3Smain --> L3Gbr8
-    L3Gbr8 --> L3Gbr8a
-    L3Gbr8a --> L3Ebr8
-    L3Gbr8a --> L3Esh1
-    L3Gbr8 --> L3Gbr8b
-    L3Gbr8b --> L3Esh2
-    L3Xctx ~~~ BottomPadding[ ]:::invisible
-    L3Esh1 ~~~ BottomPadding
-    L3Esh2 ~~~ BottomPadding
-    L3Edeep ~~~ BottomPadding
-    L3J1 ~~~ BottomPadding
-    L3E2 ~~~ BottomPadding
-    C22top ~~~ BottomPadding
-    C23top ~~~ BottomPadding
-    C24top ~~~ BottomPadding
-    C25top ~~~ BottomPadding
-    C26top ~~~ BottomPadding
-    L3Ebr1 ~~~ BottomPadding
-    L3Ebr2 ~~~ BottomPadding
-    L3Ebr3 ~~~ BottomPadding
-    L3Ebr4 ~~~ BottomPadding
-    L3Ebr5 ~~~ BottomPadding
-    L3Ebr6 ~~~ BottomPadding
-    L3Ebr7 ~~~ BottomPadding
-    L3Ebr8 ~~~ BottomPadding
+    L3top_L220 --o L3Xctx_L221
+    L3top_L220 --> L3Esh1_L222
+    L3top_L220 --> L3Esh2_L223
+    L3top_L220 --> L3Smain_L224
+    L3Smain_L224 --> L3G2_L225
+    L3G2_L225 --> L3S2_L226
+    L3S2_L226 --> L3G3_L227
+    L3G3_L227 --> L3S3_L228
+    L3S3_L228 --> L3G4_L229
+    L3G4_L229 --> L3Edeep_L230
+    L3G4_L229 --> L3Esh1_L222
+    L3S3_L228 --> L3G4b_L232
+    L3G4b_L232 --> L3Esh2_L223
+    L3G4b_L232 --> L3Esh1_L222
+    L3G3_L227 --> L3G3b_L235
+    L3G3b_L235 --> L3Esh1_L222
+    L3S2_L226 --> L3G3c_L237
+    L3G3c_L237 --o L3J1_L238
+    L3G3c_L237 --> L3Esh2_L223
+    L3G2_L225 --> L3G2b_L240
+    L3G2b_L240 --> L3S2b_L241
+    L3S2b_L241 --> L3G3d_L242
+    L3G3d_L242 --> L3Esh1_L222
+    L3G3d_L242 --> L3Esh2_L223
+    L3S2b_L241 --> L3G3e_L245
+    L3G3e_L245 --> L3E2_L246
+    L3Smain_L224 --> C22top_L247
+    L3Smain_L224 --> C23top_L248
+    L3Smain_L224 --> _Connector_00000000
+    _Connector_00000000 --> C24top_L249
+    _Connector_00000000 --> C25top_L250
+    _Connector_00000000 --> C26top_L251
+    _Connector_00000000 --> L3Gbr1_L252
+    L3Gbr1_L252 --> L3Gbr1a_L253
+    L3Gbr1a_L253 --> L3Ebr1_L254
+    L3Gbr1a_L253 --> L3Esh1_L222
+    L3Gbr1_L252 --> L3Gbr1b_L256
+    L3Gbr1b_L256 --> L3Esh2_L223
+    _Connector_00000000 --> L3Gbr2_L258
+    L3Gbr2_L258 --> L3Gbr2a_L259
+    L3Gbr2a_L259 --> L3Ebr2_L260
+    L3Gbr2a_L259 --> L3Esh1_L222
+    L3Gbr2_L258 --> L3Gbr2b_L262
+    L3Gbr2b_L262 --> L3Esh2_L223
+    _Connector_00000000 --> L3Gbr3_L264
+    L3Gbr3_L264 --> L3Gbr3a_L265
+    L3Gbr3a_L265 --> L3Ebr3_L266
+    L3Gbr3a_L265 --> L3Esh1_L222
+    L3Gbr3_L264 --> L3Gbr3b_L268
+    L3Gbr3b_L268 --> L3Esh2_L223
+    _Connector_00000000 --> L3Gbr4_L270
+    L3Gbr4_L270 --> L3Gbr4a_L271
+    L3Gbr4a_L271 --> L3Ebr4_L272
+    L3Gbr4a_L271 --> L3Esh1_L222
+    L3Gbr4_L270 --> L3Gbr4b_L274
+    L3Gbr4b_L274 --> L3Esh2_L223
+    _Connector_00000000 --> L3Gbr5_L276
+    L3Gbr5_L276 --> L3Gbr5a_L277
+    L3Gbr5a_L277 --> L3Ebr5_L278
+    L3Gbr5a_L277 --> L3Esh1_L222
+    L3Gbr5_L276 --> L3Gbr5b_L280
+    L3Gbr5b_L280 --> L3Esh2_L223
+    L3Smain_L224 --> L3Gbr6_L282
+    L3Gbr6_L282 --> L3Gbr6a_L283
+    L3Gbr6a_L283 --> L3Ebr6_L284
+    L3Gbr6a_L283 --> L3Esh1_L222
+    L3Gbr6_L282 --> L3Gbr6b_L286
+    L3Gbr6b_L286 --> L3Esh2_L223
+    L3Smain_L224 --> L3Gbr7_L288
+    L3Gbr7_L288 --> L3Gbr7a_L289
+    L3Gbr7a_L289 --> L3Ebr7_L290
+    L3Gbr7a_L289 --> L3Esh1_L222
+    L3Gbr7_L288 --> L3Gbr7b_L292
+    L3Gbr7b_L292 --> L3Esh2_L223
+    L3Smain_L224 --> L3Gbr8_L294
+    L3Gbr8_L294 --> L3Gbr8a_L295
+    L3Gbr8a_L295 --> L3Ebr8_L296
+    L3Gbr8a_L295 --> L3Esh1_L222
+    L3Gbr8_L294 --> L3Gbr8b_L298
+    L3Gbr8b_L298 --> L3Esh2_L223
+    L3Xctx_L221 ~~~ BottomPadding[ ]:::invisible
+    L3Esh1_L222 ~~~ BottomPadding
+    L3Esh2_L223 ~~~ BottomPadding
+    L3Edeep_L230 ~~~ BottomPadding
+    L3J1_L238 ~~~ BottomPadding
+    L3E2_L246 ~~~ BottomPadding
+    C22top_L247 ~~~ BottomPadding
+    C23top_L248 ~~~ BottomPadding
+    C24top_L249 ~~~ BottomPadding
+    C25top_L250 ~~~ BottomPadding
+    C26top_L251 ~~~ BottomPadding
+    L3Ebr1_L254 ~~~ BottomPadding
+    L3Ebr2_L260 ~~~ BottomPadding
+    L3Ebr3_L266 ~~~ BottomPadding
+    L3Ebr4_L272 ~~~ BottomPadding
+    L3Ebr5_L278 ~~~ BottomPadding
+    L3Ebr6_L284 ~~~ BottomPadding
+    L3Ebr7_L290 ~~~ BottomPadding
+    L3Ebr8_L296 ~~~ BottomPadding
 ```
 
 ### Package L4top
@@ -4873,221 +4892,221 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    L4top["<b>L4top</b><br>Statement of L4top"]
-    L4Xctx(["<b>L4Xctx</b><br>Context of L4Xctx"])
-    L4Esh1(("<b>L4Esh1</b><br>Shared evidence A of L4"))
-    L4Esh2(("<b>L4Esh2</b><br>Shared evidence B of L4"))
-    L4Smain[/"<b>L4Smain</b><br>Main strategy of L4"/]
-    L4G2["<b>L4G2</b><br>Level-2 claim of L4"]
-    C29top[["<b>C29top</b><br>Statement of C29top"]]
-    C30top[["<b>C30top</b><br>Statement of C30top"]]
-    SynConnect_00000000((" ")):::connector
-    L4Gbr6["<b>L4Gbr6</b><br>Breadth claim 6 of L4"]
-    L4Gbr7["<b>L4Gbr7</b><br>Breadth claim 7 of L4"]
-    L4Gbr8["<b>L4Gbr8</b><br>Breadth claim 8 of L4"]
-    L4S2[/"<b>L4S2</b><br>Level-3 strategy of L4"/]
-    L4G2b["<b>L4G2b</b><br>Level-3 alt claim of L4"]
-    C31top[["<b>C31top</b><br>Statement of C31top"]]
-    C32top[["<b>C32top</b><br>Statement of C32top"]]
-    C33top[["<b>C33top</b><br>Statement of C33top"]]
-    L4Gbr1["<b>L4Gbr1</b><br>Breadth claim 1 of L4"]
-    L4Gbr2["<b>L4Gbr2</b><br>Breadth claim 2 of L4"]
-    L4Gbr3["<b>L4Gbr3</b><br>Breadth claim 3 of L4"]
-    L4Gbr4["<b>L4Gbr4</b><br>Breadth claim 4 of L4"]
-    L4Gbr5["<b>L4Gbr5</b><br>Breadth claim 5 of L4"]
-    L4Gbr6a["<b>L4Gbr6a</b><br>Sub-claim 6a of L4"]
-    L4Gbr6b["<b>L4Gbr6b</b><br>Sub-claim 6b of L4"]
-    L4Gbr7a["<b>L4Gbr7a</b><br>Sub-claim 7a of L4"]
-    L4Gbr7b["<b>L4Gbr7b</b><br>Sub-claim 7b of L4"]
-    L4Gbr8a["<b>L4Gbr8a</b><br>Sub-claim 8a of L4"]
-    L4Gbr8b["<b>L4Gbr8b</b><br>Sub-claim 8b of L4"]
-    L4G3["<b>L4G3</b><br>Level-4 claim of L4"]
-    L4G3c["<b>L4G3c</b><br>Level-4 alt claim of L4"]
-    L4S2b[/"<b>L4S2b</b><br>Level-4 alt strategy of L4"/]
-    L4Gbr1a["<b>L4Gbr1a</b><br>Sub-claim 1a of L4"]
-    L4Gbr1b["<b>L4Gbr1b</b><br>Sub-claim 1b of L4"]
-    L4Gbr2a["<b>L4Gbr2a</b><br>Sub-claim 2a of L4"]
-    L4Gbr2b["<b>L4Gbr2b</b><br>Sub-claim 2b of L4"]
-    L4Gbr3a["<b>L4Gbr3a</b><br>Sub-claim 3a of L4"]
-    L4Gbr3b["<b>L4Gbr3b</b><br>Sub-claim 3b of L4"]
-    L4Gbr4a["<b>L4Gbr4a</b><br>Sub-claim 4a of L4"]
-    L4Gbr4b["<b>L4Gbr4b</b><br>Sub-claim 4b of L4"]
-    L4Gbr5a["<b>L4Gbr5a</b><br>Sub-claim 5a of L4"]
-    L4Gbr5b["<b>L4Gbr5b</b><br>Sub-claim 5b of L4"]
-    L4Ebr6(("<b>L4Ebr6</b><br>Evidence for breadth 6 of L4"))
-    L4Ebr7(("<b>L4Ebr7</b><br>Evidence for breadth 7 of L4"))
-    L4Ebr8(("<b>L4Ebr8</b><br>Evidence for breadth 8 of L4"))
-    L4S3[/"<b>L4S3</b><br>Level-5 strategy of L4"/]
-    L4G3b["<b>L4G3b</b><br>Level-5 alt claim of L4"]
-    L4J1("<b>L4J1</b>&nbsp;Ⓙ<br>Justification of L4")
-    L4G3d["<b>L4G3d</b><br>Level-5 claim D of L4"]
-    L4G3e["<b>L4G3e</b><br>Level-5 claim E of L4"]
-    L4Ebr1(("<b>L4Ebr1</b><br>Evidence for breadth 1 of L4"))
-    L4Ebr2(("<b>L4Ebr2</b><br>Evidence for breadth 2 of L4"))
-    L4Ebr3(("<b>L4Ebr3</b><br>Evidence for breadth 3 of L4"))
-    L4Ebr4(("<b>L4Ebr4</b><br>Evidence for breadth 4 of L4"))
-    L4Ebr5(("<b>L4Ebr5</b><br>Evidence for breadth 5 of L4"))
-    L4G4["<b>L4G4</b><br>Level-6 claim of L4"]
-    L4G4b["<b>L4G4b</b><br>Level-6 alt claim of L4"]
-    L4E2(("<b>L4E2</b><br>Extra evidence of L4"))
-    L4Edeep(("<b>L4Edeep</b><br>Deep evidence of L4"))
-    click L4top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4top"
-    click L4Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l4xctx"
-    click L4Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh1"
-    click L4Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh2"
-    click L4Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4smain"
-    click L4G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2"
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
-    click L4Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6"
-    click L4Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7"
-    click L4Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8"
-    click L4S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2"
-    click L4G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2b"
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
-    click L4Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1"
-    click L4Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2"
-    click L4Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3"
-    click L4Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4"
-    click L4Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5"
-    click L4Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6a"
-    click L4Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6b"
-    click L4Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7a"
-    click L4Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7b"
-    click L4Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8a"
-    click L4Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8b"
-    click L4G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3"
-    click L4G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3c"
-    click L4S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2b"
-    click L4Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1a"
-    click L4Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1b"
-    click L4Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2a"
-    click L4Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2b"
-    click L4Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3a"
-    click L4Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3b"
-    click L4Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4a"
-    click L4Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4b"
-    click L4Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5a"
-    click L4Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5b"
-    click L4Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr6"
-    click L4Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr7"
-    click L4Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr8"
-    click L4S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s3"
-    click L4G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3b"
-    click L4J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l4j1"
-    click L4G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3d"
-    click L4G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3e"
-    click L4Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr1"
-    click L4Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr2"
-    click L4Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr3"
-    click L4Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr4"
-    click L4Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr5"
-    click L4G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4"
-    click L4G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4b"
-    click L4E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4e2"
-    click L4Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
+    L4top_L301["<b>L4top</b><br>Statement of L4top"]
+    L4Xctx_L302(["<b>L4Xctx</b><br>Context of L4Xctx"])
+    L4Esh1_L303(("<b>L4Esh1</b><br>Shared evidence A of L4"))
+    L4Esh2_L304(("<b>L4Esh2</b><br>Shared evidence B of L4"))
+    L4Smain_L305[/"<b>L4Smain</b><br>Main strategy of L4"/]
+    L4G2_L306["<b>L4G2</b><br>Level-2 claim of L4"]
+    C29top_L328[["<b>C29top</b><br>Statement of C29top"]]
+    C30top_L329[["<b>C30top</b><br>Statement of C30top"]]
+    _Connector_00000000((" ")):::connector
+    L4Gbr6_L363["<b>L4Gbr6</b><br>Breadth claim 6 of L4"]
+    L4Gbr7_L369["<b>L4Gbr7</b><br>Breadth claim 7 of L4"]
+    L4Gbr8_L375["<b>L4Gbr8</b><br>Breadth claim 8 of L4"]
+    L4S2_L307[/"<b>L4S2</b><br>Level-3 strategy of L4"/]
+    L4G2b_L321["<b>L4G2b</b><br>Level-3 alt claim of L4"]
+    C31top_L330[["<b>C31top</b><br>Statement of C31top"]]
+    C32top_L331[["<b>C32top</b><br>Statement of C32top"]]
+    C33top_L332[["<b>C33top</b><br>Statement of C33top"]]
+    L4Gbr1_L333["<b>L4Gbr1</b><br>Breadth claim 1 of L4"]
+    L4Gbr2_L339["<b>L4Gbr2</b><br>Breadth claim 2 of L4"]
+    L4Gbr3_L345["<b>L4Gbr3</b><br>Breadth claim 3 of L4"]
+    L4Gbr4_L351["<b>L4Gbr4</b><br>Breadth claim 4 of L4"]
+    L4Gbr5_L357["<b>L4Gbr5</b><br>Breadth claim 5 of L4"]
+    L4Gbr6a_L364["<b>L4Gbr6a</b><br>Sub-claim 6a of L4"]
+    L4Gbr6b_L367["<b>L4Gbr6b</b><br>Sub-claim 6b of L4"]
+    L4Gbr7a_L370["<b>L4Gbr7a</b><br>Sub-claim 7a of L4"]
+    L4Gbr7b_L373["<b>L4Gbr7b</b><br>Sub-claim 7b of L4"]
+    L4Gbr8a_L376["<b>L4Gbr8a</b><br>Sub-claim 8a of L4"]
+    L4Gbr8b_L379["<b>L4Gbr8b</b><br>Sub-claim 8b of L4"]
+    L4G3_L308["<b>L4G3</b><br>Level-4 claim of L4"]
+    L4G3c_L318["<b>L4G3c</b><br>Level-4 alt claim of L4"]
+    L4S2b_L322[/"<b>L4S2b</b><br>Level-4 alt strategy of L4"/]
+    L4Gbr1a_L334["<b>L4Gbr1a</b><br>Sub-claim 1a of L4"]
+    L4Gbr1b_L337["<b>L4Gbr1b</b><br>Sub-claim 1b of L4"]
+    L4Gbr2a_L340["<b>L4Gbr2a</b><br>Sub-claim 2a of L4"]
+    L4Gbr2b_L343["<b>L4Gbr2b</b><br>Sub-claim 2b of L4"]
+    L4Gbr3a_L346["<b>L4Gbr3a</b><br>Sub-claim 3a of L4"]
+    L4Gbr3b_L349["<b>L4Gbr3b</b><br>Sub-claim 3b of L4"]
+    L4Gbr4a_L352["<b>L4Gbr4a</b><br>Sub-claim 4a of L4"]
+    L4Gbr4b_L355["<b>L4Gbr4b</b><br>Sub-claim 4b of L4"]
+    L4Gbr5a_L358["<b>L4Gbr5a</b><br>Sub-claim 5a of L4"]
+    L4Gbr5b_L361["<b>L4Gbr5b</b><br>Sub-claim 5b of L4"]
+    L4Ebr6_L365(("<b>L4Ebr6</b><br>Evidence for breadth 6 of L4"))
+    L4Ebr7_L371(("<b>L4Ebr7</b><br>Evidence for breadth 7 of L4"))
+    L4Ebr8_L377(("<b>L4Ebr8</b><br>Evidence for breadth 8 of L4"))
+    L4S3_L309[/"<b>L4S3</b><br>Level-5 strategy of L4"/]
+    L4G3b_L316["<b>L4G3b</b><br>Level-5 alt claim of L4"]
+    L4J1_L319("<b>L4J1</b>&nbsp;Ⓙ<br>Justification of L4")
+    L4G3d_L323["<b>L4G3d</b><br>Level-5 claim D of L4"]
+    L4G3e_L326["<b>L4G3e</b><br>Level-5 claim E of L4"]
+    L4Ebr1_L335(("<b>L4Ebr1</b><br>Evidence for breadth 1 of L4"))
+    L4Ebr2_L341(("<b>L4Ebr2</b><br>Evidence for breadth 2 of L4"))
+    L4Ebr3_L347(("<b>L4Ebr3</b><br>Evidence for breadth 3 of L4"))
+    L4Ebr4_L353(("<b>L4Ebr4</b><br>Evidence for breadth 4 of L4"))
+    L4Ebr5_L359(("<b>L4Ebr5</b><br>Evidence for breadth 5 of L4"))
+    L4G4_L310["<b>L4G4</b><br>Level-6 claim of L4"]
+    L4G4b_L313["<b>L4G4b</b><br>Level-6 alt claim of L4"]
+    L4E2_L327(("<b>L4E2</b><br>Extra evidence of L4"))
+    L4Edeep_L311(("<b>L4Edeep</b><br>Deep evidence of L4"))
+    click L4top_L301 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4top"
+    click L4Xctx_L302 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l4xctx"
+    click L4Esh1_L303 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh1"
+    click L4Esh2_L304 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4esh2"
+    click L4Smain_L305 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4smain"
+    click L4G2_L306 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2"
+    click C29top_L328 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c29top"
+    click C30top_L329 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c30top"
+    click L4Gbr6_L363 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6"
+    click L4Gbr7_L369 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7"
+    click L4Gbr8_L375 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8"
+    click L4S2_L307 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2"
+    click L4G2b_L321 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g2b"
+    click C31top_L330 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c31top"
+    click C32top_L331 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c32top"
+    click C33top_L332 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c33top"
+    click L4Gbr1_L333 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1"
+    click L4Gbr2_L339 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2"
+    click L4Gbr3_L345 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3"
+    click L4Gbr4_L351 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4"
+    click L4Gbr5_L357 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5"
+    click L4Gbr6a_L364 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6a"
+    click L4Gbr6b_L367 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr6b"
+    click L4Gbr7a_L370 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7a"
+    click L4Gbr7b_L373 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr7b"
+    click L4Gbr8a_L376 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8a"
+    click L4Gbr8b_L379 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr8b"
+    click L4G3_L308 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3"
+    click L4G3c_L318 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3c"
+    click L4S2b_L322 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s2b"
+    click L4Gbr1a_L334 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1a"
+    click L4Gbr1b_L337 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr1b"
+    click L4Gbr2a_L340 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2a"
+    click L4Gbr2b_L343 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr2b"
+    click L4Gbr3a_L346 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3a"
+    click L4Gbr3b_L349 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr3b"
+    click L4Gbr4a_L352 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4a"
+    click L4Gbr4b_L355 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr4b"
+    click L4Gbr5a_L358 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5a"
+    click L4Gbr5b_L361 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4gbr5b"
+    click L4Ebr6_L365 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr6"
+    click L4Ebr7_L371 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr7"
+    click L4Ebr8_L377 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr8"
+    click L4S3_L309 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l4s3"
+    click L4G3b_L316 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3b"
+    click L4J1_L319 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l4j1"
+    click L4G3d_L323 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3d"
+    click L4G3e_L326 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g3e"
+    click L4Ebr1_L335 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr1"
+    click L4Ebr2_L341 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr2"
+    click L4Ebr3_L347 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr3"
+    click L4Ebr4_L353 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr4"
+    click L4Ebr5_L359 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4ebr5"
+    click L4G4_L310 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4"
+    click L4G4b_L313 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l4g4b"
+    click L4E2_L327 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4e2"
+    click L4Edeep_L311 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
 
-    L4top --o L4Xctx
-    L4top --> L4Esh1
-    L4top --> L4Esh2
-    L4top --> L4Smain
-    L4Smain --> L4G2
-    L4G2 --> L4S2
-    L4S2 --> L4G3
-    L4G3 --> L4S3
-    L4S3 --> L4G4
-    L4G4 --> L4Edeep
-    L4G4 --> L4Esh1
-    L4S3 --> L4G4b
-    L4G4b --> L4Esh2
-    L4G4b --> L4Esh1
-    L4G3 --> L4G3b
-    L4G3b --> L4Esh1
-    L4S2 --> L4G3c
-    L4G3c --o L4J1
-    L4G3c --> L4Esh2
-    L4G2 --> L4G2b
-    L4G2b --> L4S2b
-    L4S2b --> L4G3d
-    L4G3d --> L4Esh1
-    L4G3d --> L4Esh2
-    L4S2b --> L4G3e
-    L4G3e --> L4E2
-    L4Smain --> C29top
-    L4Smain --> C30top
-    L4Smain --> SynConnect_00000000
-    SynConnect_00000000 --> C31top
-    SynConnect_00000000 --> C32top
-    SynConnect_00000000 --> C33top
-    SynConnect_00000000 --> L4Gbr1
-    L4Gbr1 --> L4Gbr1a
-    L4Gbr1a --> L4Ebr1
-    L4Gbr1a --> L4Esh1
-    L4Gbr1 --> L4Gbr1b
-    L4Gbr1b --> L4Esh2
-    SynConnect_00000000 --> L4Gbr2
-    L4Gbr2 --> L4Gbr2a
-    L4Gbr2a --> L4Ebr2
-    L4Gbr2a --> L4Esh1
-    L4Gbr2 --> L4Gbr2b
-    L4Gbr2b --> L4Esh2
-    SynConnect_00000000 --> L4Gbr3
-    L4Gbr3 --> L4Gbr3a
-    L4Gbr3a --> L4Ebr3
-    L4Gbr3a --> L4Esh1
-    L4Gbr3 --> L4Gbr3b
-    L4Gbr3b --> L4Esh2
-    SynConnect_00000000 --> L4Gbr4
-    L4Gbr4 --> L4Gbr4a
-    L4Gbr4a --> L4Ebr4
-    L4Gbr4a --> L4Esh1
-    L4Gbr4 --> L4Gbr4b
-    L4Gbr4b --> L4Esh2
-    SynConnect_00000000 --> L4Gbr5
-    L4Gbr5 --> L4Gbr5a
-    L4Gbr5a --> L4Ebr5
-    L4Gbr5a --> L4Esh1
-    L4Gbr5 --> L4Gbr5b
-    L4Gbr5b --> L4Esh2
-    L4Smain --> L4Gbr6
-    L4Gbr6 --> L4Gbr6a
-    L4Gbr6a --> L4Ebr6
-    L4Gbr6a --> L4Esh1
-    L4Gbr6 --> L4Gbr6b
-    L4Gbr6b --> L4Esh2
-    L4Smain --> L4Gbr7
-    L4Gbr7 --> L4Gbr7a
-    L4Gbr7a --> L4Ebr7
-    L4Gbr7a --> L4Esh1
-    L4Gbr7 --> L4Gbr7b
-    L4Gbr7b --> L4Esh2
-    L4Smain --> L4Gbr8
-    L4Gbr8 --> L4Gbr8a
-    L4Gbr8a --> L4Ebr8
-    L4Gbr8a --> L4Esh1
-    L4Gbr8 --> L4Gbr8b
-    L4Gbr8b --> L4Esh2
-    L4Xctx ~~~ BottomPadding[ ]:::invisible
-    L4Esh1 ~~~ BottomPadding
-    L4Esh2 ~~~ BottomPadding
-    L4Edeep ~~~ BottomPadding
-    L4J1 ~~~ BottomPadding
-    L4E2 ~~~ BottomPadding
-    C29top ~~~ BottomPadding
-    C30top ~~~ BottomPadding
-    C31top ~~~ BottomPadding
-    C32top ~~~ BottomPadding
-    C33top ~~~ BottomPadding
-    L4Ebr1 ~~~ BottomPadding
-    L4Ebr2 ~~~ BottomPadding
-    L4Ebr3 ~~~ BottomPadding
-    L4Ebr4 ~~~ BottomPadding
-    L4Ebr5 ~~~ BottomPadding
-    L4Ebr6 ~~~ BottomPadding
-    L4Ebr7 ~~~ BottomPadding
-    L4Ebr8 ~~~ BottomPadding
+    L4top_L301 --o L4Xctx_L302
+    L4top_L301 --> L4Esh1_L303
+    L4top_L301 --> L4Esh2_L304
+    L4top_L301 --> L4Smain_L305
+    L4Smain_L305 --> L4G2_L306
+    L4G2_L306 --> L4S2_L307
+    L4S2_L307 --> L4G3_L308
+    L4G3_L308 --> L4S3_L309
+    L4S3_L309 --> L4G4_L310
+    L4G4_L310 --> L4Edeep_L311
+    L4G4_L310 --> L4Esh1_L303
+    L4S3_L309 --> L4G4b_L313
+    L4G4b_L313 --> L4Esh2_L304
+    L4G4b_L313 --> L4Esh1_L303
+    L4G3_L308 --> L4G3b_L316
+    L4G3b_L316 --> L4Esh1_L303
+    L4S2_L307 --> L4G3c_L318
+    L4G3c_L318 --o L4J1_L319
+    L4G3c_L318 --> L4Esh2_L304
+    L4G2_L306 --> L4G2b_L321
+    L4G2b_L321 --> L4S2b_L322
+    L4S2b_L322 --> L4G3d_L323
+    L4G3d_L323 --> L4Esh1_L303
+    L4G3d_L323 --> L4Esh2_L304
+    L4S2b_L322 --> L4G3e_L326
+    L4G3e_L326 --> L4E2_L327
+    L4Smain_L305 --> C29top_L328
+    L4Smain_L305 --> C30top_L329
+    L4Smain_L305 --> _Connector_00000000
+    _Connector_00000000 --> C31top_L330
+    _Connector_00000000 --> C32top_L331
+    _Connector_00000000 --> C33top_L332
+    _Connector_00000000 --> L4Gbr1_L333
+    L4Gbr1_L333 --> L4Gbr1a_L334
+    L4Gbr1a_L334 --> L4Ebr1_L335
+    L4Gbr1a_L334 --> L4Esh1_L303
+    L4Gbr1_L333 --> L4Gbr1b_L337
+    L4Gbr1b_L337 --> L4Esh2_L304
+    _Connector_00000000 --> L4Gbr2_L339
+    L4Gbr2_L339 --> L4Gbr2a_L340
+    L4Gbr2a_L340 --> L4Ebr2_L341
+    L4Gbr2a_L340 --> L4Esh1_L303
+    L4Gbr2_L339 --> L4Gbr2b_L343
+    L4Gbr2b_L343 --> L4Esh2_L304
+    _Connector_00000000 --> L4Gbr3_L345
+    L4Gbr3_L345 --> L4Gbr3a_L346
+    L4Gbr3a_L346 --> L4Ebr3_L347
+    L4Gbr3a_L346 --> L4Esh1_L303
+    L4Gbr3_L345 --> L4Gbr3b_L349
+    L4Gbr3b_L349 --> L4Esh2_L304
+    _Connector_00000000 --> L4Gbr4_L351
+    L4Gbr4_L351 --> L4Gbr4a_L352
+    L4Gbr4a_L352 --> L4Ebr4_L353
+    L4Gbr4a_L352 --> L4Esh1_L303
+    L4Gbr4_L351 --> L4Gbr4b_L355
+    L4Gbr4b_L355 --> L4Esh2_L304
+    _Connector_00000000 --> L4Gbr5_L357
+    L4Gbr5_L357 --> L4Gbr5a_L358
+    L4Gbr5a_L358 --> L4Ebr5_L359
+    L4Gbr5a_L358 --> L4Esh1_L303
+    L4Gbr5_L357 --> L4Gbr5b_L361
+    L4Gbr5b_L361 --> L4Esh2_L304
+    L4Smain_L305 --> L4Gbr6_L363
+    L4Gbr6_L363 --> L4Gbr6a_L364
+    L4Gbr6a_L364 --> L4Ebr6_L365
+    L4Gbr6a_L364 --> L4Esh1_L303
+    L4Gbr6_L363 --> L4Gbr6b_L367
+    L4Gbr6b_L367 --> L4Esh2_L304
+    L4Smain_L305 --> L4Gbr7_L369
+    L4Gbr7_L369 --> L4Gbr7a_L370
+    L4Gbr7a_L370 --> L4Ebr7_L371
+    L4Gbr7a_L370 --> L4Esh1_L303
+    L4Gbr7_L369 --> L4Gbr7b_L373
+    L4Gbr7b_L373 --> L4Esh2_L304
+    L4Smain_L305 --> L4Gbr8_L375
+    L4Gbr8_L375 --> L4Gbr8a_L376
+    L4Gbr8a_L376 --> L4Ebr8_L377
+    L4Gbr8a_L376 --> L4Esh1_L303
+    L4Gbr8_L375 --> L4Gbr8b_L379
+    L4Gbr8b_L379 --> L4Esh2_L304
+    L4Xctx_L302 ~~~ BottomPadding[ ]:::invisible
+    L4Esh1_L303 ~~~ BottomPadding
+    L4Esh2_L304 ~~~ BottomPadding
+    L4Edeep_L311 ~~~ BottomPadding
+    L4J1_L319 ~~~ BottomPadding
+    L4E2_L327 ~~~ BottomPadding
+    C29top_L328 ~~~ BottomPadding
+    C30top_L329 ~~~ BottomPadding
+    C31top_L330 ~~~ BottomPadding
+    C32top_L331 ~~~ BottomPadding
+    C33top_L332 ~~~ BottomPadding
+    L4Ebr1_L335 ~~~ BottomPadding
+    L4Ebr2_L341 ~~~ BottomPadding
+    L4Ebr3_L347 ~~~ BottomPadding
+    L4Ebr4_L353 ~~~ BottomPadding
+    L4Ebr5_L359 ~~~ BottomPadding
+    L4Ebr6_L365 ~~~ BottomPadding
+    L4Ebr7_L371 ~~~ BottomPadding
+    L4Ebr8_L377 ~~~ BottomPadding
 ```
 
 ### Package L5top
@@ -5106,221 +5125,221 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    L5top["<b>L5top</b><br>Statement of L5top"]
-    L5Xctx(["<b>L5Xctx</b><br>Context of L5Xctx"])
-    L5Esh1(("<b>L5Esh1</b><br>Shared evidence A of L5"))
-    L5Esh2(("<b>L5Esh2</b><br>Shared evidence B of L5"))
-    L5Smain[/"<b>L5Smain</b><br>Main strategy of L5"/]
-    L5G2["<b>L5G2</b><br>Level-2 claim of L5"]
-    C36top[["<b>C36top</b><br>Statement of C36top"]]
-    C37top[["<b>C37top</b><br>Statement of C37top"]]
-    SynConnect_00000000((" ")):::connector
-    L5Gbr6["<b>L5Gbr6</b><br>Breadth claim 6 of L5"]
-    L5Gbr7["<b>L5Gbr7</b><br>Breadth claim 7 of L5"]
-    L5Gbr8["<b>L5Gbr8</b><br>Breadth claim 8 of L5"]
-    L5S2[/"<b>L5S2</b><br>Level-3 strategy of L5"/]
-    L5G2b["<b>L5G2b</b><br>Level-3 alt claim of L5"]
-    C38top[["<b>C38top</b><br>Statement of C38top"]]
-    C39top[["<b>C39top</b><br>Statement of C39top"]]
-    C40top[["<b>C40top</b><br>Statement of C40top"]]
-    L5Gbr1["<b>L5Gbr1</b><br>Breadth claim 1 of L5"]
-    L5Gbr2["<b>L5Gbr2</b><br>Breadth claim 2 of L5"]
-    L5Gbr3["<b>L5Gbr3</b><br>Breadth claim 3 of L5"]
-    L5Gbr4["<b>L5Gbr4</b><br>Breadth claim 4 of L5"]
-    L5Gbr5["<b>L5Gbr5</b><br>Breadth claim 5 of L5"]
-    L5Gbr6a["<b>L5Gbr6a</b><br>Sub-claim 6a of L5"]
-    L5Gbr6b["<b>L5Gbr6b</b><br>Sub-claim 6b of L5"]
-    L5Gbr7a["<b>L5Gbr7a</b><br>Sub-claim 7a of L5"]
-    L5Gbr7b["<b>L5Gbr7b</b><br>Sub-claim 7b of L5"]
-    L5Gbr8a["<b>L5Gbr8a</b><br>Sub-claim 8a of L5"]
-    L5Gbr8b["<b>L5Gbr8b</b><br>Sub-claim 8b of L5"]
-    L5G3["<b>L5G3</b><br>Level-4 claim of L5"]
-    L5G3c["<b>L5G3c</b><br>Level-4 alt claim of L5"]
-    L5S2b[/"<b>L5S2b</b><br>Level-4 alt strategy of L5"/]
-    L5Gbr1a["<b>L5Gbr1a</b><br>Sub-claim 1a of L5"]
-    L5Gbr1b["<b>L5Gbr1b</b><br>Sub-claim 1b of L5"]
-    L5Gbr2a["<b>L5Gbr2a</b><br>Sub-claim 2a of L5"]
-    L5Gbr2b["<b>L5Gbr2b</b><br>Sub-claim 2b of L5"]
-    L5Gbr3a["<b>L5Gbr3a</b><br>Sub-claim 3a of L5"]
-    L5Gbr3b["<b>L5Gbr3b</b><br>Sub-claim 3b of L5"]
-    L5Gbr4a["<b>L5Gbr4a</b><br>Sub-claim 4a of L5"]
-    L5Gbr4b["<b>L5Gbr4b</b><br>Sub-claim 4b of L5"]
-    L5Gbr5a["<b>L5Gbr5a</b><br>Sub-claim 5a of L5"]
-    L5Gbr5b["<b>L5Gbr5b</b><br>Sub-claim 5b of L5"]
-    L5Ebr6(("<b>L5Ebr6</b><br>Evidence for breadth 6 of L5"))
-    L5Ebr7(("<b>L5Ebr7</b><br>Evidence for breadth 7 of L5"))
-    L5Ebr8(("<b>L5Ebr8</b><br>Evidence for breadth 8 of L5"))
-    L5S3[/"<b>L5S3</b><br>Level-5 strategy of L5"/]
-    L5G3b["<b>L5G3b</b><br>Level-5 alt claim of L5"]
-    L5J1("<b>L5J1</b>&nbsp;Ⓙ<br>Justification of L5")
-    L5G3d["<b>L5G3d</b><br>Level-5 claim D of L5"]
-    L5G3e["<b>L5G3e</b><br>Level-5 claim E of L5"]
-    L5Ebr1(("<b>L5Ebr1</b><br>Evidence for breadth 1 of L5"))
-    L5Ebr2(("<b>L5Ebr2</b><br>Evidence for breadth 2 of L5"))
-    L5Ebr3(("<b>L5Ebr3</b><br>Evidence for breadth 3 of L5"))
-    L5Ebr4(("<b>L5Ebr4</b><br>Evidence for breadth 4 of L5"))
-    L5Ebr5(("<b>L5Ebr5</b><br>Evidence for breadth 5 of L5"))
-    L5G4["<b>L5G4</b><br>Level-6 claim of L5"]
-    L5G4b["<b>L5G4b</b><br>Level-6 alt claim of L5"]
-    L5E2(("<b>L5E2</b><br>Extra evidence of L5"))
-    L5Edeep(("<b>L5Edeep</b><br>Deep evidence of L5"))
-    click L5top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5top"
-    click L5Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l5xctx"
-    click L5Esh1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh1"
-    click L5Esh2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh2"
-    click L5Smain "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5smain"
-    click L5G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2"
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
-    click L5Gbr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6"
-    click L5Gbr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7"
-    click L5Gbr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8"
-    click L5S2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2"
-    click L5G2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2b"
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
-    click L5Gbr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1"
-    click L5Gbr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2"
-    click L5Gbr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3"
-    click L5Gbr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4"
-    click L5Gbr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5"
-    click L5Gbr6a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6a"
-    click L5Gbr6b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6b"
-    click L5Gbr7a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7a"
-    click L5Gbr7b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7b"
-    click L5Gbr8a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8a"
-    click L5Gbr8b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8b"
-    click L5G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3"
-    click L5G3c "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3c"
-    click L5S2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2b"
-    click L5Gbr1a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1a"
-    click L5Gbr1b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1b"
-    click L5Gbr2a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2a"
-    click L5Gbr2b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2b"
-    click L5Gbr3a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3a"
-    click L5Gbr3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3b"
-    click L5Gbr4a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4a"
-    click L5Gbr4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4b"
-    click L5Gbr5a "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5a"
-    click L5Gbr5b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5b"
-    click L5Ebr6 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr6"
-    click L5Ebr7 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr7"
-    click L5Ebr8 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr8"
-    click L5S3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s3"
-    click L5G3b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3b"
-    click L5J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l5j1"
-    click L5G3d "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3d"
-    click L5G3e "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3e"
-    click L5Ebr1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr1"
-    click L5Ebr2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr2"
-    click L5Ebr3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr3"
-    click L5Ebr4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr4"
-    click L5Ebr5 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr5"
-    click L5G4 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4"
-    click L5G4b "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4b"
-    click L5E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5e2"
-    click L5Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
+    L5top_L382["<b>L5top</b><br>Statement of L5top"]
+    L5Xctx_L383(["<b>L5Xctx</b><br>Context of L5Xctx"])
+    L5Esh1_L384(("<b>L5Esh1</b><br>Shared evidence A of L5"))
+    L5Esh2_L385(("<b>L5Esh2</b><br>Shared evidence B of L5"))
+    L5Smain_L386[/"<b>L5Smain</b><br>Main strategy of L5"/]
+    L5G2_L387["<b>L5G2</b><br>Level-2 claim of L5"]
+    C36top_L409[["<b>C36top</b><br>Statement of C36top"]]
+    C37top_L410[["<b>C37top</b><br>Statement of C37top"]]
+    _Connector_00000000((" ")):::connector
+    L5Gbr6_L444["<b>L5Gbr6</b><br>Breadth claim 6 of L5"]
+    L5Gbr7_L450["<b>L5Gbr7</b><br>Breadth claim 7 of L5"]
+    L5Gbr8_L456["<b>L5Gbr8</b><br>Breadth claim 8 of L5"]
+    L5S2_L388[/"<b>L5S2</b><br>Level-3 strategy of L5"/]
+    L5G2b_L402["<b>L5G2b</b><br>Level-3 alt claim of L5"]
+    C38top_L411[["<b>C38top</b><br>Statement of C38top"]]
+    C39top_L412[["<b>C39top</b><br>Statement of C39top"]]
+    C40top_L413[["<b>C40top</b><br>Statement of C40top"]]
+    L5Gbr1_L414["<b>L5Gbr1</b><br>Breadth claim 1 of L5"]
+    L5Gbr2_L420["<b>L5Gbr2</b><br>Breadth claim 2 of L5"]
+    L5Gbr3_L426["<b>L5Gbr3</b><br>Breadth claim 3 of L5"]
+    L5Gbr4_L432["<b>L5Gbr4</b><br>Breadth claim 4 of L5"]
+    L5Gbr5_L438["<b>L5Gbr5</b><br>Breadth claim 5 of L5"]
+    L5Gbr6a_L445["<b>L5Gbr6a</b><br>Sub-claim 6a of L5"]
+    L5Gbr6b_L448["<b>L5Gbr6b</b><br>Sub-claim 6b of L5"]
+    L5Gbr7a_L451["<b>L5Gbr7a</b><br>Sub-claim 7a of L5"]
+    L5Gbr7b_L454["<b>L5Gbr7b</b><br>Sub-claim 7b of L5"]
+    L5Gbr8a_L457["<b>L5Gbr8a</b><br>Sub-claim 8a of L5"]
+    L5Gbr8b_L460["<b>L5Gbr8b</b><br>Sub-claim 8b of L5"]
+    L5G3_L389["<b>L5G3</b><br>Level-4 claim of L5"]
+    L5G3c_L399["<b>L5G3c</b><br>Level-4 alt claim of L5"]
+    L5S2b_L403[/"<b>L5S2b</b><br>Level-4 alt strategy of L5"/]
+    L5Gbr1a_L415["<b>L5Gbr1a</b><br>Sub-claim 1a of L5"]
+    L5Gbr1b_L418["<b>L5Gbr1b</b><br>Sub-claim 1b of L5"]
+    L5Gbr2a_L421["<b>L5Gbr2a</b><br>Sub-claim 2a of L5"]
+    L5Gbr2b_L424["<b>L5Gbr2b</b><br>Sub-claim 2b of L5"]
+    L5Gbr3a_L427["<b>L5Gbr3a</b><br>Sub-claim 3a of L5"]
+    L5Gbr3b_L430["<b>L5Gbr3b</b><br>Sub-claim 3b of L5"]
+    L5Gbr4a_L433["<b>L5Gbr4a</b><br>Sub-claim 4a of L5"]
+    L5Gbr4b_L436["<b>L5Gbr4b</b><br>Sub-claim 4b of L5"]
+    L5Gbr5a_L439["<b>L5Gbr5a</b><br>Sub-claim 5a of L5"]
+    L5Gbr5b_L442["<b>L5Gbr5b</b><br>Sub-claim 5b of L5"]
+    L5Ebr6_L446(("<b>L5Ebr6</b><br>Evidence for breadth 6 of L5"))
+    L5Ebr7_L452(("<b>L5Ebr7</b><br>Evidence for breadth 7 of L5"))
+    L5Ebr8_L458(("<b>L5Ebr8</b><br>Evidence for breadth 8 of L5"))
+    L5S3_L390[/"<b>L5S3</b><br>Level-5 strategy of L5"/]
+    L5G3b_L397["<b>L5G3b</b><br>Level-5 alt claim of L5"]
+    L5J1_L400("<b>L5J1</b>&nbsp;Ⓙ<br>Justification of L5")
+    L5G3d_L404["<b>L5G3d</b><br>Level-5 claim D of L5"]
+    L5G3e_L407["<b>L5G3e</b><br>Level-5 claim E of L5"]
+    L5Ebr1_L416(("<b>L5Ebr1</b><br>Evidence for breadth 1 of L5"))
+    L5Ebr2_L422(("<b>L5Ebr2</b><br>Evidence for breadth 2 of L5"))
+    L5Ebr3_L428(("<b>L5Ebr3</b><br>Evidence for breadth 3 of L5"))
+    L5Ebr4_L434(("<b>L5Ebr4</b><br>Evidence for breadth 4 of L5"))
+    L5Ebr5_L440(("<b>L5Ebr5</b><br>Evidence for breadth 5 of L5"))
+    L5G4_L391["<b>L5G4</b><br>Level-6 claim of L5"]
+    L5G4b_L394["<b>L5G4b</b><br>Level-6 alt claim of L5"]
+    L5E2_L408(("<b>L5E2</b><br>Extra evidence of L5"))
+    L5Edeep_L392(("<b>L5Edeep</b><br>Deep evidence of L5"))
+    click L5top_L382 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5top"
+    click L5Xctx_L383 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-l5xctx"
+    click L5Esh1_L384 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh1"
+    click L5Esh2_L385 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5esh2"
+    click L5Smain_L386 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5smain"
+    click L5G2_L387 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2"
+    click C36top_L409 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c36top"
+    click C37top_L410 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c37top"
+    click L5Gbr6_L444 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6"
+    click L5Gbr7_L450 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7"
+    click L5Gbr8_L456 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8"
+    click L5S2_L388 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2"
+    click L5G2b_L402 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g2b"
+    click C38top_L411 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c38top"
+    click C39top_L412 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c39top"
+    click C40top_L413 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c40top"
+    click L5Gbr1_L414 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1"
+    click L5Gbr2_L420 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2"
+    click L5Gbr3_L426 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3"
+    click L5Gbr4_L432 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4"
+    click L5Gbr5_L438 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5"
+    click L5Gbr6a_L445 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6a"
+    click L5Gbr6b_L448 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr6b"
+    click L5Gbr7a_L451 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7a"
+    click L5Gbr7b_L454 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr7b"
+    click L5Gbr8a_L457 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8a"
+    click L5Gbr8b_L460 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr8b"
+    click L5G3_L389 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3"
+    click L5G3c_L399 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3c"
+    click L5S2b_L403 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s2b"
+    click L5Gbr1a_L415 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1a"
+    click L5Gbr1b_L418 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr1b"
+    click L5Gbr2a_L421 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2a"
+    click L5Gbr2b_L424 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr2b"
+    click L5Gbr3a_L427 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3a"
+    click L5Gbr3b_L430 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr3b"
+    click L5Gbr4a_L433 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4a"
+    click L5Gbr4b_L436 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr4b"
+    click L5Gbr5a_L439 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5a"
+    click L5Gbr5b_L442 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5gbr5b"
+    click L5Ebr6_L446 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr6"
+    click L5Ebr7_L452 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr7"
+    click L5Ebr8_L458 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr8"
+    click L5S3_L390 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-l5s3"
+    click L5G3b_L397 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3b"
+    click L5J1_L400 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-l5j1"
+    click L5G3d_L404 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3d"
+    click L5G3e_L407 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g3e"
+    click L5Ebr1_L416 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr1"
+    click L5Ebr2_L422 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr2"
+    click L5Ebr3_L428 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr3"
+    click L5Ebr4_L434 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr4"
+    click L5Ebr5_L440 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5ebr5"
+    click L5G4_L391 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4"
+    click L5G4b_L394 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-l5g4b"
+    click L5E2_L408 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5e2"
+    click L5Edeep_L392 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
 
-    L5top --o L5Xctx
-    L5top --> L5Esh1
-    L5top --> L5Esh2
-    L5top --> L5Smain
-    L5Smain --> L5G2
-    L5G2 --> L5S2
-    L5S2 --> L5G3
-    L5G3 --> L5S3
-    L5S3 --> L5G4
-    L5G4 --> L5Edeep
-    L5G4 --> L5Esh1
-    L5S3 --> L5G4b
-    L5G4b --> L5Esh2
-    L5G4b --> L5Esh1
-    L5G3 --> L5G3b
-    L5G3b --> L5Esh1
-    L5S2 --> L5G3c
-    L5G3c --o L5J1
-    L5G3c --> L5Esh2
-    L5G2 --> L5G2b
-    L5G2b --> L5S2b
-    L5S2b --> L5G3d
-    L5G3d --> L5Esh1
-    L5G3d --> L5Esh2
-    L5S2b --> L5G3e
-    L5G3e --> L5E2
-    L5Smain --> C36top
-    L5Smain --> C37top
-    L5Smain --> SynConnect_00000000
-    SynConnect_00000000 --> C38top
-    SynConnect_00000000 --> C39top
-    SynConnect_00000000 --> C40top
-    SynConnect_00000000 --> L5Gbr1
-    L5Gbr1 --> L5Gbr1a
-    L5Gbr1a --> L5Ebr1
-    L5Gbr1a --> L5Esh1
-    L5Gbr1 --> L5Gbr1b
-    L5Gbr1b --> L5Esh2
-    SynConnect_00000000 --> L5Gbr2
-    L5Gbr2 --> L5Gbr2a
-    L5Gbr2a --> L5Ebr2
-    L5Gbr2a --> L5Esh1
-    L5Gbr2 --> L5Gbr2b
-    L5Gbr2b --> L5Esh2
-    SynConnect_00000000 --> L5Gbr3
-    L5Gbr3 --> L5Gbr3a
-    L5Gbr3a --> L5Ebr3
-    L5Gbr3a --> L5Esh1
-    L5Gbr3 --> L5Gbr3b
-    L5Gbr3b --> L5Esh2
-    SynConnect_00000000 --> L5Gbr4
-    L5Gbr4 --> L5Gbr4a
-    L5Gbr4a --> L5Ebr4
-    L5Gbr4a --> L5Esh1
-    L5Gbr4 --> L5Gbr4b
-    L5Gbr4b --> L5Esh2
-    SynConnect_00000000 --> L5Gbr5
-    L5Gbr5 --> L5Gbr5a
-    L5Gbr5a --> L5Ebr5
-    L5Gbr5a --> L5Esh1
-    L5Gbr5 --> L5Gbr5b
-    L5Gbr5b --> L5Esh2
-    L5Smain --> L5Gbr6
-    L5Gbr6 --> L5Gbr6a
-    L5Gbr6a --> L5Ebr6
-    L5Gbr6a --> L5Esh1
-    L5Gbr6 --> L5Gbr6b
-    L5Gbr6b --> L5Esh2
-    L5Smain --> L5Gbr7
-    L5Gbr7 --> L5Gbr7a
-    L5Gbr7a --> L5Ebr7
-    L5Gbr7a --> L5Esh1
-    L5Gbr7 --> L5Gbr7b
-    L5Gbr7b --> L5Esh2
-    L5Smain --> L5Gbr8
-    L5Gbr8 --> L5Gbr8a
-    L5Gbr8a --> L5Ebr8
-    L5Gbr8a --> L5Esh1
-    L5Gbr8 --> L5Gbr8b
-    L5Gbr8b --> L5Esh2
-    L5Xctx ~~~ BottomPadding[ ]:::invisible
-    L5Esh1 ~~~ BottomPadding
-    L5Esh2 ~~~ BottomPadding
-    L5Edeep ~~~ BottomPadding
-    L5J1 ~~~ BottomPadding
-    L5E2 ~~~ BottomPadding
-    C36top ~~~ BottomPadding
-    C37top ~~~ BottomPadding
-    C38top ~~~ BottomPadding
-    C39top ~~~ BottomPadding
-    C40top ~~~ BottomPadding
-    L5Ebr1 ~~~ BottomPadding
-    L5Ebr2 ~~~ BottomPadding
-    L5Ebr3 ~~~ BottomPadding
-    L5Ebr4 ~~~ BottomPadding
-    L5Ebr5 ~~~ BottomPadding
-    L5Ebr6 ~~~ BottomPadding
-    L5Ebr7 ~~~ BottomPadding
-    L5Ebr8 ~~~ BottomPadding
+    L5top_L382 --o L5Xctx_L383
+    L5top_L382 --> L5Esh1_L384
+    L5top_L382 --> L5Esh2_L385
+    L5top_L382 --> L5Smain_L386
+    L5Smain_L386 --> L5G2_L387
+    L5G2_L387 --> L5S2_L388
+    L5S2_L388 --> L5G3_L389
+    L5G3_L389 --> L5S3_L390
+    L5S3_L390 --> L5G4_L391
+    L5G4_L391 --> L5Edeep_L392
+    L5G4_L391 --> L5Esh1_L384
+    L5S3_L390 --> L5G4b_L394
+    L5G4b_L394 --> L5Esh2_L385
+    L5G4b_L394 --> L5Esh1_L384
+    L5G3_L389 --> L5G3b_L397
+    L5G3b_L397 --> L5Esh1_L384
+    L5S2_L388 --> L5G3c_L399
+    L5G3c_L399 --o L5J1_L400
+    L5G3c_L399 --> L5Esh2_L385
+    L5G2_L387 --> L5G2b_L402
+    L5G2b_L402 --> L5S2b_L403
+    L5S2b_L403 --> L5G3d_L404
+    L5G3d_L404 --> L5Esh1_L384
+    L5G3d_L404 --> L5Esh2_L385
+    L5S2b_L403 --> L5G3e_L407
+    L5G3e_L407 --> L5E2_L408
+    L5Smain_L386 --> C36top_L409
+    L5Smain_L386 --> C37top_L410
+    L5Smain_L386 --> _Connector_00000000
+    _Connector_00000000 --> C38top_L411
+    _Connector_00000000 --> C39top_L412
+    _Connector_00000000 --> C40top_L413
+    _Connector_00000000 --> L5Gbr1_L414
+    L5Gbr1_L414 --> L5Gbr1a_L415
+    L5Gbr1a_L415 --> L5Ebr1_L416
+    L5Gbr1a_L415 --> L5Esh1_L384
+    L5Gbr1_L414 --> L5Gbr1b_L418
+    L5Gbr1b_L418 --> L5Esh2_L385
+    _Connector_00000000 --> L5Gbr2_L420
+    L5Gbr2_L420 --> L5Gbr2a_L421
+    L5Gbr2a_L421 --> L5Ebr2_L422
+    L5Gbr2a_L421 --> L5Esh1_L384
+    L5Gbr2_L420 --> L5Gbr2b_L424
+    L5Gbr2b_L424 --> L5Esh2_L385
+    _Connector_00000000 --> L5Gbr3_L426
+    L5Gbr3_L426 --> L5Gbr3a_L427
+    L5Gbr3a_L427 --> L5Ebr3_L428
+    L5Gbr3a_L427 --> L5Esh1_L384
+    L5Gbr3_L426 --> L5Gbr3b_L430
+    L5Gbr3b_L430 --> L5Esh2_L385
+    _Connector_00000000 --> L5Gbr4_L432
+    L5Gbr4_L432 --> L5Gbr4a_L433
+    L5Gbr4a_L433 --> L5Ebr4_L434
+    L5Gbr4a_L433 --> L5Esh1_L384
+    L5Gbr4_L432 --> L5Gbr4b_L436
+    L5Gbr4b_L436 --> L5Esh2_L385
+    _Connector_00000000 --> L5Gbr5_L438
+    L5Gbr5_L438 --> L5Gbr5a_L439
+    L5Gbr5a_L439 --> L5Ebr5_L440
+    L5Gbr5a_L439 --> L5Esh1_L384
+    L5Gbr5_L438 --> L5Gbr5b_L442
+    L5Gbr5b_L442 --> L5Esh2_L385
+    L5Smain_L386 --> L5Gbr6_L444
+    L5Gbr6_L444 --> L5Gbr6a_L445
+    L5Gbr6a_L445 --> L5Ebr6_L446
+    L5Gbr6a_L445 --> L5Esh1_L384
+    L5Gbr6_L444 --> L5Gbr6b_L448
+    L5Gbr6b_L448 --> L5Esh2_L385
+    L5Smain_L386 --> L5Gbr7_L450
+    L5Gbr7_L450 --> L5Gbr7a_L451
+    L5Gbr7a_L451 --> L5Ebr7_L452
+    L5Gbr7a_L451 --> L5Esh1_L384
+    L5Gbr7_L450 --> L5Gbr7b_L454
+    L5Gbr7b_L454 --> L5Esh2_L385
+    L5Smain_L386 --> L5Gbr8_L456
+    L5Gbr8_L456 --> L5Gbr8a_L457
+    L5Gbr8a_L457 --> L5Ebr8_L458
+    L5Gbr8a_L457 --> L5Esh1_L384
+    L5Gbr8_L456 --> L5Gbr8b_L460
+    L5Gbr8b_L460 --> L5Esh2_L385
+    L5Xctx_L383 ~~~ BottomPadding[ ]:::invisible
+    L5Esh1_L384 ~~~ BottomPadding
+    L5Esh2_L385 ~~~ BottomPadding
+    L5Edeep_L392 ~~~ BottomPadding
+    L5J1_L400 ~~~ BottomPadding
+    L5E2_L408 ~~~ BottomPadding
+    C36top_L409 ~~~ BottomPadding
+    C37top_L410 ~~~ BottomPadding
+    C38top_L411 ~~~ BottomPadding
+    C39top_L412 ~~~ BottomPadding
+    C40top_L413 ~~~ BottomPadding
+    L5Ebr1_L416 ~~~ BottomPadding
+    L5Ebr2_L422 ~~~ BottomPadding
+    L5Ebr3_L428 ~~~ BottomPadding
+    L5Ebr4_L434 ~~~ BottomPadding
+    L5Ebr5_L440 ~~~ BottomPadding
+    L5Ebr6_L446 ~~~ BottomPadding
+    L5Ebr7_L452 ~~~ BottomPadding
+    L5Ebr8_L458 ~~~ BottomPadding
 ```
 
 ### Package C01top
@@ -5339,52 +5358,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C01top["<b>C01top</b><br>Statement of C01top"]
-    C02top[["<b>C02top</b><br>Statement of C02top"]]
-    C01Xctx(["<b>C01Xctx</b><br>Context of C01Xctx"])
-    C01Esh(("<b>C01Esh</b><br>Shared evidence of C01"))
-    C01Sass[/"<b>C01Sass</b><br>Assertion strategy of C01"/]
-    C01G1["<b>C01G1</b><br>Sub-claim 1 of C01"]
-    C01G2["<b>C01G2</b><br>Sub-claim 2 of C01"]
-    C01G3["<b>C01G3</b><br>Sub-claim 3 of C01"]
-    C01E1(("<b>C01E1</b><br>Evidence 1 of C01"))
-    C01J1("<b>C01J1</b>&nbsp;Ⓙ<br>Justification of C01")
-    C01A1("<b>C01A1</b>&nbsp;Ⓐ<br>Assumption of C01")
-    C01E2(("<b>C01E2</b><br>Evidence 2 of C01"))
-    click C01top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01top"
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
-    click C01Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c01xctx"
-    click C01Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01esh"
-    click C01Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c01sass"
-    click C01G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g1"
-    click C01G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g2"
-    click C01G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g3"
-    click C01E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e1"
-    click C01J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c01j1"
-    click C01A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c01a1"
-    click C01E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
+    C01top_L463["<b>C01top</b><br>Statement of C01top"]
+    C02top_L464[["<b>C02top</b><br>Statement of C02top"]]
+    C01Xctx_L465(["<b>C01Xctx</b><br>Context of C01Xctx"])
+    C01Esh_L466(("<b>C01Esh</b><br>Shared evidence of C01"))
+    C01Sass_L467[/"<b>C01Sass</b><br>Assertion strategy of C01"/]
+    C01G1_L468["<b>C01G1</b><br>Sub-claim 1 of C01"]
+    C01G2_L471["<b>C01G2</b><br>Sub-claim 2 of C01"]
+    C01G3_L474["<b>C01G3</b><br>Sub-claim 3 of C01"]
+    C01E1_L469(("<b>C01E1</b><br>Evidence 1 of C01"))
+    C01J1_L472("<b>C01J1</b>&nbsp;Ⓙ<br>Justification of C01")
+    C01A1_L475("<b>C01A1</b>&nbsp;Ⓐ<br>Assumption of C01")
+    C01E2_L476(("<b>C01E2</b><br>Evidence 2 of C01"))
+    click C01top_L463 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01top"
+    click C02top_L464 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c02top"
+    click C01Xctx_L465 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c01xctx"
+    click C01Esh_L466 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01esh"
+    click C01Sass_L467 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c01sass"
+    click C01G1_L468 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g1"
+    click C01G2_L471 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g2"
+    click C01G3_L474 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c01g3"
+    click C01E1_L469 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e1"
+    click C01J1_L472 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c01j1"
+    click C01A1_L475 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c01a1"
+    click C01E2_L476 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
 
-    C01top --> C02top
-    C01top --o C01Xctx
-    C01top --> C01Esh
-    C01top --> C01Sass
-    C01Sass --> C01G1
-    C01G1 --> C01E1
-    C01G1 --o C01Xctx
-    C01Sass --> C01G2
-    C01G2 --o C01J1
-    C01G2 --> C01Esh
-    C01Sass --> C01G3
-    C01G3 --o C01A1
-    C01G3 --> C01E2
-    C01G3 --> C01E1
-    C02top ~~~ BottomPadding[ ]:::invisible
-    C01Xctx ~~~ BottomPadding
-    C01Esh ~~~ BottomPadding
-    C01E1 ~~~ BottomPadding
-    C01J1 ~~~ BottomPadding
-    C01A1 ~~~ BottomPadding
-    C01E2 ~~~ BottomPadding
+    C01top_L463 --> C02top_L464
+    C01top_L463 --o C01Xctx_L465
+    C01top_L463 --> C01Esh_L466
+    C01top_L463 --> C01Sass_L467
+    C01Sass_L467 --> C01G1_L468
+    C01G1_L468 --> C01E1_L469
+    C01G1_L468 --o C01Xctx_L465
+    C01Sass_L467 --> C01G2_L471
+    C01G2_L471 --o C01J1_L472
+    C01G2_L471 --> C01Esh_L466
+    C01Sass_L467 --> C01G3_L474
+    C01G3_L474 --o C01A1_L475
+    C01G3_L474 --> C01E2_L476
+    C01G3_L474 --> C01E1_L469
+    C02top_L464 ~~~ BottomPadding[ ]:::invisible
+    C01Xctx_L465 ~~~ BottomPadding
+    C01Esh_L466 ~~~ BottomPadding
+    C01E1_L469 ~~~ BottomPadding
+    C01J1_L472 ~~~ BottomPadding
+    C01A1_L475 ~~~ BottomPadding
+    C01E2_L476 ~~~ BottomPadding
 ```
 
 ### Package C02top
@@ -5403,52 +5422,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C02top["<b>C02top</b><br>Statement of C02top"]
-    C03top[["<b>C03top</b><br>Statement of C03top"]]
-    C02Xctx(["<b>C02Xctx</b><br>Context of C02Xctx"])
-    C02Esh(("<b>C02Esh</b><br>Shared evidence of C02"))
-    C02Sass[/"<b>C02Sass</b><br>Assertion strategy of C02"/]
-    C02G1["<b>C02G1</b><br>Sub-claim 1 of C02"]
-    C02G2["<b>C02G2</b><br>Sub-claim 2 of C02"]
-    C02G3["<b>C02G3</b><br>Sub-claim 3 of C02"]
-    C02E1(("<b>C02E1</b><br>Evidence 1 of C02"))
-    C02J1("<b>C02J1</b>&nbsp;Ⓙ<br>Justification of C02")
-    C02A1("<b>C02A1</b>&nbsp;Ⓐ<br>Assumption of C02")
-    C02E2(("<b>C02E2</b><br>Evidence 2 of C02"))
-    click C02top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02top"
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
-    click C02Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c02xctx"
-    click C02Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02esh"
-    click C02Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c02sass"
-    click C02G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g1"
-    click C02G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g2"
-    click C02G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g3"
-    click C02E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e1"
-    click C02J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c02j1"
-    click C02A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c02a1"
-    click C02E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
+    C02top_L479["<b>C02top</b><br>Statement of C02top"]
+    C03top_L480[["<b>C03top</b><br>Statement of C03top"]]
+    C02Xctx_L481(["<b>C02Xctx</b><br>Context of C02Xctx"])
+    C02Esh_L482(("<b>C02Esh</b><br>Shared evidence of C02"))
+    C02Sass_L483[/"<b>C02Sass</b><br>Assertion strategy of C02"/]
+    C02G1_L484["<b>C02G1</b><br>Sub-claim 1 of C02"]
+    C02G2_L487["<b>C02G2</b><br>Sub-claim 2 of C02"]
+    C02G3_L490["<b>C02G3</b><br>Sub-claim 3 of C02"]
+    C02E1_L485(("<b>C02E1</b><br>Evidence 1 of C02"))
+    C02J1_L488("<b>C02J1</b>&nbsp;Ⓙ<br>Justification of C02")
+    C02A1_L491("<b>C02A1</b>&nbsp;Ⓐ<br>Assumption of C02")
+    C02E2_L492(("<b>C02E2</b><br>Evidence 2 of C02"))
+    click C02top_L479 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02top"
+    click C03top_L480 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c03top"
+    click C02Xctx_L481 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c02xctx"
+    click C02Esh_L482 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02esh"
+    click C02Sass_L483 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c02sass"
+    click C02G1_L484 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g1"
+    click C02G2_L487 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g2"
+    click C02G3_L490 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c02g3"
+    click C02E1_L485 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e1"
+    click C02J1_L488 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c02j1"
+    click C02A1_L491 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c02a1"
+    click C02E2_L492 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
 
-    C02top --> C03top
-    C02top --o C02Xctx
-    C02top --> C02Esh
-    C02top --> C02Sass
-    C02Sass --> C02G1
-    C02G1 --> C02E1
-    C02G1 --o C02Xctx
-    C02Sass --> C02G2
-    C02G2 --o C02J1
-    C02G2 --> C02Esh
-    C02Sass --> C02G3
-    C02G3 --o C02A1
-    C02G3 --> C02E2
-    C02G3 --> C02E1
-    C03top ~~~ BottomPadding[ ]:::invisible
-    C02Xctx ~~~ BottomPadding
-    C02Esh ~~~ BottomPadding
-    C02E1 ~~~ BottomPadding
-    C02J1 ~~~ BottomPadding
-    C02A1 ~~~ BottomPadding
-    C02E2 ~~~ BottomPadding
+    C02top_L479 --> C03top_L480
+    C02top_L479 --o C02Xctx_L481
+    C02top_L479 --> C02Esh_L482
+    C02top_L479 --> C02Sass_L483
+    C02Sass_L483 --> C02G1_L484
+    C02G1_L484 --> C02E1_L485
+    C02G1_L484 --o C02Xctx_L481
+    C02Sass_L483 --> C02G2_L487
+    C02G2_L487 --o C02J1_L488
+    C02G2_L487 --> C02Esh_L482
+    C02Sass_L483 --> C02G3_L490
+    C02G3_L490 --o C02A1_L491
+    C02G3_L490 --> C02E2_L492
+    C02G3_L490 --> C02E1_L485
+    C03top_L480 ~~~ BottomPadding[ ]:::invisible
+    C02Xctx_L481 ~~~ BottomPadding
+    C02Esh_L482 ~~~ BottomPadding
+    C02E1_L485 ~~~ BottomPadding
+    C02J1_L488 ~~~ BottomPadding
+    C02A1_L491 ~~~ BottomPadding
+    C02E2_L492 ~~~ BottomPadding
 ```
 
 ### Package C03top
@@ -5467,52 +5486,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C03top["<b>C03top</b><br>Statement of C03top"]
-    C04top[["<b>C04top</b><br>Statement of C04top"]]
-    C03Xctx(["<b>C03Xctx</b><br>Context of C03Xctx"])
-    C03Esh(("<b>C03Esh</b><br>Shared evidence of C03"))
-    C03Sass[/"<b>C03Sass</b><br>Assertion strategy of C03"/]
-    C03G1["<b>C03G1</b><br>Sub-claim 1 of C03"]
-    C03G2["<b>C03G2</b><br>Sub-claim 2 of C03"]
-    C03G3["<b>C03G3</b><br>Sub-claim 3 of C03"]
-    C03E1(("<b>C03E1</b><br>Evidence 1 of C03"))
-    C03J1("<b>C03J1</b>&nbsp;Ⓙ<br>Justification of C03")
-    C03A1("<b>C03A1</b>&nbsp;Ⓐ<br>Assumption of C03")
-    C03E2(("<b>C03E2</b><br>Evidence 2 of C03"))
-    click C03top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03top"
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
-    click C03Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c03xctx"
-    click C03Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03esh"
-    click C03Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c03sass"
-    click C03G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g1"
-    click C03G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g2"
-    click C03G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g3"
-    click C03E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e1"
-    click C03J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c03j1"
-    click C03A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c03a1"
-    click C03E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
+    C03top_L495["<b>C03top</b><br>Statement of C03top"]
+    C04top_L496[["<b>C04top</b><br>Statement of C04top"]]
+    C03Xctx_L497(["<b>C03Xctx</b><br>Context of C03Xctx"])
+    C03Esh_L498(("<b>C03Esh</b><br>Shared evidence of C03"))
+    C03Sass_L499[/"<b>C03Sass</b><br>Assertion strategy of C03"/]
+    C03G1_L500["<b>C03G1</b><br>Sub-claim 1 of C03"]
+    C03G2_L503["<b>C03G2</b><br>Sub-claim 2 of C03"]
+    C03G3_L506["<b>C03G3</b><br>Sub-claim 3 of C03"]
+    C03E1_L501(("<b>C03E1</b><br>Evidence 1 of C03"))
+    C03J1_L504("<b>C03J1</b>&nbsp;Ⓙ<br>Justification of C03")
+    C03A1_L507("<b>C03A1</b>&nbsp;Ⓐ<br>Assumption of C03")
+    C03E2_L508(("<b>C03E2</b><br>Evidence 2 of C03"))
+    click C03top_L495 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03top"
+    click C04top_L496 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c04top"
+    click C03Xctx_L497 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c03xctx"
+    click C03Esh_L498 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03esh"
+    click C03Sass_L499 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c03sass"
+    click C03G1_L500 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g1"
+    click C03G2_L503 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g2"
+    click C03G3_L506 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c03g3"
+    click C03E1_L501 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e1"
+    click C03J1_L504 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c03j1"
+    click C03A1_L507 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c03a1"
+    click C03E2_L508 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
 
-    C03top --> C04top
-    C03top --o C03Xctx
-    C03top --> C03Esh
-    C03top --> C03Sass
-    C03Sass --> C03G1
-    C03G1 --> C03E1
-    C03G1 --o C03Xctx
-    C03Sass --> C03G2
-    C03G2 --o C03J1
-    C03G2 --> C03Esh
-    C03Sass --> C03G3
-    C03G3 --o C03A1
-    C03G3 --> C03E2
-    C03G3 --> C03E1
-    C04top ~~~ BottomPadding[ ]:::invisible
-    C03Xctx ~~~ BottomPadding
-    C03Esh ~~~ BottomPadding
-    C03E1 ~~~ BottomPadding
-    C03J1 ~~~ BottomPadding
-    C03A1 ~~~ BottomPadding
-    C03E2 ~~~ BottomPadding
+    C03top_L495 --> C04top_L496
+    C03top_L495 --o C03Xctx_L497
+    C03top_L495 --> C03Esh_L498
+    C03top_L495 --> C03Sass_L499
+    C03Sass_L499 --> C03G1_L500
+    C03G1_L500 --> C03E1_L501
+    C03G1_L500 --o C03Xctx_L497
+    C03Sass_L499 --> C03G2_L503
+    C03G2_L503 --o C03J1_L504
+    C03G2_L503 --> C03Esh_L498
+    C03Sass_L499 --> C03G3_L506
+    C03G3_L506 --o C03A1_L507
+    C03G3_L506 --> C03E2_L508
+    C03G3_L506 --> C03E1_L501
+    C04top_L496 ~~~ BottomPadding[ ]:::invisible
+    C03Xctx_L497 ~~~ BottomPadding
+    C03Esh_L498 ~~~ BottomPadding
+    C03E1_L501 ~~~ BottomPadding
+    C03J1_L504 ~~~ BottomPadding
+    C03A1_L507 ~~~ BottomPadding
+    C03E2_L508 ~~~ BottomPadding
 ```
 
 ### Package C04top
@@ -5531,52 +5550,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C04top["<b>C04top</b><br>Statement of C04top"]
-    C05top[["<b>C05top</b><br>Statement of C05top"]]
-    C04Xctx(["<b>C04Xctx</b><br>Context of C04Xctx"])
-    C04Esh(("<b>C04Esh</b><br>Shared evidence of C04"))
-    C04Sass[/"<b>C04Sass</b><br>Assertion strategy of C04"/]
-    C04G1["<b>C04G1</b><br>Sub-claim 1 of C04"]
-    C04G2["<b>C04G2</b><br>Sub-claim 2 of C04"]
-    C04G3["<b>C04G3</b><br>Sub-claim 3 of C04"]
-    C04E1(("<b>C04E1</b><br>Evidence 1 of C04"))
-    C04J1("<b>C04J1</b>&nbsp;Ⓙ<br>Justification of C04")
-    C04A1("<b>C04A1</b>&nbsp;Ⓐ<br>Assumption of C04")
-    C04E2(("<b>C04E2</b><br>Evidence 2 of C04"))
-    click C04top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04top"
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
-    click C04Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c04xctx"
-    click C04Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04esh"
-    click C04Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c04sass"
-    click C04G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g1"
-    click C04G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g2"
-    click C04G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g3"
-    click C04E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e1"
-    click C04J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c04j1"
-    click C04A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c04a1"
-    click C04E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
+    C04top_L511["<b>C04top</b><br>Statement of C04top"]
+    C05top_L512[["<b>C05top</b><br>Statement of C05top"]]
+    C04Xctx_L513(["<b>C04Xctx</b><br>Context of C04Xctx"])
+    C04Esh_L514(("<b>C04Esh</b><br>Shared evidence of C04"))
+    C04Sass_L515[/"<b>C04Sass</b><br>Assertion strategy of C04"/]
+    C04G1_L516["<b>C04G1</b><br>Sub-claim 1 of C04"]
+    C04G2_L519["<b>C04G2</b><br>Sub-claim 2 of C04"]
+    C04G3_L522["<b>C04G3</b><br>Sub-claim 3 of C04"]
+    C04E1_L517(("<b>C04E1</b><br>Evidence 1 of C04"))
+    C04J1_L520("<b>C04J1</b>&nbsp;Ⓙ<br>Justification of C04")
+    C04A1_L523("<b>C04A1</b>&nbsp;Ⓐ<br>Assumption of C04")
+    C04E2_L524(("<b>C04E2</b><br>Evidence 2 of C04"))
+    click C04top_L511 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04top"
+    click C05top_L512 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c05top"
+    click C04Xctx_L513 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c04xctx"
+    click C04Esh_L514 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04esh"
+    click C04Sass_L515 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c04sass"
+    click C04G1_L516 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g1"
+    click C04G2_L519 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g2"
+    click C04G3_L522 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c04g3"
+    click C04E1_L517 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e1"
+    click C04J1_L520 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c04j1"
+    click C04A1_L523 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c04a1"
+    click C04E2_L524 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
 
-    C04top --> C05top
-    C04top --o C04Xctx
-    C04top --> C04Esh
-    C04top --> C04Sass
-    C04Sass --> C04G1
-    C04G1 --> C04E1
-    C04G1 --o C04Xctx
-    C04Sass --> C04G2
-    C04G2 --o C04J1
-    C04G2 --> C04Esh
-    C04Sass --> C04G3
-    C04G3 --o C04A1
-    C04G3 --> C04E2
-    C04G3 --> C04E1
-    C05top ~~~ BottomPadding[ ]:::invisible
-    C04Xctx ~~~ BottomPadding
-    C04Esh ~~~ BottomPadding
-    C04E1 ~~~ BottomPadding
-    C04J1 ~~~ BottomPadding
-    C04A1 ~~~ BottomPadding
-    C04E2 ~~~ BottomPadding
+    C04top_L511 --> C05top_L512
+    C04top_L511 --o C04Xctx_L513
+    C04top_L511 --> C04Esh_L514
+    C04top_L511 --> C04Sass_L515
+    C04Sass_L515 --> C04G1_L516
+    C04G1_L516 --> C04E1_L517
+    C04G1_L516 --o C04Xctx_L513
+    C04Sass_L515 --> C04G2_L519
+    C04G2_L519 --o C04J1_L520
+    C04G2_L519 --> C04Esh_L514
+    C04Sass_L515 --> C04G3_L522
+    C04G3_L522 --o C04A1_L523
+    C04G3_L522 --> C04E2_L524
+    C04G3_L522 --> C04E1_L517
+    C05top_L512 ~~~ BottomPadding[ ]:::invisible
+    C04Xctx_L513 ~~~ BottomPadding
+    C04Esh_L514 ~~~ BottomPadding
+    C04E1_L517 ~~~ BottomPadding
+    C04J1_L520 ~~~ BottomPadding
+    C04A1_L523 ~~~ BottomPadding
+    C04E2_L524 ~~~ BottomPadding
 ```
 
 ### Package C05top
@@ -5595,52 +5614,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C05top["<b>C05top</b><br>Statement of C05top"]
-    C06top[["<b>C06top</b><br>Statement of C06top"]]
-    C05Xctx(["<b>C05Xctx</b><br>Context of C05Xctx"])
-    C05Esh(("<b>C05Esh</b><br>Shared evidence of C05"))
-    C05Sass[/"<b>C05Sass</b><br>Assertion strategy of C05"/]
-    C05G1["<b>C05G1</b><br>Sub-claim 1 of C05"]
-    C05G2["<b>C05G2</b><br>Sub-claim 2 of C05"]
-    C05G3["<b>C05G3</b><br>Sub-claim 3 of C05"]
-    C05E1(("<b>C05E1</b><br>Evidence 1 of C05"))
-    C05J1("<b>C05J1</b>&nbsp;Ⓙ<br>Justification of C05")
-    C05A1("<b>C05A1</b>&nbsp;Ⓐ<br>Assumption of C05")
-    C05E2(("<b>C05E2</b><br>Evidence 2 of C05"))
-    click C05top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05top"
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
-    click C05Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c05xctx"
-    click C05Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05esh"
-    click C05Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c05sass"
-    click C05G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g1"
-    click C05G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g2"
-    click C05G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g3"
-    click C05E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e1"
-    click C05J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c05j1"
-    click C05A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c05a1"
-    click C05E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
+    C05top_L527["<b>C05top</b><br>Statement of C05top"]
+    C06top_L528[["<b>C06top</b><br>Statement of C06top"]]
+    C05Xctx_L529(["<b>C05Xctx</b><br>Context of C05Xctx"])
+    C05Esh_L530(("<b>C05Esh</b><br>Shared evidence of C05"))
+    C05Sass_L531[/"<b>C05Sass</b><br>Assertion strategy of C05"/]
+    C05G1_L532["<b>C05G1</b><br>Sub-claim 1 of C05"]
+    C05G2_L535["<b>C05G2</b><br>Sub-claim 2 of C05"]
+    C05G3_L538["<b>C05G3</b><br>Sub-claim 3 of C05"]
+    C05E1_L533(("<b>C05E1</b><br>Evidence 1 of C05"))
+    C05J1_L536("<b>C05J1</b>&nbsp;Ⓙ<br>Justification of C05")
+    C05A1_L539("<b>C05A1</b>&nbsp;Ⓐ<br>Assumption of C05")
+    C05E2_L540(("<b>C05E2</b><br>Evidence 2 of C05"))
+    click C05top_L527 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05top"
+    click C06top_L528 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c06top"
+    click C05Xctx_L529 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c05xctx"
+    click C05Esh_L530 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05esh"
+    click C05Sass_L531 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c05sass"
+    click C05G1_L532 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g1"
+    click C05G2_L535 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g2"
+    click C05G3_L538 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c05g3"
+    click C05E1_L533 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e1"
+    click C05J1_L536 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c05j1"
+    click C05A1_L539 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c05a1"
+    click C05E2_L540 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
 
-    C05top --> C06top
-    C05top --o C05Xctx
-    C05top --> C05Esh
-    C05top --> C05Sass
-    C05Sass --> C05G1
-    C05G1 --> C05E1
-    C05G1 --o C05Xctx
-    C05Sass --> C05G2
-    C05G2 --o C05J1
-    C05G2 --> C05Esh
-    C05Sass --> C05G3
-    C05G3 --o C05A1
-    C05G3 --> C05E2
-    C05G3 --> C05E1
-    C06top ~~~ BottomPadding[ ]:::invisible
-    C05Xctx ~~~ BottomPadding
-    C05Esh ~~~ BottomPadding
-    C05E1 ~~~ BottomPadding
-    C05J1 ~~~ BottomPadding
-    C05A1 ~~~ BottomPadding
-    C05E2 ~~~ BottomPadding
+    C05top_L527 --> C06top_L528
+    C05top_L527 --o C05Xctx_L529
+    C05top_L527 --> C05Esh_L530
+    C05top_L527 --> C05Sass_L531
+    C05Sass_L531 --> C05G1_L532
+    C05G1_L532 --> C05E1_L533
+    C05G1_L532 --o C05Xctx_L529
+    C05Sass_L531 --> C05G2_L535
+    C05G2_L535 --o C05J1_L536
+    C05G2_L535 --> C05Esh_L530
+    C05Sass_L531 --> C05G3_L538
+    C05G3_L538 --o C05A1_L539
+    C05G3_L538 --> C05E2_L540
+    C05G3_L538 --> C05E1_L533
+    C06top_L528 ~~~ BottomPadding[ ]:::invisible
+    C05Xctx_L529 ~~~ BottomPadding
+    C05Esh_L530 ~~~ BottomPadding
+    C05E1_L533 ~~~ BottomPadding
+    C05J1_L536 ~~~ BottomPadding
+    C05A1_L539 ~~~ BottomPadding
+    C05E2_L540 ~~~ BottomPadding
 ```
 
 ### Package C06top
@@ -5659,52 +5678,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C06top["<b>C06top</b><br>Statement of C06top"]
-    C07top[["<b>C07top</b><br>Statement of C07top"]]
-    C06Xctx(["<b>C06Xctx</b><br>Context of C06Xctx"])
-    C06Esh(("<b>C06Esh</b><br>Shared evidence of C06"))
-    C06Sass[/"<b>C06Sass</b><br>Assertion strategy of C06"/]
-    C06G1["<b>C06G1</b><br>Sub-claim 1 of C06"]
-    C06G2["<b>C06G2</b><br>Sub-claim 2 of C06"]
-    C06G3["<b>C06G3</b><br>Sub-claim 3 of C06"]
-    C06E1(("<b>C06E1</b><br>Evidence 1 of C06"))
-    C06J1("<b>C06J1</b>&nbsp;Ⓙ<br>Justification of C06")
-    C06A1("<b>C06A1</b>&nbsp;Ⓐ<br>Assumption of C06")
-    C06E2(("<b>C06E2</b><br>Evidence 2 of C06"))
-    click C06top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06top"
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
-    click C06Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c06xctx"
-    click C06Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06esh"
-    click C06Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c06sass"
-    click C06G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g1"
-    click C06G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g2"
-    click C06G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g3"
-    click C06E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e1"
-    click C06J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c06j1"
-    click C06A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c06a1"
-    click C06E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
+    C06top_L543["<b>C06top</b><br>Statement of C06top"]
+    C07top_L544[["<b>C07top</b><br>Statement of C07top"]]
+    C06Xctx_L545(["<b>C06Xctx</b><br>Context of C06Xctx"])
+    C06Esh_L546(("<b>C06Esh</b><br>Shared evidence of C06"))
+    C06Sass_L547[/"<b>C06Sass</b><br>Assertion strategy of C06"/]
+    C06G1_L548["<b>C06G1</b><br>Sub-claim 1 of C06"]
+    C06G2_L551["<b>C06G2</b><br>Sub-claim 2 of C06"]
+    C06G3_L554["<b>C06G3</b><br>Sub-claim 3 of C06"]
+    C06E1_L549(("<b>C06E1</b><br>Evidence 1 of C06"))
+    C06J1_L552("<b>C06J1</b>&nbsp;Ⓙ<br>Justification of C06")
+    C06A1_L555("<b>C06A1</b>&nbsp;Ⓐ<br>Assumption of C06")
+    C06E2_L556(("<b>C06E2</b><br>Evidence 2 of C06"))
+    click C06top_L543 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06top"
+    click C07top_L544 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c07top"
+    click C06Xctx_L545 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c06xctx"
+    click C06Esh_L546 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06esh"
+    click C06Sass_L547 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c06sass"
+    click C06G1_L548 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g1"
+    click C06G2_L551 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g2"
+    click C06G3_L554 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c06g3"
+    click C06E1_L549 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e1"
+    click C06J1_L552 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c06j1"
+    click C06A1_L555 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c06a1"
+    click C06E2_L556 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
 
-    C06top --> C07top
-    C06top --o C06Xctx
-    C06top --> C06Esh
-    C06top --> C06Sass
-    C06Sass --> C06G1
-    C06G1 --> C06E1
-    C06G1 --o C06Xctx
-    C06Sass --> C06G2
-    C06G2 --o C06J1
-    C06G2 --> C06Esh
-    C06Sass --> C06G3
-    C06G3 --o C06A1
-    C06G3 --> C06E2
-    C06G3 --> C06E1
-    C07top ~~~ BottomPadding[ ]:::invisible
-    C06Xctx ~~~ BottomPadding
-    C06Esh ~~~ BottomPadding
-    C06E1 ~~~ BottomPadding
-    C06J1 ~~~ BottomPadding
-    C06A1 ~~~ BottomPadding
-    C06E2 ~~~ BottomPadding
+    C06top_L543 --> C07top_L544
+    C06top_L543 --o C06Xctx_L545
+    C06top_L543 --> C06Esh_L546
+    C06top_L543 --> C06Sass_L547
+    C06Sass_L547 --> C06G1_L548
+    C06G1_L548 --> C06E1_L549
+    C06G1_L548 --o C06Xctx_L545
+    C06Sass_L547 --> C06G2_L551
+    C06G2_L551 --o C06J1_L552
+    C06G2_L551 --> C06Esh_L546
+    C06Sass_L547 --> C06G3_L554
+    C06G3_L554 --o C06A1_L555
+    C06G3_L554 --> C06E2_L556
+    C06G3_L554 --> C06E1_L549
+    C07top_L544 ~~~ BottomPadding[ ]:::invisible
+    C06Xctx_L545 ~~~ BottomPadding
+    C06Esh_L546 ~~~ BottomPadding
+    C06E1_L549 ~~~ BottomPadding
+    C06J1_L552 ~~~ BottomPadding
+    C06A1_L555 ~~~ BottomPadding
+    C06E2_L556 ~~~ BottomPadding
 ```
 
 ### Package C07top
@@ -5723,52 +5742,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C07top["<b>C07top</b><br>Statement of C07top"]
-    C08top[["<b>C08top</b><br>Statement of C08top"]]
-    C07Xctx(["<b>C07Xctx</b><br>Context of C07Xctx"])
-    C07Esh(("<b>C07Esh</b><br>Shared evidence of C07"))
-    C07Sass[/"<b>C07Sass</b><br>Assertion strategy of C07"/]
-    C07G1["<b>C07G1</b><br>Sub-claim 1 of C07"]
-    C07G2["<b>C07G2</b><br>Sub-claim 2 of C07"]
-    C07G3["<b>C07G3</b><br>Sub-claim 3 of C07"]
-    C07E1(("<b>C07E1</b><br>Evidence 1 of C07"))
-    C07J1("<b>C07J1</b>&nbsp;Ⓙ<br>Justification of C07")
-    C07A1("<b>C07A1</b>&nbsp;Ⓐ<br>Assumption of C07")
-    C07E2(("<b>C07E2</b><br>Evidence 2 of C07"))
-    click C07top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07top"
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
-    click C07Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c07xctx"
-    click C07Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07esh"
-    click C07Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c07sass"
-    click C07G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g1"
-    click C07G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g2"
-    click C07G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g3"
-    click C07E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e1"
-    click C07J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c07j1"
-    click C07A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c07a1"
-    click C07E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
+    C07top_L559["<b>C07top</b><br>Statement of C07top"]
+    C08top_L560[["<b>C08top</b><br>Statement of C08top"]]
+    C07Xctx_L561(["<b>C07Xctx</b><br>Context of C07Xctx"])
+    C07Esh_L562(("<b>C07Esh</b><br>Shared evidence of C07"))
+    C07Sass_L563[/"<b>C07Sass</b><br>Assertion strategy of C07"/]
+    C07G1_L564["<b>C07G1</b><br>Sub-claim 1 of C07"]
+    C07G2_L567["<b>C07G2</b><br>Sub-claim 2 of C07"]
+    C07G3_L570["<b>C07G3</b><br>Sub-claim 3 of C07"]
+    C07E1_L565(("<b>C07E1</b><br>Evidence 1 of C07"))
+    C07J1_L568("<b>C07J1</b>&nbsp;Ⓙ<br>Justification of C07")
+    C07A1_L571("<b>C07A1</b>&nbsp;Ⓐ<br>Assumption of C07")
+    C07E2_L572(("<b>C07E2</b><br>Evidence 2 of C07"))
+    click C07top_L559 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07top"
+    click C08top_L560 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c08top"
+    click C07Xctx_L561 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c07xctx"
+    click C07Esh_L562 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07esh"
+    click C07Sass_L563 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c07sass"
+    click C07G1_L564 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g1"
+    click C07G2_L567 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g2"
+    click C07G3_L570 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c07g3"
+    click C07E1_L565 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e1"
+    click C07J1_L568 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c07j1"
+    click C07A1_L571 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c07a1"
+    click C07E2_L572 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
 
-    C07top --> C08top
-    C07top --o C07Xctx
-    C07top --> C07Esh
-    C07top --> C07Sass
-    C07Sass --> C07G1
-    C07G1 --> C07E1
-    C07G1 --o C07Xctx
-    C07Sass --> C07G2
-    C07G2 --o C07J1
-    C07G2 --> C07Esh
-    C07Sass --> C07G3
-    C07G3 --o C07A1
-    C07G3 --> C07E2
-    C07G3 --> C07E1
-    C08top ~~~ BottomPadding[ ]:::invisible
-    C07Xctx ~~~ BottomPadding
-    C07Esh ~~~ BottomPadding
-    C07E1 ~~~ BottomPadding
-    C07J1 ~~~ BottomPadding
-    C07A1 ~~~ BottomPadding
-    C07E2 ~~~ BottomPadding
+    C07top_L559 --> C08top_L560
+    C07top_L559 --o C07Xctx_L561
+    C07top_L559 --> C07Esh_L562
+    C07top_L559 --> C07Sass_L563
+    C07Sass_L563 --> C07G1_L564
+    C07G1_L564 --> C07E1_L565
+    C07G1_L564 --o C07Xctx_L561
+    C07Sass_L563 --> C07G2_L567
+    C07G2_L567 --o C07J1_L568
+    C07G2_L567 --> C07Esh_L562
+    C07Sass_L563 --> C07G3_L570
+    C07G3_L570 --o C07A1_L571
+    C07G3_L570 --> C07E2_L572
+    C07G3_L570 --> C07E1_L565
+    C08top_L560 ~~~ BottomPadding[ ]:::invisible
+    C07Xctx_L561 ~~~ BottomPadding
+    C07Esh_L562 ~~~ BottomPadding
+    C07E1_L565 ~~~ BottomPadding
+    C07J1_L568 ~~~ BottomPadding
+    C07A1_L571 ~~~ BottomPadding
+    C07E2_L572 ~~~ BottomPadding
 ```
 
 ### Package C08top
@@ -5787,52 +5806,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C08top["<b>C08top</b><br>Statement of C08top"]
-    C09top[["<b>C09top</b><br>Statement of C09top"]]
-    C08Xctx(["<b>C08Xctx</b><br>Context of C08Xctx"])
-    C08Esh(("<b>C08Esh</b><br>Shared evidence of C08"))
-    C08Sass[/"<b>C08Sass</b><br>Assertion strategy of C08"/]
-    C08G1["<b>C08G1</b><br>Sub-claim 1 of C08"]
-    C08G2["<b>C08G2</b><br>Sub-claim 2 of C08"]
-    C08G3["<b>C08G3</b><br>Sub-claim 3 of C08"]
-    C08E1(("<b>C08E1</b><br>Evidence 1 of C08"))
-    C08J1("<b>C08J1</b>&nbsp;Ⓙ<br>Justification of C08")
-    C08A1("<b>C08A1</b>&nbsp;Ⓐ<br>Assumption of C08")
-    C08E2(("<b>C08E2</b><br>Evidence 2 of C08"))
-    click C08top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08top"
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
-    click C08Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c08xctx"
-    click C08Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08esh"
-    click C08Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c08sass"
-    click C08G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g1"
-    click C08G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g2"
-    click C08G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g3"
-    click C08E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e1"
-    click C08J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c08j1"
-    click C08A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c08a1"
-    click C08E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
+    C08top_L575["<b>C08top</b><br>Statement of C08top"]
+    C09top_L576[["<b>C09top</b><br>Statement of C09top"]]
+    C08Xctx_L577(["<b>C08Xctx</b><br>Context of C08Xctx"])
+    C08Esh_L578(("<b>C08Esh</b><br>Shared evidence of C08"))
+    C08Sass_L579[/"<b>C08Sass</b><br>Assertion strategy of C08"/]
+    C08G1_L580["<b>C08G1</b><br>Sub-claim 1 of C08"]
+    C08G2_L583["<b>C08G2</b><br>Sub-claim 2 of C08"]
+    C08G3_L586["<b>C08G3</b><br>Sub-claim 3 of C08"]
+    C08E1_L581(("<b>C08E1</b><br>Evidence 1 of C08"))
+    C08J1_L584("<b>C08J1</b>&nbsp;Ⓙ<br>Justification of C08")
+    C08A1_L587("<b>C08A1</b>&nbsp;Ⓐ<br>Assumption of C08")
+    C08E2_L588(("<b>C08E2</b><br>Evidence 2 of C08"))
+    click C08top_L575 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08top"
+    click C09top_L576 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c09top"
+    click C08Xctx_L577 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c08xctx"
+    click C08Esh_L578 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08esh"
+    click C08Sass_L579 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c08sass"
+    click C08G1_L580 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g1"
+    click C08G2_L583 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g2"
+    click C08G3_L586 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c08g3"
+    click C08E1_L581 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e1"
+    click C08J1_L584 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c08j1"
+    click C08A1_L587 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c08a1"
+    click C08E2_L588 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
 
-    C08top --> C09top
-    C08top --o C08Xctx
-    C08top --> C08Esh
-    C08top --> C08Sass
-    C08Sass --> C08G1
-    C08G1 --> C08E1
-    C08G1 --o C08Xctx
-    C08Sass --> C08G2
-    C08G2 --o C08J1
-    C08G2 --> C08Esh
-    C08Sass --> C08G3
-    C08G3 --o C08A1
-    C08G3 --> C08E2
-    C08G3 --> C08E1
-    C09top ~~~ BottomPadding[ ]:::invisible
-    C08Xctx ~~~ BottomPadding
-    C08Esh ~~~ BottomPadding
-    C08E1 ~~~ BottomPadding
-    C08J1 ~~~ BottomPadding
-    C08A1 ~~~ BottomPadding
-    C08E2 ~~~ BottomPadding
+    C08top_L575 --> C09top_L576
+    C08top_L575 --o C08Xctx_L577
+    C08top_L575 --> C08Esh_L578
+    C08top_L575 --> C08Sass_L579
+    C08Sass_L579 --> C08G1_L580
+    C08G1_L580 --> C08E1_L581
+    C08G1_L580 --o C08Xctx_L577
+    C08Sass_L579 --> C08G2_L583
+    C08G2_L583 --o C08J1_L584
+    C08G2_L583 --> C08Esh_L578
+    C08Sass_L579 --> C08G3_L586
+    C08G3_L586 --o C08A1_L587
+    C08G3_L586 --> C08E2_L588
+    C08G3_L586 --> C08E1_L581
+    C09top_L576 ~~~ BottomPadding[ ]:::invisible
+    C08Xctx_L577 ~~~ BottomPadding
+    C08Esh_L578 ~~~ BottomPadding
+    C08E1_L581 ~~~ BottomPadding
+    C08J1_L584 ~~~ BottomPadding
+    C08A1_L587 ~~~ BottomPadding
+    C08E2_L588 ~~~ BottomPadding
 ```
 
 ### Package C09top
@@ -5851,52 +5870,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C09top["<b>C09top</b><br>Statement of C09top"]
-    C10top[["<b>C10top</b><br>Statement of C10top"]]
-    C09Xctx(["<b>C09Xctx</b><br>Context of C09Xctx"])
-    C09Esh(("<b>C09Esh</b><br>Shared evidence of C09"))
-    C09Sass[/"<b>C09Sass</b><br>Assertion strategy of C09"/]
-    C09G1["<b>C09G1</b><br>Sub-claim 1 of C09"]
-    C09G2["<b>C09G2</b><br>Sub-claim 2 of C09"]
-    C09G3["<b>C09G3</b><br>Sub-claim 3 of C09"]
-    C09E1(("<b>C09E1</b><br>Evidence 1 of C09"))
-    C09J1("<b>C09J1</b>&nbsp;Ⓙ<br>Justification of C09")
-    C09A1("<b>C09A1</b>&nbsp;Ⓐ<br>Assumption of C09")
-    C09E2(("<b>C09E2</b><br>Evidence 2 of C09"))
-    click C09top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09top"
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
-    click C09Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c09xctx"
-    click C09Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09esh"
-    click C09Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c09sass"
-    click C09G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g1"
-    click C09G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g2"
-    click C09G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g3"
-    click C09E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e1"
-    click C09J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c09j1"
-    click C09A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c09a1"
-    click C09E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
+    C09top_L591["<b>C09top</b><br>Statement of C09top"]
+    C10top_L592[["<b>C10top</b><br>Statement of C10top"]]
+    C09Xctx_L593(["<b>C09Xctx</b><br>Context of C09Xctx"])
+    C09Esh_L594(("<b>C09Esh</b><br>Shared evidence of C09"))
+    C09Sass_L595[/"<b>C09Sass</b><br>Assertion strategy of C09"/]
+    C09G1_L596["<b>C09G1</b><br>Sub-claim 1 of C09"]
+    C09G2_L599["<b>C09G2</b><br>Sub-claim 2 of C09"]
+    C09G3_L602["<b>C09G3</b><br>Sub-claim 3 of C09"]
+    C09E1_L597(("<b>C09E1</b><br>Evidence 1 of C09"))
+    C09J1_L600("<b>C09J1</b>&nbsp;Ⓙ<br>Justification of C09")
+    C09A1_L603("<b>C09A1</b>&nbsp;Ⓐ<br>Assumption of C09")
+    C09E2_L604(("<b>C09E2</b><br>Evidence 2 of C09"))
+    click C09top_L591 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09top"
+    click C10top_L592 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c10top"
+    click C09Xctx_L593 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c09xctx"
+    click C09Esh_L594 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09esh"
+    click C09Sass_L595 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c09sass"
+    click C09G1_L596 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g1"
+    click C09G2_L599 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g2"
+    click C09G3_L602 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c09g3"
+    click C09E1_L597 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e1"
+    click C09J1_L600 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c09j1"
+    click C09A1_L603 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c09a1"
+    click C09E2_L604 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
 
-    C09top --> C10top
-    C09top --o C09Xctx
-    C09top --> C09Esh
-    C09top --> C09Sass
-    C09Sass --> C09G1
-    C09G1 --> C09E1
-    C09G1 --o C09Xctx
-    C09Sass --> C09G2
-    C09G2 --o C09J1
-    C09G2 --> C09Esh
-    C09Sass --> C09G3
-    C09G3 --o C09A1
-    C09G3 --> C09E2
-    C09G3 --> C09E1
-    C10top ~~~ BottomPadding[ ]:::invisible
-    C09Xctx ~~~ BottomPadding
-    C09Esh ~~~ BottomPadding
-    C09E1 ~~~ BottomPadding
-    C09J1 ~~~ BottomPadding
-    C09A1 ~~~ BottomPadding
-    C09E2 ~~~ BottomPadding
+    C09top_L591 --> C10top_L592
+    C09top_L591 --o C09Xctx_L593
+    C09top_L591 --> C09Esh_L594
+    C09top_L591 --> C09Sass_L595
+    C09Sass_L595 --> C09G1_L596
+    C09G1_L596 --> C09E1_L597
+    C09G1_L596 --o C09Xctx_L593
+    C09Sass_L595 --> C09G2_L599
+    C09G2_L599 --o C09J1_L600
+    C09G2_L599 --> C09Esh_L594
+    C09Sass_L595 --> C09G3_L602
+    C09G3_L602 --o C09A1_L603
+    C09G3_L602 --> C09E2_L604
+    C09G3_L602 --> C09E1_L597
+    C10top_L592 ~~~ BottomPadding[ ]:::invisible
+    C09Xctx_L593 ~~~ BottomPadding
+    C09Esh_L594 ~~~ BottomPadding
+    C09E1_L597 ~~~ BottomPadding
+    C09J1_L600 ~~~ BottomPadding
+    C09A1_L603 ~~~ BottomPadding
+    C09E2_L604 ~~~ BottomPadding
 ```
 
 ### Package C10top
@@ -5915,52 +5934,52 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C10top["<b>C10top</b><br>Statement of C10top"]
-    C11top[["<b>C11top</b><br>Statement of C11top"]]
-    C10Xctx(["<b>C10Xctx</b><br>Context of C10Xctx"])
-    C10Esh(("<b>C10Esh</b><br>Shared evidence of C10"))
-    C10Sass[/"<b>C10Sass</b><br>Assertion strategy of C10"/]
-    C10G1["<b>C10G1</b><br>Sub-claim 1 of C10"]
-    C10G2["<b>C10G2</b><br>Sub-claim 2 of C10"]
-    C10G3["<b>C10G3</b><br>Sub-claim 3 of C10"]
-    C10E1(("<b>C10E1</b><br>Evidence 1 of C10"))
-    C10J1("<b>C10J1</b>&nbsp;Ⓙ<br>Justification of C10")
-    C10A1("<b>C10A1</b>&nbsp;Ⓐ<br>Assumption of C10")
-    C10E2(("<b>C10E2</b><br>Evidence 2 of C10"))
-    click C10top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10top"
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
-    click C10Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c10xctx"
-    click C10Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10esh"
-    click C10Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c10sass"
-    click C10G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g1"
-    click C10G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g2"
-    click C10G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g3"
-    click C10E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e1"
-    click C10J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c10j1"
-    click C10A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c10a1"
-    click C10E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
+    C10top_L607["<b>C10top</b><br>Statement of C10top"]
+    C11top_L608[["<b>C11top</b><br>Statement of C11top"]]
+    C10Xctx_L609(["<b>C10Xctx</b><br>Context of C10Xctx"])
+    C10Esh_L610(("<b>C10Esh</b><br>Shared evidence of C10"))
+    C10Sass_L611[/"<b>C10Sass</b><br>Assertion strategy of C10"/]
+    C10G1_L612["<b>C10G1</b><br>Sub-claim 1 of C10"]
+    C10G2_L615["<b>C10G2</b><br>Sub-claim 2 of C10"]
+    C10G3_L618["<b>C10G3</b><br>Sub-claim 3 of C10"]
+    C10E1_L613(("<b>C10E1</b><br>Evidence 1 of C10"))
+    C10J1_L616("<b>C10J1</b>&nbsp;Ⓙ<br>Justification of C10")
+    C10A1_L619("<b>C10A1</b>&nbsp;Ⓐ<br>Assumption of C10")
+    C10E2_L620(("<b>C10E2</b><br>Evidence 2 of C10"))
+    click C10top_L607 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10top"
+    click C11top_L608 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c11top"
+    click C10Xctx_L609 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c10xctx"
+    click C10Esh_L610 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10esh"
+    click C10Sass_L611 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c10sass"
+    click C10G1_L612 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g1"
+    click C10G2_L615 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g2"
+    click C10G3_L618 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c10g3"
+    click C10E1_L613 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e1"
+    click C10J1_L616 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c10j1"
+    click C10A1_L619 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c10a1"
+    click C10E2_L620 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
 
-    C10top --> C11top
-    C10top --o C10Xctx
-    C10top --> C10Esh
-    C10top --> C10Sass
-    C10Sass --> C10G1
-    C10G1 --> C10E1
-    C10G1 --o C10Xctx
-    C10Sass --> C10G2
-    C10G2 --o C10J1
-    C10G2 --> C10Esh
-    C10Sass --> C10G3
-    C10G3 --o C10A1
-    C10G3 --> C10E2
-    C10G3 --> C10E1
-    C11top ~~~ BottomPadding[ ]:::invisible
-    C10Xctx ~~~ BottomPadding
-    C10Esh ~~~ BottomPadding
-    C10E1 ~~~ BottomPadding
-    C10J1 ~~~ BottomPadding
-    C10A1 ~~~ BottomPadding
-    C10E2 ~~~ BottomPadding
+    C10top_L607 --> C11top_L608
+    C10top_L607 --o C10Xctx_L609
+    C10top_L607 --> C10Esh_L610
+    C10top_L607 --> C10Sass_L611
+    C10Sass_L611 --> C10G1_L612
+    C10G1_L612 --> C10E1_L613
+    C10G1_L612 --o C10Xctx_L609
+    C10Sass_L611 --> C10G2_L615
+    C10G2_L615 --o C10J1_L616
+    C10G2_L615 --> C10Esh_L610
+    C10Sass_L611 --> C10G3_L618
+    C10G3_L618 --o C10A1_L619
+    C10G3_L618 --> C10E2_L620
+    C10G3_L618 --> C10E1_L613
+    C11top_L608 ~~~ BottomPadding[ ]:::invisible
+    C10Xctx_L609 ~~~ BottomPadding
+    C10Esh_L610 ~~~ BottomPadding
+    C10E1_L613 ~~~ BottomPadding
+    C10J1_L616 ~~~ BottomPadding
+    C10A1_L619 ~~~ BottomPadding
+    C10E2_L620 ~~~ BottomPadding
 ```
 
 ### Package C11top
@@ -5979,48 +5998,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C11top["<b>C11top</b><br>Statement of C11top"]
-    C11Xctx(["<b>C11Xctx</b><br>Context of C11Xctx"])
-    C11Esh(("<b>C11Esh</b><br>Shared evidence of C11"))
-    C11Sass[/"<b>C11Sass</b><br>Assertion strategy of C11"/]
-    C11G1["<b>C11G1</b><br>Sub-claim 1 of C11"]
-    C11G2["<b>C11G2</b><br>Sub-claim 2 of C11"]
-    C11G3["<b>C11G3</b><br>Sub-claim 3 of C11"]
-    C11E1(("<b>C11E1</b><br>Evidence 1 of C11"))
-    C11J1("<b>C11J1</b>&nbsp;Ⓙ<br>Justification of C11")
-    C11A1("<b>C11A1</b>&nbsp;Ⓐ<br>Assumption of C11")
-    C11E2(("<b>C11E2</b><br>Evidence 2 of C11"))
-    click C11top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11top"
-    click C11Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c11xctx"
-    click C11Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11esh"
-    click C11Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c11sass"
-    click C11G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g1"
-    click C11G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g2"
-    click C11G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g3"
-    click C11E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e1"
-    click C11J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c11j1"
-    click C11A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c11a1"
-    click C11E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
+    C11top_L623["<b>C11top</b><br>Statement of C11top"]
+    C11Xctx_L624(["<b>C11Xctx</b><br>Context of C11Xctx"])
+    C11Esh_L625(("<b>C11Esh</b><br>Shared evidence of C11"))
+    C11Sass_L626[/"<b>C11Sass</b><br>Assertion strategy of C11"/]
+    C11G1_L627["<b>C11G1</b><br>Sub-claim 1 of C11"]
+    C11G2_L630["<b>C11G2</b><br>Sub-claim 2 of C11"]
+    C11G3_L633["<b>C11G3</b><br>Sub-claim 3 of C11"]
+    C11E1_L628(("<b>C11E1</b><br>Evidence 1 of C11"))
+    C11J1_L631("<b>C11J1</b>&nbsp;Ⓙ<br>Justification of C11")
+    C11A1_L634("<b>C11A1</b>&nbsp;Ⓐ<br>Assumption of C11")
+    C11E2_L635(("<b>C11E2</b><br>Evidence 2 of C11"))
+    click C11top_L623 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11top"
+    click C11Xctx_L624 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c11xctx"
+    click C11Esh_L625 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11esh"
+    click C11Sass_L626 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c11sass"
+    click C11G1_L627 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g1"
+    click C11G2_L630 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g2"
+    click C11G3_L633 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c11g3"
+    click C11E1_L628 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e1"
+    click C11J1_L631 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c11j1"
+    click C11A1_L634 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c11a1"
+    click C11E2_L635 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
 
-    C11top --o C11Xctx
-    C11top --> C11Esh
-    C11top --> C11Sass
-    C11Sass --> C11G1
-    C11G1 --> C11E1
-    C11G1 --o C11Xctx
-    C11Sass --> C11G2
-    C11G2 --o C11J1
-    C11G2 --> C11Esh
-    C11Sass --> C11G3
-    C11G3 --o C11A1
-    C11G3 --> C11E2
-    C11G3 --> C11E1
-    C11Xctx ~~~ BottomPadding[ ]:::invisible
-    C11Esh ~~~ BottomPadding
-    C11E1 ~~~ BottomPadding
-    C11J1 ~~~ BottomPadding
-    C11A1 ~~~ BottomPadding
-    C11E2 ~~~ BottomPadding
+    C11top_L623 --o C11Xctx_L624
+    C11top_L623 --> C11Esh_L625
+    C11top_L623 --> C11Sass_L626
+    C11Sass_L626 --> C11G1_L627
+    C11G1_L627 --> C11E1_L628
+    C11G1_L627 --o C11Xctx_L624
+    C11Sass_L626 --> C11G2_L630
+    C11G2_L630 --o C11J1_L631
+    C11G2_L630 --> C11Esh_L625
+    C11Sass_L626 --> C11G3_L633
+    C11G3_L633 --o C11A1_L634
+    C11G3_L633 --> C11E2_L635
+    C11G3_L633 --> C11E1_L628
+    C11Xctx_L624 ~~~ BottomPadding[ ]:::invisible
+    C11Esh_L625 ~~~ BottomPadding
+    C11E1_L628 ~~~ BottomPadding
+    C11J1_L631 ~~~ BottomPadding
+    C11A1_L634 ~~~ BottomPadding
+    C11E2_L635 ~~~ BottomPadding
 ```
 
 ### Package C12top
@@ -6039,48 +6058,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C12top["<b>C12top</b><br>Statement of C12top"]
-    C12Xctx(["<b>C12Xctx</b><br>Context of C12Xctx"])
-    C12Esh(("<b>C12Esh</b><br>Shared evidence of C12"))
-    C12Sass[/"<b>C12Sass</b><br>Assertion strategy of C12"/]
-    C12G1["<b>C12G1</b><br>Sub-claim 1 of C12"]
-    C12G2["<b>C12G2</b><br>Sub-claim 2 of C12"]
-    C12G3["<b>C12G3</b><br>Sub-claim 3 of C12"]
-    C12E1(("<b>C12E1</b><br>Evidence 1 of C12"))
-    C12J1("<b>C12J1</b>&nbsp;Ⓙ<br>Justification of C12")
-    C12A1("<b>C12A1</b>&nbsp;Ⓐ<br>Assumption of C12")
-    C12E2(("<b>C12E2</b><br>Evidence 2 of C12"))
-    click C12top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12top"
-    click C12Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c12xctx"
-    click C12Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12esh"
-    click C12Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c12sass"
-    click C12G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g1"
-    click C12G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g2"
-    click C12G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g3"
-    click C12E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e1"
-    click C12J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c12j1"
-    click C12A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c12a1"
-    click C12E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
+    C12top_L638["<b>C12top</b><br>Statement of C12top"]
+    C12Xctx_L639(["<b>C12Xctx</b><br>Context of C12Xctx"])
+    C12Esh_L640(("<b>C12Esh</b><br>Shared evidence of C12"))
+    C12Sass_L641[/"<b>C12Sass</b><br>Assertion strategy of C12"/]
+    C12G1_L642["<b>C12G1</b><br>Sub-claim 1 of C12"]
+    C12G2_L645["<b>C12G2</b><br>Sub-claim 2 of C12"]
+    C12G3_L648["<b>C12G3</b><br>Sub-claim 3 of C12"]
+    C12E1_L643(("<b>C12E1</b><br>Evidence 1 of C12"))
+    C12J1_L646("<b>C12J1</b>&nbsp;Ⓙ<br>Justification of C12")
+    C12A1_L649("<b>C12A1</b>&nbsp;Ⓐ<br>Assumption of C12")
+    C12E2_L650(("<b>C12E2</b><br>Evidence 2 of C12"))
+    click C12top_L638 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12top"
+    click C12Xctx_L639 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c12xctx"
+    click C12Esh_L640 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12esh"
+    click C12Sass_L641 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c12sass"
+    click C12G1_L642 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g1"
+    click C12G2_L645 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g2"
+    click C12G3_L648 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c12g3"
+    click C12E1_L643 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e1"
+    click C12J1_L646 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c12j1"
+    click C12A1_L649 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c12a1"
+    click C12E2_L650 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
 
-    C12top --o C12Xctx
-    C12top --> C12Esh
-    C12top --> C12Sass
-    C12Sass --> C12G1
-    C12G1 --> C12E1
-    C12G1 --o C12Xctx
-    C12Sass --> C12G2
-    C12G2 --o C12J1
-    C12G2 --> C12Esh
-    C12Sass --> C12G3
-    C12G3 --o C12A1
-    C12G3 --> C12E2
-    C12G3 --> C12E1
-    C12Xctx ~~~ BottomPadding[ ]:::invisible
-    C12Esh ~~~ BottomPadding
-    C12E1 ~~~ BottomPadding
-    C12J1 ~~~ BottomPadding
-    C12A1 ~~~ BottomPadding
-    C12E2 ~~~ BottomPadding
+    C12top_L638 --o C12Xctx_L639
+    C12top_L638 --> C12Esh_L640
+    C12top_L638 --> C12Sass_L641
+    C12Sass_L641 --> C12G1_L642
+    C12G1_L642 --> C12E1_L643
+    C12G1_L642 --o C12Xctx_L639
+    C12Sass_L641 --> C12G2_L645
+    C12G2_L645 --o C12J1_L646
+    C12G2_L645 --> C12Esh_L640
+    C12Sass_L641 --> C12G3_L648
+    C12G3_L648 --o C12A1_L649
+    C12G3_L648 --> C12E2_L650
+    C12G3_L648 --> C12E1_L643
+    C12Xctx_L639 ~~~ BottomPadding[ ]:::invisible
+    C12Esh_L640 ~~~ BottomPadding
+    C12E1_L643 ~~~ BottomPadding
+    C12J1_L646 ~~~ BottomPadding
+    C12A1_L649 ~~~ BottomPadding
+    C12E2_L650 ~~~ BottomPadding
 ```
 
 ### Package C13top
@@ -6099,48 +6118,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C13top["<b>C13top</b><br>Statement of C13top"]
-    C13Xctx(["<b>C13Xctx</b><br>Context of C13Xctx"])
-    C13Esh(("<b>C13Esh</b><br>Shared evidence of C13"))
-    C13Sass[/"<b>C13Sass</b><br>Assertion strategy of C13"/]
-    C13G1["<b>C13G1</b><br>Sub-claim 1 of C13"]
-    C13G2["<b>C13G2</b><br>Sub-claim 2 of C13"]
-    C13G3["<b>C13G3</b><br>Sub-claim 3 of C13"]
-    C13E1(("<b>C13E1</b><br>Evidence 1 of C13"))
-    C13J1("<b>C13J1</b>&nbsp;Ⓙ<br>Justification of C13")
-    C13A1("<b>C13A1</b>&nbsp;Ⓐ<br>Assumption of C13")
-    C13E2(("<b>C13E2</b><br>Evidence 2 of C13"))
-    click C13top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13top"
-    click C13Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c13xctx"
-    click C13Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13esh"
-    click C13Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c13sass"
-    click C13G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g1"
-    click C13G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g2"
-    click C13G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g3"
-    click C13E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e1"
-    click C13J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c13j1"
-    click C13A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c13a1"
-    click C13E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
+    C13top_L653["<b>C13top</b><br>Statement of C13top"]
+    C13Xctx_L654(["<b>C13Xctx</b><br>Context of C13Xctx"])
+    C13Esh_L655(("<b>C13Esh</b><br>Shared evidence of C13"))
+    C13Sass_L656[/"<b>C13Sass</b><br>Assertion strategy of C13"/]
+    C13G1_L657["<b>C13G1</b><br>Sub-claim 1 of C13"]
+    C13G2_L660["<b>C13G2</b><br>Sub-claim 2 of C13"]
+    C13G3_L663["<b>C13G3</b><br>Sub-claim 3 of C13"]
+    C13E1_L658(("<b>C13E1</b><br>Evidence 1 of C13"))
+    C13J1_L661("<b>C13J1</b>&nbsp;Ⓙ<br>Justification of C13")
+    C13A1_L664("<b>C13A1</b>&nbsp;Ⓐ<br>Assumption of C13")
+    C13E2_L665(("<b>C13E2</b><br>Evidence 2 of C13"))
+    click C13top_L653 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13top"
+    click C13Xctx_L654 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c13xctx"
+    click C13Esh_L655 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13esh"
+    click C13Sass_L656 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c13sass"
+    click C13G1_L657 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g1"
+    click C13G2_L660 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g2"
+    click C13G3_L663 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c13g3"
+    click C13E1_L658 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e1"
+    click C13J1_L661 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c13j1"
+    click C13A1_L664 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c13a1"
+    click C13E2_L665 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
 
-    C13top --o C13Xctx
-    C13top --> C13Esh
-    C13top --> C13Sass
-    C13Sass --> C13G1
-    C13G1 --> C13E1
-    C13G1 --o C13Xctx
-    C13Sass --> C13G2
-    C13G2 --o C13J1
-    C13G2 --> C13Esh
-    C13Sass --> C13G3
-    C13G3 --o C13A1
-    C13G3 --> C13E2
-    C13G3 --> C13E1
-    C13Xctx ~~~ BottomPadding[ ]:::invisible
-    C13Esh ~~~ BottomPadding
-    C13E1 ~~~ BottomPadding
-    C13J1 ~~~ BottomPadding
-    C13A1 ~~~ BottomPadding
-    C13E2 ~~~ BottomPadding
+    C13top_L653 --o C13Xctx_L654
+    C13top_L653 --> C13Esh_L655
+    C13top_L653 --> C13Sass_L656
+    C13Sass_L656 --> C13G1_L657
+    C13G1_L657 --> C13E1_L658
+    C13G1_L657 --o C13Xctx_L654
+    C13Sass_L656 --> C13G2_L660
+    C13G2_L660 --o C13J1_L661
+    C13G2_L660 --> C13Esh_L655
+    C13Sass_L656 --> C13G3_L663
+    C13G3_L663 --o C13A1_L664
+    C13G3_L663 --> C13E2_L665
+    C13G3_L663 --> C13E1_L658
+    C13Xctx_L654 ~~~ BottomPadding[ ]:::invisible
+    C13Esh_L655 ~~~ BottomPadding
+    C13E1_L658 ~~~ BottomPadding
+    C13J1_L661 ~~~ BottomPadding
+    C13A1_L664 ~~~ BottomPadding
+    C13E2_L665 ~~~ BottomPadding
 ```
 
 ### Package C14top
@@ -6159,48 +6178,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C14top["<b>C14top</b><br>Statement of C14top"]
-    C14Xctx(["<b>C14Xctx</b><br>Context of C14Xctx"])
-    C14Esh(("<b>C14Esh</b><br>Shared evidence of C14"))
-    C14Sass[/"<b>C14Sass</b><br>Assertion strategy of C14"/]
-    C14G1["<b>C14G1</b><br>Sub-claim 1 of C14"]
-    C14G2["<b>C14G2</b><br>Sub-claim 2 of C14"]
-    C14G3["<b>C14G3</b><br>Sub-claim 3 of C14"]
-    C14E1(("<b>C14E1</b><br>Evidence 1 of C14"))
-    C14J1("<b>C14J1</b>&nbsp;Ⓙ<br>Justification of C14")
-    C14A1("<b>C14A1</b>&nbsp;Ⓐ<br>Assumption of C14")
-    C14E2(("<b>C14E2</b><br>Evidence 2 of C14"))
-    click C14top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14top"
-    click C14Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c14xctx"
-    click C14Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14esh"
-    click C14Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c14sass"
-    click C14G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g1"
-    click C14G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g2"
-    click C14G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g3"
-    click C14E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e1"
-    click C14J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c14j1"
-    click C14A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c14a1"
-    click C14E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
+    C14top_L668["<b>C14top</b><br>Statement of C14top"]
+    C14Xctx_L669(["<b>C14Xctx</b><br>Context of C14Xctx"])
+    C14Esh_L670(("<b>C14Esh</b><br>Shared evidence of C14"))
+    C14Sass_L671[/"<b>C14Sass</b><br>Assertion strategy of C14"/]
+    C14G1_L672["<b>C14G1</b><br>Sub-claim 1 of C14"]
+    C14G2_L675["<b>C14G2</b><br>Sub-claim 2 of C14"]
+    C14G3_L678["<b>C14G3</b><br>Sub-claim 3 of C14"]
+    C14E1_L673(("<b>C14E1</b><br>Evidence 1 of C14"))
+    C14J1_L676("<b>C14J1</b>&nbsp;Ⓙ<br>Justification of C14")
+    C14A1_L679("<b>C14A1</b>&nbsp;Ⓐ<br>Assumption of C14")
+    C14E2_L680(("<b>C14E2</b><br>Evidence 2 of C14"))
+    click C14top_L668 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14top"
+    click C14Xctx_L669 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c14xctx"
+    click C14Esh_L670 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14esh"
+    click C14Sass_L671 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c14sass"
+    click C14G1_L672 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g1"
+    click C14G2_L675 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g2"
+    click C14G3_L678 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c14g3"
+    click C14E1_L673 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e1"
+    click C14J1_L676 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c14j1"
+    click C14A1_L679 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c14a1"
+    click C14E2_L680 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
 
-    C14top --o C14Xctx
-    C14top --> C14Esh
-    C14top --> C14Sass
-    C14Sass --> C14G1
-    C14G1 --> C14E1
-    C14G1 --o C14Xctx
-    C14Sass --> C14G2
-    C14G2 --o C14J1
-    C14G2 --> C14Esh
-    C14Sass --> C14G3
-    C14G3 --o C14A1
-    C14G3 --> C14E2
-    C14G3 --> C14E1
-    C14Xctx ~~~ BottomPadding[ ]:::invisible
-    C14Esh ~~~ BottomPadding
-    C14E1 ~~~ BottomPadding
-    C14J1 ~~~ BottomPadding
-    C14A1 ~~~ BottomPadding
-    C14E2 ~~~ BottomPadding
+    C14top_L668 --o C14Xctx_L669
+    C14top_L668 --> C14Esh_L670
+    C14top_L668 --> C14Sass_L671
+    C14Sass_L671 --> C14G1_L672
+    C14G1_L672 --> C14E1_L673
+    C14G1_L672 --o C14Xctx_L669
+    C14Sass_L671 --> C14G2_L675
+    C14G2_L675 --o C14J1_L676
+    C14G2_L675 --> C14Esh_L670
+    C14Sass_L671 --> C14G3_L678
+    C14G3_L678 --o C14A1_L679
+    C14G3_L678 --> C14E2_L680
+    C14G3_L678 --> C14E1_L673
+    C14Xctx_L669 ~~~ BottomPadding[ ]:::invisible
+    C14Esh_L670 ~~~ BottomPadding
+    C14E1_L673 ~~~ BottomPadding
+    C14J1_L676 ~~~ BottomPadding
+    C14A1_L679 ~~~ BottomPadding
+    C14E2_L680 ~~~ BottomPadding
 ```
 
 ### Package C15top
@@ -6219,48 +6238,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C15top["<b>C15top</b><br>Statement of C15top"]
-    C15Xctx(["<b>C15Xctx</b><br>Context of C15Xctx"])
-    C15Esh(("<b>C15Esh</b><br>Shared evidence of C15"))
-    C15Sass[/"<b>C15Sass</b><br>Assertion strategy of C15"/]
-    C15G1["<b>C15G1</b><br>Sub-claim 1 of C15"]
-    C15G2["<b>C15G2</b><br>Sub-claim 2 of C15"]
-    C15G3["<b>C15G3</b><br>Sub-claim 3 of C15"]
-    C15E1(("<b>C15E1</b><br>Evidence 1 of C15"))
-    C15J1("<b>C15J1</b>&nbsp;Ⓙ<br>Justification of C15")
-    C15A1("<b>C15A1</b>&nbsp;Ⓐ<br>Assumption of C15")
-    C15E2(("<b>C15E2</b><br>Evidence 2 of C15"))
-    click C15top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15top"
-    click C15Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c15xctx"
-    click C15Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15esh"
-    click C15Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c15sass"
-    click C15G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g1"
-    click C15G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g2"
-    click C15G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g3"
-    click C15E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e1"
-    click C15J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c15j1"
-    click C15A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c15a1"
-    click C15E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
+    C15top_L683["<b>C15top</b><br>Statement of C15top"]
+    C15Xctx_L684(["<b>C15Xctx</b><br>Context of C15Xctx"])
+    C15Esh_L685(("<b>C15Esh</b><br>Shared evidence of C15"))
+    C15Sass_L686[/"<b>C15Sass</b><br>Assertion strategy of C15"/]
+    C15G1_L687["<b>C15G1</b><br>Sub-claim 1 of C15"]
+    C15G2_L690["<b>C15G2</b><br>Sub-claim 2 of C15"]
+    C15G3_L693["<b>C15G3</b><br>Sub-claim 3 of C15"]
+    C15E1_L688(("<b>C15E1</b><br>Evidence 1 of C15"))
+    C15J1_L691("<b>C15J1</b>&nbsp;Ⓙ<br>Justification of C15")
+    C15A1_L694("<b>C15A1</b>&nbsp;Ⓐ<br>Assumption of C15")
+    C15E2_L695(("<b>C15E2</b><br>Evidence 2 of C15"))
+    click C15top_L683 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15top"
+    click C15Xctx_L684 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c15xctx"
+    click C15Esh_L685 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15esh"
+    click C15Sass_L686 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c15sass"
+    click C15G1_L687 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g1"
+    click C15G2_L690 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g2"
+    click C15G3_L693 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c15g3"
+    click C15E1_L688 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e1"
+    click C15J1_L691 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c15j1"
+    click C15A1_L694 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c15a1"
+    click C15E2_L695 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
 
-    C15top --o C15Xctx
-    C15top --> C15Esh
-    C15top --> C15Sass
-    C15Sass --> C15G1
-    C15G1 --> C15E1
-    C15G1 --o C15Xctx
-    C15Sass --> C15G2
-    C15G2 --o C15J1
-    C15G2 --> C15Esh
-    C15Sass --> C15G3
-    C15G3 --o C15A1
-    C15G3 --> C15E2
-    C15G3 --> C15E1
-    C15Xctx ~~~ BottomPadding[ ]:::invisible
-    C15Esh ~~~ BottomPadding
-    C15E1 ~~~ BottomPadding
-    C15J1 ~~~ BottomPadding
-    C15A1 ~~~ BottomPadding
-    C15E2 ~~~ BottomPadding
+    C15top_L683 --o C15Xctx_L684
+    C15top_L683 --> C15Esh_L685
+    C15top_L683 --> C15Sass_L686
+    C15Sass_L686 --> C15G1_L687
+    C15G1_L687 --> C15E1_L688
+    C15G1_L687 --o C15Xctx_L684
+    C15Sass_L686 --> C15G2_L690
+    C15G2_L690 --o C15J1_L691
+    C15G2_L690 --> C15Esh_L685
+    C15Sass_L686 --> C15G3_L693
+    C15G3_L693 --o C15A1_L694
+    C15G3_L693 --> C15E2_L695
+    C15G3_L693 --> C15E1_L688
+    C15Xctx_L684 ~~~ BottomPadding[ ]:::invisible
+    C15Esh_L685 ~~~ BottomPadding
+    C15E1_L688 ~~~ BottomPadding
+    C15J1_L691 ~~~ BottomPadding
+    C15A1_L694 ~~~ BottomPadding
+    C15E2_L695 ~~~ BottomPadding
 ```
 
 ### Package C16top
@@ -6279,48 +6298,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C16top["<b>C16top</b><br>Statement of C16top"]
-    C16Xctx(["<b>C16Xctx</b><br>Context of C16Xctx"])
-    C16Esh(("<b>C16Esh</b><br>Shared evidence of C16"))
-    C16Sass[/"<b>C16Sass</b><br>Assertion strategy of C16"/]
-    C16G1["<b>C16G1</b><br>Sub-claim 1 of C16"]
-    C16G2["<b>C16G2</b><br>Sub-claim 2 of C16"]
-    C16G3["<b>C16G3</b><br>Sub-claim 3 of C16"]
-    C16E1(("<b>C16E1</b><br>Evidence 1 of C16"))
-    C16J1("<b>C16J1</b>&nbsp;Ⓙ<br>Justification of C16")
-    C16A1("<b>C16A1</b>&nbsp;Ⓐ<br>Assumption of C16")
-    C16E2(("<b>C16E2</b><br>Evidence 2 of C16"))
-    click C16top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16top"
-    click C16Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c16xctx"
-    click C16Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16esh"
-    click C16Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c16sass"
-    click C16G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g1"
-    click C16G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g2"
-    click C16G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g3"
-    click C16E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e1"
-    click C16J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c16j1"
-    click C16A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c16a1"
-    click C16E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
+    C16top_L698["<b>C16top</b><br>Statement of C16top"]
+    C16Xctx_L699(["<b>C16Xctx</b><br>Context of C16Xctx"])
+    C16Esh_L700(("<b>C16Esh</b><br>Shared evidence of C16"))
+    C16Sass_L701[/"<b>C16Sass</b><br>Assertion strategy of C16"/]
+    C16G1_L702["<b>C16G1</b><br>Sub-claim 1 of C16"]
+    C16G2_L705["<b>C16G2</b><br>Sub-claim 2 of C16"]
+    C16G3_L708["<b>C16G3</b><br>Sub-claim 3 of C16"]
+    C16E1_L703(("<b>C16E1</b><br>Evidence 1 of C16"))
+    C16J1_L706("<b>C16J1</b>&nbsp;Ⓙ<br>Justification of C16")
+    C16A1_L709("<b>C16A1</b>&nbsp;Ⓐ<br>Assumption of C16")
+    C16E2_L710(("<b>C16E2</b><br>Evidence 2 of C16"))
+    click C16top_L698 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16top"
+    click C16Xctx_L699 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c16xctx"
+    click C16Esh_L700 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16esh"
+    click C16Sass_L701 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c16sass"
+    click C16G1_L702 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g1"
+    click C16G2_L705 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g2"
+    click C16G3_L708 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c16g3"
+    click C16E1_L703 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e1"
+    click C16J1_L706 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c16j1"
+    click C16A1_L709 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c16a1"
+    click C16E2_L710 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
 
-    C16top --o C16Xctx
-    C16top --> C16Esh
-    C16top --> C16Sass
-    C16Sass --> C16G1
-    C16G1 --> C16E1
-    C16G1 --o C16Xctx
-    C16Sass --> C16G2
-    C16G2 --o C16J1
-    C16G2 --> C16Esh
-    C16Sass --> C16G3
-    C16G3 --o C16A1
-    C16G3 --> C16E2
-    C16G3 --> C16E1
-    C16Xctx ~~~ BottomPadding[ ]:::invisible
-    C16Esh ~~~ BottomPadding
-    C16E1 ~~~ BottomPadding
-    C16J1 ~~~ BottomPadding
-    C16A1 ~~~ BottomPadding
-    C16E2 ~~~ BottomPadding
+    C16top_L698 --o C16Xctx_L699
+    C16top_L698 --> C16Esh_L700
+    C16top_L698 --> C16Sass_L701
+    C16Sass_L701 --> C16G1_L702
+    C16G1_L702 --> C16E1_L703
+    C16G1_L702 --o C16Xctx_L699
+    C16Sass_L701 --> C16G2_L705
+    C16G2_L705 --o C16J1_L706
+    C16G2_L705 --> C16Esh_L700
+    C16Sass_L701 --> C16G3_L708
+    C16G3_L708 --o C16A1_L709
+    C16G3_L708 --> C16E2_L710
+    C16G3_L708 --> C16E1_L703
+    C16Xctx_L699 ~~~ BottomPadding[ ]:::invisible
+    C16Esh_L700 ~~~ BottomPadding
+    C16E1_L703 ~~~ BottomPadding
+    C16J1_L706 ~~~ BottomPadding
+    C16A1_L709 ~~~ BottomPadding
+    C16E2_L710 ~~~ BottomPadding
 ```
 
 ### Package C17top
@@ -6339,48 +6358,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C17top["<b>C17top</b><br>Statement of C17top"]
-    C17Xctx(["<b>C17Xctx</b><br>Context of C17Xctx"])
-    C17Esh(("<b>C17Esh</b><br>Shared evidence of C17"))
-    C17Sass[/"<b>C17Sass</b><br>Assertion strategy of C17"/]
-    C17G1["<b>C17G1</b><br>Sub-claim 1 of C17"]
-    C17G2["<b>C17G2</b><br>Sub-claim 2 of C17"]
-    C17G3["<b>C17G3</b><br>Sub-claim 3 of C17"]
-    C17E1(("<b>C17E1</b><br>Evidence 1 of C17"))
-    C17J1("<b>C17J1</b>&nbsp;Ⓙ<br>Justification of C17")
-    C17A1("<b>C17A1</b>&nbsp;Ⓐ<br>Assumption of C17")
-    C17E2(("<b>C17E2</b><br>Evidence 2 of C17"))
-    click C17top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17top"
-    click C17Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c17xctx"
-    click C17Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17esh"
-    click C17Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c17sass"
-    click C17G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g1"
-    click C17G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g2"
-    click C17G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g3"
-    click C17E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e1"
-    click C17J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c17j1"
-    click C17A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c17a1"
-    click C17E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
+    C17top_L713["<b>C17top</b><br>Statement of C17top"]
+    C17Xctx_L714(["<b>C17Xctx</b><br>Context of C17Xctx"])
+    C17Esh_L715(("<b>C17Esh</b><br>Shared evidence of C17"))
+    C17Sass_L716[/"<b>C17Sass</b><br>Assertion strategy of C17"/]
+    C17G1_L717["<b>C17G1</b><br>Sub-claim 1 of C17"]
+    C17G2_L720["<b>C17G2</b><br>Sub-claim 2 of C17"]
+    C17G3_L723["<b>C17G3</b><br>Sub-claim 3 of C17"]
+    C17E1_L718(("<b>C17E1</b><br>Evidence 1 of C17"))
+    C17J1_L721("<b>C17J1</b>&nbsp;Ⓙ<br>Justification of C17")
+    C17A1_L724("<b>C17A1</b>&nbsp;Ⓐ<br>Assumption of C17")
+    C17E2_L725(("<b>C17E2</b><br>Evidence 2 of C17"))
+    click C17top_L713 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17top"
+    click C17Xctx_L714 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c17xctx"
+    click C17Esh_L715 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17esh"
+    click C17Sass_L716 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c17sass"
+    click C17G1_L717 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g1"
+    click C17G2_L720 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g2"
+    click C17G3_L723 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c17g3"
+    click C17E1_L718 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e1"
+    click C17J1_L721 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c17j1"
+    click C17A1_L724 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c17a1"
+    click C17E2_L725 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
 
-    C17top --o C17Xctx
-    C17top --> C17Esh
-    C17top --> C17Sass
-    C17Sass --> C17G1
-    C17G1 --> C17E1
-    C17G1 --o C17Xctx
-    C17Sass --> C17G2
-    C17G2 --o C17J1
-    C17G2 --> C17Esh
-    C17Sass --> C17G3
-    C17G3 --o C17A1
-    C17G3 --> C17E2
-    C17G3 --> C17E1
-    C17Xctx ~~~ BottomPadding[ ]:::invisible
-    C17Esh ~~~ BottomPadding
-    C17E1 ~~~ BottomPadding
-    C17J1 ~~~ BottomPadding
-    C17A1 ~~~ BottomPadding
-    C17E2 ~~~ BottomPadding
+    C17top_L713 --o C17Xctx_L714
+    C17top_L713 --> C17Esh_L715
+    C17top_L713 --> C17Sass_L716
+    C17Sass_L716 --> C17G1_L717
+    C17G1_L717 --> C17E1_L718
+    C17G1_L717 --o C17Xctx_L714
+    C17Sass_L716 --> C17G2_L720
+    C17G2_L720 --o C17J1_L721
+    C17G2_L720 --> C17Esh_L715
+    C17Sass_L716 --> C17G3_L723
+    C17G3_L723 --o C17A1_L724
+    C17G3_L723 --> C17E2_L725
+    C17G3_L723 --> C17E1_L718
+    C17Xctx_L714 ~~~ BottomPadding[ ]:::invisible
+    C17Esh_L715 ~~~ BottomPadding
+    C17E1_L718 ~~~ BottomPadding
+    C17J1_L721 ~~~ BottomPadding
+    C17A1_L724 ~~~ BottomPadding
+    C17E2_L725 ~~~ BottomPadding
 ```
 
 ### Package C18top
@@ -6399,48 +6418,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C18top["<b>C18top</b><br>Statement of C18top"]
-    C18Xctx(["<b>C18Xctx</b><br>Context of C18Xctx"])
-    C18Esh(("<b>C18Esh</b><br>Shared evidence of C18"))
-    C18Sass[/"<b>C18Sass</b><br>Assertion strategy of C18"/]
-    C18G1["<b>C18G1</b><br>Sub-claim 1 of C18"]
-    C18G2["<b>C18G2</b><br>Sub-claim 2 of C18"]
-    C18G3["<b>C18G3</b><br>Sub-claim 3 of C18"]
-    C18E1(("<b>C18E1</b><br>Evidence 1 of C18"))
-    C18J1("<b>C18J1</b>&nbsp;Ⓙ<br>Justification of C18")
-    C18A1("<b>C18A1</b>&nbsp;Ⓐ<br>Assumption of C18")
-    C18E2(("<b>C18E2</b><br>Evidence 2 of C18"))
-    click C18top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18top"
-    click C18Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c18xctx"
-    click C18Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18esh"
-    click C18Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c18sass"
-    click C18G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g1"
-    click C18G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g2"
-    click C18G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g3"
-    click C18E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e1"
-    click C18J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c18j1"
-    click C18A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c18a1"
-    click C18E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
+    C18top_L728["<b>C18top</b><br>Statement of C18top"]
+    C18Xctx_L729(["<b>C18Xctx</b><br>Context of C18Xctx"])
+    C18Esh_L730(("<b>C18Esh</b><br>Shared evidence of C18"))
+    C18Sass_L731[/"<b>C18Sass</b><br>Assertion strategy of C18"/]
+    C18G1_L732["<b>C18G1</b><br>Sub-claim 1 of C18"]
+    C18G2_L735["<b>C18G2</b><br>Sub-claim 2 of C18"]
+    C18G3_L738["<b>C18G3</b><br>Sub-claim 3 of C18"]
+    C18E1_L733(("<b>C18E1</b><br>Evidence 1 of C18"))
+    C18J1_L736("<b>C18J1</b>&nbsp;Ⓙ<br>Justification of C18")
+    C18A1_L739("<b>C18A1</b>&nbsp;Ⓐ<br>Assumption of C18")
+    C18E2_L740(("<b>C18E2</b><br>Evidence 2 of C18"))
+    click C18top_L728 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18top"
+    click C18Xctx_L729 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c18xctx"
+    click C18Esh_L730 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18esh"
+    click C18Sass_L731 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c18sass"
+    click C18G1_L732 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g1"
+    click C18G2_L735 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g2"
+    click C18G3_L738 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c18g3"
+    click C18E1_L733 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e1"
+    click C18J1_L736 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c18j1"
+    click C18A1_L739 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c18a1"
+    click C18E2_L740 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
 
-    C18top --o C18Xctx
-    C18top --> C18Esh
-    C18top --> C18Sass
-    C18Sass --> C18G1
-    C18G1 --> C18E1
-    C18G1 --o C18Xctx
-    C18Sass --> C18G2
-    C18G2 --o C18J1
-    C18G2 --> C18Esh
-    C18Sass --> C18G3
-    C18G3 --o C18A1
-    C18G3 --> C18E2
-    C18G3 --> C18E1
-    C18Xctx ~~~ BottomPadding[ ]:::invisible
-    C18Esh ~~~ BottomPadding
-    C18E1 ~~~ BottomPadding
-    C18J1 ~~~ BottomPadding
-    C18A1 ~~~ BottomPadding
-    C18E2 ~~~ BottomPadding
+    C18top_L728 --o C18Xctx_L729
+    C18top_L728 --> C18Esh_L730
+    C18top_L728 --> C18Sass_L731
+    C18Sass_L731 --> C18G1_L732
+    C18G1_L732 --> C18E1_L733
+    C18G1_L732 --o C18Xctx_L729
+    C18Sass_L731 --> C18G2_L735
+    C18G2_L735 --o C18J1_L736
+    C18G2_L735 --> C18Esh_L730
+    C18Sass_L731 --> C18G3_L738
+    C18G3_L738 --o C18A1_L739
+    C18G3_L738 --> C18E2_L740
+    C18G3_L738 --> C18E1_L733
+    C18Xctx_L729 ~~~ BottomPadding[ ]:::invisible
+    C18Esh_L730 ~~~ BottomPadding
+    C18E1_L733 ~~~ BottomPadding
+    C18J1_L736 ~~~ BottomPadding
+    C18A1_L739 ~~~ BottomPadding
+    C18E2_L740 ~~~ BottomPadding
 ```
 
 ### Package C19top
@@ -6459,48 +6478,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C19top["<b>C19top</b><br>Statement of C19top"]
-    C19Xctx(["<b>C19Xctx</b><br>Context of C19Xctx"])
-    C19Esh(("<b>C19Esh</b><br>Shared evidence of C19"))
-    C19Sass[/"<b>C19Sass</b><br>Assertion strategy of C19"/]
-    C19G1["<b>C19G1</b><br>Sub-claim 1 of C19"]
-    C19G2["<b>C19G2</b><br>Sub-claim 2 of C19"]
-    C19G3["<b>C19G3</b><br>Sub-claim 3 of C19"]
-    C19E1(("<b>C19E1</b><br>Evidence 1 of C19"))
-    C19J1("<b>C19J1</b>&nbsp;Ⓙ<br>Justification of C19")
-    C19A1("<b>C19A1</b>&nbsp;Ⓐ<br>Assumption of C19")
-    C19E2(("<b>C19E2</b><br>Evidence 2 of C19"))
-    click C19top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19top"
-    click C19Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c19xctx"
-    click C19Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19esh"
-    click C19Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c19sass"
-    click C19G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g1"
-    click C19G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g2"
-    click C19G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g3"
-    click C19E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e1"
-    click C19J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c19j1"
-    click C19A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c19a1"
-    click C19E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
+    C19top_L743["<b>C19top</b><br>Statement of C19top"]
+    C19Xctx_L744(["<b>C19Xctx</b><br>Context of C19Xctx"])
+    C19Esh_L745(("<b>C19Esh</b><br>Shared evidence of C19"))
+    C19Sass_L746[/"<b>C19Sass</b><br>Assertion strategy of C19"/]
+    C19G1_L747["<b>C19G1</b><br>Sub-claim 1 of C19"]
+    C19G2_L750["<b>C19G2</b><br>Sub-claim 2 of C19"]
+    C19G3_L753["<b>C19G3</b><br>Sub-claim 3 of C19"]
+    C19E1_L748(("<b>C19E1</b><br>Evidence 1 of C19"))
+    C19J1_L751("<b>C19J1</b>&nbsp;Ⓙ<br>Justification of C19")
+    C19A1_L754("<b>C19A1</b>&nbsp;Ⓐ<br>Assumption of C19")
+    C19E2_L755(("<b>C19E2</b><br>Evidence 2 of C19"))
+    click C19top_L743 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19top"
+    click C19Xctx_L744 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c19xctx"
+    click C19Esh_L745 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19esh"
+    click C19Sass_L746 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c19sass"
+    click C19G1_L747 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g1"
+    click C19G2_L750 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g2"
+    click C19G3_L753 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c19g3"
+    click C19E1_L748 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e1"
+    click C19J1_L751 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c19j1"
+    click C19A1_L754 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c19a1"
+    click C19E2_L755 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
 
-    C19top --o C19Xctx
-    C19top --> C19Esh
-    C19top --> C19Sass
-    C19Sass --> C19G1
-    C19G1 --> C19E1
-    C19G1 --o C19Xctx
-    C19Sass --> C19G2
-    C19G2 --o C19J1
-    C19G2 --> C19Esh
-    C19Sass --> C19G3
-    C19G3 --o C19A1
-    C19G3 --> C19E2
-    C19G3 --> C19E1
-    C19Xctx ~~~ BottomPadding[ ]:::invisible
-    C19Esh ~~~ BottomPadding
-    C19E1 ~~~ BottomPadding
-    C19J1 ~~~ BottomPadding
-    C19A1 ~~~ BottomPadding
-    C19E2 ~~~ BottomPadding
+    C19top_L743 --o C19Xctx_L744
+    C19top_L743 --> C19Esh_L745
+    C19top_L743 --> C19Sass_L746
+    C19Sass_L746 --> C19G1_L747
+    C19G1_L747 --> C19E1_L748
+    C19G1_L747 --o C19Xctx_L744
+    C19Sass_L746 --> C19G2_L750
+    C19G2_L750 --o C19J1_L751
+    C19G2_L750 --> C19Esh_L745
+    C19Sass_L746 --> C19G3_L753
+    C19G3_L753 --o C19A1_L754
+    C19G3_L753 --> C19E2_L755
+    C19G3_L753 --> C19E1_L748
+    C19Xctx_L744 ~~~ BottomPadding[ ]:::invisible
+    C19Esh_L745 ~~~ BottomPadding
+    C19E1_L748 ~~~ BottomPadding
+    C19J1_L751 ~~~ BottomPadding
+    C19A1_L754 ~~~ BottomPadding
+    C19E2_L755 ~~~ BottomPadding
 ```
 
 ### Package C20top
@@ -6519,48 +6538,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C20top["<b>C20top</b><br>Statement of C20top"]
-    C20Xctx(["<b>C20Xctx</b><br>Context of C20Xctx"])
-    C20Esh(("<b>C20Esh</b><br>Shared evidence of C20"))
-    C20Sass[/"<b>C20Sass</b><br>Assertion strategy of C20"/]
-    C20G1["<b>C20G1</b><br>Sub-claim 1 of C20"]
-    C20G2["<b>C20G2</b><br>Sub-claim 2 of C20"]
-    C20G3["<b>C20G3</b><br>Sub-claim 3 of C20"]
-    C20E1(("<b>C20E1</b><br>Evidence 1 of C20"))
-    C20J1("<b>C20J1</b>&nbsp;Ⓙ<br>Justification of C20")
-    C20A1("<b>C20A1</b>&nbsp;Ⓐ<br>Assumption of C20")
-    C20E2(("<b>C20E2</b><br>Evidence 2 of C20"))
-    click C20top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20top"
-    click C20Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c20xctx"
-    click C20Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20esh"
-    click C20Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c20sass"
-    click C20G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g1"
-    click C20G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g2"
-    click C20G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g3"
-    click C20E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e1"
-    click C20J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c20j1"
-    click C20A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c20a1"
-    click C20E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
+    C20top_L758["<b>C20top</b><br>Statement of C20top"]
+    C20Xctx_L759(["<b>C20Xctx</b><br>Context of C20Xctx"])
+    C20Esh_L760(("<b>C20Esh</b><br>Shared evidence of C20"))
+    C20Sass_L761[/"<b>C20Sass</b><br>Assertion strategy of C20"/]
+    C20G1_L762["<b>C20G1</b><br>Sub-claim 1 of C20"]
+    C20G2_L765["<b>C20G2</b><br>Sub-claim 2 of C20"]
+    C20G3_L768["<b>C20G3</b><br>Sub-claim 3 of C20"]
+    C20E1_L763(("<b>C20E1</b><br>Evidence 1 of C20"))
+    C20J1_L766("<b>C20J1</b>&nbsp;Ⓙ<br>Justification of C20")
+    C20A1_L769("<b>C20A1</b>&nbsp;Ⓐ<br>Assumption of C20")
+    C20E2_L770(("<b>C20E2</b><br>Evidence 2 of C20"))
+    click C20top_L758 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20top"
+    click C20Xctx_L759 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c20xctx"
+    click C20Esh_L760 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20esh"
+    click C20Sass_L761 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c20sass"
+    click C20G1_L762 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g1"
+    click C20G2_L765 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g2"
+    click C20G3_L768 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c20g3"
+    click C20E1_L763 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e1"
+    click C20J1_L766 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c20j1"
+    click C20A1_L769 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c20a1"
+    click C20E2_L770 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
 
-    C20top --o C20Xctx
-    C20top --> C20Esh
-    C20top --> C20Sass
-    C20Sass --> C20G1
-    C20G1 --> C20E1
-    C20G1 --o C20Xctx
-    C20Sass --> C20G2
-    C20G2 --o C20J1
-    C20G2 --> C20Esh
-    C20Sass --> C20G3
-    C20G3 --o C20A1
-    C20G3 --> C20E2
-    C20G3 --> C20E1
-    C20Xctx ~~~ BottomPadding[ ]:::invisible
-    C20Esh ~~~ BottomPadding
-    C20E1 ~~~ BottomPadding
-    C20J1 ~~~ BottomPadding
-    C20A1 ~~~ BottomPadding
-    C20E2 ~~~ BottomPadding
+    C20top_L758 --o C20Xctx_L759
+    C20top_L758 --> C20Esh_L760
+    C20top_L758 --> C20Sass_L761
+    C20Sass_L761 --> C20G1_L762
+    C20G1_L762 --> C20E1_L763
+    C20G1_L762 --o C20Xctx_L759
+    C20Sass_L761 --> C20G2_L765
+    C20G2_L765 --o C20J1_L766
+    C20G2_L765 --> C20Esh_L760
+    C20Sass_L761 --> C20G3_L768
+    C20G3_L768 --o C20A1_L769
+    C20G3_L768 --> C20E2_L770
+    C20G3_L768 --> C20E1_L763
+    C20Xctx_L759 ~~~ BottomPadding[ ]:::invisible
+    C20Esh_L760 ~~~ BottomPadding
+    C20E1_L763 ~~~ BottomPadding
+    C20J1_L766 ~~~ BottomPadding
+    C20A1_L769 ~~~ BottomPadding
+    C20E2_L770 ~~~ BottomPadding
 ```
 
 ### Package C21top
@@ -6579,48 +6598,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C21top["<b>C21top</b><br>Statement of C21top"]
-    C21Xctx(["<b>C21Xctx</b><br>Context of C21Xctx"])
-    C21Esh(("<b>C21Esh</b><br>Shared evidence of C21"))
-    C21Sass[/"<b>C21Sass</b><br>Assertion strategy of C21"/]
-    C21G1["<b>C21G1</b><br>Sub-claim 1 of C21"]
-    C21G2["<b>C21G2</b><br>Sub-claim 2 of C21"]
-    C21G3["<b>C21G3</b><br>Sub-claim 3 of C21"]
-    C21E1(("<b>C21E1</b><br>Evidence 1 of C21"))
-    C21J1("<b>C21J1</b>&nbsp;Ⓙ<br>Justification of C21")
-    C21A1("<b>C21A1</b>&nbsp;Ⓐ<br>Assumption of C21")
-    C21E2(("<b>C21E2</b><br>Evidence 2 of C21"))
-    click C21top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21top"
-    click C21Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c21xctx"
-    click C21Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21esh"
-    click C21Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c21sass"
-    click C21G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g1"
-    click C21G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g2"
-    click C21G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g3"
-    click C21E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e1"
-    click C21J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c21j1"
-    click C21A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c21a1"
-    click C21E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
+    C21top_L773["<b>C21top</b><br>Statement of C21top"]
+    C21Xctx_L774(["<b>C21Xctx</b><br>Context of C21Xctx"])
+    C21Esh_L775(("<b>C21Esh</b><br>Shared evidence of C21"))
+    C21Sass_L776[/"<b>C21Sass</b><br>Assertion strategy of C21"/]
+    C21G1_L777["<b>C21G1</b><br>Sub-claim 1 of C21"]
+    C21G2_L780["<b>C21G2</b><br>Sub-claim 2 of C21"]
+    C21G3_L783["<b>C21G3</b><br>Sub-claim 3 of C21"]
+    C21E1_L778(("<b>C21E1</b><br>Evidence 1 of C21"))
+    C21J1_L781("<b>C21J1</b>&nbsp;Ⓙ<br>Justification of C21")
+    C21A1_L784("<b>C21A1</b>&nbsp;Ⓐ<br>Assumption of C21")
+    C21E2_L785(("<b>C21E2</b><br>Evidence 2 of C21"))
+    click C21top_L773 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21top"
+    click C21Xctx_L774 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c21xctx"
+    click C21Esh_L775 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21esh"
+    click C21Sass_L776 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c21sass"
+    click C21G1_L777 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g1"
+    click C21G2_L780 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g2"
+    click C21G3_L783 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c21g3"
+    click C21E1_L778 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e1"
+    click C21J1_L781 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c21j1"
+    click C21A1_L784 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c21a1"
+    click C21E2_L785 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
 
-    C21top --o C21Xctx
-    C21top --> C21Esh
-    C21top --> C21Sass
-    C21Sass --> C21G1
-    C21G1 --> C21E1
-    C21G1 --o C21Xctx
-    C21Sass --> C21G2
-    C21G2 --o C21J1
-    C21G2 --> C21Esh
-    C21Sass --> C21G3
-    C21G3 --o C21A1
-    C21G3 --> C21E2
-    C21G3 --> C21E1
-    C21Xctx ~~~ BottomPadding[ ]:::invisible
-    C21Esh ~~~ BottomPadding
-    C21E1 ~~~ BottomPadding
-    C21J1 ~~~ BottomPadding
-    C21A1 ~~~ BottomPadding
-    C21E2 ~~~ BottomPadding
+    C21top_L773 --o C21Xctx_L774
+    C21top_L773 --> C21Esh_L775
+    C21top_L773 --> C21Sass_L776
+    C21Sass_L776 --> C21G1_L777
+    C21G1_L777 --> C21E1_L778
+    C21G1_L777 --o C21Xctx_L774
+    C21Sass_L776 --> C21G2_L780
+    C21G2_L780 --o C21J1_L781
+    C21G2_L780 --> C21Esh_L775
+    C21Sass_L776 --> C21G3_L783
+    C21G3_L783 --o C21A1_L784
+    C21G3_L783 --> C21E2_L785
+    C21G3_L783 --> C21E1_L778
+    C21Xctx_L774 ~~~ BottomPadding[ ]:::invisible
+    C21Esh_L775 ~~~ BottomPadding
+    C21E1_L778 ~~~ BottomPadding
+    C21J1_L781 ~~~ BottomPadding
+    C21A1_L784 ~~~ BottomPadding
+    C21E2_L785 ~~~ BottomPadding
 ```
 
 ### Package C22top
@@ -6639,48 +6658,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C22top["<b>C22top</b><br>Statement of C22top"]
-    C22Xctx(["<b>C22Xctx</b><br>Context of C22Xctx"])
-    C22Esh(("<b>C22Esh</b><br>Shared evidence of C22"))
-    C22Sass[/"<b>C22Sass</b><br>Assertion strategy of C22"/]
-    C22G1["<b>C22G1</b><br>Sub-claim 1 of C22"]
-    C22G2["<b>C22G2</b><br>Sub-claim 2 of C22"]
-    C22G3["<b>C22G3</b><br>Sub-claim 3 of C22"]
-    C22E1(("<b>C22E1</b><br>Evidence 1 of C22"))
-    C22J1("<b>C22J1</b>&nbsp;Ⓙ<br>Justification of C22")
-    C22A1("<b>C22A1</b>&nbsp;Ⓐ<br>Assumption of C22")
-    C22E2(("<b>C22E2</b><br>Evidence 2 of C22"))
-    click C22top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22top"
-    click C22Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c22xctx"
-    click C22Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22esh"
-    click C22Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c22sass"
-    click C22G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g1"
-    click C22G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g2"
-    click C22G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g3"
-    click C22E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e1"
-    click C22J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c22j1"
-    click C22A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c22a1"
-    click C22E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
+    C22top_L788["<b>C22top</b><br>Statement of C22top"]
+    C22Xctx_L789(["<b>C22Xctx</b><br>Context of C22Xctx"])
+    C22Esh_L790(("<b>C22Esh</b><br>Shared evidence of C22"))
+    C22Sass_L791[/"<b>C22Sass</b><br>Assertion strategy of C22"/]
+    C22G1_L792["<b>C22G1</b><br>Sub-claim 1 of C22"]
+    C22G2_L795["<b>C22G2</b><br>Sub-claim 2 of C22"]
+    C22G3_L798["<b>C22G3</b><br>Sub-claim 3 of C22"]
+    C22E1_L793(("<b>C22E1</b><br>Evidence 1 of C22"))
+    C22J1_L796("<b>C22J1</b>&nbsp;Ⓙ<br>Justification of C22")
+    C22A1_L799("<b>C22A1</b>&nbsp;Ⓐ<br>Assumption of C22")
+    C22E2_L800(("<b>C22E2</b><br>Evidence 2 of C22"))
+    click C22top_L788 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22top"
+    click C22Xctx_L789 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c22xctx"
+    click C22Esh_L790 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22esh"
+    click C22Sass_L791 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c22sass"
+    click C22G1_L792 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g1"
+    click C22G2_L795 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g2"
+    click C22G3_L798 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c22g3"
+    click C22E1_L793 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e1"
+    click C22J1_L796 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c22j1"
+    click C22A1_L799 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c22a1"
+    click C22E2_L800 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
 
-    C22top --o C22Xctx
-    C22top --> C22Esh
-    C22top --> C22Sass
-    C22Sass --> C22G1
-    C22G1 --> C22E1
-    C22G1 --o C22Xctx
-    C22Sass --> C22G2
-    C22G2 --o C22J1
-    C22G2 --> C22Esh
-    C22Sass --> C22G3
-    C22G3 --o C22A1
-    C22G3 --> C22E2
-    C22G3 --> C22E1
-    C22Xctx ~~~ BottomPadding[ ]:::invisible
-    C22Esh ~~~ BottomPadding
-    C22E1 ~~~ BottomPadding
-    C22J1 ~~~ BottomPadding
-    C22A1 ~~~ BottomPadding
-    C22E2 ~~~ BottomPadding
+    C22top_L788 --o C22Xctx_L789
+    C22top_L788 --> C22Esh_L790
+    C22top_L788 --> C22Sass_L791
+    C22Sass_L791 --> C22G1_L792
+    C22G1_L792 --> C22E1_L793
+    C22G1_L792 --o C22Xctx_L789
+    C22Sass_L791 --> C22G2_L795
+    C22G2_L795 --o C22J1_L796
+    C22G2_L795 --> C22Esh_L790
+    C22Sass_L791 --> C22G3_L798
+    C22G3_L798 --o C22A1_L799
+    C22G3_L798 --> C22E2_L800
+    C22G3_L798 --> C22E1_L793
+    C22Xctx_L789 ~~~ BottomPadding[ ]:::invisible
+    C22Esh_L790 ~~~ BottomPadding
+    C22E1_L793 ~~~ BottomPadding
+    C22J1_L796 ~~~ BottomPadding
+    C22A1_L799 ~~~ BottomPadding
+    C22E2_L800 ~~~ BottomPadding
 ```
 
 ### Package C23top
@@ -6699,48 +6718,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C23top["<b>C23top</b><br>Statement of C23top"]
-    C23Xctx(["<b>C23Xctx</b><br>Context of C23Xctx"])
-    C23Esh(("<b>C23Esh</b><br>Shared evidence of C23"))
-    C23Sass[/"<b>C23Sass</b><br>Assertion strategy of C23"/]
-    C23G1["<b>C23G1</b><br>Sub-claim 1 of C23"]
-    C23G2["<b>C23G2</b><br>Sub-claim 2 of C23"]
-    C23G3["<b>C23G3</b><br>Sub-claim 3 of C23"]
-    C23E1(("<b>C23E1</b><br>Evidence 1 of C23"))
-    C23J1("<b>C23J1</b>&nbsp;Ⓙ<br>Justification of C23")
-    C23A1("<b>C23A1</b>&nbsp;Ⓐ<br>Assumption of C23")
-    C23E2(("<b>C23E2</b><br>Evidence 2 of C23"))
-    click C23top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23top"
-    click C23Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c23xctx"
-    click C23Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23esh"
-    click C23Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c23sass"
-    click C23G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g1"
-    click C23G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g2"
-    click C23G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g3"
-    click C23E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e1"
-    click C23J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c23j1"
-    click C23A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c23a1"
-    click C23E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
+    C23top_L803["<b>C23top</b><br>Statement of C23top"]
+    C23Xctx_L804(["<b>C23Xctx</b><br>Context of C23Xctx"])
+    C23Esh_L805(("<b>C23Esh</b><br>Shared evidence of C23"))
+    C23Sass_L806[/"<b>C23Sass</b><br>Assertion strategy of C23"/]
+    C23G1_L807["<b>C23G1</b><br>Sub-claim 1 of C23"]
+    C23G2_L810["<b>C23G2</b><br>Sub-claim 2 of C23"]
+    C23G3_L813["<b>C23G3</b><br>Sub-claim 3 of C23"]
+    C23E1_L808(("<b>C23E1</b><br>Evidence 1 of C23"))
+    C23J1_L811("<b>C23J1</b>&nbsp;Ⓙ<br>Justification of C23")
+    C23A1_L814("<b>C23A1</b>&nbsp;Ⓐ<br>Assumption of C23")
+    C23E2_L815(("<b>C23E2</b><br>Evidence 2 of C23"))
+    click C23top_L803 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23top"
+    click C23Xctx_L804 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c23xctx"
+    click C23Esh_L805 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23esh"
+    click C23Sass_L806 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c23sass"
+    click C23G1_L807 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g1"
+    click C23G2_L810 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g2"
+    click C23G3_L813 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c23g3"
+    click C23E1_L808 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e1"
+    click C23J1_L811 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c23j1"
+    click C23A1_L814 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c23a1"
+    click C23E2_L815 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
 
-    C23top --o C23Xctx
-    C23top --> C23Esh
-    C23top --> C23Sass
-    C23Sass --> C23G1
-    C23G1 --> C23E1
-    C23G1 --o C23Xctx
-    C23Sass --> C23G2
-    C23G2 --o C23J1
-    C23G2 --> C23Esh
-    C23Sass --> C23G3
-    C23G3 --o C23A1
-    C23G3 --> C23E2
-    C23G3 --> C23E1
-    C23Xctx ~~~ BottomPadding[ ]:::invisible
-    C23Esh ~~~ BottomPadding
-    C23E1 ~~~ BottomPadding
-    C23J1 ~~~ BottomPadding
-    C23A1 ~~~ BottomPadding
-    C23E2 ~~~ BottomPadding
+    C23top_L803 --o C23Xctx_L804
+    C23top_L803 --> C23Esh_L805
+    C23top_L803 --> C23Sass_L806
+    C23Sass_L806 --> C23G1_L807
+    C23G1_L807 --> C23E1_L808
+    C23G1_L807 --o C23Xctx_L804
+    C23Sass_L806 --> C23G2_L810
+    C23G2_L810 --o C23J1_L811
+    C23G2_L810 --> C23Esh_L805
+    C23Sass_L806 --> C23G3_L813
+    C23G3_L813 --o C23A1_L814
+    C23G3_L813 --> C23E2_L815
+    C23G3_L813 --> C23E1_L808
+    C23Xctx_L804 ~~~ BottomPadding[ ]:::invisible
+    C23Esh_L805 ~~~ BottomPadding
+    C23E1_L808 ~~~ BottomPadding
+    C23J1_L811 ~~~ BottomPadding
+    C23A1_L814 ~~~ BottomPadding
+    C23E2_L815 ~~~ BottomPadding
 ```
 
 ### Package C24top
@@ -6759,48 +6778,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C24top["<b>C24top</b><br>Statement of C24top"]
-    C24Xctx(["<b>C24Xctx</b><br>Context of C24Xctx"])
-    C24Esh(("<b>C24Esh</b><br>Shared evidence of C24"))
-    C24Sass[/"<b>C24Sass</b><br>Assertion strategy of C24"/]
-    C24G1["<b>C24G1</b><br>Sub-claim 1 of C24"]
-    C24G2["<b>C24G2</b><br>Sub-claim 2 of C24"]
-    C24G3["<b>C24G3</b><br>Sub-claim 3 of C24"]
-    C24E1(("<b>C24E1</b><br>Evidence 1 of C24"))
-    C24J1("<b>C24J1</b>&nbsp;Ⓙ<br>Justification of C24")
-    C24A1("<b>C24A1</b>&nbsp;Ⓐ<br>Assumption of C24")
-    C24E2(("<b>C24E2</b><br>Evidence 2 of C24"))
-    click C24top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24top"
-    click C24Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c24xctx"
-    click C24Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24esh"
-    click C24Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c24sass"
-    click C24G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g1"
-    click C24G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g2"
-    click C24G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g3"
-    click C24E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e1"
-    click C24J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c24j1"
-    click C24A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c24a1"
-    click C24E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
+    C24top_L818["<b>C24top</b><br>Statement of C24top"]
+    C24Xctx_L819(["<b>C24Xctx</b><br>Context of C24Xctx"])
+    C24Esh_L820(("<b>C24Esh</b><br>Shared evidence of C24"))
+    C24Sass_L821[/"<b>C24Sass</b><br>Assertion strategy of C24"/]
+    C24G1_L822["<b>C24G1</b><br>Sub-claim 1 of C24"]
+    C24G2_L825["<b>C24G2</b><br>Sub-claim 2 of C24"]
+    C24G3_L828["<b>C24G3</b><br>Sub-claim 3 of C24"]
+    C24E1_L823(("<b>C24E1</b><br>Evidence 1 of C24"))
+    C24J1_L826("<b>C24J1</b>&nbsp;Ⓙ<br>Justification of C24")
+    C24A1_L829("<b>C24A1</b>&nbsp;Ⓐ<br>Assumption of C24")
+    C24E2_L830(("<b>C24E2</b><br>Evidence 2 of C24"))
+    click C24top_L818 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24top"
+    click C24Xctx_L819 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c24xctx"
+    click C24Esh_L820 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24esh"
+    click C24Sass_L821 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c24sass"
+    click C24G1_L822 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g1"
+    click C24G2_L825 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g2"
+    click C24G3_L828 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c24g3"
+    click C24E1_L823 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e1"
+    click C24J1_L826 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c24j1"
+    click C24A1_L829 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c24a1"
+    click C24E2_L830 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
 
-    C24top --o C24Xctx
-    C24top --> C24Esh
-    C24top --> C24Sass
-    C24Sass --> C24G1
-    C24G1 --> C24E1
-    C24G1 --o C24Xctx
-    C24Sass --> C24G2
-    C24G2 --o C24J1
-    C24G2 --> C24Esh
-    C24Sass --> C24G3
-    C24G3 --o C24A1
-    C24G3 --> C24E2
-    C24G3 --> C24E1
-    C24Xctx ~~~ BottomPadding[ ]:::invisible
-    C24Esh ~~~ BottomPadding
-    C24E1 ~~~ BottomPadding
-    C24J1 ~~~ BottomPadding
-    C24A1 ~~~ BottomPadding
-    C24E2 ~~~ BottomPadding
+    C24top_L818 --o C24Xctx_L819
+    C24top_L818 --> C24Esh_L820
+    C24top_L818 --> C24Sass_L821
+    C24Sass_L821 --> C24G1_L822
+    C24G1_L822 --> C24E1_L823
+    C24G1_L822 --o C24Xctx_L819
+    C24Sass_L821 --> C24G2_L825
+    C24G2_L825 --o C24J1_L826
+    C24G2_L825 --> C24Esh_L820
+    C24Sass_L821 --> C24G3_L828
+    C24G3_L828 --o C24A1_L829
+    C24G3_L828 --> C24E2_L830
+    C24G3_L828 --> C24E1_L823
+    C24Xctx_L819 ~~~ BottomPadding[ ]:::invisible
+    C24Esh_L820 ~~~ BottomPadding
+    C24E1_L823 ~~~ BottomPadding
+    C24J1_L826 ~~~ BottomPadding
+    C24A1_L829 ~~~ BottomPadding
+    C24E2_L830 ~~~ BottomPadding
 ```
 
 ### Package C25top
@@ -6819,48 +6838,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C25top["<b>C25top</b><br>Statement of C25top"]
-    C25Xctx(["<b>C25Xctx</b><br>Context of C25Xctx"])
-    C25Esh(("<b>C25Esh</b><br>Shared evidence of C25"))
-    C25Sass[/"<b>C25Sass</b><br>Assertion strategy of C25"/]
-    C25G1["<b>C25G1</b><br>Sub-claim 1 of C25"]
-    C25G2["<b>C25G2</b><br>Sub-claim 2 of C25"]
-    C25G3["<b>C25G3</b><br>Sub-claim 3 of C25"]
-    C25E1(("<b>C25E1</b><br>Evidence 1 of C25"))
-    C25J1("<b>C25J1</b>&nbsp;Ⓙ<br>Justification of C25")
-    C25A1("<b>C25A1</b>&nbsp;Ⓐ<br>Assumption of C25")
-    C25E2(("<b>C25E2</b><br>Evidence 2 of C25"))
-    click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25top"
-    click C25Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c25xctx"
-    click C25Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25esh"
-    click C25Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c25sass"
-    click C25G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g1"
-    click C25G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g2"
-    click C25G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g3"
-    click C25E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e1"
-    click C25J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c25j1"
-    click C25A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c25a1"
-    click C25E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
+    C25top_L833["<b>C25top</b><br>Statement of C25top"]
+    C25Xctx_L834(["<b>C25Xctx</b><br>Context of C25Xctx"])
+    C25Esh_L835(("<b>C25Esh</b><br>Shared evidence of C25"))
+    C25Sass_L836[/"<b>C25Sass</b><br>Assertion strategy of C25"/]
+    C25G1_L837["<b>C25G1</b><br>Sub-claim 1 of C25"]
+    C25G2_L840["<b>C25G2</b><br>Sub-claim 2 of C25"]
+    C25G3_L843["<b>C25G3</b><br>Sub-claim 3 of C25"]
+    C25E1_L838(("<b>C25E1</b><br>Evidence 1 of C25"))
+    C25J1_L841("<b>C25J1</b>&nbsp;Ⓙ<br>Justification of C25")
+    C25A1_L844("<b>C25A1</b>&nbsp;Ⓐ<br>Assumption of C25")
+    C25E2_L845(("<b>C25E2</b><br>Evidence 2 of C25"))
+    click C25top_L833 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25top"
+    click C25Xctx_L834 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c25xctx"
+    click C25Esh_L835 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25esh"
+    click C25Sass_L836 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c25sass"
+    click C25G1_L837 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g1"
+    click C25G2_L840 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g2"
+    click C25G3_L843 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c25g3"
+    click C25E1_L838 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e1"
+    click C25J1_L841 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c25j1"
+    click C25A1_L844 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c25a1"
+    click C25E2_L845 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
 
-    C25top --o C25Xctx
-    C25top --> C25Esh
-    C25top --> C25Sass
-    C25Sass --> C25G1
-    C25G1 --> C25E1
-    C25G1 --o C25Xctx
-    C25Sass --> C25G2
-    C25G2 --o C25J1
-    C25G2 --> C25Esh
-    C25Sass --> C25G3
-    C25G3 --o C25A1
-    C25G3 --> C25E2
-    C25G3 --> C25E1
-    C25Xctx ~~~ BottomPadding[ ]:::invisible
-    C25Esh ~~~ BottomPadding
-    C25E1 ~~~ BottomPadding
-    C25J1 ~~~ BottomPadding
-    C25A1 ~~~ BottomPadding
-    C25E2 ~~~ BottomPadding
+    C25top_L833 --o C25Xctx_L834
+    C25top_L833 --> C25Esh_L835
+    C25top_L833 --> C25Sass_L836
+    C25Sass_L836 --> C25G1_L837
+    C25G1_L837 --> C25E1_L838
+    C25G1_L837 --o C25Xctx_L834
+    C25Sass_L836 --> C25G2_L840
+    C25G2_L840 --o C25J1_L841
+    C25G2_L840 --> C25Esh_L835
+    C25Sass_L836 --> C25G3_L843
+    C25G3_L843 --o C25A1_L844
+    C25G3_L843 --> C25E2_L845
+    C25G3_L843 --> C25E1_L838
+    C25Xctx_L834 ~~~ BottomPadding[ ]:::invisible
+    C25Esh_L835 ~~~ BottomPadding
+    C25E1_L838 ~~~ BottomPadding
+    C25J1_L841 ~~~ BottomPadding
+    C25A1_L844 ~~~ BottomPadding
+    C25E2_L845 ~~~ BottomPadding
 ```
 
 ### Package C26top
@@ -6879,48 +6898,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C26top["<b>C26top</b><br>Statement of C26top"]
-    C26Xctx(["<b>C26Xctx</b><br>Context of C26Xctx"])
-    C26Esh(("<b>C26Esh</b><br>Shared evidence of C26"))
-    C26Sass[/"<b>C26Sass</b><br>Assertion strategy of C26"/]
-    C26G1["<b>C26G1</b><br>Sub-claim 1 of C26"]
-    C26G2["<b>C26G2</b><br>Sub-claim 2 of C26"]
-    C26G3["<b>C26G3</b><br>Sub-claim 3 of C26"]
-    C26E1(("<b>C26E1</b><br>Evidence 1 of C26"))
-    C26J1("<b>C26J1</b>&nbsp;Ⓙ<br>Justification of C26")
-    C26A1("<b>C26A1</b>&nbsp;Ⓐ<br>Assumption of C26")
-    C26E2(("<b>C26E2</b><br>Evidence 2 of C26"))
-    click C26top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26top"
-    click C26Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c26xctx"
-    click C26Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26esh"
-    click C26Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c26sass"
-    click C26G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g1"
-    click C26G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g2"
-    click C26G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g3"
-    click C26E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e1"
-    click C26J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c26j1"
-    click C26A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c26a1"
-    click C26E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
+    C26top_L848["<b>C26top</b><br>Statement of C26top"]
+    C26Xctx_L849(["<b>C26Xctx</b><br>Context of C26Xctx"])
+    C26Esh_L850(("<b>C26Esh</b><br>Shared evidence of C26"))
+    C26Sass_L851[/"<b>C26Sass</b><br>Assertion strategy of C26"/]
+    C26G1_L852["<b>C26G1</b><br>Sub-claim 1 of C26"]
+    C26G2_L855["<b>C26G2</b><br>Sub-claim 2 of C26"]
+    C26G3_L858["<b>C26G3</b><br>Sub-claim 3 of C26"]
+    C26E1_L853(("<b>C26E1</b><br>Evidence 1 of C26"))
+    C26J1_L856("<b>C26J1</b>&nbsp;Ⓙ<br>Justification of C26")
+    C26A1_L859("<b>C26A1</b>&nbsp;Ⓐ<br>Assumption of C26")
+    C26E2_L860(("<b>C26E2</b><br>Evidence 2 of C26"))
+    click C26top_L848 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26top"
+    click C26Xctx_L849 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c26xctx"
+    click C26Esh_L850 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26esh"
+    click C26Sass_L851 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c26sass"
+    click C26G1_L852 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g1"
+    click C26G2_L855 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g2"
+    click C26G3_L858 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c26g3"
+    click C26E1_L853 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e1"
+    click C26J1_L856 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c26j1"
+    click C26A1_L859 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c26a1"
+    click C26E2_L860 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
 
-    C26top --o C26Xctx
-    C26top --> C26Esh
-    C26top --> C26Sass
-    C26Sass --> C26G1
-    C26G1 --> C26E1
-    C26G1 --o C26Xctx
-    C26Sass --> C26G2
-    C26G2 --o C26J1
-    C26G2 --> C26Esh
-    C26Sass --> C26G3
-    C26G3 --o C26A1
-    C26G3 --> C26E2
-    C26G3 --> C26E1
-    C26Xctx ~~~ BottomPadding[ ]:::invisible
-    C26Esh ~~~ BottomPadding
-    C26E1 ~~~ BottomPadding
-    C26J1 ~~~ BottomPadding
-    C26A1 ~~~ BottomPadding
-    C26E2 ~~~ BottomPadding
+    C26top_L848 --o C26Xctx_L849
+    C26top_L848 --> C26Esh_L850
+    C26top_L848 --> C26Sass_L851
+    C26Sass_L851 --> C26G1_L852
+    C26G1_L852 --> C26E1_L853
+    C26G1_L852 --o C26Xctx_L849
+    C26Sass_L851 --> C26G2_L855
+    C26G2_L855 --o C26J1_L856
+    C26G2_L855 --> C26Esh_L850
+    C26Sass_L851 --> C26G3_L858
+    C26G3_L858 --o C26A1_L859
+    C26G3_L858 --> C26E2_L860
+    C26G3_L858 --> C26E1_L853
+    C26Xctx_L849 ~~~ BottomPadding[ ]:::invisible
+    C26Esh_L850 ~~~ BottomPadding
+    C26E1_L853 ~~~ BottomPadding
+    C26J1_L856 ~~~ BottomPadding
+    C26A1_L859 ~~~ BottomPadding
+    C26E2_L860 ~~~ BottomPadding
 ```
 
 ### Package C27top
@@ -6939,48 +6958,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C27top["<b>C27top</b><br>Statement of C27top"]
-    C27Xctx(["<b>C27Xctx</b><br>Context of C27Xctx"])
-    C27Esh(("<b>C27Esh</b><br>Shared evidence of C27"))
-    C27Sass[/"<b>C27Sass</b><br>Assertion strategy of C27"/]
-    C27G1["<b>C27G1</b><br>Sub-claim 1 of C27"]
-    C27G2["<b>C27G2</b><br>Sub-claim 2 of C27"]
-    C27G3["<b>C27G3</b><br>Sub-claim 3 of C27"]
-    C27E1(("<b>C27E1</b><br>Evidence 1 of C27"))
-    C27J1("<b>C27J1</b>&nbsp;Ⓙ<br>Justification of C27")
-    C27A1("<b>C27A1</b>&nbsp;Ⓐ<br>Assumption of C27")
-    C27E2(("<b>C27E2</b><br>Evidence 2 of C27"))
-    click C27top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27top"
-    click C27Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c27xctx"
-    click C27Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27esh"
-    click C27Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c27sass"
-    click C27G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g1"
-    click C27G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g2"
-    click C27G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g3"
-    click C27E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e1"
-    click C27J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c27j1"
-    click C27A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c27a1"
-    click C27E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
+    C27top_L863["<b>C27top</b><br>Statement of C27top"]
+    C27Xctx_L864(["<b>C27Xctx</b><br>Context of C27Xctx"])
+    C27Esh_L865(("<b>C27Esh</b><br>Shared evidence of C27"))
+    C27Sass_L866[/"<b>C27Sass</b><br>Assertion strategy of C27"/]
+    C27G1_L867["<b>C27G1</b><br>Sub-claim 1 of C27"]
+    C27G2_L870["<b>C27G2</b><br>Sub-claim 2 of C27"]
+    C27G3_L873["<b>C27G3</b><br>Sub-claim 3 of C27"]
+    C27E1_L868(("<b>C27E1</b><br>Evidence 1 of C27"))
+    C27J1_L871("<b>C27J1</b>&nbsp;Ⓙ<br>Justification of C27")
+    C27A1_L874("<b>C27A1</b>&nbsp;Ⓐ<br>Assumption of C27")
+    C27E2_L875(("<b>C27E2</b><br>Evidence 2 of C27"))
+    click C27top_L863 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27top"
+    click C27Xctx_L864 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c27xctx"
+    click C27Esh_L865 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27esh"
+    click C27Sass_L866 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c27sass"
+    click C27G1_L867 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g1"
+    click C27G2_L870 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g2"
+    click C27G3_L873 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c27g3"
+    click C27E1_L868 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e1"
+    click C27J1_L871 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c27j1"
+    click C27A1_L874 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c27a1"
+    click C27E2_L875 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
 
-    C27top --o C27Xctx
-    C27top --> C27Esh
-    C27top --> C27Sass
-    C27Sass --> C27G1
-    C27G1 --> C27E1
-    C27G1 --o C27Xctx
-    C27Sass --> C27G2
-    C27G2 --o C27J1
-    C27G2 --> C27Esh
-    C27Sass --> C27G3
-    C27G3 --o C27A1
-    C27G3 --> C27E2
-    C27G3 --> C27E1
-    C27Xctx ~~~ BottomPadding[ ]:::invisible
-    C27Esh ~~~ BottomPadding
-    C27E1 ~~~ BottomPadding
-    C27J1 ~~~ BottomPadding
-    C27A1 ~~~ BottomPadding
-    C27E2 ~~~ BottomPadding
+    C27top_L863 --o C27Xctx_L864
+    C27top_L863 --> C27Esh_L865
+    C27top_L863 --> C27Sass_L866
+    C27Sass_L866 --> C27G1_L867
+    C27G1_L867 --> C27E1_L868
+    C27G1_L867 --o C27Xctx_L864
+    C27Sass_L866 --> C27G2_L870
+    C27G2_L870 --o C27J1_L871
+    C27G2_L870 --> C27Esh_L865
+    C27Sass_L866 --> C27G3_L873
+    C27G3_L873 --o C27A1_L874
+    C27G3_L873 --> C27E2_L875
+    C27G3_L873 --> C27E1_L868
+    C27Xctx_L864 ~~~ BottomPadding[ ]:::invisible
+    C27Esh_L865 ~~~ BottomPadding
+    C27E1_L868 ~~~ BottomPadding
+    C27J1_L871 ~~~ BottomPadding
+    C27A1_L874 ~~~ BottomPadding
+    C27E2_L875 ~~~ BottomPadding
 ```
 
 ### Package C28top
@@ -6999,48 +7018,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C28top["<b>C28top</b><br>Statement of C28top"]
-    C28Xctx(["<b>C28Xctx</b><br>Context of C28Xctx"])
-    C28Esh(("<b>C28Esh</b><br>Shared evidence of C28"))
-    C28Sass[/"<b>C28Sass</b><br>Assertion strategy of C28"/]
-    C28G1["<b>C28G1</b><br>Sub-claim 1 of C28"]
-    C28G2["<b>C28G2</b><br>Sub-claim 2 of C28"]
-    C28G3["<b>C28G3</b><br>Sub-claim 3 of C28"]
-    C28E1(("<b>C28E1</b><br>Evidence 1 of C28"))
-    C28J1("<b>C28J1</b>&nbsp;Ⓙ<br>Justification of C28")
-    C28A1("<b>C28A1</b>&nbsp;Ⓐ<br>Assumption of C28")
-    C28E2(("<b>C28E2</b><br>Evidence 2 of C28"))
-    click C28top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28top"
-    click C28Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c28xctx"
-    click C28Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28esh"
-    click C28Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c28sass"
-    click C28G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g1"
-    click C28G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g2"
-    click C28G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g3"
-    click C28E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e1"
-    click C28J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c28j1"
-    click C28A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c28a1"
-    click C28E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
+    C28top_L878["<b>C28top</b><br>Statement of C28top"]
+    C28Xctx_L879(["<b>C28Xctx</b><br>Context of C28Xctx"])
+    C28Esh_L880(("<b>C28Esh</b><br>Shared evidence of C28"))
+    C28Sass_L881[/"<b>C28Sass</b><br>Assertion strategy of C28"/]
+    C28G1_L882["<b>C28G1</b><br>Sub-claim 1 of C28"]
+    C28G2_L885["<b>C28G2</b><br>Sub-claim 2 of C28"]
+    C28G3_L888["<b>C28G3</b><br>Sub-claim 3 of C28"]
+    C28E1_L883(("<b>C28E1</b><br>Evidence 1 of C28"))
+    C28J1_L886("<b>C28J1</b>&nbsp;Ⓙ<br>Justification of C28")
+    C28A1_L889("<b>C28A1</b>&nbsp;Ⓐ<br>Assumption of C28")
+    C28E2_L890(("<b>C28E2</b><br>Evidence 2 of C28"))
+    click C28top_L878 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28top"
+    click C28Xctx_L879 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c28xctx"
+    click C28Esh_L880 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28esh"
+    click C28Sass_L881 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c28sass"
+    click C28G1_L882 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g1"
+    click C28G2_L885 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g2"
+    click C28G3_L888 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c28g3"
+    click C28E1_L883 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e1"
+    click C28J1_L886 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c28j1"
+    click C28A1_L889 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c28a1"
+    click C28E2_L890 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
 
-    C28top --o C28Xctx
-    C28top --> C28Esh
-    C28top --> C28Sass
-    C28Sass --> C28G1
-    C28G1 --> C28E1
-    C28G1 --o C28Xctx
-    C28Sass --> C28G2
-    C28G2 --o C28J1
-    C28G2 --> C28Esh
-    C28Sass --> C28G3
-    C28G3 --o C28A1
-    C28G3 --> C28E2
-    C28G3 --> C28E1
-    C28Xctx ~~~ BottomPadding[ ]:::invisible
-    C28Esh ~~~ BottomPadding
-    C28E1 ~~~ BottomPadding
-    C28J1 ~~~ BottomPadding
-    C28A1 ~~~ BottomPadding
-    C28E2 ~~~ BottomPadding
+    C28top_L878 --o C28Xctx_L879
+    C28top_L878 --> C28Esh_L880
+    C28top_L878 --> C28Sass_L881
+    C28Sass_L881 --> C28G1_L882
+    C28G1_L882 --> C28E1_L883
+    C28G1_L882 --o C28Xctx_L879
+    C28Sass_L881 --> C28G2_L885
+    C28G2_L885 --o C28J1_L886
+    C28G2_L885 --> C28Esh_L880
+    C28Sass_L881 --> C28G3_L888
+    C28G3_L888 --o C28A1_L889
+    C28G3_L888 --> C28E2_L890
+    C28G3_L888 --> C28E1_L883
+    C28Xctx_L879 ~~~ BottomPadding[ ]:::invisible
+    C28Esh_L880 ~~~ BottomPadding
+    C28E1_L883 ~~~ BottomPadding
+    C28J1_L886 ~~~ BottomPadding
+    C28A1_L889 ~~~ BottomPadding
+    C28E2_L890 ~~~ BottomPadding
 ```
 
 ### Package C29top
@@ -7059,48 +7078,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C29top["<b>C29top</b><br>Statement of C29top"]
-    C29Xctx(["<b>C29Xctx</b><br>Context of C29Xctx"])
-    C29Esh(("<b>C29Esh</b><br>Shared evidence of C29"))
-    C29Sass[/"<b>C29Sass</b><br>Assertion strategy of C29"/]
-    C29G1["<b>C29G1</b><br>Sub-claim 1 of C29"]
-    C29G2["<b>C29G2</b><br>Sub-claim 2 of C29"]
-    C29G3["<b>C29G3</b><br>Sub-claim 3 of C29"]
-    C29E1(("<b>C29E1</b><br>Evidence 1 of C29"))
-    C29J1("<b>C29J1</b>&nbsp;Ⓙ<br>Justification of C29")
-    C29A1("<b>C29A1</b>&nbsp;Ⓐ<br>Assumption of C29")
-    C29E2(("<b>C29E2</b><br>Evidence 2 of C29"))
-    click C29top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29top"
-    click C29Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c29xctx"
-    click C29Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29esh"
-    click C29Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c29sass"
-    click C29G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g1"
-    click C29G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g2"
-    click C29G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g3"
-    click C29E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e1"
-    click C29J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c29j1"
-    click C29A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c29a1"
-    click C29E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
+    C29top_L893["<b>C29top</b><br>Statement of C29top"]
+    C29Xctx_L894(["<b>C29Xctx</b><br>Context of C29Xctx"])
+    C29Esh_L895(("<b>C29Esh</b><br>Shared evidence of C29"))
+    C29Sass_L896[/"<b>C29Sass</b><br>Assertion strategy of C29"/]
+    C29G1_L897["<b>C29G1</b><br>Sub-claim 1 of C29"]
+    C29G2_L900["<b>C29G2</b><br>Sub-claim 2 of C29"]
+    C29G3_L903["<b>C29G3</b><br>Sub-claim 3 of C29"]
+    C29E1_L898(("<b>C29E1</b><br>Evidence 1 of C29"))
+    C29J1_L901("<b>C29J1</b>&nbsp;Ⓙ<br>Justification of C29")
+    C29A1_L904("<b>C29A1</b>&nbsp;Ⓐ<br>Assumption of C29")
+    C29E2_L905(("<b>C29E2</b><br>Evidence 2 of C29"))
+    click C29top_L893 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29top"
+    click C29Xctx_L894 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c29xctx"
+    click C29Esh_L895 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29esh"
+    click C29Sass_L896 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c29sass"
+    click C29G1_L897 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g1"
+    click C29G2_L900 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g2"
+    click C29G3_L903 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c29g3"
+    click C29E1_L898 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e1"
+    click C29J1_L901 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c29j1"
+    click C29A1_L904 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c29a1"
+    click C29E2_L905 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
 
-    C29top --o C29Xctx
-    C29top --> C29Esh
-    C29top --> C29Sass
-    C29Sass --> C29G1
-    C29G1 --> C29E1
-    C29G1 --o C29Xctx
-    C29Sass --> C29G2
-    C29G2 --o C29J1
-    C29G2 --> C29Esh
-    C29Sass --> C29G3
-    C29G3 --o C29A1
-    C29G3 --> C29E2
-    C29G3 --> C29E1
-    C29Xctx ~~~ BottomPadding[ ]:::invisible
-    C29Esh ~~~ BottomPadding
-    C29E1 ~~~ BottomPadding
-    C29J1 ~~~ BottomPadding
-    C29A1 ~~~ BottomPadding
-    C29E2 ~~~ BottomPadding
+    C29top_L893 --o C29Xctx_L894
+    C29top_L893 --> C29Esh_L895
+    C29top_L893 --> C29Sass_L896
+    C29Sass_L896 --> C29G1_L897
+    C29G1_L897 --> C29E1_L898
+    C29G1_L897 --o C29Xctx_L894
+    C29Sass_L896 --> C29G2_L900
+    C29G2_L900 --o C29J1_L901
+    C29G2_L900 --> C29Esh_L895
+    C29Sass_L896 --> C29G3_L903
+    C29G3_L903 --o C29A1_L904
+    C29G3_L903 --> C29E2_L905
+    C29G3_L903 --> C29E1_L898
+    C29Xctx_L894 ~~~ BottomPadding[ ]:::invisible
+    C29Esh_L895 ~~~ BottomPadding
+    C29E1_L898 ~~~ BottomPadding
+    C29J1_L901 ~~~ BottomPadding
+    C29A1_L904 ~~~ BottomPadding
+    C29E2_L905 ~~~ BottomPadding
 ```
 
 ### Package C30top
@@ -7119,48 +7138,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C30top["<b>C30top</b><br>Statement of C30top"]
-    C30Xctx(["<b>C30Xctx</b><br>Context of C30Xctx"])
-    C30Esh(("<b>C30Esh</b><br>Shared evidence of C30"))
-    C30Sass[/"<b>C30Sass</b><br>Assertion strategy of C30"/]
-    C30G1["<b>C30G1</b><br>Sub-claim 1 of C30"]
-    C30G2["<b>C30G2</b><br>Sub-claim 2 of C30"]
-    C30G3["<b>C30G3</b><br>Sub-claim 3 of C30"]
-    C30E1(("<b>C30E1</b><br>Evidence 1 of C30"))
-    C30J1("<b>C30J1</b>&nbsp;Ⓙ<br>Justification of C30")
-    C30A1("<b>C30A1</b>&nbsp;Ⓐ<br>Assumption of C30")
-    C30E2(("<b>C30E2</b><br>Evidence 2 of C30"))
-    click C30top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30top"
-    click C30Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c30xctx"
-    click C30Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30esh"
-    click C30Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c30sass"
-    click C30G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g1"
-    click C30G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g2"
-    click C30G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g3"
-    click C30E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e1"
-    click C30J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c30j1"
-    click C30A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c30a1"
-    click C30E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
+    C30top_L908["<b>C30top</b><br>Statement of C30top"]
+    C30Xctx_L909(["<b>C30Xctx</b><br>Context of C30Xctx"])
+    C30Esh_L910(("<b>C30Esh</b><br>Shared evidence of C30"))
+    C30Sass_L911[/"<b>C30Sass</b><br>Assertion strategy of C30"/]
+    C30G1_L912["<b>C30G1</b><br>Sub-claim 1 of C30"]
+    C30G2_L915["<b>C30G2</b><br>Sub-claim 2 of C30"]
+    C30G3_L918["<b>C30G3</b><br>Sub-claim 3 of C30"]
+    C30E1_L913(("<b>C30E1</b><br>Evidence 1 of C30"))
+    C30J1_L916("<b>C30J1</b>&nbsp;Ⓙ<br>Justification of C30")
+    C30A1_L919("<b>C30A1</b>&nbsp;Ⓐ<br>Assumption of C30")
+    C30E2_L920(("<b>C30E2</b><br>Evidence 2 of C30"))
+    click C30top_L908 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30top"
+    click C30Xctx_L909 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c30xctx"
+    click C30Esh_L910 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30esh"
+    click C30Sass_L911 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c30sass"
+    click C30G1_L912 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g1"
+    click C30G2_L915 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g2"
+    click C30G3_L918 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c30g3"
+    click C30E1_L913 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e1"
+    click C30J1_L916 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c30j1"
+    click C30A1_L919 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c30a1"
+    click C30E2_L920 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
 
-    C30top --o C30Xctx
-    C30top --> C30Esh
-    C30top --> C30Sass
-    C30Sass --> C30G1
-    C30G1 --> C30E1
-    C30G1 --o C30Xctx
-    C30Sass --> C30G2
-    C30G2 --o C30J1
-    C30G2 --> C30Esh
-    C30Sass --> C30G3
-    C30G3 --o C30A1
-    C30G3 --> C30E2
-    C30G3 --> C30E1
-    C30Xctx ~~~ BottomPadding[ ]:::invisible
-    C30Esh ~~~ BottomPadding
-    C30E1 ~~~ BottomPadding
-    C30J1 ~~~ BottomPadding
-    C30A1 ~~~ BottomPadding
-    C30E2 ~~~ BottomPadding
+    C30top_L908 --o C30Xctx_L909
+    C30top_L908 --> C30Esh_L910
+    C30top_L908 --> C30Sass_L911
+    C30Sass_L911 --> C30G1_L912
+    C30G1_L912 --> C30E1_L913
+    C30G1_L912 --o C30Xctx_L909
+    C30Sass_L911 --> C30G2_L915
+    C30G2_L915 --o C30J1_L916
+    C30G2_L915 --> C30Esh_L910
+    C30Sass_L911 --> C30G3_L918
+    C30G3_L918 --o C30A1_L919
+    C30G3_L918 --> C30E2_L920
+    C30G3_L918 --> C30E1_L913
+    C30Xctx_L909 ~~~ BottomPadding[ ]:::invisible
+    C30Esh_L910 ~~~ BottomPadding
+    C30E1_L913 ~~~ BottomPadding
+    C30J1_L916 ~~~ BottomPadding
+    C30A1_L919 ~~~ BottomPadding
+    C30E2_L920 ~~~ BottomPadding
 ```
 
 ### Package C31top
@@ -7179,48 +7198,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C31top["<b>C31top</b><br>Statement of C31top"]
-    C31Xctx(["<b>C31Xctx</b><br>Context of C31Xctx"])
-    C31Esh(("<b>C31Esh</b><br>Shared evidence of C31"))
-    C31Sass[/"<b>C31Sass</b><br>Assertion strategy of C31"/]
-    C31G1["<b>C31G1</b><br>Sub-claim 1 of C31"]
-    C31G2["<b>C31G2</b><br>Sub-claim 2 of C31"]
-    C31G3["<b>C31G3</b><br>Sub-claim 3 of C31"]
-    C31E1(("<b>C31E1</b><br>Evidence 1 of C31"))
-    C31J1("<b>C31J1</b>&nbsp;Ⓙ<br>Justification of C31")
-    C31A1("<b>C31A1</b>&nbsp;Ⓐ<br>Assumption of C31")
-    C31E2(("<b>C31E2</b><br>Evidence 2 of C31"))
-    click C31top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31top"
-    click C31Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c31xctx"
-    click C31Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31esh"
-    click C31Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c31sass"
-    click C31G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g1"
-    click C31G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g2"
-    click C31G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g3"
-    click C31E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e1"
-    click C31J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c31j1"
-    click C31A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c31a1"
-    click C31E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
+    C31top_L923["<b>C31top</b><br>Statement of C31top"]
+    C31Xctx_L924(["<b>C31Xctx</b><br>Context of C31Xctx"])
+    C31Esh_L925(("<b>C31Esh</b><br>Shared evidence of C31"))
+    C31Sass_L926[/"<b>C31Sass</b><br>Assertion strategy of C31"/]
+    C31G1_L927["<b>C31G1</b><br>Sub-claim 1 of C31"]
+    C31G2_L930["<b>C31G2</b><br>Sub-claim 2 of C31"]
+    C31G3_L933["<b>C31G3</b><br>Sub-claim 3 of C31"]
+    C31E1_L928(("<b>C31E1</b><br>Evidence 1 of C31"))
+    C31J1_L931("<b>C31J1</b>&nbsp;Ⓙ<br>Justification of C31")
+    C31A1_L934("<b>C31A1</b>&nbsp;Ⓐ<br>Assumption of C31")
+    C31E2_L935(("<b>C31E2</b><br>Evidence 2 of C31"))
+    click C31top_L923 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31top"
+    click C31Xctx_L924 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c31xctx"
+    click C31Esh_L925 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31esh"
+    click C31Sass_L926 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c31sass"
+    click C31G1_L927 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g1"
+    click C31G2_L930 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g2"
+    click C31G3_L933 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c31g3"
+    click C31E1_L928 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e1"
+    click C31J1_L931 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c31j1"
+    click C31A1_L934 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c31a1"
+    click C31E2_L935 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
 
-    C31top --o C31Xctx
-    C31top --> C31Esh
-    C31top --> C31Sass
-    C31Sass --> C31G1
-    C31G1 --> C31E1
-    C31G1 --o C31Xctx
-    C31Sass --> C31G2
-    C31G2 --o C31J1
-    C31G2 --> C31Esh
-    C31Sass --> C31G3
-    C31G3 --o C31A1
-    C31G3 --> C31E2
-    C31G3 --> C31E1
-    C31Xctx ~~~ BottomPadding[ ]:::invisible
-    C31Esh ~~~ BottomPadding
-    C31E1 ~~~ BottomPadding
-    C31J1 ~~~ BottomPadding
-    C31A1 ~~~ BottomPadding
-    C31E2 ~~~ BottomPadding
+    C31top_L923 --o C31Xctx_L924
+    C31top_L923 --> C31Esh_L925
+    C31top_L923 --> C31Sass_L926
+    C31Sass_L926 --> C31G1_L927
+    C31G1_L927 --> C31E1_L928
+    C31G1_L927 --o C31Xctx_L924
+    C31Sass_L926 --> C31G2_L930
+    C31G2_L930 --o C31J1_L931
+    C31G2_L930 --> C31Esh_L925
+    C31Sass_L926 --> C31G3_L933
+    C31G3_L933 --o C31A1_L934
+    C31G3_L933 --> C31E2_L935
+    C31G3_L933 --> C31E1_L928
+    C31Xctx_L924 ~~~ BottomPadding[ ]:::invisible
+    C31Esh_L925 ~~~ BottomPadding
+    C31E1_L928 ~~~ BottomPadding
+    C31J1_L931 ~~~ BottomPadding
+    C31A1_L934 ~~~ BottomPadding
+    C31E2_L935 ~~~ BottomPadding
 ```
 
 ### Package C32top
@@ -7239,48 +7258,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C32top["<b>C32top</b><br>Statement of C32top"]
-    C32Xctx(["<b>C32Xctx</b><br>Context of C32Xctx"])
-    C32Esh(("<b>C32Esh</b><br>Shared evidence of C32"))
-    C32Sass[/"<b>C32Sass</b><br>Assertion strategy of C32"/]
-    C32G1["<b>C32G1</b><br>Sub-claim 1 of C32"]
-    C32G2["<b>C32G2</b><br>Sub-claim 2 of C32"]
-    C32G3["<b>C32G3</b><br>Sub-claim 3 of C32"]
-    C32E1(("<b>C32E1</b><br>Evidence 1 of C32"))
-    C32J1("<b>C32J1</b>&nbsp;Ⓙ<br>Justification of C32")
-    C32A1("<b>C32A1</b>&nbsp;Ⓐ<br>Assumption of C32")
-    C32E2(("<b>C32E2</b><br>Evidence 2 of C32"))
-    click C32top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32top"
-    click C32Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c32xctx"
-    click C32Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32esh"
-    click C32Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c32sass"
-    click C32G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g1"
-    click C32G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g2"
-    click C32G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g3"
-    click C32E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e1"
-    click C32J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c32j1"
-    click C32A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c32a1"
-    click C32E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
+    C32top_L938["<b>C32top</b><br>Statement of C32top"]
+    C32Xctx_L939(["<b>C32Xctx</b><br>Context of C32Xctx"])
+    C32Esh_L940(("<b>C32Esh</b><br>Shared evidence of C32"))
+    C32Sass_L941[/"<b>C32Sass</b><br>Assertion strategy of C32"/]
+    C32G1_L942["<b>C32G1</b><br>Sub-claim 1 of C32"]
+    C32G2_L945["<b>C32G2</b><br>Sub-claim 2 of C32"]
+    C32G3_L948["<b>C32G3</b><br>Sub-claim 3 of C32"]
+    C32E1_L943(("<b>C32E1</b><br>Evidence 1 of C32"))
+    C32J1_L946("<b>C32J1</b>&nbsp;Ⓙ<br>Justification of C32")
+    C32A1_L949("<b>C32A1</b>&nbsp;Ⓐ<br>Assumption of C32")
+    C32E2_L950(("<b>C32E2</b><br>Evidence 2 of C32"))
+    click C32top_L938 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32top"
+    click C32Xctx_L939 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c32xctx"
+    click C32Esh_L940 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32esh"
+    click C32Sass_L941 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c32sass"
+    click C32G1_L942 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g1"
+    click C32G2_L945 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g2"
+    click C32G3_L948 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c32g3"
+    click C32E1_L943 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e1"
+    click C32J1_L946 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c32j1"
+    click C32A1_L949 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c32a1"
+    click C32E2_L950 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
 
-    C32top --o C32Xctx
-    C32top --> C32Esh
-    C32top --> C32Sass
-    C32Sass --> C32G1
-    C32G1 --> C32E1
-    C32G1 --o C32Xctx
-    C32Sass --> C32G2
-    C32G2 --o C32J1
-    C32G2 --> C32Esh
-    C32Sass --> C32G3
-    C32G3 --o C32A1
-    C32G3 --> C32E2
-    C32G3 --> C32E1
-    C32Xctx ~~~ BottomPadding[ ]:::invisible
-    C32Esh ~~~ BottomPadding
-    C32E1 ~~~ BottomPadding
-    C32J1 ~~~ BottomPadding
-    C32A1 ~~~ BottomPadding
-    C32E2 ~~~ BottomPadding
+    C32top_L938 --o C32Xctx_L939
+    C32top_L938 --> C32Esh_L940
+    C32top_L938 --> C32Sass_L941
+    C32Sass_L941 --> C32G1_L942
+    C32G1_L942 --> C32E1_L943
+    C32G1_L942 --o C32Xctx_L939
+    C32Sass_L941 --> C32G2_L945
+    C32G2_L945 --o C32J1_L946
+    C32G2_L945 --> C32Esh_L940
+    C32Sass_L941 --> C32G3_L948
+    C32G3_L948 --o C32A1_L949
+    C32G3_L948 --> C32E2_L950
+    C32G3_L948 --> C32E1_L943
+    C32Xctx_L939 ~~~ BottomPadding[ ]:::invisible
+    C32Esh_L940 ~~~ BottomPadding
+    C32E1_L943 ~~~ BottomPadding
+    C32J1_L946 ~~~ BottomPadding
+    C32A1_L949 ~~~ BottomPadding
+    C32E2_L950 ~~~ BottomPadding
 ```
 
 ### Package C33top
@@ -7299,48 +7318,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C33top["<b>C33top</b><br>Statement of C33top"]
-    C33Xctx(["<b>C33Xctx</b><br>Context of C33Xctx"])
-    C33Esh(("<b>C33Esh</b><br>Shared evidence of C33"))
-    C33Sass[/"<b>C33Sass</b><br>Assertion strategy of C33"/]
-    C33G1["<b>C33G1</b><br>Sub-claim 1 of C33"]
-    C33G2["<b>C33G2</b><br>Sub-claim 2 of C33"]
-    C33G3["<b>C33G3</b><br>Sub-claim 3 of C33"]
-    C33E1(("<b>C33E1</b><br>Evidence 1 of C33"))
-    C33J1("<b>C33J1</b>&nbsp;Ⓙ<br>Justification of C33")
-    C33A1("<b>C33A1</b>&nbsp;Ⓐ<br>Assumption of C33")
-    C33E2(("<b>C33E2</b><br>Evidence 2 of C33"))
-    click C33top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33top"
-    click C33Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c33xctx"
-    click C33Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33esh"
-    click C33Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c33sass"
-    click C33G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g1"
-    click C33G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g2"
-    click C33G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g3"
-    click C33E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e1"
-    click C33J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c33j1"
-    click C33A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c33a1"
-    click C33E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
+    C33top_L953["<b>C33top</b><br>Statement of C33top"]
+    C33Xctx_L954(["<b>C33Xctx</b><br>Context of C33Xctx"])
+    C33Esh_L955(("<b>C33Esh</b><br>Shared evidence of C33"))
+    C33Sass_L956[/"<b>C33Sass</b><br>Assertion strategy of C33"/]
+    C33G1_L957["<b>C33G1</b><br>Sub-claim 1 of C33"]
+    C33G2_L960["<b>C33G2</b><br>Sub-claim 2 of C33"]
+    C33G3_L963["<b>C33G3</b><br>Sub-claim 3 of C33"]
+    C33E1_L958(("<b>C33E1</b><br>Evidence 1 of C33"))
+    C33J1_L961("<b>C33J1</b>&nbsp;Ⓙ<br>Justification of C33")
+    C33A1_L964("<b>C33A1</b>&nbsp;Ⓐ<br>Assumption of C33")
+    C33E2_L965(("<b>C33E2</b><br>Evidence 2 of C33"))
+    click C33top_L953 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33top"
+    click C33Xctx_L954 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c33xctx"
+    click C33Esh_L955 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33esh"
+    click C33Sass_L956 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c33sass"
+    click C33G1_L957 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g1"
+    click C33G2_L960 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g2"
+    click C33G3_L963 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c33g3"
+    click C33E1_L958 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e1"
+    click C33J1_L961 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c33j1"
+    click C33A1_L964 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c33a1"
+    click C33E2_L965 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
 
-    C33top --o C33Xctx
-    C33top --> C33Esh
-    C33top --> C33Sass
-    C33Sass --> C33G1
-    C33G1 --> C33E1
-    C33G1 --o C33Xctx
-    C33Sass --> C33G2
-    C33G2 --o C33J1
-    C33G2 --> C33Esh
-    C33Sass --> C33G3
-    C33G3 --o C33A1
-    C33G3 --> C33E2
-    C33G3 --> C33E1
-    C33Xctx ~~~ BottomPadding[ ]:::invisible
-    C33Esh ~~~ BottomPadding
-    C33E1 ~~~ BottomPadding
-    C33J1 ~~~ BottomPadding
-    C33A1 ~~~ BottomPadding
-    C33E2 ~~~ BottomPadding
+    C33top_L953 --o C33Xctx_L954
+    C33top_L953 --> C33Esh_L955
+    C33top_L953 --> C33Sass_L956
+    C33Sass_L956 --> C33G1_L957
+    C33G1_L957 --> C33E1_L958
+    C33G1_L957 --o C33Xctx_L954
+    C33Sass_L956 --> C33G2_L960
+    C33G2_L960 --o C33J1_L961
+    C33G2_L960 --> C33Esh_L955
+    C33Sass_L956 --> C33G3_L963
+    C33G3_L963 --o C33A1_L964
+    C33G3_L963 --> C33E2_L965
+    C33G3_L963 --> C33E1_L958
+    C33Xctx_L954 ~~~ BottomPadding[ ]:::invisible
+    C33Esh_L955 ~~~ BottomPadding
+    C33E1_L958 ~~~ BottomPadding
+    C33J1_L961 ~~~ BottomPadding
+    C33A1_L964 ~~~ BottomPadding
+    C33E2_L965 ~~~ BottomPadding
 ```
 
 ### Package C34top
@@ -7359,48 +7378,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C34top["<b>C34top</b><br>Statement of C34top"]
-    C34Xctx(["<b>C34Xctx</b><br>Context of C34Xctx"])
-    C34Esh(("<b>C34Esh</b><br>Shared evidence of C34"))
-    C34Sass[/"<b>C34Sass</b><br>Assertion strategy of C34"/]
-    C34G1["<b>C34G1</b><br>Sub-claim 1 of C34"]
-    C34G2["<b>C34G2</b><br>Sub-claim 2 of C34"]
-    C34G3["<b>C34G3</b><br>Sub-claim 3 of C34"]
-    C34E1(("<b>C34E1</b><br>Evidence 1 of C34"))
-    C34J1("<b>C34J1</b>&nbsp;Ⓙ<br>Justification of C34")
-    C34A1("<b>C34A1</b>&nbsp;Ⓐ<br>Assumption of C34")
-    C34E2(("<b>C34E2</b><br>Evidence 2 of C34"))
-    click C34top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34top"
-    click C34Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c34xctx"
-    click C34Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34esh"
-    click C34Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c34sass"
-    click C34G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g1"
-    click C34G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g2"
-    click C34G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g3"
-    click C34E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e1"
-    click C34J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c34j1"
-    click C34A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c34a1"
-    click C34E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
+    C34top_L968["<b>C34top</b><br>Statement of C34top"]
+    C34Xctx_L969(["<b>C34Xctx</b><br>Context of C34Xctx"])
+    C34Esh_L970(("<b>C34Esh</b><br>Shared evidence of C34"))
+    C34Sass_L971[/"<b>C34Sass</b><br>Assertion strategy of C34"/]
+    C34G1_L972["<b>C34G1</b><br>Sub-claim 1 of C34"]
+    C34G2_L975["<b>C34G2</b><br>Sub-claim 2 of C34"]
+    C34G3_L978["<b>C34G3</b><br>Sub-claim 3 of C34"]
+    C34E1_L973(("<b>C34E1</b><br>Evidence 1 of C34"))
+    C34J1_L976("<b>C34J1</b>&nbsp;Ⓙ<br>Justification of C34")
+    C34A1_L979("<b>C34A1</b>&nbsp;Ⓐ<br>Assumption of C34")
+    C34E2_L980(("<b>C34E2</b><br>Evidence 2 of C34"))
+    click C34top_L968 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34top"
+    click C34Xctx_L969 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c34xctx"
+    click C34Esh_L970 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34esh"
+    click C34Sass_L971 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c34sass"
+    click C34G1_L972 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g1"
+    click C34G2_L975 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g2"
+    click C34G3_L978 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c34g3"
+    click C34E1_L973 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e1"
+    click C34J1_L976 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c34j1"
+    click C34A1_L979 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c34a1"
+    click C34E2_L980 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
 
-    C34top --o C34Xctx
-    C34top --> C34Esh
-    C34top --> C34Sass
-    C34Sass --> C34G1
-    C34G1 --> C34E1
-    C34G1 --o C34Xctx
-    C34Sass --> C34G2
-    C34G2 --o C34J1
-    C34G2 --> C34Esh
-    C34Sass --> C34G3
-    C34G3 --o C34A1
-    C34G3 --> C34E2
-    C34G3 --> C34E1
-    C34Xctx ~~~ BottomPadding[ ]:::invisible
-    C34Esh ~~~ BottomPadding
-    C34E1 ~~~ BottomPadding
-    C34J1 ~~~ BottomPadding
-    C34A1 ~~~ BottomPadding
-    C34E2 ~~~ BottomPadding
+    C34top_L968 --o C34Xctx_L969
+    C34top_L968 --> C34Esh_L970
+    C34top_L968 --> C34Sass_L971
+    C34Sass_L971 --> C34G1_L972
+    C34G1_L972 --> C34E1_L973
+    C34G1_L972 --o C34Xctx_L969
+    C34Sass_L971 --> C34G2_L975
+    C34G2_L975 --o C34J1_L976
+    C34G2_L975 --> C34Esh_L970
+    C34Sass_L971 --> C34G3_L978
+    C34G3_L978 --o C34A1_L979
+    C34G3_L978 --> C34E2_L980
+    C34G3_L978 --> C34E1_L973
+    C34Xctx_L969 ~~~ BottomPadding[ ]:::invisible
+    C34Esh_L970 ~~~ BottomPadding
+    C34E1_L973 ~~~ BottomPadding
+    C34J1_L976 ~~~ BottomPadding
+    C34A1_L979 ~~~ BottomPadding
+    C34E2_L980 ~~~ BottomPadding
 ```
 
 ### Package C35top
@@ -7419,48 +7438,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C35top["<b>C35top</b><br>Statement of C35top"]
-    C35Xctx(["<b>C35Xctx</b><br>Context of C35Xctx"])
-    C35Esh(("<b>C35Esh</b><br>Shared evidence of C35"))
-    C35Sass[/"<b>C35Sass</b><br>Assertion strategy of C35"/]
-    C35G1["<b>C35G1</b><br>Sub-claim 1 of C35"]
-    C35G2["<b>C35G2</b><br>Sub-claim 2 of C35"]
-    C35G3["<b>C35G3</b><br>Sub-claim 3 of C35"]
-    C35E1(("<b>C35E1</b><br>Evidence 1 of C35"))
-    C35J1("<b>C35J1</b>&nbsp;Ⓙ<br>Justification of C35")
-    C35A1("<b>C35A1</b>&nbsp;Ⓐ<br>Assumption of C35")
-    C35E2(("<b>C35E2</b><br>Evidence 2 of C35"))
-    click C35top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35top"
-    click C35Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c35xctx"
-    click C35Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35esh"
-    click C35Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c35sass"
-    click C35G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g1"
-    click C35G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g2"
-    click C35G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g3"
-    click C35E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e1"
-    click C35J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c35j1"
-    click C35A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c35a1"
-    click C35E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
+    C35top_L983["<b>C35top</b><br>Statement of C35top"]
+    C35Xctx_L984(["<b>C35Xctx</b><br>Context of C35Xctx"])
+    C35Esh_L985(("<b>C35Esh</b><br>Shared evidence of C35"))
+    C35Sass_L986[/"<b>C35Sass</b><br>Assertion strategy of C35"/]
+    C35G1_L987["<b>C35G1</b><br>Sub-claim 1 of C35"]
+    C35G2_L990["<b>C35G2</b><br>Sub-claim 2 of C35"]
+    C35G3_L993["<b>C35G3</b><br>Sub-claim 3 of C35"]
+    C35E1_L988(("<b>C35E1</b><br>Evidence 1 of C35"))
+    C35J1_L991("<b>C35J1</b>&nbsp;Ⓙ<br>Justification of C35")
+    C35A1_L994("<b>C35A1</b>&nbsp;Ⓐ<br>Assumption of C35")
+    C35E2_L995(("<b>C35E2</b><br>Evidence 2 of C35"))
+    click C35top_L983 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35top"
+    click C35Xctx_L984 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c35xctx"
+    click C35Esh_L985 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35esh"
+    click C35Sass_L986 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c35sass"
+    click C35G1_L987 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g1"
+    click C35G2_L990 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g2"
+    click C35G3_L993 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c35g3"
+    click C35E1_L988 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e1"
+    click C35J1_L991 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c35j1"
+    click C35A1_L994 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c35a1"
+    click C35E2_L995 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
 
-    C35top --o C35Xctx
-    C35top --> C35Esh
-    C35top --> C35Sass
-    C35Sass --> C35G1
-    C35G1 --> C35E1
-    C35G1 --o C35Xctx
-    C35Sass --> C35G2
-    C35G2 --o C35J1
-    C35G2 --> C35Esh
-    C35Sass --> C35G3
-    C35G3 --o C35A1
-    C35G3 --> C35E2
-    C35G3 --> C35E1
-    C35Xctx ~~~ BottomPadding[ ]:::invisible
-    C35Esh ~~~ BottomPadding
-    C35E1 ~~~ BottomPadding
-    C35J1 ~~~ BottomPadding
-    C35A1 ~~~ BottomPadding
-    C35E2 ~~~ BottomPadding
+    C35top_L983 --o C35Xctx_L984
+    C35top_L983 --> C35Esh_L985
+    C35top_L983 --> C35Sass_L986
+    C35Sass_L986 --> C35G1_L987
+    C35G1_L987 --> C35E1_L988
+    C35G1_L987 --o C35Xctx_L984
+    C35Sass_L986 --> C35G2_L990
+    C35G2_L990 --o C35J1_L991
+    C35G2_L990 --> C35Esh_L985
+    C35Sass_L986 --> C35G3_L993
+    C35G3_L993 --o C35A1_L994
+    C35G3_L993 --> C35E2_L995
+    C35G3_L993 --> C35E1_L988
+    C35Xctx_L984 ~~~ BottomPadding[ ]:::invisible
+    C35Esh_L985 ~~~ BottomPadding
+    C35E1_L988 ~~~ BottomPadding
+    C35J1_L991 ~~~ BottomPadding
+    C35A1_L994 ~~~ BottomPadding
+    C35E2_L995 ~~~ BottomPadding
 ```
 
 ### Package C36top
@@ -7479,48 +7498,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C36top["<b>C36top</b><br>Statement of C36top"]
-    C36Xctx(["<b>C36Xctx</b><br>Context of C36Xctx"])
-    C36Esh(("<b>C36Esh</b><br>Shared evidence of C36"))
-    C36Sass[/"<b>C36Sass</b><br>Assertion strategy of C36"/]
-    C36G1["<b>C36G1</b><br>Sub-claim 1 of C36"]
-    C36G2["<b>C36G2</b><br>Sub-claim 2 of C36"]
-    C36G3["<b>C36G3</b><br>Sub-claim 3 of C36"]
-    C36E1(("<b>C36E1</b><br>Evidence 1 of C36"))
-    C36J1("<b>C36J1</b>&nbsp;Ⓙ<br>Justification of C36")
-    C36A1("<b>C36A1</b>&nbsp;Ⓐ<br>Assumption of C36")
-    C36E2(("<b>C36E2</b><br>Evidence 2 of C36"))
-    click C36top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36top"
-    click C36Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c36xctx"
-    click C36Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36esh"
-    click C36Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c36sass"
-    click C36G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g1"
-    click C36G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g2"
-    click C36G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g3"
-    click C36E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e1"
-    click C36J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c36j1"
-    click C36A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c36a1"
-    click C36E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
+    C36top_L998["<b>C36top</b><br>Statement of C36top"]
+    C36Xctx_L999(["<b>C36Xctx</b><br>Context of C36Xctx"])
+    C36Esh_L1000(("<b>C36Esh</b><br>Shared evidence of C36"))
+    C36Sass_L1001[/"<b>C36Sass</b><br>Assertion strategy of C36"/]
+    C36G1_L1002["<b>C36G1</b><br>Sub-claim 1 of C36"]
+    C36G2_L1005["<b>C36G2</b><br>Sub-claim 2 of C36"]
+    C36G3_L1008["<b>C36G3</b><br>Sub-claim 3 of C36"]
+    C36E1_L1003(("<b>C36E1</b><br>Evidence 1 of C36"))
+    C36J1_L1006("<b>C36J1</b>&nbsp;Ⓙ<br>Justification of C36")
+    C36A1_L1009("<b>C36A1</b>&nbsp;Ⓐ<br>Assumption of C36")
+    C36E2_L1010(("<b>C36E2</b><br>Evidence 2 of C36"))
+    click C36top_L998 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36top"
+    click C36Xctx_L999 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c36xctx"
+    click C36Esh_L1000 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36esh"
+    click C36Sass_L1001 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c36sass"
+    click C36G1_L1002 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g1"
+    click C36G2_L1005 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g2"
+    click C36G3_L1008 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c36g3"
+    click C36E1_L1003 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e1"
+    click C36J1_L1006 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c36j1"
+    click C36A1_L1009 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c36a1"
+    click C36E2_L1010 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
 
-    C36top --o C36Xctx
-    C36top --> C36Esh
-    C36top --> C36Sass
-    C36Sass --> C36G1
-    C36G1 --> C36E1
-    C36G1 --o C36Xctx
-    C36Sass --> C36G2
-    C36G2 --o C36J1
-    C36G2 --> C36Esh
-    C36Sass --> C36G3
-    C36G3 --o C36A1
-    C36G3 --> C36E2
-    C36G3 --> C36E1
-    C36Xctx ~~~ BottomPadding[ ]:::invisible
-    C36Esh ~~~ BottomPadding
-    C36E1 ~~~ BottomPadding
-    C36J1 ~~~ BottomPadding
-    C36A1 ~~~ BottomPadding
-    C36E2 ~~~ BottomPadding
+    C36top_L998 --o C36Xctx_L999
+    C36top_L998 --> C36Esh_L1000
+    C36top_L998 --> C36Sass_L1001
+    C36Sass_L1001 --> C36G1_L1002
+    C36G1_L1002 --> C36E1_L1003
+    C36G1_L1002 --o C36Xctx_L999
+    C36Sass_L1001 --> C36G2_L1005
+    C36G2_L1005 --o C36J1_L1006
+    C36G2_L1005 --> C36Esh_L1000
+    C36Sass_L1001 --> C36G3_L1008
+    C36G3_L1008 --o C36A1_L1009
+    C36G3_L1008 --> C36E2_L1010
+    C36G3_L1008 --> C36E1_L1003
+    C36Xctx_L999 ~~~ BottomPadding[ ]:::invisible
+    C36Esh_L1000 ~~~ BottomPadding
+    C36E1_L1003 ~~~ BottomPadding
+    C36J1_L1006 ~~~ BottomPadding
+    C36A1_L1009 ~~~ BottomPadding
+    C36E2_L1010 ~~~ BottomPadding
 ```
 
 ### Package C37top
@@ -7539,48 +7558,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C37top["<b>C37top</b><br>Statement of C37top"]
-    C37Xctx(["<b>C37Xctx</b><br>Context of C37Xctx"])
-    C37Esh(("<b>C37Esh</b><br>Shared evidence of C37"))
-    C37Sass[/"<b>C37Sass</b><br>Assertion strategy of C37"/]
-    C37G1["<b>C37G1</b><br>Sub-claim 1 of C37"]
-    C37G2["<b>C37G2</b><br>Sub-claim 2 of C37"]
-    C37G3["<b>C37G3</b><br>Sub-claim 3 of C37"]
-    C37E1(("<b>C37E1</b><br>Evidence 1 of C37"))
-    C37J1("<b>C37J1</b>&nbsp;Ⓙ<br>Justification of C37")
-    C37A1("<b>C37A1</b>&nbsp;Ⓐ<br>Assumption of C37")
-    C37E2(("<b>C37E2</b><br>Evidence 2 of C37"))
-    click C37top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37top"
-    click C37Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c37xctx"
-    click C37Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37esh"
-    click C37Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c37sass"
-    click C37G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g1"
-    click C37G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g2"
-    click C37G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g3"
-    click C37E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e1"
-    click C37J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c37j1"
-    click C37A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c37a1"
-    click C37E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
+    C37top_L1013["<b>C37top</b><br>Statement of C37top"]
+    C37Xctx_L1014(["<b>C37Xctx</b><br>Context of C37Xctx"])
+    C37Esh_L1015(("<b>C37Esh</b><br>Shared evidence of C37"))
+    C37Sass_L1016[/"<b>C37Sass</b><br>Assertion strategy of C37"/]
+    C37G1_L1017["<b>C37G1</b><br>Sub-claim 1 of C37"]
+    C37G2_L1020["<b>C37G2</b><br>Sub-claim 2 of C37"]
+    C37G3_L1023["<b>C37G3</b><br>Sub-claim 3 of C37"]
+    C37E1_L1018(("<b>C37E1</b><br>Evidence 1 of C37"))
+    C37J1_L1021("<b>C37J1</b>&nbsp;Ⓙ<br>Justification of C37")
+    C37A1_L1024("<b>C37A1</b>&nbsp;Ⓐ<br>Assumption of C37")
+    C37E2_L1025(("<b>C37E2</b><br>Evidence 2 of C37"))
+    click C37top_L1013 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37top"
+    click C37Xctx_L1014 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c37xctx"
+    click C37Esh_L1015 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37esh"
+    click C37Sass_L1016 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c37sass"
+    click C37G1_L1017 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g1"
+    click C37G2_L1020 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g2"
+    click C37G3_L1023 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c37g3"
+    click C37E1_L1018 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e1"
+    click C37J1_L1021 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c37j1"
+    click C37A1_L1024 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c37a1"
+    click C37E2_L1025 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
 
-    C37top --o C37Xctx
-    C37top --> C37Esh
-    C37top --> C37Sass
-    C37Sass --> C37G1
-    C37G1 --> C37E1
-    C37G1 --o C37Xctx
-    C37Sass --> C37G2
-    C37G2 --o C37J1
-    C37G2 --> C37Esh
-    C37Sass --> C37G3
-    C37G3 --o C37A1
-    C37G3 --> C37E2
-    C37G3 --> C37E1
-    C37Xctx ~~~ BottomPadding[ ]:::invisible
-    C37Esh ~~~ BottomPadding
-    C37E1 ~~~ BottomPadding
-    C37J1 ~~~ BottomPadding
-    C37A1 ~~~ BottomPadding
-    C37E2 ~~~ BottomPadding
+    C37top_L1013 --o C37Xctx_L1014
+    C37top_L1013 --> C37Esh_L1015
+    C37top_L1013 --> C37Sass_L1016
+    C37Sass_L1016 --> C37G1_L1017
+    C37G1_L1017 --> C37E1_L1018
+    C37G1_L1017 --o C37Xctx_L1014
+    C37Sass_L1016 --> C37G2_L1020
+    C37G2_L1020 --o C37J1_L1021
+    C37G2_L1020 --> C37Esh_L1015
+    C37Sass_L1016 --> C37G3_L1023
+    C37G3_L1023 --o C37A1_L1024
+    C37G3_L1023 --> C37E2_L1025
+    C37G3_L1023 --> C37E1_L1018
+    C37Xctx_L1014 ~~~ BottomPadding[ ]:::invisible
+    C37Esh_L1015 ~~~ BottomPadding
+    C37E1_L1018 ~~~ BottomPadding
+    C37J1_L1021 ~~~ BottomPadding
+    C37A1_L1024 ~~~ BottomPadding
+    C37E2_L1025 ~~~ BottomPadding
 ```
 
 ### Package C38top
@@ -7599,48 +7618,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C38top["<b>C38top</b><br>Statement of C38top"]
-    C38Xctx(["<b>C38Xctx</b><br>Context of C38Xctx"])
-    C38Esh(("<b>C38Esh</b><br>Shared evidence of C38"))
-    C38Sass[/"<b>C38Sass</b><br>Assertion strategy of C38"/]
-    C38G1["<b>C38G1</b><br>Sub-claim 1 of C38"]
-    C38G2["<b>C38G2</b><br>Sub-claim 2 of C38"]
-    C38G3["<b>C38G3</b><br>Sub-claim 3 of C38"]
-    C38E1(("<b>C38E1</b><br>Evidence 1 of C38"))
-    C38J1("<b>C38J1</b>&nbsp;Ⓙ<br>Justification of C38")
-    C38A1("<b>C38A1</b>&nbsp;Ⓐ<br>Assumption of C38")
-    C38E2(("<b>C38E2</b><br>Evidence 2 of C38"))
-    click C38top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38top"
-    click C38Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c38xctx"
-    click C38Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38esh"
-    click C38Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c38sass"
-    click C38G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g1"
-    click C38G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g2"
-    click C38G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g3"
-    click C38E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e1"
-    click C38J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c38j1"
-    click C38A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c38a1"
-    click C38E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
+    C38top_L1028["<b>C38top</b><br>Statement of C38top"]
+    C38Xctx_L1029(["<b>C38Xctx</b><br>Context of C38Xctx"])
+    C38Esh_L1030(("<b>C38Esh</b><br>Shared evidence of C38"))
+    C38Sass_L1031[/"<b>C38Sass</b><br>Assertion strategy of C38"/]
+    C38G1_L1032["<b>C38G1</b><br>Sub-claim 1 of C38"]
+    C38G2_L1035["<b>C38G2</b><br>Sub-claim 2 of C38"]
+    C38G3_L1038["<b>C38G3</b><br>Sub-claim 3 of C38"]
+    C38E1_L1033(("<b>C38E1</b><br>Evidence 1 of C38"))
+    C38J1_L1036("<b>C38J1</b>&nbsp;Ⓙ<br>Justification of C38")
+    C38A1_L1039("<b>C38A1</b>&nbsp;Ⓐ<br>Assumption of C38")
+    C38E2_L1040(("<b>C38E2</b><br>Evidence 2 of C38"))
+    click C38top_L1028 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38top"
+    click C38Xctx_L1029 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c38xctx"
+    click C38Esh_L1030 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38esh"
+    click C38Sass_L1031 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c38sass"
+    click C38G1_L1032 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g1"
+    click C38G2_L1035 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g2"
+    click C38G3_L1038 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c38g3"
+    click C38E1_L1033 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e1"
+    click C38J1_L1036 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c38j1"
+    click C38A1_L1039 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c38a1"
+    click C38E2_L1040 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
 
-    C38top --o C38Xctx
-    C38top --> C38Esh
-    C38top --> C38Sass
-    C38Sass --> C38G1
-    C38G1 --> C38E1
-    C38G1 --o C38Xctx
-    C38Sass --> C38G2
-    C38G2 --o C38J1
-    C38G2 --> C38Esh
-    C38Sass --> C38G3
-    C38G3 --o C38A1
-    C38G3 --> C38E2
-    C38G3 --> C38E1
-    C38Xctx ~~~ BottomPadding[ ]:::invisible
-    C38Esh ~~~ BottomPadding
-    C38E1 ~~~ BottomPadding
-    C38J1 ~~~ BottomPadding
-    C38A1 ~~~ BottomPadding
-    C38E2 ~~~ BottomPadding
+    C38top_L1028 --o C38Xctx_L1029
+    C38top_L1028 --> C38Esh_L1030
+    C38top_L1028 --> C38Sass_L1031
+    C38Sass_L1031 --> C38G1_L1032
+    C38G1_L1032 --> C38E1_L1033
+    C38G1_L1032 --o C38Xctx_L1029
+    C38Sass_L1031 --> C38G2_L1035
+    C38G2_L1035 --o C38J1_L1036
+    C38G2_L1035 --> C38Esh_L1030
+    C38Sass_L1031 --> C38G3_L1038
+    C38G3_L1038 --o C38A1_L1039
+    C38G3_L1038 --> C38E2_L1040
+    C38G3_L1038 --> C38E1_L1033
+    C38Xctx_L1029 ~~~ BottomPadding[ ]:::invisible
+    C38Esh_L1030 ~~~ BottomPadding
+    C38E1_L1033 ~~~ BottomPadding
+    C38J1_L1036 ~~~ BottomPadding
+    C38A1_L1039 ~~~ BottomPadding
+    C38E2_L1040 ~~~ BottomPadding
 ```
 
 ### Package C39top
@@ -7659,48 +7678,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C39top["<b>C39top</b><br>Statement of C39top"]
-    C39Xctx(["<b>C39Xctx</b><br>Context of C39Xctx"])
-    C39Esh(("<b>C39Esh</b><br>Shared evidence of C39"))
-    C39Sass[/"<b>C39Sass</b><br>Assertion strategy of C39"/]
-    C39G1["<b>C39G1</b><br>Sub-claim 1 of C39"]
-    C39G2["<b>C39G2</b><br>Sub-claim 2 of C39"]
-    C39G3["<b>C39G3</b><br>Sub-claim 3 of C39"]
-    C39E1(("<b>C39E1</b><br>Evidence 1 of C39"))
-    C39J1("<b>C39J1</b>&nbsp;Ⓙ<br>Justification of C39")
-    C39A1("<b>C39A1</b>&nbsp;Ⓐ<br>Assumption of C39")
-    C39E2(("<b>C39E2</b><br>Evidence 2 of C39"))
-    click C39top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39top"
-    click C39Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c39xctx"
-    click C39Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39esh"
-    click C39Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c39sass"
-    click C39G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g1"
-    click C39G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g2"
-    click C39G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g3"
-    click C39E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e1"
-    click C39J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c39j1"
-    click C39A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c39a1"
-    click C39E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
+    C39top_L1043["<b>C39top</b><br>Statement of C39top"]
+    C39Xctx_L1044(["<b>C39Xctx</b><br>Context of C39Xctx"])
+    C39Esh_L1045(("<b>C39Esh</b><br>Shared evidence of C39"))
+    C39Sass_L1046[/"<b>C39Sass</b><br>Assertion strategy of C39"/]
+    C39G1_L1047["<b>C39G1</b><br>Sub-claim 1 of C39"]
+    C39G2_L1050["<b>C39G2</b><br>Sub-claim 2 of C39"]
+    C39G3_L1053["<b>C39G3</b><br>Sub-claim 3 of C39"]
+    C39E1_L1048(("<b>C39E1</b><br>Evidence 1 of C39"))
+    C39J1_L1051("<b>C39J1</b>&nbsp;Ⓙ<br>Justification of C39")
+    C39A1_L1054("<b>C39A1</b>&nbsp;Ⓐ<br>Assumption of C39")
+    C39E2_L1055(("<b>C39E2</b><br>Evidence 2 of C39"))
+    click C39top_L1043 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39top"
+    click C39Xctx_L1044 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c39xctx"
+    click C39Esh_L1045 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39esh"
+    click C39Sass_L1046 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c39sass"
+    click C39G1_L1047 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g1"
+    click C39G2_L1050 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g2"
+    click C39G3_L1053 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c39g3"
+    click C39E1_L1048 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e1"
+    click C39J1_L1051 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c39j1"
+    click C39A1_L1054 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c39a1"
+    click C39E2_L1055 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
 
-    C39top --o C39Xctx
-    C39top --> C39Esh
-    C39top --> C39Sass
-    C39Sass --> C39G1
-    C39G1 --> C39E1
-    C39G1 --o C39Xctx
-    C39Sass --> C39G2
-    C39G2 --o C39J1
-    C39G2 --> C39Esh
-    C39Sass --> C39G3
-    C39G3 --o C39A1
-    C39G3 --> C39E2
-    C39G3 --> C39E1
-    C39Xctx ~~~ BottomPadding[ ]:::invisible
-    C39Esh ~~~ BottomPadding
-    C39E1 ~~~ BottomPadding
-    C39J1 ~~~ BottomPadding
-    C39A1 ~~~ BottomPadding
-    C39E2 ~~~ BottomPadding
+    C39top_L1043 --o C39Xctx_L1044
+    C39top_L1043 --> C39Esh_L1045
+    C39top_L1043 --> C39Sass_L1046
+    C39Sass_L1046 --> C39G1_L1047
+    C39G1_L1047 --> C39E1_L1048
+    C39G1_L1047 --o C39Xctx_L1044
+    C39Sass_L1046 --> C39G2_L1050
+    C39G2_L1050 --o C39J1_L1051
+    C39G2_L1050 --> C39Esh_L1045
+    C39Sass_L1046 --> C39G3_L1053
+    C39G3_L1053 --o C39A1_L1054
+    C39G3_L1053 --> C39E2_L1055
+    C39G3_L1053 --> C39E1_L1048
+    C39Xctx_L1044 ~~~ BottomPadding[ ]:::invisible
+    C39Esh_L1045 ~~~ BottomPadding
+    C39E1_L1048 ~~~ BottomPadding
+    C39J1_L1051 ~~~ BottomPadding
+    C39A1_L1054 ~~~ BottomPadding
+    C39E2_L1055 ~~~ BottomPadding
 ```
 
 ### Package C40top
@@ -7719,48 +7738,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C40top["<b>C40top</b><br>Statement of C40top"]
-    C40Xctx(["<b>C40Xctx</b><br>Context of C40Xctx"])
-    C40Esh(("<b>C40Esh</b><br>Shared evidence of C40"))
-    C40Sass[/"<b>C40Sass</b><br>Assertion strategy of C40"/]
-    C40G1["<b>C40G1</b><br>Sub-claim 1 of C40"]
-    C40G2["<b>C40G2</b><br>Sub-claim 2 of C40"]
-    C40G3["<b>C40G3</b><br>Sub-claim 3 of C40"]
-    C40E1(("<b>C40E1</b><br>Evidence 1 of C40"))
-    C40J1("<b>C40J1</b>&nbsp;Ⓙ<br>Justification of C40")
-    C40A1("<b>C40A1</b>&nbsp;Ⓐ<br>Assumption of C40")
-    C40E2(("<b>C40E2</b><br>Evidence 2 of C40"))
-    click C40top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40top"
-    click C40Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c40xctx"
-    click C40Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40esh"
-    click C40Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c40sass"
-    click C40G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g1"
-    click C40G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g2"
-    click C40G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g3"
-    click C40E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e1"
-    click C40J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c40j1"
-    click C40A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c40a1"
-    click C40E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
+    C40top_L1058["<b>C40top</b><br>Statement of C40top"]
+    C40Xctx_L1059(["<b>C40Xctx</b><br>Context of C40Xctx"])
+    C40Esh_L1060(("<b>C40Esh</b><br>Shared evidence of C40"))
+    C40Sass_L1061[/"<b>C40Sass</b><br>Assertion strategy of C40"/]
+    C40G1_L1062["<b>C40G1</b><br>Sub-claim 1 of C40"]
+    C40G2_L1065["<b>C40G2</b><br>Sub-claim 2 of C40"]
+    C40G3_L1068["<b>C40G3</b><br>Sub-claim 3 of C40"]
+    C40E1_L1063(("<b>C40E1</b><br>Evidence 1 of C40"))
+    C40J1_L1066("<b>C40J1</b>&nbsp;Ⓙ<br>Justification of C40")
+    C40A1_L1069("<b>C40A1</b>&nbsp;Ⓐ<br>Assumption of C40")
+    C40E2_L1070(("<b>C40E2</b><br>Evidence 2 of C40"))
+    click C40top_L1058 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40top"
+    click C40Xctx_L1059 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c40xctx"
+    click C40Esh_L1060 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40esh"
+    click C40Sass_L1061 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c40sass"
+    click C40G1_L1062 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g1"
+    click C40G2_L1065 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g2"
+    click C40G3_L1068 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c40g3"
+    click C40E1_L1063 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e1"
+    click C40J1_L1066 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c40j1"
+    click C40A1_L1069 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c40a1"
+    click C40E2_L1070 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
 
-    C40top --o C40Xctx
-    C40top --> C40Esh
-    C40top --> C40Sass
-    C40Sass --> C40G1
-    C40G1 --> C40E1
-    C40G1 --o C40Xctx
-    C40Sass --> C40G2
-    C40G2 --o C40J1
-    C40G2 --> C40Esh
-    C40Sass --> C40G3
-    C40G3 --o C40A1
-    C40G3 --> C40E2
-    C40G3 --> C40E1
-    C40Xctx ~~~ BottomPadding[ ]:::invisible
-    C40Esh ~~~ BottomPadding
-    C40E1 ~~~ BottomPadding
-    C40J1 ~~~ BottomPadding
-    C40A1 ~~~ BottomPadding
-    C40E2 ~~~ BottomPadding
+    C40top_L1058 --o C40Xctx_L1059
+    C40top_L1058 --> C40Esh_L1060
+    C40top_L1058 --> C40Sass_L1061
+    C40Sass_L1061 --> C40G1_L1062
+    C40G1_L1062 --> C40E1_L1063
+    C40G1_L1062 --o C40Xctx_L1059
+    C40Sass_L1061 --> C40G2_L1065
+    C40G2_L1065 --o C40J1_L1066
+    C40G2_L1065 --> C40Esh_L1060
+    C40Sass_L1061 --> C40G3_L1068
+    C40G3_L1068 --o C40A1_L1069
+    C40G3_L1068 --> C40E2_L1070
+    C40G3_L1068 --> C40E1_L1063
+    C40Xctx_L1059 ~~~ BottomPadding[ ]:::invisible
+    C40Esh_L1060 ~~~ BottomPadding
+    C40E1_L1063 ~~~ BottomPadding
+    C40J1_L1066 ~~~ BottomPadding
+    C40A1_L1069 ~~~ BottomPadding
+    C40E2_L1070 ~~~ BottomPadding
 ```
 
 ### Package C41top
@@ -7779,48 +7798,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C41top["<b>C41top</b><br>Statement of C41top"]
-    C41Xctx(["<b>C41Xctx</b><br>Context of C41Xctx"])
-    C41Esh(("<b>C41Esh</b><br>Shared evidence of C41"))
-    C41Sass[/"<b>C41Sass</b><br>Assertion strategy of C41"/]
-    C41G1["<b>C41G1</b><br>Sub-claim 1 of C41"]
-    C41G2["<b>C41G2</b><br>Sub-claim 2 of C41"]
-    C41G3["<b>C41G3</b><br>Sub-claim 3 of C41"]
-    C41E1(("<b>C41E1</b><br>Evidence 1 of C41"))
-    C41J1("<b>C41J1</b>&nbsp;Ⓙ<br>Justification of C41")
-    C41A1("<b>C41A1</b>&nbsp;Ⓐ<br>Assumption of C41")
-    C41E2(("<b>C41E2</b><br>Evidence 2 of C41"))
-    click C41top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41top"
-    click C41Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c41xctx"
-    click C41Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41esh"
-    click C41Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c41sass"
-    click C41G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g1"
-    click C41G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g2"
-    click C41G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g3"
-    click C41E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e1"
-    click C41J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c41j1"
-    click C41A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c41a1"
-    click C41E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
+    C41top_L1073["<b>C41top</b><br>Statement of C41top"]
+    C41Xctx_L1074(["<b>C41Xctx</b><br>Context of C41Xctx"])
+    C41Esh_L1075(("<b>C41Esh</b><br>Shared evidence of C41"))
+    C41Sass_L1076[/"<b>C41Sass</b><br>Assertion strategy of C41"/]
+    C41G1_L1077["<b>C41G1</b><br>Sub-claim 1 of C41"]
+    C41G2_L1080["<b>C41G2</b><br>Sub-claim 2 of C41"]
+    C41G3_L1083["<b>C41G3</b><br>Sub-claim 3 of C41"]
+    C41E1_L1078(("<b>C41E1</b><br>Evidence 1 of C41"))
+    C41J1_L1081("<b>C41J1</b>&nbsp;Ⓙ<br>Justification of C41")
+    C41A1_L1084("<b>C41A1</b>&nbsp;Ⓐ<br>Assumption of C41")
+    C41E2_L1085(("<b>C41E2</b><br>Evidence 2 of C41"))
+    click C41top_L1073 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41top"
+    click C41Xctx_L1074 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c41xctx"
+    click C41Esh_L1075 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41esh"
+    click C41Sass_L1076 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c41sass"
+    click C41G1_L1077 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g1"
+    click C41G2_L1080 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g2"
+    click C41G3_L1083 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c41g3"
+    click C41E1_L1078 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e1"
+    click C41J1_L1081 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c41j1"
+    click C41A1_L1084 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c41a1"
+    click C41E2_L1085 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
 
-    C41top --o C41Xctx
-    C41top --> C41Esh
-    C41top --> C41Sass
-    C41Sass --> C41G1
-    C41G1 --> C41E1
-    C41G1 --o C41Xctx
-    C41Sass --> C41G2
-    C41G2 --o C41J1
-    C41G2 --> C41Esh
-    C41Sass --> C41G3
-    C41G3 --o C41A1
-    C41G3 --> C41E2
-    C41G3 --> C41E1
-    C41Xctx ~~~ BottomPadding[ ]:::invisible
-    C41Esh ~~~ BottomPadding
-    C41E1 ~~~ BottomPadding
-    C41J1 ~~~ BottomPadding
-    C41A1 ~~~ BottomPadding
-    C41E2 ~~~ BottomPadding
+    C41top_L1073 --o C41Xctx_L1074
+    C41top_L1073 --> C41Esh_L1075
+    C41top_L1073 --> C41Sass_L1076
+    C41Sass_L1076 --> C41G1_L1077
+    C41G1_L1077 --> C41E1_L1078
+    C41G1_L1077 --o C41Xctx_L1074
+    C41Sass_L1076 --> C41G2_L1080
+    C41G2_L1080 --o C41J1_L1081
+    C41G2_L1080 --> C41Esh_L1075
+    C41Sass_L1076 --> C41G3_L1083
+    C41G3_L1083 --o C41A1_L1084
+    C41G3_L1083 --> C41E2_L1085
+    C41G3_L1083 --> C41E1_L1078
+    C41Xctx_L1074 ~~~ BottomPadding[ ]:::invisible
+    C41Esh_L1075 ~~~ BottomPadding
+    C41E1_L1078 ~~~ BottomPadding
+    C41J1_L1081 ~~~ BottomPadding
+    C41A1_L1084 ~~~ BottomPadding
+    C41E2_L1085 ~~~ BottomPadding
 ```
 
 ### Package C42top
@@ -7839,48 +7858,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C42top["<b>C42top</b><br>Statement of C42top"]
-    C42Xctx(["<b>C42Xctx</b><br>Context of C42Xctx"])
-    C42Esh(("<b>C42Esh</b><br>Shared evidence of C42"))
-    C42Sass[/"<b>C42Sass</b><br>Assertion strategy of C42"/]
-    C42G1["<b>C42G1</b><br>Sub-claim 1 of C42"]
-    C42G2["<b>C42G2</b><br>Sub-claim 2 of C42"]
-    C42G3["<b>C42G3</b><br>Sub-claim 3 of C42"]
-    C42E1(("<b>C42E1</b><br>Evidence 1 of C42"))
-    C42J1("<b>C42J1</b>&nbsp;Ⓙ<br>Justification of C42")
-    C42A1("<b>C42A1</b>&nbsp;Ⓐ<br>Assumption of C42")
-    C42E2(("<b>C42E2</b><br>Evidence 2 of C42"))
-    click C42top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42top"
-    click C42Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c42xctx"
-    click C42Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42esh"
-    click C42Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c42sass"
-    click C42G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g1"
-    click C42G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g2"
-    click C42G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g3"
-    click C42E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e1"
-    click C42J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c42j1"
-    click C42A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c42a1"
-    click C42E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
+    C42top_L1088["<b>C42top</b><br>Statement of C42top"]
+    C42Xctx_L1089(["<b>C42Xctx</b><br>Context of C42Xctx"])
+    C42Esh_L1090(("<b>C42Esh</b><br>Shared evidence of C42"))
+    C42Sass_L1091[/"<b>C42Sass</b><br>Assertion strategy of C42"/]
+    C42G1_L1092["<b>C42G1</b><br>Sub-claim 1 of C42"]
+    C42G2_L1095["<b>C42G2</b><br>Sub-claim 2 of C42"]
+    C42G3_L1098["<b>C42G3</b><br>Sub-claim 3 of C42"]
+    C42E1_L1093(("<b>C42E1</b><br>Evidence 1 of C42"))
+    C42J1_L1096("<b>C42J1</b>&nbsp;Ⓙ<br>Justification of C42")
+    C42A1_L1099("<b>C42A1</b>&nbsp;Ⓐ<br>Assumption of C42")
+    C42E2_L1100(("<b>C42E2</b><br>Evidence 2 of C42"))
+    click C42top_L1088 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42top"
+    click C42Xctx_L1089 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c42xctx"
+    click C42Esh_L1090 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42esh"
+    click C42Sass_L1091 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c42sass"
+    click C42G1_L1092 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g1"
+    click C42G2_L1095 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g2"
+    click C42G3_L1098 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c42g3"
+    click C42E1_L1093 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e1"
+    click C42J1_L1096 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c42j1"
+    click C42A1_L1099 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c42a1"
+    click C42E2_L1100 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
 
-    C42top --o C42Xctx
-    C42top --> C42Esh
-    C42top --> C42Sass
-    C42Sass --> C42G1
-    C42G1 --> C42E1
-    C42G1 --o C42Xctx
-    C42Sass --> C42G2
-    C42G2 --o C42J1
-    C42G2 --> C42Esh
-    C42Sass --> C42G3
-    C42G3 --o C42A1
-    C42G3 --> C42E2
-    C42G3 --> C42E1
-    C42Xctx ~~~ BottomPadding[ ]:::invisible
-    C42Esh ~~~ BottomPadding
-    C42E1 ~~~ BottomPadding
-    C42J1 ~~~ BottomPadding
-    C42A1 ~~~ BottomPadding
-    C42E2 ~~~ BottomPadding
+    C42top_L1088 --o C42Xctx_L1089
+    C42top_L1088 --> C42Esh_L1090
+    C42top_L1088 --> C42Sass_L1091
+    C42Sass_L1091 --> C42G1_L1092
+    C42G1_L1092 --> C42E1_L1093
+    C42G1_L1092 --o C42Xctx_L1089
+    C42Sass_L1091 --> C42G2_L1095
+    C42G2_L1095 --o C42J1_L1096
+    C42G2_L1095 --> C42Esh_L1090
+    C42Sass_L1091 --> C42G3_L1098
+    C42G3_L1098 --o C42A1_L1099
+    C42G3_L1098 --> C42E2_L1100
+    C42G3_L1098 --> C42E1_L1093
+    C42Xctx_L1089 ~~~ BottomPadding[ ]:::invisible
+    C42Esh_L1090 ~~~ BottomPadding
+    C42E1_L1093 ~~~ BottomPadding
+    C42J1_L1096 ~~~ BottomPadding
+    C42A1_L1099 ~~~ BottomPadding
+    C42E2_L1100 ~~~ BottomPadding
 ```
 
 ### Package C43top
@@ -7899,48 +7918,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C43top["<b>C43top</b><br>Statement of C43top"]
-    C43Xctx(["<b>C43Xctx</b><br>Context of C43Xctx"])
-    C43Esh(("<b>C43Esh</b><br>Shared evidence of C43"))
-    C43Sass[/"<b>C43Sass</b><br>Assertion strategy of C43"/]
-    C43G1["<b>C43G1</b><br>Sub-claim 1 of C43"]
-    C43G2["<b>C43G2</b><br>Sub-claim 2 of C43"]
-    C43G3["<b>C43G3</b><br>Sub-claim 3 of C43"]
-    C43E1(("<b>C43E1</b><br>Evidence 1 of C43"))
-    C43J1("<b>C43J1</b>&nbsp;Ⓙ<br>Justification of C43")
-    C43A1("<b>C43A1</b>&nbsp;Ⓐ<br>Assumption of C43")
-    C43E2(("<b>C43E2</b><br>Evidence 2 of C43"))
-    click C43top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43top"
-    click C43Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c43xctx"
-    click C43Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43esh"
-    click C43Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c43sass"
-    click C43G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g1"
-    click C43G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g2"
-    click C43G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g3"
-    click C43E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e1"
-    click C43J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c43j1"
-    click C43A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c43a1"
-    click C43E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
+    C43top_L1103["<b>C43top</b><br>Statement of C43top"]
+    C43Xctx_L1104(["<b>C43Xctx</b><br>Context of C43Xctx"])
+    C43Esh_L1105(("<b>C43Esh</b><br>Shared evidence of C43"))
+    C43Sass_L1106[/"<b>C43Sass</b><br>Assertion strategy of C43"/]
+    C43G1_L1107["<b>C43G1</b><br>Sub-claim 1 of C43"]
+    C43G2_L1110["<b>C43G2</b><br>Sub-claim 2 of C43"]
+    C43G3_L1113["<b>C43G3</b><br>Sub-claim 3 of C43"]
+    C43E1_L1108(("<b>C43E1</b><br>Evidence 1 of C43"))
+    C43J1_L1111("<b>C43J1</b>&nbsp;Ⓙ<br>Justification of C43")
+    C43A1_L1114("<b>C43A1</b>&nbsp;Ⓐ<br>Assumption of C43")
+    C43E2_L1115(("<b>C43E2</b><br>Evidence 2 of C43"))
+    click C43top_L1103 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43top"
+    click C43Xctx_L1104 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c43xctx"
+    click C43Esh_L1105 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43esh"
+    click C43Sass_L1106 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c43sass"
+    click C43G1_L1107 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g1"
+    click C43G2_L1110 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g2"
+    click C43G3_L1113 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c43g3"
+    click C43E1_L1108 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e1"
+    click C43J1_L1111 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c43j1"
+    click C43A1_L1114 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c43a1"
+    click C43E2_L1115 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
 
-    C43top --o C43Xctx
-    C43top --> C43Esh
-    C43top --> C43Sass
-    C43Sass --> C43G1
-    C43G1 --> C43E1
-    C43G1 --o C43Xctx
-    C43Sass --> C43G2
-    C43G2 --o C43J1
-    C43G2 --> C43Esh
-    C43Sass --> C43G3
-    C43G3 --o C43A1
-    C43G3 --> C43E2
-    C43G3 --> C43E1
-    C43Xctx ~~~ BottomPadding[ ]:::invisible
-    C43Esh ~~~ BottomPadding
-    C43E1 ~~~ BottomPadding
-    C43J1 ~~~ BottomPadding
-    C43A1 ~~~ BottomPadding
-    C43E2 ~~~ BottomPadding
+    C43top_L1103 --o C43Xctx_L1104
+    C43top_L1103 --> C43Esh_L1105
+    C43top_L1103 --> C43Sass_L1106
+    C43Sass_L1106 --> C43G1_L1107
+    C43G1_L1107 --> C43E1_L1108
+    C43G1_L1107 --o C43Xctx_L1104
+    C43Sass_L1106 --> C43G2_L1110
+    C43G2_L1110 --o C43J1_L1111
+    C43G2_L1110 --> C43Esh_L1105
+    C43Sass_L1106 --> C43G3_L1113
+    C43G3_L1113 --o C43A1_L1114
+    C43G3_L1113 --> C43E2_L1115
+    C43G3_L1113 --> C43E1_L1108
+    C43Xctx_L1104 ~~~ BottomPadding[ ]:::invisible
+    C43Esh_L1105 ~~~ BottomPadding
+    C43E1_L1108 ~~~ BottomPadding
+    C43J1_L1111 ~~~ BottomPadding
+    C43A1_L1114 ~~~ BottomPadding
+    C43E2_L1115 ~~~ BottomPadding
 ```
 
 ### Package C44top
@@ -7959,48 +7978,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C44top["<b>C44top</b><br>Statement of C44top"]
-    C44Xctx(["<b>C44Xctx</b><br>Context of C44Xctx"])
-    C44Esh(("<b>C44Esh</b><br>Shared evidence of C44"))
-    C44Sass[/"<b>C44Sass</b><br>Assertion strategy of C44"/]
-    C44G1["<b>C44G1</b><br>Sub-claim 1 of C44"]
-    C44G2["<b>C44G2</b><br>Sub-claim 2 of C44"]
-    C44G3["<b>C44G3</b><br>Sub-claim 3 of C44"]
-    C44E1(("<b>C44E1</b><br>Evidence 1 of C44"))
-    C44J1("<b>C44J1</b>&nbsp;Ⓙ<br>Justification of C44")
-    C44A1("<b>C44A1</b>&nbsp;Ⓐ<br>Assumption of C44")
-    C44E2(("<b>C44E2</b><br>Evidence 2 of C44"))
-    click C44top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44top"
-    click C44Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c44xctx"
-    click C44Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44esh"
-    click C44Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c44sass"
-    click C44G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g1"
-    click C44G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g2"
-    click C44G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g3"
-    click C44E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e1"
-    click C44J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c44j1"
-    click C44A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c44a1"
-    click C44E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
+    C44top_L1118["<b>C44top</b><br>Statement of C44top"]
+    C44Xctx_L1119(["<b>C44Xctx</b><br>Context of C44Xctx"])
+    C44Esh_L1120(("<b>C44Esh</b><br>Shared evidence of C44"))
+    C44Sass_L1121[/"<b>C44Sass</b><br>Assertion strategy of C44"/]
+    C44G1_L1122["<b>C44G1</b><br>Sub-claim 1 of C44"]
+    C44G2_L1125["<b>C44G2</b><br>Sub-claim 2 of C44"]
+    C44G3_L1128["<b>C44G3</b><br>Sub-claim 3 of C44"]
+    C44E1_L1123(("<b>C44E1</b><br>Evidence 1 of C44"))
+    C44J1_L1126("<b>C44J1</b>&nbsp;Ⓙ<br>Justification of C44")
+    C44A1_L1129("<b>C44A1</b>&nbsp;Ⓐ<br>Assumption of C44")
+    C44E2_L1130(("<b>C44E2</b><br>Evidence 2 of C44"))
+    click C44top_L1118 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44top"
+    click C44Xctx_L1119 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c44xctx"
+    click C44Esh_L1120 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44esh"
+    click C44Sass_L1121 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c44sass"
+    click C44G1_L1122 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g1"
+    click C44G2_L1125 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g2"
+    click C44G3_L1128 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c44g3"
+    click C44E1_L1123 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e1"
+    click C44J1_L1126 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c44j1"
+    click C44A1_L1129 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c44a1"
+    click C44E2_L1130 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
 
-    C44top --o C44Xctx
-    C44top --> C44Esh
-    C44top --> C44Sass
-    C44Sass --> C44G1
-    C44G1 --> C44E1
-    C44G1 --o C44Xctx
-    C44Sass --> C44G2
-    C44G2 --o C44J1
-    C44G2 --> C44Esh
-    C44Sass --> C44G3
-    C44G3 --o C44A1
-    C44G3 --> C44E2
-    C44G3 --> C44E1
-    C44Xctx ~~~ BottomPadding[ ]:::invisible
-    C44Esh ~~~ BottomPadding
-    C44E1 ~~~ BottomPadding
-    C44J1 ~~~ BottomPadding
-    C44A1 ~~~ BottomPadding
-    C44E2 ~~~ BottomPadding
+    C44top_L1118 --o C44Xctx_L1119
+    C44top_L1118 --> C44Esh_L1120
+    C44top_L1118 --> C44Sass_L1121
+    C44Sass_L1121 --> C44G1_L1122
+    C44G1_L1122 --> C44E1_L1123
+    C44G1_L1122 --o C44Xctx_L1119
+    C44Sass_L1121 --> C44G2_L1125
+    C44G2_L1125 --o C44J1_L1126
+    C44G2_L1125 --> C44Esh_L1120
+    C44Sass_L1121 --> C44G3_L1128
+    C44G3_L1128 --o C44A1_L1129
+    C44G3_L1128 --> C44E2_L1130
+    C44G3_L1128 --> C44E1_L1123
+    C44Xctx_L1119 ~~~ BottomPadding[ ]:::invisible
+    C44Esh_L1120 ~~~ BottomPadding
+    C44E1_L1123 ~~~ BottomPadding
+    C44J1_L1126 ~~~ BottomPadding
+    C44A1_L1129 ~~~ BottomPadding
+    C44E2_L1130 ~~~ BottomPadding
 ```
 
 ### Package C45top
@@ -8019,48 +8038,48 @@ flowchart TD
     classDef invisible opacity:0
     classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
-    C45top["<b>C45top</b><br>Statement of C45top"]
-    C45Xctx(["<b>C45Xctx</b><br>Context of C45Xctx"])
-    C45Esh(("<b>C45Esh</b><br>Shared evidence of C45"))
-    C45Sass[/"<b>C45Sass</b><br>Assertion strategy of C45"/]
-    C45G1["<b>C45G1</b><br>Sub-claim 1 of C45"]
-    C45G2["<b>C45G2</b><br>Sub-claim 2 of C45"]
-    C45G3["<b>C45G3</b><br>Sub-claim 3 of C45"]
-    C45E1(("<b>C45E1</b><br>Evidence 1 of C45"))
-    C45J1("<b>C45J1</b>&nbsp;Ⓙ<br>Justification of C45")
-    C45A1("<b>C45A1</b>&nbsp;Ⓐ<br>Assumption of C45")
-    C45E2(("<b>C45E2</b><br>Evidence 2 of C45"))
-    click C45top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45top"
-    click C45Xctx "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c45xctx"
-    click C45Esh "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45esh"
-    click C45Sass "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c45sass"
-    click C45G1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g1"
-    click C45G2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g2"
-    click C45G3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g3"
-    click C45E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e1"
-    click C45J1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c45j1"
-    click C45A1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c45a1"
-    click C45E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
+    C45top_L1133["<b>C45top</b><br>Statement of C45top"]
+    C45Xctx_L1134(["<b>C45Xctx</b><br>Context of C45Xctx"])
+    C45Esh_L1135(("<b>C45Esh</b><br>Shared evidence of C45"))
+    C45Sass_L1136[/"<b>C45Sass</b><br>Assertion strategy of C45"/]
+    C45G1_L1137["<b>C45G1</b><br>Sub-claim 1 of C45"]
+    C45G2_L1140["<b>C45G2</b><br>Sub-claim 2 of C45"]
+    C45G3_L1143["<b>C45G3</b><br>Sub-claim 3 of C45"]
+    C45E1_L1138(("<b>C45E1</b><br>Evidence 1 of C45"))
+    C45J1_L1141("<b>C45J1</b>&nbsp;Ⓙ<br>Justification of C45")
+    C45A1_L1144("<b>C45A1</b>&nbsp;Ⓐ<br>Assumption of C45")
+    C45E2_L1145(("<b>C45E2</b><br>Evidence 2 of C45"))
+    click C45top_L1133 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45top"
+    click C45Xctx_L1134 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#context-c45xctx"
+    click C45Esh_L1135 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45esh"
+    click C45Sass_L1136 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#strategy-c45sass"
+    click C45G1_L1137 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g1"
+    click C45G2_L1140 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g2"
+    click C45G3_L1143 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#claim-c45g3"
+    click C45E1_L1138 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e1"
+    click C45J1_L1141 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#justification-c45j1"
+    click C45A1_L1144 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#assumption-c45a1"
+    click C45E2_L1145 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
 
-    C45top --o C45Xctx
-    C45top --> C45Esh
-    C45top --> C45Sass
-    C45Sass --> C45G1
-    C45G1 --> C45E1
-    C45G1 --o C45Xctx
-    C45Sass --> C45G2
-    C45G2 --o C45J1
-    C45G2 --> C45Esh
-    C45Sass --> C45G3
-    C45G3 --o C45A1
-    C45G3 --> C45E2
-    C45G3 --> C45E1
-    C45Xctx ~~~ BottomPadding[ ]:::invisible
-    C45Esh ~~~ BottomPadding
-    C45E1 ~~~ BottomPadding
-    C45J1 ~~~ BottomPadding
-    C45A1 ~~~ BottomPadding
-    C45E2 ~~~ BottomPadding
+    C45top_L1133 --o C45Xctx_L1134
+    C45top_L1133 --> C45Esh_L1135
+    C45top_L1133 --> C45Sass_L1136
+    C45Sass_L1136 --> C45G1_L1137
+    C45G1_L1137 --> C45E1_L1138
+    C45G1_L1137 --o C45Xctx_L1134
+    C45Sass_L1136 --> C45G2_L1140
+    C45G2_L1140 --o C45J1_L1141
+    C45G2_L1140 --> C45Esh_L1135
+    C45Sass_L1136 --> C45G3_L1143
+    C45G3_L1143 --o C45A1_L1144
+    C45G3_L1143 --> C45E2_L1145
+    C45G3_L1143 --> C45E1_L1138
+    C45Xctx_L1134 ~~~ BottomPadding[ ]:::invisible
+    C45Esh_L1135 ~~~ BottomPadding
+    C45E1_L1138 ~~~ BottomPadding
+    C45J1_L1141 ~~~ BottomPadding
+    C45A1_L1144 ~~~ BottomPadding
+    C45E2_L1145 ~~~ BottomPadding
 ```
 <!-- end verocase -->
 

@@ -20,30 +20,30 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C1["<b>C1</b><br>The software is acceptably safe"]
-    AR1[/"<b>AR1</b><br>Argue safety by hazard category"/]
-    A1["<b>A1</b><br>Threat model is current<br>ASSUMED"]
-    X1[("<b>X1</b>&nbsp;↗<br>Scope is release v1.0")]
-    C2["<b>C2</b><br>All hazards have been identified"]
-    C3["<b>C3</b><br>All hazards have been mitigated"]
-    E1[("<b>E1</b>&nbsp;↗<br>Hazard analysis")]
+    C1_L1["<b>C1</b><br>The software is acceptably safe"]
+    AR1_L2[/"<b>AR1</b><br>Argue safety by hazard category"/]
+    A1_L7["<b>A1</b><br>Threat model is current<br>ASSUMED"]
+    X1_L8[("<b>X1</b>&nbsp;↗<br>Scope is release v1.0")]
+    C2_L3["<b>C2</b><br>All hazards have been identified"]
+    C3_L5["<b>C3</b><br>All hazards have been mitigated"]
+    E1_L4[("<b>E1</b>&nbsp;↗<br>Hazard analysis")]
     Dot1((" ")):::sacmDot
-    click C1 "#claim-c1"
-    click AR1 "#strategy-ar1"
-    click A1 "#assumption-a1"
-    click X1 "#context-x1"
-    click C2 "#claim-c2"
-    click C3 "#claim-c3"
-    click E1 "#evidence-e1"
+    click C1_L1 "#claim-c1"
+    click AR1_L2 "#strategy-ar1"
+    click A1_L7 "#assumption-a1"
+    click X1_L8 "#context-x1"
+    click C2_L3 "#claim-c2"
+    click C3_L5 "#claim-c3"
+    click E1_L4 "#evidence-e1"
 
-    BottomPadding[ ]:::invisible ~~~ E1
-    E1 --> C2
-    C2 --- Dot1
-    C3 --- Dot1
-    AR1 --- Dot1
-    A1 --- Dot1
-    Dot1 --> C1
-    X1 --o C1
+    BottomPadding[ ]:::invisible ~~~ E1_L4
+    E1_L4 --> C2_L3
+    C2_L3 --- Dot1
+    C3_L5 --- Dot1
+    AR1_L2 --- Dot1
+    A1_L7 --- Dot1
+    Dot1 --> C1_L1
+    X1_L8 --o C1_L1
 ```
 
 Defines: **[Claim C1](#claim-c1)**, [Context X1](#context-x1), [Assumption A1](#assumption-a1), [Strategy AR1](#strategy-ar1), [Claim C3](#claim-c3), [Claim C2](#claim-c2), [Evidence E1](#evidence-e1)
@@ -81,29 +81,29 @@ flowchart BT
     classDef sacmDot fill:#000,stroke:#000
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
-    C1["<b>C1</b><br>The software is acceptably safe"]
-    AR1[/"<b>AR1</b><br>Argue safety by hazard category"/]
-    A1["<b>A1</b><br>Threat model is current<br>ASSUMED"]
-    X1[("<b>X1</b>&nbsp;↗<br>Scope is release v1.0")]
-    C2["<b>C2</b><br>All hazards have been identified"]
-    C3["<b>C3</b><br>All hazards have been mitigated"]
-    E1[("<b>E1</b>&nbsp;↗<br>Hazard analysis")]
+    C1_L1["<b>C1</b><br>The software is acceptably safe"]
+    AR1_L2[/"<b>AR1</b><br>Argue safety by hazard category"/]
+    A1_L7["<b>A1</b><br>Threat model is current<br>ASSUMED"]
+    X1_L8[("<b>X1</b>&nbsp;↗<br>Scope is release v1.0")]
+    C2_L3["<b>C2</b><br>All hazards have been identified"]
+    C3_L5["<b>C3</b><br>All hazards have been mitigated"]
+    E1_L4[("<b>E1</b>&nbsp;↗<br>Hazard analysis")]
     Dot1((" ")):::sacmDot
-    click C1 "#claim-c1"
-    click AR1 "#strategy-ar1"
-    click A1 "#assumption-a1"
-    click X1 "#context-x1"
-    click C2 "#claim-c2"
-    click C3 "#claim-c3"
-    click E1 "#evidence-e1"
+    click C1_L1 "#claim-c1"
+    click AR1_L2 "#strategy-ar1"
+    click A1_L7 "#assumption-a1"
+    click X1_L8 "#context-x1"
+    click C2_L3 "#claim-c2"
+    click C3_L5 "#claim-c3"
+    click E1_L4 "#evidence-e1"
 
-    BottomPadding[ ]:::invisible ~~~ E1
-    E1 --> C2
-    C2 --- Dot1
-    C3 --- Dot1
-    AR1 --- Dot1
-    A1 --- Dot1
-    Dot1 --> C1
-    X1 --o C1
+    BottomPadding[ ]:::invisible ~~~ E1_L4
+    E1_L4 --> C2_L3
+    C2_L3 --- Dot1
+    C3_L5 --- Dot1
+    AR1_L2 --- Dot1
+    A1_L7 --- Dot1
+    Dot1 --> C1_L1
+    X1_L8 --o C1_L1
 ```
 <!-- end verocase -->

@@ -1914,9 +1914,9 @@ class TestGsnConnectorVisible(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertIn(':::connector', r.stdout)
         self.assertIn('Grp', r.stdout)
-        self.assertIn('Root --> Grp', r.stdout)
-        self.assertIn('Grp --> C1', r.stdout)
-        self.assertIn('Grp --> C2', r.stdout)
+        self.assertIn('Root_L1 --> Grp_L2', r.stdout)
+        self.assertIn('Grp_L2 --> C1_L3', r.stdout)
+        self.assertIn('Grp_L2 --> C2_L4', r.stdout)
 
     def test_gsn_connector_not_transparent(self):
         """Connector children are NOT connected directly to the grandparent (old transparent behaviour)."""
@@ -1991,28 +1991,28 @@ class TestMermaidWidthConfig(unittest.TestCase):
                                   {'max_mermaid_children': 0,
                                    'narrowed_mermaid_children': 1})
         self.assertEqual(r.returncode, 0)
-        self.assertNotIn('SynConnect_', r.stdout)
+        self.assertNotIn('_Connector_', r.stdout)
 
     def test_sacm_wide_diagram_narrowed(self):
-        """10 direct SACM children > 8 (default max) → SynConnect_ inserted."""
+        """10 direct SACM children > 8 (default max) → _Connector_ inserted."""
         r = self._run_with_config(self._wide_ltac(10), {})
         self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertIn('SynConnect_', r.stdout)
+        self.assertIn('_Connector_', r.stdout)
 
     def test_gsn_wide_diagram_narrowed(self):
-        """10 direct GSN children > 8 (default max) → SynConnect_ inserted."""
+        """10 direct GSN children > 8 (default max) → _Connector_ inserted."""
         r = self._run_with_config(self._wide_ltac(10), {}, selector='gsn/mermaid')
         self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertIn('SynConnect_', r.stdout)
+        self.assertIn('_Connector_', r.stdout)
         self.assertIn(':::connector', r.stdout)
 
     def test_width_transform_disabled_when_max_zero(self):
-        """max == 0 disables transform; no SynConnect_ even for wide diagrams."""
+        """max == 0 disables transform; no _Connector_ even for wide diagrams."""
         r = self._run_with_config(self._wide_ltac(10),
                                   {'max_mermaid_children': 0,
                                    'narrowed_mermaid_children': 6})
         self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertNotIn('SynConnect_', r.stdout)
+        self.assertNotIn('_Connector_', r.stdout)
 
     def test_sacm_strategy_absorbed_narrowed(self):
         """Strategy-absorbed children are counted and narrowed when too many."""
@@ -2028,7 +2028,7 @@ class TestMermaidWidthConfig(unittest.TestCase):
         r = self._run_with_config(ltac, {'max_mermaid_children': 4,
                                          'narrowed_mermaid_children': 2})
         self.assertEqual(r.returncode, 0, r.stderr)
-        self.assertIn('SynConnect_', r.stdout)
+        self.assertIn('_Connector_', r.stdout)
         # S1 kept (rightmost), C1 kept (leftmost)
         self.assertIn('S1', r.stdout)
         self.assertIn('C1', r.stdout)
@@ -2049,7 +2049,7 @@ class TestMermaidWidthConfig(unittest.TestCase):
                 f.write('<!-- end verocase -->\n')
             r = run('--ltac', ltac_path, '--stdout', doc_path)
             self.assertEqual(r.returncode, 0, r.stderr)
-            self.assertIn('SynConnect_', r.stdout)
+            self.assertIn('_Connector_', r.stdout)
         finally:
             os.unlink(ltac_path)
             os.unlink(doc_path)
