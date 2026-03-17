@@ -2419,6 +2419,23 @@ class Case:
     # Rendering
     # ------------------------------------------------------------------
 
+    def _parse_selector(self, selector: str,
+                        doc_format: str) -> Tuple[str, Optional[str]]:
+        """Parse a SELECTOR string into (display_type, element_id_or_None).
+
+        Format: 'display_type [element_id]'
+        An element_id of '*' is kept as the literal string '*'.
+        Expands shorthand forms (sacm, gsn, ltac) using doc_format and config.
+        Calls self.error() on unknown display_type, setting had_error.
+        """
+        parts = selector.split(None, 1)
+        raw_type = parts[0] if parts else ''
+        element_id: Optional[str] = parts[1].strip() if len(parts) > 1 else None
+        display_type = expand_selector(raw_type, doc_format, self.config)
+        if display_type not in _VALID_DISPLAY_TYPES:
+            self.error(f"unknown selector type {display_type!r}")
+        return display_type, element_id
+
     def render_selector(self, selector: str, out: 'TextIO',
                         current_element: Optional['Node'] = None,
                         doc_format: str = 'markdown',
@@ -2430,7 +2447,7 @@ class Case:
         doc_format must be ``'markdown'`` or ``'html'``.
         state carries per-document rendering context.
         """
-        display_type, element_id = parse_selector(selector, doc_format, self.config)
+        display_type, element_id = self._parse_selector(selector, doc_format)
 
         if display_type == 'config':
             self.error("use '<!-- verocase-config KEY = VALUE -->' (not '<!-- verocase config ...-->')")
@@ -4153,23 +4170,6 @@ def expand_selector(raw: str, doc_format: str, config: dict) -> str:
     return raw
 
 
-def parse_selector(selector: str, doc_format: str = 'markdown',
-                   config: dict = None) -> Tuple[str, Optional[str]]:
-    """Parse a SELECTOR string into (display_type, element_id_or_None).
-
-    Format: 'display_type [element_id]'
-    An element_id of '*' is kept as the literal string '*'.
-    Expands shorthand forms (sacm, gsn, ltac) using doc_format and config.
-    Calls error() on unknown display_type.
-    """
-    config = config or {}
-    parts = selector.split(None, 1)
-    raw_type = parts[0] if parts else ''
-    element_id: Optional[str] = parts[1].strip() if len(parts) > 1 else None
-    display_type = expand_selector(raw_type, doc_format, config)
-    if display_type not in _VALID_DISPLAY_TYPES:
-        print(f"verocase: error: unknown selector type {display_type!r}", file=sys.stderr)
-    return display_type, element_id
 
 
 def _render_or_all(
