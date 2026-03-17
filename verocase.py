@@ -2724,13 +2724,24 @@ class Case:
 
 # Node types that cannot act as inference parents for Claims or Strategies.
 # Used to warn about structurally invalid parent-child relationships.
-_NON_INFERENTIAL_TYPES = frozenset({'Evidence', 'Context', 'Assumption', 'Justification'})
-# Explicit assertion-status options (all lowercase, matching parse_options output).
-_STATUS_OPTIONS = frozenset({'assumed', 'needssupport', 'axiomatic', 'defeated'})
-_ASSERTION_STATUSES = frozenset({'assumed', 'needssupport', 'axiomatic', 'defeated', 'ascited'})
+_NON_INFERENTIAL_TYPES = frozenset({
+    'Evidence', 'Context', 'Assumption', 'Justification'
+})
+# _STATUS_OPTIONS: statuses as literal option keywords in LTAC text.
+# _ASSERTION_STATUSES: all statuses that mark an assertion as
+#   already-addressed, including 'ascited', which is implicit
+#   (derived from is_citation, not written as a literal option).
+# Use _STATUS_OPTIONS when intersecting node.options.
+# Use _ASSERTION_STATUSES when checking if any status is already present.
+# The way we're handling 'ascited' is debatable, and probably
+# worth a revisit later.
+_STATUS_OPTIONS = frozenset({
+    'assumed', 'needssupport', 'axiomatic', 'defeated'
+})
+_ASSERTION_STATUSES = _STATUS_OPTIONS | {'ascited'}
 
 def _infer_id(text: str) -> str:
-    """Derive an LTAC identifier from element text for nodes with no explicit ID.
+    """Derive an LTAC id from element text for nodes with no explicit ID.
 
     Strips characters that are either illegal in LTAC identifiers per the spec
     (':' and '^') or that our parser treats as delimiters and would misread if
