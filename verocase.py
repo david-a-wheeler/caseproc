@@ -844,16 +844,6 @@ class Case:
                 return [candidate]
         return []
 
-    def _detect_doc_format(self, path: str) -> str:
-        """Return 'markdown' or 'html' based on the file extension; panics on unknown."""
-        low = path.lower()
-        if low == '-' or low.endswith('.md') or low.endswith('.markdown'):
-            return 'markdown'
-        if low.endswith('.html') or low.endswith('.htm'):
-            return 'html'
-        self.panic(f"cannot determine document format from filename {path!r}; "
-                   f"expected .md, .markdown, .html, or .htm")
-
     def _parse_ltac_file(self, path: str) -> None:
         """Open path and parse its LTAC content into this Case."""
         try:
@@ -941,11 +931,13 @@ class Case:
                 return None
             return [nodes.parent]
         else:
-            seen: List['Node'] = []
+            result: List['Node'] = []
+            seen_ids: set = set()
             for n in nodes:
-                if n.parent is not None and n.parent not in seen:
-                    seen.append(n.parent)
-            return seen
+                if n.parent is not None and id(n.parent) not in seen_ids:
+                    seen_ids.add(id(n.parent))
+                    result.append(n.parent)
+            return result
 
     def nodes_for(self, element_id: Optional[str],
                   current: Optional['Node'] = None) -> List['Node']:
@@ -2796,7 +2788,6 @@ class _LTACParser:
         self.node_count: int = 0
         self._stack: List[Tuple[int, Node]] = []
         self._current_pkg: List[Node] = []
-        self._pkg_root_lineno: Optional[int] = None
         # For empty-statement check (item 4): track declarations that usually
         # carry a statement (non-Link, non-Relation, non-citation) and whether
         # any such declaration has a non-empty statement.
@@ -3083,15 +3074,12 @@ class _LTACParser:
                                 f" package starts with {node.node_type!r};"
                                 f" expected Claim or Justification")
             self._current_pkg.append(node)
-            self._pkg_root_lineno = lineno
-
         self._stack.append((node.depth, node))
 
     def _finalize_package(self) -> None:
         """Flush the current package's root into results and reset package state."""
         self.results.extend(self._current_pkg)
         self._current_pkg = []
-        self._pkg_root_lineno = None
         self._stack = []
 
 
@@ -3933,7 +3921,6 @@ def _gsn_collect_edges(node, write_edge, leaf_nodes):
     """
     if node.node_type in ('Link', 'Relation'):
         return
-    edges_before = [0]  # track whether this node emits any edges
     _had_edge = [False]
 
     def _we(line: str) -> None:
