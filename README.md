@@ -8,10 +8,10 @@ The name verocase is derived from the Latin *vero*
 (meaning "in truth" or "truly") and *case*,
 (representing the tool's purpose to manage an assurance case).
 
-The `verocase` program reads a file written
-in our extended version of the simple
-[Lightweight Text Assurance Case (LTAC) format](docs/ltac-extended.txt)
-and updates all related markdown or HTML documentation.
+The `verocase` program reads a file written in our extended version of the
+[Lightweight Text Assurance Case (LTAC) format](docs/ltac-extended.txt),
+which provides a basic outline of *why* some claim is true,
+and then updates all related markdown or HTML documentation.
 The result is an easily read and easily modified assurance case.
 The program can automatically generate graphics
 for both Structured Assurance Case Metamodel (SACM) and
@@ -28,68 +28,99 @@ Processing is lightening-fast. In one real-world assurance case
 with over 200 elements and 370Kib of documentation, processing
 takes less than 0.2 seconds.
 
-An assurance case is "a body of evidence organized into an argument demonstrating that some claim about a system holds (i.e., is assured). An assurance case is needed when it is important to show that a system exhibits some complex
-property, such as safety, security, privacy, or reliability."
+An assurance case is "a body of evidence organized into an argument
+demonstrating that some claim about a system holds (i.e., is assured). An
+assurance case is needed when it is important to show that a system
+exhibits some complex property, such as safety, security, privacy,
+or reliability."
 ([NIST Special Publication 800-53A Revision 5](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53Ar5.pdf)).
 
 The [tutorial](docs/tutorial.md) explains how to use the tool.
-The [reference manual](docs/reference.md) explains tool use in detail.
+It's *really* easy to get started.
+The tool has lots of capabilities, but using them is entirely optional.
+The [reference manual](docs/reference.md) explains the tool capabilities
+in detail.
 
 ## Background
 
-Large assurance cases are often maintained using specialized tools that
-manage data structures containing the assurance case information.
-Examples include
-[Adalard ASCE](https://www.adelard.com/asce/) and
-[Argevide PREMIS](https://www.argevide.com/assurance-case/).
-These specialized tools allow people to edit
-diagrams that flexibly present the information graphically.
-For large assurance cases where maximum flexibility is critical,
-these tools can be quite helpful.
+In *principle* maintaining an assurance case is easy.
+You start with the claim you're trying to make, and repeatedly subdivide
+that claim using subclaims, arguments, and so on.
+In the end you have a structure with many claims, arguments, assumptions,
+and evidence, until finally you show that all the bottom
+"leaf" claims are true.
+However, problems can show up when you try to do this at scale.
 
-However, these sophisticated tools seem excessive for some assurance cases.
-They require installation, learning to use them, and committing to
-storing all data in a database that can only be managed by a complex tool.
-Some assurance cases don't need their sophistication.
-I was looking for a simpler alternative.
+This tool, `verocase`,
+represents a completely *different* approach for maintaining an
+assurance case. First, we'll explain common approaches, and then
+we'll explain how verocase is different.
 
-An obvious alternative to these sophisticated tools
-is to write an assurance case entirely as a traditional document.
+### Traditional document
+
+One approach is for maintaining an assurance case
+is to maintain one entirely as a traditional document.
 That's possible, and traditional document editing tools make it easy to
-edit a document.
-I've done this for a while.
+edit documents.
+I've done this for over a decade on one project using LibreOffice.
+
 However, this approach doesn't provide *any* support for the
 structure of an assurance case.
 Maintaining an assurance case
-this way requires a lot of extra work to keep parts consistent.
+this way requires a lot of extra work to keep the different parts consistent.
 It's too easy to make mistakes, leading to inconsistencies,
 and the results often go slowly out of date.
-Such documents
-often don't provide many helpful graphics to show the overview, since those
-graphics are a pain to create and maintain.
 
-The graphics matter, too.
-There are several graphical notations for easily
+What's more, ordinary document processing tools
+don't provide many helpful graphics to show the overview of the assurance case.
+There are several widely-used graphical notations for easily
 expressing and maintaining assurance cases, including
 the Object Management Group's
 [Structured Assurance Case Metamodel (SACM)](https://www.omg.org/spec/SACM),
 [Goal Structuring Notation (GSN)](https://scsc.uk/gsn-standard), and
 [Claims Arguments Evidence (CAE)](https://claimsargumentsevidence.org/notations/claims-arguments-evidence-cae/).
-Hand-maintaining the graphics can be burdensome, involving carefully placing
-all the symbols, and moving and updating them as information changes.
+Using widely-understood graphical notation makes the assurance case
+easier to understand.
+However, it's burdensome to create and maintain these graphics by hand.
+I did this with LibreOffice, which has some nice tools for maintaining
+graphics, but as a generalized tool it involved a lot of extra work.
 An AI can help, but it's error-prone for humans to maintain them,
 and AI can make the same mistakes.
 
-## Our approach
+### Graphics editing and database tools
+
+Large assurance cases are often maintained using specialized tools that
+manage a database containing the assurance case structure and more
+detailed information.
+Examples include
+[Adalard ASCE](https://www.adelard.com/asce/) and
+[Argevide PREMIS](https://www.argevide.com/assurance-case/).
+These specialized tools allow people to directly edit
+diagrams that flexibly present the information graphically.
+Since they *know* about at least one common assurance case notation, they
+are designed to make it easy to create the graphics and enter the data.
+
+For large assurance cases where maximum flexibility is critical,
+these tools can be quite helpful. If this is the kind of tool you want,
+by all means, look at them!
+
+However, these sophisticated tools seem excessive for some assurance cases.
+They require installation, learning to use them, and committing to
+storing all data in a database that can only be managed by a complex tool.
+I was looking for a simpler alternative, one where it would be much
+easier to edit the assurance case and manage the result with git.
+
+## Our approach as an alternative
 
 This tool, `verocase`, takes a completely different approach:
 
 * As input, it reads a simple text file (default file `case.ltac`
   in `./` or `docs/`). This file is written in our
   extended version of the Lightweight Text Assurance Case (LTAC) format.
-  This simple format is easily understood and used, and makes it
-  easy to express simple hierarchy of structure and high-level statements.
-  The tool will identify and report various kinds of invalid constructs
+  This simple format makes it
+  easy to express a simple hierarchy of structure and high-level statements.
+  The `verocase`
+  tool will identify and report various kinds of invalid constructs
   (e.g., citations of undefined elements, invalid types, logical circularity,
   unreachable elements, and so on).
 * As output, it updates a set of 1+ documents (in markdown or HTML),
@@ -99,11 +130,11 @@ This tool, `verocase`, takes a completely different approach:
   GSN notation. You don't need to fiddle with the graphics at all.
   It also automatically generates many hypertext links, making it
   easy to navigate the assurance case.
-  The expectation is that humans and AIs would edit these documents to
-  provide all the details (aka SACM "content").
+  The expectation is that humans and AIs would edit these "document files"
+  to provide all the details (aka SACM "content").
 
-Just run `verocase` and the document files will be updated based on the
-input LTAC file.
+In short: just run `verocase` and the document files will be updated
+based on the input LTAC file.
 
 Currently the tool can generate both SACM and GSN notation in mermaid format.
 It can also generate a markdown indented bullet list that looks like LTAC
@@ -117,8 +148,9 @@ The result is *much* easier to integrate into version control systems like git,
 since all information is kept in simple text files.
 Both AI and humans find this information really easy to follow.
 AI systems love markdown and HTML, and they
-also know how to handle indented structures like LTAC.
-It's remarkably easy to edit, too - just use tools you already know how to use.
+also know how to handle indented structures like LTAC since they've seen
+them elsewhere (e.g., in YAML and Python).
+It's remarkably easy to edit, too - just use any text editing tool.
 
 ## Handling evolution
 
@@ -132,29 +164,32 @@ better than a simple document can.
 
 This tool does a number of validation checks;
 see `--help-validations` for the full list.
-If it validates, the tool automatically updates the documents to match
+If it passes basic validation,
+the tool by default will automatically update the document files to match
 the LTAC input, e.g., it updates the graphics and the headings.
 
 Database-based tools can make it easy to make specific changes "everywhere".
 However, database-based tools are complex and requiring using that
 specialized tool for almost all assurance case tasks.
-Our goal is to get many of those benefits using a different and
+Our goal is to get many of those benefits using a completely different and
 simpler approach.
 
 We achieve similar capabilities using a few simple options.
 Normally the tool will only *read* the LTAC file, not modify it.
-However, a few options will *update* the LTAC file.
-The `--update` option updates the LTAC file so that all elements that cite an
-element will have their statements updated to match the definition.
-The option `--rename OLD NEW` let you rename IDs in
-the LTAC and document files, while
-`--restate LABEL STATEMENT` lets you change the statment of a given label
-in the LTAC and document files.
-This gives us many of the advantages of database-based approaches
+However, a few options will *update* the LTAC file:
+
+* `--update` option: updates the LTAC file so that all elements that cite an
+  element will have their statements updated to match the definition.
+* `--rename OLD NEW` let you rename IDs in the LTAC and document files.
+* `--restate LABEL STATEMENT` lets you change the statement of a given label
+  in the LTAC and document files.
+* `--detail ID` detaches ID from its current package, and makes it the
+  head of its own package.
+
+These options give us many of the advantages of database-based approaches
 (you can do one operation to change
 certain values "everywhere"), while providing better transparency,
-greater simplicity, and easier integration with AI and version control
-of a text-based approach.
+greater simplicity, and easier integration with AI and version control tools.
 
 ## Pros and Cons
 
@@ -179,25 +214,27 @@ The big con of this approach is that to make it work, we are intentionally
 imposing various limits:
 
 * We *require* that the assurance case be organized as a set of packages,
-  where each package is a hierarchy.
+  where each package is a strict tree hierarchy.
   This restriction is required by our extended LTAC input form.
   This restriction is allowed but not strictly required by widely-used
   assurance case notations like GSN, SACM, and CAE.
-  This is key to our approach; this restriction greatly simplifies expression
-  the assurance case, as a package can now be represented as
-  clearly indented information.
+  This is key to our approach; this restriction greatly simplifies the
+  expression the assurance case, as a package can now be represented as
+  indented information.
   Each package must have a single top claim or justification, as
   we name the package after that top element.
-  This restriction is not a problem in practice, because
+  We believe restriction is not a problem in practice, because
   a claim or justification may be *referenced* in any package,
   and "Links" allow references to an element already in use in a package.
 * Our inputs are *text* not graphics. I find that entering data as simple
-  text is far more efficient, but if you want to enter data as graphics,
+  text is far more efficient. If you want to enter data as graphics,
   this is the wrong tool for you.
 * We generate graphics automatically. In addition, we currently
   use `mermaid` because it's
   directly support by GitHub's built-in markdown processor.
   Mermaid is limited in what it can do.
+  For example, mermaid will sometimes let lines overlap, and you simply
+  have to live with its less-than-fancy rendering.
   In practice, mermaid's limits aren't a serious problem if
   your packages don't have too many elements.
   You can have as many packages as you want, so we suggest
