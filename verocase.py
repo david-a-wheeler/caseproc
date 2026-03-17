@@ -67,21 +67,16 @@ __all__ = [
 # Module-level error/reporting
 
 class VerocaseError(Exception):
-    """Raised by panic() for fatal errors.
+    """Raised by _panic() and Case.panic() for fatal errors.
 
     Catch in main() to exit cleanly, or handle in library code.
     """
 
 
-def panic(msg: str) -> None:
+def _panic(msg: str) -> None:
     """Print a fatal error to stderr and raise VerocaseError."""
     print(f"verocase: fatal: {msg}", file=sys.stderr)
     raise VerocaseError(msg)
-
-
-def notify(msg: str) -> None:
-    """Print an informational notification to stderr."""
-    print(f"verocase: {msg}", file=sys.stderr)
 
 
 _DEFAULT_ELEMENT_SELECTIONS = 'referenced_by,supported_by,supports,ext_ref'
@@ -370,8 +365,8 @@ def detect_doc_format(path: str) -> str:
         return 'markdown'
     if low.endswith('.html') or low.endswith('.htm'):
         return 'html'
-    panic(f"cannot determine document format from filename {path!r}; "
-          f"expected .md, .markdown, .html, or .htm")
+    _panic(f"cannot determine document format from filename {path!r}; "
+           f"expected .md, .markdown, .html, or .htm")
 
 
 # ---------------------------------------------------------------------------
@@ -622,7 +617,7 @@ class Case:
         self.stderr:         'TextIO'           = stderr or sys.stderr
 
     # ------------------------------------------------------------------
-    # Error reporting
+    # Error reporting: We do our own, to set self.had_error
     # ------------------------------------------------------------------
 
     def error(self, msg: str) -> None:
@@ -640,6 +635,7 @@ class Case:
     def panic(self, msg: str) -> None:
         """Print a fatal error to stderr and raise VerocaseError."""
         print(f"verocase: fatal: {msg}", file=self.stderr)
+        self.had_error = True
         raise VerocaseError(msg)
 
     def notify(self, msg: str) -> None:
@@ -975,7 +971,7 @@ class Case:
             node.options.append('needssupport')
             count += 1
         if count:
-            notify(f"Adding {count} needsSupport marking(s) to leaves in the LTAC file")
+            self.notify(f"Adding {count} needsSupport marking(s) to leaves in the LTAC file")
         return count
 
     def _collect_document_element_ids(self, path: str) -> set:
@@ -1421,7 +1417,7 @@ class Case:
         then the temp files are moved to their final locations.  This
         minimises the window when files are absent.
         """
-        notify("Updating " + " ".join(os.path.basename(fp) for _, fp in pairs))
+        self.notify("Updating " + " ".join(os.path.basename(fp) for _, fp in pairs))
         self._make_backup(pairs)
         for tmp, final in pairs:
             try:
@@ -1810,7 +1806,7 @@ class Case:
                 i += 1
             return None, None
 
-        notify(f"Fixing {len(misplaced)} misplaced element region(s) in {path}")
+        self.notify(f"Fixing {len(misplaced)} misplaced element region(s) in {path}")
 
         misplaced_set = set(misplaced)
         for ltac_ident in ltac_order:
@@ -2703,8 +2699,7 @@ class Case:
                 self.panic(f"{filename}:{lineno}: unexpected '<!-- end verocase -->' "
                            "with no open region; check for a missing "
                            "'<!-- verocase ...' opener above this line")
-                out.write(text + '\n')
-                continue
+                continue  # pragma: no cover
 
             out.write(text + '\n')
 
@@ -4598,9 +4593,9 @@ def config_invariant_checker(config: dict,
         return
     prefix = f'{filename}:{lineno}: ' if filename else ''
     if nr < 2:
-        panic(f'{prefix}narrowed_mermaid_children ({nr}) must be >= 2')
+        _panic(f'{prefix}narrowed_mermaid_children ({nr}) must be >= 2')
     if nr >= mx:
-        panic(
+        _panic(
             f'{prefix}narrowed_mermaid_children ({nr}) must be less than '
             f'max_mermaid_children ({mx})'
         )
@@ -4651,7 +4646,7 @@ def _consume_region(line_iter, filename: str, start_lineno: int, selector: str,
                 if case is not None:
                     case.panic(msg)
                 else:
-                    panic(msg)
+                    _panic(msg)
     msg = f"{filename}:{start_lineno}: unclosed '<!-- verocase {selector} -->' region"
     if case is not None:
         case.error(msg)
@@ -4832,7 +4827,7 @@ Triggering the full CLI pipeline programmatically:
   (validation, rendering, file updates) without subprocess overhead.
 
 Exceptions:
-  class VerocaseError(Exception)  raised by panic() on fatal errors
+  class VerocaseError(Exception)  raised by _panic() on fatal errors
 
 The key data structures are:
 
@@ -5551,32 +5546,32 @@ def run(args: argparse.Namespace) -> bool:
     if _has_analysis:
         _file_modifying_modes = ('fixmissing', 'fixmisplaced', 'start')
         if any(getattr(args, f, False) for f in _file_modifying_modes):
-            panic("analysis options (--missing, --empty, --orphans, --misplaced, --leaves, --packages) "
-                  "cannot be combined with file-modifying modes (--fixmissing, --fixmisplaced, --start)")
+            _panic("analysis options (--missing, --empty, --orphans, --misplaced, --leaves, --packages) "
+                   "cannot be combined with file-modifying modes (--fixmissing, --fixmisplaced, --start)")
         if args.sync:
-            panic("analysis options cannot be combined with --sync (which modifies the LTAC file)")
+            _panic("analysis options cannot be combined with --sync (which modifies the LTAC file)")
         if getattr(args, 'mutations', []):
-            panic("analysis options cannot be combined with --rename/--restate/--detach/--move "
-                  "(which modify the LTAC file)")
+            _panic("analysis options cannot be combined with --rename/--restate/--detach/--move "
+                   "(which modify the LTAC file)")
 
     if args.read_only:
         _file_modifying_modes = ('fixmissing', 'fixmisplaced', 'start')
         if any(getattr(args, f, False) for f in _file_modifying_modes):
-            panic("--read-only cannot be combined with file-modifying modes "
-                  "(--fixmissing, --fixmisplaced, --start)")
+            _panic("--read-only cannot be combined with file-modifying modes "
+                   "(--fixmissing, --fixmisplaced, --start)")
         if args.sync:
-            panic("--read-only cannot be combined with --sync")
+            _panic("--read-only cannot be combined with --sync")
         if getattr(args, 'mutations', []):
-            panic("--read-only cannot be combined with --rename/--restate/--detach/--move")
+            _panic("--read-only cannot be combined with --rename/--restate/--detach/--move")
         if args.update_ltac:
-            panic("--read-only cannot be combined with --update-ltac")
+            _panic("--read-only cannot be combined with --update-ltac")
 
     if args.sync:
         changed = case.sync_citations()
         if changed:
             tmp = case._make_ltac_temp(ltac_path, ltac_line_ending)
             if tmp is None:
-                panic("cannot write updated LTAC file")
+                _panic("cannot write updated LTAC file")
             case.commit_updates([(tmp, ltac_path)])
 
     # Apply ordered mutations (--rename / --restate).
@@ -5591,7 +5586,7 @@ def run(args: argparse.Namespace) -> bool:
             elif op == 'move':
                 case.move_id(a, b)
         if not case.validate_ltac():
-            panic("LTAC validation failed after mutations; no files updated")
+            _panic("LTAC validation failed after mutations; no files updated")
 
     _NO_FILES_MSG = (
         "no document files found; specify files on the command line, set document_files "
@@ -5690,17 +5685,17 @@ def run(args: argparse.Namespace) -> bool:
         case.save_ltac_if_modified()
     elif args.stdout:
         if not case.document_files:
-            panic(_NO_FILES_MSG)
+            _panic(_NO_FILES_MSG)
         seen_element_ids = case._process_document_files(case.document_files, sys.stdout, strip=args.strip)
         case.check_element_coverage(seen_element_ids)
         case.save_ltac_if_modified()
     elif args.fixmissing or args.start:
         if not case.document_files:
-            panic(_NO_FILES_MSG)
+            _panic(_NO_FILES_MSG)
         case.fixmissing()
     elif args.fixmisplaced:
         if not case.document_files:
-            panic(_NO_FILES_MSG)
+            _panic(_NO_FILES_MSG)
         case.fix_misplaced_documents()
     elif args.read_only:
         # --read-only: load, validate, and optionally report stats; no file writes.
@@ -5713,7 +5708,7 @@ def run(args: argparse.Namespace) -> bool:
         if args.update_ltac:
             case.ltac_modified = True
         if not case.document_files and not case.ltac_modified:
-            panic(_NO_FILES_MSG)
+            _panic(_NO_FILES_MSG)
         case.update_files(strip=args.strip)
 
     if args.doublecheck:
