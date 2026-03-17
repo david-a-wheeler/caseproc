@@ -119,7 +119,7 @@ verocase
 
 It finds `case.ltac` and `case.md` automatically, validates the LTAC,
 and rewrites `case.md` with fresh generated content.
-The original `case.md` is backed up to `.backup/case.md` before any change.
+The original `case.md` is backed up to `.backups/` before any change.
 
 ---
 
@@ -630,20 +630,20 @@ However, if you know the ID, you can use `--restate` like this:
 verocase --restate AuthSafe "Authentication mechanisms are robust and tested"
 ```
 
-You can also use `--update` (next).
+You can also use `--sync` (next).
 
 ### Syncing citation text
 
 When you update a declaration's statement, any citations (`^ID: old text`)
 become out of date. If you edit the declaration, you can
-run `--update` to resync them:
+run `--sync` to resync them:
 
 ```sh
-verocase --update
+verocase --sync
 ```
 
 This rewrites any citation whose text doesn't match its declaration.
-Without `--update`, a mismatch produces a warning suggesting you run it.
+Without `--sync`, a mismatch produces a warning suggesting you run it.
 
 ---
 
