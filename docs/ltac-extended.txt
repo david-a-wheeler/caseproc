@@ -43,10 +43,17 @@ NOTE: This "Extended LTAC" is based on LTAC v1.1.2, 26.02.2026 from Argevide but
     - Justifications and Assumptions should be used for higher-level claims and strategies.
 	- If a Claim is to be supported by Evidence and by Strategy, the Evidence should be replaced by a Claim describing it and this Claim can be supported by this Evidence element
   i) LTAC can be used to present a single module argument, not modular arguments. Interfaces and away elements cannot be represented in LTAC. Other more advanced notations can be used to represent modular arguments.
-  j) Each non-blank line must contain one element, link, or citation, you can't add additional text about on following lines about an element.
+  j) Each non-blank line must contain one element, link, citation, or comment (see rule 10); you can't add additional text about an element on following lines.
   k) LTAC is a code. In Markdown you should place 3 backticks ` ``` ` on a line above and below the code block to present LTAC packages.
   l) Elements can include "{Options}" which may influence how they are translated into various formats.
-10. Options and references
+10. Comments
+  a) A comment is a line whose first non-space character is '#'. The comment text runs from the '#' to the end of the line.
+  b) A comment is associated with the next non-comment line in the file, wherever that line appears. Intervening blank lines do not change this association.
+  c) A comment's indentation must equal the indentation of the line it is associated with. Consequently, comments before a package root must be at indentation level 0, comments within a package must match the depth of the element they precede, and trailing comments at the end of the file must be at indentation level 0.
+  d) Consecutive comment lines form a comment group; blank lines within an open group are absorbed into it (not treated as package separators) and may serve as visual separators. All comment lines in a group must share the same indentation level.
+  e) A blank line before a comment group begins is not absorbed; it acts as a normal package separator.
+
+11. Options and references
   a) After the element text you may add an optional curly-brace-enclosed comma-separated list of options that mark the element
   b) After that you may add an optional parentheses-enclosed reference (a URL or file being referred to)
   c) To define text ending in parentheses or braces, use `{}` or `()` afterwards to indicate they are not options and/or referencs
