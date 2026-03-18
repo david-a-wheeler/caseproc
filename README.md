@@ -2,7 +2,7 @@
 
 `verocase` is an open source software (OSS) tool
 that makes it *easy* and *efficient*
-to create and maintain an assurance case.
+to create and maintain an assurance case, for both humans and AI.
 The name verocase is derived from the Latin *vero*
 (meaning "in truth" or "truly") and *case*,
 (representing the tool's purpose to manage an assurance case).
@@ -104,14 +104,17 @@ Since they *know* about at least one common assurance case notation, they
 are designed to make it easy to create the graphics and enter the data.
 
 For large assurance cases where maximum flexibility is critical,
-these tools can be quite helpful. If this is the kind of tool you want,
-by all means, look at them!
+these tools can be quite helpful.
+They're especially helpful for users who aren't comfortable editing a text file,
+and would strongly prefer to enter and manipulate data through a GUI.
+If this is the kind of tool you want,
+by all means, check them out!
 
 However, these sophisticated tools seem excessive for some assurance cases.
-They require installation, learning to use them, and committing to
+These tools require installation, learning to use them, and committing to
 storing all data in a database that can only be managed by a complex tool.
-I was looking for a simpler alternative, one where it would be much
-easier to edit the assurance case and manage the result with git.
+I was looking for a simpler alternative where it would be much
+faster to edit the assurance case and where I could manage the result with git.
 
 ### Our approach as an alternative
 
@@ -149,6 +152,7 @@ as appropriate.
 
 The result is *much* easier to integrate into version control systems like git,
 since all information is kept in simple text files.
+This simplifies review and collaborative development.
 Both AI and humans find this information really easy to follow.
 AI systems love markdown and HTML, and they
 also know how to handle indented structures like LTAC since they've seen
