@@ -1388,12 +1388,12 @@ class TestComments(unittest.TestCase):
     """Comments in LTAC: parsing, round-trip, and correct node attachment.
 
     The fixture comments.ltac exercises every interesting position:
-      - file-level header block (multi-line, with an absorbed blank line)
-      - inter-package comment (depth 0 between packages)
+      - file-level header block (multi-line, with an absorbed blank line mid-group)
+      - inter-package comment (depth 0 between packages, preceded by blank separator)
       - depth-1 comment within a package
-      - depth-1 comment group containing a bare '#' visual separator
+      - depth-1 comment group containing an absorbed blank line visual separator
       - depth-2 comment within a package
-      - trailing comment after the last package
+      - trailing comment after the last package (preceded by blank separator)
     """
 
     def _case(self):
@@ -1480,6 +1480,61 @@ class TestComments(unittest.TestCase):
         case, _ = self._case()
         self.assertEqual(case.trailing_comments,
                          ['# Trailing comment after the last package.'])
+
+
+class TestBlankLineRoundTrip(unittest.TestCase):
+    """Blank lines as part of the comment block: parsing and round-trip tests.
+
+    Covers blank lines within a package, between packages, and normalization.
+    Fixture files:
+      blank-lines.ltac           -- exercises all round-trip cases:
+                                    blank between siblings, blank+comment before
+                                    child, and double blank between packages
+      blank-lines-normalize.ltac -- no separators; normalized on write (stable)
+    """
+
+    def _parse(self, src):
+        sys.path.insert(0, os.path.join(_HERE, '..'))
+        import verocase
+        case = verocase.Case()
+        verocase._LTACParser(case).parse(src.splitlines(keepends=True))
+        return case, verocase
+
+    def _roundtrip(self, src):
+        import io
+        case, verocase_mod = self._parse(src)
+        self.assertFalse(case.had_error)
+        buf = io.StringIO()
+        case.write_ltac(buf)
+        return buf.getvalue()
+
+    def test_blank_lines_roundtrip(self):
+        """Blank lines within a package and between packages round-trip correctly;
+        blanks are stored as pre_comments=[''] on the following node."""
+        src = read_fixture('blank-lines.ltac')
+        case, _ = self._parse(src)
+        by_id = {n.identifier: n for n in case.all_nodes()}
+        self.assertEqual(by_id['C2'].pre_comments, [''])
+        self.assertEqual(by_id['Child'].pre_comments, ['', '# Comment about child'])
+        self.assertEqual(by_id['Pkg2'].pre_comments, [''])
+        self.assertEqual(self._roundtrip(src), src)
+
+    def test_blank_lines_file_ends(self):
+        """Multi-line comment blocks with blanks at file start and end round-trip."""
+        src = read_fixture('blank-lines-file-ends.ltac')
+        case, _ = self._parse(src)
+        self.assertEqual(case.roots[0].pre_comments,
+                         ['# File header', '', '# More header'])
+        self.assertEqual(case.trailing_comments,
+                         ['# Trailing comment', '', '# More trailing'])
+        self.assertEqual(self._roundtrip(src), src)
+
+    def test_blank_lines_normalization(self):
+        """Missing blank separators are added on write; result is stable."""
+        original = read_fixture('blank-lines-normalize.ltac')
+        normalized = self._roundtrip(original)
+        self.assertNotEqual(normalized, original)
+        self.assertEqual(self._roundtrip(normalized), normalized)
 
 
 class TestCommitUpdates(unittest.TestCase):

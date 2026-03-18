@@ -1,0 +1,10 @@
+- Claim Root: top
+  - Claim C1: first
+
+  - Claim C2: second
+
+  # Comment about child
+  - Claim Child: only child
+
+
+- Claim Pkg2: second
