@@ -1374,9 +1374,9 @@ class Case:
         '- Claim C1: The software is safe\\n  - Evidence E1: Test results (tests.pdf)\\n'
         """
         for i, root in enumerate(self.roots):
-            if i > 0:
-                out.write('\n')
             root.write_ltac_subtree(out)
+            if i < len(self.roots) - 1 or self.trailing_comments:
+                out.write('\n')
         for c in self.trailing_comments:
             out.write((c + '\n') if c else '\n')
 
@@ -2852,6 +2852,10 @@ class _LTACParser:
         # Finalize last open package
         if self._stack or self._current_pkg:
             self._finalize_package()
+        # Same stripping as for package-level nodes: a leading blank was the
+        # separator between the last package and the trailing comment block.
+        if self._pending_comments and self._pending_comments[0] == '':
+            self._pending_comments.pop(0)
         self._case.trailing_comments = self._pending_comments
 
         # Warn about any Link nodes whose targets were never found.
@@ -2880,10 +2884,7 @@ class _LTACParser:
         """Process a single LTAC source line, updating parser state."""
         stripped = line.strip()
         if not stripped:
-            if self._pending_comments:
-                self._pending_comments.append('')
-            elif self._stack or self._current_pkg:
-                self._finalize_package()
+            self._pending_comments.append('')
             return
 
         if stripped.startswith('#'):
@@ -2941,6 +2942,11 @@ class _LTACParser:
             lineno=lineno,
         )
         self.node_count += 1
+        # A blank line before the first comment in a package-level block is the
+        # package separator; strip it so it is not stored (it will be re-emitted
+        # on write as the blank line between packages).
+        if depth == 0 and self._pending_comments and self._pending_comments[0] == '':
+            self._pending_comments.pop(0)
         node.pre_comments = self._pending_comments
         self._pending_comments = []
 
