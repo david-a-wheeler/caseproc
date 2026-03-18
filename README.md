@@ -87,8 +87,13 @@ easier to understand.
 However, it's burdensome to create and maintain these graphics by hand.
 I did this with LibreOffice, which has some nice tools for maintaining
 graphics, but as a generalized tool it involved a lot of extra work.
-An AI can help, but it's error-prone for humans to maintain them,
-and AI can make the same mistakes.
+
+An AI can help, but it's no miracle.
+It's error-prone for *humans* to maintain an assurance case in
+a document-only approach.
+AI can make exactly the same kind of mistakes, for the same reasons.
+Once assurance cases grow from being tiny, it's really helpful to have some
+kind of automated support.
 
 ### Graphics editing and database tools
 
@@ -176,7 +181,7 @@ the tool by default will automatically update the document files to match
 the LTAC input, e.g., it updates the graphics and the headings.
 
 Database-based tools can make it easy to make specific changes "everywhere".
-However, database-based tools are complex and requiring using that
+However, database-based tools are complex and require the use of a
 specialized tool for almost all assurance case tasks.
 Our goal is to get many of those benefits using a completely different and
 simpler approach.
