@@ -155,6 +155,60 @@ flowchart BT
     click C25top "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#package-c25top"
 
     BottomPadding[ ]:::invisible ~~~ Xscope
+    BottomPadding ~~~ Asys
+    BottomPadding ~~~ Esys1
+    BottomPadding ~~~ Scomps
+    BottomPadding ~~~ Sdecomp
+    BottomPadding ~~~ C44top
+    BottomPadding ~~~ C45top
+    BottomPadding ~~~ L1top
+    BottomPadding ~~~ C01top
+    BottomPadding ~~~ C02top
+    BottomPadding ~~~ C03top
+    BottomPadding ~~~ C41top
+    BottomPadding ~~~ C42top
+    BottomPadding ~~~ C43top
+    BottomPadding ~~~ L2top
+    BottomPadding ~~~ L3top
+    BottomPadding ~~~ L4top
+    BottomPadding ~~~ L5top
+    BottomPadding ~~~ C04top
+    BottomPadding ~~~ C05top
+    BottomPadding ~~~ C06top
+    BottomPadding ~~~ C38top
+    BottomPadding ~~~ C39top
+    BottomPadding ~~~ C40top
+    BottomPadding ~~~ C07top
+    BottomPadding ~~~ C08top
+    BottomPadding ~~~ C09top
+    BottomPadding ~~~ C35top
+    BottomPadding ~~~ C36top
+    BottomPadding ~~~ C37top
+    BottomPadding ~~~ C10top
+    BottomPadding ~~~ C11top
+    BottomPadding ~~~ C12top
+    BottomPadding ~~~ C32top
+    BottomPadding ~~~ C33top
+    BottomPadding ~~~ C34top
+    BottomPadding ~~~ C13top
+    BottomPadding ~~~ C14top
+    BottomPadding ~~~ C15top
+    BottomPadding ~~~ C29top
+    BottomPadding ~~~ C30top
+    BottomPadding ~~~ C31top
+    BottomPadding ~~~ C16top
+    BottomPadding ~~~ C17top
+    BottomPadding ~~~ C18top
+    BottomPadding ~~~ C26top
+    BottomPadding ~~~ C27top
+    BottomPadding ~~~ C28top
+    BottomPadding ~~~ C19top
+    BottomPadding ~~~ C20top
+    BottomPadding ~~~ C21top
+    BottomPadding ~~~ C22top
+    BottomPadding ~~~ C23top
+    BottomPadding ~~~ C24top
+    BottomPadding ~~~ C25top
     L2top --- _Connector_00000000
     L3top --- _Connector_00000000
     L4top --- _Connector_00000000
@@ -369,6 +423,39 @@ flowchart BT
     click L1Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l1edeep"
 
     BottomPadding[ ]:::invisible ~~~ L1Xctx
+    BottomPadding ~~~ L1Esh1
+    BottomPadding ~~~ L1Esh2
+    BottomPadding ~~~ L1Smain
+    BottomPadding ~~~ L1S2
+    BottomPadding ~~~ C08top
+    BottomPadding ~~~ C09top
+    BottomPadding ~~~ C10top
+    BottomPadding ~~~ L1Gbr7b
+    BottomPadding ~~~ L1Gbr8b
+    BottomPadding ~~~ L1S2b
+    BottomPadding ~~~ C11top
+    BottomPadding ~~~ C12top
+    BottomPadding ~~~ L1Gbr4b
+    BottomPadding ~~~ L1Gbr5b
+    BottomPadding ~~~ L1Gbr6b
+    BottomPadding ~~~ L1Ebr7
+    BottomPadding ~~~ L1Ebr8
+    BottomPadding ~~~ L1S3
+    BottomPadding ~~~ L1G3b
+    BottomPadding ~~~ L1J1
+    BottomPadding ~~~ L1G3d
+    BottomPadding ~~~ L1Gbr1b
+    BottomPadding ~~~ L1Gbr2b
+    BottomPadding ~~~ L1Gbr3b
+    BottomPadding ~~~ L1Ebr4
+    BottomPadding ~~~ L1Ebr5
+    BottomPadding ~~~ L1Ebr6
+    BottomPadding ~~~ L1G4b
+    BottomPadding ~~~ L1E2
+    BottomPadding ~~~ L1Ebr1
+    BottomPadding ~~~ L1Ebr2
+    BottomPadding ~~~ L1Ebr3
+    BottomPadding ~~~ L1Edeep
     L1Edeep --> L1G4
     L1G4 --- Dot1
     L1G4b --- Dot1
@@ -590,6 +677,39 @@ flowchart BT
     click L2Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l2edeep"
 
     BottomPadding[ ]:::invisible ~~~ L2Xctx
+    BottomPadding ~~~ L2Esh1
+    BottomPadding ~~~ L2Esh2
+    BottomPadding ~~~ L2Smain
+    BottomPadding ~~~ L2S2
+    BottomPadding ~~~ C15top
+    BottomPadding ~~~ C16top
+    BottomPadding ~~~ C17top
+    BottomPadding ~~~ L2Gbr7b
+    BottomPadding ~~~ L2Gbr8b
+    BottomPadding ~~~ L2S2b
+    BottomPadding ~~~ C18top
+    BottomPadding ~~~ C19top
+    BottomPadding ~~~ L2Gbr4b
+    BottomPadding ~~~ L2Gbr5b
+    BottomPadding ~~~ L2Gbr6b
+    BottomPadding ~~~ L2Ebr7
+    BottomPadding ~~~ L2Ebr8
+    BottomPadding ~~~ L2S3
+    BottomPadding ~~~ L2G3b
+    BottomPadding ~~~ L2J1
+    BottomPadding ~~~ L2G3d
+    BottomPadding ~~~ L2Gbr1b
+    BottomPadding ~~~ L2Gbr2b
+    BottomPadding ~~~ L2Gbr3b
+    BottomPadding ~~~ L2Ebr4
+    BottomPadding ~~~ L2Ebr5
+    BottomPadding ~~~ L2Ebr6
+    BottomPadding ~~~ L2G4b
+    BottomPadding ~~~ L2E2
+    BottomPadding ~~~ L2Ebr1
+    BottomPadding ~~~ L2Ebr2
+    BottomPadding ~~~ L2Ebr3
+    BottomPadding ~~~ L2Edeep
     L2Edeep --> L2G4
     L2G4 --- Dot1
     L2G4b --- Dot1
@@ -811,6 +931,39 @@ flowchart BT
     click L3Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l3edeep"
 
     BottomPadding[ ]:::invisible ~~~ L3Xctx
+    BottomPadding ~~~ L3Esh1
+    BottomPadding ~~~ L3Esh2
+    BottomPadding ~~~ L3Smain
+    BottomPadding ~~~ L3S2
+    BottomPadding ~~~ C22top
+    BottomPadding ~~~ C23top
+    BottomPadding ~~~ C24top
+    BottomPadding ~~~ L3Gbr7b
+    BottomPadding ~~~ L3Gbr8b
+    BottomPadding ~~~ L3S2b
+    BottomPadding ~~~ C25top
+    BottomPadding ~~~ C26top
+    BottomPadding ~~~ L3Gbr4b
+    BottomPadding ~~~ L3Gbr5b
+    BottomPadding ~~~ L3Gbr6b
+    BottomPadding ~~~ L3Ebr7
+    BottomPadding ~~~ L3Ebr8
+    BottomPadding ~~~ L3S3
+    BottomPadding ~~~ L3G3b
+    BottomPadding ~~~ L3J1
+    BottomPadding ~~~ L3G3d
+    BottomPadding ~~~ L3Gbr1b
+    BottomPadding ~~~ L3Gbr2b
+    BottomPadding ~~~ L3Gbr3b
+    BottomPadding ~~~ L3Ebr4
+    BottomPadding ~~~ L3Ebr5
+    BottomPadding ~~~ L3Ebr6
+    BottomPadding ~~~ L3G4b
+    BottomPadding ~~~ L3E2
+    BottomPadding ~~~ L3Ebr1
+    BottomPadding ~~~ L3Ebr2
+    BottomPadding ~~~ L3Ebr3
+    BottomPadding ~~~ L3Edeep
     L3Edeep --> L3G4
     L3G4 --- Dot1
     L3G4b --- Dot1
@@ -1032,6 +1185,39 @@ flowchart BT
     click L4Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l4edeep"
 
     BottomPadding[ ]:::invisible ~~~ L4Xctx
+    BottomPadding ~~~ L4Esh1
+    BottomPadding ~~~ L4Esh2
+    BottomPadding ~~~ L4Smain
+    BottomPadding ~~~ L4S2
+    BottomPadding ~~~ C29top
+    BottomPadding ~~~ C30top
+    BottomPadding ~~~ C31top
+    BottomPadding ~~~ L4Gbr7b
+    BottomPadding ~~~ L4Gbr8b
+    BottomPadding ~~~ L4S2b
+    BottomPadding ~~~ C32top
+    BottomPadding ~~~ C33top
+    BottomPadding ~~~ L4Gbr4b
+    BottomPadding ~~~ L4Gbr5b
+    BottomPadding ~~~ L4Gbr6b
+    BottomPadding ~~~ L4Ebr7
+    BottomPadding ~~~ L4Ebr8
+    BottomPadding ~~~ L4S3
+    BottomPadding ~~~ L4G3b
+    BottomPadding ~~~ L4J1
+    BottomPadding ~~~ L4G3d
+    BottomPadding ~~~ L4Gbr1b
+    BottomPadding ~~~ L4Gbr2b
+    BottomPadding ~~~ L4Gbr3b
+    BottomPadding ~~~ L4Ebr4
+    BottomPadding ~~~ L4Ebr5
+    BottomPadding ~~~ L4Ebr6
+    BottomPadding ~~~ L4G4b
+    BottomPadding ~~~ L4E2
+    BottomPadding ~~~ L4Ebr1
+    BottomPadding ~~~ L4Ebr2
+    BottomPadding ~~~ L4Ebr3
+    BottomPadding ~~~ L4Edeep
     L4Edeep --> L4G4
     L4G4 --- Dot1
     L4G4b --- Dot1
@@ -1253,6 +1439,39 @@ flowchart BT
     click L5Edeep "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-l5edeep"
 
     BottomPadding[ ]:::invisible ~~~ L5Xctx
+    BottomPadding ~~~ L5Esh1
+    BottomPadding ~~~ L5Esh2
+    BottomPadding ~~~ L5Smain
+    BottomPadding ~~~ L5S2
+    BottomPadding ~~~ C36top
+    BottomPadding ~~~ C37top
+    BottomPadding ~~~ C38top
+    BottomPadding ~~~ L5Gbr7b
+    BottomPadding ~~~ L5Gbr8b
+    BottomPadding ~~~ L5S2b
+    BottomPadding ~~~ C39top
+    BottomPadding ~~~ C40top
+    BottomPadding ~~~ L5Gbr4b
+    BottomPadding ~~~ L5Gbr5b
+    BottomPadding ~~~ L5Gbr6b
+    BottomPadding ~~~ L5Ebr7
+    BottomPadding ~~~ L5Ebr8
+    BottomPadding ~~~ L5S3
+    BottomPadding ~~~ L5G3b
+    BottomPadding ~~~ L5J1
+    BottomPadding ~~~ L5G3d
+    BottomPadding ~~~ L5Gbr1b
+    BottomPadding ~~~ L5Gbr2b
+    BottomPadding ~~~ L5Gbr3b
+    BottomPadding ~~~ L5Ebr4
+    BottomPadding ~~~ L5Ebr5
+    BottomPadding ~~~ L5Ebr6
+    BottomPadding ~~~ L5G4b
+    BottomPadding ~~~ L5E2
+    BottomPadding ~~~ L5Ebr1
+    BottomPadding ~~~ L5Ebr2
+    BottomPadding ~~~ L5Ebr3
+    BottomPadding ~~~ L5Edeep
     L5Edeep --> L5G4
     L5G4 --- Dot1
     L5G4b --- Dot1
@@ -1370,6 +1589,13 @@ flowchart BT
     click C01E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c01e2"
 
     BottomPadding[ ]:::invisible ~~~ C02top
+    BottomPadding ~~~ C01Xctx
+    BottomPadding ~~~ C01Esh
+    BottomPadding ~~~ C01Sass
+    BottomPadding ~~~ C01E1
+    BottomPadding ~~~ C01J1
+    BottomPadding ~~~ C01A1
+    BottomPadding ~~~ C01E2
     C01E1 --> C01G1
     C01J1 --> C01G2
     C01A1 --- Dot1
@@ -1430,6 +1656,13 @@ flowchart BT
     click C02E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c02e2"
 
     BottomPadding[ ]:::invisible ~~~ C03top
+    BottomPadding ~~~ C02Xctx
+    BottomPadding ~~~ C02Esh
+    BottomPadding ~~~ C02Sass
+    BottomPadding ~~~ C02E1
+    BottomPadding ~~~ C02J1
+    BottomPadding ~~~ C02A1
+    BottomPadding ~~~ C02E2
     C02E1 --> C02G1
     C02J1 --> C02G2
     C02A1 --- Dot1
@@ -1490,6 +1723,13 @@ flowchart BT
     click C03E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c03e2"
 
     BottomPadding[ ]:::invisible ~~~ C04top
+    BottomPadding ~~~ C03Xctx
+    BottomPadding ~~~ C03Esh
+    BottomPadding ~~~ C03Sass
+    BottomPadding ~~~ C03E1
+    BottomPadding ~~~ C03J1
+    BottomPadding ~~~ C03A1
+    BottomPadding ~~~ C03E2
     C03E1 --> C03G1
     C03J1 --> C03G2
     C03A1 --- Dot1
@@ -1550,6 +1790,13 @@ flowchart BT
     click C04E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c04e2"
 
     BottomPadding[ ]:::invisible ~~~ C05top
+    BottomPadding ~~~ C04Xctx
+    BottomPadding ~~~ C04Esh
+    BottomPadding ~~~ C04Sass
+    BottomPadding ~~~ C04E1
+    BottomPadding ~~~ C04J1
+    BottomPadding ~~~ C04A1
+    BottomPadding ~~~ C04E2
     C04E1 --> C04G1
     C04J1 --> C04G2
     C04A1 --- Dot1
@@ -1610,6 +1857,13 @@ flowchart BT
     click C05E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c05e2"
 
     BottomPadding[ ]:::invisible ~~~ C06top
+    BottomPadding ~~~ C05Xctx
+    BottomPadding ~~~ C05Esh
+    BottomPadding ~~~ C05Sass
+    BottomPadding ~~~ C05E1
+    BottomPadding ~~~ C05J1
+    BottomPadding ~~~ C05A1
+    BottomPadding ~~~ C05E2
     C05E1 --> C05G1
     C05J1 --> C05G2
     C05A1 --- Dot1
@@ -1670,6 +1924,13 @@ flowchart BT
     click C06E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c06e2"
 
     BottomPadding[ ]:::invisible ~~~ C07top
+    BottomPadding ~~~ C06Xctx
+    BottomPadding ~~~ C06Esh
+    BottomPadding ~~~ C06Sass
+    BottomPadding ~~~ C06E1
+    BottomPadding ~~~ C06J1
+    BottomPadding ~~~ C06A1
+    BottomPadding ~~~ C06E2
     C06E1 --> C06G1
     C06J1 --> C06G2
     C06A1 --- Dot1
@@ -1730,6 +1991,13 @@ flowchart BT
     click C07E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c07e2"
 
     BottomPadding[ ]:::invisible ~~~ C08top
+    BottomPadding ~~~ C07Xctx
+    BottomPadding ~~~ C07Esh
+    BottomPadding ~~~ C07Sass
+    BottomPadding ~~~ C07E1
+    BottomPadding ~~~ C07J1
+    BottomPadding ~~~ C07A1
+    BottomPadding ~~~ C07E2
     C07E1 --> C07G1
     C07J1 --> C07G2
     C07A1 --- Dot1
@@ -1790,6 +2058,13 @@ flowchart BT
     click C08E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c08e2"
 
     BottomPadding[ ]:::invisible ~~~ C09top
+    BottomPadding ~~~ C08Xctx
+    BottomPadding ~~~ C08Esh
+    BottomPadding ~~~ C08Sass
+    BottomPadding ~~~ C08E1
+    BottomPadding ~~~ C08J1
+    BottomPadding ~~~ C08A1
+    BottomPadding ~~~ C08E2
     C08E1 --> C08G1
     C08J1 --> C08G2
     C08A1 --- Dot1
@@ -1850,6 +2125,13 @@ flowchart BT
     click C09E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c09e2"
 
     BottomPadding[ ]:::invisible ~~~ C10top
+    BottomPadding ~~~ C09Xctx
+    BottomPadding ~~~ C09Esh
+    BottomPadding ~~~ C09Sass
+    BottomPadding ~~~ C09E1
+    BottomPadding ~~~ C09J1
+    BottomPadding ~~~ C09A1
+    BottomPadding ~~~ C09E2
     C09E1 --> C09G1
     C09J1 --> C09G2
     C09A1 --- Dot1
@@ -1910,6 +2192,13 @@ flowchart BT
     click C10E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c10e2"
 
     BottomPadding[ ]:::invisible ~~~ C11top
+    BottomPadding ~~~ C10Xctx
+    BottomPadding ~~~ C10Esh
+    BottomPadding ~~~ C10Sass
+    BottomPadding ~~~ C10E1
+    BottomPadding ~~~ C10J1
+    BottomPadding ~~~ C10A1
+    BottomPadding ~~~ C10E2
     C10E1 --> C10G1
     C10J1 --> C10G2
     C10A1 --- Dot1
@@ -1968,6 +2257,12 @@ flowchart BT
     click C11E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c11e2"
 
     BottomPadding[ ]:::invisible ~~~ C11Xctx
+    BottomPadding ~~~ C11Esh
+    BottomPadding ~~~ C11Sass
+    BottomPadding ~~~ C11E1
+    BottomPadding ~~~ C11J1
+    BottomPadding ~~~ C11A1
+    BottomPadding ~~~ C11E2
     C11E1 --> C11G1
     C11J1 --> C11G2
     C11A1 --- Dot1
@@ -2025,6 +2320,12 @@ flowchart BT
     click C12E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c12e2"
 
     BottomPadding[ ]:::invisible ~~~ C12Xctx
+    BottomPadding ~~~ C12Esh
+    BottomPadding ~~~ C12Sass
+    BottomPadding ~~~ C12E1
+    BottomPadding ~~~ C12J1
+    BottomPadding ~~~ C12A1
+    BottomPadding ~~~ C12E2
     C12E1 --> C12G1
     C12J1 --> C12G2
     C12A1 --- Dot1
@@ -2082,6 +2383,12 @@ flowchart BT
     click C13E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c13e2"
 
     BottomPadding[ ]:::invisible ~~~ C13Xctx
+    BottomPadding ~~~ C13Esh
+    BottomPadding ~~~ C13Sass
+    BottomPadding ~~~ C13E1
+    BottomPadding ~~~ C13J1
+    BottomPadding ~~~ C13A1
+    BottomPadding ~~~ C13E2
     C13E1 --> C13G1
     C13J1 --> C13G2
     C13A1 --- Dot1
@@ -2139,6 +2446,12 @@ flowchart BT
     click C14E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c14e2"
 
     BottomPadding[ ]:::invisible ~~~ C14Xctx
+    BottomPadding ~~~ C14Esh
+    BottomPadding ~~~ C14Sass
+    BottomPadding ~~~ C14E1
+    BottomPadding ~~~ C14J1
+    BottomPadding ~~~ C14A1
+    BottomPadding ~~~ C14E2
     C14E1 --> C14G1
     C14J1 --> C14G2
     C14A1 --- Dot1
@@ -2196,6 +2509,12 @@ flowchart BT
     click C15E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c15e2"
 
     BottomPadding[ ]:::invisible ~~~ C15Xctx
+    BottomPadding ~~~ C15Esh
+    BottomPadding ~~~ C15Sass
+    BottomPadding ~~~ C15E1
+    BottomPadding ~~~ C15J1
+    BottomPadding ~~~ C15A1
+    BottomPadding ~~~ C15E2
     C15E1 --> C15G1
     C15J1 --> C15G2
     C15A1 --- Dot1
@@ -2253,6 +2572,12 @@ flowchart BT
     click C16E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c16e2"
 
     BottomPadding[ ]:::invisible ~~~ C16Xctx
+    BottomPadding ~~~ C16Esh
+    BottomPadding ~~~ C16Sass
+    BottomPadding ~~~ C16E1
+    BottomPadding ~~~ C16J1
+    BottomPadding ~~~ C16A1
+    BottomPadding ~~~ C16E2
     C16E1 --> C16G1
     C16J1 --> C16G2
     C16A1 --- Dot1
@@ -2310,6 +2635,12 @@ flowchart BT
     click C17E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c17e2"
 
     BottomPadding[ ]:::invisible ~~~ C17Xctx
+    BottomPadding ~~~ C17Esh
+    BottomPadding ~~~ C17Sass
+    BottomPadding ~~~ C17E1
+    BottomPadding ~~~ C17J1
+    BottomPadding ~~~ C17A1
+    BottomPadding ~~~ C17E2
     C17E1 --> C17G1
     C17J1 --> C17G2
     C17A1 --- Dot1
@@ -2367,6 +2698,12 @@ flowchart BT
     click C18E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c18e2"
 
     BottomPadding[ ]:::invisible ~~~ C18Xctx
+    BottomPadding ~~~ C18Esh
+    BottomPadding ~~~ C18Sass
+    BottomPadding ~~~ C18E1
+    BottomPadding ~~~ C18J1
+    BottomPadding ~~~ C18A1
+    BottomPadding ~~~ C18E2
     C18E1 --> C18G1
     C18J1 --> C18G2
     C18A1 --- Dot1
@@ -2424,6 +2761,12 @@ flowchart BT
     click C19E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c19e2"
 
     BottomPadding[ ]:::invisible ~~~ C19Xctx
+    BottomPadding ~~~ C19Esh
+    BottomPadding ~~~ C19Sass
+    BottomPadding ~~~ C19E1
+    BottomPadding ~~~ C19J1
+    BottomPadding ~~~ C19A1
+    BottomPadding ~~~ C19E2
     C19E1 --> C19G1
     C19J1 --> C19G2
     C19A1 --- Dot1
@@ -2481,6 +2824,12 @@ flowchart BT
     click C20E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c20e2"
 
     BottomPadding[ ]:::invisible ~~~ C20Xctx
+    BottomPadding ~~~ C20Esh
+    BottomPadding ~~~ C20Sass
+    BottomPadding ~~~ C20E1
+    BottomPadding ~~~ C20J1
+    BottomPadding ~~~ C20A1
+    BottomPadding ~~~ C20E2
     C20E1 --> C20G1
     C20J1 --> C20G2
     C20A1 --- Dot1
@@ -2538,6 +2887,12 @@ flowchart BT
     click C21E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c21e2"
 
     BottomPadding[ ]:::invisible ~~~ C21Xctx
+    BottomPadding ~~~ C21Esh
+    BottomPadding ~~~ C21Sass
+    BottomPadding ~~~ C21E1
+    BottomPadding ~~~ C21J1
+    BottomPadding ~~~ C21A1
+    BottomPadding ~~~ C21E2
     C21E1 --> C21G1
     C21J1 --> C21G2
     C21A1 --- Dot1
@@ -2595,6 +2950,12 @@ flowchart BT
     click C22E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c22e2"
 
     BottomPadding[ ]:::invisible ~~~ C22Xctx
+    BottomPadding ~~~ C22Esh
+    BottomPadding ~~~ C22Sass
+    BottomPadding ~~~ C22E1
+    BottomPadding ~~~ C22J1
+    BottomPadding ~~~ C22A1
+    BottomPadding ~~~ C22E2
     C22E1 --> C22G1
     C22J1 --> C22G2
     C22A1 --- Dot1
@@ -2652,6 +3013,12 @@ flowchart BT
     click C23E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c23e2"
 
     BottomPadding[ ]:::invisible ~~~ C23Xctx
+    BottomPadding ~~~ C23Esh
+    BottomPadding ~~~ C23Sass
+    BottomPadding ~~~ C23E1
+    BottomPadding ~~~ C23J1
+    BottomPadding ~~~ C23A1
+    BottomPadding ~~~ C23E2
     C23E1 --> C23G1
     C23J1 --> C23G2
     C23A1 --- Dot1
@@ -2709,6 +3076,12 @@ flowchart BT
     click C24E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c24e2"
 
     BottomPadding[ ]:::invisible ~~~ C24Xctx
+    BottomPadding ~~~ C24Esh
+    BottomPadding ~~~ C24Sass
+    BottomPadding ~~~ C24E1
+    BottomPadding ~~~ C24J1
+    BottomPadding ~~~ C24A1
+    BottomPadding ~~~ C24E2
     C24E1 --> C24G1
     C24J1 --> C24G2
     C24A1 --- Dot1
@@ -2766,6 +3139,12 @@ flowchart BT
     click C25E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c25e2"
 
     BottomPadding[ ]:::invisible ~~~ C25Xctx
+    BottomPadding ~~~ C25Esh
+    BottomPadding ~~~ C25Sass
+    BottomPadding ~~~ C25E1
+    BottomPadding ~~~ C25J1
+    BottomPadding ~~~ C25A1
+    BottomPadding ~~~ C25E2
     C25E1 --> C25G1
     C25J1 --> C25G2
     C25A1 --- Dot1
@@ -2823,6 +3202,12 @@ flowchart BT
     click C26E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c26e2"
 
     BottomPadding[ ]:::invisible ~~~ C26Xctx
+    BottomPadding ~~~ C26Esh
+    BottomPadding ~~~ C26Sass
+    BottomPadding ~~~ C26E1
+    BottomPadding ~~~ C26J1
+    BottomPadding ~~~ C26A1
+    BottomPadding ~~~ C26E2
     C26E1 --> C26G1
     C26J1 --> C26G2
     C26A1 --- Dot1
@@ -2880,6 +3265,12 @@ flowchart BT
     click C27E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c27e2"
 
     BottomPadding[ ]:::invisible ~~~ C27Xctx
+    BottomPadding ~~~ C27Esh
+    BottomPadding ~~~ C27Sass
+    BottomPadding ~~~ C27E1
+    BottomPadding ~~~ C27J1
+    BottomPadding ~~~ C27A1
+    BottomPadding ~~~ C27E2
     C27E1 --> C27G1
     C27J1 --> C27G2
     C27A1 --- Dot1
@@ -2937,6 +3328,12 @@ flowchart BT
     click C28E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c28e2"
 
     BottomPadding[ ]:::invisible ~~~ C28Xctx
+    BottomPadding ~~~ C28Esh
+    BottomPadding ~~~ C28Sass
+    BottomPadding ~~~ C28E1
+    BottomPadding ~~~ C28J1
+    BottomPadding ~~~ C28A1
+    BottomPadding ~~~ C28E2
     C28E1 --> C28G1
     C28J1 --> C28G2
     C28A1 --- Dot1
@@ -2994,6 +3391,12 @@ flowchart BT
     click C29E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c29e2"
 
     BottomPadding[ ]:::invisible ~~~ C29Xctx
+    BottomPadding ~~~ C29Esh
+    BottomPadding ~~~ C29Sass
+    BottomPadding ~~~ C29E1
+    BottomPadding ~~~ C29J1
+    BottomPadding ~~~ C29A1
+    BottomPadding ~~~ C29E2
     C29E1 --> C29G1
     C29J1 --> C29G2
     C29A1 --- Dot1
@@ -3051,6 +3454,12 @@ flowchart BT
     click C30E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c30e2"
 
     BottomPadding[ ]:::invisible ~~~ C30Xctx
+    BottomPadding ~~~ C30Esh
+    BottomPadding ~~~ C30Sass
+    BottomPadding ~~~ C30E1
+    BottomPadding ~~~ C30J1
+    BottomPadding ~~~ C30A1
+    BottomPadding ~~~ C30E2
     C30E1 --> C30G1
     C30J1 --> C30G2
     C30A1 --- Dot1
@@ -3108,6 +3517,12 @@ flowchart BT
     click C31E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c31e2"
 
     BottomPadding[ ]:::invisible ~~~ C31Xctx
+    BottomPadding ~~~ C31Esh
+    BottomPadding ~~~ C31Sass
+    BottomPadding ~~~ C31E1
+    BottomPadding ~~~ C31J1
+    BottomPadding ~~~ C31A1
+    BottomPadding ~~~ C31E2
     C31E1 --> C31G1
     C31J1 --> C31G2
     C31A1 --- Dot1
@@ -3165,6 +3580,12 @@ flowchart BT
     click C32E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c32e2"
 
     BottomPadding[ ]:::invisible ~~~ C32Xctx
+    BottomPadding ~~~ C32Esh
+    BottomPadding ~~~ C32Sass
+    BottomPadding ~~~ C32E1
+    BottomPadding ~~~ C32J1
+    BottomPadding ~~~ C32A1
+    BottomPadding ~~~ C32E2
     C32E1 --> C32G1
     C32J1 --> C32G2
     C32A1 --- Dot1
@@ -3222,6 +3643,12 @@ flowchart BT
     click C33E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c33e2"
 
     BottomPadding[ ]:::invisible ~~~ C33Xctx
+    BottomPadding ~~~ C33Esh
+    BottomPadding ~~~ C33Sass
+    BottomPadding ~~~ C33E1
+    BottomPadding ~~~ C33J1
+    BottomPadding ~~~ C33A1
+    BottomPadding ~~~ C33E2
     C33E1 --> C33G1
     C33J1 --> C33G2
     C33A1 --- Dot1
@@ -3279,6 +3706,12 @@ flowchart BT
     click C34E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c34e2"
 
     BottomPadding[ ]:::invisible ~~~ C34Xctx
+    BottomPadding ~~~ C34Esh
+    BottomPadding ~~~ C34Sass
+    BottomPadding ~~~ C34E1
+    BottomPadding ~~~ C34J1
+    BottomPadding ~~~ C34A1
+    BottomPadding ~~~ C34E2
     C34E1 --> C34G1
     C34J1 --> C34G2
     C34A1 --- Dot1
@@ -3336,6 +3769,12 @@ flowchart BT
     click C35E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c35e2"
 
     BottomPadding[ ]:::invisible ~~~ C35Xctx
+    BottomPadding ~~~ C35Esh
+    BottomPadding ~~~ C35Sass
+    BottomPadding ~~~ C35E1
+    BottomPadding ~~~ C35J1
+    BottomPadding ~~~ C35A1
+    BottomPadding ~~~ C35E2
     C35E1 --> C35G1
     C35J1 --> C35G2
     C35A1 --- Dot1
@@ -3393,6 +3832,12 @@ flowchart BT
     click C36E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c36e2"
 
     BottomPadding[ ]:::invisible ~~~ C36Xctx
+    BottomPadding ~~~ C36Esh
+    BottomPadding ~~~ C36Sass
+    BottomPadding ~~~ C36E1
+    BottomPadding ~~~ C36J1
+    BottomPadding ~~~ C36A1
+    BottomPadding ~~~ C36E2
     C36E1 --> C36G1
     C36J1 --> C36G2
     C36A1 --- Dot1
@@ -3450,6 +3895,12 @@ flowchart BT
     click C37E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c37e2"
 
     BottomPadding[ ]:::invisible ~~~ C37Xctx
+    BottomPadding ~~~ C37Esh
+    BottomPadding ~~~ C37Sass
+    BottomPadding ~~~ C37E1
+    BottomPadding ~~~ C37J1
+    BottomPadding ~~~ C37A1
+    BottomPadding ~~~ C37E2
     C37E1 --> C37G1
     C37J1 --> C37G2
     C37A1 --- Dot1
@@ -3507,6 +3958,12 @@ flowchart BT
     click C38E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c38e2"
 
     BottomPadding[ ]:::invisible ~~~ C38Xctx
+    BottomPadding ~~~ C38Esh
+    BottomPadding ~~~ C38Sass
+    BottomPadding ~~~ C38E1
+    BottomPadding ~~~ C38J1
+    BottomPadding ~~~ C38A1
+    BottomPadding ~~~ C38E2
     C38E1 --> C38G1
     C38J1 --> C38G2
     C38A1 --- Dot1
@@ -3564,6 +4021,12 @@ flowchart BT
     click C39E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c39e2"
 
     BottomPadding[ ]:::invisible ~~~ C39Xctx
+    BottomPadding ~~~ C39Esh
+    BottomPadding ~~~ C39Sass
+    BottomPadding ~~~ C39E1
+    BottomPadding ~~~ C39J1
+    BottomPadding ~~~ C39A1
+    BottomPadding ~~~ C39E2
     C39E1 --> C39G1
     C39J1 --> C39G2
     C39A1 --- Dot1
@@ -3621,6 +4084,12 @@ flowchart BT
     click C40E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c40e2"
 
     BottomPadding[ ]:::invisible ~~~ C40Xctx
+    BottomPadding ~~~ C40Esh
+    BottomPadding ~~~ C40Sass
+    BottomPadding ~~~ C40E1
+    BottomPadding ~~~ C40J1
+    BottomPadding ~~~ C40A1
+    BottomPadding ~~~ C40E2
     C40E1 --> C40G1
     C40J1 --> C40G2
     C40A1 --- Dot1
@@ -3678,6 +4147,12 @@ flowchart BT
     click C41E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c41e2"
 
     BottomPadding[ ]:::invisible ~~~ C41Xctx
+    BottomPadding ~~~ C41Esh
+    BottomPadding ~~~ C41Sass
+    BottomPadding ~~~ C41E1
+    BottomPadding ~~~ C41J1
+    BottomPadding ~~~ C41A1
+    BottomPadding ~~~ C41E2
     C41E1 --> C41G1
     C41J1 --> C41G2
     C41A1 --- Dot1
@@ -3735,6 +4210,12 @@ flowchart BT
     click C42E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c42e2"
 
     BottomPadding[ ]:::invisible ~~~ C42Xctx
+    BottomPadding ~~~ C42Esh
+    BottomPadding ~~~ C42Sass
+    BottomPadding ~~~ C42E1
+    BottomPadding ~~~ C42J1
+    BottomPadding ~~~ C42A1
+    BottomPadding ~~~ C42E2
     C42E1 --> C42G1
     C42J1 --> C42G2
     C42A1 --- Dot1
@@ -3792,6 +4273,12 @@ flowchart BT
     click C43E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c43e2"
 
     BottomPadding[ ]:::invisible ~~~ C43Xctx
+    BottomPadding ~~~ C43Esh
+    BottomPadding ~~~ C43Sass
+    BottomPadding ~~~ C43E1
+    BottomPadding ~~~ C43J1
+    BottomPadding ~~~ C43A1
+    BottomPadding ~~~ C43E2
     C43E1 --> C43G1
     C43J1 --> C43G2
     C43A1 --- Dot1
@@ -3849,6 +4336,12 @@ flowchart BT
     click C44E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c44e2"
 
     BottomPadding[ ]:::invisible ~~~ C44Xctx
+    BottomPadding ~~~ C44Esh
+    BottomPadding ~~~ C44Sass
+    BottomPadding ~~~ C44E1
+    BottomPadding ~~~ C44J1
+    BottomPadding ~~~ C44A1
+    BottomPadding ~~~ C44E2
     C44E1 --> C44G1
     C44J1 --> C44G2
     C44A1 --- Dot1
@@ -3906,6 +4399,12 @@ flowchart BT
     click C45E2 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/stress-test-output.expected.md#evidence-c45e2"
 
     BottomPadding[ ]:::invisible ~~~ C45Xctx
+    BottomPadding ~~~ C45Esh
+    BottomPadding ~~~ C45Sass
+    BottomPadding ~~~ C45E1
+    BottomPadding ~~~ C45J1
+    BottomPadding ~~~ C45A1
+    BottomPadding ~~~ C45E2
     C45E1 --> C45G1
     C45J1 --> C45G2
     C45A1 --- Dot1

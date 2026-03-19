@@ -48,7 +48,15 @@ flowchart BT
     click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-deployment"
     click Maintenance "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#package-maintenance"
 
-    BottomPadding[ ]:::invisible ~~~ Requirements
+    BottomPadding[ ]:::invisible ~~~ Processes
+    BottomPadding ~~~ NonTechnical
+    BottomPadding ~~~ Controls
+    BottomPadding ~~~ Requirements
+    BottomPadding ~~~ Design
+    BottomPadding ~~~ Implementation
+    BottomPadding ~~~ Verification
+    BottomPadding ~~~ Deployment
+    BottomPadding ~~~ Maintenance
     Requirements --- Dot1
     Design --- Dot1
     Implementation --- Dot1
@@ -91,6 +99,8 @@ flowchart BT
     click ReqScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#context-reqscope"
 
     BottomPadding[ ]:::invisible ~~~ ReqSpec
+    BottomPadding ~~~ TestCoverage
+    BottomPadding ~~~ ReqScope
     ReqSpec --- Dot1
     TestCoverage --- Dot1
     Dot1 --> Requirements
@@ -123,6 +133,7 @@ flowchart BT
     click ThreatModel "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-doc-output.expected.md#evidence-threatmodel"
 
     BottomPadding[ ]:::invisible ~~~ DesignDoc
+    BottomPadding ~~~ ThreatModel
     DesignDoc --- Dot1
     ThreatModel --- Dot1
     Dot1 --> Design

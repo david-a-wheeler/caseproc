@@ -3830,6 +3830,13 @@ def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
         out.write('\n')
         out.write(decl)
 
+    # Display leaves are rendered nodes that never appear as an edge target.
+    # The target is always the last whitespace-separated token of an edge line.
+    edge_targets = {line.split()[-1] for line in edge_lines}
+    leaf_nodes = [n for n in all_nodes
+                  if n.node_type not in ('Relation', 'Link')
+                  and n.diagram_id not in edge_targets]
+
     # Click lines (BFS); write directly.
     # Link to the element anchor; never directly to ext_ref.
     # When base_url is empty, fragment-only links (#id) are used so that
@@ -3851,9 +3858,17 @@ def _sacm_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
         out.write('\n')
         out.write(line)
 
-    if bottom_padding and roots:
-        bottom_node = roots[0].leftmost_leaf
-        _write_edge(f'    BottomPadding[ ]:::invisible ~~~ {bottom_node.diagram_id}')
+    # BottomPadding: connect an invisible node below every display leaf so that
+    # GitHub's diagram controls never obscure content at the bottom.
+    if bottom_padding:
+        first_bp = True
+        seen: set = set()
+        for leaf in leaf_nodes:
+            if leaf.diagram_id not in seen:
+                seen.add(leaf.diagram_id)
+                bp = 'BottomPadding[ ]:::invisible' if first_bp else 'BottomPadding'
+                _write_edge(f'    {bp} ~~~ {leaf.diagram_id}')
+                first_bp = False
 
     for edge_line in edge_lines:
         _write_edge(edge_line)

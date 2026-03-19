@@ -39,7 +39,15 @@ flowchart BT
     click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-top.sacm.mermaid.expected.md#package-deployment"
     click Maintenance "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/badgeapp-top.sacm.mermaid.expected.md#package-maintenance"
 
-    BottomPadding[ ]:::invisible ~~~ Requirements
+    BottomPadding[ ]:::invisible ~~~ Processes
+    BottomPadding ~~~ NonTechnical
+    BottomPadding ~~~ Controls
+    BottomPadding ~~~ Requirements
+    BottomPadding ~~~ Design
+    BottomPadding ~~~ Implementation
+    BottomPadding ~~~ Verification
+    BottomPadding ~~~ Deployment
+    BottomPadding ~~~ Maintenance
     Requirements --- Dot1
     Design --- Dot1
     Implementation --- Dot1

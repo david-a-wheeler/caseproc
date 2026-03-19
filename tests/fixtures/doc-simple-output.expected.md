@@ -36,7 +36,11 @@ flowchart BT
     click C3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/doc-simple-output.expected.md#claim-c3"
     click E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/doc-simple-output.expected.md#evidence-e1"
 
-    BottomPadding[ ]:::invisible ~~~ E1
+    BottomPadding[ ]:::invisible ~~~ AR1
+    BottomPadding ~~~ A1
+    BottomPadding ~~~ X1
+    BottomPadding ~~~ C3
+    BottomPadding ~~~ E1
     E1 --> C2
     C2 --- Dot1
     C3 --- Dot1
@@ -97,7 +101,11 @@ flowchart BT
     click C3 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/doc-simple-output.expected.md#claim-c3"
     click E1 "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/doc-simple-output.expected.md#evidence-e1"
 
-    BottomPadding[ ]:::invisible ~~~ E1
+    BottomPadding[ ]:::invisible ~~~ AR1
+    BottomPadding ~~~ A1
+    BottomPadding ~~~ X1
+    BottomPadding ~~~ C3
+    BottomPadding ~~~ E1
     E1 --> C2
     C2 --- Dot1
     C3 --- Dot1
