@@ -374,7 +374,7 @@ See [Configuration](#configuration) for the full list of keys.
 Unknown keys produce a warning and are ignored.
 
 `verocase` also auto-discovers a config file if `--config` is not given:
-it checks for `verocase.toml` in the current directory, then `docs/verocase.toml`.
+it checks in order: `verocase.toml`, `docs/verocase.toml`, `case.toml`, `docs/case.toml`.
 
 TOML support requires Python 3.11 or later (which includes `tomllib` in the
 standard library), or the third-party `tomli` package (`pip install tomli`)
@@ -502,7 +502,7 @@ Two CLI shortcuts exist for the most commonly used inspection selectors:
 ## Configuration
 
 Configuration is supplied in a TOML file, either via `--config FILE` or
-auto-discovered from `verocase.toml` / `docs/verocase.toml`.
+auto-discovered from `verocase.toml`, `docs/verocase.toml`, `case.toml`, or `docs/case.toml`.
 All keys are optional; unrecognized keys produce a warning.
 
 | Key | Default | Description |
@@ -994,8 +994,8 @@ Similarly, if no document files are given on the command line and no
 (in order): `case.md`, `case.markdown`, `case.html`,
 `docs/case.md`, `docs/case.markdown`, `docs/case.html`.
 
-Config file auto-discovery: `verocase.toml` in the current directory, then
-`docs/verocase.toml`.
+Config file auto-discovery: `verocase.toml`, `docs/verocase.toml`, `case.toml`,
+`docs/case.toml` (searched in that order).
 
 ### Safe file updates
 

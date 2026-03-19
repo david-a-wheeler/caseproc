@@ -462,6 +462,8 @@ See the [reference manual](reference.md) for details.
 
 1. `verocase.toml` in the current directory
 2. `docs/verocase.toml` in the current directory
+3. `case.toml` in the current directory
+4. `docs/case.toml` in the current directory
 
 You can also specify one explicitly:
 

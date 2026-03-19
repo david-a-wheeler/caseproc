@@ -85,6 +85,9 @@ _DEFAULT_ELEMENT_SELECTIONS = 'referenced_by,supported_by,supports,ext_ref'
 _DEFAULT_PACKAGE_SELECTIONS = 'representation,pkg_defines,pkg_citing,pkg_cited'
 
 # Default configuration values.  Case().load_config() merges a TOML file over these.
+# Config files searched in order when no explicit --config is given.
+_CONFIG_SEARCH_PATHS = ('verocase.toml', 'docs/verocase.toml', 'case.toml', 'docs/case.toml')
+
 # Pass to functions that accept a config dict when no config file is needed.
 DEFAULT_CONFIG = types.MappingProxyType({
     'base_url': '',
@@ -719,10 +722,10 @@ class Case:
     # ------------------------------------------------------------------
 
     def load_config(self, filename: Optional[str] = None) -> 'Case':
-        """Load configuration from filename, or auto-discover verocase.toml.
+        """Load configuration from filename, or auto-discover a config file.
 
         If filename is given, load it (panic if not found). If None,
-        search for verocase.toml / docs/verocase.toml; keep defaults
+        search _CONFIG_SEARCH_PATHS in order; keep defaults
         if not found.
         Sets self.config and self.config_path. Returns self for chaining.
         """
@@ -757,7 +760,7 @@ class Case:
         """Discover and load config, LTAC, and document files; return self.
 
         All parameters are optional; with no arguments, auto-discovers
-        verocase.toml, case.ltac, and case.md from well-known paths,
+        a config file (verocase.toml or case.toml), case.ltac, and case.md from well-known paths,
         mirroring the CLI with no arguments.
 
         Parameters
@@ -794,18 +797,14 @@ class Case:
     def _find_config(self, path: Optional[str] = None) -> Optional[str]:
         """Return the config file path to use, or None if not found.
 
-        Search order: explicit path → verocase.toml → docs/verocase.toml → None.
+        Search order: explicit path → _CONFIG_SEARCH_PATHS → None.
         Panics if an explicit path is given but the file does not exist.
         """
         if path is not None:
             if os.path.exists(path):
                 return path
             self.panic(f"config file not found: {path!r}")
-        if os.path.exists('verocase.toml'):
-            return 'verocase.toml'
-        if os.path.exists('docs/verocase.toml'):
-            return 'docs/verocase.toml'
-        return None
+        return next((p for p in _CONFIG_SEARCH_PATHS if os.path.exists(p)), None)
 
     def _load_config(self, config_path: Optional[str]) -> dict:
         """Load and validate a TOML config file; return a config dict.
@@ -4750,7 +4749,7 @@ Additional checks when document files are processed:
 """
 
 _HELP_CONFIGURATION = """\
-Configuration keys (--config FILE, TOML file; auto-discovered as verocase.toml):
+Configuration keys (--config FILE, TOML file; auto-discovered as verocase.toml or case.toml):
   document_files     list of document file paths to process (default: auto-discover)
   ltac_file          LTAC file path (alternative to --ltac; default: auto-discover)
   max_backups        number of timestamped backup snapshots to keep (default: 20)
@@ -5140,7 +5139,7 @@ Run --help-api for the public Python API summary (for library use).
     )
     parser.add_argument(
         '--config', type=str, metavar='FILE',
-        help='path to a TOML config file (default: auto-discover verocase.toml)',
+        help='path to a TOML config file (default: auto-discover verocase.toml or case.toml)',
     )
     parser.add_argument(
         '--error', action='store_true',
