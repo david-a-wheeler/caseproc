@@ -4446,43 +4446,6 @@ def _cae_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
                       if n.node_type not in ('Relation', 'Link')
                       and n.diagram_id not in edge_targets]
 
-    # Compute tree depth for each node so that BottomPadding only connects to
-    # the deepest leaves.  Shallow leaves (e.g. a direct Assumption child of
-    # the root) are tightened toward the root by Dagre's network-simplex
-    # ranking and would otherwise pull BottomPadding up into the middle of the
-    # diagram rather than below the actual visual bottom.
-    _node_depths: Dict[str, int] = {}
-
-    def _record_depth(node: 'Node', d: int) -> None:
-        if node.diagram_id and node.node_type not in ('Link', 'Relation'):
-            if d > _node_depths.get(node.diagram_id, -1):
-                _node_depths[node.diagram_id] = d
-        for child in node.children:
-            if child.node_type == 'Link':
-                pass
-            elif child.node_type == 'Relation':
-                for gc in child.children:
-                    if gc.node_type != 'Link':
-                        _record_depth(gc, d + 1)
-            elif child.node_type == 'Connector':
-                _record_depth(child, d + 1)
-                for cc in child.children:
-                    if cc.node_type != 'Link':
-                        _record_depth(cc, d + 1)
-            else:
-                _record_depth(child, d + 1)
-
-    for root in roots:
-        _record_depth(root, 0)
-
-    if display_leaves:
-        _max_leaf_depth = max(_node_depths.get(n.diagram_id, 0)
-                              for n in display_leaves)
-        bp_leaves = [n for n in display_leaves
-                     if _node_depths.get(n.diagram_id, 0) >= _max_leaf_depth]
-    else:
-        bp_leaves = display_leaves
-
     _first_edge = [True]
 
     def _write_edge(line: str) -> None:
@@ -4492,11 +4455,11 @@ def _cae_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
         out.write('\n')
         out.write(line)
 
-    # BottomPadding first (BT diagram: invisible node below each leaf)
+    # BottomPadding first (BT diagram: invisible node below every display leaf)
     if bottom_padding:
         first_bp = True
         seen: set = set()
-        for leaf in bp_leaves:
+        for leaf in display_leaves:
             if leaf.diagram_id not in seen:
                 seen.add(leaf.diagram_id)
                 bp = 'BottomPadding[ ]:::invisible' if first_bp else 'BottomPadding'

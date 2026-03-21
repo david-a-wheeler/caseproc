@@ -443,7 +443,10 @@ flowchart BT
     click EvHarden "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evharden"
     click XProd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xprod"
 
-    BottomPadding[ ]:::invisible ~~~ EvHarden
+    BottomPadding[ ]:::invisible ~~~ XScope
+    BottomPadding ~~~ Access
+    BottomPadding ~~~ Data
+    BottomPadding ~~~ EvHarden
     BottomPadding ~~~ XProd
     XScope -.-> Security
     Access --> SArg
@@ -508,7 +511,8 @@ flowchart BT
     click EvPenTest "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evpentest"
     click DBVuln "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-dbvuln"
 
-    BottomPadding[ ]:::invisible ~~~ EvLogin
+    BottomPadding[ ]:::invisible ~~~ AAdmin
+    BottomPadding ~~~ EvLogin
     BottomPadding ~~~ JMechanism
     BottomPadding ~~~ XLogPolicy
     BottomPadding ~~~ EvRBAC
@@ -582,7 +586,11 @@ flowchart BT
     click DataMap "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-datamap"
     click JRetention "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jretention"
 
-    BottomPadding[ ]:::invisible ~~~ EvTLS
+    BottomPadding[ ]:::invisible ~~~ XRegulation
+    BottomPadding ~~~ AEncrypt
+    BottomPadding ~~~ MetaClaim
+    BottomPadding ~~~ AuditAccess
+    BottomPadding ~~~ EvTLS
     BottomPadding ~~~ EvDB
     BottomPadding ~~~ DataMap
     BottomPadding ~~~ JRetention
