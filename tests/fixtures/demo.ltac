@@ -1,0 +1,42 @@
+# Website security assurance case for a public-facing web application.
+# Demonstrates all LTAC element types and rendering options.
+
+- Claim Security: The website is adequately secure against moderate threats
+  - Context XScope: OWASP Top Ten threat model defines the threat scope (owasp-top10.pdf)
+  - Strategy SArg: Security is argued by examining access control, data protection, and deployment
+    - Claim ^Access
+    - Claim ^Data
+    - Claim Deployment: Deployment configuration follows security hardening guidelines
+      - Evidence EvHarden: Server hardening checklist completed and signed off (hardening-checklist.pdf)
+      - Context XProd: Production environment enforces HTTPS-only connections
+
+- Claim Access: User access control prevents unauthorized actions
+  - Assumption AAdmin: Site administrators follow the published access management policy
+  - Strategy SAccess: Access control is argued by examining authentication and authorization
+    - Claim AuthN: All users are authenticated before accessing protected resources
+      - Evidence EvLogin: Login audit log shows no unauthorized access in last 90 days (audit.log)
+      - Justification JMechanism: Password-plus-MFA provides industry-standard two-factor authentication
+      - Context XLogPolicy: Log retention policy requires 90-day audit trail (log-policy.pdf)
+    - Claim AuthZ: Users can only access resources appropriate to their role
+      - Evidence EvRBAC: Role-based access control configuration review passed (rbac-review.pdf)
+      - Claim AuthZAdmin: Administrative functions require elevated privilege {assumed}
+    - Claim XSSFree: Cross-site scripting attacks are mitigated
+      - Evidence EvCSP: Content Security Policy headers verified by automated scanner (csp-scan.pdf)
+      - Relation R1: {counter}
+        - Link EvPenTest
+    - Claim SqlFree: SQL injection attacks are mitigated {defeated}
+      - Evidence EvPenTest: Penetration test report identifies active vulnerabilities in multiple endpoints (pentest-2024.pdf)
+      - Claim DBVuln: Active SQL injection vulnerability found in search endpoint {defeater}
+
+- Claim Data: Sensitive user data is protected in transit and at rest
+  - Context XRegulation: GDPR and applicable state privacy laws govern data handling (privacy-policy.pdf)
+  - Claim AEncrypt: TLS 1.3 is correctly deployed on all public endpoints {axiomatic}
+  - Strategy SData: Data protection is argued by examining encryption, minimization, and audit logging
+    - Claim Encrypt: All sensitive data is encrypted in transit and at rest
+      - Evidence EvTLS: TLS configuration scan achieves A+ rating (ssl-labs-report.pdf)
+      - Evidence EvDB: Database-level encryption enabled and key management audited (db-audit.pdf)
+    - Claim Minimise: Only necessary data is collected and retained per the privacy policy
+      - Claim DataMap: The data flow diagram covers all personal data stores and flows {needssupport}
+      - Justification JRetention: Data minimisation reduces breach impact and aids regulatory compliance
+    - Claim AuditAccess: All sensitive data access events are logged and periodically reviewed {abstract}
+  - Claim MetaClaim: This assurance case addresses all applicable data protection requirements {metaclaim}

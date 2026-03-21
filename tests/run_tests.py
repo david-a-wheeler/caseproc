@@ -608,6 +608,23 @@ class TestBadgeappDoc(unittest.TestCase):
 
 
 @_skip_no_toml
+class TestDemo(unittest.TestCase):
+    def test_demo_all_notations(self):
+        """--stdout renders all packages in SACM, GSN, CAE, and LTAC notations,
+        exercising all element types and all options ({assumed}, {axiomatic},
+        {defeated}, {defeater}, {needssupport}, {abstract}, {metaclaim},
+        {counter}) as well as cross-package citations and external references."""
+        result = run('--ltac', fixture('demo.ltac'),
+                     '--config', fixture('demo.toml'),
+                     '--stdout', fixture('demo-input.md'))
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(check(result.stdout, 'demo-output.expected.md'),
+                         read_fixture('demo-output.expected.md'))
+        self.assertEqual(check(result.stderr, 'demo-stderr.expected.txt'),
+                         read_fixture('demo-stderr.expected.txt'))
+
+
+@_skip_no_toml
 class TestStress(unittest.TestCase):
     def _tmp_copy(self, name):
         """Copy a fixture to tests/results/<name> and return its path."""
