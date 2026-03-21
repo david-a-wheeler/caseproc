@@ -4092,30 +4092,10 @@ flowchart TD
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;"""
 
 
-def _gsn_strategy_context_just(node) -> list:
-    """Return up to 2 Context/Justification children of a Strategy node.
-
-    Includes both direct children and Link children whose target is a
-    Context or Justification.  Used to build invisible side-by-side subgraphs.
-    """
-    result = []
-    for child in node.children:
-        if child.node_type in ('Context', 'Justification'):
-            result.append(child)
-        elif child.node_type == 'Link' and child.link_target is not None:
-            if child.link_target.node_type in ('Context', 'Justification'):
-                result.append(child.link_target)
-        if len(result) == 2:
-            break
-    return result
-
-
-def _gsn_collect_edges(node, write_edge, leaf_nodes, skip_targets=None):
+def _gsn_collect_edges(node, write_edge, leaf_nodes):
     """Write GSN edges for *node* and its subtree (DFS pre-order) via write_edge.
 
     Nodes with no outgoing edges are appended to leaf_nodes.
-    skip_targets: optional set of diagram_ids whose incoming edges should be
-    suppressed (used for Context/Justification nodes moved into LR subgraphs).
     """
     if node.node_type in ('Link', 'Relation'):
         return
@@ -4125,15 +4105,10 @@ def _gsn_collect_edges(node, write_edge, leaf_nodes, skip_targets=None):
         _had_edge[0] = True
         write_edge(line)
 
-    def _skipped(did: str) -> bool:
-        return skip_targets is not None and did in skip_targets
-
     for child in node.children:
         if child.node_type == 'Link':
             if child.link_target is not None:
                 tgt = child.link_target
-                if _skipped(tgt.diagram_id):
-                    continue
                 _we(_edge_line(
                     node.diagram_id, tgt.diagram_id,
                     tgt.is_incontextof,
@@ -4141,7 +4116,7 @@ def _gsn_collect_edges(node, write_edge, leaf_nodes, skip_targets=None):
         elif child.node_type == 'Connector':
             _we(_edge_line(node.diagram_id, child.diagram_id,
                            False, False, False))
-            _gsn_collect_edges(child, write_edge, leaf_nodes, skip_targets)
+            _gsn_collect_edges(child, write_edge, leaf_nodes)
         elif child.node_type == 'Relation':
             rc = 'counter' in child.options
             ra = 'abstract' in child.options
@@ -4149,27 +4124,21 @@ def _gsn_collect_edges(node, write_edge, leaf_nodes, skip_targets=None):
                 if gc.node_type == 'Link':
                     if gc.link_target is not None:
                         tgt = gc.link_target
-                        if _skipped(tgt.diagram_id):
-                            continue
                         _we(_edge_line(
                             node.diagram_id, tgt.diagram_id,
                             tgt.is_incontextof, rc, ra))
                 else:
-                    if _skipped(gc.diagram_id):
-                        continue
                     _we(_edge_line(
                         node.diagram_id, gc.diagram_id,
                         gc.is_incontextof, rc, ra))
-                    _gsn_collect_edges(gc, write_edge, leaf_nodes, skip_targets)
+                    _gsn_collect_edges(gc, write_edge, leaf_nodes)
         else:
-            if _skipped(child.diagram_id):
-                continue
             is_counter = 'counter' in child.options or 'defeater' in child.options
             _we(_edge_line(
                 node.diagram_id, child.diagram_id,
                 child.is_incontextof,
                 is_counter, False))
-            _gsn_collect_edges(child, write_edge, leaf_nodes, skip_targets)
+            _gsn_collect_edges(child, write_edge, leaf_nodes)
     if not _had_edge[0]:
         leaf_nodes.append(node)
 
@@ -4216,37 +4185,8 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
         out.write('\n')
         out.write(line)
 
-    # Invisible LR subgraphs: keep Context/Justification beside their Strategy.
-    # For each Strategy with 1-2 such children, emit a direction LR subgraph.
-    # The --o edges are placed INSIDE the subgraph body so Dagre treats them
-    # as LR edges (not TD), placing items at the same rank as the Strategy.
-    # No ~~~ ordering edges are used: combining ~~~ and --o for the same pair
-    # creates a directed cycle inside the LR subgraph (~~~ goes item→Strategy,
-    # --o goes Strategy→item), which causes Dagre's cycle-breaker to produce
-    # garbage layout.  The --o edges alone suffice: Strategy on the left,
-    # items to the right, all at the same TD rank within the subgraph box.
-    # Items are added to _moved_ids so _gsn_collect_edges skips them,
-    # preventing duplicate edges and BottomPadding connections.
-    _moved_ids: set = set()
-    _sg_idx = [0]
-    for node in all_nodes:
-        if node.node_type != 'Strategy':
-            continue
-        items = _gsn_strategy_context_just(node)
-        if not items:
-            continue
-        _sg_idx[0] += 1
-        sg_id = f'SgCJ{_sg_idx[0]}'
-        _write_edge(f'    subgraph {sg_id} [ ]')
-        _write_edge('        direction LR')
-        for item in items:
-            _write_edge(f'        {node.diagram_id} --o {item.diagram_id}')
-            _moved_ids.add(item.diagram_id)
-        _write_edge('    end')
-        _write_edge(f'    style {sg_id} fill:none,stroke:none')
-
     for root in roots:
-        _gsn_collect_edges(root, _write_edge, leaf_nodes, _moved_ids)
+        _gsn_collect_edges(root, _write_edge, leaf_nodes)
 
     # BottomPadding (after edges): one invisible node per leaf, below every
     # leaf, so GitHub's diagram controls don't obscure the bottom of the diagram.

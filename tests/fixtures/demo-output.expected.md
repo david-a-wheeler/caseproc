@@ -389,13 +389,9 @@ flowchart TD
     click EvPenTest "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evpentest"
     click DBVuln "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-dbvuln"
 
-    subgraph SgCJ1 [ ]
-        direction LR
-        SAccess --o XAuthStd
-    end
-    style SgCJ1 fill:none,stroke:none
     Access --o AAdmin
     Access --> SAccess
+    SAccess --o XAuthStd
     SAccess --> AuthN
     AuthN --> EvLogin
     AuthN --o JMechanism
@@ -410,14 +406,15 @@ flowchart TD
     SqlFree --> EvPenTest
     SqlFree -->|⊖| DBVuln
     AAdmin ~~~ BottomPadding1[ ]:::invisible
-    EvLogin ~~~ BottomPadding2[ ]:::invisible
-    JMechanism ~~~ BottomPadding3[ ]:::invisible
-    XLogPolicy ~~~ BottomPadding4[ ]:::invisible
-    EvRBAC ~~~ BottomPadding5[ ]:::invisible
-    AuthZAdmin ~~~ BottomPadding6[ ]:::invisible
-    EvCSP ~~~ BottomPadding7[ ]:::invisible
-    EvPenTest ~~~ BottomPadding8[ ]:::invisible
-    DBVuln ~~~ BottomPadding9[ ]:::invisible
+    XAuthStd ~~~ BottomPadding2[ ]:::invisible
+    EvLogin ~~~ BottomPadding3[ ]:::invisible
+    JMechanism ~~~ BottomPadding4[ ]:::invisible
+    XLogPolicy ~~~ BottomPadding5[ ]:::invisible
+    EvRBAC ~~~ BottomPadding6[ ]:::invisible
+    AuthZAdmin ~~~ BottomPadding7[ ]:::invisible
+    EvCSP ~~~ BottomPadding8[ ]:::invisible
+    EvPenTest ~~~ BottomPadding9[ ]:::invisible
+    DBVuln ~~~ BottomPadding10[ ]:::invisible
 ```
 
 ### Package Data
@@ -465,15 +462,11 @@ flowchart TD
     click DataMap "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-datamap"
     click JRetention "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jretention"
 
-    subgraph SgCJ1 [ ]
-        direction LR
-        SData --o XDataScope
-        SData --o JDataArch
-    end
-    style SgCJ1 fill:none,stroke:none
     Data --o XRegulation
     Data --> AEncrypt
     Data --> SData
+    SData --o XDataScope
+    SData --o JDataArch
     SData --> Encrypt
     Encrypt --> EvTLS
     Encrypt --> EvDB
@@ -484,12 +477,14 @@ flowchart TD
     Data --> MetaClaim
     XRegulation ~~~ BottomPadding1[ ]:::invisible
     AEncrypt ~~~ BottomPadding2[ ]:::invisible
-    EvTLS ~~~ BottomPadding3[ ]:::invisible
-    EvDB ~~~ BottomPadding4[ ]:::invisible
-    DataMap ~~~ BottomPadding5[ ]:::invisible
-    JRetention ~~~ BottomPadding6[ ]:::invisible
-    AuditAccess ~~~ BottomPadding7[ ]:::invisible
-    MetaClaim ~~~ BottomPadding8[ ]:::invisible
+    XDataScope ~~~ BottomPadding3[ ]:::invisible
+    JDataArch ~~~ BottomPadding4[ ]:::invisible
+    EvTLS ~~~ BottomPadding5[ ]:::invisible
+    EvDB ~~~ BottomPadding6[ ]:::invisible
+    DataMap ~~~ BottomPadding7[ ]:::invisible
+    JRetention ~~~ BottomPadding8[ ]:::invisible
+    AuditAccess ~~~ BottomPadding9[ ]:::invisible
+    MetaClaim ~~~ BottomPadding10[ ]:::invisible
 ```
 
 ### Package Monitoring
@@ -527,21 +522,19 @@ flowchart TD
     click EvAlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evalertcoverage"
     click EvResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evresponsetime"
 
-    subgraph SgCJ1 [ ]
-        direction LR
-        SMonitor --o XSIEMScope
-        SMonitor --o JSOCModel
-    end
-    style SgCJ1 fill:none,stroke:none
     Monitoring --> SMonitor
+    SMonitor --o XSIEMScope
+    SMonitor --o JSOCModel
     SMonitor --o XSLA
     SMonitor --> AlertCoverage
     AlertCoverage --> EvAlertCoverage
     SMonitor --> ResponseTime
     ResponseTime --> EvResponseTime
-    XSLA ~~~ BottomPadding1[ ]:::invisible
-    EvAlertCoverage ~~~ BottomPadding2[ ]:::invisible
-    EvResponseTime ~~~ BottomPadding3[ ]:::invisible
+    XSIEMScope ~~~ BottomPadding1[ ]:::invisible
+    JSOCModel ~~~ BottomPadding2[ ]:::invisible
+    XSLA ~~~ BottomPadding3[ ]:::invisible
+    EvAlertCoverage ~~~ BottomPadding4[ ]:::invisible
+    EvResponseTime ~~~ BottomPadding5[ ]:::invisible
 ```
 <!-- end verocase -->
 
