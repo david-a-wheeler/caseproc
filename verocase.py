@@ -4342,17 +4342,21 @@ def _cae_node_decl(node: 'Node') -> str:
 
 
 def _cae_collect_edges(node: 'Node', write_edge) -> None:
-    """Write CAE edges for *node* and its subtree (DFS pre-order) via write_edge.
+    """Write CAE edges for *node* and its subtree (DFS post-order) via write_edge.
 
-    CAE has no dot/connector nodes — all edges are direct.
+    Edges are written in DFS post-order (deepest leaves first), matching the
+    BT (bottom-to-top) flowchart direction: each edge goes child --> parent.
+    CAE has no dot nodes — all edges are direct.
     Context children use dashed arrows (abstract=True).
     Defeater children use X-head edges (defeater=True).
     """
     if node.node_type == 'Connector':
         for child in node.children:
             if child.node_type != 'Link':
-                write_edge(f'    {child.diagram_id} --- {node.diagram_id}')
                 _cae_collect_edges(child, write_edge)
+        for child in node.children:
+            if child.node_type != 'Link':
+                write_edge(f'    {child.diagram_id} --- {node.diagram_id}')
         return
 
     if node.node_type in ('Link', 'Relation'):
@@ -4363,12 +4367,12 @@ def _cae_collect_edges(node: 'Node', write_edge) -> None:
             if child.link_target is not None:
                 tgt = child.link_target
                 is_ctx = tgt.node_type == 'Context'
-                write_edge(_edge_line(node.diagram_id, tgt.diagram_id,
+                write_edge(_edge_line(tgt.diagram_id, node.diagram_id,
                                       False, 'counter' in child.options,
                                       abstract=is_ctx))
         elif child.node_type == 'Connector':
-            write_edge(_edge_line(node.diagram_id, child.diagram_id, False))
             _cae_collect_edges(child, write_edge)
+            write_edge(_edge_line(child.diagram_id, node.diagram_id, False))
         elif child.node_type == 'Relation':
             rc = 'counter' in child.options
             ra = 'abstract' in child.options
@@ -4377,22 +4381,22 @@ def _cae_collect_edges(node: 'Node', write_edge) -> None:
                     if gc.link_target is not None:
                         tgt = gc.link_target
                         is_ctx = tgt.node_type == 'Context'
-                        write_edge(_edge_line(node.diagram_id, tgt.diagram_id,
+                        write_edge(_edge_line(tgt.diagram_id, node.diagram_id,
                                              False, rc, abstract=is_ctx or ra))
                 else:
                     is_ctx = gc.node_type == 'Context'
-                    write_edge(_edge_line(node.diagram_id, gc.diagram_id,
-                                         False, rc, abstract=is_ctx or ra))
                     _cae_collect_edges(gc, write_edge)
+                    write_edge(_edge_line(gc.diagram_id, node.diagram_id,
+                                         False, rc, abstract=is_ctx or ra))
         else:
             is_ctx = child.node_type == 'Context'
             is_def = 'defeater' in child.options
             is_counter = 'counter' in child.options and not is_def
-            write_edge(_edge_line(node.diagram_id, child.diagram_id,
+            _cae_collect_edges(child, write_edge)
+            write_edge(_edge_line(child.diagram_id, node.diagram_id,
                                   False, is_counter,
                                   abstract=is_ctx,
                                   defeater=is_def))
-            _cae_collect_edges(child, write_edge)
 
 
 def _cae_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
@@ -4463,7 +4467,7 @@ def render_cae(roots: List['Node'], config: dict, out: TextIO) -> bool:
     """Write package roots as a complete CAE/mermaid code block to out.
 
     Output structure: header → node declarations (BFS) → click lines
-    → blank line → BottomPadding + edges (DFS pre-order).
+    → blank line → BottomPadding + edges (DFS post-order).
     The original nodes are not modified; a deep copy is used internally.
     """
     out.write('```mermaid\n')
