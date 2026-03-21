@@ -1,9 +1,11 @@
-# Website Security Assurance Case
+# Demo Website Security Assurance Case
 
 This document presents the security assurance case for a public-facing web
 application, arguing that it is adequately secure against moderate threats.
 The case is structured as three sub-arguments—access control, data
 protection, and deployment—each supporting the overarching security claim.
+
+It's really a demo of some of our capabilities.
 
 ## SACM Diagrams
 
