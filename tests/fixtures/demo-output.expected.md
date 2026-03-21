@@ -391,7 +391,6 @@ flowchart TD
 
     subgraph SgCJ1 [ ]
         direction LR
-        XAuthStd ~~~ SAccess
         SAccess --o XAuthStd
     end
     style SgCJ1 fill:none,stroke:none
@@ -468,7 +467,6 @@ flowchart TD
 
     subgraph SgCJ1 [ ]
         direction LR
-        XDataScope ~~~ SData ~~~ JDataArch
         SData --o XDataScope
         SData --o JDataArch
     end
@@ -531,7 +529,6 @@ flowchart TD
 
     subgraph SgCJ1 [ ]
         direction LR
-        XSIEMScope ~~~ SMonitor ~~~ JSOCModel
         SMonitor --o XSIEMScope
         SMonitor --o JSOCModel
     end

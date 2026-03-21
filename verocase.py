@@ -4218,12 +4218,15 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
 
     # Invisible LR subgraphs: keep Context/Justification beside their Strategy.
     # For each Strategy with 1-2 such children, emit a direction LR subgraph.
-    # The visible --o edges are placed INSIDE the subgraph body so that Dagre
-    # treats them as LR edges (not TD), keeping the items at the same rank as
-    # the Strategy.  They are added to _moved_ids so that _gsn_collect_edges
-    # skips them (preventing duplicate edges and BottomPadding connections).
-    # Items are listed leftmost-first: item ~~~ Strategy (1 item) or
-    # item1 ~~~ Strategy ~~~ item2 (2 items).
+    # The --o edges are placed INSIDE the subgraph body so Dagre treats them
+    # as LR edges (not TD), placing items at the same rank as the Strategy.
+    # No ~~~ ordering edges are used: combining ~~~ and --o for the same pair
+    # creates a directed cycle inside the LR subgraph (~~~ goes item→Strategy,
+    # --o goes Strategy→item), which causes Dagre's cycle-breaker to produce
+    # garbage layout.  The --o edges alone suffice: Strategy on the left,
+    # items to the right, all at the same TD rank within the subgraph box.
+    # Items are added to _moved_ids so _gsn_collect_edges skips them,
+    # preventing duplicate edges and BottomPadding connections.
     _moved_ids: set = set()
     _sg_idx = [0]
     for node in all_nodes:
@@ -4236,10 +4239,6 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
         sg_id = f'SgCJ{_sg_idx[0]}'
         _write_edge(f'    subgraph {sg_id} [ ]')
         _write_edge('        direction LR')
-        if len(items) == 1:
-            _write_edge(f'        {items[0].diagram_id} ~~~ {node.diagram_id}')
-        else:
-            _write_edge(f'        {items[0].diagram_id} ~~~ {node.diagram_id} ~~~ {items[1].diagram_id}')
         for item in items:
             _write_edge(f'        {node.diagram_id} --o {item.diagram_id}')
             _moved_ids.add(item.diagram_id)
