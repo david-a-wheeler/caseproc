@@ -2,10 +2,15 @@
 
 This document presents the security assurance case for a public-facing web
 application, arguing that it is adequately secure against moderate threats.
-The case is structured as three sub-arguments—access control, data
-protection, and deployment—each supporting the overarching security claim.
+The case is structured as four sub-arguments—access control, data
+protection, deployment, and monitoring—each supporting the overarching
+security claim.
 
-It's really a demo of some of our capabilities.
+It's really a demo of some of our capabilities, including four different
+GSN Strategy renderings: one with no Context or Justification children
+(SArg), one with a single Context (SAccess), one with a Context and a
+Justification (SData), and one with a Context, a Justification, and a
+second Context (SMonitor).
 
 ## SACM Diagrams
 
@@ -50,9 +55,10 @@ It was agreed with the customer as the applicable scope for this engagement.
 <!-- verocase element SArg -->
 <!-- end verocase -->
 
-The argument is decomposed into three parallel sub-arguments. Access control,
-data protection, and deployment configuration are argued independently; each
-sub-argument supports the top-level security claim.
+The argument is decomposed into four parallel sub-arguments. Access control,
+data protection, deployment configuration, and security monitoring are argued
+independently; each sub-argument supports the top-level security claim.
+SArg demonstrates a Strategy with no Context or Justification children.
 
 <!-- verocase element Access -->
 <!-- end verocase -->
@@ -74,6 +80,17 @@ administrators is outside the threat model for this case.
 Access control is argued by examining the authentication mechanism,
 role-based authorisation configuration, and mitigations for the two most
 prevalent web injection attack classes: XSS and SQL injection.
+SAccess demonstrates a Strategy with a single Context child (XAuthStd),
+which GSN renders beside the Strategy rather than below it.
+
+<!-- verocase element XAuthStd -->
+<!-- end verocase -->
+
+NIST SP 800-63B Authenticator Assurance Level 2 is the baseline required
+for applications handling personal data. The standard mandates a
+multi-factor authentication mechanism resistant to phishing and replay
+attacks, and serves as the normative reference for all authentication
+claims in this sub-argument.
 
 <!-- verocase element AuthN -->
 <!-- end verocase -->
@@ -198,6 +215,25 @@ deployed, not that the protocol is sound.
 Data protection is argued across four concerns: encryption of data in
 transit, encryption of data at rest, minimisation of data collected and
 retained, and audit logging of access to sensitive records.
+SData demonstrates a Strategy with a Context child (XDataScope) and a
+Justification child (JDataArch), which GSN renders flanking the Strategy.
+
+<!-- verocase element XDataScope -->
+<!-- end verocase -->
+
+GDPR Article 32 requires controllers to implement appropriate technical
+measures to ensure a level of security appropriate to the risk, including
+encryption and ongoing confidentiality assurance. Applicable state privacy
+laws impose equivalent or stricter obligations. These instruments define
+the normative scope for all data protection claims in this sub-argument.
+
+<!-- verocase element JDataArch -->
+<!-- end verocase -->
+
+Separating encryption, data minimisation, and audit logging into
+independent sub-arguments follows the EDPB's layered security guidance
+and makes each concern independently verifiable. This decomposition also
+simplifies gap analysis against GDPR Article 32 compliance checklists.
 
 <!-- verocase element Encrypt -->
 <!-- end verocase -->
@@ -280,3 +316,76 @@ hardening.
 The production environment is configured to reject plain HTTP connections.
 HTTP requests are redirected to HTTPS at the load balancer before reaching
 any application code, preventing accidental cleartext transmission.
+
+<!-- verocase element Monitoring -->
+<!-- end verocase -->
+
+Security event detection and response is essential for identifying active
+attacks and limiting their impact. This claim covers the operational
+capability to detect, triage, and respond to security events in time to
+prevent material harm.
+
+<!-- verocase element SMonitor -->
+<!-- end verocase -->
+
+Detection capability is argued by examining three orthogonal concerns:
+the breadth of SIEM event-source coverage, the SOC staffing model that
+ensures human review is always available, and the contractual response-time
+obligations that bound acceptable latency.
+SMonitor demonstrates a Strategy with three Context/Justification children.
+The first two (XSIEMScope and JSOCModel) are rendered beside the Strategy
+in GSN; the third (XSLA) remains below as a regular in-context-of child.
+
+<!-- verocase element XSIEMScope -->
+<!-- end verocase -->
+
+The SIEM is configured to ingest logs from all application servers, load
+balancers, database engines, and network perimeter devices. Full coverage
+is a prerequisite for the alerting-coverage claim; gaps in ingestion would
+create blind spots that make AlertCoverage unverifiable.
+
+<!-- verocase element JSOCModel -->
+<!-- end verocase -->
+
+The follow-the-sun model staffs the SOC across three regional teams in
+overlapping shifts, eliminating the after-hours coverage gaps common in
+single-region operations. This staffing structure is the organisational
+justification for asserting that human review is continuously available.
+
+<!-- verocase element XSLA -->
+<!-- end verocase -->
+
+The service-level agreement with the customer specifies a 15-minute
+acknowledgment target for P1 (critical) security alerts. This contractual
+obligation defines the quantitative threshold against which the
+ResponseTime claim is measured.
+
+<!-- verocase element AlertCoverage -->
+<!-- end verocase -->
+
+The SIEM rule set is mapped against the OWASP Top Ten. Each attack
+category must have at least one detection rule with a documented test
+case confirming it fires on a representative attack sample.
+
+<!-- verocase element EvAlertCoverage -->
+<!-- end verocase -->
+
+An annual SIEM rule audit reviewed all active detection rules against the
+current OWASP Top Ten list. Every attack category had at least one
+matching rule, and each rule had a passing test case in the rule-testing
+framework.
+
+<!-- verocase element ResponseTime -->
+<!-- end verocase -->
+
+Alert acknowledgment time is measured from the moment a P1 alert fires
+in the SIEM to the moment a SOC analyst marks it as under investigation.
+The claim requires this latency to remain within the SLA threshold.
+
+<!-- verocase element EvResponseTime -->
+<!-- end verocase -->
+
+Monthly SOC performance reports for the preceding 12 months were reviewed.
+Across 847 P1 alerts raised during the period, 99.2% were acknowledged
+within 15 minutes. The eight exceptions were all caused by a single
+infrastructure outage and were covered by the SLA's force-majeure clause.

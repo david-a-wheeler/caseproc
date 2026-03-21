@@ -2,10 +2,15 @@
 
 This document presents the security assurance case for a public-facing web
 application, arguing that it is adequately secure against moderate threats.
-The case is structured as three sub-arguments—access control, data
-protection, and deployment—each supporting the overarching security claim.
+The case is structured as four sub-arguments—access control, data
+protection, deployment, and monitoring—each supporting the overarching
+security claim.
 
-It's really a demo of some of our capabilities.
+It's really a demo of some of our capabilities, including four different
+GSN Strategy renderings: one with no Context or Justification children
+(SArg), one with a single Context (SAccess), one with a Context and a
+Justification (SData), and one with a Context, a Justification, and a
+second Context (SMonitor).
 
 ## SACM Diagrams
 
@@ -29,10 +34,11 @@ flowchart BT
     classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
     Security["<b>Security</b><br>The website is adequately secure against moderate threats"]
     XScope[("<b>XScope</b>&nbsp;↗<br>OWASP Top Ten threat model defines the threat scope")]
-    SArg[/"<b>SArg</b><br>Security is argued by examining access control, data protection, and deployment"/]
+    SArg[/"<b>SArg</b><br>Security is argued by examining access control, data protection, deployment, and monitoring"/]
     Access[["<b>Access</b>"]]
     Data[["<b>Data</b>"]]
     Deployment["<b>Deployment</b><br>Deployment configuration follows security hardening guidelines"]
+    Monitoring[["<b>Monitoring</b>"]]
     EvHarden[("<b>EvHarden</b>&nbsp;↗<br>Server hardening checklist completed and signed off")]
     XProd[("<b>XProd</b>&nbsp;↗<br>Production environment enforces HTTPS-only connections")]
     Dot1((" ")):::sacmDot
@@ -42,6 +48,7 @@ flowchart BT
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-access"
     click Data "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-data"
     click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-deployment"
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-monitoring"
     click EvHarden "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evharden"
     click XProd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xprod"
 
@@ -49,6 +56,7 @@ flowchart BT
     BottomPadding ~~~ SArg
     BottomPadding ~~~ Access
     BottomPadding ~~~ Data
+    BottomPadding ~~~ Monitoring
     BottomPadding ~~~ EvHarden
     BottomPadding ~~~ XProd
     EvHarden --> Deployment
@@ -56,6 +64,7 @@ flowchart BT
     Access --- Dot1
     Data --- Dot1
     Deployment --- Dot1
+    Monitoring --- Dot1
     SArg --- Dot1
     Dot1 --> Security
     XScope --o Security
@@ -81,6 +90,7 @@ flowchart BT
     Access["<b>Access</b><br>User access control prevents unauthorized actions"]
     AAdmin["<b>AAdmin</b><br>Site administrators follow the published access management policy<br>ASSUMED"]
     SAccess[/"<b>SAccess</b><br>Access control is argued by examining authentication and authorization"/]
+    XAuthStd[("<b>XAuthStd</b>&nbsp;↗<br>NIST SP 800-63B Level 2 defines the required authentication assurance level")]
     AuthN["<b>AuthN</b><br>All users are authenticated before accessing protected resources"]
     AuthZ["<b>AuthZ</b><br>Users can only access resources appropriate to their role"]
     XSSFree["<b>XSSFree</b><br>Cross-site scripting attacks are mitigated"]
@@ -100,6 +110,7 @@ flowchart BT
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-access"
     click AAdmin "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#assumption-aadmin"
     click SAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-saccess"
+    click XAuthStd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xauthstd"
     click AuthN "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authn"
     click AuthZ "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authz"
     click XSSFree "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-xssfree"
@@ -114,7 +125,7 @@ flowchart BT
     click DBVuln "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-dbvuln"
 
     BottomPadding[ ]:::invisible ~~~ AAdmin
-    BottomPadding ~~~ SAccess
+    BottomPadding ~~~ XAuthStd
     BottomPadding ~~~ EvLogin
     BottomPadding ~~~ JMechanism
     BottomPadding ~~~ XLogPolicy
@@ -141,6 +152,7 @@ flowchart BT
     SqlFree --- Dot4
     SAccess --- Dot4
     Dot4 --> Access
+    XAuthStd --o SAccess
 ```
 
 ### Package Data
@@ -165,6 +177,8 @@ flowchart BT
     AEncrypt["<b>AEncrypt</b><br>TLS 1.3 is correctly deployed on all public endpoints<br>━━━"]
     SData[/"<b>SData</b><br>Data protection is argued by examining encryption, minimization, and audit logging"/]
     MetaClaim["<b>MetaClaim</b><br>This assurance case addresses all applicable data protection requirements"]
+    XDataScope[("<b>XDataScope</b>&nbsp;↗<br>GDPR Article 32 and state privacy law specify the required technical security measures")]
+    JDataArch["<b>JDataArch</b><br>Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB"]
     Encrypt["<b>Encrypt</b><br>All sensitive data is encrypted in transit and at rest"]
     Minimise["<b>Minimise</b><br>Only necessary data is collected and retained per the privacy policy"]
     AuditAccess["<b>AuditAccess</b><br>All sensitive data access events are logged and periodically reviewed"]:::abstractClaim
@@ -180,6 +194,8 @@ flowchart BT
     click AEncrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-aencrypt"
     click SData "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-sdata"
     click MetaClaim "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-metaclaim"
+    click XDataScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xdatascope"
+    click JDataArch "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jdataarch"
     click Encrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-encrypt"
     click Minimise "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-minimise"
     click AuditAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-auditaccess"
@@ -190,8 +206,9 @@ flowchart BT
 
     BottomPadding[ ]:::invisible ~~~ XRegulation
     BottomPadding ~~~ AEncrypt
-    BottomPadding ~~~ SData
     BottomPadding ~~~ MetaClaim
+    BottomPadding ~~~ XDataScope
+    BottomPadding ~~~ JDataArch
     BottomPadding ~~~ AuditAccess
     BottomPadding ~~~ EvTLS
     BottomPadding ~~~ EvDB
@@ -204,6 +221,7 @@ flowchart BT
     JRetention --- Dot2
     Dot2 --> Minimise
     AEncrypt --- Dot3
+    JDataArch --- Dot3
     Encrypt --- Dot3
     Minimise --- Dot3
     AuditAccess --- Dot3
@@ -211,6 +229,60 @@ flowchart BT
     MetaClaim --- Dot3
     Dot3 --> Data
     XRegulation --o Data
+    XDataScope --o SData
+```
+
+### Package Monitoring
+```mermaid
+---
+config:
+  theme: neutral
+  flowchart:
+    curve: linear
+    htmlLabels: true
+    rankSpacing: 60
+    nodeSpacing: 45
+    padding: 15
+---
+flowchart BT
+    classDef invisible opacity:0
+    classDef sacmDot fill:#000,stroke:#000
+    classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
+    classDef abstractClaim stroke-width:2px,stroke-dasharray: 5 5;
+    Monitoring["<b>Monitoring</b><br>Security events are detected and responded to in a timely manner"]
+    SMonitor[/"<b>SMonitor</b><br>Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures"/]
+    XSIEMScope[("<b>XSIEMScope</b>&nbsp;↗<br>The SIEM deployment covers all application, network, and host event sources")]
+    JSOCModel["<b>JSOCModel</b><br>The 24/7 follow-the-sun SOC model ensures trained responders are always available"]
+    XSLA[("<b>XSLA</b>&nbsp;↗<br>The service-level agreement requires critical alerts to be acknowledged within 15 minutes")]
+    AlertCoverage["<b>AlertCoverage</b><br>All OWASP Top Ten attack patterns trigger at least one SIEM alert"]
+    ResponseTime["<b>ResponseTime</b><br>Critical security alerts are acknowledged within the required timeframe"]
+    EvAlertCoverage[("<b>EvAlertCoverage</b>&nbsp;↗<br>SIEM rule audit confirms coverage of all current OWASP Top Ten patterns")]
+    EvResponseTime[("<b>EvResponseTime</b>&nbsp;↗<br>SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year")]
+    Dot1((" ")):::sacmDot
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-monitoring"
+    click SMonitor "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-smonitor"
+    click XSIEMScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsiemscope"
+    click JSOCModel "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jsocmodel"
+    click XSLA "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsla"
+    click AlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-alertcoverage"
+    click ResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-responsetime"
+    click EvAlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evalertcoverage"
+    click EvResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evresponsetime"
+
+    BottomPadding[ ]:::invisible ~~~ XSIEMScope
+    BottomPadding ~~~ JSOCModel
+    BottomPadding ~~~ XSLA
+    BottomPadding ~~~ EvAlertCoverage
+    BottomPadding ~~~ EvResponseTime
+    EvAlertCoverage --> AlertCoverage
+    EvResponseTime --> ResponseTime
+    JSOCModel --- Dot1
+    AlertCoverage --- Dot1
+    ResponseTime --- Dot1
+    SMonitor --- Dot1
+    Dot1 --> Monitoring
+    XSIEMScope --o SMonitor
+    XSLA --o SMonitor
 ```
 <!-- end verocase -->
 
@@ -235,10 +307,11 @@ flowchart TD
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
     Security["<b>Security</b><br>The website is adequately secure against moderate threats"]
     XScope(["<b>XScope</b><br>OWASP Top Ten threat model defines the threat scope"])
-    SArg[/"<b>SArg</b><br>Security is argued by examining access control, data protection, and deployment"/]
+    SArg[/"<b>SArg</b><br>Security is argued by examining access control, data protection, deployment, and monitoring"/]
     Access[["<b>Access</b>"]]
     Data[["<b>Data</b>"]]
     Deployment["<b>Deployment</b><br>Deployment configuration follows security hardening guidelines"]
+    Monitoring[["<b>Monitoring</b>"]]
     EvHarden(("<b>EvHarden</b><br>Server hardening checklist completed and signed off"))
     XProd(["<b>XProd</b><br>Production environment enforces HTTPS-only connections"])
     click Security "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-security"
@@ -247,6 +320,7 @@ flowchart TD
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-access"
     click Data "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-data"
     click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-deployment"
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-monitoring"
     click EvHarden "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evharden"
     click XProd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xprod"
 
@@ -257,11 +331,13 @@ flowchart TD
     SArg --> Deployment
     Deployment --> EvHarden
     Deployment --o XProd
+    SArg --> Monitoring
     XScope ~~~ BottomPadding[ ]:::invisible
     Access ~~~ BottomPadding
     Data ~~~ BottomPadding
     EvHarden ~~~ BottomPadding
     XProd ~~~ BottomPadding
+    Monitoring ~~~ BottomPadding
 ```
 
 ### Package Access
@@ -283,6 +359,7 @@ flowchart TD
     Access["<b>Access</b><br>User access control prevents unauthorized actions"]
     AAdmin("<b>AAdmin</b>&nbsp;Ⓐ<br>Site administrators follow the published access management policy")
     SAccess[/"<b>SAccess</b><br>Access control is argued by examining authentication and authorization"/]
+    XAuthStd(["<b>XAuthStd</b><br>NIST SP 800-63B Level 2 defines the required authentication assurance level"])
     AuthN["<b>AuthN</b><br>All users are authenticated before accessing protected resources"]
     AuthZ["<b>AuthZ</b><br>Users can only access resources appropriate to their role"]
     XSSFree["<b>XSSFree</b><br>Cross-site scripting attacks are mitigated"]
@@ -298,6 +375,7 @@ flowchart TD
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-access"
     click AAdmin "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#assumption-aadmin"
     click SAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-saccess"
+    click XAuthStd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xauthstd"
     click AuthN "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authn"
     click AuthZ "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authz"
     click XSSFree "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-xssfree"
@@ -311,8 +389,14 @@ flowchart TD
     click EvPenTest "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evpentest"
     click DBVuln "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-dbvuln"
 
+    subgraph SgCJ1 [ ]
+        direction LR
+        SAccess ~~~ XAuthStd
+    end
+    style SgCJ1 fill:none,stroke:none
     Access --o AAdmin
     Access --> SAccess
+    SAccess --o XAuthStd
     SAccess --> AuthN
     AuthN --> EvLogin
     AuthN --o JMechanism
@@ -327,6 +411,7 @@ flowchart TD
     SqlFree --> EvPenTest
     SqlFree -->|⊖| DBVuln
     AAdmin ~~~ BottomPadding[ ]:::invisible
+    XAuthStd ~~~ BottomPadding
     EvLogin ~~~ BottomPadding
     JMechanism ~~~ BottomPadding
     XLogPolicy ~~~ BottomPadding
@@ -358,6 +443,8 @@ flowchart TD
     AEncrypt["<b>AEncrypt</b><br>TLS 1.3 is correctly deployed on all public endpoints<br>AXIOMATIC"]
     SData[/"<b>SData</b><br>Data protection is argued by examining encryption, minimization, and audit logging"/]
     MetaClaim["<b>MetaClaim</b><br>This assurance case addresses all applicable data protection requirements<br>METACLAIM"]
+    XDataScope(["<b>XDataScope</b><br>GDPR Article 32 and state privacy law specify the required technical security measures"])
+    JDataArch("<b>JDataArch</b>&nbsp;Ⓙ<br>Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB")
     Encrypt["<b>Encrypt</b><br>All sensitive data is encrypted in transit and at rest"]
     Minimise["<b>Minimise</b><br>Only necessary data is collected and retained per the privacy policy"]
     AuditAccess["<b>AuditAccess</b><br>All sensitive data access events are logged and periodically reviewed"]:::gsnUndev
@@ -370,6 +457,8 @@ flowchart TD
     click AEncrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-aencrypt"
     click SData "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-sdata"
     click MetaClaim "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-metaclaim"
+    click XDataScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xdatascope"
+    click JDataArch "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jdataarch"
     click Encrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-encrypt"
     click Minimise "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-minimise"
     click AuditAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-auditaccess"
@@ -378,9 +467,16 @@ flowchart TD
     click DataMap "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-datamap"
     click JRetention "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jretention"
 
+    subgraph SgCJ1 [ ]
+        direction LR
+        XDataScope ~~~ SData ~~~ JDataArch
+    end
+    style SgCJ1 fill:none,stroke:none
     Data --o XRegulation
     Data --> AEncrypt
     Data --> SData
+    SData --o XDataScope
+    SData --o JDataArch
     SData --> Encrypt
     Encrypt --> EvTLS
     Encrypt --> EvDB
@@ -391,12 +487,69 @@ flowchart TD
     Data --> MetaClaim
     XRegulation ~~~ BottomPadding[ ]:::invisible
     AEncrypt ~~~ BottomPadding
+    XDataScope ~~~ BottomPadding
+    JDataArch ~~~ BottomPadding
     EvTLS ~~~ BottomPadding
     EvDB ~~~ BottomPadding
     DataMap ~~~ BottomPadding
     JRetention ~~~ BottomPadding
     AuditAccess ~~~ BottomPadding
     MetaClaim ~~~ BottomPadding
+```
+
+### Package Monitoring
+```mermaid
+---
+config:
+  theme: neutral
+  flowchart:
+    curve: basis
+    htmlLabels: true
+    rankSpacing: 60
+    nodeSpacing: 45
+    padding: 15
+---
+flowchart TD
+    classDef invisible opacity:0
+    classDef gsnUndev stroke-width:2px,stroke-dasharray: 5 5;
+    classDef connector fill:none,stroke:#cccccc,stroke-width:1px;
+    Monitoring["<b>Monitoring</b><br>Security events are detected and responded to in a timely manner"]
+    SMonitor[/"<b>SMonitor</b><br>Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures"/]
+    XSIEMScope(["<b>XSIEMScope</b><br>The SIEM deployment covers all application, network, and host event sources"])
+    JSOCModel("<b>JSOCModel</b>&nbsp;Ⓙ<br>The 24/7 follow-the-sun SOC model ensures trained responders are always available")
+    XSLA(["<b>XSLA</b><br>The service-level agreement requires critical alerts to be acknowledged within 15 minutes"])
+    AlertCoverage["<b>AlertCoverage</b><br>All OWASP Top Ten attack patterns trigger at least one SIEM alert"]
+    ResponseTime["<b>ResponseTime</b><br>Critical security alerts are acknowledged within the required timeframe"]
+    EvAlertCoverage(("<b>EvAlertCoverage</b><br>SIEM rule audit confirms coverage of all current OWASP Top Ten patterns"))
+    EvResponseTime(("<b>EvResponseTime</b><br>SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year"))
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-monitoring"
+    click SMonitor "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-smonitor"
+    click XSIEMScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsiemscope"
+    click JSOCModel "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jsocmodel"
+    click XSLA "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsla"
+    click AlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-alertcoverage"
+    click ResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-responsetime"
+    click EvAlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evalertcoverage"
+    click EvResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evresponsetime"
+
+    subgraph SgCJ1 [ ]
+        direction LR
+        XSIEMScope ~~~ SMonitor ~~~ JSOCModel
+    end
+    style SgCJ1 fill:none,stroke:none
+    Monitoring --> SMonitor
+    SMonitor --o XSIEMScope
+    SMonitor --o JSOCModel
+    SMonitor --o XSLA
+    SMonitor --> AlertCoverage
+    AlertCoverage --> EvAlertCoverage
+    SMonitor --> ResponseTime
+    ResponseTime --> EvResponseTime
+    XSIEMScope ~~~ BottomPadding[ ]:::invisible
+    JSOCModel ~~~ BottomPadding
+    XSLA ~~~ BottomPadding
+    EvAlertCoverage ~~~ BottomPadding
+    EvResponseTime ~~~ BottomPadding
 ```
 <!-- end verocase -->
 
@@ -428,10 +581,11 @@ flowchart BT
     classDef abstractClaim    stroke-width:2px,stroke-dasharray:5 5
     Security(("<b>Security</b><br>The website is adequately secure against moderate threats")):::caeClaimClass
     XScope(("<b>XScope</b><br>OWASP Top Ten threat model defines the threat scope")):::caeInfoClass
-    SArg(["<b>SArg</b><br>Security is argued by examining access control, data protection, and deployment"]):::caeArgClass
+    SArg(["<b>SArg</b><br>Security is argued by examining access control, data protection, deployment, and monitoring"]):::caeArgClass
     Access[["<b>Access</b>"]]:::caeClaimClass
     Data[["<b>Data</b>"]]:::caeClaimClass
     Deployment(("<b>Deployment</b><br>Deployment configuration follows security hardening guidelines")):::caeClaimClass
+    Monitoring[["<b>Monitoring</b>"]]:::caeClaimClass
     EvHarden["<b>EvHarden</b><br>Server hardening checklist completed and signed off"]:::caeEvidClass
     XProd(("<b>XProd</b><br>Production environment enforces HTTPS-only connections")):::caeInfoClass
     click Security "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-security"
@@ -440,12 +594,14 @@ flowchart BT
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-access"
     click Data "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-data"
     click Deployment "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-deployment"
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#package-monitoring"
     click EvHarden "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evharden"
     click XProd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xprod"
 
     BottomPadding[ ]:::invisible ~~~ XScope
     BottomPadding ~~~ Access
     BottomPadding ~~~ Data
+    BottomPadding ~~~ Monitoring
     BottomPadding ~~~ EvHarden
     BottomPadding ~~~ XProd
     XScope -.-> Security
@@ -454,6 +610,7 @@ flowchart BT
     EvHarden --> Deployment
     XProd -.-> Deployment
     Deployment --> SArg
+    Monitoring --> SArg
     SArg --> Security
 ```
 
@@ -483,6 +640,7 @@ flowchart BT
     Access(("<b>Access</b><br>User access control prevents unauthorized actions")):::caeClaimClass
     AAdmin(("<b>AAdmin</b>&nbsp;Ⓐ<br>Site administrators follow the published access management policy")):::caeAssumedClass
     SAccess(["<b>SAccess</b><br>Access control is argued by examining authentication and authorization"]):::caeArgClass
+    XAuthStd(("<b>XAuthStd</b><br>NIST SP 800-63B Level 2 defines the required authentication assurance level")):::caeInfoClass
     AuthN(("<b>AuthN</b><br>All users are authenticated before accessing protected resources")):::caeClaimClass
     AuthZ(("<b>AuthZ</b><br>Users can only access resources appropriate to their role")):::caeClaimClass
     XSSFree(("<b>XSSFree</b><br>Cross-site scripting attacks are mitigated")):::caeClaimClass
@@ -498,6 +656,7 @@ flowchart BT
     click Access "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-access"
     click AAdmin "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#assumption-aadmin"
     click SAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-saccess"
+    click XAuthStd "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xauthstd"
     click AuthN "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authn"
     click AuthZ "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-authz"
     click XSSFree "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-xssfree"
@@ -512,6 +671,7 @@ flowchart BT
     click DBVuln "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-dbvuln"
 
     BottomPadding[ ]:::invisible ~~~ AAdmin
+    BottomPadding ~~~ XAuthStd
     BottomPadding ~~~ EvLogin
     BottomPadding ~~~ JMechanism
     BottomPadding ~~~ XLogPolicy
@@ -521,6 +681,7 @@ flowchart BT
     BottomPadding ~~~ EvPenTest
     BottomPadding ~~~ DBVuln
     AAdmin --> Access
+    XAuthStd -.-> SAccess
     EvLogin --> AuthN
     JMechanism --> AuthN
     XLogPolicy -.-> AuthN
@@ -565,6 +726,8 @@ flowchart BT
     AEncrypt(("<b>AEncrypt</b><br>TLS 1.3 is correctly deployed on all public endpoints")):::caeClaimClass
     SData(["<b>SData</b><br>Data protection is argued by examining encryption, minimization, and audit logging"]):::caeArgClass
     MetaClaim(("<b>MetaClaim</b><br>This assurance case addresses all applicable data protection requirements")):::caeClaimClass
+    XDataScope(("<b>XDataScope</b><br>GDPR Article 32 and state privacy law specify the required technical security measures")):::caeInfoClass
+    JDataArch(["<b>JDataArch</b>&nbsp;Ⓢ<br>Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB"]):::caeSideClass
     Encrypt(("<b>Encrypt</b><br>All sensitive data is encrypted in transit and at rest")):::caeClaimClass
     Minimise(("<b>Minimise</b><br>Only necessary data is collected and retained per the privacy policy")):::caeClaimClass
     AuditAccess(("<b>AuditAccess</b><br>All sensitive data access events are logged and periodically reviewed")):::caeClaimClass
@@ -578,6 +741,8 @@ flowchart BT
     click AEncrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-aencrypt"
     click SData "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-sdata"
     click MetaClaim "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-metaclaim"
+    click XDataScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xdatascope"
+    click JDataArch "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jdataarch"
     click Encrypt "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-encrypt"
     click Minimise "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-minimise"
     click AuditAccess "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-auditaccess"
@@ -589,6 +754,8 @@ flowchart BT
     BottomPadding[ ]:::invisible ~~~ XRegulation
     BottomPadding ~~~ AEncrypt
     BottomPadding ~~~ MetaClaim
+    BottomPadding ~~~ XDataScope
+    BottomPadding ~~~ JDataArch
     BottomPadding ~~~ AuditAccess
     BottomPadding ~~~ EvTLS
     BottomPadding ~~~ EvDB
@@ -596,6 +763,8 @@ flowchart BT
     BottomPadding ~~~ JRetention
     XRegulation -.-> Data
     AEncrypt --> Data
+    XDataScope -.-> SData
+    JDataArch --> SData
     EvTLS --> Encrypt
     EvDB --> Encrypt
     Encrypt --> SData
@@ -606,6 +775,63 @@ flowchart BT
     SData --> Data
     MetaClaim --> Data
 ```
+
+### Package Monitoring
+```mermaid
+---
+config:
+  theme: neutral
+  flowchart:
+    curve: linear
+    htmlLabels: true
+    rankSpacing: 60
+    nodeSpacing: 45
+    padding: 15
+---
+flowchart BT
+    classDef invisible        opacity:0
+    classDef connector        fill:none,stroke:#cccccc,stroke-width:1px
+    classDef caeClaimClass    fill:#dce8f8,stroke:#2874a6,stroke-width:2px,color:#000
+    classDef caeArgClass      fill:#fdebd0,stroke:#d35400,stroke-width:3px,color:#000
+    classDef caeEvidClass     fill:#d5f5e3,stroke:#1e8449,stroke-width:2px,color:#000
+    classDef caeInfoClass     fill:#f0f0f0,stroke:#999999,stroke-width:1px,stroke-dasharray:4 3,color:#000
+    classDef caeAssumedClass  fill:#e8daef,stroke:#76448a,stroke-width:2px,stroke-dasharray:4 3,color:#000
+    classDef caeSideClass     fill:#d6eaf8,stroke:#1a5276,stroke-width:2px,color:#000
+    classDef caeDefeaterClass fill:#fadbd8,stroke:#c0392b,stroke-width:4px,color:#000
+    classDef abstractClaim    stroke-width:2px,stroke-dasharray:5 5
+    Monitoring(("<b>Monitoring</b><br>Security events are detected and responded to in a timely manner")):::caeClaimClass
+    SMonitor(["<b>SMonitor</b><br>Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures"]):::caeArgClass
+    XSIEMScope(("<b>XSIEMScope</b><br>The SIEM deployment covers all application, network, and host event sources")):::caeInfoClass
+    JSOCModel(["<b>JSOCModel</b>&nbsp;Ⓢ<br>The 24/7 follow-the-sun SOC model ensures trained responders are always available"]):::caeSideClass
+    XSLA(("<b>XSLA</b><br>The service-level agreement requires critical alerts to be acknowledged within 15 minutes")):::caeInfoClass
+    AlertCoverage(("<b>AlertCoverage</b><br>All OWASP Top Ten attack patterns trigger at least one SIEM alert")):::caeClaimClass
+    ResponseTime(("<b>ResponseTime</b><br>Critical security alerts are acknowledged within the required timeframe")):::caeClaimClass
+    EvAlertCoverage["<b>EvAlertCoverage</b><br>SIEM rule audit confirms coverage of all current OWASP Top Ten patterns"]:::caeEvidClass
+    EvResponseTime["<b>EvResponseTime</b><br>SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year"]:::caeEvidClass
+    click Monitoring "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-monitoring"
+    click SMonitor "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#strategy-smonitor"
+    click XSIEMScope "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsiemscope"
+    click JSOCModel "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#justification-jsocmodel"
+    click XSLA "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#context-xsla"
+    click AlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-alertcoverage"
+    click ResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#claim-responsetime"
+    click EvAlertCoverage "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evalertcoverage"
+    click EvResponseTime "https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/demo-output.expected.md#evidence-evresponsetime"
+
+    BottomPadding[ ]:::invisible ~~~ XSIEMScope
+    BottomPadding ~~~ JSOCModel
+    BottomPadding ~~~ XSLA
+    BottomPadding ~~~ EvAlertCoverage
+    BottomPadding ~~~ EvResponseTime
+    XSIEMScope -.-> SMonitor
+    JSOCModel --> SMonitor
+    XSLA -.-> SMonitor
+    EvAlertCoverage --> AlertCoverage
+    AlertCoverage --> SMonitor
+    EvResponseTime --> ResponseTime
+    ResponseTime --> SMonitor
+    SMonitor --> Monitoring
+```
 <!-- end verocase -->
 
 ## LTAC Notation
@@ -614,17 +840,19 @@ flowchart BT
 ### Package Security
 - [Claim Security: The website is adequately secure against moderate threats](#claim-security)
   - [Context XScope: OWASP Top Ten threat model defines the threat scope](#context-xscope) ([owasp-top10.pdf](owasp-top10.pdf))
-  - [Strategy SArg: Security is argued by examining access control, data protection, and deployment](#strategy-sarg)
+  - [Strategy SArg: Security is argued by examining access control, data protection, deployment, and monitoring](#strategy-sarg)
     - [Claim Access](#claim-access)
     - [Claim Data](#claim-data)
     - [Claim Deployment: Deployment configuration follows security hardening guidelines](#claim-deployment)
       - [Evidence EvHarden: Server hardening checklist completed and signed off](#evidence-evharden) ([hardening-checklist.pdf](hardening-checklist.pdf))
       - [Context XProd: Production environment enforces HTTPS-only connections](#context-xprod)
+    - [Claim Monitoring](#claim-monitoring)
 
 ### Package Access
 - [Claim Access: User access control prevents unauthorized actions](#claim-access)
   - [Assumption AAdmin: Site administrators follow the published access management policy](#assumption-aadmin)
   - [Strategy SAccess: Access control is argued by examining authentication and authorization](#strategy-saccess)
+    - [Context XAuthStd: NIST SP 800-63B Level 2 defines the required authentication assurance level](#context-xauthstd) ([nist-800-63b.pdf](nist-800-63b.pdf))
     - [Claim AuthN: All users are authenticated before accessing protected resources](#claim-authn)
       - [Evidence EvLogin: Login audit log shows no unauthorized access in last 90 days](#evidence-evlogin) ([audit.log](audit.log))
       - [Justification JMechanism: Password-plus-MFA provides industry-standard two-factor authentication](#justification-jmechanism)
@@ -644,6 +872,8 @@ flowchart BT
   - [Context XRegulation: GDPR and applicable state privacy laws govern data handling](#context-xregulation) ([privacy-policy.pdf](privacy-policy.pdf))
   - [Claim AEncrypt: TLS 1.3 is correctly deployed on all public endpoints](#claim-aencrypt)
   - [Strategy SData: Data protection is argued by examining encryption, minimization, and audit logging](#strategy-sdata)
+    - [Context XDataScope: GDPR Article 32 and state privacy law specify the required technical security measures](#context-xdatascope) ([gdpr-art32.pdf](gdpr-art32.pdf))
+    - [Justification JDataArch: Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB](#justification-jdataarch)
     - [Claim Encrypt: All sensitive data is encrypted in transit and at rest](#claim-encrypt)
       - [Evidence EvTLS: TLS configuration scan achieves A+ rating](#evidence-evtls) ([ssl-labs-report.pdf](ssl-labs-report.pdf))
       - [Evidence EvDB: Database-level encryption enabled and key management audited](#evidence-evdb) ([db-audit.pdf](db-audit.pdf))
@@ -652,6 +882,17 @@ flowchart BT
       - [Justification JRetention: Data minimisation reduces breach impact and aids regulatory compliance](#justification-jretention)
     - [Claim AuditAccess: All sensitive data access events are logged and periodically reviewed](#claim-auditaccess)
   - [Claim MetaClaim: This assurance case addresses all applicable data protection requirements](#claim-metaclaim)
+
+### Package Monitoring
+- [Claim Monitoring: Security events are detected and responded to in a timely manner](#claim-monitoring)
+  - [Strategy SMonitor: Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures](#strategy-smonitor)
+    - [Context XSIEMScope: The SIEM deployment covers all application, network, and host event sources](#context-xsiemscope) ([siem-config.pdf](siem-config.pdf))
+    - [Justification JSOCModel: The 24/7 follow-the-sun SOC model ensures trained responders are always available](#justification-jsocmodel) ([soc-charter.pdf](soc-charter.pdf))
+    - [Context XSLA: The service-level agreement requires critical alerts to be acknowledged within 15 minutes](#context-xsla) ([sla.pdf](sla.pdf))
+    - [Claim AlertCoverage: All OWASP Top Ten attack patterns trigger at least one SIEM alert](#claim-alertcoverage)
+      - [Evidence EvAlertCoverage: SIEM rule audit confirms coverage of all current OWASP Top Ten patterns](#evidence-evalertcoverage) ([siem-audit-2024.pdf](siem-audit-2024.pdf))
+    - [Claim ResponseTime: Critical security alerts are acknowledged within the required timeframe](#claim-responsetime)
+      - [Evidence EvResponseTime: SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year](#evidence-evresponsetime) ([soc-metrics-2024.pdf](soc-metrics-2024.pdf))
 <!-- end verocase -->
 
 ## Element Details
@@ -692,18 +933,19 @@ It was agreed with the customer as the applicable scope for this engagement.
 <!-- DO NOT EDIT text from here until "end verocase" -->
 
 <a id="strategy-sarg"></a>
-### Strategy SArg: Security is argued by examining access control, data protection, and deployment
+### Strategy SArg: Security is argued by examining access control, data protection, deployment, and monitoring
 
 Referenced by: **[Package Security](#package-security)**
 
-Supported by: **[Claim Access](#claim-access)**, [Claim Data](#claim-data), [Claim Deployment](#claim-deployment)
+Supported by: **[Claim Access](#claim-access)**, [Claim Data](#claim-data), [Claim Deployment](#claim-deployment), [Claim Monitoring](#claim-monitoring)
 
 Supports: **[Claim Security](#claim-security)**
 <!-- end verocase -->
 
-The argument is decomposed into three parallel sub-arguments. Access control,
-data protection, and deployment configuration are argued independently; each
-sub-argument supports the top-level security claim.
+The argument is decomposed into four parallel sub-arguments. Access control,
+data protection, deployment configuration, and security monitoring are argued
+independently; each sub-argument supports the top-level security claim.
+SArg demonstrates a Strategy with no Context or Justification children.
 
 <!-- verocase element Access -->
 <!-- DO NOT EDIT text from here until "end verocase" -->
@@ -745,7 +987,7 @@ administrators is outside the threat model for this case.
 
 Referenced by: **[Package Access](#package-access)**
 
-Supported by: **[Claim AuthN](#claim-authn)**, [Claim AuthZ](#claim-authz), [Claim XSSFree](#claim-xssfree), [Claim SqlFree](#claim-sqlfree)
+Supported by: **[Context XAuthStd](#context-xauthstd)**, [Claim AuthN](#claim-authn), [Claim AuthZ](#claim-authz), [Claim XSSFree](#claim-xssfree), [Claim SqlFree](#claim-sqlfree)
 
 Supports: **[Claim Access](#claim-access)**
 <!-- end verocase -->
@@ -753,6 +995,27 @@ Supports: **[Claim Access](#claim-access)**
 Access control is argued by examining the authentication mechanism,
 role-based authorisation configuration, and mitigations for the two most
 prevalent web injection attack classes: XSS and SQL injection.
+SAccess demonstrates a Strategy with a single Context child (XAuthStd),
+which GSN renders beside the Strategy rather than below it.
+
+<!-- verocase element XAuthStd -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="context-xauthstd"></a>
+### Context XAuthStd: NIST SP 800-63B Level 2 defines the required authentication assurance level
+
+Referenced by: **[Package Access](#package-access)**
+
+Supports: **[Strategy SAccess](#strategy-saccess)**
+
+External Reference: [nist-800-63b.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/nist-800-63b.pdf)
+<!-- end verocase -->
+
+NIST SP 800-63B Authenticator Assurance Level 2 is the baseline required
+for applications handling personal data. The standard mandates a
+multi-factor authentication mechanism resistant to phishing and replay
+attacks, and serves as the normative reference for all authentication
+claims in this sub-argument.
 
 <!-- verocase element AuthN -->
 <!-- DO NOT EDIT text from here until "end verocase" -->
@@ -1031,7 +1294,7 @@ deployed, not that the protocol is sound.
 
 Referenced by: **[Package Data](#package-data)**
 
-Supported by: **[Claim Encrypt](#claim-encrypt)**, [Claim Minimise](#claim-minimise), [Claim AuditAccess](#claim-auditaccess)
+Supported by: **[Context XDataScope](#context-xdatascope)**, [Justification JDataArch](#justification-jdataarch), [Claim Encrypt](#claim-encrypt), [Claim Minimise](#claim-minimise), [Claim AuditAccess](#claim-auditaccess)
 
 Supports: **[Claim Data](#claim-data)**
 <!-- end verocase -->
@@ -1039,6 +1302,43 @@ Supports: **[Claim Data](#claim-data)**
 Data protection is argued across four concerns: encryption of data in
 transit, encryption of data at rest, minimisation of data collected and
 retained, and audit logging of access to sensitive records.
+SData demonstrates a Strategy with a Context child (XDataScope) and a
+Justification child (JDataArch), which GSN renders flanking the Strategy.
+
+<!-- verocase element XDataScope -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="context-xdatascope"></a>
+### Context XDataScope: GDPR Article 32 and state privacy law specify the required technical security measures
+
+Referenced by: **[Package Data](#package-data)**
+
+Supports: **[Strategy SData](#strategy-sdata)**
+
+External Reference: [gdpr-art32.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/gdpr-art32.pdf)
+<!-- end verocase -->
+
+GDPR Article 32 requires controllers to implement appropriate technical
+measures to ensure a level of security appropriate to the risk, including
+encryption and ongoing confidentiality assurance. Applicable state privacy
+laws impose equivalent or stricter obligations. These instruments define
+the normative scope for all data protection claims in this sub-argument.
+
+<!-- verocase element JDataArch -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="justification-jdataarch"></a>
+### Justification JDataArch: Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB
+
+Referenced by: **[Package Data](#package-data)**
+
+Supports: **[Strategy SData](#strategy-sdata)**
+<!-- end verocase -->
+
+Separating encryption, data minimisation, and audit logging into
+independent sub-arguments follows the EDPB's layered security guidance
+and makes each concern independently verifiable. This decomposition also
+simplifies gap analysis against GDPR Article 32 compliance checklists.
 
 <!-- verocase element Encrypt -->
 <!-- DO NOT EDIT text from here until "end verocase" -->
@@ -1221,3 +1521,166 @@ Supports: **[Claim Deployment](#claim-deployment)**
 The production environment is configured to reject plain HTTP connections.
 HTTP requests are redirected to HTTPS at the load balancer before reaching
 any application code, preventing accidental cleartext transmission.
+
+<!-- verocase element Monitoring -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="claim-monitoring"></a>
+### Claim Monitoring: Security events are detected and responded to in a timely manner
+
+Referenced by: **[Package Monitoring](#package-monitoring)**, [Package Security](#package-security)
+
+Supported by: **[Strategy SMonitor](#strategy-smonitor)**
+
+Supports: [Strategy SArg](#strategy-sarg)
+<!-- end verocase -->
+
+Security event detection and response is essential for identifying active
+attacks and limiting their impact. This claim covers the operational
+capability to detect, triage, and respond to security events in time to
+prevent material harm.
+
+<!-- verocase element SMonitor -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="strategy-smonitor"></a>
+### Strategy SMonitor: Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supported by: **[Context XSIEMScope](#context-xsiemscope)**, [Justification JSOCModel](#justification-jsocmodel), [Context XSLA](#context-xsla), [Claim AlertCoverage](#claim-alertcoverage), [Claim ResponseTime](#claim-responsetime)
+
+Supports: **[Claim Monitoring](#claim-monitoring)**
+<!-- end verocase -->
+
+Detection capability is argued by examining three orthogonal concerns:
+the breadth of SIEM event-source coverage, the SOC staffing model that
+ensures human review is always available, and the contractual response-time
+obligations that bound acceptable latency.
+SMonitor demonstrates a Strategy with three Context/Justification children.
+The first two (XSIEMScope and JSOCModel) are rendered beside the Strategy
+in GSN; the third (XSLA) remains below as a regular in-context-of child.
+
+<!-- verocase element XSIEMScope -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="context-xsiemscope"></a>
+### Context XSIEMScope: The SIEM deployment covers all application, network, and host event sources
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supports: **[Strategy SMonitor](#strategy-smonitor)**
+
+External Reference: [siem-config.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/siem-config.pdf)
+<!-- end verocase -->
+
+The SIEM is configured to ingest logs from all application servers, load
+balancers, database engines, and network perimeter devices. Full coverage
+is a prerequisite for the alerting-coverage claim; gaps in ingestion would
+create blind spots that make AlertCoverage unverifiable.
+
+<!-- verocase element JSOCModel -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="justification-jsocmodel"></a>
+### Justification JSOCModel: The 24/7 follow-the-sun SOC model ensures trained responders are always available
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supports: **[Strategy SMonitor](#strategy-smonitor)**
+
+External Reference: [soc-charter.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/soc-charter.pdf)
+<!-- end verocase -->
+
+The follow-the-sun model staffs the SOC across three regional teams in
+overlapping shifts, eliminating the after-hours coverage gaps common in
+single-region operations. This staffing structure is the organisational
+justification for asserting that human review is continuously available.
+
+<!-- verocase element XSLA -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="context-xsla"></a>
+### Context XSLA: The service-level agreement requires critical alerts to be acknowledged within 15 minutes
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supports: **[Strategy SMonitor](#strategy-smonitor)**
+
+External Reference: [sla.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/sla.pdf)
+<!-- end verocase -->
+
+The service-level agreement with the customer specifies a 15-minute
+acknowledgment target for P1 (critical) security alerts. This contractual
+obligation defines the quantitative threshold against which the
+ResponseTime claim is measured.
+
+<!-- verocase element AlertCoverage -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="claim-alertcoverage"></a>
+### Claim AlertCoverage: All OWASP Top Ten attack patterns trigger at least one SIEM alert
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supported by: **[Evidence EvAlertCoverage](#evidence-evalertcoverage)**
+
+Supports: **[Strategy SMonitor](#strategy-smonitor)**
+<!-- end verocase -->
+
+The SIEM rule set is mapped against the OWASP Top Ten. Each attack
+category must have at least one detection rule with a documented test
+case confirming it fires on a representative attack sample.
+
+<!-- verocase element EvAlertCoverage -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="evidence-evalertcoverage"></a>
+### Evidence EvAlertCoverage: SIEM rule audit confirms coverage of all current OWASP Top Ten patterns
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supports: **[Claim AlertCoverage](#claim-alertcoverage)**
+
+External Reference: [siem-audit-2024.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/siem-audit-2024.pdf)
+<!-- end verocase -->
+
+An annual SIEM rule audit reviewed all active detection rules against the
+current OWASP Top Ten list. Every attack category had at least one
+matching rule, and each rule had a passing test case in the rule-testing
+framework.
+
+<!-- verocase element ResponseTime -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="claim-responsetime"></a>
+### Claim ResponseTime: Critical security alerts are acknowledged within the required timeframe
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supported by: **[Evidence EvResponseTime](#evidence-evresponsetime)**
+
+Supports: **[Strategy SMonitor](#strategy-smonitor)**
+<!-- end verocase -->
+
+Alert acknowledgment time is measured from the moment a P1 alert fires
+in the SIEM to the moment a SOC analyst marks it as under investigation.
+The claim requires this latency to remain within the SLA threshold.
+
+<!-- verocase element EvResponseTime -->
+<!-- DO NOT EDIT text from here until "end verocase" -->
+
+<a id="evidence-evresponsetime"></a>
+### Evidence EvResponseTime: SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year
+
+Referenced by: **[Package Monitoring](#package-monitoring)**
+
+Supports: **[Claim ResponseTime](#claim-responsetime)**
+
+External Reference: [soc-metrics-2024.pdf](https://github.com/david-a-wheeler/verocase/blob/main/tests/fixtures/soc-metrics-2024.pdf)
+<!-- end verocase -->
+
+Monthly SOC performance reports for the preceding 12 months were reviewed.
+Across 847 P1 alerts raised during the period, 99.2% were acknowledged
+within 15 minutes. The eight exceptions were all caused by a single
+infrastructure outage and were covered by the SLA's force-majeure clause.

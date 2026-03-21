@@ -3,16 +3,18 @@
 
 - Claim Security: The website is adequately secure against moderate threats
   - Context XScope: OWASP Top Ten threat model defines the threat scope (owasp-top10.pdf)
-  - Strategy SArg: Security is argued by examining access control, data protection, and deployment
+  - Strategy SArg: Security is argued by examining access control, data protection, deployment, and monitoring
     - Claim ^Access
     - Claim ^Data
     - Claim Deployment: Deployment configuration follows security hardening guidelines
       - Evidence EvHarden: Server hardening checklist completed and signed off (hardening-checklist.pdf)
       - Context XProd: Production environment enforces HTTPS-only connections
+    - Claim ^Monitoring
 
 - Claim Access: User access control prevents unauthorized actions
   - Assumption AAdmin: Site administrators follow the published access management policy
   - Strategy SAccess: Access control is argued by examining authentication and authorization
+    - Context XAuthStd: NIST SP 800-63B Level 2 defines the required authentication assurance level (nist-800-63b.pdf)
     - Claim AuthN: All users are authenticated before accessing protected resources
       - Evidence EvLogin: Login audit log shows no unauthorized access in last 90 days (audit.log)
       - Justification JMechanism: Password-plus-MFA provides industry-standard two-factor authentication
@@ -32,6 +34,8 @@
   - Context XRegulation: GDPR and applicable state privacy laws govern data handling (privacy-policy.pdf)
   - Claim AEncrypt: TLS 1.3 is correctly deployed on all public endpoints {axiomatic}
   - Strategy SData: Data protection is argued by examining encryption, minimization, and audit logging
+    - Context XDataScope: GDPR Article 32 and state privacy law specify the required technical security measures (gdpr-art32.pdf)
+    - Justification JDataArch: Treating encryption, minimisation, and audit as independent sub-arguments mirrors the layered controls recommended by the EDPB
     - Claim Encrypt: All sensitive data is encrypted in transit and at rest
       - Evidence EvTLS: TLS configuration scan achieves A+ rating (ssl-labs-report.pdf)
       - Evidence EvDB: Database-level encryption enabled and key management audited (db-audit.pdf)
@@ -40,3 +44,13 @@
       - Justification JRetention: Data minimisation reduces breach impact and aids regulatory compliance
     - Claim AuditAccess: All sensitive data access events are logged and periodically reviewed {abstract}
   - Claim MetaClaim: This assurance case addresses all applicable data protection requirements {metaclaim}
+
+- Claim Monitoring: Security events are detected and responded to in a timely manner
+  - Strategy SMonitor: Detection capability is argued by examining alerting coverage, SOC capacity, and response procedures
+    - Context XSIEMScope: The SIEM deployment covers all application, network, and host event sources (siem-config.pdf)
+    - Justification JSOCModel: The 24/7 follow-the-sun SOC model ensures trained responders are always available (soc-charter.pdf)
+    - Context XSLA: The service-level agreement requires critical alerts to be acknowledged within 15 minutes (sla.pdf)
+    - Claim AlertCoverage: All OWASP Top Ten attack patterns trigger at least one SIEM alert
+      - Evidence EvAlertCoverage: SIEM rule audit confirms coverage of all current OWASP Top Ten patterns (siem-audit-2024.pdf)
+    - Claim ResponseTime: Critical security alerts are acknowledged within the required timeframe
+      - Evidence EvResponseTime: SOC metrics show 99.2% of critical alerts acknowledged within 15 minutes over the past year (soc-metrics-2024.pdf)

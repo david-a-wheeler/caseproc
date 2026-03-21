@@ -4093,6 +4093,24 @@ flowchart TD
     classDef connector fill:none,stroke:#cccccc,stroke-width:1px;"""
 
 
+def _gsn_strategy_context_just(node) -> list:
+    """Return up to 2 Context/Justification children of a Strategy node.
+
+    Includes both direct children and Link children whose target is a
+    Context or Justification.  Used to build invisible side-by-side subgraphs.
+    """
+    result = []
+    for child in node.children:
+        if child.node_type in ('Context', 'Justification'):
+            result.append(child)
+        elif child.node_type == 'Link' and child.link_target is not None:
+            if child.link_target.node_type in ('Context', 'Justification'):
+                result.append(child.link_target)
+        if len(result) == 2:
+            break
+    return result
+
+
 def _gsn_collect_edges(node, write_edge, leaf_nodes):
     """Write GSN edges for *node* and its subtree (DFS pre-order) via write_edge.
 
@@ -4185,6 +4203,27 @@ def _gsn_diagram_body(roots: List['Node'], config: dict, out: TextIO) -> None:
             _first_edge[0] = False
         out.write('\n')
         out.write(line)
+
+    # Invisible LR subgraphs: keep Context/Justification beside their Strategy.
+    # For each Strategy with 1-2 such children, emit a direction LR subgraph
+    # with invisible (~~~) edges so Dagre places them at the same visual rank.
+    _sg_idx = [0]
+    for node in all_nodes:
+        if node.node_type != 'Strategy':
+            continue
+        items = _gsn_strategy_context_just(node)
+        if not items:
+            continue
+        _sg_idx[0] += 1
+        sg_id = f'SgCJ{_sg_idx[0]}'
+        _write_edge(f'    subgraph {sg_id} [ ]')
+        _write_edge('        direction LR')
+        if len(items) == 1:
+            _write_edge(f'        {node.diagram_id} ~~~ {items[0].diagram_id}')
+        else:
+            _write_edge(f'        {items[0].diagram_id} ~~~ {node.diagram_id} ~~~ {items[1].diagram_id}')
+        _write_edge('    end')
+        _write_edge(f'    style {sg_id} fill:none,stroke:none')
 
     for root in roots:
         _gsn_collect_edges(root, _write_edge, leaf_nodes)
