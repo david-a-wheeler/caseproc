@@ -14,6 +14,6 @@
 ```mermaid
 graph LR
     A[Google] --> B[GitHub]
-    click A "[https://www.google.com](https://www.google.com)" "Open Google"
-    click B "[https://www.github.com](https://www.github.com)" "Open GitHub"
+    click A "https://www.google.com" "Open Google"
+    click B "https://www.github.com" "Open GitHub"
 ```
