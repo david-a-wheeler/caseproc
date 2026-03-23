@@ -5224,6 +5224,11 @@ This is a sample assurance case for you to edit.
 
 ## Elements
 
+<!-- verocase element Security -->
+<!-- end verocase -->
+
+This is where you put details about the top-level Claim Security.
+
 <!-- verocase epilogue -->
 <!-- end verocase -->
 
