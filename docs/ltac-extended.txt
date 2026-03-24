@@ -7,7 +7,7 @@ NOTE: This "Extended LTAC" is based on LTAC v1.1.2, 26.02.2026 from Argevide but
 
 1. LTAC is a text format for representing assurance case arguments regardless of the notation originally used. LTAC can be mapped to GSN, CAE, TRUST-IT, and SACM notations. An LTAC package contains a set of elements, each presented in a separate line.
 2. LTAC defines its own element types that can be mapped to GSN, CAE, TRUST-IT, and SACM. LTAC defines its own syntax described below which is different from the rules of GSN, CAE, TRUST-IT, or SACM. Only the rules described below apply to LTAC.
-3. The allowed element types are Claim, Strategy, Justification, Evidence, Context, Assumption, and Relation. Each package in LTAC should start (at the top) with a Claim or Justification.
+3. The allowed element types are Claim, Strategy, Justification, Evidence, Context, Assumption, and Relation. Each package in LTAC should start (at the top) with a Claim, Justification, or Strategy.
 4. A keyword 'Link' is used to cite an already specified element within the same package.
 5. Each element is defined in one line in LTAC that begins with dash and a type keyword (or 'Link' keyword). This is followed optionally by an identifier or by "^" and a mandatory identifier, e.g.
   - Claim C1
@@ -114,10 +114,9 @@ Certain options are defined to enable better SACM support:
 - assumed: assertionDeclaration=assumed
 - axiomatic: assertionDeclaration=axiomatic
 - defeated: assertionDeclaration=defeated
-- ascited: assertionDeclaration=asCited
+- defeater: Defeats its parent (grandparent if parent is Relation)
 - iscounter: isCounter=true (counters declared purpose). Counter-evidence doesn't always lead to the defeat of a claim, but it might.
 - abstract: isAbstract=true
-- metaclaim: metaClaim=true
 
 Unless otherwise noted, parents are connected through children via a SACM AssertedRelationship with default the assertionDeclaration `asserted`. When a Strategy (ArgumentReasoning), sub-Claims, and/or Evidence share the same parent Claim, they all connect to a single shared AssertedRelationship (represented by default as a dot). If a Strategy has sub-Claims as Children, the children will become siblings of the Strategy and share the AssertedRelationship.
 
