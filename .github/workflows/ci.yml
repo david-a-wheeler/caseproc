@@ -1,6 +1,8 @@
 name: CI
 
-# Note: this pins dependencies; update here to update dependencies.
+# This pins dependencies to counter supply chain attacks.
+# You have to update this file to update dependencies, but that's okay;
+# dependabot will propose them, and we can decide when to accept.
 
 on:
   push:
