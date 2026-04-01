@@ -4984,7 +4984,7 @@ _CAE_BODY_HEADER = (
 )
 
 
-def _cae_assertion_suffix(node_type: str, options) -> str:
+def _cae_assertion_suffix(_node_type: str, options) -> str:
     """Return the CAE mermaid assertion-state suffix for the given node type
     and options.
 
@@ -5530,11 +5530,11 @@ def _render_ext_ref(
 # config, fmt, out, sep).
 _ELEMENT_RENDER_MAP: Dict[str, callable] = {
     "referenced_by": render_referenced_by,
-    "supported_by": lambda node, case, config, fmt, o, s: render_supported_by(
+    "supported_by": lambda node, _case, config, fmt, o, s: render_supported_by(
         node, config, fmt, o, s
     ),
     "supports": render_supports,
-    "ext_ref": lambda node, case, config, fmt, o, s: _render_ext_ref(
+    "ext_ref": lambda node, _case, config, fmt, o, s: _render_ext_ref(
         node, config, fmt, o, s
     ),
 }
@@ -5629,7 +5629,7 @@ def render_pkg_cited(
 
 def render_representation(
     pkg_root: Node,
-    all_roots: List[Node],
+    _all_roots: List[Node],
     config: dict,
     fmt: str,
     out: TextIO,
@@ -5705,8 +5705,8 @@ def _apply_sel(
     Returns True if anything was written.
     """
     wrote_any = False
-    for sel in sel_str.split(","):
-        sel = sel.strip()
+    for raw_sel in sel_str.split(","):
+        sel = raw_sel.strip()
         if not sel:
             continue
         fn = render_map.get(sel)
@@ -6398,7 +6398,7 @@ class _HelpTopicAction(argparse.Action):
         kwargs.setdefault("nargs", 0)
         super().__init__(option_strings, dest, **kwargs)
 
-    def __call__(self, parser, namespace, values, option_string=None):
+    def __call__(self, _parser, namespace, _values, _option_string=None):
         setattr(namespace, self.dest, True)
 
 
@@ -6411,7 +6411,7 @@ class _MutationAction(argparse.Action):
     The order on the command line is the order of application.
     """
 
-    def __call__(self, parser, namespace, values, option_string=None):
+    def __call__(self, _parser, namespace, values, option_string=None):
         mutations = getattr(namespace, self.dest, None) or []
         op = option_string.lstrip(
             "-"
