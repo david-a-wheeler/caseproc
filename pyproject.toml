@@ -43,9 +43,12 @@ Issues = "https://github.com/david-a-wheeler/verocase/issues"
 [project.scripts]
 verocase = "verocase:main"
 
+[tool.ruff]
+line-length = 80
+
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "RUF"]
-ignore = ["E702", "E501"]  # E702: semicolon multi-statement (intentional); E501: line-length (handled separately)
+ignore = ["E702"]  # Allow multiple statements on one line (semicolon)
 
 [tool.flit.sdist]
 # These include/exclude lists must be kept in sync with .gitignore.
