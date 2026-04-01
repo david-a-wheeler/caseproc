@@ -3604,24 +3604,23 @@ class _LTACParser:
                     self.links.setdefault(target_id, []).append(node)
                 else:
                     self._pending_links.setdefault(target_id, []).append(node)
+            # Link Foo: target is the definition.
+            elif target_id in self.all_definitions_for:
+                node.link_target = self.all_definitions_for[target_id][0]
+                canonical = self._first_statements.get(target_id)
+                if (
+                    node.text
+                    and canonical is not None
+                    and node.text != canonical
+                ):
+                    self._case.warn(
+                        f"line {lineno}: Link {target_id!r}: statement"
+                        f" {node.text!r} differs from declaration;"
+                        f" use --sync to sync"
+                    )
+                self.links.setdefault(target_id, []).append(node)
             else:
-                # Link Foo: target is the definition.
-                if target_id in self.all_definitions_for:
-                    node.link_target = self.all_definitions_for[target_id][0]
-                    canonical = self._first_statements.get(target_id)
-                    if (
-                        node.text
-                        and canonical is not None
-                        and node.text != canonical
-                    ):
-                        self._case.warn(
-                            f"line {lineno}: Link {target_id!r}: statement"
-                            f" {node.text!r} differs from declaration;"
-                            f" use --sync to sync"
-                        )
-                    self.links.setdefault(target_id, []).append(node)
-                else:
-                    self._pending_links.setdefault(target_id, []).append(node)
+                self._pending_links.setdefault(target_id, []).append(node)
         elif node.identifier:
             ident = node.identifier
             # Type must be consistent across all uses of an ID.
@@ -5517,15 +5516,14 @@ def _render_ext_ref(
     # that could smuggle an unsafe scheme in via relative-path resolution.
     if is_safe_url(node.ext_ref) and is_safe_url(url):
         out.write("External Reference: " + hyperlink(node.ext_ref, url, fmt))
+    # Disallowed scheme: show as plain text so the value is visible but
+    # not clickable.
+    elif fmt == "html":
+        out.write(
+            "External Reference: " + escape_html_content(node.ext_ref)
+        )
     else:
-        # Disallowed scheme: show as plain text so the value is visible but
-        # not clickable.
-        if fmt == "html":
-            out.write(
-                "External Reference: " + escape_html_content(node.ext_ref)
-            )
-        else:
-            out.write("External Reference: " + escape_markdown(node.ext_ref))
+        out.write("External Reference: " + escape_markdown(node.ext_ref))
     return True
 
 

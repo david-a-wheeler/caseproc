@@ -47,7 +47,7 @@ verocase = "verocase:main"
 line-length = 80
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I", "RUF", "UP", "PERF", "PLW", "ARG", "FLY"]
+select = ["E", "F", "B", "I", "RUF", "UP", "PERF", "PLW", "ARG", "FLY", "PLR5501"]
 ignore = ["E702"]  # Allow multiple statements on one line (semicolon)
 
 [tool.flit.sdist]
