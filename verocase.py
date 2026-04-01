@@ -4988,6 +4988,10 @@ def _cae_assertion_suffix(_node_type: str, options) -> str:
     """Return the CAE mermaid assertion-state suffix for the given node type
     and options.
 
+    _node_type is unused: CAE suffixes currently depend only on options
+    (defeated/needssupport). The parameter is kept for API symmetry with
+    similar helpers and in case CAE needs type-specific suffixes in future.
+
     >>> _cae_assertion_suffix('Claim', {'defeated'})
     '<br>DEFEATED'
     >>> _cae_assertion_suffix('Claim', {'defeater', 'defeated'})
