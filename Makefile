@@ -1,4 +1,7 @@
-# verocase: Simple Makefile to simplify checking
+# verocase: Simple Makefile to simplify local checking (run "make")
+#
+# The CI/CD process on the shared site is defined in
+# .github/workflows/ci.yml
 
 .PHONY: verify test lint typecheck
 
