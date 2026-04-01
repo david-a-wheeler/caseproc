@@ -3915,28 +3915,6 @@ def _resolve_ext_ref(ext_ref: str, base_url: str) -> str:
     return ext_ref
 
 
-def _node_url(
-    node: Node,
-    base_url: str,
-    pkg_label: str = cast(str, DEFAULT_CONFIG["pkg_label"]),
-) -> str:
-    """Return the hyperlink URL for a node, or '' if none can be determined.
-
-    If the node has an ext_ref, it is resolved via _resolve_ext_ref (relative
-    refs are joined with the directory of base_url when base_url is set).
-    Otherwise a URL is constructed from base_url and a GitHub-style fragment.
-    Returns '' when base_url is empty and no ext_ref is present.
-
-    NOTE: Mermaid click statements use _node_anchor_url directly so that
-    clicking always navigates to the element section, not to its ext_ref.
-    The ext_ref is shown separately in the rendered document text.
-    """
-    if node.ext_ref:
-        return _resolve_ext_ref(node.ext_ref, base_url)
-    if not base_url:
-        return ""
-    return _node_anchor_url(node, base_url, pkg_label)
-
 
 def _render_markdown_node(
     node: Node,
