@@ -1731,7 +1731,7 @@ class Case:
             except OSError as e:  # noqa: PERF203 -- except calls self.panic (not pass); restructuring would change semantics
                 self.panic(f"cannot update {final!r}: {e}")
 
-    def _make_ltac_temp(self, path: str) -> Optional[str]:
+    def make_ltac_temp(self, path: str) -> Optional[str]:
         """Stream the LTAC forest directly to a temp file next to path.
 
         Returns the temp file path, or None if an error occurred (already
@@ -1768,7 +1768,7 @@ class Case:
         target = path or self.ltac_path
         if target is None:
             self.panic("save_ltac: no path given and case.ltac_path is not set")
-        tmp = self._make_ltac_temp(target)
+        tmp = self.make_ltac_temp(target)
         if tmp is None:
             return  # error already reported
         self.commit_updates([(tmp, target)])
@@ -2058,7 +2058,7 @@ class Case:
         self.commit_updates(pairs)
 
         if self.ltac_modified and self.ltac_path:
-            tmp = self._make_ltac_temp(self.ltac_path)
+            tmp = self.make_ltac_temp(self.ltac_path)
             if tmp is not None:
                 self.commit_updates([(tmp, self.ltac_path)])
                 self.ltac_modified = False
@@ -2082,7 +2082,7 @@ class Case:
         ]
         changed = self._mark_needs_support(all_ids_ordered)
         if (changed or self.ltac_modified) and self.ltac_path:
-            tmp = self._make_ltac_temp(self.ltac_path)
+            tmp = self.make_ltac_temp(self.ltac_path)
             if tmp is not None:
                 self.commit_updates([(tmp, self.ltac_path)])
                 self.ltac_modified = False
@@ -2331,7 +2331,7 @@ class Case:
         """
         self.update_documents(add_missing=add_missing, strip=strip)
         if self.ltac_modified and self.ltac_path:
-            tmp = self._make_ltac_temp(self.ltac_path)
+            tmp = self.make_ltac_temp(self.ltac_path)
             if tmp is not None:
                 self.commit_updates([(tmp, self.ltac_path)])
                 self.ltac_modified = False
@@ -3330,7 +3330,7 @@ class Case:
             root.write_ltac_subtree(out, root.depth)
         return True
 
-    def _check_no_existing_case_files(self) -> None:
+    def check_no_existing_case_files(self) -> None:
         """Panic if any well-known case file already exists."""
         for path in _START_CANDIDATES:
             if os.path.exists(path):
@@ -3339,7 +3339,7 @@ class Case:
                     f" remove it before using --start"
                 )
 
-    def _write_start_stubs(self) -> None:
+    def write_start_stubs(self) -> None:
         """Write initial case.ltac and case.md stubs for --start."""
         try:
             with open("case.ltac", "w", encoding="utf-8") as f:
@@ -7202,8 +7202,8 @@ def run(args: argparse.Namespace) -> bool:
     # loading below, which will find the newly created case.ltac.
     if args.start:
         _tmp_case = Case()
-        _tmp_case._check_no_existing_case_files()
-        _tmp_case._write_start_stubs()
+        _tmp_case.check_no_existing_case_files()
+        _tmp_case.write_start_stubs()
 
     # Load config, discover LTAC, parse LTAC, and validate:
     case = Case().load(
@@ -7235,7 +7235,7 @@ def run(args: argparse.Namespace) -> bool:
     if args.sync:
         changed = case.sync_citations()
         if changed:
-            tmp = case._make_ltac_temp(ltac_path)
+            tmp = case.make_ltac_temp(ltac_path)
             if tmp is None:
                 _panic("cannot write updated LTAC file")
             case.commit_updates([(tmp, ltac_path)])

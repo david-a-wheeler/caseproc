@@ -1,4 +1,11 @@
 {
   "pythonVersion": "3.8",
-  "typeCheckingMode": "standard"
+  "typeCheckingMode": "standard",
+  "reportUnnecessaryComparison": "error",
+  "reportUnnecessaryIsInstance": "error",
+  "reportUnusedVariable": "error",
+  "reportPrivateUsage": "error",
+  "reportConstantRedefinition": "error",
+  "reportDeprecated": "error",
+  "reportUninitializedInstanceVariable": "error"
 }
