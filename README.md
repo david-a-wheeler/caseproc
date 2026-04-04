@@ -35,7 +35,8 @@ The [tutorial](docs/tutorial.md) explains how to use the tool.
 It's *really* easy to get started.
 The tool has lots of capabilities, but using them is entirely optional.
 The [reference manual](docs/reference.md) explains the tool capabilities
-in detail.
+in detail. We take steps to make the tool trustworthy through
+our extensive test suite, linting, and static type analysis.
 
 ## Background
 
@@ -262,6 +263,8 @@ However, it requires that the assurance case be organized as a set of
 trees (aka a "forest"), and that may be too restrictive for some.
 
 ## Other information
+
+We love contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 The specification of extended LTAC that we implement is in file
 [docs/ltac-extended.txt](docs/ltac-extended.txt).
